@@ -1,0 +1,113 @@
+{
+  "setup": {
+    "task": "9-bit majority over complete 512-state domain",
+    "seeds": [0, 1, 2],
+    "execution_classes_blocks": [0, 2, 4, 6, 8],
+    "format": "uniform global Q4 (scale 16)",
+    "storage": "int8_t weights/biases/hidden/LUT; int32_t accumulators and residual temporaries",
+    "activation_lut": "257 points over [-8,8]; Q4 grid matches LUT spacing exactly, so runtime lookup is direct-index with no interpolation",
+    "timing_boundary": "ordinary host Linux central-latency audit only; not WCET/hard real time"
+  },
+  "quantization_boundary": {
+    "q4": {
+      "all_three_seeds_all_five_classes_float_prediction_agreement": 1.0,
+      "all_three_seeds_all_five_classes_task_accuracy_match_float": true
+    },
+    "q3_seed0_negative": {
+      "depth6_accuracy": 0.8515625,
+      "depth6_float_prediction_agreement": 0.9765625,
+      "depth8_accuracy": 0.986328125,
+      "depth8_float_prediction_agreement": 0.986328125,
+      "interpretation": "Q3 already changes decisions; Q4 is the smallest tested global Q format that preserves every tested decision."
+    },
+    "numeric_equivalence_boundary": "Q4 is decision-equivalent on the tested finite domain, not logit/float-arithmetic equivalent. The residual coefficient is represented as 3/16 = 0.1875 rather than 0.2."
+  },
+  "memory": {
+    "float32_reference_weight_bytes": 335368,
+    "q5_int16_weight_bytes_existing_baseline": 167684,
+    "q4_int8_weight_bytes": 83842,
+    "q4_weight_reduction_vs_float_fraction": 0.75,
+    "q4_weight_reduction_vs_q5_fraction": 0.5,
+    "float32_reference_activation_lut_bytes": 2056,
+    "q4_int8_activation_lut_bytes": 514,
+    "q4_lut_reduction_vs_float_fraction": 0.75,
+    "float_reference_workspace_bytes": 8064,
+    "q5_workspace_bytes_existing_baseline": 4032,
+    "q4_int8_workspace_bytes": 3776,
+    "q4_workspace_reduction_vs_float_fraction": 0.5317460317460317
+  },
+  "static_integer_safety": {
+    "storage_bound_abs": 128,
+    "largest_generic_raw_linear_accumulator_bound": 2097152,
+    "largest_generic_bound_source": "F2: 128 terms * 128 abs(weight storage bound) * 128 abs(input storage bound)",
+    "signed_int32_max": 2147483647,
+    "int64_mac_required": false,
+    "source_contains_integer_division_for_numeric_path": false,
+    "gcc_o2_div_or_idiv_instruction_count": 0
+  },
+  "freestanding_audit": {
+    "gcc_o2_undefined_external_symbols_count": 0,
+    "clang_o2_seed0_undefined_external_symbols_count": 0,
+    "gcc_o2_object_size_bytes_seed0": 87362,
+    "gcc_o2_object_text_bytes_seed0": 86826,
+    "clang_o2_object_size_bytes_seed0": 89953,
+    "existing_q5_gcc_object_text_bytes": 170974,
+    "invalid_execution_class_fails_closed_to_class_0_all_seeds": true,
+    "project_local_max_stack_usage_bytes_gcc_o2": 72
+  },
+  "seeds": [
+    {
+      "seed": 0,
+      "stored_parameter_min": -33,
+      "stored_parameter_max": 55,
+      "accuracy_by_class": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "median_us_by_class": [0.214, 27.178, 81.366, 133.403, 179.109],
+      "p95_us_by_class": [0.226, 30.571, 157.506, 207.363, 263.884],
+      "p99_us_by_class": [0.233, 80.247, 283.997, 513.833, 786.334],
+      "median_strictly_increasing": true
+    },
+    {
+      "seed": 1,
+      "stored_parameter_min": -54,
+      "stored_parameter_max": 37,
+      "accuracy_by_class": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "median_us_by_class": [0.236, 27.201, 75.123, 130.063, 172.773],
+      "p95_us_by_class": [0.249, 31.280, 94.638, 171.408, 224.653],
+      "p99_us_by_class": [0.261, 64.668, 219.137, 297.868, 350.415],
+      "median_strictly_increasing": true
+    },
+    {
+      "seed": 2,
+      "stored_parameter_min": -32,
+      "stored_parameter_max": 44,
+      "accuracy_by_class": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "median_us_by_class": [0.236, 29.353, 75.001, 132.851, 177.044],
+      "p95_us_by_class": [0.250, 30.501, 118.748, 176.234, 223.919],
+      "p99_us_by_class": [0.257, 105.388, 352.515, 314.440, 368.842],
+      "median_strictly_increasing": true
+    }
+  ],
+  "q5_vs_q4_seed0_alternating_host_audit": {
+    "runs_each": 3,
+    "q5_median_of_p50_us_by_class": [0.208, 30.304, 81.782, 138.723, 182.782],
+    "q4_median_of_p50_us_by_class": [0.216, 27.196, 74.583, 131.775, 173.274],
+    "q4_over_q5_ratio_by_class": [1.0384615385, 0.8974392819, 0.9119732949, 0.9499145780, 0.9479817487],
+    "interpretation": "This host run shows no central-latency penalty for the nonzero Q4 classes, but timing is machine/run specific and is not a portable speed claim."
+  },
+  "aggregate": {
+    "all_seeds_all_classes_accuracy_match_float": true,
+    "all_seeds_zero_gcc_undefined_external_symbols": true,
+    "all_seeds_median_strictly_increasing": true,
+    "gcc_and_clang_seed0_functional_match": true
+  },
+  "interpretation": {
+    "supported": "For this supplied finite Real-Time NN toy, a global Q4 implementation preserves every tested float decision across three seeds using int8 storage, int32-only MAC accumulation, direct bounded LUT activations, and the same finite runtime work classes.",
+    "not_supported": [
+      "numeric/logit equivalence to float inference",
+      "universal sufficiency of Q4 for other tasks or networks",
+      "target-independent speedup",
+      "WCET or hard-real-time guarantee",
+      "physical energy savings"
+    ]
+  }
+}
