@@ -7,6 +7,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_learned_deadline_results.json` — learned activation integrated with empirical P95 deadline admission.
 - `realtime_nn_common_deadline_frontier_results.json` — dense common-deadline learned-vs-prefix frontier audit.
 - `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with hard-budget/timing/deadline audits.
+- `realtime_nn_structured_width_results.json` — structured channel-width/depth activation audit: one maximum-width NN, exact sliced work counts, matched dense-mask control, PyTorch backend negative, and plain-C++ physical-width speedup across three seeds.
 - `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic; negative runtime result.
 - `realtime_nn_generated_cpp_results.json` — generated-weight plain-C++ conditional inference; verifies the physical work/central-latency relation without PyTorch and shows scheduler tails remain under same-core contention.
 - `realtime_nn_freestanding_core_results.json` — freestanding finite-class inference-core audit: zero unresolved external symbols, fixed caller-owned workspace, full-domain functional reproduction, and invalid-class fail-closed behavior.
@@ -35,26 +36,23 @@ Authoritative compact summaries for the current public reproduction include:
 
 For the Real-Time NN line, machine-specific microsecond values are not the primary cross-machine reproduction target. Reproduction should focus on:
 
-- physical hard-skip traces / explicit C++ loop bounds;
+- physical hard-skip traces / explicit loop bounds;
 - hard budget compliance;
 - finite executed-work classes;
 - physical work counts derived from actual control flow and checked by instrumentation;
+- structured depth/width activation where inactive channels are physically absent from the executed matrix dimensions;
+- matched dense-mask controls that preserve output while retaining wasteful full-width computation;
+- backend sensitivity: reduced neural work must be shown to become reduced physical latency on the intended runtime;
 - explicit separation of target-independent work metadata from target/compiler/RTOS timing certification;
 - fail-closed admission when timing evidence is absent, bound to a different manifest, or certified for a different deployed build;
 - compiler/optimization code-generation sensitivity even when neural outputs are identical;
 - capability validation for every runtime-admissible execution class;
 - quality/latency Pareto usefulness of exposed classes;
 - task quality under budget;
-- work/central-latency ordering;
-- controller overhead;
-- task-loss-only selection behavior;
-- dense-mask and analytic-oracle controls;
+- controller overhead and task-loss-only selection behavior;
 - common-deadline on-time & correct behavior;
 - repeated timing-calibration stability, not just one favorable calibration;
-- consistency between framework and generated-C++ implementations;
-- freestanding-core linkability and fail-closed execution-class handling;
-- fixed-point functional preservation, numeric headroom, and static-memory footprint;
-- static numeric range bounds and compiler code-generation audits for the integer inner path;
+- freestanding/fixed-point numeric and memory audits;
 - explicit refusal to interpret uncontrolled Linux P95/P99 as WCET.
 
 The corresponding scripts in `experiments/` regenerate fuller traces. Generated binary weights and generated C headers are local reproduction artifacts and are not committed.
