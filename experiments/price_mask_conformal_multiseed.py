@@ -29,7 +29,7 @@ def sample(n):
     y=ALL_Y[idx]
     return idx,bits,y
 
-# ----- Experts: lookup (memory-heavy) vs algorithmic deep MLP (compute-heavy) -----
+# ----- Experts: lookup (parameter-footprint-heavy) vs algorithmic deep MLP (compute-heavy) -----
 class Lookup(nn.Module):
     def __init__(self):
         super().__init__()
@@ -69,13 +69,13 @@ def train_algo(seed,steps=700):
 class Router(nn.Module):
     def __init__(self,use_price=True):
         super().__init__(); self.use_price=use_price
-        din=4 if use_price else 2
-        self.net=nn.Sequential(nn.Linear(din,16),nn.Tanh(),nn.Linear(16,2))
+        # Same architecture/parameter count for price-aware and price-blind controls.
+        # The control receives zeroed price features rather than a smaller network.
+        self.net=nn.Sequential(nn.Linear(4,16),nn.Tanh(),nn.Linear(16,2))
     def logits(self,price,mask):
         # price is positive; log makes ratios transferable across scales
-        if self.use_price:
-            x=torch.cat([torch.log(price.clamp_min(1e-6)),mask],1)
-        else:x=mask
+        price_features=torch.log(price.clamp_min(1e-6)) if self.use_price else torch.zeros_like(price)
+        x=torch.cat([price_features,mask],1)
         z=self.net(x)
         return z + (mask-1.0)*1e4
     def choose(self,price,mask): return self.logits(price,mask).argmax(1)
@@ -90,21 +90,22 @@ def expert_costs(lookup,algo):
         if isinstance(mod,nn.Linear): mac_algo += mod.in_features*mod.out_features
     mac_lookup=2
     comp=torch.tensor([mac_lookup,mac_algo],dtype=torch.float)
-    mem=torch.tensor([lookup_params,algo_params],dtype=torch.float)
-    C=torch.stack([comp/comp.max(),mem/mem.max()],1) # expert x [compute,memory]
-    return C,{'params':[lookup_params,algo_params],'macs':[mac_lookup,mac_algo]}
+    footprint=torch.tensor([lookup_params,algo_params],dtype=torch.float)
+    # The second resource dimension is a parameter-footprint proxy, not measured
+    # memory traffic, resident-memory reduction, bandwidth, or joules.
+    C=torch.stack([comp/comp.max(),footprint/footprint.max()],1) # expert x [compute_proxy, parameter_footprint_proxy]
+    return C,{'params':[lookup_params,algo_params],'macs':[mac_lookup,mac_algo],
+              'resource_columns':['compute_proxy','parameter_footprint_proxy']}
 
 def train_router(seed,C,use_price,steps=1000):
     torch.manual_seed(seed+1000+(0 if use_price else 500)); random.seed(seed+1000)
     r=Router(use_price);opt=torch.optim.Adam(r.parameters(),lr=6e-3)
     for s in range(steps):
         n=256
-        if use_price:
-            # log-uniform prices independently; broad enough to teach relative price.
-            lp=(torch.rand(n,2)*6.-3.)
-            p=torch.exp(lp)
-        else:
-            p=torch.ones(n,2)
+        # Both policies are trained against the same log-uniform price distribution.
+        # The price-blind control simply cannot observe those prices.
+        lp=(torch.rand(n,2)*6.-3.)
+        p=torch.exp(lp)
         # random safe masks, including both-safe cases
         u=torch.rand(n)
         mask=torch.ones(n,2)
@@ -147,10 +148,25 @@ def calibrate_shared(rp,rc,experts):
                     'shared_conf99':max(a['conf99'],b['conf99'])})
     return out
 
+def safe_mask(bounds,D):
+    return torch.tensor([[1. if bounds[j]<=D else 0. for j in range(2)]],dtype=torch.float)
+
+def oracle_choice(price,mask,C):
+    # Analytic external scheduler baseline for this toy objective.
+    feasible=mask[0].bool()
+    if not bool(feasible.any()): return None
+    p=torch.tensor(price,dtype=torch.float)
+    costs=(C*p[None,:]).sum(1)
+    costs=costs.masked_fill(~feasible,float('inf'))
+    return int(costs.argmin())
+
 @torch.no_grad()
 def eval_policy(router,experts,C,price,D,bounds,N=1200):
-    safe=torch.tensor([[1. if bounds[j]<=D else 0. for j in range(2)]],dtype=torch.float)
-    if safe.sum()==0: safe[0,int(torch.tensor(bounds).argmin())]=1.
+    safe=safe_mask(bounds,D)
+    if safe.sum()==0:
+        # RTOS-style admission failure: do not execute an uncertified route.
+        return {'admitted':False,'acc':None,'miss':None,'mean_us':None,'p99_us':None,
+                'hist':[0.0,0.0],'resource_cost':None,'safe':safe[0].tolist()}
     p=torch.tensor([price],dtype=torch.float)
     hist=[0,0];miss=0;correct=0;costs=[];times=[]
     for _ in range(N):
@@ -158,18 +174,20 @@ def eval_policy(router,experts,C,price,D,bounds,N=1200):
         t=time.perf_counter_ns();j=int(router.choose(p,safe)[0]);logits=experts[j](idx,b);us=(time.perf_counter_ns()-t)/1000.
         times.append(us); miss+= int(us>D);correct+=int(logits.argmax(1).item()==y.item());hist[j]+=1
         costs.append(float((p[0]*C[j]).sum()))
-    return {'acc':correct/N,'miss':miss/N,'mean_us':statistics.mean(times),'p99_us':sorted(times)[int(.99*(N-1))],
+    return {'admitted':True,'acc':correct/N,'miss':miss/N,'mean_us':statistics.mean(times),'p99_us':sorted(times)[int(.99*(N-1))],
             'hist':[h/N for h in hist],'resource_cost':statistics.mean(costs),'safe':safe[0].tolist()}
 
 def route_sweep(router,C):
     rows=[]
     mask=torch.ones(1,2)
     for ratio in [0.04,.1,.25,.5,1,2,4,10,25]:
-        # geometric mean ~0.1, varying ratio pc/pm
-        pc=.1*math.sqrt(ratio);pm=.1/math.sqrt(ratio);p=torch.tensor([[pc,pm]])
+        # geometric mean ~0.1, varying ratio compute_price / footprint_proxy_price
+        pc=.1*math.sqrt(ratio);pf=.1/math.sqrt(ratio);p=torch.tensor([[pc,pf]])
         prob=router.logits(p,mask).softmax(1)[0]
         j=int(prob.argmax());cost=float((p[0]*C[j]).sum())
-        rows.append({'ratio':ratio,'pc':pc,'pm':pm,'prob':prob.tolist(),'route':j,'cost':cost})
+        oj=oracle_choice([pc,pf],mask,C);ocost=float((p[0]*C[oj]).sum())
+        rows.append({'ratio':ratio,'compute_price':pc,'footprint_proxy_price':pf,'prob':prob.tolist(),
+                     'route':j,'cost':cost,'oracle_route':oj,'oracle_cost':ocost,'oracle_regret':cost-ocost})
     return rows
 
 def run_seed(seed):
@@ -183,13 +201,18 @@ def run_seed(seed):
     # Use shared conformal bounds for final evaluation. Pick tight/loose/generous deadlines.
     lo=min(boundsc);hi=max(boundsc)
     Ds=sorted(set([round(lo*1.05,2),round(hi*1.05,2),round(hi*1.6,2)]))
-    conds={'compute_expensive':[1.,.05],'memory_expensive':[.05,1.],'balanced':[.1,.1]}
+    conds={'compute_expensive':[1.,.05],'footprint_expensive':[.05,1.],'balanced':[.1,.1]}
     rows=[]
     for cn,p in conds.items():
         for D in Ds:
             rows.append({'policy':'price','cond':cn,'D':D,**eval_policy(rp,experts,C,p,D,boundsc)})
             rows.append({'policy':'control','cond':cn,'D':D,**eval_policy(rc,experts,C,p,D,boundsc)})
-    return {'seed':seed,'expert_acc':[a0,a1],'C':C.tolist(),'meta':meta,'cal':cal,'bounds_conf99':boundsc,'deadlines':Ds,'rows':rows,'sweep':route_sweep(rp,C)}
+    sweep=route_sweep(rp,C)
+    return {'seed':seed,'expert_acc':[a0,a1],'C':C.tolist(),'meta':meta,
+            'router_params':{'price':sum(p.numel() for p in rp.parameters()),'control':sum(p.numel() for p in rc.parameters())},
+            'cal':cal,'bounds_conf99':boundsc,'deadlines':Ds,'rows':rows,'sweep':sweep,
+            'oracle_sweep_agreement':sum(int(z['route']==z['oracle_route']) for z in sweep)/len(sweep),
+            'oracle_sweep_mean_regret':statistics.mean(z['oracle_regret'] for z in sweep)}
 
 def summarize(seeds):
     # Compare at generous deadline (both routes safe) and tight route class point.
@@ -200,8 +223,11 @@ def summarize(seeds):
             groups.setdefault(key,[]).append(r)
     out={}
     for k,rs in groups.items():
-        out['|'.join(k)]={m:statistics.mean([r[m] for r in rs]) for m in ['acc','miss','mean_us','resource_cost']}
-        out['|'.join(k)]['hist']=[statistics.mean([r['hist'][j] for r in rs]) for j in range(2)]
+        admitted=[r for r in rs if r.get('admitted',True)]
+        out['|'.join(k)]={'admission_rate':len(admitted)/len(rs)}
+        if admitted:
+            out['|'.join(k)].update({m:statistics.mean([r[m] for r in admitted]) for m in ['acc','miss','mean_us','resource_cost']})
+            out['|'.join(k)]['hist']=[statistics.mean([r['hist'][j] for r in admitted]) for j in range(2)]
     return out
 
 def main():
