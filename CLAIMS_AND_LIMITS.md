@@ -18,6 +18,14 @@ The current final experiment uses two normalized resource coordinates:
 
 The parameter-footprint coordinate is **not** measured runtime memory traffic, bandwidth, cache pressure, resident-memory reduction, or energy. Both experts are resident in the same process during inference.
 
+## Related-work boundary
+
+Lookup-table neurons/networks and differentiable logic networks are established prior work. This repository does **not** claim novelty for LUT-based neural computation, LUT neurons, mapping sub-networks into LUTs, or LUT-oriented edge/FPGA inference.
+
+The current lookup expert is used only as one deliberately simple execution regime with a different resource profile from the MLP expert. The narrow mechanism under test is the **resource-conditioned choice among already-valid execution regimes**, combined with an independent runtime availability mask.
+
+See [`RELATED_WORK.md`](RELATED_WORK.md) for representative prior work including Differentiable Weightless Neural Networks, NeuraLUT, LL-ViT, deep differentiable logic-gate networks, and fully trainable deep LUT networks.
+
 ## Explicitly not claimed
 
 1. Hard real-time guarantees or WCET bounds.
@@ -28,6 +36,8 @@ The parameter-footprint coordinate is **not** measured runtime memory traffic, b
 6. Automatic self-organization of useful circuits under arbitrary architectures or objectives.
 7. Hardware-independent timing guarantees.
 8. Necessity of a learned router when route costs are exactly known: in the final two-route toy objective, an analytic `argmin(price · cost)` scheduler is an oracle baseline and the learned router matches it on the tested sweep.
+9. Novelty of LUT neurons, LUT networks, differentiable logic networks, or LUT-based neural hardware mapping.
+10. Demonstrated improvement of the present routing mechanism on DWN, NeuraLUT, LL-ViT, or other LUT/logic-network architectures.
 
 ## Important negative results retained
 
