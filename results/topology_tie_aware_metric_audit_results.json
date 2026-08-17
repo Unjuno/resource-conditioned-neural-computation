@@ -1,0 +1,24 @@
+{
+  "setup": {
+    "task": "xor2",
+    "seeds": [0, 1, 2, 3, 4],
+    "dense_price_points": 400,
+    "reason": "Exact route identity is not a valid cost-optimality metric when multiple topologies tie at the same minimum resource cost."
+  },
+  "seeds": [
+    {"seed": 0, "exact": 0.4975, "tie": 0.4975, "regret": 0.029351856950670482, "prune_exact": 0.9375, "prune_tie": 0.9375, "prune_regret": 0.0016460359841585159, "hardacc": 1.0},
+    {"seed": 1, "exact": 0.9775, "tie": 0.9775, "regret": 0.001627594456076622, "prune_exact": 0.9925, "prune_tie": 0.9925, "prune_regret": 0.00003555838018655777, "hardacc": 1.0},
+    {"seed": 2, "exact": 0.98, "tie": 0.98, "regret": 0.0013985764607787133, "prune_exact": 0.995, "prune_tie": 0.995, "prune_regret": 0.000016346499323844908, "hardacc": 1.0},
+    {"seed": 3, "exact": 0.4975, "tie": 0.4975, "regret": 0.029893325064331292, "prune_exact": 0.935, "prune_tie": 0.935, "prune_regret": 0.001781620755791664, "hardacc": 1.0},
+    {"seed": 4, "exact": 0.585, "tie": 0.7025, "regret": 0.02026502391323447, "prune_exact": 0.585, "prune_tie": 0.87, "prune_regret": 0.010204318147152662, "hardacc": 1.0}
+  ],
+  "aggregate": {
+    "exact": 0.7075,
+    "tie": 0.731,
+    "regret": 0.016507275369018314,
+    "prune_exact": 0.889,
+    "prune_tie": 0.946,
+    "prune_regret": 0.002736775953322649,
+    "hardacc": 1.0
+  }
+}
