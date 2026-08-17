@@ -2,142 +2,146 @@
 
 ## Question
 
-Now that the Real-Time NN has finite physical execution classes with exact work counts, how should an RTOS use them **without confusing target-independent neural work with target-specific execution time**?
+How should an RTOS use finite Real-Time NN work classes without confusing:
 
-The intended split is:
+1. target-independent neural work;
+2. the exact deployed binary/build;
+3. target-specific execution-time certification?
+
+The contract now treats these as three distinct layers.
 
 ```text
-static NN execution-class manifest
-        +
-target/compiler/RTOS timing certification
+neural execution-class manifest
+        ↓
+certified deployed build identity
+        ↓
+target/compiler/RTOS timing bounds
         ↓
 remaining deadline
         ↓
 highest explicitly certified class that fits
-        ↓
-freestanding NN core
 ```
 
-The experiment deliberately does **not** put Linux P95/P99 values into the static manifest.
+Linux P95/P99 values are deliberately absent from the static manifest.
 
-## Target-independent manifest
+## 1. Target-independent manifest
 
-The committed manifest records only properties of the neural implementation:
+`results/realtime_nn_execution_class_manifest.json` records only neural implementation properties:
 
 - five finite classes (`0/2/4/6/8` blocks);
-- exact physically executed linear MACs;
+- exact physical linear MACs;
 - activation-LUT calls;
 - residual multiply/shift operations;
-- linear output counts;
+- linear-output counts;
 - model/LUT/workspace storage;
 - finite-domain quality for this toy.
 
-It explicitly stores:
+It explicitly contains:
 
 ```json
 "target_timing_bounds": null
 ```
 
-Canonical JSON SHA-256 for the tested manifest is:
+Canonical manifest SHA-256:
 
 ```text
 c497a83885b3c2912c6b589dfded58f6fe0230cd83395df37f81ae6743f248d5
 ```
 
-The small embedded C interface uses the first 64 bits as a manifest fingerprint. This is an integration guard, not a cryptographic security protocol.
+The embedded interface uses the first 64 bits as an integration fingerprint. This is a mismatch guard, not a cryptographic-security protocol.
 
-## Target binding
+## 2. Certified build identity
 
-`RTNNTargetTimingBinding` contains:
+A compiler-matrix audit later showed that the same source/manifest and identical finite-domain outputs can compile into different machine-code objects under different compilers and optimization flags.
 
-- the expected manifest fingerprint;
-- runtime overhead in target-defined ticks;
-- one explicit upper-bound value per execution class.
+Therefore manifest identity alone is insufficient for timing certification.
+
+`RTNNTargetTimingBinding` now also contains:
+
+```c
+uint64_t certified_build_id;
+```
+
+and admission receives the deployed build ID. A mismatch returns `-1`.
+
+A production `build_id` could come from a signed certification package, linked-image digest, compiler/toolchain configuration digest, or another auditable deployment identity. The important invariant is that timing evidence cannot silently survive a machine-code-changing rebuild.
+
+See `notes/realtime_nn_compiler_bound_timing.md`.
+
+## 3. Target-specific timing binding
+
+The binding additionally contains:
+
+- runtime overhead in target-defined `uint32` ticks;
+- one explicit upper bound per execution class.
 
 `UINT32_MAX` means:
 
-> this class has **no defensible timing bound in this target configuration**.
+> this execution class has no defensible timing bound in this target/build configuration.
 
-The runtime is forbidden from inferring a missing time bound from MAC count, adjacent classes, Linux timing, or a different machine.
+The runtime must not infer a missing bound from MAC count, neighboring classes, Linux timing, or a different machine/build.
 
-The admission function returns the highest class whose explicit certified bound fits the remaining deadline after runtime overhead. It returns `-1` if:
+Admission returns the highest class whose certified upper bound fits the remaining deadline after runtime overhead. It returns `-1` when:
 
 - the binding is null;
-- the manifest fingerprint is wrong;
-- the deadline is smaller than runtime overhead;
-- no explicitly bounded class fits.
+- manifest identity mismatches;
+- deployed build identity mismatches;
+- runtime overhead already exceeds the deadline;
+- no explicitly certified class fits.
 
 ## Property test
 
-Three synthetic timing bindings were used only to exercise the interface:
+Three synthetic timing bindings exercise the interface only:
 
-1. a synthetic fast target;
-2. a synthetic slower target;
-3. a partial-certification target where only classes 0 and 1 have timing bounds.
+1. synthetic fast build/target;
+2. synthetic slower build/target;
+3. partial certification where only classes 0 and 1 are bounded.
 
-For each binding, **100,000 random deadlines** were tested in C.
+For each matching binding, **100,000 random deadlines** are tested in C.
 
 Across 300,000 random cases:
 
-- the selected class always fits its explicit bound;
-- it is always the highest explicitly certified class that fits;
-- uncertified classes are never admitted, even for arbitrarily large deadlines;
-- a wrong manifest fingerprint is rejected;
-- a null binding is rejected.
+- admitted class always fits its explicit bound;
+- admitted class is always the highest explicitly certified fitting class;
+- uncertified classes are never admitted even for very large deadlines;
+- wrong manifest ID rejects;
+- wrong build ID rejects;
+- null binding rejects.
 
-The contract object itself compiles with:
+The contract object itself remains freestanding with zero unresolved external symbols.
 
-```bash
-gcc -O2 -std=c11 -ffreestanding -fno-builtin -c \
-  experiments/realtime_nn_execution_contract.c -o contract.o
-```
+## Why partial certification matters
 
-and `nm -u contract.o` is empty.
+Even if class 4 has a known static work count of 729,152 linear MACs, a target binding that only certifies classes 0 and 1 will **never** admit classes 2–4.
 
-## Why the partial-certification test matters
+This enforces:
 
-Suppose classes 0 and 1 have target-specific bounds, while classes 2–4 do not.
+> **known neural work is not known execution time.**
 
-Even if the static manifest knows that class 4 executes 729,152 linear MACs, and even if the caller supplies a very large deadline, the runtime still refuses to admit classes 2–4.
+## Why build identity matters
 
-This enforces a systems boundary:
+The compiler audit gives the complementary rule:
 
-> **known neural work is not the same thing as known execution time.**
+> **known neural manifest is not known machine code.**
 
-The target-specific timing argument must be attached explicitly.
+Both identity checks are therefore required before a target timing table is accepted.
 
-## Synthetic bindings are not evidence
+## Synthetic bindings are not timing evidence
 
-The example bound arrays in the host test are arbitrary values chosen to exercise deadline transitions. They are not measurements, WCET estimates, or evidence that the same timing relationship transfers between hardware platforms.
+The example `upper_ticks[]` arrays are arbitrary test values. They are not measurements or WCET estimates.
 
-The real future binding must identify a concrete:
+A real certification should identify at least:
 
 - processor/accelerator;
-- compiler and flags;
+- generated weights/LUTs and NN source revision;
+- compiler and optimization/configuration;
+- linked/deployed build identity;
 - memory/cache assumptions;
 - RTOS scheduling policy and task priority;
 - interrupt/interference assumptions;
 - timing-analysis method.
 
-Only then should the `upper_ticks[]` array be populated.
-
-## Interpretation
-
-This experiment closes an interface-design gap:
-
-```text
-NN side:
-  finite physical work classes
-  exact static work/resource metadata
-
-RTOS/target side:
-  explicit timing certification for some/all classes
-
-admission:
-  deadline -> highest certified class that fits
-```
-
-It does **not** close the remaining real-time proof gap. The most important next experiment remains a concrete target binding with defensible timing bounds.
+Only then should target timing upper bounds be populated.
 
 ## Reproduce
 
@@ -159,4 +163,9 @@ property_deadlines_per_binding=100000
 all_admission_properties_pass=1
 uncertified_classes_never_admitted=1
 wrong_manifest_rejected=1
+wrong_build_id_rejected=1
 ```
+
+## Current boundary
+
+This closes the **interface** path from deadline to certified finite work class. It does not provide the actual timing certification. A concrete target/RTOS with defensible per-class upper bounds remains the primary missing real-time experiment.

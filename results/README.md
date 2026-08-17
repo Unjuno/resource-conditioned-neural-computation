@@ -12,7 +12,8 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_freestanding_core_results.json` — freestanding finite-class inference-core audit: zero unresolved external symbols, fixed caller-owned workspace, full-domain functional reproduction, and invalid-class fail-closed behavior.
 - `realtime_nn_execution_count_audit_results.json` — physical work-count correction: source/instrumentation audit establishes 91,136 linear MACs per block and corrects the RTOS-facing class work table.
 - `realtime_nn_execution_class_manifest.json` — target-independent finite-class manifest: exact physical work/resource metadata with target timing deliberately absent.
-- `realtime_nn_execution_contract_results.json` — RTOS admission-contract property audit: target timing bindings are separate from neural work metadata; missing/stale certification fails closed.
+- `realtime_nn_execution_contract_results.json` — RTOS admission-contract property audit: timing evidence is separately bound to both neural manifest identity and certified deployed-build identity; missing/stale certification fails closed.
+- `realtime_nn_compiler_matrix_results.json` — GCC/Clang × optimization-level audit: identical finite-domain outputs but ten distinct machine-code objects, motivating build-bound timing certification.
 - `realtime_nn_fixed_q5_results.json` — Q5 integer freestanding-core audit: 3-seed full-domain behavior preservation, int16 weights/workspace with int32 accumulators, 2x storage reduction, compiler cross-check, and central-latency comparison.
 - `realtime_nn_q5_bounded_numeric_results.json` — bounded numeric-path audit: bit-identical branch-reduced Q5 helpers plus conservative static int32/int16 linear-range bounds derived from weights and LUT output ranges.
 - `realtime_nn_fine_grained_classes_results.json` — execution-class granularity audit: post-hoc intermediate depth classes can lose capability, while jointly trained 0..8 depth classes preserve non-decreasing quality and strictly increasing median latency; dominated classes remain off the Pareto frontier.
@@ -39,7 +40,8 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - finite executed-work classes;
 - physical work counts derived from actual control flow and checked by instrumentation;
 - explicit separation of target-independent work metadata from target/compiler/RTOS timing certification;
-- fail-closed admission when timing evidence is absent or bound to a different manifest;
+- fail-closed admission when timing evidence is absent, bound to a different manifest, or certified for a different deployed build;
+- compiler/optimization code-generation sensitivity even when neural outputs are identical;
 - capability validation for every runtime-admissible execution class;
 - quality/latency Pareto usefulness of exposed classes;
 - task quality under budget;

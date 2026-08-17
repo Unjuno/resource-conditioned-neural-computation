@@ -9,8 +9,10 @@ const RTNNStaticExecutionClass RTNN_STATIC_CLASSES[RTNN_EXECUTION_CLASS_COUNT] =
 };
 
 int8_t rtnn_admit_execution_class(uint32_t deadline,
+                                  uint64_t deployed_build_id,
                                   const RTNNTargetTimingBinding* binding) {
     if (!binding || binding->manifest_id != RTNN_EXECUTION_MANIFEST_ID) return -1;
+    if (binding->certified_build_id != deployed_build_id) return -1;
     if (deadline < binding->runtime_overhead_ticks) return -1;
 
     const uint32_t usable = deadline - binding->runtime_overhead_ticks;

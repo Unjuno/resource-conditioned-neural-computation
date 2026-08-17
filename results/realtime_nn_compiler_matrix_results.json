@@ -1,0 +1,39 @@
+{
+  "setup": {
+    "seed": 0,
+    "host_isa": "x86_64",
+    "gcc": "14.2.0",
+    "clang": "17.0.0",
+    "optimizations": ["O0", "O1", "O2", "O3", "Os"],
+    "core": "bounded-numeric division-free Q5 freestanding core",
+    "note": "Compiler/code-generation audit only; not WCET."
+  },
+  "rows": [
+    {"compiler":"gcc","optimization":"O0","undefined_external_symbols":0,"conditional_jump_count":16,"div_or_idiv_instruction_count":0,"text_bytes":171628,"functional_output_hash":"b825970f0350e016","object_sha256":"14a43894b08b51b7a7b81bec293c0bada7e66c83f1065d380ccb95ea06704898"},
+    {"compiler":"gcc","optimization":"O1","undefined_external_symbols":0,"conditional_jump_count":19,"div_or_idiv_instruction_count":0,"text_bytes":170266,"functional_output_hash":"b825970f0350e016","object_sha256":"0c92cb20c94a76a855d5a9d14b16314f75dd0a233cb017c84312a339ed174e85"},
+    {"compiler":"gcc","optimization":"O2","undefined_external_symbols":0,"conditional_jump_count":21,"div_or_idiv_instruction_count":0,"text_bytes":170789,"functional_output_hash":"b825970f0350e016","object_sha256":"8a39de0e683cd7270200ca940305bc6718db95f77096d2ba421cdb1b2d70afc6"},
+    {"compiler":"gcc","optimization":"O3","undefined_external_symbols":0,"conditional_jump_count":22,"div_or_idiv_instruction_count":0,"text_bytes":173613,"functional_output_hash":"b825970f0350e016","object_sha256":"804b51460a1ae70cef4e3c7d6fd5ecda276ecb0f02f1ceb64874f820105e808b"},
+    {"compiler":"gcc","optimization":"Os","undefined_external_symbols":0,"conditional_jump_count":13,"div_or_idiv_instruction_count":0,"text_bytes":170005,"functional_output_hash":"b825970f0350e016","object_sha256":"6953b0b8f08f6005d51f1de41d428db6ab35689c36fe1db677e78d5cdfd2891f"},
+    {"compiler":"clang","optimization":"O0","undefined_external_symbols":0,"conditional_jump_count":15,"div_or_idiv_instruction_count":0,"text_bytes":171190,"functional_output_hash":"b825970f0350e016","object_sha256":"9259fe9b43ab095976439fbf1ae322b8d4e88fbf4884ad693576c55feb597883"},
+    {"compiler":"clang","optimization":"O1","undefined_external_symbols":0,"conditional_jump_count":24,"div_or_idiv_instruction_count":0,"text_bytes":170489,"functional_output_hash":"b825970f0350e016","object_sha256":"a8facaf4960fc1df3ddc40ed2421a6fb2ec29443a80e3d87dfb6d7a297cf3ab1"},
+    {"compiler":"clang","optimization":"O2","undefined_external_symbols":0,"conditional_jump_count":22,"div_or_idiv_instruction_count":0,"text_bytes":172984,"functional_output_hash":"b825970f0350e016","object_sha256":"1d12addcedcebb5d58b6fc864b4c1334efc7874ad611f9ef15c42263732e606c"},
+    {"compiler":"clang","optimization":"O3","undefined_external_symbols":0,"conditional_jump_count":23,"div_or_idiv_instruction_count":0,"text_bytes":173895,"functional_output_hash":"b825970f0350e016","object_sha256":"f49eed301d4b8bf57cd49d0cd7e2ac2ac57fc28ae5e01de2007e4d6f7d2a7480"},
+    {"compiler":"clang","optimization":"Os","undefined_external_symbols":0,"conditional_jump_count":20,"div_or_idiv_instruction_count":0,"text_bytes":170179,"functional_output_hash":"b825970f0350e016","object_sha256":"a2b9ee323754c72e088c86c3964686db7b455e41b01e8a06e5c110398b5d9ccb"}
+  ],
+  "aggregate": {
+    "build_count": 10,
+    "unique_object_hashes": 10,
+    "unique_functional_output_hashes": 1,
+    "all_zero_undefined_external_symbols": true,
+    "all_zero_div_or_idiv": true,
+    "conditional_jump_min": 13,
+    "conditional_jump_max": 24,
+    "text_bytes_min": 170005,
+    "text_bytes_max": 173895,
+    "project_local_max_stack_usage_bytes_range": [136, 280]
+  },
+  "interpretation": {
+    "supported": "The same RTNN manifest and functional behavior can compile into distinct machine-code objects under different compilers/optimization flags; a timing certification therefore must be bound to the certified deployed build, not only to the target-independent neural work manifest.",
+    "not_supported": ["WCET from object-size/branch counts", "cross-ISA timing equivalence", "compiler-independent execution time"]
+  }
+}
