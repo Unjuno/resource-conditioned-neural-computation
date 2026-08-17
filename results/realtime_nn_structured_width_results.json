@@ -1,0 +1,45 @@
+{
+  "setup": {
+    "task": "9-bit majority complete 512-state domain",
+    "training_steps_per_seed": 160,
+    "seeds": [0,1,2],
+    "maximum_hidden_width": 32,
+    "classes": [
+      {"class":0,"depth":0,"active_width":8,"slim_linear_macs":16,"dense_mask_linear_macs":64,"work_ratio":0.25},
+      {"class":1,"depth":2,"active_width":8,"slim_linear_macs":11408,"dense_mask_linear_macs":182336,"work_ratio":0.06256581256581256},
+      {"class":2,"depth":4,"active_width":16,"slim_linear_macs":91168,"dense_mask_linear_macs":364608,"work_ratio":0.25004388274530454},
+      {"class":3,"depth":6,"active_width":24,"slim_linear_macs":307632,"dense_mask_linear_macs":546880,"work_ratio":0.5625219426565243},
+      {"class":4,"depth":8,"active_width":32,"slim_linear_macs":729152,"dense_mask_linear_macs":729152,"work_ratio":1.0}
+    ],
+    "same_parameters": "All classes use prefixes of one maximum-width parameter set jointly trained across all classes.",
+    "dense_control": "Dense-width-mask computes the maximum 32/128 channel matrices then zeros inactive hidden/FF channels; it is mathematically output-equivalent to the sliced slim path for the tested model.",
+    "timing_boundary": "ordinary Linux host timing; central-latency mechanism audit only, not WCET"
+  },
+  "quality": {
+    "all_three_seeds_accuracy_by_class": [0.63671875,0.71484375,0.78515625,0.86328125,1.0],
+    "all_three_seeds_python_slim_median_strictly_increases": true
+  },
+  "cpp_seed_results": [
+    {"seed":0,"accuracy":[0.63671875,0.71484375,0.78515625,0.86328125,1.0],"max_slim_dense_output_abs_diff":[0,0,0,0,0],"slim_p50_us":[0.135,8.813,55.080,139.608,328.840],"dense_mask_p50_us":[0.323,67.598,154.171,227.408,328.407],"slim_p95_us":[0.137,12.009,82.850,249.802,522.049],"dense_mask_p95_us":[0.327,92.647,628.895,349.513,507.522]},
+    {"seed":1,"accuracy":[0.63671875,0.71484375,0.78515625,0.86328125,1.0],"max_slim_dense_output_abs_diff":[0,0,0,0,0],"slim_p50_us":[0.135,8.737,55.074,140.152,329.068],"dense_mask_p50_us":[0.327,67.537,143.023,228.266,327.451],"slim_p95_us":[0.137,8.846,97.413,246.801,545.621],"dense_mask_p95_us":[0.336,153.152,235.760,379.803,440.123]},
+    {"seed":2,"accuracy":[0.63671875,0.71484375,0.78515625,0.86328125,1.0],"max_slim_dense_output_abs_diff":[0,0,0,0,0],"slim_p50_us":[0.191,12.742,71.280,208.403,467.929],"dense_mask_p50_us":[0.404,98.043,206.199,326.236,480.846],"slim_p95_us":[0.211,14.105,85.708,257.742,613.411],"dense_mask_p95_us":[0.420,130.535,266.824,424.644,611.427]}
+  ],
+  "cpp_aggregate": {
+    "mean_slim_p50_us":[0.15366666666666667,10.097333333333333,60.478,162.721,375.279],
+    "mean_dense_mask_p50_us":[0.35133333333333333,77.726,167.79766666666666,260.63666666666666,378.90133333333335],
+    "mean_p50_ratio_slim_over_dense":[0.43452432342390657,0.12990106278104072,0.362674014950963,0.622235264416911,0.9931311862717128],
+    "all_seeds_all_classes_cpp_output_identical_slim_vs_dense_mask": true
+  },
+  "pytorch_backend_negative_control_seed0": {
+    "note": "Physical tensor slicing reduces nominal MACs but does not produce proportional latency benefit in PyTorch for these tiny batch-1 matrices; some slim classes are slightly slower than dense-mask control.",
+    "classes_1_to_3": [
+      {"class":1,"work_ratio":0.06256581256581256,"slim_p50_us":112.5115,"dense_mask_p50_us":108.8715,"latency_ratio":1.0334339106194},
+      {"class":2,"work_ratio":0.25004388274530454,"slim_p50_us":215.549,"dense_mask_p50_us":203.4775,"latency_ratio":1.0593259697018098},
+      {"class":3,"work_ratio":0.5625219426565243,"slim_p50_us":310.0015,"dense_mask_p50_us":305.5795,"latency_ratio":1.014470866010318}
+    ]
+  },
+  "interpretation": {
+    "supported": "One maximum-width NN can jointly support budget classes that change both executed depth and active channel width. When the backend physically reduces loop/matrix dimensions, the same-output dense-mask control is substantially slower for the narrower classes in the tested C++ implementation.",
+    "not_supported": ["universal kernel speedup from width sparsity", "hard-real-time/WCET", "arbitrary channel masks rather than structured prefixes", "LLM-scale generalization"]
+  }
+}
