@@ -45,6 +45,16 @@ See [`RELATED_WORK.md`](RELATED_WORK.md) for specific prior work including DWN, 
 
 See [`notes/readiness_report.md`](notes/readiness_report.md) for exact claims, limitations, and prior falsification results.
 
+## Direct internal-circuit test
+
+The repository now also contains a direct test of the original architectural claim: **one fixed parameterized network changes the internal subgraph that is actually executed when only the resource condition changes**.
+
+The model contains a retrieval node, an algorithmic stem with four residual compute blocks, a shared classifier head, and a resource-conditioned router. Under one resource condition the executed trace is `retrieval -> head`; under another it is `stem -> block0 -> block1 -> block2 -> block3 -> head`.
+
+Across three seeds, both circuits retain 100% accuracy over all 4,096 task states. An exhaustive same-input counterfactual check confirms that changing only the resource condition changes the selected circuit while preserving the prediction over the complete finite domain. Forward hooks verify that modules on the inactive subgraph are not executed.
+
+This directly supports **resource-conditioned effective internal circuits**, not merely variable iteration count. It does **not** show spontaneous circuit discovery: the alternative subgraphs were deliberately constructed and only the router was post-trained after capability acquisition. See [`notes/internal_circuit_experiment.md`](notes/internal_circuit_experiment.md).
+
 ## Reproduce
 
 Python 3.10+ is recommended.
@@ -55,6 +65,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 python experiments/price_mask_conformal_multiseed.py
 python experiments/price_negative_control.py
+python experiments/internal_circuit_conditioning.py
 ```
 
 Generated JSON is written to `results/`.
