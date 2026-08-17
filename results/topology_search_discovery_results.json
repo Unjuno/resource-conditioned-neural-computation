@@ -1,0 +1,41 @@
+{
+  "setup": {
+    "search_space": "3 stages x {skip, lookup, compute} = 27 hard topologies",
+    "topology_labels_used": false,
+    "training_price_anchors": [0.02, 0.08, 0.25, 1.0, 4.0, 12.5, 50.0],
+    "resource_columns": ["compute_proxy", "active_parameter_footprint_proxy"],
+    "boundary": "Primitive operations and stage count are supplied; complete topologies are not route labels. This is constrained subgraph discovery, not unconstrained NAS."
+  },
+  "xor2": {
+    "price_aware": {
+      "seeds": [
+        {"seed":0,"num_selected_topologies":4,"selected_topologies":[[0,2,0],[0,2,1],[1,0,1],[1,2,1]],"dense_hard_accuracy":1.0,"global_oracle_agreement":0.4975,"mean_global_regret":0.029351856950670482,"endpoint_probes":{"footprint_expensive":{"ratio":0.02,"topology":[0,2,0],"lookup_count":0,"compute_count":1},"balanced":{"ratio":1.0,"topology":[0,2,0],"lookup_count":0,"compute_count":1},"compute_expensive":{"ratio":50.0,"topology":[1,0,1],"lookup_count":2,"compute_count":0}},"posthoc_local_prune_oracle_agreement":0.9375,"posthoc_local_prune_regret":0.0016460359841585159,"posthoc_pruned_topologies":[[0,0,1],[0,2,0]]},
+        {"seed":1,"num_selected_topologies":4,"selected_topologies":[[0,1,1],[2,0,0],[2,0,1],[2,1,1]],"dense_hard_accuracy":1.0,"global_oracle_agreement":0.9775,"mean_global_regret":0.001627594456076622,"endpoint_probes":{"footprint_expensive":{"ratio":0.02,"topology":[2,0,0],"lookup_count":0,"compute_count":1},"balanced":{"ratio":1.0,"topology":[2,0,0],"lookup_count":0,"compute_count":1},"compute_expensive":{"ratio":50.0,"topology":[0,1,1],"lookup_count":2,"compute_count":0}},"posthoc_local_prune_oracle_agreement":0.9925,"posthoc_local_prune_regret":0.00003555838018655777,"posthoc_pruned_topologies":[[0,1,1],[2,0,0]]},
+        {"seed":2,"num_selected_topologies":4,"selected_topologies":[[0,1,1],[2,0,0],[2,0,1],[2,1,1]],"dense_hard_accuracy":1.0,"global_oracle_agreement":0.98,"mean_global_regret":0.0013985764607787133,"endpoint_probes":{"footprint_expensive":{"ratio":0.02,"topology":[2,0,0],"lookup_count":0,"compute_count":1},"balanced":{"ratio":1.0,"topology":[2,0,0],"lookup_count":0,"compute_count":1},"compute_expensive":{"ratio":50.0,"topology":[0,1,1],"lookup_count":2,"compute_count":0}},"posthoc_local_prune_oracle_agreement":0.995,"posthoc_local_prune_regret":0.000016346499323844908,"posthoc_pruned_topologies":[[0,1,1],[2,0,0]]},
+        {"seed":3,"num_selected_topologies":4,"selected_topologies":[[0,1,1],[2,0,0],[2,0,1],[2,1,1]],"dense_hard_accuracy":1.0,"global_oracle_agreement":0.4975,"mean_global_regret":0.029893325064331292,"endpoint_probes":{"footprint_expensive":{"ratio":0.02,"topology":[2,0,0],"lookup_count":0,"compute_count":1},"balanced":{"ratio":1.0,"topology":[2,0,0],"lookup_count":0,"compute_count":1},"compute_expensive":{"ratio":50.0,"topology":[0,1,1],"lookup_count":2,"compute_count":0}},"posthoc_local_prune_oracle_agreement":0.935,"posthoc_local_prune_regret":0.001781620755791664,"posthoc_pruned_topologies":[[0,0,1],[2,0,0]]},
+        {"seed":4,"num_selected_topologies":4,"selected_topologies":[[1,0,1],[1,1,1],[2,0,0],[2,0,1]],"dense_hard_accuracy":1.0,"global_oracle_agreement":0.585,"mean_global_regret":0.02026502391323447,"endpoint_probes":{"footprint_expensive":{"ratio":0.02,"topology":[2,0,0],"lookup_count":0,"compute_count":1},"balanced":{"ratio":1.0,"topology":[2,0,0],"lookup_count":0,"compute_count":1},"compute_expensive":{"ratio":50.0,"topology":[1,1,1],"lookup_count":3,"compute_count":0}},"posthoc_local_prune_oracle_agreement":0.585,"posthoc_local_prune_regret":0.010204318147152662,"posthoc_pruned_topologies":[[1,0,1],[1,1,0],[2,0,0]]}
+      ],
+      "aggregate": {"mean_selected_topologies":4,"mean_dense_hard_accuracy":1.0,"mean_global_oracle_agreement":0.7075,"mean_global_regret":0.016507275369018318,"seeds_with_multiple_topologies":5,"mean_posthoc_local_prune_oracle_agreement":0.889,"mean_posthoc_local_prune_regret":0.002736775953322649,"seeds_compute_only_when_footprint_expensive":5,"seeds_lookup_only_when_compute_expensive":5}
+    },
+    "price_blind": {
+      "seeds": [
+        {"seed":0,"num_selected_topologies":1,"selected_topologies":[[1,0,0]],"dense_hard_accuracy":1.0,"global_oracle_agreement":1.0,"mean_global_regret":0.0},
+        {"seed":1,"num_selected_topologies":1,"selected_topologies":[[2,0,0]],"dense_hard_accuracy":1.0,"global_oracle_agreement":0.4975,"mean_global_regret":0.16294703552499412},
+        {"seed":2,"num_selected_topologies":1,"selected_topologies":[[0,0,1]],"dense_hard_accuracy":1.0,"global_oracle_agreement":1.0,"mean_global_regret":0.0},
+        {"seed":3,"num_selected_topologies":1,"selected_topologies":[[2,0,0]],"dense_hard_accuracy":1.0,"global_oracle_agreement":1.0,"mean_global_regret":0.0},
+        {"seed":4,"num_selected_topologies":1,"selected_topologies":[[2,0,0]],"dense_hard_accuracy":1.0,"global_oracle_agreement":1.0,"mean_global_regret":0.0}
+      ],
+      "aggregate": {"mean_selected_topologies":1,"mean_dense_hard_accuracy":1.0,"mean_global_oracle_agreement":0.8995,"mean_global_regret":0.03258940710499882,"seeds_with_multiple_topologies":0}
+    }
+  },
+  "parity4_stress": {
+    "price_aware": {
+      "seeds": [
+        {"seed":0,"num_selected_topologies":4,"selected_topologies":[[0,1,0],[0,1,2],[0,2,2],[1,1,0]],"dense_hard_accuracy":1.0,"global_oracle_agreement":0.0,"mean_global_regret":0.0677858055010438},
+        {"seed":1,"num_selected_topologies":1,"selected_topologies":[[0,1,0]],"dense_hard_accuracy":1.0,"global_oracle_agreement":1.0,"mean_global_regret":0.0},
+        {"seed":2,"num_selected_topologies":1,"selected_topologies":[[0,0,1]],"dense_hard_accuracy":1.0,"global_oracle_agreement":1.0,"mean_global_regret":0.0}
+      ],
+      "aggregate": {"mean_selected_topologies":2,"mean_dense_hard_accuracy":1.0,"mean_global_oracle_agreement":0.6666666666666666,"mean_global_regret":0.02259526850034793,"seeds_with_multiple_topologies":1}
+    }
+  }
+}

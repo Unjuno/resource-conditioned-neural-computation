@@ -27,11 +27,11 @@ A separate runtime mask can disable execution classes based on held-out timing c
 
 ## Related work / novelty boundary
 
-**LUT-based neural computation is not claimed as novel here.** Prior work already includes differentiable logic-gate networks, interconnected lookup-table networks, neural sub-networks synthesized into LUTs, LUT-neuron Vision Transformers, and fully trainable deep LUT networks.
+**LUT-based neural computation, dynamic routing, neural architecture search, once-for-all subnetworks, and runtime subnetwork switching are not claimed as novel here.** Prior work already includes differentiable logic-gate/LUT networks, dynamically routed neural graphs, Adaptive Neural Trees, Once-for-All, Dynamic-OFA, and hardware-aware dynamic NAS such as HADAS.
 
-The lookup path here is only a clean constructive example of one execution regime. The narrower question is whether a model can use an explicit resource-price signal to choose among already-valid, resource-distinct execution regimes while an independent runtime mask constrains feasibility.
+The lookup path here is only a clean constructive example of one execution regime. The narrower question is whether a model can use an explicit normalized resource-price signal to change its actual internal execution while an independent runtime mask constrains feasibility.
 
-See [`RELATED_WORK.md`](RELATED_WORK.md) for specific prior work including DWN, NeuraLUT, LL-ViT, differentiable logic-gate networks, and recent trainable LUT-network work.
+See [`RELATED_WORK.md`](RELATED_WORK.md) for the explicit prior-art boundary.
 
 ## Main observations
 
@@ -94,6 +94,28 @@ Complete gradient separation is not required: a diagnostic that trains capabilit
 
 See [`notes/joint_self_specialization.md`](notes/joint_self_specialization.md).
 
+## Constrained topology-search follow-up
+
+The latest experiment removes the short list of complete named routes. Instead, one three-stage supernet supplies only primitive operations: `skip`, `lookup`, or `compute` at each stage. This creates **27 possible hard topologies**, but complete topologies are never used as training labels.
+
+On the main XOR toy, the resource-price-aware model:
+
+- selects **4 distinct hard topologies in every one of 5 seeds** over the held-out dense price sweep;
+- keeps **100% exhaustive task accuracy** at every tested price point;
+- uses a **compute-only** topology when the parameter-footprint proxy is expensive in **5/5 seeds**;
+- uses a **lookup-only / lookup-heavy** topology when the compute proxy is expensive in **5/5 seeds**;
+- learns different exact stage placements across seeds, rather than reproducing one fixed named route.
+
+The matched price-blind version selects exactly **one fixed topology in 5/5 seeds**.
+
+This is evidence for **resource-conditioned subgraph discovery inside a supplied supernet search space**. It is not evidence for unconstrained architecture discovery.
+
+The optimization remains imperfect. After training, all 27 hard topologies are exhaustively checked; the learned topology matches the globally cheapest 100%-accurate topology only **70.75%** of the dense price sweep on average. A separate validation-only local pruning diagnostic improves this to **88.9%**, but one seed remains poorly consolidated.
+
+A harder 4-bit-parity stress test is also unstable: only **1/3 seeds** discovers multiple resource-conditioned topologies, while **2/3 seeds** collapse to a single lookup topology. Therefore the repository does **not** claim that topology discovery is robust across tasks.
+
+See [`notes/topology_search_discovery.md`](notes/topology_search_discovery.md).
+
 ## Runtime contention negative result
 
 A same-core Linux contention follow-up attempted to turn empirical 99%-order-statistic timing calibration into a route-specific availability mask. The desired separation was **not stable** across independent invocations: scheduler/preemption tails of several milliseconds often affected even short routes, and state recalibration did not consistently improve held-out miss rate.
@@ -114,6 +136,7 @@ python experiments/internal_circuit_conditioning.py
 python experiments/multicircuit_contract_transfer.py
 python experiments/multicircuit_runtime_state_calibration.py
 python experiments/joint_self_specialization.py
+python experiments/topology_search_discovery.py --suite
 ```
 
 Generated JSON is written to `results/`.
@@ -132,7 +155,8 @@ Useful criticism includes evidence that:
 4. the result disappears under a clean reimplementation;
 5. a materially identical prior method already establishes the same narrow mechanism and runtime/model responsibility split;
 6. the three-circuit result is explained by a weaker discrete controller once price/mask information and capacity are matched;
-7. the joint-from-scratch result disappears when fallback capability and price normalization are matched fairly.
+7. the joint-from-scratch result disappears when fallback capability and price normalization are matched fairly;
+8. the constrained topology-search result disappears under a stronger matched supernet/NAS baseline or fails to transfer beyond the easy XOR setting.
 
 Please open an issue using the critique/reproduction templates.
 
