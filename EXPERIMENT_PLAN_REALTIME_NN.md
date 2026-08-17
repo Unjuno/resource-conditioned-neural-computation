@@ -2,104 +2,108 @@
 
 ## Objective
 
-Test the intended mechanism directly:
+Test the intended system directly:
 
-> With one fixed neural network, a runtime-admitted work/time budget constrains physical execution, the NN learns which admissible internal computation is useful, and the resulting work/quality/latency relation supports deadline-aware behavior.
-
-A controller/gate is an implementation mechanism, not the research target.
+> A runtime admits a bounded amount of neural work; one fixed NN physically executes only admissible computation and may learn which admissible computation is useful; the runtime must derive that budget from a defensible timing/interference model.
 
 ## Progress
 
-- **Physical budget-conditioned block execution:** PASS.
-- **Learned module selection under a hard runtime cap:** PASS.
-- **Learned activation + empirical deadline admission:** PASS as soft/weakly-hard.
-- **Task-loss-only selection without relevance labels:** PASS in the supplied key/query toy.
-- **Less analytically exposed useful-computation task:** NEXT MODEL-SIDE FALSIFICATION.
-- **Machine-state-aware runtime admission:** OPEN.
-- **Finer-grained structured physical activation:** OPEN.
+### Model side
+
+- **Physical budget-conditioned execution:** PASS.
+- **Learned selection under a hard runtime cap:** PASS.
+- **Task-loss-only useful-computation selection:** PASS in the supplied toy search space.
+- **Learned selection + empirical soft deadline admission:** PASS with caveats.
+- **Less analytically exposed useful-computation task:** OPEN.
+- **Finer structured physical activation:** OPEN.
+
+### Runtime side
+
+- **Empirical central-latency execution classes on ordinary Linux:** usable as a toy soft/weakly-hard mechanism.
+- **Coarse machine-state → empirical P95 timing table:** FAIL / unstable under uncontrolled same-core Linux interference.
+- **Controlled RTOS/interference-aware admission:** NEXT PRIMARY RUNTIME MILESTONE.
 - **Hard timing guarantee / WCET:** OPEN.
 
-## Completed mechanism chain
+## Why simple machine-state recalibration failed
 
-The current toy experiments now cover:
+The tested idea was:
 
 ```text
-runtime deadline/budget
-    → hard physical work cap
-    → learned budget-compliant activation
-    → executed work
-    → measured latency
-    → task quality / on-time quality
+state ∈ {idle, loaded}
+      ↓
+empirical P95 table
+      ↓
+admitted budget
 ```
 
-Task-loss-only training demonstrates that the selection signal does not have to be supplied as an explicit relevance label in the current fixed search space.
+An initial run appeared positive but did not reproduce.
 
-## Current task-only result
+Repeated interleaved calibration showed that the same categorical state can produce P95 estimates that jump between a normal execution mode and a scheduler-preempted mode.
 
-Eight slots carry categorical keys and values; a global query identifies the useful slots only through ordinary task features. No relevance targets are used during training.
+Under continuous same-core load, a high-sample probe gives:
 
-At `k=4`:
+| budget | median | P95 | >4 ms fraction |
+|---:|---:|---:|---:|
+| .25 | 103 us | 381 us | 3.00% |
+| .50 | 189 us | **8.38 ms** | **6.94%** |
+| .75 | 279 us | 8.49 ms | 9.22% |
+| 1.00 | 378 us | 8.63 ms | 11.72% |
 
-- learned accuracy: **100%**;
-- fixed-prefix accuracy: **78.74%**;
-- analytic key/query oracle: **100%**;
-- selected useful-slot fraction: **100%**.
+The `B=.5` class crosses the 5% preemption-frequency threshold, so P95 moves discontinuously into the preempted mode. This is a **quantile-cliff** failure, not a neural routing failure.
 
-Physical hard-skip timing remains monotonic in 3/3 seeds.
+## Next primary runtime experiment
 
-The task is still analytically simple enough that an external key/query oracle exists. Therefore the next model-side experiment should make useful computation less directly exposed rather than merely making the controller larger.
+Stop trying to rescue uncontrolled Linux P95 with more calibration.
+
+Use a **controlled scheduling/interference substrate**. Preferred sequence:
+
+1. generate a small fixed conditional-execution inference implementation with analyzable block classes;
+2. run it under isolated/reserved CPU scheduling or an available RTOS/time-predictable environment;
+3. define explicit interference assumptions;
+4. obtain per-budget timing bounds under those assumptions;
+5. let the runtime admit the largest budget whose bound fits the deadline;
+6. verify that NN learned selection remains inside the admitted work cap.
+
+Target chain:
+
+```text
+deadline + bounded interference
+       ↓
+defensible execution-time bound by budget
+       ↓
+admitted work budget
+       ↓
+same NN physical execution
+```
+
+If an RTOS target is unavailable, the next-best experiment is generated single-thread C/C++ inference under isolated CPU scheduling, with explicit acknowledgement that this is still not formal WCET.
 
 ## Next model-side falsification
 
-Construct a task where the value of an internal computation is **latent or interaction-dependent**, while keeping the same systems contract:
+In parallel, make useful internal computation less analytically exposed than the current key/query toy while retaining:
 
-```text
-runtime admits k
-NN chooses ≤ k physical modules
-selection trained from task loss
-```
+- task-loss-only selection;
+- hard physical work cap;
+- physical skip audit;
+- measured controller overhead;
+- strong fixed/external baselines.
 
-Candidate requirements:
-
-1. no direct relevance flag or simple key==query oracle at the controller input;
-2. useful modules depend on learned intermediate representation or interactions;
-3. hard work cap remains structural;
-4. physical execution and timing audits remain unchanged;
-5. a strong external baseline is retained when one can be defined;
-6. negative collapse is reported rather than repaired by unrelated router optimization.
-
-Do not scale model size for its own sake.
-
-## Next runtime-side falsification
-
-Add a machine-state variable that changes actual execution timing while leaving model weights fixed.
-
-Runtime question:
-
-> Can the runtime remap deadline + observed machine state to a conservative admitted work budget without retraining the NN?
-
-This should be tested first under controlled CPU-frequency/load states if available, while explicitly retaining the Linux tail limitation.
-
-A stronger follow-up should move to an RTOS/time-predictable target.
+Do not increase model scale unless the mechanism requires it.
 
 ## Finer physical activation — OPEN
 
-Test channel/neuron/sub-block groups only when inactive work is **physically skipped**. Dense zero masks do not count as compute reduction.
+Test channel/neuron/sub-block groups only where inactive computation is physically skipped. Dense zero masks do not count as work reduction.
 
-Measure controller overhead, work reduction, latency, quality, and variance.
+## Hard timing boundary
 
-## Hard timing guarantee boundary — OPEN
+Ordinary Linux/PyTorch empirical percentiles are not WCET. The new machine-state audit makes that boundary stronger: even P95 can become discontinuous when scheduler-preemption probability crosses the selected quantile.
 
-Ordinary Linux/PyTorch timing is not WCET.
-
-Current experiments repeatedly show unstable/non-monotonic high-percentile timing even when medians are well ordered.
-
-A hard-real-time experiment requires statically analyzable generated inference code, a time-predictable target, controlled RTOS interference assumptions, formal/static WCET, or an accepted equivalent.
+A hard-real-time result requires controlled scheduling plus a defensible static/formal/probabilistic timing argument with explicit assumptions.
 
 ## Direction rule
 
-Do not expand router/NAS experiments unless they solve a concrete failure in:
+Do not return to route-score/NAS optimization unless it fixes a concrete problem in:
 
 ```text
-budget → physical activation → work → latency → deadline
+budget → physical activation → work → timing bound → deadline
 ```
