@@ -17,10 +17,14 @@
 13. Centering log prices to remove common-scale information materially improves random-contract robustness: the centered representation reaches 97.36% mean oracle agreement versus 79.56% for the raw-log-price ablation under changing common price scale.
 14. In the constrained topology-search follow-up, the experimenter supplies only a three-stage supernet with per-stage `skip`, `lookup`, and `compute` primitives (27 possible hard topologies), not complete route labels. On XOR, the resource-price-aware model selects four hard topologies in every one of five seeds while preserving 100% exhaustive task accuracy; the matched price-blind model selects one fixed topology in every seed.
 15. In that topology-search follow-up, all five price-aware seeds use compute-only execution when the parameter-footprint proxy is expensive and lookup-only/lookup-heavy execution when the compute proxy is expensive; exact stage placement varies across seeds.
+16. Re-auditing the XOR topology result with a tie-aware cost metric gives **73.10%** mean minimum-cost rate for the directly learned topology and **94.6%** after validation-only local pruning; the corresponding mean regrets are ~0.01651 and ~0.00274. The older 70.75% and 88.9% figures are exact-route-identity metrics and are retained only for audit history.
+17. In a frozen-capability parity diagnostic, all six single-primitive placements reach 100% accuracy in all five seeds. Under the same binary feasibility/resource objective, an independent-stage factorized router reaches 77.30% mean tie-aware optimal-cost rate (minimum 49.75%), while an autoregressive router reaches 94.85% (minimum 93.50%). All evaluated router conditions retain 100% hard task accuracy.
 
 The direct internal-circuit experiment additionally verifies, across three seeds and all 4,096 finite task states per seed, that changing only the resource condition changes the actually executed internal subgraph while preserving the correct prediction. Forward-hook counts verify that the inactive subgraph is not executed. The alternative subgraphs were deliberately constructed; spontaneous circuit discovery is **not** claimed.
 
 The three-circuit and joint-from-scratch experiments extend that construction to three distinct resource profiles and three executed traces. The topology-search follow-up relaxes the complete-route specification further, but still supplies primitive operation types and a fixed three-stage search space. It therefore supports **constrained subgraph discovery**, not unconstrained architecture discovery.
+
+The router-stabilization audit freezes capability deliberately and therefore isolates allocation only. It does **not** establish a joint-from-scratch solution to the parity topology-discovery problem.
 
 ## Resource-proxy definition
 
@@ -55,8 +59,10 @@ See [`RELATED_WORK.md`](RELATED_WORK.md) for representative prior work including
 12. Real hardware portability from the simulated calibration-transfer experiment. That test assumes a separable multiplicative mapping from runtime/hardware state to the two-dimensional effective resource price.
 13. That a learned continuous router materially dominates a strong discrete external scheduler in the three-circuit interpolation test; the measured dense-ratio advantage is only about 0.39 percentage points.
 14. Unconstrained self-organization under a single undifferentiated joint objective. The successful joint-from-scratch condition explicitly applies task supervision to every potentially admissible circuit to preserve fallback capability.
-15. Globally resource-optimal topology discovery. In the XOR topology-search follow-up, direct learned topologies match the cheapest 100%-accurate hard topology on only 70.75% of the dense sweep on average.
+15. Globally resource-optimal topology discovery. In the XOR topology-search follow-up, direct learned topologies are minimum-cost on only **73.10%** of the dense sweep under the corrected tie-aware metric; mean regret is ~0.01651.
 16. Robust topology discovery across tasks. In the 4-bit-parity stress test, only 1/3 seeds discovers multiple resource-conditioned topologies and 2/3 collapse to a single lookup topology.
+17. That the autoregressive router audit solves joint topology discovery. Capabilities are deliberately trained first and frozen, and the audit computes exact expectations over the tiny 27-topology search space.
+18. General superiority of autoregressive routing or scalability of the flat 27-way / exact-marginal diagnostic to large search spaces.
 
 ## Important negative results retained
 
@@ -65,8 +71,9 @@ See [`RELATED_WORK.md`](RELATED_WORK.md) for representative prior work including
 - Naive joint specialization can cause fallback-capability forgetting. In the joint-from-scratch ablation, the retrieval route falls to 71.95% mean forced accuracy and is never used in the dense sweep, while the capability-preserving variant keeps all three routes at 100%.
 - Raw absolute log-price features can create unnecessary dependence on common price scale. The raw-log-price ablation remains strong on fixed-scale sweeps but falls to 79.56% mean oracle agreement on random contracts with varying common scale; relative centered log prices recover 97.36%.
 - Complete gradient separation is not required in the joint toy: the decoupled diagnostic reaches 97.51% held-out dense agreement, slightly below the ordinary capability-preserving joint result at 98.15%.
-- Constrained topology search does not automatically minimize the resource objective. The main XOR search maintains 100% task accuracy but reaches only 70.75% mean global-oracle agreement because redundant active operations can remain. Validation-only local pruning improves this to 88.9% but does not fix every seed.
+- Constrained topology search does not automatically minimize the resource objective. The main XOR search maintains 100% task accuracy but reaches only 73.10% mean tie-aware minimum-cost rate because redundant active operations can remain. Validation-only local pruning improves this to 94.6% but does not fix every seed.
 - The same topology-search procedure is not robust on 4-bit parity: only 1/3 seeds uses multiple resource-conditioned topologies.
+- Capability preservation alone does not solve parity allocation. In the frozen-capability audit, all single-primitive routes are 100% accurate but the independent-stage binary router still falls as low as 49.75% tie-aware optimal-cost rate; correlated autoregressive routing is markedly more stable but remains a diagnostic rather than a joint solution.
 - Soft-mixture, deterministic straight-through, and primitive-DropPath topology-search variants did not improve the main result; they either damaged hard-discretized task accuracy or increased redundant topology selection.
 - Simple linear compute+memory timing models did not capture end-to-end tail latency on Linux/PyTorch.
 - Runtime-load distribution shift breaks calibration unless the timing model is recalibrated or conditioned on state.
