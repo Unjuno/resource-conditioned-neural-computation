@@ -2,9 +2,10 @@
 
 Authoritative compact summaries for the current public reproduction include:
 
-- `realtime_nn_budget_execution_results.json` — direct same-network budget-conditioned physical block execution and soft P95 deadline admission.
-- `realtime_nn_learned_budget_gate_results.json` — learned internal activation under a hard runtime expert-call cap.
-- `realtime_nn_learned_deadline_results.json` — learned activation integrated with policy-specific P95 deadline admission; includes fixed-prefix, dense-mask, always-full, and strong external relevance-oracle baselines.
+- `realtime_nn_budget_execution_results.json` — direct same-network physical budget execution and soft P95 deadline admission.
+- `realtime_nn_learned_budget_gate_results.json` — learned internal activation under a hard runtime expert-call cap with explicit relevance supervision.
+- `realtime_nn_learned_deadline_results.json` — learned activation integrated with empirical P95 deadline admission.
+- `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with no relevance labels/warmup, physical hard-budget audit, timing, dense control, oracle baseline, and deadline diagnostic.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
 - `internal_circuit_conditioning_results.json`
@@ -21,16 +22,16 @@ Authoritative compact summaries for the current public reproduction include:
 - `nonseparable_contract_diagnostic_results.json`
 - `router_parameterization_sensitivity_results.json`
 
-For the Real-Time NN line, machine-specific microsecond values are not the main cross-machine reproduction target. Reproduction should focus on:
+For the Real-Time NN line, machine-specific microsecond values are not the primary cross-machine reproduction target. Reproduction should focus on:
 
 - physical hard-skip traces;
 - hard budget compliance;
-- work/latency ordering;
-- quality under budget;
+- task quality under budget;
+- work/median-latency ordering;
 - controller overhead;
-- on-time & correct behavior under common deadlines;
-- dense-mask controls;
-- strong external scheduling/oracle baselines where analytic information is exposed;
-- explicit refusal to interpret empirical Linux tails as WCET.
+- task-loss-only selection behavior;
+- dense-mask and analytic-oracle controls;
+- on-time & correct behavior under empirical deadlines;
+- explicit refusal to interpret Linux high-percentile timing as WCET.
 
 The corresponding scripts in `experiments/` regenerate fuller traces. The committed JSONs may be compact summaries rather than every intermediate timing sample.
