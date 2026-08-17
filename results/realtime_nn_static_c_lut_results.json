@@ -1,0 +1,63 @@
+{
+  "setup": {
+    "source_model_seed": 0,
+    "activation_tables": "257-point float32 tanh and GELU LUTs over [-8,8] with linear interpolation",
+    "activation_table_bytes": 2056,
+    "runtime": "static C budget execution classes with compile-time const weights and caller-owned workspace",
+    "compiler": "gcc -O2 -std=c11, no -lm required",
+    "timing_boundary": "ordinary Linux; not WCET/hard real time"
+  },
+  "activation_range_audit": {
+    "global_first_tanh_input_min": -2.7204358578,
+    "global_first_tanh_input_max": 1.8624452353,
+    "global_gelu_input_min": -1.6275956631,
+    "global_gelu_input_max": 2.3467452526,
+    "global_second_tanh_input_min": -0.9999496341,
+    "global_second_tanh_input_max": 0.9957956672,
+    "lut_domain": [-8.0, 8.0],
+    "max_linear_interp_error_over_minus2_8_to_2_5": {
+      "tanh": 0.0003749249,
+      "gelu": 0.0003974636
+    }
+  },
+  "prediction_audit_against_exact_activations": {
+    "depth_0": {"prediction_agreement":1.0,"max_logit_abs_diff":0.0,"accuracy":0.63671875},
+    "depth_2": {"prediction_agreement":1.0,"max_logit_abs_diff":0.0067554116,"accuracy":0.71484375},
+    "depth_4": {"prediction_agreement":1.0,"max_logit_abs_diff":0.0031757355,"accuracy":0.78515625},
+    "depth_6": {"prediction_agreement":1.0,"max_logit_abs_diff":0.0056662559,"accuracy":0.86328125},
+    "depth_8": {"prediction_agreement":1.0,"max_logit_abs_diff":0.0060232878,"accuracy":1.0}
+  },
+  "idle_example": {
+    "reps_per_class": 800,
+    "depth_0": {"p50_us":0.059,"p95_us":0.061,"p99_us":0.078},
+    "depth_2": {"p50_us":41.532,"p95_us":45.007,"p99_us":74.718},
+    "depth_4": {"p50_us":84.445,"p95_us":132.965,"p99_us":238.951},
+    "depth_6": {"p50_us":129.077,"p95_us":197.545,"p99_us":407.581},
+    "depth_8": {"p50_us":171.438,"p95_us":247.124,"p99_us":470.463}
+  },
+  "same_core_busy_example": {
+    "reps_per_class": 1000,
+    "depth_0": {"p50_us":0.058,"p95_us":0.060,"p99_us":0.087},
+    "depth_2": {"p50_us":41.528,"p95_us":99.112,"p99_us":4171.096},
+    "depth_4": {"p50_us":84.729,"p95_us":438.846,"p99_us":4172.867},
+    "depth_6": {"p50_us":128.768,"p95_us":4124.859,"p99_us":4202.864},
+    "depth_8": {"p50_us":172.228,"p95_us":4158.317,"p99_us":4312.036}
+  },
+  "binary_audit": {
+    "text_bytes": 345624,
+    "data_bytes": 656,
+    "bss_bytes": 168632,
+    "undefined_tanh_erf_exp_pow_symbols": false,
+    "undefined_malloc_or_free_symbols": false,
+    "note": "benchmark harness still references clock_gettime/qsort/stdio; neural activation path uses only fixed LUT interpolation and linear arithmetic"
+  },
+  "checks": {
+    "all_predictions_preserved": true,
+    "full_domain_accuracy_preserved": true,
+    "actual_activation_inputs_inside_lut_domain": true,
+    "runtime_libm_activation_dependency_removed": true,
+    "idle_central_latency_ordered_by_work": true,
+    "same_core_scheduler_tail_remains": true,
+    "hard_real_time_established": false
+  }
+}
