@@ -71,6 +71,29 @@ A simulated runtime-calibration transfer keeps the NN and router frozen, applies
 
 See [`notes/multicircuit_contract_transfer.md`](notes/multicircuit_contract_transfer.md).
 
+## Joint specialization from scratch
+
+A separate follow-up removes capability pretraining and freezing. The same three circuit types and router are initialized together and trained from scratch in one run. Candidate topologies are still deliberately constructed; this is **not** spontaneous topology discovery.
+
+Naive joint optimization fails: the retrieval fallback route drops to **71.95% mean forced accuracy** across five seeds (minimum **67.19%**) and is never selected in the held-out dense sweep.
+
+Adding a task loss on every potentially admissible circuit prevents that forgetting. In the capability-preserving joint condition:
+
+- all three circuits remain **100% accurate in all 5 seeds**;
+- all three routes are selected in **5/5 seeds**;
+- training sees only seven discrete price-ratio anchors;
+- held-out dense continuous ratios reach **98.15% mean oracle-route agreement**;
+- 4,000 random price/mask contracts per seed reach **97.36% mean oracle agreement** with mean normalized regret **0.00055**;
+- the same fixed input routes to tied-deep, shallow, or retrieval solely as the resource price changes.
+
+The matched capability-preserving price-blind control keeps every route accurate but does not specialize: held-out dense agreement is **34.91%**, and it selects the same shallow route across the three price regimes.
+
+A scale-invariance ablation also matters. When the router sees raw log prices, fixed-scale dense agreement stays high (**97.96%**) but random-contract agreement falls to **79.56%** when the common price scale changes. Centering log prices per contract restores the stronger result, matching the fact that multiplying all price coordinates by the same positive scalar cannot change `argmin(price · cost)`.
+
+Complete gradient separation is not required: a diagnostic that trains capabilities and allocation with separate optimizers reaches **97.51%** held-out dense agreement, slightly below the ordinary capability-preserving joint result.
+
+See [`notes/joint_self_specialization.md`](notes/joint_self_specialization.md).
+
 ## Runtime contention negative result
 
 A same-core Linux contention follow-up attempted to turn empirical 99%-order-statistic timing calibration into a route-specific availability mask. The desired separation was **not stable** across independent invocations: scheduler/preemption tails of several milliseconds often affected even short routes, and state recalibration did not consistently improve held-out miss rate.
@@ -90,6 +113,7 @@ python experiments/price_negative_control.py
 python experiments/internal_circuit_conditioning.py
 python experiments/multicircuit_contract_transfer.py
 python experiments/multicircuit_runtime_state_calibration.py
+python experiments/joint_self_specialization.py
 ```
 
 Generated JSON is written to `results/`.
@@ -107,7 +131,8 @@ Useful criticism includes evidence that:
 3. the timing-mask result is an artifact of calibration leakage;
 4. the result disappears under a clean reimplementation;
 5. a materially identical prior method already establishes the same narrow mechanism and runtime/model responsibility split;
-6. the three-circuit result is explained by a weaker discrete controller once price/mask information and capacity are matched.
+6. the three-circuit result is explained by a weaker discrete controller once price/mask information and capacity are matched;
+7. the joint-from-scratch result disappears when fallback capability and price normalization are matched fairly.
 
 Please open an issue using the critique/reproduction templates.
 
