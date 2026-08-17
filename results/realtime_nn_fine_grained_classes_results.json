@@ -1,0 +1,32 @@
+{
+  "setup": {
+    "task": "9-bit majority complete 512-state domain",
+    "same_network": "8 optional local propagation blocks + shared head",
+    "fine_training": "all depths 0..8 included in joint task loss",
+    "posthoc_control": "original model trained only at depths 0/2/4/6/8, then evaluated at all intermediate depths",
+    "timing_boundary": "ordinary Linux/PyTorch central timing only; P95 tail is unstable and not used as a safety claim"
+  },
+  "fine_grained": {
+    "per_seed_accuracy": {
+      "0": [0.63671875,0.63671875,0.71484375,0.71484375,0.78515625,0.78515625,0.86328125,0.86328125,1.0],
+      "1": [0.63671875,0.63671875,0.71484375,0.71484375,0.78515625,0.78515625,0.86328125,0.86328125,1.0],
+      "2": [0.63671875,0.63671875,0.71484375,0.71484375,0.78515625,0.78515625,0.86328125,0.86328125,1.0]
+    },
+    "mean_accuracy": [0.63671875,0.63671875,0.71484375,0.71484375,0.78515625,0.78515625,0.86328125,0.86328125,1.0],
+    "mean_median_us": [11.7216666667,57.6318333333,102.973,146.2275,189.765,237.8996666667,284.4706666667,332.6758333333,374.2225],
+    "checks": {
+      "all_seeds_accuracy_nondecreasing": true,
+      "all_seeds_median_latency_increasing": true,
+      "all_seeds_near_bayes": true
+    }
+  },
+  "posthoc_control": {
+    "per_seed_accuracy": {
+      "0": [0.63671875,0.63671875,0.71484375,0.63671875,0.78515625,0.2734375,0.86328125,0.72265625,1.0],
+      "1": [0.63671875,0.63671875,0.71484375,0.63671875,0.78515625,0.28515625,0.86328125,0.13671875,1.0],
+      "2": [0.63671875,0.36328125,0.71484375,0.32421875,0.78515625,0.73828125,0.86328125,0.1640625,1.0]
+    },
+    "mean_accuracy": [0.63671875,0.5455729167,0.71484375,0.5325520833,0.78515625,0.4322916667,0.86328125,0.3411458333,1.0],
+    "all_odd_depths_nondegrading": false
+  }
+}
