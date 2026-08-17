@@ -43,17 +43,34 @@ Seed-0 full-domain accuracy matches the Python model exactly:
 
 The implementation therefore reproduces the same learned computation rather than a separate approximation.
 
+## Exact physical linear-MAC accounting
+
+A later execution-count audit corrected the originally published `92,160 MAC/block` proxy. The rightmost position does **not** execute the neighbor `32 x 32` matvec; it copies the neighbor bias instead.
+
+Exact per-block count:
+
+```text
+self     9 * 32 * 32   =  9,216
+neighbor 8 * 32 * 32   =  8,192
+FF1      9 * 128 * 32  = 36,864
+FF2      9 * 32 * 128  = 36,864
+                         -------
+                         91,136 MAC/block
+```
+
+Debug instrumentation of the actual execution path matches this derivation. See `notes/realtime_nn_execution_count_correction.md`.
+
 ## Idle C++ timing
 
 One `g++ -O2 -std=c++17` run:
 
-| blocks | linear MAC proxy | median | P95 | P99 |
+| blocks | executed linear MACs | median | P95 | P99 |
 |---:|---:|---:|---:|---:|
 | 0 | 64 | 0.063 us | 0.064 us | 0.065 us |
-| 2 | 184,384 | 71.4 us | 129.9 us | 288.1 us |
-| 4 | 368,704 | 143.1 us | 255.0 us | 594.7 us |
-| 6 | 553,024 | 217.5 us | 490.4 us | 4.29 ms |
-| 8 | 737,344 | 294.8 us | 4.36 ms | 4.56 ms |
+| 2 | **182,336** | 71.4 us | 129.9 us | 288.1 us |
+| 4 | **364,608** | 143.1 us | 255.0 us | 594.7 us |
+| 6 | **546,880** | 217.5 us | 490.4 us | 4.29 ms |
+| 8 | **729,152** | 294.8 us | 4.36 ms | 4.56 ms |
 
 Median execution is strictly increasing with physically executed work.
 
@@ -96,7 +113,7 @@ Therefore the unresolved hard timing problem is not merely framework overhead or
 The C++ implementation is closer to an embedded/RTOS boundary because:
 
 - conditional work is explicit control flow;
-- per-budget loop structure and MAC counts are finite and visible;
+- per-budget loop structure and exact executed linear-MAC counts are finite and visible;
 - inference has no dynamic PyTorch dependency.
 
 However, this is **not yet WCET proof**. Compiler transformations, math-library behavior, cache/memory effects, interrupts, and scheduler interference still require target-specific analysis.
