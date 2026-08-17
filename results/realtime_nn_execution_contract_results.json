@@ -1,0 +1,47 @@
+{
+  "manifest": {
+    "path": "results/realtime_nn_execution_class_manifest.json",
+    "canonical_sha256": "c497a83885b3c2912c6b589dfded58f6fe0230cd83395df37f81ae6743f248d5",
+    "embedded_manifest_id_first_64_bits": "0xc497a83885b3c291",
+    "target_timing_bounds_embedded": false
+  },
+  "static_classes": [
+    {"class":0,"blocks":0,"linear_macs":64,"lut_calls":0,"residual_ops":0,"linear_outputs":2},
+    {"class":1,"blocks":2,"linear_macs":182336,"lut_calls":3456,"residual_ops":576,"linear_outputs":3970},
+    {"class":2,"blocks":4,"linear_macs":364608,"lut_calls":6912,"residual_ops":1152,"linear_outputs":7938},
+    {"class":3,"blocks":6,"linear_macs":546880,"lut_calls":10368,"residual_ops":1728,"linear_outputs":11906},
+    {"class":4,"blocks":8,"linear_macs":729152,"lut_calls":13824,"residual_ops":2304,"linear_outputs":15874}
+  ],
+  "c_freestanding_contract": {
+    "compile_flags": "-O2 -std=c11 -ffreestanding -fno-builtin",
+    "undefined_external_symbols": 0,
+    "binding_unit": "target-defined uint32 ticks",
+    "invalid_bound_sentinel": "UINT32_MAX",
+    "no_safe_class_return": -1
+  },
+  "property_test": {
+    "synthetic_bindings": 3,
+    "random_deadlines_per_binding": 100000,
+    "total_random_deadlines": 300000,
+    "admitted_class_always_within_explicit_bound": true,
+    "admitted_class_is_highest_certified_fitting_class": true,
+    "uncertified_classes_never_inferred_from_macs": true,
+    "wrong_manifest_id_rejected": true,
+    "null_binding_rejected": true
+  },
+  "synthetic_binding_examples": {
+    "note": "These bounds exist only to exercise admission logic. They are not hardware measurements or portability evidence.",
+    "fast": {"overhead_ticks":8,"upper_ticks":[30,90,160,240,330]},
+    "slow": {"overhead_ticks":12,"upper_ticks":[40,150,290,450,650]},
+    "partial_certification": {"overhead_ticks":5,"upper_ticks":[25,100,null,null,null]}
+  },
+  "interpretation": {
+    "supported": "The target-independent neural work manifest can be separated from a target-specific timing binding. Admission can fail closed when timing evidence is missing or belongs to a different manifest, and can select the highest explicitly certified class fitting a deadline.",
+    "not_supported": [
+      "any real target timing bound",
+      "hard-real-time schedulability",
+      "hardware portability",
+      "deriving execution time from MAC count alone"
+    ]
+  }
+}
