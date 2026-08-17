@@ -1,0 +1,34 @@
+{
+  "setup": {
+    "task": "4-bit parity; frozen-capability interface diagnostic",
+    "hardware_profile": "stage-local 2D multiplicative calibration, geometric-mean normalized per resource",
+    "aware_input": "relative global log price + relative stage-local log calibration",
+    "blind_control": "same flat-policy architecture/input width with calibration coordinates zeroed",
+    "holdout_profiles": "20 disjoint generated profiles",
+    "boundary": "flat policy enumerates 81 routes; analytic scheduler remains oracle"
+  },
+  "coverage_seed0": [
+    {"training_profiles":8,"aware_optimal_rate":0.28425,"aware_regret":0.015503002533689142,"swapped_calibration_optimal_rate":0.15175},
+    {"training_profiles":32,"aware_optimal_rate":0.66375,"aware_regret":0.005324797213077545,"swapped_calibration_optimal_rate":0.24425},
+    {"training_profiles":64,"aware_optimal_rate":0.57625,"aware_regret":0.00570806619245559,"swapped_calibration_optimal_rate":0.18675},
+    {"training_profiles":128,"aware_optimal_rate":0.70175,"aware_regret":0.0032943137930706145,"swapped_calibration_optimal_rate":0.22025},
+    {"training_profiles":256,"aware_optimal_rate":0.7645,"aware_regret":0.0017135396003723144,"swapped_calibration_optimal_rate":0.26975}
+  ],
+  "n256_three_seed": {
+    "aware_per_seed":[0.7645,0.728,0.7005],
+    "aware_mean_optimal_rate":0.731,
+    "aware_min_optimal_rate":0.7005,
+    "aware_mean_regret":0.0020893213373298445,
+    "blind_per_seed":[0.158,0.2735,0.31825],
+    "blind_mean_optimal_rate":0.24991666666666668,
+    "blind_mean_regret":0.018693157202874622,
+    "swap_per_seed":[0.26975,0.2565,0.2425],
+    "swap_mean_optimal_rate":0.25625
+  },
+  "autoregressive_1200_step_diagnostic": {
+    "hard_accuracy":1.0,
+    "optimal_rate":0.0525,
+    "mean_regret":0.2030068584876135,
+    "num_routes":1
+  }
+}
