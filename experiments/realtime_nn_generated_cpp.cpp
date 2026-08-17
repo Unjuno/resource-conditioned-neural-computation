@@ -19,8 +19,9 @@ constexpr int L = 9;
 constexpr int C = 32;
 constexpr int F = 128;
 constexpr int K = 8;
-constexpr int BLOCK_LINEAR_MACS = 92160;
-constexpr int HEAD_LINEAR_MACS = 64;
+// The rightmost position copies neighbor bias instead of executing a neighbor matvec.
+constexpr int BLOCK_LINEAR_MACS = 9*C*C + 8*C*C + 9*F*C + 9*C*F; // 91,136
+constexpr int HEAD_LINEAR_MACS = 2*C; // 64
 
 struct BlockParams {
     const float *self_w, *self_b, *neigh_w, *neigh_b;
