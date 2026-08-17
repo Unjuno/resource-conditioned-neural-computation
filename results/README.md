@@ -5,7 +5,8 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_budget_execution_results.json` — direct same-network physical budget execution and soft P95 deadline admission.
 - `realtime_nn_learned_budget_gate_results.json` — learned internal activation under a hard runtime expert-call cap with explicit relevance supervision.
 - `realtime_nn_learned_deadline_results.json` — learned activation integrated with empirical P95 deadline admission.
-- `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with no relevance labels/warmup, physical hard-budget audit, timing, dense control, oracle baseline, and deadline diagnostic.
+- `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with hard-budget/timing/deadline audits.
+- `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic. This is a **negative runtime result**: a coarse machine-state→P95 table is not stable on ordinary Linux.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
 - `internal_circuit_conditioning_results.json`
@@ -32,6 +33,7 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - task-loss-only selection behavior;
 - dense-mask and analytic-oracle controls;
 - on-time & correct behavior under empirical deadlines;
-- explicit refusal to interpret Linux high-percentile timing as WCET.
+- repeated timing-calibration stability, not just one favorable calibration;
+- explicit refusal to interpret Linux empirical P95/P99 as WCET.
 
 The corresponding scripts in `experiments/` regenerate fuller traces. The committed JSONs may be compact summaries rather than every intermediate timing sample.

@@ -1,0 +1,40 @@
+{
+  "setup": {
+    "model": "fixed-depth direct Real-Time NN",
+    "machine_states": ["idle", "same-core periodic competitor", "same-core continuous busy competitor"],
+    "repeated_calibration": "2 model seeds x 6 repeats x 160 samples per budget per state, budgets randomly interleaved",
+    "high_sample_probe": "seed 0, continuous same-core busy competitor, 1800 samples per budget for B=.25/.5/.75/1",
+    "timing_boundary": "ordinary Linux/PyTorch; not WCET/hard real time"
+  },
+  "seeds": [
+    {
+      "seed": 0,
+      "p95_cv": {
+        "idle": {"0.0":0.0800168869,"0.25":0.3208066322,"0.5":0.1002855688,"0.75":0.1737581757,"1.0":0.0499164487},
+        "periodic": {"0.0":0.0919906354,"0.25":0.0106232690,"0.5":0.0291062480,"0.75":0.0610923721,"1.0":0.0581069082},
+        "busy": {"0.0":0.0860056806,"0.25":0.1782392884,"0.5":0.8080948341,"0.75":0.0039597977,"1.0":0.0176202537}
+      },
+      "busy_p95_ranges_us": {"0.0":[29.525,37.858],"0.25":[206.774,362.624],"0.5":[551.484,4296.062],"0.75":[4372.071,4423.72],"1.0":[4520.782,4751.778]}
+    },
+    {
+      "seed": 1,
+      "p95_cv": {
+        "idle": {"0.0":0.1453822310,"0.25":0.1558560735,"0.5":0.1822696656,"0.75":0.2549828112,"1.0":0.1219643530},
+        "periodic": {"0.0":0.0818311825,"0.25":0.0764048028,"0.5":0.0537283675,"0.75":0.0890387283,"1.0":0.0576922053},
+        "busy": {"0.0":0.0672475848,"0.25":0.9903872037,"0.5":0.9753988216,"0.75":0.0079046194,"1.0":0.0160603524}
+      },
+      "busy_p95_ranges_us": {"0.0":[27.785,33.313],"0.25":[233.091,4160.235],"0.5":[561.092,4289.734],"0.75":[4351.343,4467.37],"1.0":[4482.488,4704.371]}
+    }
+  ],
+  "continuous_busy_high_sample": {
+    "0.25":{"n":1800,"p50_us":103.287,"p95_us":381.464,"p99_us":8359.51,"max_us":20627.256,"fraction_over_4ms":0.03},
+    "0.5":{"n":1800,"p50_us":189.463,"p95_us":8375.656,"p99_us":9127.02,"max_us":57255.734,"fraction_over_4ms":0.0694444444},
+    "0.75":{"n":1800,"p50_us":279.025,"p95_us":8489.264,"p99_us":9491.523,"max_us":491595.263,"fraction_over_4ms":0.0922222222},
+    "1.0":{"n":1800,"p50_us":377.798,"p95_us":8632.205,"p99_us":10162.781,"max_us":35752.051,"fraction_over_4ms":0.1172222222}
+  },
+  "aggregate": {
+    "max_p95_cv_by_state":{"idle":0.3208066322,"periodic":0.0919906354,"busy":0.9903872037},
+    "stable_state_to_p95_table_established": false,
+    "interpretation":"Same categorical machine state can yield empirical P95 estimates that switch between fast and scheduler-preempted modes. A simple state->P95 timing table is not a stable admission contract on ordinary Linux."
+  }
+}

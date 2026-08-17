@@ -2,90 +2,136 @@
 
 ## Current status
 
-The repository has now passed four toy-system mechanism gates for the intended Real-Time NN direction:
+The model-side toy mechanism has passed four gates:
 
 1. direct budget-conditioned physical execution;
-2. learned selection of admissible work under a hard runtime cap;
-3. learned activation integrated with empirical deadline admission;
-4. useful admissible activation learned from **task loss alone**, without explicit relevance labels.
+2. learned selection under a hard runtime work cap;
+3. learned selection integrated with empirical soft deadline admission;
+4. useful admissible activation learned from task loss alone in a supplied search space.
 
-The demonstrated toy chain is:
+The demonstrated model-side chain is:
 
 ```text
-deadline / admitted work budget
-  → budget-compliant learned internal activation
+admitted work budget
+  → budget-compliant internal activation
   → physically executed work
-  → measured latency
-  → task quality / on-time quality
+  → measured central latency
+  → task quality
 ```
 
-**Hard-real-time readiness is still not reached.** Current timing is ordinary Linux/PyTorch and remains empirical rather than WCET.
+The newest runtime-side audit adds an important **negative boundary**:
 
-## New milestone — task-loss-only selection
+> a coarse machine-state label does not provide a stable empirical P95 execution-class table under uncontrolled same-core Linux interference.
 
-`experiments/realtime_nn_task_only_gate.py` uses an 8-slot key/query task. Exactly four slots match a global query; the label is the strict majority of matching-slot bits.
+Therefore **hard-real-time readiness is not reached**.
 
-The controller receives ordinary task features but no relevance targets. Training uses task cross-entropy only, with no relevance auxiliary loss, capability warmup, or expert freezing.
+## Model-side readiness
 
-Three-seed mean result:
+### Direct physical execution — PASS
 
-| k | learned | prefix | analytic oracle | learned relevance fraction |
-|---:|---:|---:|---:|---:|
-| 1 | 69.04% | 67.66% | 69.09% | 100% |
-| 2 | **81.27%** | 71.37% | 81.80% | 100% |
-| 4 | **100.00%** | 78.74% | 100.00% | 100% |
-| 8 | 99.82% | 99.82% | 99.82% | 50% |
+One fixed network physically executes different numbers of optional blocks as budget changes. Hard-skip median timing is monotonic in 3/3 seeds; dense masking without physical skipping does not obtain the speedup.
 
-Hard budget compliance passes in 3/3 seeds. Learned hard-skip median latency is strictly monotonic in 3/3 seeds:
+### Learned hard-budget selection — PASS
 
-**77.49 / 110.47 / 176.97 / 314.04 us** for `k=1/2/4/8`.
+Hard top-k structurally enforces the admitted work cap. Learned selection improves quality over fixed prefix in useful intermediate regimes, with controller overhead included.
 
-Thus the current supplied search space no longer requires an explicit relevance-teaching signal for useful physical conditional computation to emerge.
+### Task-loss-only useful-computation selection — PASS in supplied toy search space
 
-This is still not unconstrained self-organized architecture discovery: the primitive experts, hard top-k mechanism, and task structure are supplied, and an analytic key/query oracle exists.
+Without relevance labels, relevance auxiliary loss, capability warmup, or expert freezing:
 
-## Deadline boundary
+- `k=2`: learned **81.27%** vs prefix 71.37%;
+- `k=4`: learned **100%** vs prefix 78.74%;
+- learned useful-slot selection is 100% for `k<=4` across 3/3 seeds;
+- hard-cap compliance and monotonic median timing pass in 3/3 seeds.
 
-The task-only controller is not universally superior under deadline admission.
+This does not establish unconstrained architecture discovery; an analytic key/query oracle exists.
 
-Mean on-time & correct:
+## Runtime machine-state audit — FAIL for simple Linux P95 recalibration
 
-| target class | learned | prefix | oracle | always full |
-|---:|---:|---:|---:|---:|
-| 1 | 67.60% | 76.93% | **79.47%** | 31.20% |
-| 2 | 75.93% | 82.27% | **89.73%** | 72.87% |
-| 4 | **98.27%** | 85.13% | 97.47% | 91.40% |
-| 8 | 96.53% | 85.13% | **98.13%** | 95.93% |
+The proposed runtime abstraction was:
 
-The learned benefit is strongest in the intermediate `k≈4` regime. Under tight deadlines, controller overhead lets simpler/faster policies admit more work and win.
+```text
+observed coarse machine state
+    → empirical P95 timing table
+    → admitted NN budget
+```
 
-## Timing boundary
+An initial experiment appeared to show that recalibration under load reduced misses. An independent repeat contradicted it, so the positive conclusion was withdrawn.
 
-The fixed-depth experiment has non-monotonic q99 timing in 3/3 seeds. Task-only learned-hard q99 is monotonic in only **1/3 seeds**, with high-percentile outliers far above the median.
+The follow-up repeatedly calibrates the same execution classes under idle, periodic same-core load, and continuous same-core busy load.
 
-All deadline results remain **empirical soft/weakly-hard**. WCET/hard real time is not established.
+Across two model seeds, six repeated calibrations per state show maximum empirical-P95 coefficient of variation of:
 
-## What remains before a stronger claim
+- idle: **0.321**;
+- periodic: **0.092**;
+- continuous busy: **0.990**.
 
-1. make useful internal computation less analytically exposed than the current key/query task;
-2. add machine-state-aware budget admission;
-3. test structured finer-grained physical activation;
-4. move to an RTOS/time-predictable target or obtain defensible static/formal WCET;
-5. later test the mechanism in sequence models without making scale itself the goal.
+Under continuous busy load, the same execution class can switch between sub-millisecond P95 and multi-millisecond P95 across repetitions.
+
+A larger probe explains the discontinuity:
+
+| budget | median | P95 | >4 ms fraction |
+|---:|---:|---:|---:|
+| .25 | 103 us | 381 us | 3.00% |
+| .50 | 189 us | **8.38 ms** | **6.94%** |
+| .75 | 279 us | 8.49 ms | 9.22% |
+| 1.00 | 378 us | 8.63 ms | 11.72% |
+
+When scheduler-preempted samples cross the 5% frequency boundary, empirical P95 jumps from the normal execution mode into the preempted mode. This **quantile cliff** makes simple state→P95 admission unstable.
+
+See `notes/realtime_nn_machine_state_timing_audit.md`.
+
+## Consequence for the Real-Time NN architecture
+
+The separation of responsibility becomes sharper:
+
+```text
+NN:
+  obey admitted work cap
+  choose useful computation inside that cap
+
+RTOS/runtime:
+  provide bounded scheduling/interference conditions
+  derive a defensible admissible work budget
+```
+
+The NN can reduce its nominal execution window and thereby reduce exposure to interference, but it cannot turn an uncontrolled Linux scheduler into a hard-real-time substrate.
+
+## Next required runtime milestone
+
+Do **not** keep tuning empirical Linux percentiles.
+
+The next runtime-side test should use a controlled scheduling substrate, for example:
+
+- CPU reservation / isolated real-time scheduling;
+- a real RTOS or time-predictable embedded target;
+- generated analyzable inference code;
+- or a formal/probabilistic interference model with explicit assumptions.
+
+Then test:
+
+```text
+deadline + bounded interference
+       ↓
+defensible admitted work budget
+       ↓
+same Real-Time NN
+```
 
 ## Readiness labels
 
 - **Direct physical budget execution:** PASS.
 - **Learned budget-compliant physical activation:** PASS.
-- **Learned activation + soft deadline admission:** PASS with empirical-timing caveat.
-- **Task-loss-only useful-computation selection:** PASS in the supplied toy search space.
-- **General/unconstrained self-organized circuit discovery:** NOT ESTABLISHED.
-- **Machine-state-aware admission:** OPEN.
+- **Task-loss-only useful-computation selection:** PASS in supplied toy search space.
+- **Soft deadline-admission mechanism:** PASS only under empirical central-timing assumptions.
+- **Coarse machine-state→P95 admission on ordinary Linux:** FAIL / NOT STABLE.
+- **Controlled RTOS/interference-aware admission:** OPEN.
 - **Hard real time / WCET:** NOT ESTABLISHED.
+- **General self-organized circuit discovery:** NOT ESTABLISHED.
 - **Real-Time LM / LLM-scale generalization:** NOT TESTED.
 
 ## Recommended framing
 
-**Real-Time Neural Computation: Budget-Conditioned Internal Activation for Predictable Inference Time**
+**Real-Time Neural Computation: Budget-Conditioned Physical Execution under Runtime Admission**
 
-“Predictable” currently means observed/calibratable central timing behavior, not a formal WCET guarantee.
+Any use of “predictable” must distinguish central empirical latency from a formal timing guarantee.
