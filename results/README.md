@@ -17,6 +17,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_compiler_matrix_results.json` — GCC/Clang × optimization-level audit: identical finite-domain outputs but ten distinct machine-code objects, motivating build-bound timing certification.
 - `realtime_nn_fixed_q5_results.json` — Q5 integer freestanding-core audit: 3-seed full-domain behavior preservation, int16 weights/workspace with int32 accumulators, 2x storage reduction, compiler cross-check, and central-latency comparison.
 - `realtime_nn_q5_bounded_numeric_results.json` — bounded numeric-path audit: bit-identical branch-reduced Q5 helpers plus conservative static int32/int16 linear-range bounds derived from weights and LUT output ranges.
+- `realtime_nn_q4_i8_results.json` — Q4 int8 freestanding-core audit: Q3 negative boundary, 3-seed decision preservation at Q4, 4x weight/LUT compression versus float, int32-only bounded MACs, division-free direct LUTs, compiler cross-check, and finite-class timing order.
 - `realtime_nn_fine_grained_classes_results.json` — execution-class granularity audit: post-hoc intermediate depth classes can lose capability, while jointly trained 0..8 depth classes preserve non-decreasing quality and strictly increasing median latency; dominated classes remain off the Pareto frontier.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
