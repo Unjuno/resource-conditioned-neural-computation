@@ -8,6 +8,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_common_deadline_frontier_results.json` — dense common-deadline learned-vs-prefix frontier audit.
 - `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with hard-budget/timing/deadline audits.
 - `realtime_nn_structured_width_results.json` — structured channel-width/depth activation audit: one maximum-width NN, exact sliced work counts, matched dense-mask control, PyTorch backend negative, and plain-C++ physical-width speedup across three seeds.
+- `realtime_nn_structured_width_q7_results.json` — freestanding Q7 lowering of the structured-width classes: Q5/Q6 precision failure boundary, 3-seed float-prediction equivalence at Q7, static numeric bounds, and explicit physical width loop bounds.
 - `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic; negative runtime result.
 - `realtime_nn_generated_cpp_results.json` — generated-weight plain-C++ conditional inference; verifies the physical work/central-latency relation without PyTorch and shows scheduler tails remain under same-core contention.
 - `realtime_nn_freestanding_core_results.json` — freestanding finite-class inference-core audit: zero unresolved external symbols, fixed caller-owned workspace, full-domain functional reproduction, and invalid-class fail-closed behavior.
@@ -43,6 +44,7 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - structured depth/width activation where inactive channels are physically absent from the executed matrix dimensions;
 - matched dense-mask controls that preserve output while retaining wasteful full-width computation;
 - backend sensitivity: reduced neural work must be shown to become reduced physical latency on the intended runtime;
+- fixed-point precision as part of execution-class capability validation rather than assuming one Q-format transfers across architectures;
 - explicit separation of target-independent work metadata from target/compiler/RTOS timing certification;
 - fail-closed admission when timing evidence is absent, bound to a different manifest, or certified for a different deployed build;
 - compiler/optimization code-generation sensitivity even when neural outputs are identical;
