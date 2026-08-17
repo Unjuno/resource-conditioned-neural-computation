@@ -10,13 +10,15 @@ This is an implementation/analyzability question, not a hard-real-time claim.
 
 The core exposes five finite execution classes:
 
-| class | blocks | linear-MAC proxy | activation LUT calls |
+| class | blocks | executed linear MACs | activation LUT calls |
 |---:|---:|---:|---:|
 | 0 | 0 | 64 | 0 |
-| 1 | 2 | 184,384 | 3,456 |
-| 2 | 4 | 368,704 | 6,912 |
-| 3 | 6 | 553,024 | 10,368 |
-| 4 | 8 | 737,344 | 13,824 |
+| 1 | 2 | **182,336** | 3,456 |
+| 2 | 4 | **364,608** | 6,912 |
+| 3 | 6 | **546,880** | 10,368 |
+| 4 | 8 | **729,152** | 13,824 |
+
+These are exact physical-control-flow counts, not dense proxies. The right-boundary neighbor path copies the bias and therefore omits one `32 x 32` neighbor matvec per block. See `notes/realtime_nn_execution_count_correction.md`.
 
 The runtime owns the admitted class. The NN core then executes only the corresponding fixed call graph.
 

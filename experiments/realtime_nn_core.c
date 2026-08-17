@@ -2,7 +2,17 @@
 #include "realtime_nn_weights_generated.h"
 #include "realtime_nn_activation_lut_generated.h"
 
-#define BLOCK_MACS 92160u
+/*
+ * One block executes the neighbor matvec at positions 0..L-2 only.
+ * At the right boundary (p == L-1), the code copies the neighbor bias.
+ * Exact linear MACs per block:
+ *   self  : 9 * 32 * 32   =  9,216
+ *   neigh : 8 * 32 * 32   =  8,192
+ *   ff1   : 9 * 128 * 32  = 36,864
+ *   ff2   : 9 * 32 * 128  = 36,864
+ *   total                  = 91,136
+ */
+#define BLOCK_MACS 91136u
 #define HEAD_MACS 64u
 #define BLOCK_LUT_CALLS 1728u
 
@@ -23,10 +33,10 @@ static Model M;
 
 static const RTNNExecutionClass CLASSES[RTNN_CLASS_COUNT] = {
     {0, 0, 64u, 0u},
-    {1, 2, 184384u, 3456u},
-    {2, 4, 368704u, 6912u},
-    {3, 6, 553024u, 10368u},
-    {4, 8, 737344u, 13824u}
+    {1, 2, 182336u, 3456u},
+    {2, 4, 364608u, 6912u},
+    {3, 6, 546880u, 10368u},
+    {4, 8, 729152u, 13824u}
 };
 
 static const float* take(unsigned long* offset, unsigned long count) {
