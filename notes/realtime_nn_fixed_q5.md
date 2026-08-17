@@ -45,6 +45,14 @@ Maximum values observed across all seeds:
 
 For this finite toy domain, these are far below `int32_t` and `int16_t` limits respectively. This is an exhaustive-domain audit for this model/task, not a general overflow proof for arbitrary networks or inputs.
 
+The exporter also refuses to emit a Q5 header if any quantized tensor value is outside the signed-int16 range, rather than silently wrapping.
+
+## Fail-closed runtime class handling
+
+Invalid execution-class values map to class 0, never to a larger work class. The host regression checks class `255` against class `0` over all 512 states and requires bit-identical integer logits.
+
+This preserves the runtime contract property that malformed class input cannot silently increase neural work.
+
 ## Static memory reduction
 
 | item | float core | Q5 core |
@@ -104,7 +112,7 @@ gcc -O2 -std=c11 -D_POSIX_C_SOURCE=200809L \
 /tmp/rtnn-q5/host_bench 2000
 ```
 
-Expected `nm -u` output is empty.
+Expected `nm -u` output is empty, and the host regression should print `invalid_class_fail_closed=1`.
 
 ## Interpretation
 
