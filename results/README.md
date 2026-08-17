@@ -20,6 +20,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_q5_bounded_numeric_results.json` — bounded numeric-path audit: bit-identical branch-reduced Q5 helpers plus conservative static int32/int16 linear-range bounds derived from weights and LUT output ranges.
 - `realtime_nn_q4_i8_results.json` — Q4 int8 freestanding-core audit: Q3 negative boundary, 3-seed decision preservation at Q4, 4x weight/LUT compression versus float, int32-only bounded MACs, division-free direct LUTs, compiler cross-check, and finite-class timing order.
 - `realtime_nn_q4_cross_target_results.json` — embedded-ISA compile audit of the Q4 freestanding core: helper-free Cortex-M0/M4-soft and RV32IM objects, deterministic repeated builds, and the RV32I `__mulsi3` negative capability boundary.
+- `realtime_nn_q4_baremetal_link_results.json` — `nostdlib` bare-metal static-link audit: self-contained Cortex-M0/M4-soft and RV32IM firmware-shaped ELF images under a small audit memory model, with RV32I failing closed on the missing multiply helper.
 - `realtime_nn_fine_grained_classes_results.json` — execution-class granularity audit: post-hoc intermediate depth classes can lose capability, while jointly trained 0..8 depth classes preserve non-decreasing quality and strictly increasing median latency; dominated classes remain off the Pareto frontier.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
@@ -48,6 +49,7 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - backend sensitivity: reduced neural work must be shown to become reduced physical latency on the intended runtime;
 - fixed-point precision as part of execution-class capability validation rather than assuming one Q-format transfers across architectures;
 - embedded ISA capability requirements and compiler-generated helper dependencies as part of the deployed-build contract;
+- bare-metal/static-link feasibility separately from actual target execution and timing certification;
 - explicit separation of target-independent work metadata from target/compiler/RTOS timing certification;
 - fail-closed admission when timing evidence is absent, bound to a different manifest, or certified for a different deployed build;
 - compiler/optimization code-generation sensitivity even when neural outputs are identical;

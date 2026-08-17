@@ -1,0 +1,56 @@
+{
+  "setup": {
+    "seed": 0,
+    "compiler": "clang version 17.0.0 (https://github.com/swiftlang/llvm-project.git 10999b6d034e318f3d56c83bddb6572593a8bb0)",
+    "linker": "LLD via -fuse-ld=lld",
+    "common": ["-O2", "-std=c11", "-ffreestanding", "-fno-builtin", "-nostdlib", "--gc-sections", "--build-id=none"],
+    "linker_memory_model": {"flash_bytes": 262144, "ram_bytes": 16384},
+    "runtime_execution_claim": false
+  },
+  "targets": {
+    "cortex_m0": {
+      "link_ok": true,
+      "undefined_symbols": [],
+      "undefined_symbol_count": 0,
+      "elf_sha256": "568bb44cbc69c55a3543c8c8a1c44b133a01d9f76e79d9f5bfd8405be6c56fb1",
+      "binary_bytes": 89000,
+      "sections_bytes": {"text": 89000, "data": 0, "bss": 4048}
+    },
+    "cortex_m4_soft": {
+      "link_ok": true,
+      "undefined_symbols": [],
+      "undefined_symbol_count": 0,
+      "elf_sha256": "1fe4805b1849666552432f6bdcf8c0a42267b01b98358077410e0ef7f63db31f",
+      "binary_bytes": 88840,
+      "sections_bytes": {"text": 88840, "data": 0, "bss": 4048}
+    },
+    "rv32im": {
+      "link_ok": true,
+      "undefined_symbols": [],
+      "undefined_symbol_count": 0,
+      "elf_sha256": "8bec5a81cf84625fb4e2ecbb9dadb6c1665506e7b4e06153155b5c5bb5ecb910",
+      "binary_bytes": 87184,
+      "sections_bytes": {"text": 87184, "data": 0, "bss": 4048}
+    },
+    "rv32i_negative": {
+      "link_ok": false,
+      "requires_mul_helper": true,
+      "missing_symbol": "__mulsi3"
+    }
+  },
+  "aggregate": {
+    "linked_helper_free": ["cortex_m0", "cortex_m4_soft", "rv32im"],
+    "all_helper_free_images_fit_audit_flash_ram_model": true,
+    "rv32i_link_fails_on_mul_helper": true
+  },
+  "interpretation": {
+    "supported": "The Q4 core plus a minimal startup/probe can be statically linked without libc/crt into bare-metal ELF images for Cortex-M0, Cortex-M4 soft-float, and RV32IM under the tested Clang/LLD setup. RV32I fails to link because __mulsi3 is unresolved.",
+    "not_supported": [
+      "hardware execution or successful production boot",
+      "RTOS integration",
+      "target latency or WCET",
+      "production startup/data initialization correctness",
+      "cache/bus/flash/interference bounds"
+    ]
+  }
+}
