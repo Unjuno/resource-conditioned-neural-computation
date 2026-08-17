@@ -1,0 +1,35 @@
+{
+  "question": "Do the published linear-MAC work counts exactly match the physically executed control flow?",
+  "finding": "The previous 92,160-MAC/block proxy counted a neighbor 32x32 matvec at all 9 positions, but the implementation executes it at only 8 positions and copies the neighbor bias at the right boundary.",
+  "per_block": {
+    "self_macs": 9216,
+    "neighbor_macs": 8192,
+    "ff1_macs": 36864,
+    "ff2_macs": 36864,
+    "exact_linear_macs": 91136,
+    "activation_lut_calls": 1728,
+    "residual_scale_operations": 288,
+    "linear_outputs": 1984
+  },
+  "classes": [
+    {"class":0,"blocks":0,"linear_macs":64,"activation_lut_calls":0,"residual_scale_operations":0,"linear_outputs":2},
+    {"class":1,"blocks":2,"linear_macs":182336,"activation_lut_calls":3456,"residual_scale_operations":576,"linear_outputs":3970},
+    {"class":2,"blocks":4,"linear_macs":364608,"activation_lut_calls":6912,"residual_scale_operations":1152,"linear_outputs":7938},
+    {"class":3,"blocks":6,"linear_macs":546880,"activation_lut_calls":10368,"residual_scale_operations":1728,"linear_outputs":11906},
+    {"class":4,"blocks":8,"linear_macs":729152,"activation_lut_calls":13824,"residual_scale_operations":2304,"linear_outputs":15874}
+  ],
+  "instrumentation": {
+    "method": "Debug-instrument lin() to add out*in MACs, lut() to count calls, and the residual loop to count scale operations; run one inference per execution class.",
+    "input_state_used": 123,
+    "counts_input_independent_for_fixed_class": true,
+    "observed_class_counts_match_static_derivation": true
+  },
+  "previous_proxy": {
+    "per_block_linear_macs": 92160,
+    "error_per_block": 1024,
+    "reason": "Counted the right-boundary neighbor matvec although code executes a 32-value bias copy there.",
+    "quality_or_latency_measurements_affected": false,
+    "runtime_control_flow_affected": false
+  },
+  "interpretation": "This is a work-accounting correction. It does not change model outputs, physical execution, or timing samples; it corrects the static work values used by the RTOS-facing execution-class contract."
+}
