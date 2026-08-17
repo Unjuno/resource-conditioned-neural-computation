@@ -4,7 +4,7 @@
 
 Test the intended mechanism directly:
 
-> With one fixed neural network, changing an admitted compute/time/resource budget changes which internal computation is physically executed, and this changes measured inference latency in a predictable direction while the NN may choose which admissible computation is useful.
+> With one fixed neural network, a runtime-admitted work/time budget constrains physical execution, the NN may choose which admissible internal computation is useful, and the resulting work/quality/latency relation can support deadline-aware admission.
 
 A controller/gate is an implementation mechanism, not the research target.
 
@@ -13,134 +13,80 @@ A controller/gate is an implementation mechanism, not the research target.
 - **Phase 1 — budget-conditioned physical block execution:** PASS.
 - **Phase 2a — learned module selection under a hard runtime work cap:** PASS with explicit relevance supervision.
 - **Phase 2b — finer-grained channel/neuron/sub-block activation:** OPEN.
-- **Phase 3a — deadline-to-budget runtime with fixed execution classes:** PARTIAL PASS as empirical P95 soft/weakly-hard.
-- **Phase 3b — learned activation + deadline admission:** NEXT PRIMARY EXPERIMENT.
-- **Phase 4 — hard timing guarantee / WCET:** OPEN; not established.
+- **Phase 3a — fixed execution classes + deadline admission:** PASS as empirical P95 soft/weakly-hard.
+- **Phase 3b — learned activation + deadline admission:** PASS as empirical P95 soft/weakly-hard.
+- **Phase 3c — learned activation without explicit relevance labels:** NEXT PRIMARY EXPERIMENT.
+- **Phase 4 — hard timing guarantee / WCET:** OPEN.
 
-See:
+## Phase 1 — physical budget execution — PASS
 
-- `notes/realtime_nn_budget_execution.md`
-- `notes/realtime_nn_learned_budget_gate.md`
+One fixed network physically executes different numbers of optional blocks as budget changes. Hard-skip timing is monotonic across three seeds; dense masking without physical skipping does not obtain the latency reduction.
 
-## Phase 1 — Budget-conditioned block execution — PASS
+## Phase 2a — learned selection inside a hard cap — PASS
 
-One fixed network uses budgets `0 / .25 / .5 / .75 / 1.0` to physically execute `0 / 2 / 4 / 6 / 8` optional blocks.
+The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. A learned controller chooses which experts to execute, while hard top-k prevents execution beyond `k`.
 
-Across three seeds:
+At `k=4`, learned activation reaches **100%** accuracy versus **78.18%** for fixed prefix, with controller overhead included in latency.
 
-- hard-skip hooks match admitted depth;
-- dense-mask executes all blocks;
-- hard-skip median latency is strictly monotonic;
-- accuracy and latency form a reproducible trade-off;
-- dense logical masking without physical skipping does not obtain the speedup.
+The controller currently uses explicit relevance supervision.
 
-## Phase 2a — Learned activation under a hard cap — PASS
+## Phase 3a — fixed-class deadline admission — PASS with caveat
 
-A second network contains eight optional expert modules.
+Empirical P95 execution classes let a runtime choose the largest fixed execution budget that fits a deadline. Hard physical skipping reduces misses under tight deadlines compared with dense-mask and always-full execution.
 
-The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. A learned controller chooses which experts to execute, but hard top-k prevents execution beyond the cap.
+This is soft/weakly-hard only.
 
-The controller currently uses explicit relevance auxiliary supervision. Therefore this is a controlled learned-activation result, not autonomous self-organization.
+## Phase 3b — learned activation + deadline admission — PASS with caveat
 
-Across three seeds:
+The runtime calibrates policy-specific P95 timing classes including controller overhead, admits `k`, and the NN chooses which `k` modules to execute.
 
-- hard budget compliance passes at every k;
-- learned median latency is strictly monotonic in every seed;
-- dense-mask executes all eight experts at every budget;
-- at `k=4`, learned activation reaches **100%** accuracy versus **78.18%** for fixed prefix;
-- controller overhead is retained in end-to-end timing.
+All policies are tested on the same absolute deadline within each seed. Faster baselines may admit more work.
 
-This supports:
+Three-seed on-time & correct rates:
 
-```text
-RTOS/runtime: how much work may execute
-NN:           which admissible internal work is useful
-```
+| regime | learned | prefix | external oracle | always full |
+|---|---:|---:|---:|---:|
+| tightest | 64.50% | **66.00%** | 64.25% | 0.00% |
+| around learned `k=2` | **78.08%** | 70.50% | **80.29%** | 2.13% |
+| around learned `k=4` | **98.46%** | 76.00% | **98.71%** | 88.29% |
+| full-budget | 98.46% | **98.92%** | 97.33% | 98.46% |
 
-## Phase 2b — Finer physical activation — OPEN
+The result is intentionally not presented as universal learned-policy superiority. Controller overhead hurts at the tightest/full regimes, and the analytic relevance oracle remains slightly stronger in the synthetic task.
 
-Test structured groups only when inactive work is physically skipped:
+## Phase 3c — remove explicit relevance supervision — NEXT
 
-- channel groups;
-- neuron groups;
-- residual sub-blocks;
-- optional module groups.
-
-Measure controller overhead, work reduction, latency, quality, and timing variance.
-
-Do not use zero masks that leave the dense kernel unchanged.
-
-## Phase 3a — Deadline-to-budget runtime — PARTIAL PASS
-
-The fixed-depth experiment maps deadlines to empirical P95 execution classes.
-
-Under tight deadlines, adaptive hard-skip materially reduces misses compared with always-full execution and dense-mask execution.
-
-This remains a **soft/weakly-hard** demonstration because ordinary Linux tails are unstable.
-
-## Phase 3b — Learned activation + deadline admission — NEXT
-
-Calibrate timing classes including learned-controller overhead.
-
-For each request:
+The next experiment must preserve the systems contract while making useful internal computation latent:
 
 ```text
-deadline D + machine state S
-          ↓
-runtime admits expert/block budget k
-          ↓
-NN chooses which k admissible modules to execute
-          ↓
-physical execution
+runtime admits k
+NN learns which k modules to execute from task loss
+physical execution may not exceed k
 ```
 
-Required comparisons:
+Required properties:
 
-1. learned selection at admitted k;
-2. fixed-prefix execution at the same k;
-3. dense-mask learned selection;
-4. always-full execution;
-5. external scheduler where exact relevance/cost is analytically available.
+1. hard runtime work cap remains structural;
+2. inactive modules remain physically skipped;
+3. controller overhead remains in end-to-end timing;
+4. selection is trained primarily from task loss rather than a supplied relevance target;
+5. learned policy is compared with fixed-prefix, dense-mask, and an external oracle where one can still be defined;
+6. success is judged by quality / on-time-correct / physical budget compliance, not router accuracy.
 
-Primary metrics:
+A negative result is acceptable if task-only learning collapses to a poor selection policy; prior capability-preservation diagnostics may then be used only to explain that concrete failure.
 
-- quality at matched deadline-miss rate;
-- miss rate at matched quality;
-- controller/runtime overhead;
-- physical budget compliance;
-- timing-class stability.
+## Phase 2b — finer physical activation — OPEN
 
-## Phase 4 — Timing guarantee boundary — OPEN
+After the task-only controller is stable, test structured channel/neuron/sub-block groups only where inactive work is physically skipped. Do not use dense zero masks as evidence of compute reduction.
 
-Ordinary Linux/PyTorch timing is not WCET.
+## Phase 4 — timing guarantee boundary — OPEN
 
-Raw empirical q99 timing is already known to be unstable/nonmonotonic in the fixed-depth calibration experiment.
+Ordinary Linux/PyTorch timing is not WCET. The fixed-depth experiment already shows non-monotonic q99 classes, and learned-policy timing contains large high-percentile outliers.
 
-A stronger hard-real-time experiment requires one of:
-
-- statically analyzable generated inference code;
-- a time-predictable embedded target;
-- controlled RTOS scheduling/interference assumptions;
-- formal/static WCET or an accepted equivalent.
-
-Do not infer WCET from median/P95/P99 Linux measurements.
-
-## Next autonomy step
-
-After learned activation + deadline admission works, reduce or remove explicit relevance supervision.
-
-The controller should then learn useful admissible activation from task loss and budget constraints while preserving:
-
-- hard runtime work cap;
-- physical skipping;
-- measurable latency ordering;
-- task capability.
-
-This is the point where prior routing/topology diagnostics may become useful again—but only to solve concrete failures in the physical timing chain.
+A hard-real-time experiment requires statically analyzable code, a time-predictable target, controlled RTOS scheduling/interference assumptions, formal/static WCET, or an accepted equivalent.
 
 ## Direction rule
 
-Do not expand router/NAS experiments unless they answer a concrete failure in:
+Do not expand router/NAS experiments unless they solve a concrete failure in:
 
 ```text
 budget → physical activation → work → latency → deadline
