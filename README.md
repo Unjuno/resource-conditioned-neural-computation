@@ -139,15 +139,17 @@ The trained fixed-depth model is now also exported into a small **plain C++** in
 
 Seed-0 full-domain accuracy matches the Python model exactly at all execution depths.
 
+The static work count was later re-audited against the physical control flow: the rightmost position copies the neighbor bias rather than executing a neighbor matvec, so the exact count is **91,136 linear MACs per block**, not the earlier 92,160-MAC proxy. See [`notes/realtime_nn_execution_count_correction.md`](notes/realtime_nn_execution_count_correction.md).
+
 One `g++ -O2 -std=c++17` run:
 
-| blocks | linear MAC proxy | idle median | same-core-busy median |
+| blocks | executed linear MACs | idle median | same-core-busy median |
 |---:|---:|---:|---:|
 | 0 | 64 | 0.063 us | 0.065 us |
-| 2 | 184,384 | 71.4 us | 71.5 us |
-| 4 | 368,704 | 143.1 us | 143.5 us |
-| 6 | 553,024 | 217.5 us | 217.8 us |
-| 8 | 737,344 | 294.8 us | 292.8 us |
+| 2 | **182,336** | 71.4 us | 71.5 us |
+| 4 | **364,608** | 143.1 us | 143.5 us |
+| 6 | **546,880** | 217.5 us | 217.8 us |
+| 8 | **729,152** | 294.8 us | 292.8 us |
 
 Central timing remains strictly ordered by physical work after removing PyTorch.
 
