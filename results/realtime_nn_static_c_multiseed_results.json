@@ -1,0 +1,33 @@
+{
+  "setup": {
+    "seeds": [0,1,2],
+    "backend": "each trained seed independently exported to compile-time C weights; same static C/LUT source recompiled per seed",
+    "activation": "257-point tanh/GELU LUTs",
+    "timing_boundary": "ordinary shared Linux example timing; reproduction target is accuracy equivalence and ordering, not exact microseconds"
+  },
+  "seeds": [
+    {
+      "seed": 0,
+      "accuracy_by_depth": {"0":0.63671875,"2":0.71484375,"4":0.78515625,"6":0.86328125,"8":1.0},
+      "median_us_by_depth": {"0":0.078,"2":40.883,"4":82.796,"6":125.247,"8":167.054},
+      "median_strictly_ordered": true
+    },
+    {
+      "seed": 1,
+      "accuracy_by_depth": {"0":0.63671875,"2":0.71484375,"4":0.78515625,"6":0.86328125,"8":1.0},
+      "median_us_by_depth": {"0":0.078,"2":41.056,"4":83.256,"6":127.398,"8":170.348},
+      "median_strictly_ordered": true
+    },
+    {
+      "seed": 2,
+      "accuracy_by_depth": {"0":0.63671875,"2":0.71484375,"4":0.78515625,"6":0.86328125,"8":1.0},
+      "median_us_by_depth": {"0":0.078,"2":41.176,"4":83.719,"6":127.969,"8":171.646},
+      "median_strictly_ordered": true
+    }
+  ],
+  "aggregate": {
+    "all_seeds_match_python_accuracy_levels": true,
+    "all_seeds_preserve_budget_median_ordering": true,
+    "hard_real_time_established": false
+  }
+}
