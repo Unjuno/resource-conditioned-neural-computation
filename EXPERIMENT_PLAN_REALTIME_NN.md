@@ -6,173 +6,159 @@ Test the intended mechanism directly:
 
 > With one fixed neural network and the same task input, changing only an admitted compute/time/resource budget changes which internal computation is physically executed, and this changes measured inference latency in a predictable direction.
 
-The experiment is not primarily a router benchmark. Any gate/router is only an implementation mechanism.
+A gate/controller is an implementation mechanism, not the research target.
 
-## Phase 1 — Budget-conditioned block execution
+## Progress
 
-Build one small fixed-parameter network with a sequence of optional compute blocks.
+- **Phase 1 — budget-conditioned physical block execution:** PASS on the current toy.
+- **Phase 2 — finer-grained physical activation:** OPEN.
+- **Phase 3 — deadline-to-budget runtime:** PARTIAL PASS as an empirical P95 soft/weakly-hard prototype.
+- **Phase 4 — hard timing guarantee / WCET:** OPEN; not established.
+- **Learned budget-conditioned activation under a hard admitted budget:** OPEN and now the next primary experiment.
 
-A budget input `B` conditions binary block gates:
+See `notes/realtime_nn_budget_execution.md`.
 
-```text
-input x
-  ↓
-shared stem
-  ↓
-block 1 ─ gate g1(B, x)
-block 2 ─ gate g2(B, x)
-...
-block K ─ gate gK(B, x)
-  ↓
-shared head
-```
+## Phase 1 — Budget-conditioned block execution — PASS
 
-The implementation must use control flow so `gk = 0` skips the block entirely.
+The current experiment uses one fixed network with eight optional blocks. Budget levels activate `0 / 2 / 4 / 6 / 8` blocks.
 
-### Required measurements per inference
+The implementation uses control flow so inactive blocks are not called.
 
-- budget `B`;
-- fixed input ID;
-- active block mask;
-- execution-hook trace;
-- executed block count;
-- executed MAC/operation proxy;
+Required measurements are now present:
+
+- budget;
+- same-input counterfactuals;
+- active block trace;
+- forward-hook execution audit;
+- executed block/MAC proxy;
 - end-to-end latency;
-- output / task score.
+- task quality.
 
-### Counterfactual test
+Across three seeds, hard-skip median latency is strictly monotonic with executed depth and the quality/latency trade-off is reproducible.
 
-For every held-out input `x`, run the same frozen model at multiple budgets:
+The matched dense-mask control calls all eight blocks at every logical budget and does not obtain the hard-skip latency reduction.
 
-`B_low < B_mid < B_high`.
+## Phase 2 — Finer activation granularity — OPEN
 
-Primary acceptance criteria:
-
-1. activation pattern changes with budget for a substantial fraction of inputs;
-2. inactive blocks are not executed;
-3. executed work is ordered or at least calibratable by budget;
-4. median latency is ordered in the same direction;
-5. the latency distributions are sufficiently separated to define useful execution classes;
-6. task quality does not collapse at the smallest useful budget.
-
-A useful first target is:
-
-```text
-B_low  → fewest executed blocks → lowest latency
-B_mid  → intermediate blocks    → intermediate latency
-B_high → most executed blocks   → highest latency
-```
-
-This is a mechanism target, not a hard-real-time guarantee.
-
-## Phase 2 — Finer activation granularity
-
-Only after Phase 1 works, test whether the same principle survives finer-grained conditional execution:
+Test whether the same principle survives finer-grained conditional execution:
 
 - groups of channels;
-- expert/module groups;
 - structured neuron groups;
-- residual sub-blocks.
+- residual sub-blocks;
+- optional module groups.
 
-Do not use unstructured zero masks that leave the dense kernel unchanged. The inactive structure must correspond to skipped physical work.
+Do **not** use zero masks that leave the dense kernel unchanged. Inactive structure must correspond to skipped physical work.
 
-Compare:
+Measure:
 
-- block-level control overhead;
-- group/channel-level control overhead;
-- achieved compute reduction;
+- controller/gating overhead;
+- achieved work reduction;
 - measured latency reduction;
+- quality;
 - timing variance.
 
-The aim is to find an activation granularity that is both useful for quality and predictable enough for runtime timing classes.
+The goal is not maximum routing sophistication. The goal is the finest useful activation granularity that still creates predictable physical timing classes.
 
-## Phase 3 — Deadline-to-budget runtime
+## Phase 3 — Deadline-to-budget runtime — PARTIAL PASS
 
-Once budget → work → latency is calibrated, add a minimal runtime layer:
+The current toy runtime calibrates empirical execution classes and maps deadline to the largest admitted budget.
+
+The current version uses P95 plus a monotone conservative envelope and is explicitly **soft/weakly-hard**.
+
+It demonstrates that hard physical skipping can reduce misses under tight deadlines compared with:
+
+- always-full execution;
+- a dense-mask implementation that logically selects a smaller budget but still performs all block computation.
+
+Next runtime work should add machine state:
 
 ```text
 deadline D
-current machine state S
-calibrated timing table/model
-        ↓
+machine state S
+calibrated timing model
+      ↓
 admitted budget B
-        ↓
+      ↓
 same NN
 ```
 
-For each request, record:
+Record deadline, admitted budget, activation trace, predicted latency, actual latency, hit/miss, and quality.
 
-- deadline;
-- admitted budget;
-- selected activation trace;
-- predicted latency;
-- actual latency;
-- deadline hit/miss;
-- task quality.
+## Phase 4 — Timing guarantee boundary — OPEN
 
-Compare against:
+Ordinary Linux/PyTorch timing is not WCET.
 
-1. always-small fixed network/execution level;
-2. always-large fixed level;
-3. external fixed execution-class scheduler;
-4. budget-conditioned same-network execution.
+The current experiment deliberately retains a negative result: raw empirical q99 timing is not strictly monotonic in any of the three calibration seeds.
 
-The comparison should separate:
+A stronger hard-real-time experiment requires at least one of:
 
-- quality at matched miss rate;
-- miss rate at matched quality;
-- runtime overhead;
-- timing predictability.
-
-## Phase 4 — Timing guarantee boundary
-
-Ordinary Linux/PyTorch measurements are suitable only for mechanism and soft/probabilistic timing studies.
-
-A later hard-real-time experiment requires one of:
-
-- statically analyzable generated code;
+- statically analyzable generated inference code;
 - a time-predictable embedded target;
-- controlled RTOS scheduling and interference model;
+- controlled RTOS scheduling/interference assumptions;
 - formal/static WCET or an accepted equivalent.
 
 Do not infer WCET from median/P95/P99 Linux measurements.
 
+## Next primary experiment — learned budget-conditioned activation
+
+Replace the deliberately fixed budget→depth mapping with a learned activation mechanism while maintaining a **hard runtime-admitted budget cap**.
+
+The learned controller may decide *which* admissible blocks/groups are useful, but it may not execute more work than the runtime admitted.
+
+Required controls:
+
+1. same fixed weights across inference budgets;
+2. physical-skip hook audit;
+3. explicit executed-work accounting;
+4. controller overhead included in end-to-end latency;
+5. matched fixed-prefix budget baseline;
+6. budget-blind controller baseline;
+7. dense-mask negative control;
+8. quality and miss-rate comparison at matched budget/deadline.
+
+The learned controller is useful only if it improves quality or flexibility **without destroying the budget→actual-time relationship**.
+
 ## Baselines
 
-The minimum baseline set is:
+Main-line baselines now are:
 
 - fixed smallest execution level;
 - fixed largest execution level;
-- external scheduler choosing among the same execution classes;
-- same-network budget-conditioned execution;
-- budget-blind matched control if a learned gate is used.
+- fixed-prefix same-network budget execution;
+- learned budget-conditioned same-network execution;
+- budget-blind matched controller;
+- dense-mask control that executes all work;
+- external execution-class scheduler where applicable.
 
-Router architecture comparisons are optional and secondary. They are justified only if the gate/controller overhead or stability materially changes actual latency/deadline performance.
+Router architecture comparisons are secondary unless controller overhead or stability materially changes actual latency/deadline behavior.
 
 ## Primary plots / tables
 
-The main paper-quality figures should be systems figures, not router-oracle figures:
-
-1. **budget vs active compute**;
-2. **budget vs measured latency distribution**;
-3. **active compute vs latency**;
-4. **budget vs quality**;
-5. **deadline vs miss rate / quality**;
-6. same-input activation traces at low/mid/high budget.
+1. budget vs physically executed compute;
+2. budget vs measured latency distribution;
+3. executed compute vs latency;
+4. budget vs quality;
+5. deadline vs miss rate / quality;
+6. same-input activation traces at low/mid/high budget;
+7. hard-skip vs dense-mask latency.
 
 ## Falsification criteria
 
-The Real-Time NN interpretation is weakened or falsified if:
+The Real-Time NN interpretation is weakened if:
 
 - budget changes masks but not actual executed work;
-- work changes but wall-clock latency does not improve because control overhead dominates;
-- latency classes overlap so strongly that runtime admission is not useful;
-- only separate prebuilt models, rather than one parameterized network, can achieve the trade-off;
-- an external scheduler over identical internal execution classes is strictly simpler with no loss and the neural conditioning adds no functional value;
-- budget-conditioned execution destroys task capability at useful low-latency levels.
+- physical work changes but latency does not because control overhead dominates;
+- latency classes overlap too strongly for useful admission;
+- learned gating violates the admitted budget;
+- learned gating improves a routing proxy but not measured quality/latency/deadline behavior;
+- only separate model instances, rather than one parameter set, achieve the trade-off.
 
-Negative results should be retained.
+Negative results should remain public.
 
 ## Direction rule
 
-Do not expand router/NAS experiments unless they answer a concrete failure discovered in this direct budget/activation/latency chain.
+Do not expand router/NAS experiments unless they answer a concrete failure in the direct chain:
+
+```text
+budget → physical activation → work → latency → deadline
+```
