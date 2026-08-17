@@ -2,7 +2,8 @@
 
 Authoritative compact summaries for the current public reproduction include:
 
-- `realtime_nn_budget_execution_results.json` — **primary current Real-Time NN mechanism result**: same-network budget-conditioned physical block execution, measured latency/quality trade-off, dense-mask control, and soft P95 deadline-admission prototype.
+- `realtime_nn_budget_execution_results.json` — primary direct Real-Time NN mechanism result: same-network budget-conditioned physical block execution, measured latency/quality trade-off, dense-mask control, and soft P95 deadline-admission prototype.
+- `realtime_nn_learned_budget_gate_results.json` — learned internal activation under a hard runtime expert-call cap; compares learned physical selection with fixed-prefix and dense-mask execution.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
 - `internal_circuit_conditioning_results.json`
@@ -21,13 +22,15 @@ Authoritative compact summaries for the current public reproduction include:
 
 The corresponding scripts in `experiments/` regenerate fuller traces. The committed JSONs may be compact summaries rather than every intermediate timing sample.
 
-For the primary Real-Time NN result, machine-specific microsecond values are not the main cross-machine reproduction target. The main targets are:
+For the Real-Time NN line, machine-specific microsecond values are not the main cross-machine reproduction target. The main targets are:
 
-- physical hard-skip trace changes with budget;
+- physical hard-skip trace changes with admitted budget;
+- hard budget compliance;
 - executed-work count changes with budget;
 - hard-skip median latency is ordered with executed work;
 - dense logical masking without physical skipping does not obtain the same latency reduction;
-- task quality changes with budget;
+- learned selection can improve quality over a fixed internal path at the same physical work cap;
+- controller overhead is included rather than hidden;
 - high empirical Linux timing percentiles are not interpreted as WCET.
 
 Earlier exploratory files with obsolete architecture counts or ambiguous `memory cost` terminology remain excluded; relevant conclusions are retained in the notes with the corrected **parameter-footprint proxy** wording.
