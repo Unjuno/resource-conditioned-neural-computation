@@ -12,11 +12,11 @@ def ev(router,C,router_price,actual_price,N=3000):
 
 def main():
     rows=[]
-    envs={'compute_expensive':[1.,.05],'memory_expensive':[.05,1.]}
+    envs={'compute_expensive':[1.,.05],'footprint_expensive':[.05,1.]}
     for seed in [0,1,2]:
         lookup=m.Lookup().eval();algo=m.train_algo(seed);C,_=m.expert_costs(lookup,algo);r=m.train_router(seed,C,True)
         for name,p in envs.items():
-            other=envs['memory_expensive' if name=='compute_expensive' else 'compute_expensive']
+            other=envs['footprint_expensive' if name=='compute_expensive' else 'compute_expensive']
             for signal,rp in [('true',p),('swapped',other),('constant',[.1,.1])]:
                 rows.append({'seed':seed,'env':name,'signal':signal,**ev(r,C,rp,p)})
     summary={}
