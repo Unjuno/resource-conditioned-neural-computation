@@ -9,6 +9,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with hard-budget/timing/deadline audits.
 - `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic; negative runtime result.
 - `realtime_nn_generated_cpp_results.json` — generated-weight plain-C++ conditional inference; verifies the physical work/central-latency relation without PyTorch and shows scheduler tails remain under same-core contention.
+- `realtime_nn_freestanding_core_results.json` — freestanding finite-class inference-core audit: zero unresolved external symbols, fixed caller-owned workspace, full-domain functional reproduction, and invalid-class fail-closed behavior.
 - `realtime_nn_fine_grained_classes_results.json` — execution-class granularity audit: post-hoc intermediate depth classes can lose capability, while jointly trained 0..8 depth classes preserve non-decreasing quality and strictly increasing median latency; dominated classes remain off the Pareto frontier.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
@@ -41,6 +42,7 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - common-deadline on-time & correct behavior;
 - repeated timing-calibration stability, not just one favorable calibration;
 - consistency between framework and generated-C++ implementations;
+- freestanding-core linkability and fail-closed execution-class handling;
 - explicit refusal to interpret uncontrolled Linux P95/P99 as WCET.
 
-The corresponding scripts in `experiments/` regenerate fuller traces. Generated binary weights are local reproduction artifacts and are not committed.
+The corresponding scripts in `experiments/` regenerate fuller traces. Generated binary weights and generated C headers are local reproduction artifacts and are not committed.
