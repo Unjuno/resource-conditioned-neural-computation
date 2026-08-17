@@ -1,0 +1,62 @@
+{
+  "setup": {
+    "task": "9-bit majority complete 512-state domain",
+    "source_model": "three structured-width float models trained for 160 joint-class steps",
+    "format": "uniform signed Q7 fixed point",
+    "weights_storage": "int16_t",
+    "workspace_storage": "int16_t",
+    "accumulator": "int32_t",
+    "activation_lut": "257-entry int16 tanh/GELU over [-8,8]",
+    "workspace_bytes": 4032,
+    "weight_payload_bytes": 167684,
+    "activation_lut_bytes": 1028,
+    "execution_classes": [
+      {"class":0,"depth":0,"width":8,"linear_macs":16},
+      {"class":1,"depth":2,"width":8,"linear_macs":11408},
+      {"class":2,"depth":4,"width":16,"linear_macs":91168},
+      {"class":3,"depth":6,"width":24,"linear_macs":307632},
+      {"class":4,"depth":8,"width":32,"linear_macs":729152}
+    ]
+  },
+  "quantization_sweep_full_class_accuracy": {
+    "Q5": [1.0, 1.0, 0.998046875],
+    "Q6": [1.0, 1.0, 0.99609375],
+    "Q7": [1.0, 1.0, 1.0],
+    "Q8": [1.0, 1.0, 1.0],
+    "minimum_tested_precision_restoring_all_three_full_class_accuracies": "Q7"
+  },
+  "prediction_equivalence": {
+    "float_vs_q7_mismatches_by_seed_and_class": [
+      [0,0,0,0,0],
+      [0,0,0,0,0],
+      [0,0,0,0,0]
+    ],
+    "states_per_class": 512,
+    "all_predictions_identical": true
+  },
+  "static_numeric_bounds": [
+    {"seed":0,"max_linear_accumulator_abs_bound":1598720,"max_linear_postshift_abs_bound":12490,"int32_fraction":0.000744462013591296,"int16_fraction":0.3811761833552049},
+    {"seed":1,"max_linear_accumulator_abs_bound":1479808,"max_linear_postshift_abs_bound":11561,"int32_fraction":0.0006890892985691732,"int16_fraction":0.35282448805200356},
+    {"seed":2,"max_linear_accumulator_abs_bound":1413248,"max_linear_postshift_abs_bound":11041,"int32_fraction":0.0006580948832715372,"int16_fraction":0.336954863124485}
+  ],
+  "freestanding_audit": {
+    "undefined_external_symbols_all_three_seeds": 0,
+    "div_or_idiv_instructions_all_three_seeds": 0,
+    "invalid_class_fails_closed_to_class_0": true,
+    "branch_reduced_numeric_helpers": true
+  },
+  "host_p50_us": [
+    {"seed":0,"values":[0.066,7.728,51.672,135.958,372.381]},
+    {"seed":1,"values":[0.060,7.133,47.767,134.835,304.737]},
+    {"seed":2,"values":[0.060,6.993,47.458,134.819,304.923]}
+  ],
+  "checks": {
+    "all_three_seeds_strict_p50_order": true,
+    "all_three_seeds_all_class_accuracy": [0.63671875,0.71484375,0.78515625,0.86328125,1.0],
+    "hard_real_time_established": false
+  },
+  "interpretation": {
+    "supported": "The structured depth/width Real-Time NN can be exported to a freestanding integer core while preserving every float-path prediction across three seeds when Q7 is used. The physical class widths remain explicit loop bounds and the tested static integer ranges fit safely in int32/int16.",
+    "not_supported": ["Q5 sufficiency for this structured-width model family","WCET or hard-real-time guarantee","target-independent timing","arbitrary channel sparsity"]
+  }
+}
