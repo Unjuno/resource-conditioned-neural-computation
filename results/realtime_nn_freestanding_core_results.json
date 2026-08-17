@@ -1,0 +1,73 @@
+{
+  "setup": {
+    "seed": 0,
+    "weight_float_count": 83842,
+    "weight_bytes_payload": 335368,
+    "weight_file_bytes_with_count_header": 335372,
+    "activation_lut_points_per_function": 257,
+    "activation_lut_domain": [
+      -8.0,
+      8.0
+    ],
+    "workspace_bytes": 8064,
+    "core_compile_flags": "-O2 -std=c11 -ffreestanding -fno-builtin -fstack-usage",
+    "generated_headers_committed": false,
+    "hard_realtime_claim": false
+  },
+  "execution_classes": [
+    {
+      "class": 0,
+      "blocks": 0,
+      "linear_macs": 64,
+      "activation_lut_calls": 0,
+      "accuracy": 0.63671875
+    },
+    {
+      "class": 1,
+      "blocks": 2,
+      "linear_macs": 184384,
+      "activation_lut_calls": 3456,
+      "accuracy": 0.71484375
+    },
+    {
+      "class": 2,
+      "blocks": 4,
+      "linear_macs": 368704,
+      "activation_lut_calls": 6912,
+      "accuracy": 0.78515625
+    },
+    {
+      "class": 3,
+      "blocks": 6,
+      "linear_macs": 553024,
+      "activation_lut_calls": 10368,
+      "accuracy": 0.86328125
+    },
+    {
+      "class": 4,
+      "blocks": 8,
+      "linear_macs": 737344,
+      "activation_lut_calls": 13824,
+      "accuracy": 1.0
+    }
+  ],
+  "freestanding_audit": {
+    "undefined_external_symbols_count": 0,
+    "invalid_execution_class_fails_closed_to_class_0": true,
+    "project_local_stack_usage_bytes": {
+      "rtnn_init": 8,
+      "rtnn_infer": 16,
+      "run_block": 232,
+      "finish": 8,
+      "rtnn_execution_classes": 8
+    }
+  },
+  "interpretation": {
+    "supported": "The generated fixed-parameter NN inference core can be compiled as a freestanding object with no unresolved external symbols; the runtime selects among five finite physical work classes, and invalid class inputs fail closed to the minimum class.",
+    "not_supported": [
+      "WCET or hard-real-time guarantee",
+      "RTOS deployment result",
+      "target-independent timing bound"
+    ]
+  }
+}
