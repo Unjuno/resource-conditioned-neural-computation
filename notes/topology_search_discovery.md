@@ -32,29 +32,41 @@ With the resource-price signal enabled:
 - every selected topology is **100% correct over all 256 inputs** at every tested price point;
 - **5/5 seeds** use a compute-only topology when the parameter-footprint proxy is expensive;
 - **5/5 seeds** use a lookup-only / lookup-heavy topology when the compute proxy is expensive;
-- exact stage placement varies across seeds (for example, the compute operation appears at stage 1 in one seed and stage 0 in the others), so the full route is not a fixed named circuit supplied in advance.
+- exact stage placement varies across seeds, so the full route is not a fixed named circuit supplied in advance.
 
 With the resource-price features zeroed, the matched price-blind system selects exactly **one fixed topology in 5/5 seeds**.
 
 This is the strongest evidence in the repository so far that resource condition can participate in learning the effective subgraph itself rather than only selecting among a short hand-enumerated route list.
 
-## Important optimization failure: global resource optimum
+## Metric correction: topology identity is not cost optimality
 
-Topology discovery is not the same as finding the globally cheapest valid topology.
+The original report used `global_oracle_agreement`, which compared the learned topology against one topology returned by Python `min()`. This is a poor cost-optimality metric when several stage-symmetric topologies have exactly the same minimum resource cost.
 
-After training, all 27 hard topologies are evaluated exhaustively. For each price, the global oracle is defined as the lowest proxy-cost topology among those that achieve 100% full-domain accuracy.
+The original exact-route-identity number is retained for audit history, but the primary cost-optimality metrics are now **tie-aware minimum-cost rate** and regret.
 
-The learned price-aware topology matches that oracle only **70.75% on average across five seeds**, despite maintaining 100% task accuracy. Mean proxy regret is approximately **0.01651**.
+Across the five XOR seeds:
 
-The main failure mode is redundant active operations, especially multiple lookup operations after one lookup has already become sufficient.
+- exact selected-route identity with one arbitrarily chosen oracle route: **70.75%**;
+- tie-aware minimum-cost rate: **73.10%**;
+- mean proxy regret: **0.01651**.
 
-A separate **post-hoc local pruning diagnostic** removes an active operation only when replacing it by `skip` preserves 100% full-domain accuracy. This improves mean oracle agreement to **88.9%** and reduces mean regret to approximately **0.00274**, but it still does not solve every seed (one seed remains at 58.5% oracle agreement).
+The correction changes the metric, not the main conclusion: the directly learned topologies are still not reliably resource-optimal.
 
-The pruning result is reported separately because it is not the topology produced directly by the learned router.
+## Post-hoc local pruning diagnostic
+
+A separate validation-only local pruning diagnostic removes an active operation only when replacing it by `skip` preserves 100% full-domain accuracy.
+
+Across five seeds:
+
+- exact route identity with one oracle route: **88.9%**;
+- tie-aware minimum-cost rate: **94.6%**;
+- mean regret: **0.00274**.
+
+The pruning result is reported separately because it is not the topology produced directly by the learned router. One seed remains only **87.0%** tie-aware optimal after pruning, so the consolidation problem is not fully solved.
 
 ## Harder-task stress test: 4-bit parity
 
-The same search procedure is less stable on 4-bit parity.
+The same end-to-end Gumbel search procedure is less stable on 4-bit parity.
 
 Across three seeds:
 
@@ -64,13 +76,35 @@ Across three seeds:
 
 Therefore the result does **not** support a claim that useful resource-conditioned topology discovery emerges reliably across tasks.
 
-## Optimizer ablations
+## Router-stabilization diagnostic
 
-Several alternatives were tested and retained as negative diagnostics:
+A follow-up audit asks whether the parity failure is only a capability problem.
 
-| training variant | mean hard accuracy on dense sweep | mean global-oracle agreement | observation |
+To isolate allocation, the six single-primitive probe topologies — one lookup or one compute operation at each of the three stages — are trained to **100% full-domain parity accuracy in all five seeds**. Capability parameters are then frozen, and several routers optimize the same 27-topology resource objective.
+
+All router variants retain **100% hard task accuracy**. Their five-seed resource results are:
+
+| router / objective | mean tie-aware optimal-cost rate | worst seed | mean regret |
+|---|---:|---:|---:|
+| independent-stage factorized + confidence/margin objective | 83.95% | 51.75% | 0.00905 |
+| independent-stage factorized + binary feasibility | 77.30% | 49.75% | 0.01264 |
+| **autoregressive + binary feasibility** | **94.85%** | **93.50%** | **0.00235** |
+| flat 27-way route policy + binary feasibility | 94.20% | 92.50% | **0.00146** |
+| autoregressive, best of four restarts by the same training objective | 95.60% | 92.00% | 0.00155 |
+
+This shows that capability preservation alone is not sufficient. Even with identical valid primitives, independent per-stage routing can fall into poor resource-allocation optima. Allowing later stage choices to condition on earlier choices is substantially more stable in this controlled diagnostic.
+
+The flat 27-way policy explicitly enumerates complete routes and is retained only as a small-search-space reference. The autoregressive router does not enumerate complete routes as output classes, but its present audit objective still sums exactly over all 27 topologies during training. Neither result is presented as a scalable NAS method.
+
+See [`router_stabilization_audit.md`](router_stabilization_audit.md).
+
+## Optimizer ablations retained as negative results
+
+Several alternatives were tested in the original joint search:
+
+| training variant | mean hard accuracy on dense sweep | original exact-route oracle agreement | observation |
 |---|---:|---:|---|
-| Gumbel straight-through (main) | 100% | 70.75% | stable task capability and price-conditioned topology diversity, but redundant ops remain |
+| Gumbel straight-through (main) | 100% | 70.75% | stable XOR capability and topology diversity, but redundant ops remain |
 | soft mixture | 65.55% | 58.4% | soft training often fails after hard discretization |
 | deterministic straight-through argmax | 96.05% | 34.75% | less stable hard capability and poor resource optimality |
 | primitive DropPath | 100% | 10.7% | preserves capability but encourages redundant multi-op topologies |
@@ -83,13 +117,19 @@ A narrow statement is supported on the XOR toy:
 
 > Given a hand-specified supernet of resource-distinct primitive operations, a price-conditioned neural router can learn multiple accurate hard subgraphs without complete-route supervision, and the selected operation pattern changes systematically with the resource-price direction.
 
+The stabilization audit further supports a narrower diagnostic statement:
+
+> once primitive capability is controlled, correlated topology decisions remain an important optimization issue; an autoregressive router is markedly more stable than an independent-stage router in the tested parity search space.
+
 ## What this does not support
 
 - unconstrained or general neural architecture discovery;
 - novelty of neural architecture search, dynamic routing, runtime subnetwork switching, or once-for-all subnetworks;
 - globally resource-optimal topology search;
-- robust topology discovery across harder tasks (the parity stress test is unstable);
+- robust end-to-end topology discovery across harder tasks;
+- a joint-from-scratch parity solution from the frozen-capability router audit;
 - spontaneous invention of new primitive operations;
+- a scalable alternative to NAS;
 - hard real-time/WCET guarantees;
 - physical memory, bandwidth, or Joule savings;
 - large-model/LLM generalization.

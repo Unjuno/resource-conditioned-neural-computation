@@ -96,7 +96,7 @@ See [`notes/joint_self_specialization.md`](notes/joint_self_specialization.md).
 
 ## Constrained topology-search follow-up
 
-The latest experiment removes the short list of complete named routes. Instead, one three-stage supernet supplies only primitive operations: `skip`, `lookup`, or `compute` at each stage. This creates **27 possible hard topologies**, but complete topologies are never used as training labels.
+The topology-search experiment removes the short list of complete named routes. Instead, one three-stage supernet supplies only primitive operations: `skip`, `lookup`, or `compute` at each stage. This creates **27 possible hard topologies**, but complete topologies are never used as training labels.
 
 On the main XOR toy, the resource-price-aware model:
 
@@ -110,11 +110,37 @@ The matched price-blind version selects exactly **one fixed topology in 5/5 seed
 
 This is evidence for **resource-conditioned subgraph discovery inside a supplied supernet search space**. It is not evidence for unconstrained architecture discovery.
 
-The optimization remains imperfect. After training, all 27 hard topologies are exhaustively checked; the learned topology matches the globally cheapest 100%-accurate topology only **70.75%** of the dense price sweep on average. A separate validation-only local pruning diagnostic improves this to **88.9%**, but one seed remains poorly consolidated.
+### Tie-aware cost-optimality audit
 
-A harder 4-bit-parity stress test is also unstable: only **1/3 seeds** discovers multiple resource-conditioned topologies, while **2/3 seeds** collapse to a single lookup topology. Therefore the repository does **not** claim that topology discovery is robust across tasks.
+The original `global_oracle_agreement` compared the selected topology with one arbitrarily chosen minimum-cost topology. Because multiple stage-symmetric topologies can tie at exactly the same resource cost, exact route identity is not the correct primary cost-optimality metric.
 
-See [`notes/topology_search_discovery.md`](notes/topology_search_discovery.md).
+Across five XOR seeds, the direct learned topology has:
+
+- **70.75%** exact identity with one chosen oracle route;
+- **73.10% tie-aware minimum-cost rate**;
+- mean proxy regret **0.01651**.
+
+A separate validation-only local pruning diagnostic has:
+
+- **88.9%** exact route identity;
+- **94.6% tie-aware minimum-cost rate**;
+- mean regret **0.00274**.
+
+So pruning helps substantially, but the learned search itself is still not globally resource-optimal. See [`results/topology_tie_aware_metric_audit_results.json`](results/topology_tie_aware_metric_audit_results.json).
+
+### Harder parity stress test and router audit
+
+The original end-to-end 4-bit-parity search is unstable: only **1/3 seeds** discovers multiple resource-conditioned topologies, while **2/3 seeds** collapse to a single lookup topology.
+
+A controlled follow-up isolates router optimization by first making all six single-primitive lookup/compute placements **100% accurate in all five seeds**, then freezing those capabilities. Under the same 27-topology resource objective:
+
+- independent-stage factorized + binary feasibility: **77.30%** mean tie-aware optimal-cost rate, minimum **49.75%**;
+- autoregressive + binary feasibility: **94.85%** mean, minimum **93.50%**;
+- flat 27-way route policy + binary feasibility: **94.20%** mean, minimum **92.50%**.
+
+All three conditions maintain **100% hard task accuracy**. This indicates that the parity failure is not only a missing-capability problem: correlated topology decisions and router optimization matter even after capability is controlled.
+
+The frozen-capability audit is diagnostic only. It is **not** a joint-from-scratch parity solution, and the exact expectation over all 27 topologies is not presented as a scalable NAS method. See [`notes/router_stabilization_audit.md`](notes/router_stabilization_audit.md).
 
 ## Runtime contention negative result
 
@@ -137,6 +163,8 @@ python experiments/multicircuit_contract_transfer.py
 python experiments/multicircuit_runtime_state_calibration.py
 python experiments/joint_self_specialization.py
 python experiments/topology_search_discovery.py --suite
+python experiments/topology_tie_aware_metric_audit.py --suite
+python experiments/router_stabilization_audit.py --suite
 ```
 
 Generated JSON is written to `results/`.
@@ -156,7 +184,8 @@ Useful criticism includes evidence that:
 5. a materially identical prior method already establishes the same narrow mechanism and runtime/model responsibility split;
 6. the three-circuit result is explained by a weaker discrete controller once price/mask information and capacity are matched;
 7. the joint-from-scratch result disappears when fallback capability and price normalization are matched fairly;
-8. the constrained topology-search result disappears under a stronger matched supernet/NAS baseline or fails to transfer beyond the easy XOR setting.
+8. the constrained topology-search result disappears under a stronger matched supernet/NAS baseline or fails to transfer beyond the easy XOR setting;
+9. the router-stabilization gap disappears when independent and correlated routers are matched under the same frozen capability/feasibility set.
 
 Please open an issue using the critique/reproduction templates.
 

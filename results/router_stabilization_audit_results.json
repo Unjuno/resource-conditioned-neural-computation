@@ -1,0 +1,23 @@
+{
+  "setup": {
+    "task": "4-bit parity over the complete 256-state domain",
+    "capability_control": "all six single-primitive probe topologies reach 100% accuracy in every seed before router comparison",
+    "search_space": "3 stages x {skip, lookup, compute} = 27 hard topologies",
+    "boundary": "Capabilities are deliberately trained first and frozen for this diagnostic. This is not a joint topology-discovery result."
+  },
+  "seeds": [
+    {"seed":0,"factorized_confidence":{"tie_optimal_cost_rate":0.9075,"mean_regret":0.004417100865393877},"factorized_binary":{"tie_optimal_cost_rate":0.985,"mean_regret":0.00009606773033738137},"autoregressive_binary":{"tie_optimal_cost_rate":0.995,"mean_regret":0.00001100705936551094},"flat_binary":{"tie_optimal_cost_rate":0.9425,"mean_regret":0.0014029581658542157},"autoregressive_multistart4":{"tie_optimal_cost_rate":0.96,"mean_regret":0.0006700177490711212}},
+    {"seed":1,"factorized_confidence":{"tie_optimal_cost_rate":0.5175,"mean_regret":0.028702856935560704},"factorized_binary":{"tie_optimal_cost_rate":0.4975,"mean_regret":0.02790972199290991},"autoregressive_binary":{"tie_optimal_cost_rate":0.9375,"mean_regret":0.002962347902357578},"flat_binary":{"tie_optimal_cost_rate":0.925,"mean_regret":0.002379037719219923},"autoregressive_multistart4":{"tie_optimal_cost_rate":0.9675,"mean_regret":0.0004412786476314068}},
+    {"seed":2,"factorized_confidence":{"tie_optimal_cost_rate":0.9225,"mean_regret":0.004226177018135786},"factorized_binary":{"tie_optimal_cost_rate":0.5625,"mean_regret":0.02461100710555911},"autoregressive_binary":{"tie_optimal_cost_rate":0.9375,"mean_regret":0.0027404613234102725},"flat_binary":{"tie_optimal_cost_rate":0.95,"mean_regret":0.0010599766671657563},"autoregressive_multistart4":{"tie_optimal_cost_rate":0.9725,"mean_regret":0.0003153506852686405}},
+    {"seed":3,"factorized_confidence":{"tie_optimal_cost_rate":0.9225,"mean_regret":0.004660623390227556},"factorized_binary":{"tie_optimal_cost_rate":0.915,"mean_regret":0.006004230361431837},"autoregressive_binary":{"tie_optimal_cost_rate":0.9375,"mean_regret":0.002962347902357578},"flat_binary":{"tie_optimal_cost_rate":0.95,"mean_regret":0.0010599766671657563},"autoregressive_multistart4":{"tie_optimal_cost_rate":0.92,"mean_regret":0.0048129427805542946}},
+    {"seed":4,"factorized_confidence":{"tie_optimal_cost_rate":0.9275,"mean_regret":0.0032436105608940123},"factorized_binary":{"tie_optimal_cost_rate":0.905,"mean_regret":0.004567412286996841},"autoregressive_binary":{"tie_optimal_cost_rate":0.935,"mean_regret":0.00308756273239851},"flat_binary":{"tie_optimal_cost_rate":0.9425,"mean_regret":0.0014029564522206783},"autoregressive_multistart4":{"tie_optimal_cost_rate":0.96,"mean_regret":0.001510044764727354}}
+  ],
+  "aggregate": {
+    "factorized_confidence":{"mean_tie_optimal_cost_rate":0.8395,"min_tie_optimal_cost_rate":0.5175,"mean_regret":0.009050073754042386,"mean_hard_accuracy":1.0},
+    "factorized_binary":{"mean_tie_optimal_cost_rate":0.773,"min_tie_optimal_cost_rate":0.4975,"mean_regret":0.012637687895447017,"mean_hard_accuracy":1.0},
+    "autoregressive_binary":{"mean_tie_optimal_cost_rate":0.9485,"min_tie_optimal_cost_rate":0.935,"mean_regret":0.00235274538397789,"mean_hard_accuracy":1.0},
+    "flat_binary":{"mean_tie_optimal_cost_rate":0.942,"min_tie_optimal_cost_rate":0.925,"mean_regret":0.0014609811343252658,"mean_hard_accuracy":1.0},
+    "autoregressive_multistart4":{"mean_tie_optimal_cost_rate":0.956,"min_tie_optimal_cost_rate":0.92,"mean_regret":0.0015499269254505635,"mean_hard_accuracy":1.0}
+  },
+  "note": "This committed JSON is a compact summary. Running experiments/router_stabilization_audit.py --suite emits the full per-seed router traces and probe routes."
+}
