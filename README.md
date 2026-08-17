@@ -64,6 +64,21 @@ Learned control is **not universally better**: tight/full-budget regimes can fav
 
 See [`notes/realtime_nn_learned_deadline.md`](notes/realtime_nn_learned_deadline.md).
 
+#### Common-deadline frontier audit
+
+The four representative deadline regimes were then replaced by a **25-point common absolute deadline sweep per seed**. Each policy admits the largest execution class fitting its own empirical P95 bound.
+
+Among 18 learned-vs-prefix deadline points whose mean miss rates differ by at most two percentage points:
+
+- learned activation has higher on-time-correct at **16/18** points;
+- mean learned-minus-prefix advantage is **+9.62 percentage points**;
+- median advantage is **+11.07 points**;
+- maximum observed advantage is **+20.79 points**.
+
+This reduces the concern that the intermediate-budget advantage was created by selecting four favorable deadlines, while still retaining the negative boundary that very tight or loose/full-work regimes can favor simpler execution.
+
+See [`notes/realtime_nn_common_deadline_frontier.md`](notes/realtime_nn_common_deadline_frontier.md).
+
 ### 4. Task-loss-only budget-compliant activation
 
 The explicit relevance-supervision loss was then removed. The entire model is trained from scratch from task cross-entropy only; there is no relevance auxiliary loss, capability warmup, or expert freezing.
@@ -103,12 +118,6 @@ Maximum repeated P95 coefficient of variation:
 - periodic load: **0.092**;
 - continuous same-core busy load: **0.990**.
 
-Under continuous busy load, nominally identical repeated calibrations can move an execution-class P95 by several milliseconds. For example:
-
-- seed 0, `B=.5`: **551 us → 4.30 ms**;
-- seed 1, `B=.25`: **233 us → 4.16 ms**;
-- seed 1, `B=.5`: **561 us → 4.29 ms**.
-
 A larger 1,800-sample-per-budget probe exposes a **quantile cliff**:
 
 | budget | median | P95 | fraction > 4 ms |
@@ -128,16 +137,9 @@ See [`notes/realtime_nn_machine_state_timing_audit.md`](notes/realtime_nn_machin
 
 ## Timing boundary
 
-All current deadline experiments are **soft/weakly-hard empirical prototypes** on ordinary Linux/PyTorch.
+All current deadline experiments are **soft/weakly-hard empirical prototypes** on ordinary Linux/PyTorch. Empirical P95/P99 is not WCET.
 
-The evidence repeatedly shows that central latency can be well ordered while high-percentile timing is contaminated by preemption/outlier modes. Empirical P95/P99 is not WCET.
-
-A hard-RT claim requires a controlled scheduling substrate and a defensible timing argument, for example:
-
-- RTOS CPU reservation / bounded interference assumptions;
-- statically analyzable generated inference code;
-- time-predictable hardware/runtime;
-- formal/static WCET or an accepted probabilistic real-time model with explicit assumptions.
+A hard-RT claim requires a controlled scheduling substrate and a defensible timing argument, for example RTOS CPU reservation, bounded interference assumptions, statically analyzable generated inference code, time-predictable hardware/runtime, formal/static WCET, or an accepted probabilistic real-time model with explicit assumptions.
 
 ## Current status
 
@@ -149,8 +151,9 @@ Supported in toy systems:
 4. hard runtime work caps can coexist with learned internal selection;
 5. learned selection can be integrated with soft deadline admission;
 6. useful budget-compliant selection can be learned from task loss alone in a supplied search space;
-7. simpler or analytic policies can still be better in some deadline regimes;
-8. uncontrolled Linux machine-state timing cannot be reduced to a stable empirical P95 table.
+7. the learned intermediate-work benefit survives a denser common-deadline frontier audit;
+8. simpler or analytic policies can still be better in some deadline regimes;
+9. uncontrolled Linux machine-state timing cannot be reduced to a stable empirical P95 table.
 
 Open:
 
@@ -170,16 +173,7 @@ budget → activation → work → latency → deadline
 
 ## Nonclaims
 
-This repository does not claim:
-
-- hard real-time or WCET guarantees;
-- a production Real-Time NN or Real-Time LM;
-- Joule-level energy savings or measured memory-bandwidth reduction;
-- arbitrary hardware portability;
-- universal superiority over fixed policies or external schedulers;
-- general/unconstrained self-organized architecture discovery;
-- LLM-scale generalization;
-- novelty of LUT neurons/networks, dynamic routing, NAS, or runtime subnetwork switching.
+This repository does not claim hard real time/WCET, production RTOS deployment, physical energy savings, arbitrary hardware portability, universal superiority over fixed/analytic schedulers, unconstrained architecture discovery, or LLM-scale generalization.
 
 ## Reproduce primary experiments
 
@@ -190,6 +184,7 @@ pip install -r requirements.txt
 python experiments/realtime_nn_budget_execution.py
 python experiments/realtime_nn_learned_budget_gate.py
 python experiments/realtime_nn_learned_deadline_integration.py
+python experiments/realtime_nn_deadline_frontier.py
 python experiments/realtime_nn_task_only_gate.py
 python experiments/realtime_nn_machine_state_timing_audit.py
 ```

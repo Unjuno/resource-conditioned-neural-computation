@@ -1,0 +1,22 @@
+{
+  "setup": {
+    "seeds": 3,
+    "deadline_points_per_seed": 25,
+    "matched_definition": "absolute learned-vs-prefix mean miss-rate difference <= 0.02",
+    "timing_boundary": "ordinary Linux/PyTorch empirical P95 admission; not WCET"
+  },
+  "matched_common_deadlines": {
+    "count": 18,
+    "learned_higher_on_time_correct_count": 16,
+    "mean_delta_on_time_correct": 0.09623456790123457,
+    "median_delta_on_time_correct": 0.11071428571428571,
+    "min_delta_on_time_correct": -0.014444444444444371,
+    "max_delta_on_time_correct": 0.20793650793650797
+  },
+  "representative_points": [
+    {"deadline_us": 587.7911127804349, "learned_miss": 0.01253968253968254, "prefix_miss": 0.013968253968253968, "learned_on_time_correct": 0.800952380952381, "prefix_on_time_correct": 0.6874603174603174, "delta": 0.11349206349206353},
+    {"deadline_us": 1216.775223200773, "learned_miss": 0.008571428571428572, "prefix_miss": 0.01634920634920635, "learned_on_time_correct": 0.9419047619047619, "prefix_on_time_correct": 0.7339682539682539, "delta": 0.20793650793650797},
+    {"deadline_us": 1557.5823656372986, "learned_miss": 0.018253968253968255, "prefix_miss": 0.029841269841269842, "learned_on_time_correct": 0.9322222222222223, "prefix_on_time_correct": 0.7968253968253969, "delta": 0.1353968253968254},
+    {"deadline_us": 1998.030680580602, "learned_miss": 0.01, "prefix_miss": 0.011428571428571429, "learned_on_time_correct": 0.9404761904761905, "prefix_on_time_correct": 0.8123809523809524, "delta": 0.12809523809523804}
+  ]
+}
