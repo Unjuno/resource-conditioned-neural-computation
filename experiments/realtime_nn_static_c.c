@@ -11,7 +11,8 @@
 #define C 32
 #define F 128
 #define K 8
-#define BLOCK_MACS 92160
+// Exact physical count: neighbor matvec runs at 8 of 9 positions; boundary copies bias.
+#define BLOCK_MACS 91136
 #define HEAD_MACS 64
 
 typedef struct { const float *sw,*sb,*nw,*nb,*f1w,*f1b,*f2w,*f2b; } Block;
