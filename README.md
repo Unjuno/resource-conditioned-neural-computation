@@ -1,120 +1,155 @@
 # Resource-Conditioned Neural Computation
 
-A small, falsification-oriented mechanism study of neural execution under explicit resource conditions and runtime availability constraints.
+A falsification-oriented study toward a **Real-Time Neural Network (Real-Time NN)**: one fixed neural network whose actually executed internal computation changes with an explicit time/compute/resource budget.
 
-## Status
+## Research target
 
-**Public mechanism note / reproduction package. Not a hard-real-time claim.**
+The primary goal is **not** to optimize a router as an end in itself.
 
-The narrow systems idea under test is:
+The intended system is:
 
-> A fixed neural system can change the internal computation it actually executes as an explicit normalized resource condition changes, while an independent runtime mechanism constrains which execution classes are available.
+```text
+RTOS / runtime
+    ↓
+deadline + machine state
+    ↓
+safe admitted budget B
+    ↓
+the same neural-network parameters
+    ↓
+B-conditioned internal activation / effective circuit
+    ↓
+actual executed work changes
+    ↓
+actual inference latency changes
+    ↓
+output before the deadline when the admitted budget is feasible
+```
 
-The repository intentionally stays small. It does **not** claim WCET/hard-real-time guarantees, physical energy savings, universal superiority to external schedulers/NAS, unconstrained architecture discovery, arbitrary hardware portability, or LLM generalization.
+The core hypothesis is:
 
-## Strongest current mechanism result
+> Holding the network weights and task input fixed, changing only the supplied budget/resource condition can change which internal computation is physically executed, and that execution change can produce a measurable, calibratable change in inference latency.
 
-The harder 4-bit-parity follow-up uses a supplied three-stage `skip / lookup / compute` supernet. Capability parameters and the resource router start from scratch and capability parameters are **never frozen**.
+See [`REALTIME_NN_DIRECTION.md`](REALTIME_NN_DIRECTION.md) for the authoritative direction lock.
 
-The successful recipe separates:
+## Status correction — 2026-08-17
 
-1. fallback capability preservation;
-2. capability readiness before strong resource pressure;
-3. correlated autoregressive allocation;
-4. binary feasibility from within-feasible-set resource optimization.
+**The repository does not yet demonstrate the complete Real-Time NN chain.**
 
-Across five seeds:
+Earlier work in this repository established useful precursor mechanisms around resource-conditioned path selection, internal-subgraph execution, capability preservation, topology search, and runtime availability constraints. Those experiments remain reproducible and useful, but several later iterations over-focused on router-policy optimization and resource-proxy oracle agreement.
 
-| condition | hard accuracy | tie-aware minimum-cost rate | worst seed | mean regret |
-|---|---:|---:|---:|---:|
-| immediate joint factorized | 99.75% | 21.90% | 0.00% | 0.24381 |
-| immediate joint autoregressive | 100.00% | 37.15% | 0.00% | 0.19536 |
-| capability-gated factorized | 100.00% | 81.95% | 51.75% | 0.00978 |
-| capability-gated autoregressive | 100.00% | 97.25% | 91.75% | 0.00171 |
-| **capability-gated constrained autoregressive** | **100.00%** | **98.55%** | **95.75%** | **0.00057** |
-| matched price-blind control | 100.00% | 50.25% | 50.25% | 0.15863 |
+For the intended Real-Time NN research goal, those are **secondary diagnostics**, not the final metric.
 
-A sampled autoregressive follow-up removes complete-topology marginalization and full-domain feasibility from router training and still reaches **95.05% mean / 91.25% worst-seed** minimum-cost rate at 100% final task accuracy.
+The required chain is:
 
-See [`notes/joint_parity_curriculum.md`](notes/joint_parity_curriculum.md).
+```text
+budget / resource condition
+    → internal activation pattern
+    → physically executed compute
+    → measured end-to-end latency
+    → deadline behavior
+```
 
-## New robustness boundary: search space and hardware cost structure
+The next primary experiments must measure that chain directly in one fixed network.
 
-The latest robustness experiment keeps all single-primitive capabilities at 100% and changes the supplied search space / resource-cost structure.
+## What the core experiment must show
 
-| configuration | mean hard accuracy | mean tie-aware min-cost rate | worst seed |
-|---|---:|---:|---:|
-| 3-stage homogeneous costs | 100% | 87.70% | 53.00% |
-| 4-stage homogeneous costs | 100% | **98.10%** | **91.25%** |
-| 4-stage, heterogeneous op availability only | 100% | 90.00% | 50.25% |
-| 4-stage, **stage-dependent costs only** | 100% | **33.00%** | **0.00%** |
-| 4-stage, availability + stage-dependent costs | 100% | **41.65%** | **22.00%** |
+A Real-Time NN mechanism experiment is considered successful only if it measures, in the same implementation:
 
-Increasing depth from three to four stages does not itself break the mechanism. The main failure appears when route/stage resource costs become non-uniform. Increasing price-ratio training anchors from 7 to 21 does not rescue that condition: mean optimality falls to **21.20%**, with a 0% worst seed.
+1. the **same weights** across budgets;
+2. the **same input** in budget counterfactuals;
+3. budget-dependent active blocks/channels/neurons/edges;
+4. inactive computation is **actually skipped**, not merely zero-masked after dense execution;
+5. budget-dependent executed MAC/operation count or another implementation-level compute measure;
+6. budget-dependent **measured inference latency distribution**;
+7. task quality under each budget;
+8. a monotonic or otherwise calibratable budget → work → latency relation;
+9. a runtime mapping from deadline/machine state to an admitted budget;
+10. deadline-miss measurements under that runtime policy.
 
-This materially narrows the portability interpretation: a small global scarcity vector is not sufficient evidence for route-dependent or non-separable hardware changes.
+The first target is not a hard-real-time guarantee. The first target is a reproducible relationship of the form:
 
-See [`notes/searchspace_contract_robustness.md`](notes/searchspace_contract_robustness.md).
+```text
+smaller admitted budget
+    → smaller executed internal circuit
+    → less actual work
+    → lower measured latency
+```
 
-### Router parameterization sensitivity
+with one fixed neural network.
 
-The four-stage homogeneous result above was independently reimplemented and reproduced at the same **98.10% mean / 91.25% worst-seed** optimality. A one-variable audit then changed only implementation details:
+See [`EXPERIMENT_PLAN_REALTIME_NN.md`](EXPERIMENT_PLAN_REALTIME_NN.md).
 
-- changing the capability-probe sampling stride leaves the result essentially unchanged at **98.35% mean / 92.25% worst seed**;
-- changing only the autoregressive router-head parameterization lowers performance to **86.35% mean / 50.25% worst seed**.
+## What has already been established
 
-Therefore the four-stage robustness result remains authoritative, but the learned resource policy is **implementation-sensitive**. Router architecture is a substantive experimental variable, not incidental plumbing. See [`notes/router_parameterization_sensitivity.md`](notes/router_parameterization_sensitivity.md).
+The existing experiments provide several precursor facts:
 
-## Route-local calibration diagnostic
+- one fixed parameterized network can execute different internal subgraphs when only the resource condition changes;
+- forward-hook audits have verified cases where inactive modules are not executed;
+- resource-conditioned execution can preserve task output in finite toy domains;
+- runtime availability can override neural execution choices by construction;
+- ordinary Linux/PyTorch timing is too jittery to treat empirical P99 measurements as WCET;
+- simple normalized resource contracts work only under limited cost structures, and non-separable route/stage effects expose failures;
+- learned routing/allocation can be highly optimization- and parameterization-sensitive.
 
-A separate frozen-capability interface diagnostic gives the runtime a richer stage-local calibration contract. With 256 generated training hardware profiles and 20 disjoint held-out profiles, a flat calibration-aware policy reaches:
+These are **supporting results**. They do not replace the missing direct budget → activation → measured-latency experiment.
 
-- **73.10% mean** held-out minimum-cost rate across three router seeds;
-- **70.05% worst seed**;
-- **24.99%** for the matched calibration-blind control;
-- **25.63%** when calibration inputs are deliberately swapped at inference.
+## Secondary diagnostic experiments
 
-The intervention shows that route-local calibration information matters, but the learned policy remains below the analytic scheduler. A calibration-aware autoregressive diagnostic also collapses to one route in the tested seed (**5.25%** minimum-cost rate), so richer contract information does not by itself solve routing optimization.
+The repository intentionally retains the router/topology work because it documents real failure modes that may matter when implementing a Real-Time NN:
 
-Therefore the current portability boundary is:
+- lookup-vs-compute price-conditioned routing;
+- direct internal-circuit execution;
+- three-circuit contract interpolation;
+- capability-preserving joint training;
+- constrained subgraph discovery;
+- parity curriculum and sampled routing;
+- search-space / non-separable cost falsification;
+- router-parameterization sensitivity;
+- timing-calibration failures under ordinary Linux contention.
 
-> separable/global runtime recalibration is supported only in the narrow earlier simulation; non-separable stage-/route-local cost changes require a richer contract and/or external scheduling, and robust learned use of that richer contract is not yet established.
-
-## Evidence ladder
-
-1. **Two physically distinct strategies:** lookup/copy vs algorithmic MLP; price intervention flips the chosen strategy. Exact analytic scheduling remains the oracle when costs are known.
-2. **One fixed network, different internal circuits:** changing only resource condition changes the executed module sequence; inactive modules are not executed.
-3. **Three internal circuits:** discrete price anchors generalize to held-out continuous ratios; price-aware routing beats a matched price-blind control, but only slightly beats a nearest-anchor external scheduler.
-4. **Joint capability acquisition:** fallback supervision prevents capability forgetting; centered relative prices remove irrelevant common-scale dependence.
-5. **Constrained subgraph discovery:** a supplied `skip / lookup / compute` supernet learns multiple resource-conditioned hard subgraphs without complete-route labels on XOR.
-6. **Harder parity:** capability readiness, correlated routing, and feasibility/resource separation are all needed for stable freeze-free training in the tested toy.
-7. **Robustness falsification:** stage-dependent non-separable route costs break the simple global-contract policy despite perfect task capability.
-8. **Implementation-sensitivity audit:** the public four-stage homogeneous result is reproducible, but a small router-head parameterization change materially increases seed instability.
+These experiments should be read as **implementation diagnostics**, not as the primary research objective.
 
 Detailed evidence is in `notes/`, `results/`, and [`CLAIMS_AND_LIMITS.md`](CLAIMS_AND_LIMITS.md).
 
+## Runtime / RTOS responsibility split
+
+The target interface is:
+
+```text
+hardware / OS state
+  ├─ CPU/NPU performance
+  ├─ DVFS
+  ├─ contention
+  ├─ temperature
+  └─ timing calibration / WCET information
+          ↓
+       runtime / RTOS
+          ↓
+ normalized safe budget / execution contract
+          ↓
+        same NN
+          ↓
+ budget-conditioned internal execution
+```
+
+The runtime owns hardware-dependent timing information. The neural network should ideally consume a normalized budget/resource contract rather than a CPU model name or raw milliseconds.
+
+For strict hard-real-time claims, ordinary Linux/PyTorch measurement is insufficient. Formal/static WCET, time-predictable hardware, scheduler/runtime isolation, or another defensible timing guarantee would be required.
+
 ## Resource proxies
 
-The main resource-conditioned experiments use two normalized coordinates:
+Some precursor experiments use normalized compute and parameter-footprint proxies. The parameter-footprint coordinate is **not** measured runtime memory traffic, bandwidth, cache pressure, reduced resident memory, or energy.
 
-- **compute proxy:** approximate executed operation/MAC count;
-- **parameter-footprint proxy:** parameters associated with the selected expert/circuit.
-
-The second coordinate is **not** measured runtime memory traffic, bandwidth, cache pressure, reduced resident memory, or energy. All parameters remain resident in the same model/process.
-
-## Runtime availability / real-time boundary
-
-A separate runtime mask can disable execution classes. Neural price routing cannot override that mask; if no route is available, the implementation does not force an uncertified fallback.
-
-Ordinary Linux/PyTorch timing is **not WCET**. Same-core contention experiments show scheduler/preemption tails can destroy stable route-specific empirical P99 separation. Stronger timing guarantees require a more predictable platform, scheduler/runtime isolation, or formal/static timing analysis.
+For the Real-Time NN line, **actual executed work and actual latency now take priority over proxy-optimal route agreement**.
 
 ## Related work / novelty boundary
 
-**Not claimed as novel:** LUT neurons/networks, differentiable logic networks, dynamic routing, neural architecture search, once-for-all subnetworks, or runtime subnetwork switching.
+Not claimed as novel: LUT neurons/networks, differentiable logic networks, dynamic routing, neural architecture search, once-for-all subnetworks, early exit, or runtime subnetwork switching.
 
-Representative prior work and the exact novelty boundary are documented in [`RELATED_WORK.md`](RELATED_WORK.md).
+Representative prior work and the explicit novelty boundary are documented in [`RELATED_WORK.md`](RELATED_WORK.md).
 
-## Reproduce
+## Reproduce existing precursor experiments
 
 Python 3.10+ is recommended.
 
@@ -123,25 +158,21 @@ python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 
-python experiments/price_mask_conformal_multiseed.py
-python experiments/price_negative_control.py
 python experiments/internal_circuit_conditioning.py
 python experiments/multicircuit_contract_transfer.py
 python experiments/joint_self_specialization.py
 python experiments/topology_search_discovery.py --suite
-python experiments/router_stabilization_audit.py --suite
 python experiments/joint_parity_correlated_curriculum.py --suite
 python experiments/sampled_joint_parity_policy.py
 python experiments/searchspace_robustness.py --suite --out results/searchspace_robustness_full.json
-python experiments/nonseparable_contract_diagnostic.py --suite
 python experiments/router_parameterization_sensitivity.py
 ```
 
-The committed result JSONs are compact authoritative summaries; suite runs can emit fuller traces.
+The next authoritative reproduction target will be the direct Real-Time NN budget/activation/latency experiment described in [`EXPERIMENT_PLAN_REALTIME_NN.md`](EXPERIMENT_PLAN_REALTIME_NN.md).
 
 ## Repository scope
 
-This is a mechanism study, not a scaling project. It does not currently target LLMs, GPUs, or production RTOS deployment.
+This remains a small mechanism study. No scaling to LLMs, GPUs, or large models is required to establish the core mechanism.
 
 ## License
 
