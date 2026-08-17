@@ -56,6 +56,15 @@ This materially narrows the portability interpretation: a small global scarcity 
 
 See [`notes/searchspace_contract_robustness.md`](notes/searchspace_contract_robustness.md).
 
+### Router parameterization sensitivity
+
+The four-stage homogeneous result above was independently reimplemented and reproduced at the same **98.10% mean / 91.25% worst-seed** optimality. A one-variable audit then changed only implementation details:
+
+- changing the capability-probe sampling stride leaves the result essentially unchanged at **98.35% mean / 92.25% worst seed**;
+- changing only the autoregressive router-head parameterization lowers performance to **86.35% mean / 50.25% worst seed**.
+
+Therefore the four-stage robustness result remains authoritative, but the learned resource policy is **implementation-sensitive**. Router architecture is a substantive experimental variable, not incidental plumbing. See [`notes/router_parameterization_sensitivity.md`](notes/router_parameterization_sensitivity.md).
+
 ## Route-local calibration diagnostic
 
 A separate frozen-capability interface diagnostic gives the runtime a richer stage-local calibration contract. With 256 generated training hardware profiles and 20 disjoint held-out profiles, a flat calibration-aware policy reaches:
@@ -80,6 +89,7 @@ Therefore the current portability boundary is:
 5. **Constrained subgraph discovery:** a supplied `skip / lookup / compute` supernet learns multiple resource-conditioned hard subgraphs without complete-route labels on XOR.
 6. **Harder parity:** capability readiness, correlated routing, and feasibility/resource separation are all needed for stable freeze-free training in the tested toy.
 7. **Robustness falsification:** stage-dependent non-separable route costs break the simple global-contract policy despite perfect task capability.
+8. **Implementation-sensitivity audit:** the public four-stage homogeneous result is reproducible, but a small router-head parameterization change materially increases seed instability.
 
 Detailed evidence is in `notes/`, `results/`, and [`CLAIMS_AND_LIMITS.md`](CLAIMS_AND_LIMITS.md).
 
@@ -124,6 +134,7 @@ python experiments/joint_parity_correlated_curriculum.py --suite
 python experiments/sampled_joint_parity_policy.py
 python experiments/searchspace_robustness.py --suite --out results/searchspace_robustness_full.json
 python experiments/nonseparable_contract_diagnostic.py --suite
+python experiments/router_parameterization_sensitivity.py
 ```
 
 The committed result JSONs are compact authoritative summaries; suite runs can emit fuller traces.
