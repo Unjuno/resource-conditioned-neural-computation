@@ -16,20 +16,24 @@ The package deliberately includes negative results and does **not** claim WCET g
 
 Two strategies solve the same 12-bit majority task at 100% accuracy:
 
-- **Lookup / copy path:** memory-heavy, compute-light.
-- **Algorithmic MLP path:** memory-light, compute-heavy.
+- **Lookup / copy path:** parameter-footprint-heavy, compute-light.
+- **Algorithmic MLP path:** lower parameter footprint, compute-heavy.
 
-A small router observes a two-dimensional resource-price signal. With both paths available, changing only the compute-to-memory price ratio changes which path is selected. The included sweep shows a transition from algorithmic computation to lookup/copy while accuracy remains 100%.
+In the current reproduction script, the lookup expert has 8,192 parameters and an approximately 2-operation lookup proxy, while the MLP has 4,706 parameters and 4,544 linear MACs. The second resource coordinate is therefore a **normalized parameter-footprint proxy**. It is **not** a measurement of runtime memory traffic, bandwidth, resident-memory reduction, or energy.
 
-A separate runtime mask can disable execution classes based on held-out timing calibration. The learned resource-price policy cannot override this mask.
+A small router observes two resource prices: one for the compute proxy and one for the parameter-footprint proxy. With both paths available, changing only their price ratio changes the selected path while task accuracy remains 100%. The routing probabilities vary smoothly with the continuous price ratio and cross a learned decision boundary.
+
+A separate runtime mask can disable execution classes based on held-out timing calibration. The learned resource-price policy cannot override this mask. If the runtime declares no execution class safe, the public implementation returns **not admitted** rather than executing an uncertified fallback route.
 
 ## Main observations
 
 - Across three seeds, compute-expensive conditions route to lookup/copy while preserving task accuracy.
-- Memory-expensive conditions route predominantly to algorithmic computation.
-- A continuous price-ratio sweep produces a continuous routing transition rather than a single discrete label lookup.
-- Under a shared runtime safe set, price-aware routing reduces the tested normalized resource objective at identical task accuracy.
-- Corrupting the price signal reverses the routing decision and worsens the actual resource objective, providing a negative control for fixed-route preference.
+- Parameter-footprint-proxy-expensive conditions route to algorithmic computation.
+- A continuous price-ratio sweep changes the routing distribution while preserving 100% accuracy at every tested point.
+- The price-aware and price-blind controls use the **same router architecture and parameter count (114 parameters)**; the control receives zeroed price features and is trained against the same price distribution.
+- On the tested two-route objective, the learned price-aware router matches the analytic external scheduler `argmin_j price · cost_j` at all 27 sweep points (9 ratios × 3 seeds). This repository therefore does **not** claim that learning is superior to an analytic scheduler when the route-cost table is known exactly.
+- Under a shared runtime safe set, price-aware routing reduces the tested normalized resource objective at identical task accuracy in the footprint-proxy-expensive condition.
+- Corrupting the price signal reverses the routing decision and worsens the actual resource objective, providing an intervention-based negative control for fixed-route preference.
 
 See [`notes/readiness_report.md`](notes/readiness_report.md) for exact claims, limitations, and prior falsification results.
 
@@ -49,17 +53,17 @@ Generated JSON is written to `results/`.
 
 ### Timing caveat
 
-Latency measurements depend strongly on OS/runtime state. The scripts set one PyTorch thread and attempt CPU affinity, but ordinary Linux/PyTorch measurements are **not WCET measurements**. Do not interpret the statistical mask as a hard-real-time guarantee.
+Latency measurements depend strongly on OS/runtime state. The scripts set one PyTorch thread and attempt CPU affinity, but ordinary Linux/PyTorch measurements are **not WCET measurements**. The timing mask is based on held-out empirical order statistics under the measured runtime state; do not interpret it as a hard-real-time guarantee.
 
 ## What would falsify the useful interpretation?
 
 Useful criticism includes evidence that:
 
-1. the resource-price signal is not causally used by the router;
+1. interventions on the resource-price input do not actually control routing;
 2. an equivalent price-blind policy reproduces the same resource adaptation under matched conditions;
 3. the timing-mask result is an artifact of calibration leakage;
 4. the result disappears under a clean reimplementation;
-5. a materially identical prior method already establishes the same mechanism and separation of responsibilities.
+5. a materially identical prior method already establishes the same narrow mechanism and runtime/model responsibility split.
 
 Please open an issue using the critique/reproduction templates.
 
