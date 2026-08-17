@@ -1,0 +1,12 @@
+{
+  "setup": {
+    "task": "public s4_hom 4-bit-parity condition",
+    "purpose": "one-variable implementation-sensitivity audit",
+    "boundary": "not a search-space scaling result"
+  },
+  "conditions": {
+    "matched_baseline": {"mean_optimal": 0.981, "min_optimal": 0.9125, "per_seed": [0.9975,0.9975,0.9975,0.9125,1.0]},
+    "capability_stride_only": {"mean_optimal": 0.9835, "min_optimal": 0.9225, "per_seed": [0.9975,0.9975,0.9225,1.0,1.0]},
+    "router_head_only": {"mean_optimal": 0.8635, "min_optimal": 0.5025, "per_seed": [0.945,0.93,0.5025,1.0,0.94]}
+  }
+}

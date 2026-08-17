@@ -16,16 +16,18 @@
 12. **Stage-dependent resource costs are a strong failure mode:** four-stage cost-heterogeneous routing falls to **33.00% mean / 0% worst-seed** minimum-cost rate despite 100% task accuracy and perfect single-primitive capability. Heterogeneous availability plus costs reaches only 41.65% mean / 22% worst seed.
 13. Increasing the cost-heterogeneous condition from 7 to 21 price-ratio anchors does not repair the failure; mean minimum-cost rate is **21.20%**.
 14. In a frozen-capability route-local calibration diagnostic with 256 training hardware profiles, a calibration-aware flat policy reaches **73.10% mean / 70.05% worst-seed** held-out minimum-cost rate versus **24.99%** for a matched calibration-blind control. Swapping calibration inputs reduces it to **25.63%**.
+15. The public four-stage homogeneous result is reproducible in a matched reimplementation (**98.10% mean / 91.25% worst seed**), but routing optimization is parameterization-sensitive: changing only the autoregressive router-head parameterization lowers the same condition to **86.35% mean / 50.25% worst seed**, while changing only the capability-probe sampling stride leaves it at **98.35% mean / 92.25% worst seed**.
 
 ## Current interpretation
 
-The experiments separate at least five roles:
+The experiments separate at least six roles:
 
 1. **capability preservation** — fallback primitives/routes that may be required later must remain task-capable;
 2. **capability readiness** — strong resource pressure introduced too early can lock the system into a shortcut;
 3. **correlated allocation** — coordinated subgraph decisions may require correlated routing rather than independent stage choices;
 4. **feasibility vs optimization** — validity/availability should constrain resource optimization rather than be traded as one soft scalar reward;
-5. **contract expressiveness** — one small global resource vector is adequate only for the tested separable/simple cost structures; route-local/non-separable hardware cost changes require a richer runtime representation or external scheduling.
+5. **contract expressiveness** — one small global resource vector is adequate only for the tested separable/simple cost structures; route-local/non-separable hardware cost changes require a richer runtime representation or external scheduling;
+6. **policy parameterization** — router architecture materially affects optimization stability even when task, search space, price anchors, and resource objective are held fixed.
 
 ## Resource-proxy definition
 
@@ -48,6 +50,7 @@ The experiments use normalized **compute** and **parameter-footprint** proxies. 
 13. **Arbitrary hardware portability.** The earlier positive calibration-transfer result is limited to a separable multiplicative simulation. The new stage-dependent-cost experiments show that non-separable route costs are not reliably handled by the same simple global contract.
 14. That a richer route-local calibration contract solves portability: the flat diagnostic reaches only 73.10% mean held-out optimality, and the tested autoregressive policy collapses to one route.
 15. Stable route-specific P99 safety masks under ordinary Linux contention.
+16. Robustness of the reported resource-policy optimization to seemingly minor router-architecture changes. The parameterization audit shows substantial seed sensitivity under an otherwise matched condition.
 
 ## Important negative results retained
 
@@ -60,6 +63,7 @@ The experiments use normalized **compute** and **parameter-footprint** proxies. 
 - Heterogeneous operation availability is moderately unstable, but stage-dependent **cost** heterogeneity is the stronger failure in the current ablation.
 - Denser price anchors do not fix the stage-dependent-cost failure.
 - Route-local calibration information has a clear intervention effect, but learned held-out profile routing remains below the analytic oracle and is optimization-sensitive.
+- **Router parameterization is itself a major stability variable:** in the matched four-stage homogeneous audit, changing only the autoregressive head parameterization lowers mean optimality from 98.10% to 86.35% and the worst seed from 91.25% to 50.25%.
 - Ordinary Linux/PyTorch timing remains too jittery for WCET-style claims.
 - Additional resource-vector dimensions can be redundant or harmful.
 - Resource-conditioned routing does not automatically Pareto-dominate strong input-only adaptive-routing baselines.
