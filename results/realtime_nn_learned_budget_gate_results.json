@@ -1,0 +1,58 @@
+{
+  "setup": {
+    "task": "8 slots, exactly 4 relevant; label is strict majority of relevant bits",
+    "budgets_expert_calls": [1, 2, 4, 8],
+    "controller": "learned relevance scorer, runtime-enforced hard top-k cap",
+    "training_note": "controller trained with relevance auxiliary supervision; experts/head trained across budgets; not claimed as self-organized routing",
+    "physical_skip": "hard inference calls exactly k selected experts",
+    "dense_control": "same learned selection but computes all 8 experts before masking",
+    "timing_boundary": "ordinary Linux/PyTorch batch-1 timing; not WCET"
+  },
+  "aggregate": {
+    "all_budget_compliance": true,
+    "all_dense_executes_all": true,
+    "all_hard_dense_outputs_match": true,
+    "all_learned_latency_monotonic": true,
+    "mean_learned_accuracy": {
+      "1": 0.6834999918937683,
+      "2": 0.8190000057220459,
+      "4": 1.0,
+      "8": 1.0
+    },
+    "mean_prefix_accuracy": {
+      "1": 0.687749981880188,
+      "2": 0.7142500281333923,
+      "4": 0.7817500034968058,
+      "8": 1.0
+    },
+    "mean_learned_median_us": {
+      "1": 74.61983333333333,
+      "2": 114.06783333333334,
+      "4": 195.39516666666668,
+      "8": 366.21383333333335
+    },
+    "mean_prefix_median_us": {
+      "1": 56.295500000000004,
+      "2": 95.675,
+      "4": 171.37216666666666,
+      "8": 337.41816666666665
+    },
+    "mean_dense_median_us": {
+      "1": 354.2126666666667,
+      "2": 342.641,
+      "4": 348.23483333333337,
+      "8": 356.34900000000005
+    },
+    "mean_relevant_fraction": {
+      "1": 1.0,
+      "2": 1.0,
+      "4": 1.0,
+      "8": 0.5
+    }
+  },
+  "seed_checks": [
+    {"seed": 0, "budget_compliance": true, "dense_executes_all": true, "hard_dense_outputs_match": true, "learned_latency_monotonic": true, "max_hard_dense_output_diff": 1.1920928955078125e-7},
+    {"seed": 1, "budget_compliance": true, "dense_executes_all": true, "hard_dense_outputs_match": true, "learned_latency_monotonic": true},
+    {"seed": 2, "budget_compliance": true, "dense_executes_all": true, "hard_dense_outputs_match": true, "learned_latency_monotonic": true}
+  ]
+}
