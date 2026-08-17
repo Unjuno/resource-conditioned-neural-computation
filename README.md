@@ -1,6 +1,6 @@
 # Resource-Conditioned Neural Computation
 
-A falsification-oriented study toward a **Real-Time Neural Network (Real-Time NN)**: one fixed neural network whose physically executed internal computation changes with an explicit time/compute/resource budget.
+A falsification-oriented study toward a **Real-Time Neural Network (Real-Time NN)**: one fixed neural network whose physically executed internal computation changes under a runtime-admitted work/time budget.
 
 ## Research target
 
@@ -9,28 +9,26 @@ RTOS / runtime
     ↓
 deadline + machine state
     ↓
-safe admitted budget B
+safe admitted work budget
     ↓
 the same neural-network parameters
     ↓
-B-conditioned internal activation / effective circuit
+budget-compliant internal activation
     ↓
 actual executed work changes
     ↓
 actual inference latency changes
     ↓
-output before the deadline when the admitted budget is feasible
+deadline behavior
 ```
 
-The runtime owns **how much work is admissible**. The NN may learn **which admissible internal computation is useful**. A controller/gate is an implementation mechanism, not the research target.
+The runtime owns **how much work is admissible**. The NN may learn **which admissible internal computation is useful**. A gate/controller is an implementation mechanism, not the research target.
 
 See [`REALTIME_NN_DIRECTION.md`](REALTIME_NN_DIRECTION.md).
 
 ## Milestone 1 — direct budget → physical work → latency
 
-[`experiments/realtime_nn_budget_execution.py`](experiments/realtime_nn_budget_execution.py) uses one fixed network with eight optional local-information-propagation blocks.
-
-Budgets `0 / .25 / .5 / .75 / 1.0` execute `0 / 2 / 4 / 6 / 8` blocks with the same weights.
+[`experiments/realtime_nn_budget_execution.py`](experiments/realtime_nn_budget_execution.py) uses one fixed network with eight optional blocks. Budgets `0 / .25 / .5 / .75 / 1.0` physically execute `0 / 2 / 4 / 6 / 8` blocks with the same weights.
 
 Across three seeds:
 
@@ -44,31 +42,29 @@ Across three seeds:
 
 Audits:
 
-- **3/3 seeds:** hard-skip median latency is strictly increasing with executed depth;
-- mean full/minimum-budget hard-skip latency ratio: **35.73x**;
-- forward hooks confirm inactive blocks are not called;
-- a matched dense-mask control executes all eight blocks at every logical budget;
-- hard-skip and dense-mask produce identical outputs for the same budget.
+- hard-skip median latency is strictly increasing in **3/3 seeds**;
+- full/minimum-budget median-latency ratio averages **35.73x**;
+- hooks verify inactive blocks are not called;
+- dense-mask executes all eight blocks at every logical budget;
+- hard-skip and dense-mask outputs match.
 
-This directly demonstrates the toy mechanism:
+This directly demonstrates:
 
 ```text
 smaller budget → less physical work → lower measured median latency → lower quality
 ```
 
-Detailed note: [`notes/realtime_nn_budget_execution.md`](notes/realtime_nn_budget_execution.md)
+See [`notes/realtime_nn_budget_execution.md`](notes/realtime_nn_budget_execution.md).
 
 ## Milestone 2 — learned activation under a hard runtime cap
 
-[`experiments/realtime_nn_learned_budget_gate.py`](experiments/realtime_nn_learned_budget_gate.py) removes the fixed-prefix restriction.
+[`experiments/realtime_nn_learned_budget_gate.py`](experiments/realtime_nn_learned_budget_gate.py) uses eight optional expert modules. The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. A learned controller chooses **which** experts to execute, while hard top-k structurally prevents it from exceeding the admitted budget.
 
-The model contains eight optional expert modules. The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. A learned controller chooses **which** experts to execute, but hard top-k structurally prevents it from exceeding the admitted budget.
-
-The controller is deliberately trained with a relevance auxiliary target. This is a controlled mechanism experiment, not a claim of spontaneous/self-organized routing.
+The controller is deliberately trained with an explicit relevance auxiliary target. This is a controlled mechanism experiment, not a claim of spontaneous/self-organized routing.
 
 Three-seed result:
 
-| expert-call budget k | learned accuracy | fixed-prefix accuracy | learned hard-skip median | fixed-prefix median | dense-mask median |
+| k | learned accuracy | fixed-prefix accuracy | learned median | prefix median | dense-mask median |
 |---:|---:|---:|---:|---:|---:|
 | 1 | 68.35% | 68.77% | 74.62 us | 56.30 us | 354.21 us |
 | 2 | **81.90%** | 71.43% | 114.07 us | 95.68 us | 342.64 us |
@@ -77,67 +73,74 @@ Three-seed result:
 
 Across 3/3 seeds:
 
-- hard learned execution calls exactly `k` experts at every budget;
+- physical execution obeys the hard `k` cap at every budget;
 - learned median latency is strictly increasing with `k`;
-- dense-mask executes all eight experts at every budget;
-- hard learned and dense learned outputs match to numerical precision;
-- at `k=4`, learned activation gains about **+21.8 percentage points** over fixed-prefix execution at the same expert-call cap;
-- the learned controller costs roughly **18–29 us** median overhead versus fixed prefix, and that overhead is included in the timing.
+- dense-mask executes all eight experts;
+- controller overhead is included in end-to-end timing.
 
-This establishes a stronger responsibility split:
+At `k=4`, learned activation gains about **+21.8 percentage points** over fixed-prefix execution at the same expert-call cap.
 
-```text
-RTOS/runtime: how much work may execute
-NN:           which admissible work to activate
-```
+See [`notes/realtime_nn_learned_budget_gate.md`](notes/realtime_nn_learned_budget_gate.md).
 
-Detailed note: [`notes/realtime_nn_learned_budget_gate.md`](notes/realtime_nn_learned_budget_gate.md)
+## Milestone 3 — learned activation + deadline admission
 
-## Deadline admission prototype
+[`experiments/realtime_nn_learned_deadline_integration.py`](experiments/realtime_nn_learned_deadline_integration.py) calibrates empirical P95 timing classes including controller overhead. The runtime chooses the largest admissible `k` for each deadline, then the NN chooses which `k` experts to physically execute.
 
-The fixed-depth experiment also calibrates execution classes and lets a runtime choose the largest budget that fits a deadline.
+All policies are tested on the **same absolute deadline within each seed**. Faster policies are allowed to admit larger `k`; equal work is not artificially forced.
 
-Because ordinary Linux tails are unstable, this is explicitly a **P95 empirical soft/weakly-hard prototype**, not WCET.
+The main metric is **on-time & correct rate**.
 
-Under the tightest deadline class, mean miss rates across three seeds are:
+| deadline regime | learned hard | fixed prefix | external relevance oracle | always full |
+|---|---:|---:|---:|---:|
+| tightest | 64.50% | **66.00%** | 64.25% | 0.00% |
+| around learned `k=2` | **78.08%** | 70.50% | **80.29%** | 2.13% |
+| around learned `k=4` | **98.46%** | 76.00% | **98.71%** | 88.29% |
+| full-budget | 98.46% | **98.92%** | 97.33% | 98.46% |
 
-- adaptive hard-skip: **0.13%**;
-- adaptive dense-mask: **100%**;
-- always full-depth: **100%**.
+Important interpretation:
 
-Important negative result: raw empirical q99 execution times were **not strictly monotonic in any of the 3 calibration seeds**. Ordinary Linux/PyTorch far-tail timing is still unsuitable as a hard-RT/WCET argument.
+- learned activation is **not universally better**;
+- at the tightest deadline, fixed prefix can admit more work because it avoids controller overhead and slightly wins;
+- at full budget, selection has no quality advantage and prefix remains slightly faster;
+- in the middle regime, learned activation spends the admitted work on more useful computation and strongly improves on-time-correct rate;
+- an external analytic relevance oracle remains slightly better than learned selection in the synthetic task, so no necessity/superiority claim is made for the learned controller.
+
+At the clean `k≈4` regime, learned and prefix miss rates are similar (**1.54% vs 1.21%**) while on-time-correct is **98.46% vs 76.00%**.
+
+See [`notes/realtime_nn_learned_deadline.md`](notes/realtime_nn_learned_deadline.md).
+
+## Timing boundary
+
+All deadline experiments are **empirical P95 soft/weakly-hard prototypes on ordinary Linux/PyTorch**.
+
+The fixed-depth experiment found raw q99 execution classes non-monotonic in 3/3 seeds. The learned experiments also show large high-percentile outliers relative to their median timings. None of this establishes WCET or hard real time.
+
+Hard-RT claims require a time-predictable/RTOS target, controlled interference assumptions, statically analyzable generated code, formal/static WCET, or an equivalent accepted timing argument.
 
 ## Current status
 
-Supported in toy experiments:
+Supported in toy systems:
 
 1. same-network budget-conditioned physical execution;
 2. actual work and median latency change with admitted budget;
-3. a quality/latency trade-off emerges from the same weights;
-4. logical masking without physical skipping does not obtain the same speedup;
-5. a learned controller can choose more useful internal work while a hard runtime cap bounds physical execution;
-6. empirical soft deadline admission can exploit the execution classes.
+3. quality/latency trade-offs emerge from the same parameter set;
+4. logical masking without physical skipping does not obtain the speedup;
+5. a learned controller can choose more useful internal work while a hard runtime cap bounds execution;
+6. deadline admission can combine runtime work limits with learned internal selection;
+7. learned selection is useful mainly in intermediate budget/deadline regimes and does not universally dominate simpler or analytic policies.
 
 Still open:
 
-1. integrate the learned activation controller with deadline admission and compare quality at matched miss rate;
-2. remove explicit relevance supervision and test more autonomous learned activation without losing hard budget compliance;
-3. test machine-state-aware runtime admission;
-4. move to a time-predictable/RTOS target or obtain a defensible WCET/static timing argument.
+1. remove explicit relevance supervision and learn useful admissible activation from task loss while preserving the hard work cap;
+2. test machine-state-aware runtime admission;
+3. test finer-grained structured physical activation;
+4. move to a time-predictable/RTOS target or obtain defensible WCET/static timing.
 
 ## Secondary diagnostics
 
-Older router/topology experiments remain because they document failure modes relevant to implementation:
+Older router/topology experiments remain because they document failure modes relevant to implementation: capability forgetting, shortcut collapse, conditional-subgraph formation, feasibility-vs-price separation, non-separable contract failures, objective/local-minimum sensitivity, policy-parameterization sensitivity, and Linux timing-tail instability.
 
-- capability forgetting and shortcut collapse;
-- conditional-subgraph formation;
-- feasibility-vs-price separation;
-- non-separable cost/contract failures;
-- objective/local-minimum sensitivity;
-- policy-parameterization sensitivity;
-- Linux timing-tail instability.
-
-They are secondary to the direct budget→work→latency results.
+They are secondary to the direct budget→work→latency→deadline results.
 
 See [`CLAIMS_AND_LIMITS.md`](CLAIMS_AND_LIMITS.md).
 
@@ -151,6 +154,7 @@ This repository does not currently claim:
 - measured memory-bandwidth or resident-memory reduction;
 - arbitrary hardware portability;
 - universal superiority over early exit, MoE, NAS, once-for-all networks, or external schedulers;
+- autonomous/self-organized relevance discovery in the current learned-controller experiment;
 - unconstrained architecture discovery;
 - LLM-scale generalization;
 - novelty of LUT neurons/networks, dynamic routing, NAS, or runtime subnetwork switching.
@@ -163,9 +167,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 python experiments/realtime_nn_budget_execution.py
 python experiments/realtime_nn_learned_budget_gate.py
+python experiments/realtime_nn_learned_deadline_integration.py
 ```
 
-Timing numbers are machine-dependent. Reproduction should focus on physical execution traces, budget compliance, work/latency ordering, quality trade-offs, and the dense-mask negative controls.
+Timing numbers are machine-dependent. Reproduction should focus on physical execution traces, hard budget compliance, work/latency ordering, quality/deadline trade-offs, controller overhead, and dense-mask negative controls.
 
 ## Related work
 
