@@ -5,8 +5,10 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_budget_execution_results.json` — direct same-network physical budget execution and soft P95 deadline admission.
 - `realtime_nn_learned_budget_gate_results.json` — learned internal activation under a hard runtime expert-call cap with explicit relevance supervision.
 - `realtime_nn_learned_deadline_results.json` — learned activation integrated with empirical P95 deadline admission.
+- `realtime_nn_common_deadline_frontier_results.json` — dense common-deadline learned-vs-prefix frontier audit.
 - `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with hard-budget/timing/deadline audits.
-- `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic. This is a **negative runtime result**: a coarse machine-state→P95 table is not stable on ordinary Linux.
+- `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic; negative runtime result.
+- `realtime_nn_generated_cpp_results.json` — generated-weight plain-C++ conditional inference; verifies the physical work/central-latency relation without PyTorch and shows scheduler tails remain under same-core contention.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
 - `internal_circuit_conditioning_results.json`
@@ -25,15 +27,17 @@ Authoritative compact summaries for the current public reproduction include:
 
 For the Real-Time NN line, machine-specific microsecond values are not the primary cross-machine reproduction target. Reproduction should focus on:
 
-- physical hard-skip traces;
+- physical hard-skip traces / explicit C++ loop bounds;
 - hard budget compliance;
+- finite executed-work classes;
 - task quality under budget;
-- work/median-latency ordering;
+- work/central-latency ordering;
 - controller overhead;
 - task-loss-only selection behavior;
 - dense-mask and analytic-oracle controls;
-- on-time & correct behavior under empirical deadlines;
+- common-deadline on-time & correct behavior;
 - repeated timing-calibration stability, not just one favorable calibration;
-- explicit refusal to interpret Linux empirical P95/P99 as WCET.
+- consistency between framework and generated-C++ implementations;
+- explicit refusal to interpret uncontrolled Linux P95/P99 as WCET.
 
-The corresponding scripts in `experiments/` regenerate fuller traces. The committed JSONs may be compact summaries rather than every intermediate timing sample.
+The corresponding scripts in `experiments/` regenerate fuller traces. Generated binary weights are local reproduction artifacts and are not committed.
