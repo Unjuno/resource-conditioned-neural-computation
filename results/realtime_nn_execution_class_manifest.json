@@ -1,0 +1,15 @@
+{
+  "schema": "rtnn.execution-classes.v1",
+  "network_contract": "fixed 9-bit-majority toy; Q5 bounded numeric core",
+  "weights_payload_bytes": 167684,
+  "activation_lut_bytes": 1028,
+  "workspace_bytes": 4032,
+  "classes": [
+    {"class":0,"blocks":0,"linear_macs":64,"lut_calls":0,"residual_ops":0,"linear_outputs":2,"quality":0.63671875},
+    {"class":1,"blocks":2,"linear_macs":182336,"lut_calls":3456,"residual_ops":576,"linear_outputs":3970,"quality":0.71484375},
+    {"class":2,"blocks":4,"linear_macs":364608,"lut_calls":6912,"residual_ops":1152,"linear_outputs":7938,"quality":0.78515625},
+    {"class":3,"blocks":6,"linear_macs":546880,"lut_calls":10368,"residual_ops":1728,"linear_outputs":11906,"quality":0.86328125},
+    {"class":4,"blocks":8,"linear_macs":729152,"lut_calls":13824,"residual_ops":2304,"linear_outputs":15874,"quality":1.0}
+  ],
+  "target_timing_bounds": null
+}
