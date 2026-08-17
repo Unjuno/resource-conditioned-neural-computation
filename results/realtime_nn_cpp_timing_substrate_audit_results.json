@@ -1,0 +1,35 @@
+{
+  "setup": {
+    "backend": "plain generated-weight C++ inference",
+    "cpu_affinity": "inference pinned to one allowed CPU",
+    "repeats": 3,
+    "inferences_per_depth_per_repeat": 800,
+    "depths": [2, 4, 6, 8],
+    "weight_bytes_locked": 335368,
+    "rlimit_memlock_bytes": 8388608,
+    "whole_process_mlockall": "not available in the container (ENOMEM under the 8 MiB limit)",
+    "timing_boundary": "ordinary shared Linux host; not RTOS/WCET"
+  },
+  "aggregate": {
+    "unlocked": {
+      "2": {"median_p50_us":71.408,"median_p99_us":4117.18,"total_minflt":0,"total_majflt":0,"total_involuntary_context_switches":45},
+      "4": {"median_p50_us":143.184,"median_p99_us":4171.263,"total_minflt":0,"total_majflt":0,"total_involuntary_context_switches":96},
+      "6": {"median_p50_us":217.225,"median_p99_us":4322.514,"total_minflt":0,"total_majflt":0,"total_involuntary_context_switches":140},
+      "8": {"median_p50_us":293.241,"median_p99_us":5043.448,"total_minflt":0,"total_majflt":0,"total_involuntary_context_switches":190}
+    },
+    "weight_mlock": {
+      "2": {"median_p50_us":71.462,"median_p99_us":4097.549,"total_minflt":0,"total_majflt":0,"total_involuntary_context_switches":47},
+      "4": {"median_p50_us":143.24,"median_p99_us":4193.372,"total_minflt":0,"total_majflt":0,"total_involuntary_context_switches":98},
+      "6": {"median_p50_us":217.13,"median_p99_us":4252.581,"total_minflt":0,"total_majflt":0,"total_involuntary_context_switches":141},
+      "8": {"median_p50_us":292.568,"median_p99_us":4404.379,"total_minflt":0,"total_majflt":0,"total_involuntary_context_switches":188}
+    }
+  },
+  "checks": {
+    "weight_mlock_succeeded": true,
+    "measured_major_page_faults_zero": true,
+    "measured_minor_page_faults_zero_for_depths_2_to_8": true,
+    "mlock_removed_multi_millisecond_p99_tail": false,
+    "central_latency_changed_materially_with_mlock": false
+  },
+  "interpretation": "The multi-millisecond tail persists after the small weight buffer is resident/locked and while measured page faults are zero. Involuntary context switches remain frequent and increase with longer execution classes. This supports scheduler/preemption, rather than weight paging, as the dominant observed tail mechanism in this environment; it is not a formal causal proof or WCET analysis."
+}
