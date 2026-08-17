@@ -1,131 +1,120 @@
 # Claims and limits
 
-## Core Real-Time NN target — not yet fully demonstrated
+## Core Real-Time NN claim now supported in a toy mechanism experiment
 
-The intended claim is stronger and more specific than "resource-conditioned routing":
+The strongest supported statement is now:
 
-> A single fixed neural network can change its actually executed internal computation as an admitted time/compute/resource budget changes, such that actual executed work and measured inference latency change in a predictable way while useful task quality is retained.
+> In the supplied toy architecture, one fixed neural network can receive different admitted budgets, physically execute different amounts of its internal computation, and thereby produce a reproducible budget/quality/median-latency trade-off.
 
-For the intended Real-Time NN line, the required causal chain is:
+The direct experiment measures the complete mechanism chain in one implementation:
 
 ```text
 budget
-  → internal activation pattern
-  → physically executed work
-  → measured latency
-  → deadline behavior
+  → internal activation depth
+  → physically executed blocks / MAC proxy
+  → measured end-to-end latency
+  → soft deadline behavior
 ```
 
-**The current repository does not yet demonstrate this full chain in one experiment.**
+This is **not** yet a hard-real-time claim.
 
-## Supported precursor claims
+## Direct evidence
 
-The existing experiments support narrower facts:
+Across three seeds in `experiments/realtime_nn_budget_execution.py`:
 
-1. A resource condition can act as an execution-control signal in the tested finite toy systems.
-2. One fixed parameter set can change the **actually executed internal module sequence** as the resource condition changes while preserving task output.
-3. Forward-hook audits verify cases where inactive subgraphs are not executed.
-4. An independent runtime availability mask can override neural execution choices, separating feasibility from within-available-set optimization.
-5. Same-architecture price-blind controls and resource-input interventions show that reported route switches depend on the resource signal rather than only a fixed route preference.
-6. For deliberately supplied candidate circuits, capability and allocation can be trained jointly without capability freezing when fallback capability is explicitly preserved.
-7. A supplied primitive supernet can form multiple resource-conditioned hard subgraphs in finite toy tasks without complete-route labels.
-8. Capability readiness, correlated allocation, and feasibility/resource separation materially affect allocation stability on the harder parity toy.
-9. Simple normalized resource contracts work only under limited cost structures; non-separable stage/route cost changes expose failures.
-10. Learned resource allocation can be sensitive to router/policy parameterization even when task, search space, anchors, and cost objective are held fixed.
-11. Ordinary Linux/PyTorch tail timing is not stable enough to be treated as WCET or a hard-real-time guarantee.
+1. all budgets use the same parameter set;
+2. budget values `0 / .25 / .5 / .75 / 1.0` execute `0 / 2 / 4 / 6 / 8` optional blocks;
+3. forward hooks verify inactive blocks are not called by the hard-skip implementation;
+4. a matched dense-mask control executes all eight blocks at every budget;
+5. hard-skip and dense-mask produce identical outputs for the same budget;
+6. linear MAC proxy increases from 64 at minimum budget to 737,344 at full budget;
+7. mean task accuracy increases from **63.67% → 71.48% → 78.52% → 86.33% → 100%**;
+8. mean hard-skip median latency increases from **10.53 → 98.80 → 185.69 → 280.26 → 375.82 us**;
+9. hard-skip median latency is strictly monotonic in all 3/3 seeds;
+10. full-budget/minimum-budget hard-skip latency ratio averages **35.73x**;
+11. dense-mask latency remains roughly full-compute latency at every logical budget;
+12. under the tightest P95-calibrated soft deadline class, adaptive hard-skip averages **0.13% misses**, while adaptive dense-mask and always-full-depth both average **100% misses**.
 
-These are **precursor and implementation-diagnostic claims**. They are not the Real-Time NN endpoint.
+This directly establishes that **physical conditional execution**, not a logical mask alone, is responsible for the observed latency reduction in this toy.
 
-## What is now the primary experimental metric
+See `notes/realtime_nn_budget_execution.md` and `results/realtime_nn_budget_execution_results.json`.
 
-For Real-Time NN work, the repository should prioritize:
+## Timing boundary
 
-- active block/channel/neuron/edge counts;
-- physical execution trace;
-- executed operation/MAC count or equivalent implementation-level work;
-- measured end-to-end latency distribution;
-- task quality under each budget;
-- deadline miss behavior under a runtime budget-admission policy.
+The same experiment also produces a negative result that prevents a hard-real-time interpretation:
 
-Route-oracle agreement and proxy resource regret may remain useful diagnostics, but they are **secondary**.
+- raw empirical q99 execution times are not strictly monotonic in any of the three seeds during separate calibration runs;
+- ordinary Linux/PyTorch scheduler/preemption jitter contaminates the far tail;
+- the deadline admission experiment therefore uses empirical P95 execution classes and is explicitly soft/weakly-hard.
 
-## Router-policy work is secondary
+A hard-real-time claim still requires a defensible WCET/static timing argument, time-predictable hardware/runtime, or equivalent evidence.
 
-Routers, gates, masks, and conditional controllers are possible implementation mechanisms. The project does not treat "finding the best router architecture" as its research objective.
+## What remains open
 
-Existing router-heavy experiments are retained because they expose relevant failure modes:
+The current budget-to-depth mapping is deliberately simple and fixed so the physical mechanism can be isolated.
 
-- capability forgetting;
-- shortcut collapse;
-- sensitivity to training order;
-- correlated-decision difficulties;
-- objective/local-minimum sensitivity;
-- non-separable contract failures;
-- policy-parameterization sensitivity.
+Next-line questions are:
 
-Future router work should be justified only by whether it improves the direct Real-Time NN chain from budget to actual execution time.
+1. can a **learned** budget-conditioned activation policy preserve the same physical budget compliance and latency ordering?
+2. can the runtime adapt admitted budgets to changing machine state without relying on unstable Linux tails?
+3. can the mechanism be implemented on an RTOS/time-predictable target with analyzable timing?
+4. can finer-grained block/channel activation preserve useful quality/latency trade-offs without dense execution overhead?
+
+## Secondary precursor / diagnostic evidence
+
+Earlier experiments still support narrower implementation facts:
+
+- resource conditions can change internal subgraph execution;
+- fallback capabilities can be forgotten under naive joint training;
+- capability readiness and feasibility-vs-price separation matter;
+- supplied primitive supernets can form different hard subgraphs;
+- non-separable route/stage cost changes can break simple resource contracts;
+- learned allocation can be sensitive to objective and router parameterization;
+- empirical Linux tail timing is unstable.
+
+Those experiments remain useful, but they are secondary to the direct budget/work/latency result.
 
 ## Runtime / RTOS responsibility split
-
-The target architecture is:
 
 ```text
 hardware / OS state
     ↓
-runtime / RTOS timing model
+runtime / RTOS timing/admission model
     ↓
 safe admitted normalized budget
     ↓
 same neural network
     ↓
-budget-conditioned internal execution
+budget-conditioned physical execution
 ```
 
-The runtime owns hardware-specific timing knowledge. The network should ideally consume a normalized contract.
+The runtime owns hardware-specific timing knowledge and feasibility. The NN consumes an admitted budget and changes its execution accordingly.
 
-A hard-real-time claim additionally requires a defensible timing bound such as formal/static WCET, time-predictable hardware, or an equivalent guarantee. Empirical Linux/PyTorch timing alone is insufficient.
+## Resource proxies
 
-## Resource-proxy definition
+The direct experiment uses an executed linear-MAC proxy plus measured latency. Some older experiments also use a parameter-footprint proxy.
 
-Precursor experiments use normalized compute and parameter-footprint proxies. Parameter footprint is not measured runtime memory traffic, bandwidth, cache pressure, reduced resident memory, or energy.
-
-The core Real-Time NN experiment must move beyond proxy-only evaluation and measure actual executed work and actual latency.
+Parameter footprint is **not** measured runtime memory traffic, bandwidth, cache pressure, reduced resident memory, or energy.
 
 ## Explicitly not claimed
 
-1. A complete Real-Time NN has already been demonstrated.
-2. A Real-Time LM has already been demonstrated.
-3. Hard real-time guarantees or WCET bounds.
-4. Joule-level energy savings or measured memory-bandwidth savings.
-5. Reduced total resident model memory from route switching.
-6. Universal superiority over adaptive routing, MoE, early exit, NAS, once-for-all subnetworks, or external schedulers.
-7. Necessity of a learned router when route costs are known exactly.
-8. General/unconstrained automatic discovery of useful neural architecture.
-9. A single undifferentiated objective that robustly self-organizes capability, topology, feasibility, resource allocation, and timing.
-10. A scalable NAS method.
-11. Input-difficulty adaptation in the reported resource routers.
-12. Generalization to LLMs or large neural networks.
-13. Novelty of LUT neurons/networks, differentiable logic networks, dynamic routing, NAS, or runtime subnetwork switching.
-14. Arbitrary hardware portability.
-15. Stable route-specific P99 safety masks under ordinary Linux contention.
-16. Robustness to arbitrary router/policy parameterization.
-17. That high route-oracle agreement is sufficient evidence for Real-Time NN behavior without measured budget-conditioned latency.
-
-## Important negative results retained
-
-- Weak resource pressure can be ignored; overly strong pressure can collapse useful capability.
-- Naive joint specialization can forget fallback capability.
-- Resource pressure introduced before alternative computation paths mature can lock the system into shortcuts.
-- Direct constrained topology search can preserve accuracy while retaining redundant operations.
-- Non-separable stage/route costs can break simple global resource contracts.
-- Learned allocation remains below analytic scheduling in several known-cost toy settings.
-- Router parameterization itself can materially affect seed stability.
-- Ordinary Linux/PyTorch timing remains too jittery for WCET-style claims.
+1. Hard real-time guarantees or WCET bounds.
+2. A production Real-Time NN or Real-Time LM.
+3. Joule-level energy savings.
+4. Measured memory-bandwidth savings or reduced total resident memory.
+5. A learned/self-organized budget gate in the direct timing experiment.
+6. Input-difficulty-dependent adaptive computation in the direct timing experiment.
+7. Universal superiority over early exit, MoE, NAS, once-for-all subnetworks, or external schedulers.
+8. Necessity of a learned controller when execution costs are analytically known.
+9. General/unconstrained architecture discovery.
+10. Arbitrary hardware portability.
+11. LLM-scale generalization.
+12. Novelty of LUT neurons/networks, dynamic routing, NAS, or runtime subnetwork switching.
 
 ## Direction lock
 
-Before adding a new main-line experiment, ask:
+Before promoting a new main-line experiment, ask:
 
-> Does this test whether changing the budget of the **same neural network** changes **actual internal activation**, **actual executed work**, or **actual inference time**?
+> Does it test whether changing the budget of the **same neural network** changes **actual internal activation**, **actual executed work**, **actual inference time**, or **deadline behavior**?
 
-If not, it belongs under secondary diagnostics rather than the main Real-Time NN claim.
+If not, it belongs under secondary diagnostics.
