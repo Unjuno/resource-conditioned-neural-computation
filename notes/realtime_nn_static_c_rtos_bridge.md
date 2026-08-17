@@ -53,6 +53,12 @@ Full-domain accuracy matches the original trained Python model exactly:
 
 Thus the static C representation preserves the same learned computation and budget/quality levels.
 
+## Exact physical work count
+
+The later execution-count audit found that the old `92,160 MAC/block` proxy counted a neighbor matvec at the right boundary even though the source copies the neighbor bias there.
+
+The exact physical count is **91,136 linear MACs per block**. See `notes/realtime_nn_execution_count_correction.md`.
+
 ## Explicit memory / stack accounting
 
 `Scratch` contains all intermediate activation buffers and is **8,064 bytes**.
@@ -73,13 +79,13 @@ The example executable has no undefined `malloc`/`free` symbols. The benchmark h
 
 One shared-Linux run:
 
-| blocks | MAC proxy | median | P95 | P99 |
+| blocks | executed linear MACs | median | P95 | P99 |
 |---:|---:|---:|---:|---:|
 | 0 | 64 | 0.059 us | 0.061 us | 0.087 us |
-| 2 | 184,384 | 71.37 us | 80.77 us | 98.69 us |
-| 4 | 368,704 | 143.09 us | 205.46 us | 392.82 us |
-| 6 | 553,024 | 217.05 us | 298.08 us | 594.71 us |
-| 8 | 737,344 | 292.24 us | 391.68 us | 731.32 us |
+| 2 | **182,336** | 71.37 us | 80.77 us | 98.69 us |
+| 4 | **364,608** | 143.09 us | 205.46 us | 392.82 us |
+| 6 | **546,880** | 217.05 us | 298.08 us | 594.71 us |
+| 8 | **729,152** | 292.24 us | 391.68 us | 731.32 us |
 
 Central timing is strictly ordered by finite physical work class.
 
@@ -108,7 +114,7 @@ The neural side can now be expressed as a finite set of explicit work classes wi
 - fixed weights;
 - fixed workspace;
 - fixed block call graphs;
-- known linear-MAC counts;
+- exact linear-MAC counts derived from physical control flow;
 - no runtime model swap;
 - no heap/file-I/O dependency in inference.
 
@@ -120,11 +126,7 @@ The remaining hard-real-time question is therefore not “does budget actually c
 
 ## Important limitation: math-library calls
 
-The current C implementation still calls `tanhf` and `erff` (for GELU). Those library routines may have data-dependent and target-dependent timing and are not automatically suitable for WCET analysis.
-
-A logical next implementation step is to replace them with a target-defined bounded-cost activation implementation, for example an explicitly bounded polynomial/fixed-point/LUT approximation, and quantify the induced accuracy error.
-
-That step should be motivated by timing analyzability, not by claiming LUT computation itself is novel.
+The original C implementation still called `tanhf` and `erff` (for GELU). Later static-C/Q5 experiments replace these with bounded LUT implementations; this note records the earlier bridge stage.
 
 ## What this supports
 
@@ -137,7 +139,7 @@ That step should be motivated by timing analyzability, not by claiming LUT compu
 ## What this does not support
 
 - WCET or hard-real-time guarantees;
-- fully static analysis of `libm` activation calls;
+- fully static analysis of the original `libm` activation calls;
 - general compiler/hardware portability;
 - energy savings;
 - a production RTOS integration.
