@@ -6,7 +6,7 @@
 
 The evidence supports a narrow claim: a fixed-parameter neural system can learn to use a continuous resource-price signal to switch between functionally equivalent but resource-distinct computation strategies, while an independent runtime mask constrains selectable execution classes using empirical statistical timing bounds.
 
-The evidence does **not** support a hard-real-time/WCET guarantee, a physical energy claim, or universal superiority over external scheduling.
+The evidence does **not** support a hard-real-time/WCET guarantee, a physical energy claim, universal superiority over external scheduling, or novelty of LUT-based neural computation itself.
 
 ## Final reproduction architecture
 
@@ -24,6 +24,16 @@ Both strategies achieve 100% full-state task accuracy in all three final seeds.
 The resource table has two normalized columns: `compute_proxy` and `parameter_footprint_proxy`. The latter is parameter count only. It is not measured memory traffic, bandwidth, cache behavior, resident-memory reduction, or joules.
 
 A small router observes resource prices and a runtime availability mask. Experts are frozen during routing post-training.
+
+## Related-work / novelty boundary
+
+LUT and logic-based neural computation are established research areas. Representative prior work includes Deep Differentiable Logic Gate Networks, Differentiable Weightless Neural Networks (DWN), NeuraLUT, LL-ViT with LUT neurons, and recent fully trainable deep LUT networks. See [`../RELATED_WORK.md`](../RELATED_WORK.md).
+
+Accordingly, the lookup path in this repository is **not** presented as a novel neuron, network family, or hardware mapping technique. It is a deliberately simple execution regime used to isolate a different question:
+
+> Can a model use an explicit continuous resource-price signal to choose among already-valid neural execution regimes with different resource profiles, while an independent runtime availability mask constrains which regimes may execute?
+
+The present experiments also do **not** establish that this mechanism improves DWN, NeuraLUT, LL-ViT, or other LUT/logic architectures. Those systems are possible future substrates, not validated targets of the current result.
 
 ## Matched price-blind control
 
@@ -104,6 +114,8 @@ This is best described as an **input intervention** showing that the learned rou
 4. Universal superiority to external schedulers; the analytic oracle is exact for the current two-route toy cost table.
 5. Large-model/LLM generalization.
 6. Automatic circuit self-organization under arbitrary architectures or objectives.
+7. Novelty of LUT neurons, LUT networks, differentiable logic networks, or LUT-based hardware mapping.
+8. Demonstrated gains on existing LUT/logic architectures such as DWN, NeuraLUT, or LL-ViT.
 
 ## Recommended preprint framing
 
@@ -111,7 +123,7 @@ A narrow mechanism note remains defensible under a title such as:
 
 **Resource-Conditioned Neural Computation: Learned Price-Aware Execution Paths under Runtime Safety Masks**
 
-Do not frame this as a new hard-real-time neural network architecture yet.
+Do not frame this as a new hard-real-time neural network architecture or as a new LUT-network architecture.
 
 ## Next action
 
