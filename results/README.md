@@ -10,6 +10,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic; negative runtime result.
 - `realtime_nn_generated_cpp_results.json` — generated-weight plain-C++ conditional inference; verifies the physical work/central-latency relation without PyTorch and shows scheduler tails remain under same-core contention.
 - `realtime_nn_freestanding_core_results.json` — freestanding finite-class inference-core audit: zero unresolved external symbols, fixed caller-owned workspace, full-domain functional reproduction, and invalid-class fail-closed behavior.
+- `realtime_nn_fixed_q5_results.json` — Q5 integer freestanding-core audit: 3-seed full-domain behavior preservation, int16 weights/workspace with int32 accumulators, 2x storage reduction, compiler cross-check, and central-latency comparison.
 - `realtime_nn_fine_grained_classes_results.json` — execution-class granularity audit: post-hoc intermediate depth classes can lose capability, while jointly trained 0..8 depth classes preserve non-decreasing quality and strictly increasing median latency; dominated classes remain off the Pareto frontier.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
@@ -43,6 +44,7 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - repeated timing-calibration stability, not just one favorable calibration;
 - consistency between framework and generated-C++ implementations;
 - freestanding-core linkability and fail-closed execution-class handling;
+- fixed-point functional preservation, numeric headroom, and static-memory footprint;
 - explicit refusal to interpret uncontrolled Linux P95/P99 as WCET.
 
 The corresponding scripts in `experiments/` regenerate fuller traces. Generated binary weights and generated C headers are local reproduction artifacts and are not committed.
