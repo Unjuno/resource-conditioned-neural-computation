@@ -1,12 +1,10 @@
 # Resource-Conditioned Neural Computation
 
-A falsification-oriented study toward a **Real-Time Neural Network (Real-Time NN)**: one fixed neural network whose actually executed internal computation changes with an explicit time/compute/resource budget.
+A falsification-oriented study toward a **Real-Time Neural Network (Real-Time NN)**: one fixed neural network whose physically executed internal computation changes with an explicit time/compute/resource budget.
 
 ## Research target
 
-The primary goal is **not** to optimize a router as an end in itself.
-
-The intended system is:
+The target system is:
 
 ```text
 RTOS / runtime
@@ -26,95 +24,105 @@ actual inference latency changes
 output before the deadline when the admitted budget is feasible
 ```
 
-The core hypothesis is:
+A gate/router may be used as an implementation mechanism, but **router optimization is not the research target**.
 
-> Holding the network weights and task input fixed, changing only the supplied budget/resource condition can change which internal computation is physically executed, and that execution change can produce a measurable, calibratable change in inference latency.
+See [`REALTIME_NN_DIRECTION.md`](REALTIME_NN_DIRECTION.md).
 
-See [`REALTIME_NN_DIRECTION.md`](REALTIME_NN_DIRECTION.md) for the authoritative direction lock.
+## Strongest current result: direct budget → work → latency
 
-## Status correction — 2026-08-17
+The repository now contains a direct three-seed mechanism experiment in one fixed network:
 
-**The repository does not yet demonstrate the complete Real-Time NN chain.**
+[`experiments/realtime_nn_budget_execution.py`](experiments/realtime_nn_budget_execution.py)
 
-Earlier work in this repository established useful precursor mechanisms around resource-conditioned path selection, internal-subgraph execution, capability preservation, topology search, and runtime availability constraints. Those experiments remain reproducible and useful, but several later iterations over-focused on router-policy optimization and resource-proxy oracle agreement.
+The model has eight optional local-information-propagation blocks and one shared head. Budget values `0 / .25 / .5 / .75 / 1.0` execute `0 / 2 / 4 / 6 / 8` blocks respectively. The same weights are used at every budget.
 
-For the intended Real-Time NN research goal, those are **secondary diagnostics**, not the final metric.
+The 9-bit-majority task is structured so deeper execution expands the effective receptive field. Across three seeds:
 
-The required chain is:
+| budget | active blocks | linear MAC proxy | mean accuracy | hard-skip median | dense-mask median |
+|---:|---:|---:|---:|---:|---:|
+| 0.00 | 0 | 64 | 63.67% | 10.53 us | 409.29 us |
+| 0.25 | 2 | 184,384 | 71.48% | 98.80 us | 394.08 us |
+| 0.50 | 4 | 368,704 | 78.52% | 185.69 us | 385.65 us |
+| 0.75 | 6 | 553,024 | 86.33% | 280.26 us | 377.99 us |
+| 1.00 | 8 | 737,344 | 100.00% | 375.82 us | 364.96 us |
 
-```text
-budget / resource condition
-    → internal activation pattern
-    → physically executed compute
-    → measured end-to-end latency
-    → deadline behavior
-```
+Key audits:
 
-The next primary experiments must measure that chain directly in one fixed network.
+- **3/3 seeds:** hard-skip median latency is strictly increasing with budget/executed depth;
+- mean full-budget / minimum-budget hard-skip latency ratio: **35.73x**;
+- forward hooks confirm hard-skip executes exactly the admitted blocks;
+- the matched `dense_mask` control executes all 8 blocks at every budget;
+- hard-skip and dense-mask produce identical outputs for the same budget;
+- reducing a logical mask without physically skipping work does **not** produce the latency reduction.
 
-## What the core experiment must show
-
-A Real-Time NN mechanism experiment is considered successful only if it measures, in the same implementation:
-
-1. the **same weights** across budgets;
-2. the **same input** in budget counterfactuals;
-3. budget-dependent active blocks/channels/neurons/edges;
-4. inactive computation is **actually skipped**, not merely zero-masked after dense execution;
-5. budget-dependent executed MAC/operation count or another implementation-level compute measure;
-6. budget-dependent **measured inference latency distribution**;
-7. task quality under each budget;
-8. a monotonic or otherwise calibratable budget → work → latency relation;
-9. a runtime mapping from deadline/machine state to an admitted budget;
-10. deadline-miss measurements under that runtime policy.
-
-The first target is not a hard-real-time guarantee. The first target is a reproducible relationship of the form:
+This is the first experiment in the repository that directly demonstrates the intended toy mechanism:
 
 ```text
 smaller admitted budget
-    → smaller executed internal circuit
+    → smaller physically executed internal circuit
     → less actual work
-    → lower measured latency
+    → lower measured median latency
+    → lower task quality
 ```
 
-with one fixed neural network.
+Detailed note: [`notes/realtime_nn_budget_execution.md`](notes/realtime_nn_budget_execution.md)  
+Results: [`results/realtime_nn_budget_execution_results.json`](results/realtime_nn_budget_execution_results.json)
 
-See [`EXPERIMENT_PLAN_REALTIME_NN.md`](EXPERIMENT_PLAN_REALTIME_NN.md).
+## Deadline admission prototype
 
-## What has already been established
+The same experiment calibrates execution classes and lets a runtime choose the largest budget that fits a deadline.
 
-The existing experiments provide several precursor facts:
+Because ordinary Linux tails are unstable, this is explicitly a **P95 empirical soft/weakly-hard prototype**, not WCET.
 
-- one fixed parameterized network can execute different internal subgraphs when only the resource condition changes;
-- forward-hook audits have verified cases where inactive modules are not executed;
-- resource-conditioned execution can preserve task output in finite toy domains;
-- runtime availability can override neural execution choices by construction;
-- ordinary Linux/PyTorch timing is too jittery to treat empirical P99 measurements as WCET;
-- simple normalized resource contracts work only under limited cost structures, and non-separable route/stage effects expose failures;
-- learned routing/allocation can be highly optimization- and parameterization-sensitive.
+Mean miss rates across three seeds under the tightest deadline class:
 
-These are **supporting results**. They do not replace the missing direct budget → activation → measured-latency experiment.
+- adaptive hard-skip: **0.13%**;
+- adaptive dense-mask: **100%**;
+- always full-depth: **100%**.
+
+For the next classes, adaptive hard-skip remains substantially lower-miss under tight deadlines while accepting the corresponding quality reduction.
+
+Important negative result: raw empirical q99 execution times were **not strictly monotonic in any of the 3 seeds** during separate calibration runs. The far tail is still contaminated by ordinary Linux/PyTorch scheduling jitter.
+
+Therefore this repository still does **not** claim hard real time or WCET.
+
+## Current status
+
+The direct toy mechanism is now demonstrated:
+
+```text
+budget
+  → internal activation
+  → physically executed work
+  → measured latency
+  → soft deadline behavior
+```
+
+What remains open before a stronger Real-Time NN claim:
+
+1. replace the deliberately simple fixed budget→depth mapping with a learned budget-conditioned activation policy while preserving hard budget compliance;
+2. repeat the physical-skip and latency audit under that learned policy;
+3. move timing validation to a more predictable runtime/RTOS/platform or obtain a defensible WCET/static timing argument;
+4. test whether the runtime can map changing machine state to safe admitted budgets without relying on unstable Linux tail estimates.
 
 ## Secondary diagnostic experiments
 
-The repository intentionally retains the router/topology work because it documents real failure modes that may matter when implementing a Real-Time NN:
+Earlier router/topology work remains in the repository because it documents implementation failure modes:
 
-- lookup-vs-compute price-conditioned routing;
-- direct internal-circuit execution;
-- three-circuit contract interpolation;
-- capability-preserving joint training;
-- constrained subgraph discovery;
-- parity curriculum and sampled routing;
-- search-space / non-separable cost falsification;
-- router-parameterization sensitivity;
-- timing-calibration failures under ordinary Linux contention.
+- direct internal-subgraph execution;
+- capability forgetting / shortcut collapse;
+- constrained topology discovery;
+- feasibility-vs-price separation;
+- contract expressiveness failures;
+- non-separable route-cost failures;
+- router/objective local-minimum sensitivity;
+- Linux timing-tail instability.
 
-These experiments should be read as **implementation diagnostics**, not as the primary research objective.
+These are now **secondary diagnostics**, not the headline result.
 
-Detailed evidence is in `notes/`, `results/`, and [`CLAIMS_AND_LIMITS.md`](CLAIMS_AND_LIMITS.md).
+See [`CLAIMS_AND_LIMITS.md`](CLAIMS_AND_LIMITS.md) and `notes/`.
 
 ## Runtime / RTOS responsibility split
-
-The target interface is:
 
 ```text
 hardware / OS state
@@ -122,57 +130,50 @@ hardware / OS state
   ├─ DVFS
   ├─ contention
   ├─ temperature
-  └─ timing calibration / WCET information
+  └─ timing / WCET information
           ↓
        runtime / RTOS
           ↓
- normalized safe budget / execution contract
+ normalized admitted budget
           ↓
         same NN
           ↓
- budget-conditioned internal execution
+ budget-conditioned physical execution
 ```
 
-The runtime owns hardware-dependent timing information. The neural network should ideally consume a normalized budget/resource contract rather than a CPU model name or raw milliseconds.
+The runtime owns hardware-dependent timing/admission. The NN should ideally consume a normalized budget rather than a CPU model name or raw milliseconds.
 
-For strict hard-real-time claims, ordinary Linux/PyTorch measurement is insufficient. Formal/static WCET, time-predictable hardware, scheduler/runtime isolation, or another defensible timing guarantee would be required.
+## Nonclaims
 
-## Resource proxies
+This repository does not currently claim:
 
-Some precursor experiments use normalized compute and parameter-footprint proxies. The parameter-footprint coordinate is **not** measured runtime memory traffic, bandwidth, cache pressure, reduced resident memory, or energy.
+- hard real-time or WCET guarantees;
+- Joule-level energy savings;
+- measured memory-bandwidth or resident-memory reduction;
+- arbitrary hardware portability;
+- universal superiority over early exit, MoE, NAS, once-for-all networks, or external schedulers;
+- unconstrained architecture discovery;
+- LLM-scale generalization;
+- novelty of LUT neurons/networks, dynamic routing, NAS, or runtime subnetwork switching.
 
-For the Real-Time NN line, **actual executed work and actual latency now take priority over proxy-optimal route agreement**.
-
-## Related work / novelty boundary
-
-Not claimed as novel: LUT neurons/networks, differentiable logic networks, dynamic routing, neural architecture search, once-for-all subnetworks, early exit, or runtime subnetwork switching.
-
-Representative prior work and the explicit novelty boundary are documented in [`RELATED_WORK.md`](RELATED_WORK.md).
-
-## Reproduce existing precursor experiments
-
-Python 3.10+ is recommended.
+## Reproduce the primary experiment
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-
-python experiments/internal_circuit_conditioning.py
-python experiments/multicircuit_contract_transfer.py
-python experiments/joint_self_specialization.py
-python experiments/topology_search_discovery.py --suite
-python experiments/joint_parity_correlated_curriculum.py --suite
-python experiments/sampled_joint_parity_policy.py
-python experiments/searchspace_robustness.py --suite --out results/searchspace_robustness_full.json
-python experiments/router_parameterization_sensitivity.py
+python experiments/realtime_nn_budget_execution.py
 ```
 
-The next authoritative reproduction target will be the direct Real-Time NN budget/activation/latency experiment described in [`EXPERIMENT_PLAN_REALTIME_NN.md`](EXPERIMENT_PLAN_REALTIME_NN.md).
+Timing numbers are machine-dependent. The primary reproduction targets are the **physical execution trace**, budget-dependent operation count, monotonic median-latency ordering, hard-skip vs dense-mask contrast, and explicit failure of Linux q99 to serve as a hard-RT bound.
+
+## Related work
+
+Representative prior work and the novelty boundary are documented in [`RELATED_WORK.md`](RELATED_WORK.md).
 
 ## Repository scope
 
-This remains a small mechanism study. No scaling to LLMs, GPUs, or large models is required to establish the core mechanism.
+This remains a small mechanism study. Scaling to LLMs, GPUs, or large models is not required for the current research question.
 
 ## License
 
