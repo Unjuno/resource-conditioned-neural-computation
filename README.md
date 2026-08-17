@@ -47,13 +47,35 @@ See [`notes/readiness_report.md`](notes/readiness_report.md) for exact claims, l
 
 ## Direct internal-circuit test
 
-The repository now also contains a direct test of the original architectural claim: **one fixed parameterized network changes the internal subgraph that is actually executed when only the resource condition changes**.
+The repository also contains a direct test of the original architectural claim: **one fixed parameterized network changes the internal subgraph that is actually executed when only the resource condition changes**.
 
 The model contains a retrieval node, an algorithmic stem with four residual compute blocks, a shared classifier head, and a resource-conditioned router. Under one resource condition the executed trace is `retrieval -> head`; under another it is `stem -> block0 -> block1 -> block2 -> block3 -> head`.
 
 Across three seeds, both circuits retain 100% accuracy over all 4,096 task states. An exhaustive same-input counterfactual check confirms that changing only the resource condition changes the selected circuit while preserving the prediction over the complete finite domain. Forward hooks verify that modules on the inactive subgraph are not executed.
 
 This directly supports **resource-conditioned effective internal circuits**, not merely variable iteration count. It does **not** show spontaneous circuit discovery: the alternative subgraphs were deliberately constructed and only the router was post-trained after capability acquisition. See [`notes/internal_circuit_experiment.md`](notes/internal_circuit_experiment.md).
+
+## Three-circuit contract generalization
+
+A stronger follow-up puts **three** resource-distinct circuits inside one fixed network with a shared classifier head:
+
+- retrieval: high active parameter-footprint proxy, very low compute proxy;
+- shallow compute: intermediate footprint and compute;
+- tied-deep compute: low active parameter-footprint proxy, high repeated compute.
+
+Across five seeds, all three circuits achieve 100% accuracy over the complete 256-input finite domain. Holding the task input fixed and changing only the resource contract selects all three distinct executed traces in every seed, and forward hooks verify exclusive execution of the selected subgraph.
+
+The router is trained on only seven discrete price-ratio anchors. On held-out dense continuous ratios, mean oracle-route agreement is **98.64%** (minimum seed **98.49%**). A nearest-anchor discrete external scheduler reaches **98.25%**, so the learned interpolation advantage over that strong simple baseline is present but small. Over 4,000 random price/mask contracts per seed, the price-aware router reaches **98.72%** mean oracle agreement versus **45.82%** for the matched price-blind router.
+
+A simulated runtime-calibration transfer keeps the NN and router frozen, applies one of four separable multiplicative calibration profiles to the abstract scarcity vector, and never gives hardware identity to the model. Mean oracle agreement remains approximately **97.85%–98.51%** across the four profiles. This supports only a narrow normalized-contract interface under that separable simulation; it is not evidence of arbitrary real-hardware portability.
+
+See [`notes/multicircuit_contract_transfer.md`](notes/multicircuit_contract_transfer.md).
+
+## Runtime contention negative result
+
+A same-core Linux contention follow-up attempted to turn empirical 99%-order-statistic timing calibration into a route-specific availability mask. The desired separation was **not stable** across independent invocations: scheduler/preemption tails of several milliseconds often affected even short routes, and state recalibration did not consistently improve held-out miss rate.
+
+This falsifies the simple claim that route-wise P99 recalibration on ordinary Linux is by itself sufficient to obtain a stable runtime safety mask. See [`notes/runtime_contention_negative.md`](notes/runtime_contention_negative.md).
 
 ## Reproduce
 
@@ -66,13 +88,15 @@ pip install -r requirements.txt
 python experiments/price_mask_conformal_multiseed.py
 python experiments/price_negative_control.py
 python experiments/internal_circuit_conditioning.py
+python experiments/multicircuit_contract_transfer.py
+python experiments/multicircuit_runtime_state_calibration.py
 ```
 
 Generated JSON is written to `results/`.
 
 ### Timing caveat
 
-Latency measurements depend strongly on OS/runtime state. The scripts set one PyTorch thread and attempt CPU affinity, but ordinary Linux/PyTorch measurements are **not WCET measurements**. The timing mask is based on held-out empirical order statistics under the measured runtime state; do not interpret it as a hard-real-time guarantee.
+Latency measurements depend strongly on OS/runtime state. The scripts set one PyTorch thread and attempt CPU affinity, but ordinary Linux/PyTorch measurements are **not WCET measurements**. The contention follow-up further shows that scheduler/preemption tails can dominate route-local timing and make empirical P99 class separation unstable. Do not interpret the statistical mask as a hard-real-time guarantee.
 
 ## What would falsify the useful interpretation?
 
@@ -82,7 +106,8 @@ Useful criticism includes evidence that:
 2. an equivalent price-blind policy reproduces the same resource adaptation under matched conditions;
 3. the timing-mask result is an artifact of calibration leakage;
 4. the result disappears under a clean reimplementation;
-5. a materially identical prior method already establishes the same narrow mechanism and runtime/model responsibility split.
+5. a materially identical prior method already establishes the same narrow mechanism and runtime/model responsibility split;
+6. the three-circuit result is explained by a weaker discrete controller once price/mask information and capacity are matched.
 
 Please open an issue using the critique/reproduction templates.
 
