@@ -16,6 +16,13 @@ def emit_array(f,name,vals,ctype='int16_t',per=16):
     f.write('\n};\n')
 
 
+def quantize_i16(t):
+    q=torch.round(t.detach().cpu().float().reshape(-1)*SCALE).to(torch.int32)
+    if int(q.min()) < -32768 or int(q.max()) > 32767:
+        raise ValueError('Q5 tensor does not fit int16')
+    return q.to(torch.int16).tolist()
+
+
 def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--seed',type=int,default=0)
@@ -24,15 +31,15 @@ def main():
     m=b.train(a.seed).eval()
     vals=[]
     def add(t):
-        vals.extend(torch.round(t.detach().cpu().float().reshape(-1)*SCALE).to(torch.int16).tolist())
+        vals.extend(quantize_i16(t))
     add(m.emb.weight)
     for blk in m.blocks:
         for layer in (blk.selfp,blk.neigh,blk.ff1,blk.ff2):
             add(layer.weight); add(layer.bias)
     add(m.head.weight); add(m.head.bias)
     xs=torch.linspace(-8,8,257,dtype=torch.float64)
-    tanh=torch.round(torch.tanh(xs)*SCALE).to(torch.int16).tolist()
-    gelu=torch.round((0.5*xs*(1+torch.erf(xs/math.sqrt(2))))*SCALE).to(torch.int16).tolist()
+    tanh=quantize_i16(torch.tanh(xs))
+    gelu=quantize_i16(0.5*xs*(1+torch.erf(xs/math.sqrt(2))))
     out=Path(a.out_dir); out.mkdir(parents=True,exist_ok=True)
     with (out/'realtime_nn_fixed_q5_generated.h').open('w') as f:
         f.write('#ifndef RTNN_Q5_GENERATED_H\n#define RTNN_Q5_GENERATED_H\n#include <stdint.h>\n')
