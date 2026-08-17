@@ -2,114 +2,92 @@
 
 ## Current status
 
-The repository has now passed two core toy mechanism gates for the intended Real-Time NN direction:
+The repository has now passed three core toy-system gates for the intended Real-Time NN direction:
 
 1. **direct budget-conditioned physical execution**;
-2. **learned selection of admissible internal work under a hard runtime cap**.
+2. **learned selection of admissible internal work under a hard runtime cap**;
+3. **learned activation integrated with empirical deadline admission**.
 
-The main chain now demonstrated in toy systems is:
-
-```text
-admitted budget
-  → physically bounded internal activation
-  → executed work
-  → measured median latency
-  → task-quality trade-off
-```
-
-A soft P95 deadline-admission prototype is also demonstrated for the fixed-depth version.
-
-However, **hard-real-time readiness is not reached**. Current timing is ordinary Linux/PyTorch and q99 tails are not stable enough for WCET-style interpretation.
-
-## Milestone 1 — direct physical execution
-
-`experiments/realtime_nn_budget_execution.py` uses one fixed network with eight optional local-information-propagation blocks.
-
-Across three seeds:
-
-- budgets `0 / .25 / .5 / .75 / 1.0` execute `0 / 2 / 4 / 6 / 8` blocks;
-- hooks verify inactive blocks are not called;
-- dense-mask executes all eight blocks at every logical budget;
-- mean accuracy is **63.67% / 71.48% / 78.52% / 86.33% / 100%**;
-- mean hard-skip median latency is **10.53 / 98.80 / 185.69 / 280.26 / 375.82 us**;
-- median latency is strictly monotonic in **3/3 seeds**;
-- full/minimum budget latency ratio averages **35.73x**.
-
-## Milestone 2 — learned activation under a hard cap
-
-`experiments/realtime_nn_learned_budget_gate.py` lets the runtime admit exactly `k ∈ {1,2,4,8}` expert calls. A learned controller chooses which experts to execute, while hard top-k prevents execution beyond the cap.
-
-The controller uses explicit relevance supervision, so this is not claimed as spontaneous self-organization.
-
-Across three seeds:
-
-- hard budget compliance passes at every k;
-- learned median latency is strictly monotonic in every seed;
-- dense-mask executes all eight experts at every budget;
-- learned hard-skip and dense learned outputs match numerically;
-- learned accuracy at `k=2` is **81.90%** versus **71.43%** for fixed prefix;
-- learned accuracy at `k=4` is **100%** versus **78.18%** for fixed prefix;
-- learned median latency at `k=4` is **195.40 us** versus **171.37 us** for fixed prefix, so the measured controller overhead is retained rather than hidden.
-
-This supports the intended responsibility split:
+The demonstrated toy chain is:
 
 ```text
-RTOS/runtime: how much work may execute
-NN:           which admissible internal work is useful
+deadline
+  → runtime-admitted work budget
+  → budget-compliant learned internal activation
+  → physically executed work
+  → measured latency
+  → on-time task quality
 ```
 
-## Runtime integration milestone
+However, **hard-real-time readiness is not reached**. Current timing is ordinary Linux/PyTorch and remains empirical rather than WCET.
 
-The fixed-depth experiment uses empirical P95 execution-class calibration and chooses the largest budget that fits a deadline.
+## Milestone 1 — physical budget execution
 
-At the tightest class, mean miss rates across three seeds are:
+Across three seeds in `realtime_nn_budget_execution.py`, one fixed network physically executes `0/2/4/6/8` optional blocks at increasing budgets. Hard-skip median latency is strictly monotonic in 3/3 seeds, with a mean full/minimum latency ratio of **35.73x**. Dense logical masking executes all blocks and does not obtain the speedup.
 
-- adaptive hard-skip: **0.13%**;
-- adaptive dense-mask: **100%**;
-- always full-depth: **100%**.
+## Milestone 2 — learned selection under a hard cap
 
-This is a **soft/weakly-hard statistical demonstration**, not hard real time.
+Across three seeds in `realtime_nn_learned_budget_gate.py`, the runtime admits exactly `k ∈ {1,2,4,8}` expert calls and hard top-k prevents budget violation.
 
-## Negative timing result retained
+At `k=4`, learned activation reaches **100%** accuracy versus **78.18%** for fixed prefix, while controller overhead remains visible in end-to-end timing.
 
-Raw empirical q99 execution times were not strictly increasing in any of the three fixed-depth calibration seeds.
+The controller currently uses explicit relevance supervision.
 
-Therefore:
+## Milestone 3 — learned selection + deadline admission
 
-- median/P95 execution classes are useful for the current toy Linux process;
-- far-tail timing remains scheduler/preemption-sensitive;
-- empirical high percentiles must not be presented as WCET;
-- hard-real-time determinism is not established.
+`realtime_nn_learned_deadline_integration.py` calibrates policy-specific P95 execution classes including controller overhead. All policies see the same absolute deadline within each seed.
 
-## What is now supported
+Main metric: **on-time & correct rate**.
 
-A short mechanism note can defensibly state:
+Three-seed aggregate:
 
-> In supplied toy networks, an RTOS/runtime can impose a work budget on one fixed neural parameter set; the network can physically execute only budget-compliant internal computation, and a learned controller can choose more useful admissible computation while preserving a reproducible quality/work/median-latency trade-off.
+| regime | learned | prefix | external relevance oracle | always full |
+|---|---:|---:|---:|---:|
+| tightest | 64.50% | **66.00%** | 64.25% | 0.00% |
+| around learned `k=2` | **78.08%** | 70.50% | **80.29%** | 2.13% |
+| around learned `k=4` | **98.46%** | 76.00% | **98.71%** | 88.29% |
+| full-budget | 98.46% | **98.92%** | 97.33% | 98.46% |
 
-The note must simultaneously state that current timing is empirical and not WCET/hard real time.
+At the clean `k≈4` regime, learned and prefix miss rates are close (**1.54% vs 1.21%**) while on-time-correct differs by more than 22 percentage points.
 
-## What remains before a stronger Real-Time NN claim
+This supports the intended split:
 
-1. integrate the learned controller with deadline admission and compare quality at matched miss rate;
-2. remove explicit relevance supervision and test more autonomous learned activation without losing hard budget compliance;
-3. adapt admitted budgets to changing machine state;
-4. test finer-grained physical activation only where inactive work is truly skipped;
-5. move to an RTOS/time-predictable target or obtain a defensible static/formal WCET argument.
+```text
+RTOS/runtime: decide how much work is feasible
+NN:           decide which feasible internal work is useful
+```
 
-## Role of older router/topology experiments
+## Important negative boundaries
 
-They remain secondary implementation diagnostics for capability forgetting, shortcut collapse, correlated decisions, feasibility-vs-price separation, contract expressiveness, local minima, non-separable costs, and timing-tail instability.
+Learned selection is **not universally superior**:
 
-They are not the headline evidence unless they improve or explain the direct budget→work→latency chain.
+- the tightest deadline favors the simpler prefix policy because controller overhead matters;
+- full budget also favors prefix slightly because selection no longer provides a quality benefit;
+- an external oracle that directly reads the synthetic relevance mask remains slightly stronger than the learned controller.
+
+Therefore the current learned experiment is a mechanism demonstration, not evidence that neural selection is necessary when equivalent selection information is analytically exposed.
+
+## Timing boundary
+
+The fixed-depth calibration already showed raw q99 execution classes non-monotonic in 3/3 seeds. Learned-policy calibration also contains large high-percentile outliers relative to median latency.
+
+All current deadline claims are **soft/weakly-hard empirical P95** results. WCET/hard real time is not established.
+
+## What remains before a stronger claim
+
+1. remove explicit relevance supervision and learn useful admissible activation from task loss while preserving the hard work cap;
+2. use a task where useful internal computation is latent rather than directly exposed as a relevance mask;
+3. adapt admitted budgets to machine state;
+4. test finer-grained structured physical activation;
+5. move to an RTOS/time-predictable target or obtain defensible static/formal WCET.
 
 ## Readiness labels
 
-- **Direct Real-Time NN toy physical-execution mechanism:** PASS.
+- **Direct physical budget execution:** PASS.
 - **Learned budget-compliant physical activation:** PASS with explicit relevance supervision.
-- **Soft/weakly-hard deadline-admission prototype:** PASS with empirical-timing caveat.
-- **Learned activation + deadline admission:** OPEN.
-- **Autonomous/self-organized relevance discovery:** OPEN.
+- **Learned activation + soft deadline admission:** PASS with empirical-timing caveat.
+- **Autonomous/latent useful-computation discovery:** OPEN.
+- **Machine-state-aware admission:** OPEN.
 - **Hard real time / WCET:** NOT ESTABLISHED.
 - **Real-Time LM / LLM-scale generalization:** NOT TESTED.
 
@@ -117,4 +95,4 @@ They are not the headline evidence unless they improve or explain the direct bud
 
 **Real-Time Neural Computation: Budget-Conditioned Internal Activation for Predictable Inference Time**
 
-The word "predictable" currently refers to observed/calibratable central latency behavior, not a formal WCET guarantee.
+“Predictable” currently means observed/calibratable central timing behavior, not a formal WCET guarantee.
