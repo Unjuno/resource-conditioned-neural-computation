@@ -1,0 +1,36 @@
+{
+  "model": {
+    "weights_float32_count": 83842,
+    "weight_bytes": 335368,
+    "activation_lut": {
+      "kind": "two 257-point float32 tables: tanh and GELU",
+      "bytes": 2056,
+      "domain": [-8.0, 8.0]
+    },
+    "caller_owned_workspace_bytes": 8064,
+    "inference_heap_allocation": false,
+    "inference_weight_file_io": false
+  },
+  "execution_classes": [
+    {"class":0,"executed_blocks":0,"linear_mac_proxy":64,"activation_lut_calls":0},
+    {"class":1,"executed_blocks":2,"linear_mac_proxy":184384,"activation_lut_calls":3456},
+    {"class":2,"executed_blocks":4,"linear_mac_proxy":368704,"activation_lut_calls":6912},
+    {"class":3,"executed_blocks":6,"linear_mac_proxy":553024,"activation_lut_calls":10368},
+    {"class":4,"executed_blocks":8,"linear_mac_proxy":737344,"activation_lut_calls":13824}
+  ],
+  "derivation": {
+    "linear_macs_per_block": 92160,
+    "activation_lut_calls_per_block": 1728,
+    "head_linear_macs": 64,
+    "activation_calls_per_block_breakdown": {
+      "first_tanh": 288,
+      "gelu": 1152,
+      "second_tanh": 288
+    }
+  },
+  "runtime_contract": {
+    "purpose": "target-independent static neural-work metadata; a target-specific runtime may attach a defensible timing bound to each class",
+    "timing_bound_field": "intentionally absent until measured/analyzed on a controlled target",
+    "hard_real_time_established": false
+  }
+}
