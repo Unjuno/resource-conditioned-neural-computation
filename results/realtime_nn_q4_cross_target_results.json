@@ -1,0 +1,67 @@
+{
+  "setup": {
+    "seed": 0,
+    "compiler": "clang version 17.0.0 (https://github.com/swiftlang/llvm-project.git 10999b6d034e318f3d56c83bddb6572593a8bb0)",
+    "source": "experiments/realtime_nn_q4_i8_core.c",
+    "compile_common": ["-O2", "-std=c11", "-ffreestanding", "-fno-builtin"],
+    "timing_claim": false
+  },
+  "targets": {
+    "cortex_m0": {
+      "target_flags": ["--target=armv6m-none-eabi", "-mcpu=cortex-m0", "-mthumb"],
+      "sha256": "60f6726422dfcff1e9e41989a05c4c2225f8151767d3b01be89fe073472166bc",
+      "repeat_compile_byte_identical": true,
+      "undefined_symbols": [],
+      "undefined_symbol_count": 0,
+      "object_sections_bytes": {"text": 88860, "data": 0, "bss": 268},
+      "float_instruction_pattern_count": 0,
+      "div_rem_instruction_pattern_count": 0
+    },
+    "cortex_m4_soft": {
+      "target_flags": ["--target=armv7em-none-eabi", "-mcpu=cortex-m4", "-mthumb", "-mfloat-abi=soft"],
+      "sha256": "598e5152901f38c4d94b6b57ae99c3a23683327e0b12852042e00fda0df0fd8d",
+      "repeat_compile_byte_identical": true,
+      "undefined_symbols": [],
+      "undefined_symbol_count": 0,
+      "object_sections_bytes": {"text": 88682, "data": 0, "bss": 268},
+      "float_instruction_pattern_count": 0,
+      "div_rem_instruction_pattern_count": 0
+    },
+    "rv32im": {
+      "target_flags": ["--target=riscv32-unknown-elf", "-march=rv32im", "-mabi=ilp32"],
+      "sha256": "99cbcc08ec5b712eb53a146bf9ffd40da9e76c18b3cd2c7215993b1bad4b9288",
+      "repeat_compile_byte_identical": true,
+      "undefined_symbols": [],
+      "undefined_symbol_count": 0,
+      "object_sections_bytes": {"text": 87056, "data": 0, "bss": 268},
+      "float_instruction_pattern_count": 0,
+      "div_rem_instruction_pattern_count": 0
+    },
+    "rv32i_negative": {
+      "target_flags": ["--target=riscv32-unknown-elf", "-march=rv32i", "-mabi=ilp32"],
+      "sha256": "1e05600c22f02279f924a5745e466e694e18c2571687937ec0ecfedad609e003",
+      "repeat_compile_byte_identical": true,
+      "undefined_symbols": ["U __mulsi3"],
+      "undefined_symbol_count": 1,
+      "object_sections_bytes": {"text": 87212, "data": 0, "bss": 268},
+      "float_instruction_pattern_count": 0,
+      "div_rem_instruction_pattern_count": 0
+    }
+  },
+  "aggregate": {
+    "helper_free_targets": ["cortex_m0", "cortex_m4_soft", "rv32im"],
+    "rv32i_requires_mul_helper": true,
+    "all_helper_free_targets_repeat_compile_byte_identical": true,
+    "all_helper_free_targets_no_float_instruction_patterns": true,
+    "all_helper_free_targets_no_div_rem_instruction_patterns": true
+  },
+  "interpretation": {
+    "supported": "The Q4 integer inference core cross-compiles as a self-contained freestanding object for Cortex-M0, Cortex-M4 soft-float, and RV32IM with this Clang build. RV32I without the M extension introduces an external __mulsi3 dependency, exposing a target capability boundary.",
+    "not_supported": [
+      "successful linking or booting on a real RTOS target",
+      "target functional execution",
+      "target-specific latency or WCET",
+      "cross-toolchain portability"
+    ]
+  }
+}
