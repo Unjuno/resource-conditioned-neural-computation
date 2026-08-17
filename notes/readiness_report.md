@@ -8,7 +8,7 @@ The strongest defensible claim remains narrow:
 
 > a neural system can use an explicit resource condition to change the actually executed internal computation, while an independent runtime mechanism constrains feasibility.
 
-The newest experiments strengthen the **boundary**, not the headline: the mechanism survives four-stage homogeneous search spaces, but a simple global resource contract becomes unreliable when stage/route costs change non-uniformly.
+The newest experiments strengthen the **boundary**, not the headline: the mechanism survives four-stage homogeneous search spaces, but a simple global resource contract becomes unreliable when stage/route costs change non-uniformly, and learned allocation is sensitive to router parameterization.
 
 ## Evidence ladder
 
@@ -20,18 +20,20 @@ The newest experiments strengthen the **boundary**, not the headline: the mechan
 6. **Freeze-free parity curriculum:** capability readiness + correlated constrained routing reaches **98.55% mean / 95.75% worst-seed** minimum-cost rate at 100% task accuracy over five seeds. A sampled-policy version reaches **95.05% / 91.25%** without complete-topology marginalization in router training.
 7. **Search-space robustness:** four-stage homogeneous costs remain strong at **98.10% mean / 91.25% worst-seed**. Stage-dependent costs collapse to **33.00% mean / 0% worst seed**, despite perfect task capability. Increasing price anchors to 21 does not repair this.
 8. **Non-separable contract diagnostic:** route-local calibration information improves a flat held-out-profile policy to **73.10% mean** versus **24.99% blind**, and swapping the calibration signal reduces performance to **25.63%**. This is still well below the analytic oracle; the tested autoregressive policy collapses.
-9. **Runtime timing negative:** ordinary Linux same-core contention prevents stable route-specific empirical P99 separation and does not establish WCET.
+9. **Router-parameterization sensitivity:** an exact matched reimplementation reproduces the public four-stage homogeneous result at **98.10% / 91.25%**. Changing only capability-probe sampling leaves it essentially unchanged (**98.35% / 92.25%**), while changing only the autoregressive head parameterization lowers it to **86.35% mean / 50.25% worst seed**.
+10. **Runtime timing negative:** ordinary Linux same-core contention prevents stable route-specific empirical P99 separation and does not establish WCET.
 
 ## Current interpretation
 
-The project now has two distinct interfaces:
+The project now has two distinct interfaces plus an optimization caveat:
 
 ### Model-side learning interface
 
 - preserve capability;
 - wait for capability readiness before strong resource pressure;
 - represent correlated subgraph decisions;
-- treat task validity/availability as a constraint rather than one more soft price term.
+- treat task validity/availability as a constraint rather than one more soft price term;
+- treat router architecture as a substantive optimization variable rather than incidental plumbing.
 
 ### Runtime-to-model resource interface
 
@@ -41,6 +43,10 @@ The new stage-dependent-cost ablation shows that this does **not** extend automa
 
 This is an important correction to any broad claim that “move to new hardware, recalibrate runtime only” is generally sufficient.
 
+### Optimization sensitivity
+
+The four-stage homogeneous result itself is reproducible. However, a one-variable router-head ablation materially worsens seed stability under otherwise matched conditions. Therefore claims about search-space robustness must keep router parameterization matched, or explicitly report it as an experimental factor.
+
 ## Defensible claims
 
 ### Supported
@@ -49,9 +55,10 @@ This is an important correction to any broad claim that “move to new hardware,
 2. The mechanism extends beyond a two-route toy to multiple circuits and constrained subgraphs.
 3. Capability and resource allocation can be trained without freezing capability parameters under explicit capability-preserving/capability-gated training.
 4. Correlated routing and feasibility/resource separation materially improve harder parity allocation.
-5. The mechanism survives a four-stage homogeneous search-space change.
+5. The mechanism survives a four-stage homogeneous search-space change under the public matched router configuration.
 6. Route-local calibration input has a reproducible intervention effect on held-out hardware-profile routing.
 7. Runtime availability can override neural price routing by construction.
+8. Router parameterization materially affects resource-policy optimization stability even when the task/search space/resource objective are held fixed.
 
 ### Not supported
 
@@ -66,6 +73,7 @@ This is an important correction to any broad claim that “move to new hardware,
 9. Arbitrary hardware portability.
 10. Stable route-specific P99 safety masks on ordinary Linux.
 11. Reliable learned routing under non-separable stage-/route-local cost changes; the latest experiments expose this as an open failure mode.
+12. Robustness to arbitrary router parameterization; the matched sensitivity audit shows a substantial degradation from a small head-architecture change.
 
 ## Recommended framing
 
@@ -73,8 +81,12 @@ A short mechanism note remains defensible under a title such as:
 
 **Resource-Conditioned Neural Computation: Learned Price-Aware Execution Paths under Runtime Availability Constraints**
 
-The note should explicitly include the new negative boundary:
+The note should explicitly include both negative boundaries:
 
-> normalized resource contracts are promising as an interface, but simple global scarcity coordinates are not sufficient evidence for non-separable hardware portability.
+> normalized resource contracts are promising as an interface, but simple global scarcity coordinates are not sufficient evidence for non-separable hardware portability;
+
+and
+
+> learned resource allocation is optimization-sensitive, so router architecture must be controlled as part of the mechanism rather than treated as an incidental implementation detail.
 
 Further experiments should resolve concrete review objections rather than scale for its own sake.
