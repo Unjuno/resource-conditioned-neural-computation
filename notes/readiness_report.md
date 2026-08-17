@@ -1,126 +1,115 @@
-# Resource-Conditioned Real-Time Neural Computation — Preprint Readiness Report
+# Resource-Conditioned Neural Computation — Preprint Readiness Report
 
 ## Status
 
-**STOP condition reached for a short arXiv-style technical/mechanism note.**
+**STOP condition reached for a short arXiv-style technical/mechanism note, subject to the public review window.**
 
-The evidence supports a narrow claim: a fixed-parameter neural system can learn to use a continuous resource-price signal to switch between functionally equivalent but physically different computation strategies, while an independent runtime mask can constrain the selectable execution classes for statistical deadline safety.
+The evidence supports a narrow claim: a fixed-parameter neural system can learn to use a continuous resource-price signal to switch between functionally equivalent but resource-distinct computation strategies, while an independent runtime mask constrains selectable execution classes using empirical statistical timing bounds.
 
-The evidence does **not** support a hard-real-time/WCET guarantee or a claim of universal Pareto superiority over all adaptive-routing baselines.
+The evidence does **not** support a hard-real-time/WCET guarantee, a physical energy claim, or universal superiority over external scheduling.
 
-## Core architecture tested
+## Final reproduction architecture
 
-Two equal-quality strategies solve the same discrete task:
+Two equal-quality strategies solve the same 12-bit majority task:
 
-1. **Lookup / copy path** — memory-heavy, compute-light.
-   - 32,768 parameters in the earlier full experiment.
-   - ~2 MAC-equivalent operations per inference.
-   - Measured median latency ~4–5 us in the earlier implementation.
-2. **Algorithmic MLP path** — memory-light, compute-heavy.
-   - 5,378 parameters in the earlier full experiment.
-   - ~5,248 MACs.
-   - Measured median latency ~17 us.
+1. **Lookup / copy path** — parameter-footprint-heavy, compute-light.
+   - 8,192 parameters.
+   - ~2-operation lookup proxy.
+2. **Algorithmic MLP path** — lower parameter footprint, compute-heavy.
+   - 4,706 parameters.
+   - 4,544 linear MACs.
 
-A small router observes resource prices and an RTOS/runtime availability mask. Experts are frozen during routing post-training in the safest variant.
+Both strategies achieve 100% full-state task accuracy in all three final seeds.
+
+The resource table has two normalized columns: `compute_proxy` and `parameter_footprint_proxy`. The latter is parameter count only. It is not measured memory traffic, bandwidth, cache behavior, resident-memory reduction, or joules.
+
+A small router observes resource prices and a runtime availability mask. Experts are frozen during routing post-training.
+
+## Matched price-blind control
+
+The final price-aware and price-blind routers use the same architecture and the same parameter count: **114 parameters each**. Both are trained against the same log-uniform resource-price distribution and the same random safe-mask distribution. The price-blind control receives zeroed price features, so it cannot condition its decision on the realized price vector.
+
+This replaces the earlier weaker control that also used a smaller input layer.
 
 ## Main mechanism result
 
-Across three seeds, with both strategies trained to 100% task accuracy:
+Across three seeds:
 
-- **Compute expensive:** 3/3 seeds routed to lookup/copy while preserving 100% accuracy.
-- **Memory expensive:** 2/3 seeds routed fully to algorithmic compute and one seed routed mostly to algorithmic compute.
-- Resource cost was reduced at equal task accuracy relative to a price-blind same-capacity control.
-- A continuous sweep of compute-price / memory-price caused a continuous transition from algorithmic routing to lookup routing while accuracy remained 100%.
+- **Compute proxy expensive:** the price-aware router selects lookup/copy while preserving 100% accuracy.
+- **Parameter-footprint proxy expensive:** the price-aware router selects the algorithmic MLP while preserving 100% accuracy.
+- A sweep of compute-price / footprint-price from 0.04 to 25 changes router probabilities continuously and crosses a decision boundary while accuracy remains 100%.
+- At all 27 tested sweep points (9 ratios × 3 seeds), the learned price-aware router selects the same route as the analytic oracle `argmin_j price · cost_j`; mean tested oracle regret is 0.
 
-This establishes resource price as a usable continuous control variable for effective neural execution path selection in the tested system.
+The oracle result is an important limitation as well as a sanity check: this toy experiment establishes that a neural router can learn the resource-conditioned selection rule, not that learning beats an external scheduler when the cost table is known exactly.
 
-## Final shared conformal/P99-style RTOS-mask experiment
+## Final shared empirical timing-mask experiment
 
-A fresh standalone three-seed experiment used:
+The final three-seed experiment uses:
 
-- exact lookup expert,
-- trained deep MLP expert with 100% full-state accuracy in all three seeds,
-- price-aware router,
-- price-blind control router,
-- **one shared execution-class calibration** used by both policies,
-- one-sided 99% nonparametric/conformal upper bounds for each execution class,
-- identical safe masks for price-aware and control policies.
+- one shared execution-class calibration for price-aware and price-blind policies;
+- one-sided 99% finite-sample/order-statistic bounds for each class;
+- identical safe masks for both policies;
+- no forced fallback when the safe set is empty: such a request is marked **not admitted**.
 
-### Safety behavior
+When only the lower-latency class is declared safe, both policies select that class. Resource price cannot override the runtime mask.
 
-When only the lower-latency class was declared safe, both policies selected the same class. Thus resource price did **not** override the RTOS safety mask.
+When both classes are safe, the price-aware router can select the lower normalized resource-cost path for the current resource vector.
 
-When both execution classes were safe, the price-aware router selected the lower resource-cost strategy according to the current price vector.
+In the current rerun, under the **parameter-footprint-proxy-expensive** both-safe condition, aggregated across three seeds:
 
-### Memory-expensive condition, both classes safe
+- **Price-aware:** accuracy 100%; normalized resource objective ~0.62446.
+- **Price-blind same-capacity control:** accuracy 100%; normalized resource objective ~1.00002.
 
-Three-seed aggregate, 3,600 held-out inferences per policy:
+This is about a **37.6% reduction in the tested normalized proxy objective at identical task accuracy and identical safe-set availability**. It is not a 37.6% reduction in physical memory, bandwidth, energy, or latency. The price-aware policy deliberately chooses the slower MLP when the footprint proxy is expensive.
 
-- **Price-aware:** accuracy 100%; mean normalized resource cost ~0.62446; miss rate 0.25% (9/3600; approximate Wilson 95% CI ~0.13–0.47%).
-- **Price-blind control:** accuracy 100%; mean normalized resource cost ~1.00002; miss rate 0.111% (4/3600; approximate Wilson 95% CI ~0.043–0.286%).
-
-Thus the price-aware policy reduced the tested normalized resource objective by about **37.6% at identical accuracy and identical safe-set availability**, while the statistical deadline miss rate remained below 1% in both policies. It did not improve latency: it deliberately chose the slower but memory-cheaper algorithmic path under a memory-expensive resource state.
-
-This distinction is central: the RTOS mask handles safety; resource price optimizes within the safe set.
+Absolute miss rates are not promoted as a stable headline result because ordinary Linux/PyTorch tail timing varies materially across reruns.
 
 ## Negative control
 
-The price signal was deliberately corrupted while keeping the learned router fixed.
+The price input is deliberately corrupted while the learned price-aware router is kept fixed.
 
 Across three seeds:
 
-- Under **compute-expensive** actual conditions, the correct price signal selected lookup in 3/3 seeds. Swapping the signal selected the algorithmic path in 3/3 seeds and raised normalized cost from ~0.05044 to ~1.02872.
-- Under **memory-expensive** actual conditions, the correct signal selected the algorithmic path in 3/3 seeds. Swapping or replacing the price by a constant selected lookup in 3/3 seeds and raised normalized cost from ~0.62446 to ~1.00002.
+- Under **compute-expensive** actual conditions, the true signal selects lookup in 3/3 seeds; swapping the signal selects the MLP in 3/3 seeds and raises normalized cost from ~0.05044 to ~1.02872.
+- Under **footprint-proxy-expensive** actual conditions, the true signal selects the MLP in 3/3 seeds; swapping or replacing the signal by a constant selects lookup in 3/3 seeds and raises normalized cost from ~0.62446 to ~1.00002.
 
-Therefore the observed routing is not explained by a fixed router preference; the learned policy is causally sensitive to the resource-price input.
+This is best described as an **input intervention** showing that the learned router actually uses the resource-price input. It is not a claim of a broader causal-inference identification result.
 
 ## Prior falsification results retained
 
-The broader experiment program produced several negative results that constrain the claim:
-
 1. Weak compute-price penalties can be ignored entirely.
 2. Excessively strong fixed penalties can cause abrupt cheap-policy collapse rather than smooth adaptation.
-3. Jointly specializing experts can cause capability forgetting; runtime fallback then becomes unsafe. Freezing acquired capabilities and post-training the router was more robust.
+3. Jointly specializing experts can cause capability forgetting; runtime fallback then becomes unsafe.
 4. Linear `compute_time + memory_time` latency models did not reliably predict end-to-end route latency on Linux/PyTorch.
 5. Naive online safety-factor adaptation was unstable under OS jitter.
-6. Calibration under one runtime load did not transfer reliably to a different runtime load; state-conditioned recalibration restored statistical coverage.
-7. A resource vector is not automatically superior to a scalar. Additional dimensions can be redundant/noisy.
+6. Calibration under one runtime load did not transfer reliably to a different runtime load; state-conditioned recalibration restored statistical coverage in the toy experiment.
+7. A resource vector is not automatically superior to a scalar; additional dimensions can be redundant/noisy.
 8. Price-conditioned routing did not automatically dominate a strong input-only adaptive-routing baseline in quality–compute Pareto efficiency.
-
-These failures are part of the evidence package and should remain in any preprint.
 
 ## Defensible claims
 
 ### Supported
 
-1. Resource price can be learned as a **continuous neural execution-control signal**.
+1. Resource price can be learned as a continuous neural execution-control signal in this tested system.
 2. A fixed parameter set can select different effective computation strategies according to resource prices.
-3. Functionally equivalent copy/memory and compute/algorithmic strategies can be switched while preserving task accuracy.
-4. An independent runtime safe mask can override economic routing, cleanly separating statistical timing safety from within-safe-set resource optimization.
-5. The learned policy fails a signal-swap negative control in the expected direction, supporting causal use of resource condition rather than fixed routing.
+3. Functionally equivalent copy/lookup and algorithmic strategies can be switched while preserving task accuracy.
+4. An independent runtime mask can override economic routing, separating empirical timing constraints from within-safe-set proxy optimization.
+5. Price-input intervention reverses routing in the expected direction.
 
 ### Not supported
 
 1. Hard real-time guarantees or WCET bounds.
-2. General energy savings in Joules; current resource costs are normalized proxies.
-3. Universal superiority to all conditional-computation or external-scheduler approaches.
-4. Large-model/LLM generalization.
-5. Claims that resource-conditioned functional circuits always self-organize without architectural or training constraints.
+2. General energy savings in joules.
+3. Reduced total resident memory from route switching.
+4. Universal superiority to external schedulers; the analytic oracle is exact for the current two-route toy cost table.
+5. Large-model/LLM generalization.
+6. Automatic circuit self-organization under arbitrary architectures or objectives.
 
 ## Recommended preprint framing
 
-A narrow mechanism note is defensible under a title such as:
+A narrow mechanism note remains defensible under a title such as:
 
 **Resource-Conditioned Neural Computation: Learned Price-Aware Execution Paths under Runtime Safety Masks**
-
-The paper should emphasize:
-
-- resource-conditioned execution rather than LLMs,
-- copy-vs-compute as the clean constructive example,
-- continuous price-ratio intervention,
-- shared statistical execution-class mask,
-- negative controls and failure modes,
-- separation of responsibilities: runtime safety vs neural resource optimization.
 
 Do not frame this as a new hard-real-time neural network architecture yet.
 
