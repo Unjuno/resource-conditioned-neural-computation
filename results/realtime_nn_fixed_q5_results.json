@@ -1,0 +1,59 @@
+{
+  "setup": {
+    "task": "9-bit majority complete 512-state domain",
+    "format": "uniform signed Q5 fixed point",
+    "weights_storage": "int16_t",
+    "activation_workspace_storage": "int16_t",
+    "accumulator": "int32_t",
+    "activation_lut": "257-point nearest lookup over [-8,8], int16_t outputs",
+    "execution_classes_blocks": [0, 2, 4, 6, 8],
+    "seeds": [0, 1, 2],
+    "timing_boundary": "host Linux central latency only; not WCET"
+  },
+  "memory": {
+    "weight_count": 83842,
+    "float_weight_payload_bytes": 335368,
+    "q5_weight_payload_bytes": 167684,
+    "float_activation_lut_bytes": 2056,
+    "q5_activation_lut_bytes": 1028,
+    "float_workspace_bytes": 8064,
+    "q5_workspace_bytes": 4032,
+    "float_freestanding_object_text_bytes": 340260,
+    "q5_freestanding_object_text_bytes": 170974
+  },
+  "seeds": [
+    {"seed":0,"accuracy":[0.63671875,0.71484375,0.78515625,0.86328125,1.0],"p50_us":[0.13,19.928,60.788,108.602,141.009],"undefined_external_symbols":0,"strict_p50_order":true,"max_observed_accumulator_abs":17573,"max_observed_postshift_or_activation_abs":549},
+    {"seed":1,"accuracy":[0.63671875,0.71484375,0.78515625,0.86328125,1.0],"p50_us":[0.141,19.253,60.78,106.404,139.488],"undefined_external_symbols":0,"strict_p50_order":true,"max_observed_accumulator_abs":19357,"max_observed_postshift_or_activation_abs":605},
+    {"seed":2,"accuracy":[0.63671875,0.71484375,0.78515625,0.86328125,1.0],"p50_us":[0.133,19.254,61.071,105.371,140.149],"undefined_external_symbols":0,"strict_p50_order":true,"max_observed_accumulator_abs":17108,"max_observed_postshift_or_activation_abs":535}
+  ],
+  "checks": {
+    "all_seeds_accuracy_matches_float_all_classes": true,
+    "all_seeds_zero_undefined_external_symbols": true,
+    "all_seeds_strict_central_latency_order": true,
+    "max_accumulator_abs_over_all_states_seeds": 19357,
+    "max_workspace_value_abs_over_all_states_seeds": 605,
+    "int32_headroom_ratio": 9.013805542613289e-06,
+    "int16_headroom_ratio": 0.0184636982329783
+  },
+  "central_latency_float_vs_q5_seed0_alternating_5runs": {
+    "float": {
+      "0":{"runs":[0.058001,0.058001,0.058001,0.058001,0.058001],"median_of_p50":0.058001},
+      "1":{"runs":[57.709,57.732,57.722,57.740999,57.748001],"median_of_p50":57.732},
+      "2":{"runs":[115.396,118.734999,115.457998,115.396,115.468],"median_of_p50":115.457998},
+      "3":{"runs":[173.1,189.161001,174.764,173.162998,173.179001],"median_of_p50":173.179001},
+      "4":{"runs":[230.857,231.121,252.212999,248.535,252.196999],"median_of_p50":248.535}
+    },
+    "q5": {
+      "0":{"runs":[0.133,0.135,0.136,0.14,0.131],"median_of_p50":0.135},
+      "1":{"runs":[19.873,20.06,19.878,19.786,20.056],"median_of_p50":19.878},
+      "2":{"runs":[62.094,60.153,61.767,60.779,62.584],"median_of_p50":61.767},
+      "3":{"runs":[107.89,107.634,105.798,105.757,106.277],"median_of_p50":106.277},
+      "4":{"runs":[138.165,143.835,138.222,141.007,140.182],"median_of_p50":140.182}
+    },
+    "ratio_q5_over_float":{"0":2.32754607679178,"1":0.344315111203492,"2":0.5349737659577295,"3":0.6136829487773752,"4":0.5640332347556681}
+  },
+  "interpretation": {
+    "supported": "For this complete finite toy domain, a uniform Q5 integer implementation preserves every execution-class prediction across three independently trained seeds while halving weight and activation-workspace storage and retaining finite budget-dependent physical execution classes.",
+    "not_supported": ["general fixed-point robustness beyond this toy/domain","target-independent speedup","WCET or hard-real-time guarantee","energy savings"]
+  }
+}
