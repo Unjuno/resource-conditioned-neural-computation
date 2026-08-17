@@ -5,7 +5,8 @@
     "weight_export": "83,842 float32 values; generated binary file, not committed",
     "compiler": "g++ 14.2.0 -O2 -std=c++17",
     "execution": "single C++ binary; budget depth controls the physical block-loop bound",
-    "timing_boundary": "ordinary Linux, CPU affinity attempted; not RTOS/WCET"
+    "timing_boundary": "ordinary Linux, CPU affinity attempted; not RTOS/WCET",
+    "work_count_note": "Linear MAC counts are exact for the physical control flow: the right-boundary neighbor path copies bias and does not execute a 32x32 matvec."
   },
   "verification_accuracy": {
     "depth_0": 0.63671875,
@@ -17,24 +18,25 @@
   "idle": {
     "reps": 4000,
     "depth_0": {"macs":64,"p50_us":0.063,"p95_us":0.064,"p99_us":0.065,"max_us":0.718},
-    "depth_2": {"macs":184384,"p50_us":71.4,"p95_us":129.915,"p99_us":288.103,"max_us":4392.042},
-    "depth_4": {"macs":368704,"p50_us":143.089,"p95_us":254.974,"p99_us":594.689,"max_us":17796.827},
-    "depth_6": {"macs":553024,"p50_us":217.546,"p95_us":490.444,"p99_us":4286.523,"max_us":61051.032},
-    "depth_8": {"macs":737344,"p50_us":294.754,"p95_us":4355.049,"p99_us":4556.046,"max_us":13241.761}
+    "depth_2": {"macs":182336,"p50_us":71.4,"p95_us":129.915,"p99_us":288.103,"max_us":4392.042},
+    "depth_4": {"macs":364608,"p50_us":143.089,"p95_us":254.974,"p99_us":594.689,"max_us":17796.827},
+    "depth_6": {"macs":546880,"p50_us":217.546,"p95_us":490.444,"p99_us":4286.523,"max_us":61051.032},
+    "depth_8": {"macs":729152,"p50_us":294.754,"p95_us":4355.049,"p99_us":4556.046,"max_us":13241.761}
   },
   "same_core_busy": {
     "reps": 2500,
     "depth_0": {"macs":64,"p50_us":0.065,"p95_us":0.067,"p99_us":0.068,"max_us":0.756},
-    "depth_2": {"macs":184384,"p50_us":71.531,"p95_us":151.935,"p99_us":8106.827,"max_us":8464.93},
-    "depth_4": {"macs":368704,"p50_us":143.508,"p95_us":462.486,"p99_us":8190.966,"max_us":12891.996},
-    "depth_6": {"macs":553024,"p50_us":217.797,"p95_us":8243.337,"p99_us":8367.878,"max_us":23494.236},
-    "depth_8": {"macs":737344,"p50_us":292.763,"p95_us":4313.424,"p99_us":4457.413,"max_us":9412.763}
+    "depth_2": {"macs":182336,"p50_us":71.531,"p95_us":151.935,"p99_us":8106.827,"max_us":8464.93},
+    "depth_4": {"macs":364608,"p50_us":143.508,"p95_us":462.486,"p99_us":8190.966,"max_us":12891.996},
+    "depth_6": {"macs":546880,"p50_us":217.797,"p95_us":8243.337,"p99_us":8367.878,"max_us":23494.236},
+    "depth_8": {"macs":729152,"p50_us":292.763,"p95_us":4313.424,"p99_us":4457.413,"max_us":9412.763}
   },
   "checks": {
     "accuracy_matches_python_model": true,
     "idle_median_strictly_increases_with_depth": true,
     "busy_median_strictly_increases_with_depth": true,
     "same_core_scheduler_tail_remains_without_pytorch": true,
+    "physical_mac_count_instrumented_and_corrected": true,
     "hard_real_time_established": false
   }
 }
