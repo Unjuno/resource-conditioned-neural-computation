@@ -1,78 +1,98 @@
 # Claims and limits
 
-## Core Real-Time NN claim now supported in a toy mechanism experiment
+## Core Real-Time NN mechanism supported in toy experiments
 
 The strongest supported statement is now:
 
-> In the supplied toy architecture, one fixed neural network can receive different admitted budgets, physically execute different amounts of its internal computation, and thereby produce a reproducible budget/quality/median-latency trade-off.
+> In supplied toy architectures, one fixed neural network can receive an admitted work budget, physically execute only budget-compliant internal computation, and produce a reproducible quality/work/median-latency trade-off. A learned internal controller can also choose **which** admissible computation to execute while the runtime enforces the hard work cap.
 
-The direct experiment measures the complete mechanism chain in one implementation:
+This is **not** a hard-real-time/WCET claim.
 
-```text
-budget
-  → internal activation depth
-  → physically executed blocks / MAC proxy
-  → measured end-to-end latency
-  → soft deadline behavior
-```
-
-This is **not** yet a hard-real-time claim.
-
-## Direct evidence
+## Direct fixed-budget execution evidence
 
 Across three seeds in `experiments/realtime_nn_budget_execution.py`:
 
-1. all budgets use the same parameter set;
-2. budget values `0 / .25 / .5 / .75 / 1.0` execute `0 / 2 / 4 / 6 / 8` optional blocks;
-3. forward hooks verify inactive blocks are not called by the hard-skip implementation;
-4. a matched dense-mask control executes all eight blocks at every budget;
-5. hard-skip and dense-mask produce identical outputs for the same budget;
-6. linear MAC proxy increases from 64 at minimum budget to 737,344 at full budget;
-7. mean task accuracy increases from **63.67% → 71.48% → 78.52% → 86.33% → 100%**;
-8. mean hard-skip median latency increases from **10.53 → 98.80 → 185.69 → 280.26 → 375.82 us**;
-9. hard-skip median latency is strictly monotonic in all 3/3 seeds;
-10. full-budget/minimum-budget hard-skip latency ratio averages **35.73x**;
-11. dense-mask latency remains roughly full-compute latency at every logical budget;
-12. under the tightest P95-calibrated soft deadline class, adaptive hard-skip averages **0.13% misses**, while adaptive dense-mask and always-full-depth both average **100% misses**.
+- all budgets use the same parameter set;
+- budgets `0 / .25 / .5 / .75 / 1.0` execute `0 / 2 / 4 / 6 / 8` optional blocks;
+- hooks verify inactive blocks are not called;
+- a dense-mask control executes all eight blocks at every logical budget;
+- hard-skip and dense-mask outputs match;
+- mean accuracy is **63.67% → 71.48% → 78.52% → 86.33% → 100%**;
+- mean hard-skip median latency is **10.53 → 98.80 → 185.69 → 280.26 → 375.82 us**;
+- median latency is strictly monotonic in **3/3 seeds**;
+- full/minimum-budget median-latency ratio averages **35.73x**;
+- under the tightest P95-calibrated soft deadline class, adaptive hard-skip averages **0.13% misses**, while dense-mask and always-full-depth both average **100% misses**.
 
-This directly establishes that **physical conditional execution**, not a logical mask alone, is responsible for the observed latency reduction in this toy.
+This establishes the direct chain:
 
-See `notes/realtime_nn_budget_execution.md` and `results/realtime_nn_budget_execution_results.json`.
+```text
+budget → physical activation → work → measured median latency → soft deadline behavior
+```
+
+## Learned activation under a hard runtime cap
+
+`experiments/realtime_nn_learned_budget_gate.py` tests a stronger responsibility split.
+
+The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. A learned relevance-scoring controller chooses which experts to execute, but hard top-k structurally prevents execution beyond the admitted cap.
+
+The controller is trained with explicit relevance supervision; this is not claimed as spontaneous/self-organized routing.
+
+Across three seeds:
+
+| k | learned accuracy | fixed-prefix accuracy | learned median | fixed-prefix median |
+|---:|---:|---:|---:|---:|
+| 1 | 68.35% | 68.77% | 74.62 us | 56.30 us |
+| 2 | **81.90%** | 71.43% | 114.07 us | 95.68 us |
+| 4 | **100.00%** | 78.18% | 195.40 us | 171.37 us |
+| 8 | 100.00% | 100.00% | 366.21 us | 337.42 us |
+
+Additional audits:
+
+- hard budget compliance passes in **3/3 seeds** at every k;
+- learned median latency is strictly monotonic in **3/3 seeds**;
+- learned dense-mask executes all eight experts at every budget;
+- hard learned and dense learned outputs match within numerical tolerance;
+- at `k=4`, learned activation gains about **+21.8 percentage points** over fixed-prefix execution at the same expert-call cap;
+- controller overhead is measurable (roughly 18–29 us median versus fixed prefix) and is included in the timing.
+
+This supports the intended responsibility split:
+
+```text
+runtime / RTOS: how much work is admissible
+NN:             which admissible internal work is useful
+```
 
 ## Timing boundary
 
-The same experiment also produces a negative result that prevents a hard-real-time interpretation:
+The fixed-depth experiment also produces a negative result that prevents a hard-real-time interpretation:
 
-- raw empirical q99 execution times are not strictly monotonic in any of the three seeds during separate calibration runs;
+- raw empirical q99 execution times are not strictly monotonic in any of the three calibration seeds;
 - ordinary Linux/PyTorch scheduler/preemption jitter contaminates the far tail;
-- the deadline admission experiment therefore uses empirical P95 execution classes and is explicitly soft/weakly-hard.
+- deadline admission therefore uses empirical P95 execution classes and is explicitly soft/weakly-hard.
 
-A hard-real-time claim still requires a defensible WCET/static timing argument, time-predictable hardware/runtime, or equivalent evidence.
+A hard-real-time claim still requires defensible WCET/static timing, a time-predictable runtime/platform, or equivalent evidence.
 
 ## What remains open
 
-The current budget-to-depth mapping is deliberately simple and fixed so the physical mechanism can be isolated.
+1. integrate the learned activation controller with deadline admission and compare quality at matched miss rate;
+2. remove explicit relevance supervision and test more autonomous learned activation while preserving hard budget compliance;
+3. adapt admitted budgets to machine state without relying on unstable Linux tails;
+4. test finer-grained structured activation without losing physical skipping;
+5. move to an RTOS/time-predictable target or obtain a defensible WCET/static timing argument.
 
-Next-line questions are:
+## Secondary diagnostic evidence
 
-1. can a **learned** budget-conditioned activation policy preserve the same physical budget compliance and latency ordering?
-2. can the runtime adapt admitted budgets to changing machine state without relying on unstable Linux tails?
-3. can the mechanism be implemented on an RTOS/time-predictable target with analyzable timing?
-4. can finer-grained block/channel activation preserve useful quality/latency trade-offs without dense execution overhead?
+Earlier experiments remain useful for:
 
-## Secondary precursor / diagnostic evidence
+- capability forgetting and shortcut collapse;
+- conditional-subgraph formation;
+- feasibility-vs-price separation;
+- non-separable resource-contract failures;
+- objective/local-minimum sensitivity;
+- policy-parameterization sensitivity;
+- Linux tail-timing instability.
 
-Earlier experiments still support narrower implementation facts:
-
-- resource conditions can change internal subgraph execution;
-- fallback capabilities can be forgotten under naive joint training;
-- capability readiness and feasibility-vs-price separation matter;
-- supplied primitive supernets can form different hard subgraphs;
-- non-separable route/stage cost changes can break simple resource contracts;
-- learned allocation can be sensitive to objective and router parameterization;
-- empirical Linux tail timing is unstable.
-
-Those experiments remain useful, but they are secondary to the direct budget/work/latency result.
+They are secondary to the direct budget/work/latency results.
 
 ## Runtime / RTOS responsibility split
 
@@ -85,14 +105,14 @@ safe admitted normalized budget
     ↓
 same neural network
     ↓
-budget-conditioned physical execution
+budget-compliant learned physical execution
 ```
 
-The runtime owns hardware-specific timing knowledge and feasibility. The NN consumes an admitted budget and changes its execution accordingly.
+The runtime owns hardware-specific timing knowledge and feasibility. The NN chooses computation only inside the admitted work envelope.
 
 ## Resource proxies
 
-The direct experiment uses an executed linear-MAC proxy plus measured latency. Some older experiments also use a parameter-footprint proxy.
+The direct experiments use executed expert/block counts, linear-MAC proxies, and measured latency. Older experiments may also use a parameter-footprint proxy.
 
 Parameter footprint is **not** measured runtime memory traffic, bandwidth, cache pressure, reduced resident memory, or energy.
 
@@ -102,10 +122,10 @@ Parameter footprint is **not** measured runtime memory traffic, bandwidth, cache
 2. A production Real-Time NN or Real-Time LM.
 3. Joule-level energy savings.
 4. Measured memory-bandwidth savings or reduced total resident memory.
-5. A learned/self-organized budget gate in the direct timing experiment.
-6. Input-difficulty-dependent adaptive computation in the direct timing experiment.
+5. Self-organized discovery of relevance in the learned-controller experiment.
+6. Input-dependent variable work beyond the hard runtime cap in the learned-controller experiment.
 7. Universal superiority over early exit, MoE, NAS, once-for-all subnetworks, or external schedulers.
-8. Necessity of a learned controller when execution costs are analytically known.
+8. Necessity of a learned controller when exact execution costs and relevance are analytically available.
 9. General/unconstrained architecture discovery.
 10. Arbitrary hardware portability.
 11. LLM-scale generalization.
@@ -115,6 +135,6 @@ Parameter footprint is **not** measured runtime memory traffic, bandwidth, cache
 
 Before promoting a new main-line experiment, ask:
 
-> Does it test whether changing the budget of the **same neural network** changes **actual internal activation**, **actual executed work**, **actual inference time**, or **deadline behavior**?
+> Does it test whether changing the admitted budget of the **same neural network** changes **actual internal activation**, **actual executed work**, **actual inference time**, **quality**, or **deadline behavior**?
 
 If not, it belongs under secondary diagnostics.
