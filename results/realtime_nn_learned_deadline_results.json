@@ -1,0 +1,48 @@
+{
+  "setup": {
+    "task": "8-slot relevance-majority toy from learned budget gate experiment",
+    "deadline_grid": "common absolute deadlines defined from learned-hard P95 class midpoints; all policies evaluated on same deadlines within each seed",
+    "admission": "policy-specific empirical P95 monotone execution-class bounds",
+    "policies": ["learned_hard", "prefix_hard", "oracle_hard", "dense_learned", "always_full"],
+    "timing_boundary": "ordinary Linux/PyTorch soft/weakly-hard prototype; not WCET/hard real time",
+    "oracle_boundary": "relevance mask is directly exposed by the synthetic task, so oracle_hard is an intentionally strong external baseline"
+  },
+  "aggregate": {
+    "all_budget_audits_pass": true,
+    "by_target_learned_class": {
+      "1": {
+        "learned_hard": {"mean_admitted_k": 1.0, "mean_miss_rate": 0.03875, "mean_accuracy": 0.6716666667, "mean_on_time_correct_rate": 0.645, "mean_median_latency_us": 79.8027},
+        "prefix_hard": {"mean_admitted_k": 2.0, "mean_miss_rate": 0.0766666667, "mean_accuracy": 0.71375, "mean_on_time_correct_rate": 0.66, "mean_median_latency_us": 99.5403},
+        "oracle_hard": {"mean_admitted_k": 1.0, "mean_miss_rate": 0.0470833333, "mean_accuracy": 0.6716666667, "mean_on_time_correct_rate": 0.6425, "mean_median_latency_us": 64.4432},
+        "dense_learned": {"mean_admitted_k": 0.0, "mean_miss_rate": 1.0, "mean_accuracy": 0.0, "mean_on_time_correct_rate": 0.0},
+        "always_full": {"mean_admitted_k": 8.0, "mean_miss_rate": 1.0, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.0}
+      },
+      "2": {
+        "learned_hard": {"mean_admitted_k": 2.0, "mean_miss_rate": 0.04625, "mean_accuracy": 0.8191666667, "mean_on_time_correct_rate": 0.7808333333, "mean_median_latency_us": 123.116},
+        "prefix_hard": {"mean_admitted_k": 2.6666666667, "mean_miss_rate": 0.0329166667, "mean_accuracy": 0.7270833333, "mean_on_time_correct_rate": 0.705, "mean_median_latency_us": 125.773},
+        "oracle_hard": {"mean_admitted_k": 2.0, "mean_miss_rate": 0.01875, "mean_accuracy": 0.8191666667, "mean_on_time_correct_rate": 0.8029166667, "mean_median_latency_us": 105.1085},
+        "dense_learned": {"mean_admitted_k": 0.0, "mean_miss_rate": 1.0, "mean_accuracy": 0.0, "mean_on_time_correct_rate": 0.0},
+        "always_full": {"mean_admitted_k": 8.0, "mean_miss_rate": 0.97875, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.02125}
+      },
+      "4": {
+        "learned_hard": {"mean_admitted_k": 4.0, "mean_miss_rate": 0.0154166667, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.9845833333, "mean_median_latency_us": 205.6948},
+        "prefix_hard": {"mean_admitted_k": 4.0, "mean_miss_rate": 0.0120833333, "mean_accuracy": 0.7691666667, "mean_on_time_correct_rate": 0.76, "mean_median_latency_us": 178.5745},
+        "oracle_hard": {"mean_admitted_k": 4.0, "mean_miss_rate": 0.0129166667, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.9870833333, "mean_median_latency_us": 187.3408},
+        "dense_learned": {"mean_admitted_k": 0.0, "mean_miss_rate": 1.0, "mean_accuracy": 0.0, "mean_on_time_correct_rate": 0.0},
+        "always_full": {"mean_admitted_k": 8.0, "mean_miss_rate": 0.1170833333, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.8829166667}
+      },
+      "8": {
+        "learned_hard": {"mean_admitted_k": 8.0, "mean_miss_rate": 0.0154166667, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.9845833333, "mean_median_latency_us": 375.2677},
+        "prefix_hard": {"mean_admitted_k": 8.0, "mean_miss_rate": 0.0108333333, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.9891666667, "mean_median_latency_us": 345.0332},
+        "oracle_hard": {"mean_admitted_k": 8.0, "mean_miss_rate": 0.0266666667, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.9733333333, "mean_median_latency_us": 356.336},
+        "dense_learned": {"mean_admitted_k": 8.0, "mean_miss_rate": 0.015, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.985, "mean_median_latency_us": 348.9813},
+        "always_full": {"mean_admitted_k": 8.0, "mean_miss_rate": 0.0154166667, "mean_accuracy": 1.0, "mean_on_time_correct_rate": 0.9845833333}
+      }
+    }
+  },
+  "seed_checks": [
+    {"seed": 0, "all_checks_pass": true, "learned_deadlines_us": {"1": 202.061, "2": 310.529, "4": 551.834, "8": 842.07945}},
+    {"seed": 1, "all_checks_pass": true, "learned_deadlines_us": {"1": 210.727, "2": 302.732, "4": 578.9395, "8": 905.5169}},
+    {"seed": 2, "all_checks_pass": true, "learned_deadlines_us": {"1": 207.7295, "2": 309.1425, "4": 562.3635, "8": 859.8665}}
+  ]
+}
