@@ -17,7 +17,9 @@
     "undefined_external_symbols": 0,
     "binding_unit": "target-defined uint32 ticks",
     "invalid_bound_sentinel": "UINT32_MAX",
-    "no_safe_class_return": -1
+    "no_safe_class_return": -1,
+    "binding_requires_manifest_id": true,
+    "binding_requires_certified_build_id": true
   },
   "property_test": {
     "synthetic_bindings": 3,
@@ -27,21 +29,17 @@
     "admitted_class_is_highest_certified_fitting_class": true,
     "uncertified_classes_never_inferred_from_macs": true,
     "wrong_manifest_id_rejected": true,
+    "wrong_build_id_rejected": true,
     "null_binding_rejected": true
   },
   "synthetic_binding_examples": {
-    "note": "These bounds exist only to exercise admission logic. They are not hardware measurements or portability evidence.",
-    "fast": {"overhead_ticks":8,"upper_ticks":[30,90,160,240,330]},
-    "slow": {"overhead_ticks":12,"upper_ticks":[40,150,290,450,650]},
-    "partial_certification": {"overhead_ticks":5,"upper_ticks":[25,100,null,null,null]}
+    "note": "These bounds and build IDs exist only to exercise admission logic. They are not hardware measurements or portability evidence.",
+    "fast": {"certified_build_id":"0x1111222233334444","overhead_ticks":8,"upper_ticks":[30,90,160,240,330]},
+    "slow": {"certified_build_id":"0x5555666677778888","overhead_ticks":12,"upper_ticks":[40,150,290,450,650]},
+    "partial_certification": {"certified_build_id":"0x1111222233334444","overhead_ticks":5,"upper_ticks":[25,100,null,null,null]}
   },
   "interpretation": {
-    "supported": "The target-independent neural work manifest can be separated from a target-specific timing binding. Admission can fail closed when timing evidence is missing or belongs to a different manifest, and can select the highest explicitly certified class fitting a deadline.",
-    "not_supported": [
-      "any real target timing bound",
-      "hard-real-time schedulability",
-      "hardware portability",
-      "deriving execution time from MAC count alone"
-    ]
+    "supported": "The target-independent neural work manifest can be separated from a target-specific timing binding. Timing evidence can be fail-closed on both manifest identity and certified deployed-build identity, preventing silent reuse after a machine-code-changing rebuild.",
+    "not_supported": ["any real target timing bound","hard-real-time schedulability","hardware portability","deriving execution time from MAC count alone"]
   }
 }
