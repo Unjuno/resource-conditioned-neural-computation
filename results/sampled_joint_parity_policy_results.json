@@ -1,0 +1,30 @@
+{
+  "setup": {
+    "task": "4-bit parity over the complete 256-state domain",
+    "complete_topology_enumeration_in_router_training": false,
+    "full_domain_feasibility_in_router_training": false,
+    "router": "autoregressive sampled policy gradient",
+    "samples_per_anchor": 4,
+    "calibration_states_per_sample": 64,
+    "capability_freeze": false,
+    "capability_training": "rotating single-primitive supervision continues throughout",
+    "router_activation": "sampled 64-state readiness check; resource policy turns on only after every single-primitive probe is perfect on that sampled check",
+    "boundary": "No complete-route label or exact 27-topology expectation is used for router training. Final evaluation is exhaustive over all 256 states and dense resource-price ratios."
+  },
+  "seeds": [
+    {"seed":0,"hard_accuracy":1.0,"tie_optimal_cost_rate":0.995,"mean_regret":0.00001000015,"num_routes":2,"router_activated_at":750,"probes":{"footprint_expensive":[0,2,0],"balanced":[0,2,0],"compute_expensive":[0,1,0]}},
+    {"seed":1,"hard_accuracy":1.0,"tie_optimal_cost_rate":0.9125,"mean_regret":0.0079815472,"num_routes":3,"router_activated_at":800,"probes":{"footprint_expensive":[2,0,0],"balanced":[0,0,1],"compute_expensive":[0,0,1]}},
+    {"seed":2,"hard_accuracy":1.0,"tie_optimal_cost_rate":0.9625,"mean_regret":0.0024850972,"num_routes":4,"router_activated_at":750,"probes":{"footprint_expensive":[0,2,0],"balanced":[0,2,0],"compute_expensive":[0,0,1]}},
+    {"seed":3,"hard_accuracy":1.0,"tie_optimal_cost_rate":0.955,"mean_regret":0.0015239158,"num_routes":3,"router_activated_at":1100,"probes":{"footprint_expensive":[2,0,0],"balanced":[2,0,0],"compute_expensive":[0,0,1]}},
+    {"seed":4,"hard_accuracy":1.0,"tie_optimal_cost_rate":0.9275,"mean_regret":0.0022362340,"num_routes":2,"router_activated_at":700,"probes":{"footprint_expensive":[0,0,2],"balanced":[0,0,1],"compute_expensive":[0,0,1]}}
+  ],
+  "aggregate": {
+    "mean_hard_accuracy": 1.0,
+    "min_hard_accuracy": 1.0,
+    "mean_tie_optimal_cost_rate": 0.9505,
+    "min_tie_optimal_cost_rate": 0.9125,
+    "mean_regret": 0.0028473589,
+    "seeds_multiple_routes": 5,
+    "seeds_all_probes_perfect": 5
+  }
+}
