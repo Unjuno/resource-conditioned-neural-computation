@@ -19,7 +19,8 @@
     "float_workspace_bytes": 8064,
     "q5_workspace_bytes": 4032,
     "float_freestanding_object_text_bytes": 340260,
-    "q5_freestanding_object_text_bytes": 170974
+    "q5_freestanding_object_text_bytes": 170974,
+    "q5_division_free_object_text_bytes": 170988
   },
   "seeds": [
     {"seed":0,"accuracy":[0.63671875,0.71484375,0.78515625,0.86328125,1.0],"p50_us":[0.13,19.928,60.788,108.602,141.009],"undefined_external_symbols":0,"strict_p50_order":true,"max_observed_accumulator_abs":17573,"max_observed_postshift_or_activation_abs":549},
@@ -32,10 +33,24 @@
     "all_seeds_strict_central_latency_order": true,
     "invalid_execution_class_fails_closed_to_class_0": true,
     "exporter_checks_int16_range_before_cast": true,
+    "division_free_residual_scaling_preserves_all_seed_class_predictions": true,
+    "gcc_division_free_core_div_or_idiv_instruction_count": 0,
+    "gcc_division_free_core_undefined_external_symbols": 0,
     "max_accumulator_abs_over_all_states_seeds": 19357,
     "max_workspace_value_abs_over_all_states_seeds": 605,
     "int32_headroom_ratio": 9.013805542613289e-06,
     "int16_headroom_ratio": 0.0184636982329783
+  },
+  "division_free_residual_scaling": {
+    "original_integer_form": "signed rounded ff/5",
+    "replacement": "signed rounded (ff*51)/256 implemented by multiply and shift",
+    "effective_coefficient": 0.19921875,
+    "target_float_coefficient": 0.2,
+    "three_seed_all_class_prediction_mismatches": 0,
+    "seed0_alternating_5run_median_p50_us": {
+      "division": [0.14, 19.427, 60.873, 106.453, 139.606],
+      "division_free": [0.131, 19.149, 63.409, 112.613, 146.296]
+    }
   },
   "central_latency_float_vs_q5_seed0_alternating_5runs": {
     "float": {
@@ -55,7 +70,7 @@
     "ratio_q5_over_float":{"0":2.32754607679178,"1":0.344315111203492,"2":0.5349737659577295,"3":0.6136829487773752,"4":0.5640332347556681}
   },
   "interpretation": {
-    "supported": "For this complete finite toy domain, a uniform Q5 integer implementation preserves every execution-class prediction across three independently trained seeds while halving weight and activation-workspace storage and retaining finite budget-dependent physical execution classes.",
+    "supported": "For this complete finite toy domain, a uniform Q5 integer implementation preserves every execution-class prediction across three independently trained seeds while halving weight and activation-workspace storage and retaining finite budget-dependent physical execution classes. The tested residual scaling can also be implemented without integer division while preserving all tested class predictions.",
     "not_supported": ["general fixed-point robustness beyond this toy/domain","target-independent speedup","WCET or hard-real-time guarantee","energy savings"]
   }
 }
