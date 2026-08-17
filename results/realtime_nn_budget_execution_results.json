@@ -1,0 +1,92 @@
+{
+  "setup": {
+    "task": "9-bit majority over complete 512-state domain",
+    "architecture": "one fixed network with 8 optional local-information-propagation blocks",
+    "budgets": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "depths": [0, 2, 4, 6, 8],
+    "physical_skip": "hard_skip uses control flow and does not call inactive blocks",
+    "dense_control": "dense_mask calls all 8 blocks and suppresses inactive updates only after computation",
+    "block_linear_macs": 92160,
+    "timing": "perf_counter_ns, torch single-thread CPU, batch size 1",
+    "timing_boundary": "ordinary Linux/PyTorch measurements; empirical timing only, not WCET/hard real-time",
+    "cpu_affinity": 0,
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu"
+  },
+  "aggregate": {
+    "all_seeds_hard_latency_monotonic": true,
+    "all_seeds_trace_audit_pass": true,
+    "all_seeds_hard_dense_output_match": true,
+    "mean_hard_low_high_speedup": 35.72690349508743,
+    "min_hard_low_high_speedup": 34.76308022538235,
+    "mean_dense_low_high_ratio": 0.8917122537619293,
+    "mean_accuracy_by_budget": {
+      "0.0": 0.63671875,
+      "0.25": 0.71484375,
+      "0.5": 0.78515625,
+      "0.75": 0.86328125,
+      "1.0": 1.0
+    },
+    "mean_hard_median_us_by_budget": {
+      "0.0": 10.529166666666667,
+      "0.25": 98.80183333333333,
+      "0.5": 185.692,
+      "0.75": 280.2618333333333,
+      "1.0": 375.82183333333336
+    },
+    "mean_dense_median_us_by_budget": {
+      "0.0": 409.29033333333336,
+      "0.25": 394.0763333333333,
+      "0.5": 385.653,
+      "0.75": 377.9925,
+      "1.0": 364.9645
+    },
+    "q99_monotonic_seeds": 0,
+    "deadline_mean_miss_rate": {
+      "0.0": {"adaptive_hard": 0.0013333333333333333, "adaptive_dense": 1.0, "full_depth": 1.0},
+      "0.25": {"adaptive_hard": 0.02, "adaptive_dense": 0.69, "full_depth": 0.688},
+      "0.5": {"adaptive_hard": 0.03666666666666667, "adaptive_dense": 0.22133333333333333, "full_depth": 0.17066666666666666},
+      "0.75": {"adaptive_hard": 0.046, "adaptive_dense": 0.096, "full_depth": 0.078},
+      "1.0": {"adaptive_hard": 0.05466666666666667, "adaptive_dense": 0.07866666666666666, "full_depth": 0.04066666666666666}
+    },
+    "deadline_mean_accuracy": {
+      "0.0": {"adaptive_hard": 0.606, "adaptive_dense": 0.618, "full_depth": 1.0},
+      "0.25": {"adaptive_hard": 0.716, "adaptive_dense": 0.694, "full_depth": 1.0},
+      "0.5": {"adaptive_hard": 0.7953333333333333, "adaptive_dense": 0.792, "full_depth": 1.0},
+      "0.75": {"adaptive_hard": 0.846, "adaptive_dense": 0.8586666666666667, "full_depth": 1.0},
+      "1.0": {"adaptive_hard": 1.0, "adaptive_dense": 1.0, "full_depth": 1.0}
+    }
+  },
+  "seeds": [
+    {
+      "seed": 0,
+      "state_hash": "623eedef7ada57f79b5c78fb9e81c43122a77fa50a7dad4e2629efeb9bc99388",
+      "hard_low_high_speedup": 34.76308022538235,
+      "hard_median_us": {"0.0": 11.181, "0.25": 99.8685, "0.5": 185.4565, "0.75": 275.955, "1.0": 388.686},
+      "dense_median_us": {"0.0": 404.1465, "0.25": 394.3965, "0.5": 386.957, "0.75": 374.4245, "1.0": 362.244},
+      "raw_q99_strictly_increasing": false,
+      "trace_audit_pass": true,
+      "hard_dense_outputs_identical": true
+    },
+    {
+      "seed": 1,
+      "state_hash": "476b78e971181926cb4567fbc3a370a11c4b6837d3446b6486e88ec0c38938b7",
+      "hard_low_high_speedup": 36.70425816685668,
+      "hard_median_us": {"0.0": 10.0865, "0.25": 98.587, "0.5": 182.616, "0.75": 279.271, "1.0": 370.2175},
+      "dense_median_us": {"0.0": 414.5755, "0.25": 396.5425, "0.5": 382.9845, "0.75": 381.018, "1.0": 370.364},
+      "raw_q99_strictly_increasing": false,
+      "trace_audit_pass": true,
+      "hard_dense_outputs_identical": true
+    },
+    {
+      "seed": 2,
+      "state_hash": "830f37d313dd4b9b55f041642636165bd984d2f320d34f76e9f435bd03683356",
+      "hard_low_high_speedup": 35.71337209302325,
+      "hard_median_us": {"0.0": 10.32, "0.25": 97.95, "0.5": 189.0035, "0.75": 285.5595, "1.0": 368.562},
+      "dense_median_us": {"0.0": 409.149, "0.25": 391.29, "0.5": 387.0175, "0.75": 378.535, "1.0": 362.2855},
+      "raw_q99_strictly_increasing": false,
+      "trace_audit_pass": true,
+      "hard_dense_outputs_identical": true
+    }
+  ]
+}
