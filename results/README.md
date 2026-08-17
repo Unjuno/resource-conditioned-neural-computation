@@ -9,6 +9,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with hard-budget/timing/deadline audits.
 - `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic; negative runtime result.
 - `realtime_nn_generated_cpp_results.json` — generated-weight plain-C++ conditional inference; verifies the physical work/central-latency relation without PyTorch and shows scheduler tails remain under same-core contention.
+- `realtime_nn_fine_grained_classes_results.json` — execution-class granularity audit: post-hoc intermediate depth classes can lose capability, while jointly trained 0..8 depth classes preserve non-decreasing quality and strictly increasing median latency; dominated classes remain off the Pareto frontier.
 - `price_mask_conformal_multiseed_results.json`
 - `price_negative_control_results.json`
 - `internal_circuit_conditioning_results.json`
@@ -30,6 +31,8 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - physical hard-skip traces / explicit C++ loop bounds;
 - hard budget compliance;
 - finite executed-work classes;
+- capability validation for every runtime-admissible execution class;
+- quality/latency Pareto usefulness of exposed classes;
 - task quality under budget;
 - work/central-latency ordering;
 - controller overhead;
