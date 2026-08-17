@@ -30,6 +30,8 @@
     "all_seeds_accuracy_matches_float_all_classes": true,
     "all_seeds_zero_undefined_external_symbols": true,
     "all_seeds_strict_central_latency_order": true,
+    "invalid_execution_class_fails_closed_to_class_0": true,
+    "exporter_checks_int16_range_before_cast": true,
     "max_accumulator_abs_over_all_states_seeds": 19357,
     "max_workspace_value_abs_over_all_states_seeds": 605,
     "int32_headroom_ratio": 9.013805542613289e-06,
