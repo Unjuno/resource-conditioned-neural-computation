@@ -2,91 +2,84 @@
 
 ## Current status
 
-The repository has now passed three core toy-system gates for the intended Real-Time NN direction:
+The repository has now passed four toy-system mechanism gates for the intended Real-Time NN direction:
 
-1. **direct budget-conditioned physical execution**;
-2. **learned selection of admissible internal work under a hard runtime cap**;
-3. **learned activation integrated with empirical deadline admission**.
+1. direct budget-conditioned physical execution;
+2. learned selection of admissible work under a hard runtime cap;
+3. learned activation integrated with empirical deadline admission;
+4. useful admissible activation learned from **task loss alone**, without explicit relevance labels.
 
 The demonstrated toy chain is:
 
 ```text
-deadline
-  → runtime-admitted work budget
+deadline / admitted work budget
   → budget-compliant learned internal activation
   → physically executed work
   → measured latency
-  → on-time task quality
+  → task quality / on-time quality
 ```
 
-However, **hard-real-time readiness is not reached**. Current timing is ordinary Linux/PyTorch and remains empirical rather than WCET.
+**Hard-real-time readiness is still not reached.** Current timing is ordinary Linux/PyTorch and remains empirical rather than WCET.
 
-## Milestone 1 — physical budget execution
+## New milestone — task-loss-only selection
 
-Across three seeds in `realtime_nn_budget_execution.py`, one fixed network physically executes `0/2/4/6/8` optional blocks at increasing budgets. Hard-skip median latency is strictly monotonic in 3/3 seeds, with a mean full/minimum latency ratio of **35.73x**. Dense logical masking executes all blocks and does not obtain the speedup.
+`experiments/realtime_nn_task_only_gate.py` uses an 8-slot key/query task. Exactly four slots match a global query; the label is the strict majority of matching-slot bits.
 
-## Milestone 2 — learned selection under a hard cap
+The controller receives ordinary task features but no relevance targets. Training uses task cross-entropy only, with no relevance auxiliary loss, capability warmup, or expert freezing.
 
-Across three seeds in `realtime_nn_learned_budget_gate.py`, the runtime admits exactly `k ∈ {1,2,4,8}` expert calls and hard top-k prevents budget violation.
+Three-seed mean result:
 
-At `k=4`, learned activation reaches **100%** accuracy versus **78.18%** for fixed prefix, while controller overhead remains visible in end-to-end timing.
+| k | learned | prefix | analytic oracle | learned relevance fraction |
+|---:|---:|---:|---:|---:|
+| 1 | 69.04% | 67.66% | 69.09% | 100% |
+| 2 | **81.27%** | 71.37% | 81.80% | 100% |
+| 4 | **100.00%** | 78.74% | 100.00% | 100% |
+| 8 | 99.82% | 99.82% | 99.82% | 50% |
 
-The controller currently uses explicit relevance supervision.
+Hard budget compliance passes in 3/3 seeds. Learned hard-skip median latency is strictly monotonic in 3/3 seeds:
 
-## Milestone 3 — learned selection + deadline admission
+**77.49 / 110.47 / 176.97 / 314.04 us** for `k=1/2/4/8`.
 
-`realtime_nn_learned_deadline_integration.py` calibrates policy-specific P95 execution classes including controller overhead. All policies see the same absolute deadline within each seed.
+Thus the current supplied search space no longer requires an explicit relevance-teaching signal for useful physical conditional computation to emerge.
 
-Main metric: **on-time & correct rate**.
+This is still not unconstrained self-organized architecture discovery: the primitive experts, hard top-k mechanism, and task structure are supplied, and an analytic key/query oracle exists.
 
-Three-seed aggregate:
+## Deadline boundary
 
-| regime | learned | prefix | external relevance oracle | always full |
-|---|---:|---:|---:|---:|
-| tightest | 64.50% | **66.00%** | 64.25% | 0.00% |
-| around learned `k=2` | **78.08%** | 70.50% | **80.29%** | 2.13% |
-| around learned `k=4` | **98.46%** | 76.00% | **98.71%** | 88.29% |
-| full-budget | 98.46% | **98.92%** | 97.33% | 98.46% |
+The task-only controller is not universally superior under deadline admission.
 
-At the clean `k≈4` regime, learned and prefix miss rates are close (**1.54% vs 1.21%**) while on-time-correct differs by more than 22 percentage points.
+Mean on-time & correct:
 
-This supports the intended split:
+| target class | learned | prefix | oracle | always full |
+|---:|---:|---:|---:|---:|
+| 1 | 67.60% | 76.93% | **79.47%** | 31.20% |
+| 2 | 75.93% | 82.27% | **89.73%** | 72.87% |
+| 4 | **98.27%** | 85.13% | 97.47% | 91.40% |
+| 8 | 96.53% | 85.13% | **98.13%** | 95.93% |
 
-```text
-RTOS/runtime: decide how much work is feasible
-NN:           decide which feasible internal work is useful
-```
-
-## Important negative boundaries
-
-Learned selection is **not universally superior**:
-
-- the tightest deadline favors the simpler prefix policy because controller overhead matters;
-- full budget also favors prefix slightly because selection no longer provides a quality benefit;
-- an external oracle that directly reads the synthetic relevance mask remains slightly stronger than the learned controller.
-
-Therefore the current learned experiment is a mechanism demonstration, not evidence that neural selection is necessary when equivalent selection information is analytically exposed.
+The learned benefit is strongest in the intermediate `k≈4` regime. Under tight deadlines, controller overhead lets simpler/faster policies admit more work and win.
 
 ## Timing boundary
 
-The fixed-depth calibration already showed raw q99 execution classes non-monotonic in 3/3 seeds. Learned-policy calibration also contains large high-percentile outliers relative to median latency.
+The fixed-depth experiment has non-monotonic q99 timing in 3/3 seeds. Task-only learned-hard q99 is monotonic in only **1/3 seeds**, with high-percentile outliers far above the median.
 
-All current deadline claims are **soft/weakly-hard empirical P95** results. WCET/hard real time is not established.
+All deadline results remain **empirical soft/weakly-hard**. WCET/hard real time is not established.
 
 ## What remains before a stronger claim
 
-1. remove explicit relevance supervision and learn useful admissible activation from task loss while preserving the hard work cap;
-2. use a task where useful internal computation is latent rather than directly exposed as a relevance mask;
-3. adapt admitted budgets to machine state;
-4. test finer-grained structured physical activation;
-5. move to an RTOS/time-predictable target or obtain defensible static/formal WCET.
+1. make useful internal computation less analytically exposed than the current key/query task;
+2. add machine-state-aware budget admission;
+3. test structured finer-grained physical activation;
+4. move to an RTOS/time-predictable target or obtain defensible static/formal WCET;
+5. later test the mechanism in sequence models without making scale itself the goal.
 
 ## Readiness labels
 
 - **Direct physical budget execution:** PASS.
-- **Learned budget-compliant physical activation:** PASS with explicit relevance supervision.
+- **Learned budget-compliant physical activation:** PASS.
 - **Learned activation + soft deadline admission:** PASS with empirical-timing caveat.
-- **Autonomous/latent useful-computation discovery:** OPEN.
+- **Task-loss-only useful-computation selection:** PASS in the supplied toy search space.
+- **General/unconstrained self-organized circuit discovery:** NOT ESTABLISHED.
 - **Machine-state-aware admission:** OPEN.
 - **Hard real time / WCET:** NOT ESTABLISHED.
 - **Real-Time LM / LLM-scale generalization:** NOT TESTED.

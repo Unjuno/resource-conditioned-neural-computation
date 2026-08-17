@@ -4,85 +4,97 @@
 
 Test the intended mechanism directly:
 
-> With one fixed neural network, a runtime-admitted work/time budget constrains physical execution, the NN may choose which admissible internal computation is useful, and the resulting work/quality/latency relation can support deadline-aware admission.
+> With one fixed neural network, a runtime-admitted work/time budget constrains physical execution, the NN learns which admissible internal computation is useful, and the resulting work/quality/latency relation supports deadline-aware behavior.
 
 A controller/gate is an implementation mechanism, not the research target.
 
 ## Progress
 
-- **Phase 1 — budget-conditioned physical block execution:** PASS.
-- **Phase 2a — learned module selection under a hard runtime work cap:** PASS with explicit relevance supervision.
-- **Phase 2b — finer-grained channel/neuron/sub-block activation:** OPEN.
-- **Phase 3a — fixed execution classes + deadline admission:** PASS as empirical P95 soft/weakly-hard.
-- **Phase 3b — learned activation + deadline admission:** PASS as empirical P95 soft/weakly-hard.
-- **Phase 3c — learned activation without explicit relevance labels:** NEXT PRIMARY EXPERIMENT.
-- **Phase 4 — hard timing guarantee / WCET:** OPEN.
+- **Physical budget-conditioned block execution:** PASS.
+- **Learned module selection under a hard runtime cap:** PASS.
+- **Learned activation + empirical deadline admission:** PASS as soft/weakly-hard.
+- **Task-loss-only selection without relevance labels:** PASS in the supplied key/query toy.
+- **Less analytically exposed useful-computation task:** NEXT MODEL-SIDE FALSIFICATION.
+- **Machine-state-aware runtime admission:** OPEN.
+- **Finer-grained structured physical activation:** OPEN.
+- **Hard timing guarantee / WCET:** OPEN.
 
-## Phase 1 — physical budget execution — PASS
+## Completed mechanism chain
 
-One fixed network physically executes different numbers of optional blocks as budget changes. Hard-skip timing is monotonic across three seeds; dense masking without physical skipping does not obtain the latency reduction.
+The current toy experiments now cover:
 
-## Phase 2a — learned selection inside a hard cap — PASS
+```text
+runtime deadline/budget
+    → hard physical work cap
+    → learned budget-compliant activation
+    → executed work
+    → measured latency
+    → task quality / on-time quality
+```
 
-The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. A learned controller chooses which experts to execute, while hard top-k prevents execution beyond `k`.
+Task-loss-only training demonstrates that the selection signal does not have to be supplied as an explicit relevance label in the current fixed search space.
 
-At `k=4`, learned activation reaches **100%** accuracy versus **78.18%** for fixed prefix, with controller overhead included in latency.
+## Current task-only result
 
-The controller currently uses explicit relevance supervision.
+Eight slots carry categorical keys and values; a global query identifies the useful slots only through ordinary task features. No relevance targets are used during training.
 
-## Phase 3a — fixed-class deadline admission — PASS with caveat
+At `k=4`:
 
-Empirical P95 execution classes let a runtime choose the largest fixed execution budget that fits a deadline. Hard physical skipping reduces misses under tight deadlines compared with dense-mask and always-full execution.
+- learned accuracy: **100%**;
+- fixed-prefix accuracy: **78.74%**;
+- analytic key/query oracle: **100%**;
+- selected useful-slot fraction: **100%**.
 
-This is soft/weakly-hard only.
+Physical hard-skip timing remains monotonic in 3/3 seeds.
 
-## Phase 3b — learned activation + deadline admission — PASS with caveat
+The task is still analytically simple enough that an external key/query oracle exists. Therefore the next model-side experiment should make useful computation less directly exposed rather than merely making the controller larger.
 
-The runtime calibrates policy-specific P95 timing classes including controller overhead, admits `k`, and the NN chooses which `k` modules to execute.
+## Next model-side falsification
 
-All policies are tested on the same absolute deadline within each seed. Faster baselines may admit more work.
-
-Three-seed on-time & correct rates:
-
-| regime | learned | prefix | external oracle | always full |
-|---|---:|---:|---:|---:|
-| tightest | 64.50% | **66.00%** | 64.25% | 0.00% |
-| around learned `k=2` | **78.08%** | 70.50% | **80.29%** | 2.13% |
-| around learned `k=4` | **98.46%** | 76.00% | **98.71%** | 88.29% |
-| full-budget | 98.46% | **98.92%** | 97.33% | 98.46% |
-
-The result is intentionally not presented as universal learned-policy superiority. Controller overhead hurts at the tightest/full regimes, and the analytic relevance oracle remains slightly stronger in the synthetic task.
-
-## Phase 3c — remove explicit relevance supervision — NEXT
-
-The next experiment must preserve the systems contract while making useful internal computation latent:
+Construct a task where the value of an internal computation is **latent or interaction-dependent**, while keeping the same systems contract:
 
 ```text
 runtime admits k
-NN learns which k modules to execute from task loss
-physical execution may not exceed k
+NN chooses ≤ k physical modules
+selection trained from task loss
 ```
 
-Required properties:
+Candidate requirements:
 
-1. hard runtime work cap remains structural;
-2. inactive modules remain physically skipped;
-3. controller overhead remains in end-to-end timing;
-4. selection is trained primarily from task loss rather than a supplied relevance target;
-5. learned policy is compared with fixed-prefix, dense-mask, and an external oracle where one can still be defined;
-6. success is judged by quality / on-time-correct / physical budget compliance, not router accuracy.
+1. no direct relevance flag or simple key==query oracle at the controller input;
+2. useful modules depend on learned intermediate representation or interactions;
+3. hard work cap remains structural;
+4. physical execution and timing audits remain unchanged;
+5. a strong external baseline is retained when one can be defined;
+6. negative collapse is reported rather than repaired by unrelated router optimization.
 
-A negative result is acceptable if task-only learning collapses to a poor selection policy; prior capability-preservation diagnostics may then be used only to explain that concrete failure.
+Do not scale model size for its own sake.
 
-## Phase 2b — finer physical activation — OPEN
+## Next runtime-side falsification
 
-After the task-only controller is stable, test structured channel/neuron/sub-block groups only where inactive work is physically skipped. Do not use dense zero masks as evidence of compute reduction.
+Add a machine-state variable that changes actual execution timing while leaving model weights fixed.
 
-## Phase 4 — timing guarantee boundary — OPEN
+Runtime question:
 
-Ordinary Linux/PyTorch timing is not WCET. The fixed-depth experiment already shows non-monotonic q99 classes, and learned-policy timing contains large high-percentile outliers.
+> Can the runtime remap deadline + observed machine state to a conservative admitted work budget without retraining the NN?
 
-A hard-real-time experiment requires statically analyzable code, a time-predictable target, controlled RTOS scheduling/interference assumptions, formal/static WCET, or an accepted equivalent.
+This should be tested first under controlled CPU-frequency/load states if available, while explicitly retaining the Linux tail limitation.
+
+A stronger follow-up should move to an RTOS/time-predictable target.
+
+## Finer physical activation — OPEN
+
+Test channel/neuron/sub-block groups only when inactive work is **physically skipped**. Dense zero masks do not count as compute reduction.
+
+Measure controller overhead, work reduction, latency, quality, and variance.
+
+## Hard timing guarantee boundary — OPEN
+
+Ordinary Linux/PyTorch timing is not WCET.
+
+Current experiments repeatedly show unstable/non-monotonic high-percentile timing even when medians are well ordered.
+
+A hard-real-time experiment requires statically analyzable generated inference code, a time-predictable target, controlled RTOS interference assumptions, formal/static WCET, or an accepted equivalent.
 
 ## Direction rule
 

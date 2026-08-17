@@ -1,0 +1,67 @@
+{
+  "setup": {
+    "task": "8 slots with categorical keys and a global query; exactly 4 key-query matches; label is strict majority of matching-slot bits",
+    "training": "task loss only; no relevance labels or relevance auxiliary loss; straight-through hard top-k surrogate; no capability warmup",
+    "inference": "hard top-k physically executes exactly k selected experts",
+    "baselines": ["fixed prefix", "analytic key==query oracle", "dense learned mask"],
+    "timing_boundary": "ordinary Linux/PyTorch; not WCET/hard real time"
+  },
+  "aggregate": {
+    "all_physical_checks_pass": true,
+    "learned_q99_monotonic_seeds": 1,
+    "max_hard_dense_output_diff": 1.430511474609375e-06,
+    "by_k": {
+      "1": {
+        "learned_accuracy": 0.6903999845,
+        "prefix_accuracy": 0.6765999794,
+        "oracle_accuracy": 0.6908666690,
+        "learned_selected_relevance": 1.0,
+        "learned_median_us": 77.4930,
+        "prefix_median_us": 54.2212,
+        "oracle_median_us": 64.0165,
+        "dense_median_us": 301.1907
+      },
+      "2": {
+        "learned_accuracy": 0.8126666745,
+        "prefix_accuracy": 0.7136666576,
+        "oracle_accuracy": 0.8180000186,
+        "learned_selected_relevance": 1.0,
+        "learned_median_us": 110.4730,
+        "prefix_median_us": 87.2242,
+        "oracle_median_us": 98.1567,
+        "dense_median_us": 307.5305
+      },
+      "4": {
+        "learned_accuracy": 1.0,
+        "prefix_accuracy": 0.7874000072,
+        "oracle_accuracy": 1.0,
+        "learned_selected_relevance": 1.0,
+        "learned_median_us": 176.9678,
+        "prefix_median_us": 152.8043,
+        "oracle_median_us": 162.6068,
+        "dense_median_us": 309.6403
+      },
+      "8": {
+        "learned_accuracy": 0.9981999993,
+        "prefix_accuracy": 0.9981999993,
+        "oracle_accuracy": 0.9981999993,
+        "learned_selected_relevance": 0.5,
+        "learned_median_us": 314.0357,
+        "prefix_median_us": 294.5438,
+        "oracle_median_us": 301.5832,
+        "dense_median_us": 302.3702
+      }
+    },
+    "deadline_on_time_correct": {
+      "1": {"learned_hard": 0.6760, "prefix_hard": 0.7693333333, "oracle_hard": 0.7946666667, "dense_learned": 0.0, "always_full": 0.3120},
+      "2": {"learned_hard": 0.7593333333, "prefix_hard": 0.8226666667, "oracle_hard": 0.8973333333, "dense_learned": 0.3326666667, "always_full": 0.7286666667},
+      "4": {"learned_hard": 0.9826666667, "prefix_hard": 0.8513333333, "oracle_hard": 0.9746666667, "dense_learned": 0.3320, "always_full": 0.9140},
+      "8": {"learned_hard": 0.9653333333, "prefix_hard": 0.8513333333, "oracle_hard": 0.9813333333, "dense_learned": 0.6200, "always_full": 0.9593333333}
+    }
+  },
+  "seed_checks": [
+    {"seed": 0, "hard_cap": true, "dense_executes_all": true, "learned_median_monotonic": true},
+    {"seed": 1, "hard_cap": true, "dense_executes_all": true, "learned_median_monotonic": true},
+    {"seed": 2, "hard_cap": true, "dense_executes_all": true, "learned_median_monotonic": true}
+  ]
+}
