@@ -53,6 +53,32 @@ Invalid execution-class values map to class 0, never to a larger work class. The
 
 This preserves the runtime contract property that malformed class input cannot silently increase neural work.
 
+## Division-free residual scaling
+
+The first Q5 implementation represented the residual coefficient `0.2` as signed integer division by 5. On the tested x86 GCC object this produced one integer division instruction. That is undesirable as a target-independent RTOS primitive because another target/compiler could give it very different cost or lower it to a helper routine.
+
+The public core now approximates the coefficient as:
+
+```text
+0.2 ≈ 51 / 256 = 0.19921875
+```
+
+implemented only as constant multiplication, signed rounding, and an 8-bit shift.
+
+Across **3/3 seeds and all five execution classes**, the division-free core preserves the same classification results over the complete 512-state domain. GCC `objdump` on the core object reports **zero `div`/`idiv` instructions**, and `nm -u` remains empty.
+
+Seed-0 five-run alternating host timing shows the analyzability simplification is not free but modest centrally:
+
+| class | `/5` median p50 | `51/256` median p50 |
+|---:|---:|---:|
+| 0 | 0.140 us | 0.131 us |
+| 1 | 19.427 us | 19.149 us |
+| 2 | 60.873 us | 63.409 us |
+| 3 | 106.453 us | 112.613 us |
+| 4 | 139.606 us | 146.296 us |
+
+The deeper classes are roughly 4–6% slower in this host measurement. The change is therefore justified as an implementation-cost simplification, **not** as a speed optimization.
+
 ## Static memory reduction
 
 | item | float core | Q5 core |
@@ -60,13 +86,13 @@ This preserves the runtime contract property that malformed class input cannot s
 | model weight payload | 335,368 B | **167,684 B** |
 | activation LUT payload | 2,056 B | **1,028 B** |
 | caller-owned workspace | 8,064 B | **4,032 B** |
-| GCC freestanding object `.text` in this build | 340,260 B | **170,974 B** |
+| GCC freestanding object `.text` in the original Q5 build | 340,260 B | **170,974 B** |
 
-The payload/workspace reductions are exactly 2x because float32 storage is replaced by int16 storage. Object-file sizes are compiler/build specific.
+The payload/workspace reductions are exactly 2x because float32 storage is replaced by int16 storage. Object-file sizes are compiler/build specific. The division-free Q5 object differs by only a few bytes from the `/5` version in this build.
 
 ## Host central-latency cross-check
 
-On the same host CPU, seed 0 float-LUT and Q5 binaries were alternated for five timing runs. Median-of-run-medians:
+On the same host CPU, seed 0 float-LUT and the original Q5 binaries were alternated for five timing runs. Median-of-run-medians:
 
 | class | blocks | float-LUT p50 | Q5 p50 | Q5 / float |
 |---:|---:|---:|---:|---:|
@@ -76,7 +102,7 @@ On the same host CPU, seed 0 float-LUT and Q5 binaries were alternated for five 
 | 3 | 6 | 173.179 us | **106.277 us** | **0.61x** |
 | 4 | 8 | 248.535 us | **140.182 us** | **0.56x** |
 
-Class 0 is so small that integer-core fixed overhead dominates. For nontrivial classes the tested Q5 implementation is faster centrally on this host, but **no target-independent speedup claim is made**. Linux tail latency is still not WCET. Short timing runs can transiently disturb adjacent-class ordering, so the committed comparison uses the longer repeated measurements above rather than a favorable smoke run.
+Class 0 is so small that integer-core fixed overhead dominates. For nontrivial classes the tested Q5 implementation is faster centrally on this host, but **no target-independent speedup claim is made**. Linux tail latency is still not WCET. Short timing runs can transiently disturb adjacent-class ordering, so the committed comparison uses the longer repeated measurements rather than a favorable smoke run.
 
 ## Compiler cross-check
 
@@ -103,6 +129,7 @@ gcc -O2 -std=c11 -ffreestanding -fno-builtin \
   -o /tmp/rtnn-q5/core.o
 
 nm -u /tmp/rtnn-q5/core.o
+objdump -d /tmp/rtnn-q5/core.o | grep -E '\\b(idiv|div)[a-z]*\\b' || true
 
 gcc -O2 -std=c11 -D_POSIX_C_SOURCE=200809L \
   -I/tmp/rtnn-q5 -Iexperiments \
@@ -112,7 +139,7 @@ gcc -O2 -std=c11 -D_POSIX_C_SOURCE=200809L \
 /tmp/rtnn-q5/host_bench 2000
 ```
 
-Expected `nm -u` output is empty, and the host regression should print `invalid_class_fail_closed=1`.
+Expected `nm -u` output is empty, the division-instruction grep is empty, and the host regression should print `invalid_class_fail_closed=1`.
 
 ## Interpretation
 
@@ -130,6 +157,8 @@ int16 weights + int16 workspace
 int32 bounded finite-domain accumulators
         ↓
 integer activation LUTs
+        ↓
+constant multiply/shift residual scaling
         ↓
 five finite physical execution classes
 ```
