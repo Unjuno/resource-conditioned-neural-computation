@@ -1,0 +1,55 @@
+{
+  "setup": {
+    "seeds": [0, 1, 2],
+    "complete_states": 512,
+    "compiler_primary": "GCC -O2 x86_64",
+    "timing_boundary": "ordinary Linux central timing; not WCET"
+  },
+  "static_bound": {
+    "method": "For every linear row: |acc| <= |bias|*32 + sum(|weight_i|)*input_abs_bound, with input bounds taken from embedding magnitudes or finite tanh/GELU integer LUT ranges.",
+    "seeds": [
+      {"seed": 0, "max_linear_accumulator_abs_bound": 99904, "max_linear_postshift_abs_bound": 3122},
+      {"seed": 1, "max_linear_accumulator_abs_bound": 107552, "max_linear_postshift_abs_bound": 3361},
+      {"seed": 2, "max_linear_accumulator_abs_bound": 100896, "max_linear_postshift_abs_bound": 3153}
+    ],
+    "worst_accumulator_abs_bound": 107552,
+    "worst_postshift_abs_bound": 3361,
+    "int32_limit": 2147483647,
+    "int16_limit": 32767,
+    "worst_int32_fraction": 0.000050082802795843595,
+    "worst_int16_fraction": 0.10257271034882657
+  },
+  "branchless_numeric_core": {
+    "description": "Sign-aware power-of-two rounding, int16 saturation, and LUT input clamping are expressed without data-dependent source-level if/else branches; execution-class and loop control remain.",
+    "seeds": [
+      {"seed": 0, "accuracy": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0], "p50_us": [0.137, 18.879, 41.133, 63.699, 75.295]},
+      {"seed": 1, "accuracy": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0], "p50_us": [0.2, 31.371, 62.491, 93.764, 125.059]},
+      {"seed": 2, "accuracy": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0], "p50_us": [0.219, 31.407, 62.474, 93.934, 132.272]}
+    ],
+    "bit_identical_integer_logits_vs_previous_division_free_core_all_seeds_classes_states": true,
+    "undefined_external_symbols_gcc_all_seeds": 0,
+    "div_or_idiv_instructions_gcc_all_seeds": 0,
+    "gcc_seed0_conditional_jump_count_previous": 63,
+    "gcc_seed0_conditional_jump_count_branchless_numeric": 23,
+    "gcc_seed0_object_text_bytes_previous": 170988,
+    "gcc_seed0_object_text_bytes_branchless_numeric": 170789,
+    "clang_seed0_undefined_external_symbols": 0,
+    "clang_seed0_div_or_idiv_instructions": 0,
+    "clang_seed0_conditional_jump_count": 23,
+    "clang_seed0_object_text_bytes": 172774,
+    "seed0_alternating_5run_median_p50_us": {
+      "previous_division_free": {"0": 0.145, "1": 19.221, "2": 65.075, "3": 112.864, "4": 146.307},
+      "branchless_numeric": {"0": 0.199, "1": 28.094, "2": 56.683, "3": 85.191, "4": 113.448},
+      "ratio_branchless_over_previous": {"0": 1.3724137931034484, "1": 1.4616305082982155, "2": 0.8710411064156742, "3": 0.7548111000850581, "4": 0.7754106091984663}
+    }
+  },
+  "interpretation": {
+    "supported": "For the tested Q5 toy model family, numeric helper conditionals can be implemented without data-dependent source branches while preserving bit-identical integer logits. A conservative weight/LUT-derived bound proves linear int32 accumulator and post-shift int16 values remain far below their type limits for the three tested seeds.",
+    "not_supported": [
+      "WCET or hard-real-time guarantee",
+      "architecture-independent branch count",
+      "target-independent speedup",
+      "general overflow proof for arbitrary generated networks"
+    ]
+  }
+}
