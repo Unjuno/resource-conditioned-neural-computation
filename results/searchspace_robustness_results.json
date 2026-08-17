@@ -1,0 +1,67 @@
+{
+  "setup": {
+    "task": "4-bit parity over 256 states",
+    "resource_columns": ["compute_proxy", "active_parameter_footprint_proxy"],
+    "metric": "tie-aware minimum-cost rate among 100%-accurate topologies",
+    "boundary": "proxy resources; not physical memory/energy; exact finite search-space diagnostic"
+  },
+  "configs": {
+    "s3_hom": {
+      "per_seed": [
+        {"seed":0,"hard_accuracy":1.0,"optimal_rate":0.53,"regret":0.027887721676379443,"num_routes":3,"single_probe_min_accuracy":1.0},
+        {"seed":1,"hard_accuracy":1.0,"optimal_rate":0.915,"regret":0.004922544937580824,"num_routes":3,"single_probe_min_accuracy":1.0},
+        {"seed":2,"hard_accuracy":1.0,"optimal_rate":0.9975,"regret":0.0000023742951452732087,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":3,"hard_accuracy":1.0,"optimal_rate":0.9425,"regret":0.0027288398146629333,"num_routes":3,"single_probe_min_accuracy":1.0},
+        {"seed":4,"hard_accuracy":1.0,"optimal_rate":1.0,"regret":0.0000000018440186977386474,"num_routes":3,"single_probe_min_accuracy":1.0}
+      ],
+      "aggregate":{"mean_hard_accuracy":1.0,"mean_optimal_rate":0.877,"min_optimal_rate":0.53,"mean_regret":0.0071082965135574345}
+    },
+    "s4_hom": {
+      "per_seed": [
+        {"seed":0,"hard_accuracy":1.0,"optimal_rate":0.9975,"regret":0.000002379845827817917,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":1,"hard_accuracy":1.0,"optimal_rate":0.9975,"regret":0.0000023743323981761933,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":2,"hard_accuracy":1.0,"optimal_rate":0.9975,"regret":0.000002377089112997055,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":3,"hard_accuracy":1.0,"optimal_rate":0.9125,"regret":0.005305341463536024,"num_routes":3,"single_probe_min_accuracy":1.0},
+        {"seed":4,"hard_accuracy":1.0,"optimal_rate":1.0,"regret":0.000000002775341272354126,"num_routes":2,"single_probe_min_accuracy":1.0}
+      ],
+      "aggregate":{"mean_hard_accuracy":1.0,"mean_optimal_rate":0.981,"min_optimal_rate":0.9125,"mean_regret":0.0010624951012432574}
+    },
+    "s4_avail_only": {
+      "per_seed": [
+        {"seed":0,"hard_accuracy":1.0,"optimal_rate":1.0,"regret":0.0,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":1,"hard_accuracy":1.0,"optimal_rate":0.9975,"regret":0.000002377089112997055,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":2,"hard_accuracy":1.0,"optimal_rate":0.5025,"regret":0.1586329765804112,"num_routes":1,"single_probe_min_accuracy":1.0},
+        {"seed":3,"hard_accuracy":1.0,"optimal_rate":1.0,"regret":0.000000002775341272354126,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":4,"hard_accuracy":1.0,"optimal_rate":1.0,"regret":0.00000000003725290298461914,"num_routes":3,"single_probe_min_accuracy":1.0}
+      ],
+      "aggregate":{"mean_hard_accuracy":1.0,"mean_optimal_rate":0.9,"min_optimal_rate":0.5025,"mean_regret":0.03172707129642367}
+    },
+    "s4_cost_only": {
+      "per_seed": [
+        {"seed":0,"hard_accuracy":1.0,"optimal_rate":0.5675,"regret":0.0058700027689337735,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":1,"hard_accuracy":1.0,"optimal_rate":0.1925,"regret":0.010833847671747207,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":2,"hard_accuracy":1.0,"optimal_rate":0.5675,"regret":0.0058700027689337735,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":3,"hard_accuracy":1.0,"optimal_rate":0.0,"regret":0.01701340911909938,"num_routes":3,"single_probe_min_accuracy":1.0},
+        {"seed":4,"hard_accuracy":1.0,"optimal_rate":0.3225,"regret":0.008985648807138204,"num_routes":3,"single_probe_min_accuracy":1.0}
+      ],
+      "aggregate":{"mean_hard_accuracy":1.0,"mean_optimal_rate":0.33,"min_optimal_rate":0.0,"mean_regret":0.009714582227170468}
+    },
+    "s4_hetero": {
+      "per_seed": [
+        {"seed":0,"hard_accuracy":1.0,"optimal_rate":0.22,"regret":0.006554476302117109,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":1,"hard_accuracy":1.0,"optimal_rate":0.4425,"regret":0.007771827559918165,"num_routes":3,"single_probe_min_accuracy":1.0},
+        {"seed":2,"hard_accuracy":1.0,"optimal_rate":0.3375,"regret":0.10824180955067277,"num_routes":1,"single_probe_min_accuracy":1.0},
+        {"seed":3,"hard_accuracy":1.0,"optimal_rate":0.5575,"regret":0.0031865557469427587,"num_routes":2,"single_probe_min_accuracy":1.0},
+        {"seed":4,"hard_accuracy":1.0,"optimal_rate":0.525,"regret":0.002366504892706871,"num_routes":3,"single_probe_min_accuracy":1.0}
+      ],
+      "aggregate":{"mean_hard_accuracy":1.0,"mean_optimal_rate":0.4165,"min_optimal_rate":0.22,"mean_regret":0.025624234810471533}
+    }
+  },
+  "dense_anchor_cost_only": {
+    "anchors":21,
+    "per_seed":[0.5675,0.1925,0.0,0.0,0.3],
+    "mean_optimal_rate":0.212,
+    "min_optimal_rate":0.0,
+    "mean_regret":0.00837838515266776
+  }
+}
