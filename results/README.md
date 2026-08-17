@@ -16,6 +16,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `sampled_joint_parity_policy_results.json`
 - `searchspace_robustness_results.json` — five-seed search-space/cost-structure ablation plus 21-anchor cost-heterogeneity diagnostic.
 - `nonseparable_contract_diagnostic_results.json` — route-local hardware-calibration coverage, matched blind and calibration-swap controls, plus an autoregressive negative diagnostic.
+- `router_parameterization_sensitivity_results.json` — matched reproduction of the public four-stage homogeneous result plus one-variable capability-sampling and router-head ablations.
 
 The corresponding scripts in `experiments/` regenerate fuller traces. The committed JSONs may be compact summaries rather than every intermediate tensor/trace.
 
