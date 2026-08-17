@@ -35,6 +35,16 @@ Accordingly, the lookup path in this repository is **not** presented as a novel 
 
 The present experiments also do **not** establish that this mechanism improves DWN, NeuraLUT, LL-ViT, or other LUT/logic architectures. Those systems are possible future substrates, not validated targets of the current result.
 
+## Direct fixed-network internal-circuit check
+
+A follow-up experiment places the alternative execution regimes inside one `ResourceConditionedCircuitNet` with one shared classifier head. The model contains a retrieval node and a separate algorithmic stem plus four residual compute blocks. The router is part of the same fixed parameterized model, and `forward_selected()` executes only the chosen internal subgraph.
+
+Across three seeds, both internal circuits achieve 100% accuracy over all 4,096 task states. Holding each task input fixed and changing only the resource condition changes the selected module sequence while preserving the prediction over the complete finite domain. Forward-hook counts verify that the inactive subgraph is not executed, avoiding the earlier failure mode where all branches could be computed before selection.
+
+The price-aware and price-blind routers remain matched at 114 parameters, and the learned router matches the analytic oracle at all 27 tested price-ratio points. This directly supports the narrow statement that resource condition can control an **effective internal circuit** inside one fixed parameterized network. It does not establish spontaneous discovery of useful circuits: the candidate subgraphs were deliberately constructed before router post-training, and the router does not observe task input or difficulty.
+
+See [`internal_circuit_experiment.md`](internal_circuit_experiment.md) and `../results/internal_circuit_conditioning_results.json`.
+
 ## Matched price-blind control
 
 The final price-aware and price-blind routers use the same architecture and the same parameter count: **114 parameters each**. Both are trained against the same log-uniform resource-price distribution and the same random safe-mask distribution. The price-blind control receives zeroed price features, so it cannot condition its decision on the realized price vector.
@@ -101,7 +111,7 @@ This is best described as an **input intervention** showing that the learned rou
 ### Supported
 
 1. Resource price can be learned as a continuous neural execution-control signal in this tested system.
-2. A fixed parameter set can select different effective computation strategies according to resource prices.
+2. A fixed parameter set can select different effective computation strategies according to resource prices; the direct internal-circuit test verifies that the actually executed module sequence changes while predictions remain fixed over the complete finite toy domain.
 3. Functionally equivalent copy/lookup and algorithmic strategies can be switched while preserving task accuracy.
 4. An independent runtime mask can override economic routing, separating empirical timing constraints from within-safe-set proxy optimization.
 5. Price-input intervention reverses routing in the expected direction.
@@ -116,6 +126,7 @@ This is best described as an **input intervention** showing that the learned rou
 6. Automatic circuit self-organization under arbitrary architectures or objectives.
 7. Novelty of LUT neurons, LUT networks, differentiable logic networks, or LUT-based hardware mapping.
 8. Demonstrated gains on existing LUT/logic architectures such as DWN, NeuraLUT, or LL-ViT.
+9. Input-dependent difficulty adaptation in the direct internal-circuit experiment.
 
 ## Recommended preprint framing
 

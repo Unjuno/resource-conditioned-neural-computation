@@ -3,20 +3,22 @@
 ## Supported by the included experiments
 
 1. Resource price can act as a continuous neural execution-control signal in the tested toy system.
-2. A fixed parameter set can select different effective computation strategies as resource prices change.
+2. A fixed parameter set can select different effective computation strategies as resource prices change. In the direct internal-circuit experiment, the selected module sequence itself changes while the task prediction is preserved.
 3. Functionally equivalent lookup/copy and algorithmic/compute strategies can be switched while preserving task accuracy in the tested synthetic task.
 4. An independent runtime availability mask can override resource-price routing, separating statistical timing constraints from within-safe-set resource optimization.
 5. Deliberately corrupting the resource-price signal changes the selected path in the expected wrong direction and increases the actual normalized resource objective.
 6. A same-architecture, same-parameter-count price-blind control does not reproduce the price-dependent route switch.
 
+The direct internal-circuit experiment additionally verifies, across three seeds and all 4,096 finite task states per seed, that changing only the resource condition changes the actually executed internal subgraph while preserving the correct prediction. Forward-hook counts verify that the inactive subgraph is not executed. The alternative subgraphs were deliberately constructed; spontaneous circuit discovery is **not** claimed.
+
 ## Resource-proxy definition
 
-The current final experiment uses two normalized resource coordinates:
+The resource-proxy experiments use two normalized coordinates:
 
-- **compute proxy:** approximate operation/MAC count;
-- **parameter-footprint proxy:** expert parameter count.
+- **compute proxy:** approximate executed operation/MAC count;
+- **parameter-footprint proxy:** parameter count associated with the selected expert/circuit. The direct internal-circuit experiment counts the parameters touched by the active subgraph.
 
-The parameter-footprint coordinate is **not** measured runtime memory traffic, bandwidth, cache pressure, resident-memory reduction, or energy. Both experts are resident in the same process during inference.
+The parameter-footprint coordinate is **not** measured runtime memory traffic, bandwidth, cache pressure, resident-memory reduction, or energy. All parameters remain resident in the same model/process during inference.
 
 ## Related-work boundary
 
@@ -38,6 +40,7 @@ See [`RELATED_WORK.md`](RELATED_WORK.md) for representative prior work including
 8. Necessity of a learned router when route costs are exactly known: in the final two-route toy objective, an analytic `argmin(price · cost)` scheduler is an oracle baseline and the learned router matches it on the tested sweep.
 9. Novelty of LUT neurons, LUT networks, differentiable logic networks, or LUT-based neural hardware mapping.
 10. Demonstrated improvement of the present routing mechanism on DWN, NeuraLUT, LL-ViT, or other LUT/logic-network architectures.
+11. Input-difficulty adaptation in the direct internal-circuit experiment; its router observes resource price and availability mask, not task content.
 
 ## Important negative results retained
 
