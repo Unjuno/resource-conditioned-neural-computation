@@ -1,140 +1,133 @@
 # Claims and limits
 
-## Core Real-Time NN mechanism supported in toy experiments
+## Strongest supported mechanism statement
 
-The strongest supported statement is now:
-
-> In supplied toy architectures, one fixed neural network can receive a runtime-admitted work budget, physically execute only budget-compliant internal computation, and produce a reproducible quality/work/median-latency trade-off. Useful admissible internal computation can be selected by a learned controller, including a tested case trained from **task loss alone** without explicit relevance labels.
+> In supplied toy architectures, one fixed neural network can receive a runtime-admitted work budget, physically execute only budget-compliant internal computation, and produce a reproducible quality/work/median-latency trade-off. Useful admissible computation can be selected by a learned controller, including a tested case trained from task loss alone.
 
 This is **not** a hard-real-time/WCET claim.
 
-## Direct physical budget execution
+## Supported direct evidence
 
-Across three seeds in `realtime_nn_budget_execution.py`:
+### Physical budget execution
 
-- budgets `0 / .25 / .5 / .75 / 1.0` physically execute `0 / 2 / 4 / 6 / 8` optional blocks using the same parameters;
+Across three seeds:
+
+- one fixed NN physically executes `0/2/4/6/8` optional blocks as budget increases;
 - hooks verify inactive blocks are not called;
-- hard-skip median latency is strictly monotonic in 3/3 seeds;
-- mean accuracy increases from **63.67% to 100%**;
-- mean median latency increases from **10.53 us to 375.82 us**;
-- dense logical masking executes all blocks and does not obtain the same speedup.
+- mean accuracy increases **63.67% → 100%**;
+- hard-skip median latency increases **10.53 us → 375.82 us** and is strictly monotonic in 3/3 seeds;
+- dense logical masking executes all blocks and does not obtain the speedup.
 
-## Learned selection under a hard runtime cap
+### Learned selection under a hard work cap
 
-The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. Hard top-k structurally prevents the learned controller from exceeding the cap.
+The runtime admits `k ∈ {1,2,4,8}` expert calls. Hard top-k structurally prevents budget violation.
 
-The explicitly supervised controller reaches 100% accuracy at `k=4` versus 78.18% for fixed prefix, while controller overhead is retained in timing.
+At `k=4`, the explicitly supervised learned controller reaches **100%** accuracy versus **78.18%** for fixed prefix. Controller overhead is included in timing.
 
-A deadline integration uses policy-specific empirical P95 timing classes and common absolute deadlines. At the clean `k≈4` regime, learned and prefix miss rates are similar (**1.54% vs 1.21%**) while on-time-correct is **98.46% vs 76.00%**.
+With empirical P95 deadline admission, an intermediate `k≈4` regime gives learned on-time-correct **98.46%** versus **76.00%** for prefix at similar miss rates.
 
-Learned control is not universally better: tight/full-budget regimes can favor a simpler prefix policy, and an external analytic relevance oracle remains a strong baseline.
+Learned control is not universally better: tight/full-budget regimes can favor simpler policies, and an external analytic relevance oracle remains a strong baseline.
 
-## Task-loss-only learned activation
+### Task-loss-only selection
 
-`experiments/realtime_nn_task_only_gate.py` removes the explicit relevance loss and capability warmup.
-
-Task structure:
-
-- eight slots with categorical keys;
-- one global query;
-- exactly four key-query matches;
-- label is the strict majority of matching-slot bits.
-
-The controller receives normal task features but no relevance labels. The whole model is trained from scratch with task cross-entropy using a straight-through hard-top-k surrogate.
+A second learned controller removes relevance labels, relevance auxiliary loss, capability warmup, and expert freezing.
 
 Three-seed mean result:
 
-| k | task-loss learned | fixed prefix | analytic oracle | selected relevance |
+| k | task-loss learned | fixed prefix | analytic oracle | useful-selection fraction |
 |---:|---:|---:|---:|---:|
-| 1 | 69.04% | 67.66% | 69.09% | **100%** |
-| 2 | **81.27%** | 71.37% | 81.80% | **100%** |
-| 4 | **100.00%** | 78.74% | 100.00% | **100%** |
+| 1 | 69.04% | 67.66% | 69.09% | 100% |
+| 2 | **81.27%** | 71.37% | 81.80% | 100% |
+| 4 | **100.00%** | 78.74% | 100.00% | 100% |
 | 8 | 99.82% | 99.82% | 99.82% | 50% |
 
-Physical timing:
+Learned hard-skip median latency is strictly monotonic in 3/3 seeds and hard work-cap compliance passes in 3/3 seeds.
 
-- learned median: **77.49 / 110.47 / 176.97 / 314.04 us** for `k=1/2/4/8`;
-- median latency is strictly monotonic in 3/3 seeds;
-- hard cap compliance passes in 3/3 seeds;
-- dense learned execution stays near full-compute latency because all eight experts run.
+This supports task-loss-only useful-computation selection **inside a supplied fixed search space**. It does not establish unconstrained self-organized architecture discovery.
 
-This supports the narrow statement:
+## Runtime machine-state timing boundary
 
-> Within a supplied fixed search space and a structural runtime work cap, useful budget-compliant internal computation can be learned from task loss alone while preserving physical skipping and a measured budget/latency relation.
-
-It does **not** establish general self-organized architecture discovery.
-
-## Deadline boundary for the task-only controller
-
-The task-only learned controller is also not universally best under soft deadline admission.
-
-Mean on-time & correct rate:
-
-| target class | learned | prefix | analytic oracle | always full |
-|---:|---:|---:|---:|---:|
-| 1 | 67.60% | 76.93% | **79.47%** | 31.20% |
-| 2 | 75.93% | 82.27% | **89.73%** | 72.87% |
-| 4 | **98.27%** | 85.13% | 97.47% | 91.40% |
-| 8 | 96.53% | 85.13% | **98.13%** | 95.93% |
-
-Controller overhead and noisy empirical admission allow simpler/oracle policies to win under some deadlines. The learned benefit is strongest near the intermediate `k≈4` regime.
-
-## Timing boundary
-
-All current deadline results are empirical P95 soft/weakly-hard prototypes on ordinary Linux/PyTorch.
-
-- the fixed-depth experiment has non-monotonic q99 classes in 3/3 seeds;
-- task-only learned-hard q99 is monotonic in only **1/3 seeds**;
-- millisecond-scale high-percentile outliers occur while medians remain tens/hundreds of microseconds.
-
-A hard-real-time claim requires defensible WCET/static timing, a time-predictable runtime/platform, controlled RTOS interference assumptions, or equivalent evidence.
-
-## What remains open
-
-1. make useful internal computation less analytically exposed than the current key/query task;
-2. test machine-state-aware runtime admission;
-3. test finer-grained structured physical activation;
-4. move to an RTOS/time-predictable target or obtain defensible WCET/static timing;
-5. later test sequence-model/LM applicability without making scale itself the objective.
-
-## Secondary diagnostic evidence
-
-Earlier router/topology experiments remain useful for capability forgetting, shortcut collapse, conditional-subgraph formation, feasibility-vs-price separation, non-separable contract failures, optimization sensitivity, policy-parameterization sensitivity, and Linux tail-timing instability.
-
-They are secondary to the direct budget/work/latency/deadline chain.
-
-## Runtime / RTOS responsibility split
+The hypothesis
 
 ```text
-hardware / OS state
-    ↓
-runtime / RTOS timing/admission model
-    ↓
-safe admitted work budget
-    ↓
-same neural network
-    ↓
-budget-compliant learned physical execution
+coarse machine state → one empirical P95 timing table → admitted budget
 ```
 
-The runtime owns hardware-specific feasibility. The NN chooses computation only inside the admitted envelope.
+is **not supported on ordinary Linux** by the newest audit.
+
+Two model seeds were repeatedly calibrated under idle, periodic same-core load, and continuous same-core busy load. Budgets were randomly interleaved; each state was measured six times.
+
+Maximum repeated empirical-P95 coefficient of variation:
+
+- idle: **0.321**;
+- periodic load: **0.092**;
+- continuous same-core busy load: **0.990**.
+
+Under the same continuous-busy state:
+
+- seed 0, `B=.5` P95 ranges **551 us → 4.30 ms**;
+- seed 1, `B=.25` ranges **233 us → 4.16 ms**;
+- seed 1, `B=.5` ranges **561 us → 4.29 ms**.
+
+A larger continuous-busy probe shows the cause is a scheduler/preemption mixture:
+
+| budget | median | P95 | fraction >4 ms |
+|---:|---:|---:|---:|
+| .25 | 103 us | 381 us | 3.00% |
+| .50 | 189 us | **8.38 ms** | **6.94%** |
+| .75 | 279 us | 8.49 ms | 9.22% |
+| 1.00 | 378 us | 8.63 ms | 11.72% |
+
+When preemption probability crosses the 5% boundary, empirical P95 jumps from the fast mode into the preempted mode. Therefore a categorical state-aware P95 table can be discontinuous and run-to-run unstable even though the NN execution class is unchanged.
+
+The initial exploratory result suggesting that load-specific P95 recalibration reliably rescued deadline misses was contradicted by an independent repeat and is **not promoted**.
+
+## Timing interpretation
+
+Lower neural budgets still shorten nominal execution and can reduce the observed exposure window for scheduler interference. But the NN cannot solve uncontrolled scheduling interference by itself.
+
+Hard-real-time deployment requires a controlled timing substrate and defensible assumptions, for example:
+
+- RTOS scheduling isolation / CPU reservation;
+- bounded-priority interference analysis;
+- statically analyzable generated inference code;
+- time-predictable hardware/runtime;
+- formal/static WCET or an accepted probabilistic real-time model with explicit assumptions.
+
+Empirical Linux P95/P99 is not WCET.
+
+## Current open questions
+
+1. Under a controlled RTOS/time-predictable scheduler, can deadline + bounded interference be mapped to a safe admitted NN work budget?
+2. Can useful internal computation be made less analytically exposed than the current key/query toy?
+3. Can structured finer-grained physical activation preserve predictable execution classes?
+4. Later, does the same systems principle transfer to sequence models without making scale itself the objective?
+
+## Secondary diagnostics
+
+Older router/topology experiments remain useful for capability forgetting, shortcut collapse, feasibility-vs-price separation, non-separable resource-contract failures, optimization sensitivity, and timing-tail instability. They are secondary to:
+
+```text
+budget → physical activation → work → latency → deadline
+```
 
 ## Explicitly not claimed
 
 1. Hard real-time guarantees or WCET bounds.
 2. A production Real-Time NN or Real-Time LM.
-3. Joule-level energy savings or measured memory-bandwidth reduction.
-4. Universal superiority over fixed policies or analytic schedulers.
-5. Necessity of a learned controller when exact useful-computation information is analytically available.
-6. General/unconstrained self-organized architecture discovery.
-7. Arbitrary hardware portability.
-8. LLM-scale generalization.
-9. Novelty of LUT neurons/networks, dynamic routing, NAS, or runtime subnetwork switching.
+3. Stable machine-state→P95 admission on ordinary Linux.
+4. Joule-level energy savings or measured memory-bandwidth reduction.
+5. Universal learned-policy superiority over fixed policies or external schedulers.
+6. Necessity of a learned controller when useful-computation information is analytically available.
+7. General/unconstrained self-organized architecture discovery.
+8. Arbitrary hardware portability.
+9. LLM-scale generalization.
+10. Novelty of LUT neurons/networks, dynamic routing, NAS, or runtime subnetwork switching.
 
 ## Direction lock
 
 Before promoting a new main-line experiment, ask:
 
-> Does it test whether changing the admitted budget of the **same neural network** changes **actual internal activation**, **actual executed work**, **actual inference time**, **quality**, or **deadline behavior**?
+> Does it test the physical chain `budget → activation → work → latency → deadline`, or a concrete runtime condition required to make that chain real-time safe?
 
 If not, it belongs under secondary diagnostics.
