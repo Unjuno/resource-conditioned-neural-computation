@@ -10,6 +10,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic; negative runtime result.
 - `realtime_nn_generated_cpp_results.json` — generated-weight plain-C++ conditional inference; verifies the physical work/central-latency relation without PyTorch and shows scheduler tails remain under same-core contention.
 - `realtime_nn_freestanding_core_results.json` — freestanding finite-class inference-core audit: zero unresolved external symbols, fixed caller-owned workspace, full-domain functional reproduction, and invalid-class fail-closed behavior.
+- `realtime_nn_execution_count_audit_results.json` — physical work-count correction: source/instrumentation audit establishes 91,136 linear MACs per block and corrects the RTOS-facing class work table.
 - `realtime_nn_fixed_q5_results.json` — Q5 integer freestanding-core audit: 3-seed full-domain behavior preservation, int16 weights/workspace with int32 accumulators, 2x storage reduction, compiler cross-check, and central-latency comparison.
 - `realtime_nn_q5_bounded_numeric_results.json` — bounded numeric-path audit: bit-identical branch-reduced Q5 helpers plus conservative static int32/int16 linear-range bounds derived from weights and LUT output ranges.
 - `realtime_nn_fine_grained_classes_results.json` — execution-class granularity audit: post-hoc intermediate depth classes can lose capability, while jointly trained 0..8 depth classes preserve non-decreasing quality and strictly increasing median latency; dominated classes remain off the Pareto frontier.
@@ -34,6 +35,7 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - physical hard-skip traces / explicit C++ loop bounds;
 - hard budget compliance;
 - finite executed-work classes;
+- physical work counts derived from actual control flow and checked by instrumentation;
 - capability validation for every runtime-admissible execution class;
 - quality/latency Pareto usefulness of exposed classes;
 - task quality under budget;
