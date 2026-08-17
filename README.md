@@ -25,6 +25,14 @@ A small router observes two resource prices: one for the compute proxy and one f
 
 A separate runtime mask can disable execution classes based on held-out timing calibration. The learned resource-price policy cannot override this mask. If the runtime declares no execution class safe, the public implementation returns **not admitted** rather than executing an uncertified fallback route.
 
+## Related work / novelty boundary
+
+**LUT-based neural computation is not claimed as novel here.** Prior work already includes differentiable logic-gate networks, interconnected lookup-table networks, neural sub-networks synthesized into LUTs, LUT-neuron Vision Transformers, and fully trainable deep LUT networks.
+
+The lookup path here is only a clean constructive example of one execution regime. The narrower question is whether a model can use an explicit resource-price signal to choose among already-valid, resource-distinct execution regimes while an independent runtime mask constrains feasibility.
+
+See [`RELATED_WORK.md`](RELATED_WORK.md) for specific prior work including DWN, NeuraLUT, LL-ViT, differentiable logic-gate networks, and recent trainable LUT-network work.
+
 ## Main observations
 
 - Across three seeds, compute-expensive conditions route to lookup/copy while preserving task accuracy.
