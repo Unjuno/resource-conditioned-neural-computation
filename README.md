@@ -1,152 +1,154 @@
 # Resource-Conditioned Neural Computation
 
-A small, falsification-oriented mechanism study of neural execution-path selection under explicit resource prices and runtime safety masks.
+A small, falsification-oriented mechanism study of neural execution under explicit resource conditions and runtime availability constraints.
 
 ## Status
 
 **Public mechanism note / reproduction package. Not a hard-real-time claim.**
 
-The narrow result supported by the included experiments is:
+The narrow systems idea under test is:
 
-> A fixed-parameter neural system can learn to select between functionally equivalent but resource-distinct execution paths using a continuous resource-price signal, while an independent runtime mask constrains the selectable execution classes for statistical deadline safety.
+> A fixed neural system can change the internal computation it actually executes as an explicit normalized resource condition changes, while an independent runtime mechanism constrains which execution classes are available.
 
-The package deliberately includes negative results and does **not** claim WCET guarantees, universal Pareto superiority, energy savings in joules, or generalization to LLMs.
+The repository intentionally stays small. It does **not** claim WCET/hard-real-time guarantees, physical energy savings, universal superiority to external schedulers/NAS, unconstrained architecture discovery, or LLM generalization.
 
-## Constructive example
+## Strongest current mechanism result
 
-Two strategies solve the same 12-bit majority task at 100% accuracy:
+The latest follow-up uses the harder **4-bit parity** toy inside the same supplied three-stage supernet. Each stage may use `skip`, `lookup`, or `compute`; complete routes are not task labels.
 
-- **Lookup / copy path:** parameter-footprint-heavy, compute-light.
-- **Algorithmic MLP path:** lower parameter footprint, compute-heavy.
+Capability parameters and the resource router start from scratch and **capability parameters are never frozen**. The successful training recipe separates three concerns:
 
-In the current reproduction script, the lookup expert has 8,192 parameters and an approximately 2-operation lookup proxy, while the MLP has 4,706 parameters and 4,544 linear MACs. The second resource coordinate is therefore a **normalized parameter-footprint proxy**. It is **not** a measurement of runtime memory traffic, bandwidth, resident-memory reduction, or energy.
+1. preserve fallback primitive capability;
+2. delay strong resource optimization until fallback capabilities have matured;
+3. use correlated autoregressive allocation with a binary feasibility/resource-cost split.
 
-A small router observes two resource prices: one for the compute proxy and one for the parameter-footprint proxy. With both paths available, changing only their price ratio changes the selected path while task accuracy remains 100%. The routing probabilities vary smoothly with the continuous price ratio and cross a learned decision boundary.
+Across five seeds:
 
-A separate runtime mask can disable execution classes based on held-out timing calibration. The learned resource-price policy cannot override this mask. If the runtime declares no execution class safe, the public implementation returns **not admitted** rather than executing an uncertified fallback route.
+| condition | hard accuracy | tie-aware minimum-cost rate | worst seed | mean regret |
+|---|---:|---:|---:|---:|
+| immediate joint factorized | 99.75% | 21.90% | 0.00% | 0.24381 |
+| immediate joint autoregressive | 100.00% | 37.15% | 0.00% | 0.19536 |
+| capability-gated factorized | 100.00% | 81.95% | 51.75% | 0.00978 |
+| capability-gated autoregressive | 100.00% | 97.25% | 91.75% | 0.00171 |
+| **capability-gated constrained autoregressive** | **100.00%** | **98.55%** | **95.75%** | **0.00057** |
+| matched price-blind control | 100.00% | 50.25% | 50.25% | 0.15863 |
 
-## Related work / novelty boundary
+All five constrained-autoregressive seeds use multiple hard subgraphs. At resource extremes they consistently choose compute-only execution when the parameter-footprint proxy is expensive and lookup-only execution when compute is expensive; exact stage placement remains seed-dependent.
 
-**LUT-based neural computation, dynamic routing, neural architecture search, once-for-all subnetworks, and runtime subnetwork switching are not claimed as novel here.** Prior work already includes differentiable logic-gate/LUT networks, dynamically routed neural graphs, Adaptive Neural Trees, Once-for-All, Dynamic-OFA, and hardware-aware dynamic NAS such as HADAS.
+This is **not** a single undifferentiated end-to-end self-organization result. It is better described as capability-gated, constrained joint/alternating optimization with no capability freeze.
 
-The lookup path here is only a clean constructive example of one execution regime. The narrower question is whether a model can use an explicit normalized resource-price signal to change its actual internal execution while an independent runtime mask constrains feasibility.
+See [`notes/joint_parity_curriculum.md`](notes/joint_parity_curriculum.md).
 
-See [`RELATED_WORK.md`](RELATED_WORK.md) for the explicit prior-art boundary.
+## Capability readiness matters
 
-## Main observations
+A three-seed threshold sweep varies how mature the six single-primitive probes must be before resource optimization begins.
 
-- Across three seeds, compute-expensive conditions route to lookup/copy while preserving task accuracy.
-- Parameter-footprint-proxy-expensive conditions route to algorithmic computation.
-- A continuous price-ratio sweep changes the routing distribution while preserving 100% accuracy at every tested point.
-- The price-aware and price-blind controls use the **same router architecture and parameter count (114 parameters)**; the control receives zeroed price features and is trained against the same price distribution.
-- On the tested two-route objective, the learned price-aware router matches the analytic external scheduler `argmin_j price · cost_j` at all 27 sweep points (9 ratios × 3 seeds). This repository therefore does **not** claim that learning is superior to an analytic scheduler when the route-cost table is known exactly.
-- Under a shared runtime safe set, price-aware routing reduces the tested normalized resource objective at identical task accuracy in the footprint-proxy-expensive condition.
-- Corrupting the price signal reverses the routing decision and worsens the actual resource objective, providing an intervention-based negative control for fixed-route preference.
+- 80–90% readiness: worst-seed cost-optimality remains **49.75%**;
+- 95% readiness: worst-seed cost-optimality rises to **95.75%**;
+- 99–100% remains similarly strong in this toy.
 
-See [`notes/readiness_report.md`](notes/readiness_report.md) for exact claims, limitations, and prior falsification results.
+This supports a training-order/curriculum interpretation. **95% is not claimed as a universal threshold.**
 
-## Direct internal-circuit test
+See [`results/capability_gate_threshold_sweep.json`](results/capability_gate_threshold_sweep.json).
 
-The repository also contains a direct test of the original architectural claim: **one fixed parameterized network changes the internal subgraph that is actually executed when only the resource condition changes**.
+## Removing exact topology enumeration from router training
 
-The model contains a retrieval node, an algorithmic stem with four residual compute blocks, a shared classifier head, and a resource-conditioned router. Under one resource condition the executed trace is `retrieval -> head`; under another it is `stem -> block0 -> block1 -> block2 -> block3 -> head`.
+The strongest constrained diagnostic computes an exact expectation over the tiny 27-topology space. A second experiment removes that advantage from router training:
 
-Across three seeds, both circuits retain 100% accuracy over all 4,096 task states. An exhaustive same-input counterfactual check confirms that changing only the resource condition changes the selected circuit while preserving the prediction over the complete finite domain. Forward hooks verify that modules on the inactive subgraph are not executed.
+- autoregressive sampled policy gradient;
+- four sampled topologies per price anchor;
+- feasibility estimated on fresh 64-state calibration minibatches;
+- no full-domain feasibility and no complete-topology marginalization in router training;
+- capability parameters continue training and never freeze.
 
-This directly supports **resource-conditioned effective internal circuits**, not merely variable iteration count. It does **not** show spontaneous circuit discovery: the alternative subgraphs were deliberately constructed and only the router was post-trained after capability acquisition. See [`notes/internal_circuit_experiment.md`](notes/internal_circuit_experiment.md).
+Across five seeds, exhaustive final evaluation gives:
 
-## Three-circuit contract generalization
+- **100% hard task accuracy** in all seeds;
+- **95.05% mean** tie-aware minimum-cost rate;
+- **91.25% worst seed**;
+- mean regret **0.00285**;
+- multiple routes in **5/5 seeds**.
 
-A stronger follow-up puts **three** resource-distinct circuits inside one fixed network with a shared classifier head:
+This is weaker than exact marginalization (95.05% vs 98.55%) but shows that the parity result is not solely an artifact of enumerating all 27 topologies during router training.
 
-- retrieval: high active parameter-footprint proxy, very low compute proxy;
-- shallow compute: intermediate footprint and compute;
-- tied-deep compute: low active parameter-footprint proxy, high repeated compute.
+See [`experiments/sampled_joint_parity_policy.py`](experiments/sampled_joint_parity_policy.py).
 
-Across five seeds, all three circuits achieve 100% accuracy over the complete 256-input finite domain. Holding the task input fixed and changing only the resource contract selects all three distinct executed traces in every seed, and forward hooks verify exclusive execution of the selected subgraph.
+## Evidence ladder
 
-The router is trained on only seven discrete price-ratio anchors. On held-out dense continuous ratios, mean oracle-route agreement is **98.64%** (minimum seed **98.49%**). A nearest-anchor discrete external scheduler reaches **98.25%**, so the learned interpolation advantage over that strong simple baseline is present but small. Over 4,000 random price/mask contracts per seed, the price-aware router reaches **98.72%** mean oracle agreement versus **45.82%** for the matched price-blind router.
+The repository builds the claim through increasingly direct falsification tests rather than one large benchmark.
 
-A simulated runtime-calibration transfer keeps the NN and router frozen, applies one of four separable multiplicative calibration profiles to the abstract scarcity vector, and never gives hardware identity to the model. Mean oracle agreement remains approximately **97.85%–98.51%** across the four profiles. This supports only a narrow normalized-contract interface under that separable simulation; it is not evidence of arbitrary real-hardware portability.
+### 1. Two physically distinct strategies
+
+A lookup/copy path and an algorithmic MLP solve the same task while carrying different compute and parameter-footprint proxies. Resource price changes the selected path; swapping the price signal flips the selected strategy and worsens the defined resource objective.
+
+For the known two-route cost table, analytic `argmin(price · cost)` remains the oracle. **Learning is not claimed to beat exact external scheduling when costs are known.**
+
+### 2. One fixed network, different executed internal circuits
+
+`ResourceConditionedCircuitNet` places retrieval and algorithmic subgraphs inside one fixed parameter set. Changing only resource condition changes the actually executed module sequence while preserving the prediction over all 4,096 finite task states. Forward hooks verify inactive modules are not executed.
+
+See [`notes/internal_circuit_experiment.md`](notes/internal_circuit_experiment.md).
+
+### 3. Three resource-distinct internal circuits
+
+A fixed network uses retrieval, shallow compute, or tied-deep compute. All three stay 100% accurate across five seeds. A router trained on seven discrete price-ratio anchors reaches **98.64%** held-out dense oracle agreement; a nearest-anchor external scheduler reaches **98.25%**, so the neural interpolation advantage is small.
+
+Across random price/mask contracts, the price-aware router reaches **98.72%** versus **45.82%** for the matched price-blind router.
 
 See [`notes/multicircuit_contract_transfer.md`](notes/multicircuit_contract_transfer.md).
 
-## Joint specialization from scratch
+### 4. Joint capability acquisition for supplied candidate circuits
 
-A separate follow-up removes capability pretraining and freezing. The same three circuit types and router are initialized together and trained from scratch in one run. Candidate topologies are still deliberately constructed; this is **not** spontaneous topology discovery.
+Naive joint training forgets fallback capability. Supervising every potentially admissible circuit prevents that failure and yields **98.15%** held-out dense and **97.36%** random-contract agreement without capability pretraining/freeze.
 
-Naive joint optimization fails: the retrieval fallback route drops to **71.95% mean forced accuracy** across five seeds (minimum **67.19%**) and is never selected in the held-out dense sweep.
-
-Adding a task loss on every potentially admissible circuit prevents that forgetting. In the capability-preserving joint condition:
-
-- all three circuits remain **100% accurate in all 5 seeds**;
-- all three routes are selected in **5/5 seeds**;
-- training sees only seven discrete price-ratio anchors;
-- held-out dense continuous ratios reach **98.15% mean oracle-route agreement**;
-- 4,000 random price/mask contracts per seed reach **97.36% mean oracle agreement** with mean normalized regret **0.00055**;
-- the same fixed input routes to tied-deep, shallow, or retrieval solely as the resource price changes.
-
-The matched capability-preserving price-blind control keeps every route accurate but does not specialize: held-out dense agreement is **34.91%**, and it selects the same shallow route across the three price regimes.
-
-A scale-invariance ablation also matters. When the router sees raw log prices, fixed-scale dense agreement stays high (**97.96%**) but random-contract agreement falls to **79.56%** when the common price scale changes. Centering log prices per contract restores the stronger result, matching the fact that multiplying all price coordinates by the same positive scalar cannot change `argmin(price · cost)`.
-
-Complete gradient separation is not required: a diagnostic that trains capabilities and allocation with separate optimizers reaches **97.51%** held-out dense agreement, slightly below the ordinary capability-preserving joint result.
+Relative price representation matters: raw log prices fall to **79.56%** under irrelevant common-scale shift, while centered relative log prices recover 97.36%.
 
 See [`notes/joint_self_specialization.md`](notes/joint_self_specialization.md).
 
-## Constrained topology-search follow-up
+### 5. Constrained subgraph discovery without complete-route labels
 
-The topology-search experiment removes the short list of complete named routes. Instead, one three-stage supernet supplies only primitive operations: `skip`, `lookup`, or `compute` at each stage. This creates **27 possible hard topologies**, but complete topologies are never used as training labels.
+A three-stage `skip / lookup / compute` supernet defines 27 hard topologies. On XOR, five price-aware seeds each discover four resource-conditioned hard topologies at 100% exhaustive accuracy; the matched price-blind system selects one fixed topology.
 
-On the main XOR toy, the resource-price-aware model:
+Direct topology search is not globally resource-optimal. Tie-aware re-audit gives **73.10%** minimum-cost rate before pruning and **94.6%** after validation-only local pruning.
 
-- selects **4 distinct hard topologies in every one of 5 seeds** over the held-out dense price sweep;
-- keeps **100% exhaustive task accuracy** at every tested price point;
-- uses a **compute-only** topology when the parameter-footprint proxy is expensive in **5/5 seeds**;
-- uses a **lookup-only / lookup-heavy** topology when the compute proxy is expensive in **5/5 seeds**;
-- learns different exact stage placements across seeds, rather than reproducing one fixed named route.
+See [`notes/topology_search_discovery.md`](notes/topology_search_discovery.md).
 
-The matched price-blind version selects exactly **one fixed topology in 5/5 seeds**.
+### 6. Harder parity: capability, correlation, and training order
 
-This is evidence for **resource-conditioned subgraph discovery inside a supplied supernet search space**. It is not evidence for unconstrained architecture discovery.
+The original end-to-end parity search collapses in 2/3 seeds. A frozen-capability audit shows independent per-stage routing remains unstable even after all primitive capabilities are perfect, while autoregressive routing is much more stable.
 
-### Tie-aware cost-optimality audit
+The latest freeze-free curriculum then shows that **correlation alone is insufficient**: immediate autoregressive joint training still averages only 37.15% cost-optimality. Capability readiness plus correlated constrained routing is the key intervention in the tested setup.
 
-The original `global_oracle_agreement` compared the selected topology with one arbitrarily chosen minimum-cost topology. Because multiple stage-symmetric topologies can tie at exactly the same resource cost, exact route identity is not the correct primary cost-optimality metric.
+See [`notes/router_stabilization_audit.md`](notes/router_stabilization_audit.md) and [`notes/joint_parity_curriculum.md`](notes/joint_parity_curriculum.md).
 
-Across five XOR seeds, the direct learned topology has:
+## Resource proxies
 
-- **70.75%** exact identity with one chosen oracle route;
-- **73.10% tie-aware minimum-cost rate**;
-- mean proxy regret **0.01651**.
+The main resource-conditioned experiments use two normalized coordinates:
 
-A separate validation-only local pruning diagnostic has:
+- **compute proxy:** approximate executed operation/MAC count;
+- **parameter-footprint proxy:** parameters associated with the selected expert/circuit.
 
-- **88.9%** exact route identity;
-- **94.6% tie-aware minimum-cost rate**;
-- mean regret **0.00274**.
+The second coordinate is **not** measured runtime memory traffic, bandwidth, cache pressure, reduced resident memory, or energy. All parameters remain resident in the same model/process.
 
-So pruning helps substantially, but the learned search itself is still not globally resource-optimal. See [`results/topology_tie_aware_metric_audit_results.json`](results/topology_tie_aware_metric_audit_results.json).
+## Runtime availability / real-time boundary
 
-### Harder parity stress test and router audit
+A separate runtime mask can disable execution classes. Neural price routing cannot override that mask; if no route is available, the public implementation does not force an uncertified fallback.
 
-The original end-to-end 4-bit-parity search is unstable: only **1/3 seeds** discovers multiple resource-conditioned topologies, while **2/3 seeds** collapse to a single lookup topology.
+However, ordinary Linux/PyTorch timing is **not WCET**. A same-core contention follow-up shows scheduler/preemption tails can destroy stable route-specific empirical P99 separation. Therefore the repository does not claim hard real-time behavior from these timing experiments.
 
-A controlled follow-up isolates router optimization by first making all six single-primitive lookup/compute placements **100% accurate in all five seeds**, then freezing those capabilities. Under the same 27-topology resource objective:
+Stronger guarantees would require a more predictable platform, scheduler/runtime isolation, or formal/static timing analysis.
 
-- independent-stage factorized + binary feasibility: **77.30%** mean tie-aware optimal-cost rate, minimum **49.75%**;
-- autoregressive + binary feasibility: **94.85%** mean, minimum **93.50%**;
-- flat 27-way route policy + binary feasibility: **94.20%** mean, minimum **92.50%**.
+## Related work / novelty boundary
 
-All three conditions maintain **100% hard task accuracy**. This indicates that the parity failure is not only a missing-capability problem: correlated topology decisions and router optimization matter even after capability is controlled.
+**Not claimed as novel:** LUT neurons/networks, differentiable logic networks, dynamic routing, neural architecture search, once-for-all subnetworks, or runtime subnetwork switching.
 
-The frozen-capability audit is diagnostic only. It is **not** a joint-from-scratch parity solution, and the exact expectation over all 27 topologies is not presented as a scalable NAS method. See [`notes/router_stabilization_audit.md`](notes/router_stabilization_audit.md).
+Representative prior work and the exact novelty boundary are documented in [`RELATED_WORK.md`](RELATED_WORK.md).
 
-## Runtime contention negative result
+The remaining narrow systems question is the combination of:
 
-A same-core Linux contention follow-up attempted to turn empirical 99%-order-statistic timing calibration into a route-specific availability mask. The desired separation was **not stable** across independent invocations: scheduler/preemption tails of several milliseconds often affected even short routes, and state recalibration did not consistently improve held-out miss rate.
-
-This falsifies the simple claim that route-wise P99 recalibration on ordinary Linux is by itself sufficient to obtain a stable runtime safety mask. See [`notes/runtime_contention_negative.md`](notes/runtime_contention_negative.md).
+1. an explicit normalized resource contract/price;
+2. resource-conditioned internal neural execution;
+3. an independent runtime availability constraint.
 
 ## Reproduce
 
@@ -156,43 +158,41 @@ Python 3.10+ is recommended.
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
+
 python experiments/price_mask_conformal_multiseed.py
 python experiments/price_negative_control.py
 python experiments/internal_circuit_conditioning.py
 python experiments/multicircuit_contract_transfer.py
-python experiments/multicircuit_runtime_state_calibration.py
 python experiments/joint_self_specialization.py
 python experiments/topology_search_discovery.py --suite
 python experiments/topology_tie_aware_metric_audit.py --suite
 python experiments/router_stabilization_audit.py --suite
+python experiments/joint_parity_correlated_curriculum.py --suite
+python experiments/joint_parity_correlated_curriculum.py --threshold-sweep
+python experiments/sampled_joint_parity_policy.py
 ```
 
 Generated JSON is written to `results/`.
-
-### Timing caveat
-
-Latency measurements depend strongly on OS/runtime state. The scripts set one PyTorch thread and attempt CPU affinity, but ordinary Linux/PyTorch measurements are **not WCET measurements**. The contention follow-up further shows that scheduler/preemption tails can dominate route-local timing and make empirical P99 class separation unstable. Do not interpret the statistical mask as a hard-real-time guarantee.
 
 ## What would falsify the useful interpretation?
 
 Useful criticism includes evidence that:
 
-1. interventions on the resource-price input do not actually control routing;
-2. an equivalent price-blind policy reproduces the same resource adaptation under matched conditions;
-3. the timing-mask result is an artifact of calibration leakage;
-4. the result disappears under a clean reimplementation;
-5. a materially identical prior method already establishes the same narrow mechanism and runtime/model responsibility split;
-6. the three-circuit result is explained by a weaker discrete controller once price/mask information and capacity are matched;
-7. the joint-from-scratch result disappears when fallback capability and price normalization are matched fairly;
-8. the constrained topology-search result disappears under a stronger matched supernet/NAS baseline or fails to transfer beyond the easy XOR setting;
-9. the router-stabilization gap disappears when independent and correlated routers are matched under the same frozen capability/feasibility set.
+1. resource-price interventions do not actually control routing under matched conditions;
+2. a price-blind matched policy reproduces the same adaptation;
+3. fallback capability or feasibility information leaks the desired route label;
+4. the freeze-free parity result disappears in a clean reimplementation;
+5. the readiness/correlation effects disappear under stronger matched optimization baselines;
+6. a materially identical prior method already establishes the same narrow mechanism and runtime/model responsibility split;
+7. the result depends entirely on exhaustive topology enumeration — the sampled-policy follow-up partially addresses, but does not eliminate, this concern;
+8. the mechanism fails once moved beyond the deliberately tiny supplied search space.
 
-Please open an issue using the critique/reproduction templates.
+Please use the public review issue/templates for critique, prior art, or reproduction failures.
 
 ## Repository scope
 
-This repository intentionally stays small. It is not a scaling project and does not currently target LLMs, GPUs, or production RTOS deployment.
+This is a mechanism study, not a scaling project. It does not currently target LLMs, GPUs, or production RTOS deployment.
 
 ## License
 
-Licensed under the Apache License 2.0. See `LICENSE` in the repository root.
+Apache License 2.0. See `LICENSE`.

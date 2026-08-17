@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "task": "4-bit parity over 256 states",
+    "freeze_used": false,
+    "complete_route_labels_used": false,
+    "capability_insurance": "rotating task loss over six single-primitive probes throughout training",
+    "router_activation": "immediate or delayed until all six single-primitive probes reach 100% full-domain accuracy",
+    "resource_allocation": "periodic exact binary feasibility plus resource cost",
+    "boundary": "Capability-gated modes are curriculum/alternating optimization; parameters are never frozen, but this is not a single undifferentiated end-to-end objective."
+  },
+  "aggregate": {
+    "joint_factorized": {"mean_hard_accuracy": 0.9975, "min_hard_accuracy": 0.9875, "mean_tie_optimal_cost_rate": 0.219, "min_tie_optimal_cost_rate": 0.0, "mean_regret": 0.2438088492, "seeds_using_multiple_routes": 2, "seeds_all_probes_perfect": 5},
+    "joint_ar": {"mean_hard_accuracy": 1.0, "min_hard_accuracy": 1.0, "mean_tie_optimal_cost_rate": 0.3715, "min_tie_optimal_cost_rate": 0.0, "mean_regret": 0.1953637263, "seeds_using_multiple_routes": 2, "seeds_all_probes_perfect": 5},
+    "gated_factorized": {"mean_hard_accuracy": 1.0, "min_hard_accuracy": 1.0, "mean_tie_optimal_cost_rate": 0.8195, "min_tie_optimal_cost_rate": 0.5175, "mean_regret": 0.0097795600, "seeds_using_multiple_routes": 5, "seeds_all_probes_perfect": 5},
+    "gated_ar": {"mean_hard_accuracy": 1.0, "min_hard_accuracy": 1.0, "mean_tie_optimal_cost_rate": 0.9725, "min_tie_optimal_cost_rate": 0.9175, "mean_regret": 0.0017135820, "seeds_using_multiple_routes": 5, "seeds_all_probes_perfect": 5},
+    "constrained_ar": {"mean_hard_accuracy": 1.0, "min_hard_accuracy": 1.0, "mean_tie_optimal_cost_rate": 0.9855, "min_tie_optimal_cost_rate": 0.9575, "mean_regret": 0.0005690960, "seeds_using_multiple_routes": 5, "seeds_all_probes_perfect": 5},
+    "constrained_ar_blind": {"mean_hard_accuracy": 1.0, "min_hard_accuracy": 1.0, "mean_tie_optimal_cost_rate": 0.5025, "min_tie_optimal_cost_rate": 0.5025, "mean_regret": 0.1586329771, "seeds_using_multiple_routes": 0, "seeds_all_probes_perfect": 5}
+  },
+  "seed_summary": [
+    {"seed":0,"constrained_ar":{"hard_accuracy":1.0,"tie_optimal_cost_rate":1.0,"mean_regret":0.0,"num_routes":3,"router_activated_at":750,"probes":{"footprint_expensive":[2,0,0],"balanced":[0,1,0],"compute_expensive":[1,0,0]}},"constrained_ar_blind":{"hard_accuracy":1.0,"tie_optimal_cost_rate":0.5025,"mean_regret":0.1586329764,"num_routes":1,"router_activated_at":750,"probes":{"footprint_expensive":[0,1,0],"balanced":[0,1,0],"compute_expensive":[0,1,0]}}},
+    {"seed":1,"constrained_ar":{"hard_accuracy":1.0,"tie_optimal_cost_rate":0.9575,"mean_regret":0.0007655316,"num_routes":2,"router_activated_at":750,"probes":{"footprint_expensive":[2,0,0],"balanced":[0,0,1],"compute_expensive":[0,0,1]}},"constrained_ar_blind":{"hard_accuracy":1.0,"tie_optimal_cost_rate":0.5025,"mean_regret":0.1586329764,"num_routes":1,"router_activated_at":750,"probes":{"footprint_expensive":[0,1,0],"balanced":[0,1,0],"compute_expensive":[0,1,0]}}},
+    {"seed":2,"constrained_ar":{"hard_accuracy":1.0,"tie_optimal_cost_rate":0.9725,"mean_regret":0.0020775706,"num_routes":4,"router_activated_at":850,"probes":{"footprint_expensive":[0,2,0],"balanced":[0,1,0],"compute_expensive":[0,0,1]}},"constrained_ar_blind":{"hard_accuracy":1.0,"tie_optimal_cost_rate":0.5025,"mean_regret":0.1586329764,"num_routes":1,"router_activated_at":850,"probes":{"footprint_expensive":[0,1,0],"balanced":[0,1,0],"compute_expensive":[0,1,0]}}},
+    {"seed":3,"constrained_ar":{"hard_accuracy":1.0,"tie_optimal_cost_rate":1.0,"mean_regret":1.36e-09,"num_routes":2,"router_activated_at":900,"probes":{"footprint_expensive":[2,0,0],"balanced":[0,0,1],"compute_expensive":[0,0,1]}},"constrained_ar_blind":{"hard_accuracy":1.0,"tie_optimal_cost_rate":0.5025,"mean_regret":0.1586329780,"num_routes":1,"router_activated_at":900,"probes":{"footprint_expensive":[0,0,1],"balanced":[0,0,1],"compute_expensive":[0,0,1]}}},
+    {"seed":4,"constrained_ar":{"hard_accuracy":1.0,"tie_optimal_cost_rate":0.9975,"mean_regret":2.3765e-06,"num_routes":3,"router_activated_at":700,"probes":{"footprint_expensive":[0,0,2],"balanced":[0,0,1],"compute_expensive":[0,0,1]}},"constrained_ar_blind":{"hard_accuracy":1.0,"tie_optimal_cost_rate":0.5025,"mean_regret":0.1586329780,"num_routes":1,"router_activated_at":700,"probes":{"footprint_expensive":[0,0,1],"balanced":[0,0,1],"compute_expensive":[0,0,1]}}}
+  ]
+}

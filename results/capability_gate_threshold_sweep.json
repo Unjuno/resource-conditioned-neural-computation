@@ -1,0 +1,11 @@
+{
+  "summary": {
+    "0.0": {"mean_opt": 0.7766666667, "min_opt": 0.4975, "mean_acc": 0.9908333333, "activations": [0,0,0]},
+    "0.8": {"mean_opt": 0.8091666667, "min_opt": 0.4975, "mean_acc": 1.0, "activations": [300,450,500]},
+    "0.9": {"mean_opt": 0.8091666667, "min_opt": 0.4975, "mean_acc": 1.0, "activations": [400,450,500]},
+    "0.95": {"mean_opt": 0.985, "min_opt": 0.9575, "mean_acc": 1.0, "activations": [500,750,750]},
+    "0.99": {"mean_opt": 0.9841666667, "min_opt": 0.9575, "mean_acc": 1.0, "activations": [600,750,800]},
+    "1.0": {"mean_opt": 0.9766666667, "min_opt": 0.9575, "mean_acc": 1.0, "activations": [750,750,850]}
+  },
+  "boundary": "Three-seed diagnostic only. The sharp change near 95% is task/setup-specific and is not claimed as a universal threshold. Capability parameters are never frozen."
+}
