@@ -20,7 +20,7 @@ The repository should remain a mechanism/reproduction package. Do not add scalin
 
 - A materially identical prior method establishing the same narrow mechanism claim.
 - A clean reproduction failure that cannot be explained by environment/timing variation.
-- A confound showing that the router does not causally use resource price.
+- A confound showing that interventions on the resource-price input do not actually control routing.
 - A stronger matched baseline that removes the claimed within-safe-set resource advantage.
 - A calibration or data leakage issue affecting the core result.
 
