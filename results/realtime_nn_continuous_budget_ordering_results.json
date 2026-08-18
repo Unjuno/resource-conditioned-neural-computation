@@ -1,0 +1,107 @@
+{
+  "setup": {
+    "task": "8 slots; exactly 4 match a categorical query; predict strict majority of matching-slot bits",
+    "continuous_control": "beta in [0,1] maps fail-closed to one of 8 finite physical expert-call classes",
+    "nested_policy": "input-conditioned beta-independent ranking; top-k prefix of learned per-input ordering",
+    "free_policy": "input- and beta-conditioned ranking; top-k may reorder across budgets",
+    "training": "task loss only with beta sampled continuously from Uniform(0,1); no relevance labels",
+    "timing_boundary": "container/PyTorch/Linux empirical timing only; not WCET or hard-real-time evidence"
+  },
+  "aggregate": {
+    "by_class_accuracy": {
+      "1": {"nested": 0.6861666639645895, "free": 0.6891666650772095, "prefix": 0.6709999839464823},
+      "2": {"nested": 0.8040000001589457, "free": 0.8108333349227905, "prefix": 0.6908333500226339},
+      "3": {"nested": 0.8300000031789144, "free": 0.8229999939600626, "prefix": 0.7393333514531454},
+      "4": {"nested": 1.0, "free": 1.0, "prefix": 0.7754999796549479},
+      "5": {"nested": 1.0, "free": 0.999666670958201, "prefix": 0.8096666733423868},
+      "6": {"nested": 0.9986666838328043, "free": 0.9983333349227905, "prefix": 0.8560000061988831},
+      "7": {"nested": 0.9916666547457377, "free": 0.9923333326975504, "prefix": 0.8985000054041544},
+      "8": {"nested": 0.981166660785675, "free": 0.9833333094914755, "prefix": 0.981166660785675}
+    },
+    "mean_free_minus_nested_accuracy_pp": 0.0624996920426682,
+    "k4_nested_minus_prefix_accuracy_pp": 22.45000203450521,
+    "nested_total_violations": 0,
+    "free_total_violations": 273,
+    "all_hard_cap_hook_checks_pass": true,
+    "mean_unseen_budget_accuracy": {"nested": 0.9114583333333334, "free": 0.9120312457283338},
+    "hypothesis": {
+      "H": "Nested learned ordering preserves most free-policy quality, enforces zero path-nestedness violations, and materially beats prefix at intermediate work.",
+      "PASS_conditions": {
+        "nestedness_violations": 0,
+        "hard_cap_hook_checks": true,
+        "mean_free_minus_nested_accuracy_pp_max": 2.0,
+        "k4_nested_minus_prefix_accuracy_pp_min": 5.0
+      }
+    },
+    "decision": "PASS",
+    "quality_monotonicity_audit": {
+      "per_seed": [
+        {"seed": 0, "strict_non_decreasing": false, "max_adjacent_drop_pp": 0.45000314712524414, "k4_to_k8_drop_pp": 0.8000016212463379},
+        {"seed": 1, "strict_non_decreasing": false, "max_adjacent_drop_pp": 1.4999985694885254, "k4_to_k8_drop_pp": 2.0500004291534424},
+        {"seed": 2, "strict_non_decreasing": false, "max_adjacent_drop_pp": 1.3999998569488525, "k4_to_k8_drop_pp": 2.799999713897705}
+      ],
+      "strict_pass_seeds": 0,
+      "mean_k4_to_k8_drop_pp": 1.8833339214324951,
+      "decision": "FAIL"
+    }
+  },
+  "seed_summaries": [
+    {
+      "seed": 0,
+      "accuracy": {
+        "1": {"nested": 0.6834999918937683, "free": 0.6909999847412109, "prefix": 0.6769999861717224},
+        "2": {"nested": 0.8019999861717224, "free": 0.8119999766349792, "prefix": 0.6980000138282776},
+        "3": {"nested": 0.8240000009536743, "free": 0.8205000162124634, "prefix": 0.7440000176429749},
+        "4": {"nested": 1.0, "free": 1.0, "prefix": 0.7739999890327454},
+        "5": {"nested": 1.0, "free": 0.9990000128746033, "prefix": 0.809499979019165},
+        "6": {"nested": 0.9990000128746033, "free": 0.9984999895095825, "prefix": 0.8529999852180481},
+        "7": {"nested": 0.9944999814033508, "free": 0.9929999709129333, "prefix": 0.8970000147819519},
+        "8": {"nested": 0.9919999837875366, "free": 0.9764999747276306, "prefix": 0.9919999837875366}
+      },
+      "nested_violations": 0,
+      "free_violations": 0,
+      "nested_hook_all_pass": true,
+      "free_hook_all_pass": true,
+      "nested_latency_monotonic": false,
+      "free_latency_monotonic": false
+    },
+    {
+      "seed": 1,
+      "accuracy": {
+        "1": {"nested": 0.6909999847412109, "free": 0.6830000281333923, "prefix": 0.6769999861717224},
+        "2": {"nested": 0.8050000071525574, "free": 0.8080000281333923, "prefix": 0.6890000104904175},
+        "3": {"nested": 0.828000009059906, "free": 0.8234999775886536, "prefix": 0.7365000247955322},
+        "4": {"nested": 1.0, "free": 1.0, "prefix": 0.7724999785423279},
+        "5": {"nested": 1.0, "free": 1.0, "prefix": 0.8090000152587891},
+        "6": {"nested": 0.9990000128746033, "free": 0.9965000152587891, "prefix": 0.8510000109672546},
+        "7": {"nested": 0.9944999814033508, "free": 0.9865000247955322, "prefix": 0.8964999914169312},
+        "8": {"nested": 0.9794999957084656, "free": 0.9789999723434448, "prefix": 0.9794999957084656}
+      },
+      "nested_violations": 0,
+      "free_violations": 54,
+      "nested_hook_all_pass": true,
+      "free_hook_all_pass": true,
+      "nested_latency_monotonic": false,
+      "free_latency_monotonic": false
+    },
+    {
+      "seed": 2,
+      "accuracy": {
+        "1": {"nested": 0.6840000152587891, "free": 0.6934999823570251, "prefix": 0.6589999794960022},
+        "2": {"nested": 0.8050000071525574, "free": 0.8125, "prefix": 0.6855000257492065},
+        "3": {"nested": 0.8379999995231628, "free": 0.824999988079071, "prefix": 0.737500011920929},
+        "4": {"nested": 1.0, "free": 1.0, "prefix": 0.7799999713897705},
+        "5": {"nested": 1.0, "free": 1.0, "prefix": 0.8105000257492065},
+        "6": {"nested": 0.9980000257492065, "free": 1.0, "prefix": 0.8640000224113464},
+        "7": {"nested": 0.9860000014305115, "free": 0.9975000023841858, "prefix": 0.9020000100135803},
+        "8": {"nested": 0.972000002861023, "free": 0.9944999814033508, "prefix": 0.972000002861023}
+      },
+      "nested_violations": 0,
+      "free_violations": 219,
+      "nested_hook_all_pass": true,
+      "free_hook_all_pass": true,
+      "nested_latency_monotonic": true,
+      "free_latency_monotonic": false
+    }
+  ]
+}
