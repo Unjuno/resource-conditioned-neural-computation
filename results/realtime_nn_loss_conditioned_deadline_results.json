@@ -1,0 +1,27 @@
+{
+  "setup": {
+    "seed": 0,
+    "calibration": "price-conditioned physical inference including controller overhead; 300 calibration samples/class; monotone empirical P95 envelope",
+    "test_reps": 600,
+    "timing_boundary": "ordinary Linux/PyTorch soft/weakly-hard audit; not WCET"
+  },
+  "representative_price_by_k": {"8":0.16,"6":0.425,"4":0.66,"3":1.27,"0":4.375},
+  "raw_calibration_us": {
+    "8": {"median":409.2665,"p95":494.253,"p99":1074.142},
+    "6": {"median":329.168,"p95":453.162,"p99":626.288},
+    "4": {"median":249.8005,"p95":307.085,"p99":488.334},
+    "3": {"median":208.614,"p95":261.177,"p99":313.835},
+    "0": {"median":61.025,"p95":79.068,"p99":134.489}
+  },
+  "rows": [
+    {"target_k":0,"deadline_us":85.39344,"price_conditioned":{"miss_rate":0.045,"accuracy":0.5083333333,"on_time_correct":0.4833333333},"always_full":{"miss_rate":1.0,"accuracy":0.9566666667,"on_time_correct":0.0}},
+    {"target_k":3,"deadline_us":282.07116,"price_conditioned":{"miss_rate":0.04,"accuracy":0.8733333333,"on_time_correct":0.84},"always_full":{"miss_rate":1.0,"accuracy":0.9566666667,"on_time_correct":0.0}},
+    {"target_k":4,"deadline_us":331.6518,"price_conditioned":{"miss_rate":0.1516666667,"accuracy":0.9116666667,"on_time_correct":0.7683333333},"always_full":{"miss_rate":1.0,"accuracy":0.9566666667,"on_time_correct":0.0}},
+    {"target_k":6,"deadline_us":489.41496,"price_conditioned":{"miss_rate":0.06,"accuracy":0.9533333333,"on_time_correct":0.8933333333},"always_full":{"miss_rate":0.1233333333,"accuracy":0.9566666667,"on_time_correct":0.8366666667}},
+    {"target_k":8,"deadline_us":533.79324,"price_conditioned":{"miss_rate":0.065,"accuracy":0.9566666667,"on_time_correct":0.8933333333},"always_full":{"miss_rate":0.08,"accuracy":0.9566666667,"on_time_correct":0.8766666667}}
+  ],
+  "interpretation": {
+    "supported": "A runtime can empirically map a deadline to a price region whose learned physical width is smaller and can improve on-time-correct behavior versus always-full execution at tighter deadlines.",
+    "negative_boundary": "The k=4 class missed 15.2% despite an 8% margin over its calibration P95, reinforcing that ordinary Linux percentile calibration is not a stable hard-admission contract."
+  }
+}
