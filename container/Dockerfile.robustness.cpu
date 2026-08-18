@@ -1,0 +1,8 @@
+FROM python:3.13.5-slim
+RUN pip install --no-cache-dir torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+WORKDIR /workspace
+COPY experiments/realtime_nn_incremental_refinement.py experiments/
+COPY experiments/realtime_nn_batch_order_robustness.py experiments/
+COPY container/run_robustness_audits.sh container/
+RUN mkdir -p results && chmod +x container/run_robustness_audits.sh
+CMD ["container/run_robustness_audits.sh"]
