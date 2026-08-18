@@ -2,7 +2,7 @@
 
 ## Strongest supported mechanism statement
 
-> In supplied toy architectures, one fixed neural parameter set can receive a runtime-admitted work budget and/or a scalar resource price and physically execute different internal computation classes. The tested classes vary depth, structured active channel width, and sparse expert width; they produce reproducible quality/work trade-offs and can produce lower measured central latency when the backend actually avoids inactive computation.
+> In supplied toy architectures, one fixed neural parameter set can receive a runtime-admitted work budget and/or a scalar resource price and physically execute different internal computation classes. The tested classes vary depth, structured active channel width, sparse expert width, and transformer-like attention+MLP depth; they produce reproducible quality/work trade-offs and can produce lower measured central latency when the backend actually avoids inactive computation.
 
 This is **not** a hard-real-time/WCET claim. A soft resource price does not replace a hard runtime admission bound.
 
@@ -91,6 +91,45 @@ Important limits:
 - the toy exposes a simple loss/work table, so an external analytic scheduler can compute an equivalent argmin and remains a strong baseline;
 - a soft price is not a hard execution guarantee. For a real-time system, a hard admitted work region should be supplied separately by the runtime.
 
+### Hard cap + soft price in a transformer-like sequence stack
+
+A 9-token local-attention sequence toy contains eight optional self-attention + MLP residual blocks in one parameter set. Each block expands token-0 receptive field by one token.
+
+The runtime provides a hard max-depth cap `0/2/4/6/8`. Disallowed depths are structurally removed from controller choice. A scalar resource price then chooses among the allowed physical depths according to an amortized loss/work objective
+
+\[
+E_d(\lambda)=\overline{BCE}_d+0.7\lambda d/8.
+\]
+
+Three-seed fixed-depth weighted sequence quality:
+
+| blocks | weighted bit accuracy |
+|---:|---:|
+| 0 | 58.62% |
+| 2 | 74.14% |
+| 4 | 86.21% |
+| 6 | 94.83% |
+| 8 | 100% |
+
+With full cap, **3/3 seeds** use all five execution classes in the same price order: `8 → 6 → 4 → 2 → 0` blocks. Representative mean physical medians are approximately **1.11 ms → 0.85 ms → 0.59 ms → 0.37 ms → 0.09 ms**, while dense-equivalent execution remains near full-depth timing.
+
+Matched evidence:
+
+- hard cap is respected for all tested seed×cap×price points;
+- hook execution count matches selected depth in all tested seeds;
+- physical hard-skip vs dense-equivalent has **0/750 prediction-vector mismatches** and maximum logit difference **0**;
+- full-cap loss/work-oracle agreement is **27/27** tested seed×price points;
+- price-blind controls do not change depth with price at fixed cap.
+
+This supports **hard admissibility + soft price-conditioned physical sequence computation** in a supplied transformer-like toy.
+
+Important limits:
+
+- this is not autoregressive language generation;
+- capability parameters are trained across all depths and the controller is post-trained from the capability frontier; end-to-end sparse training is not demonstrated;
+- the current variable graph is prefix-depth only, not arbitrary attention-head/MLP-expert selection;
+- an external analytic scheduler remains a strong baseline when the complete loss/work frontier is available.
+
 ### Learned selection under a hard work cap
 
 The runtime admits `k ∈ {1,2,4,8}` expert calls. Hard top-k structurally prevents budget violation.
@@ -154,11 +193,11 @@ Empirical Linux P95/P99 is not WCET.
 
 ## Current open questions
 
-1. Can a controlled RTOS supply a hard admissible work cap while a soft price lets the same NN choose the best internal width **inside that cap**?
-2. On a controlled RTOS/time-predictable target, can explicit target/build-specific upper bounds be attached to those validated execution classes?
-3. Does the price-conditioned physical-computation mechanism transfer to a small sequence/transformer model with optional attention/MLP work before considering LM scale?
-4. Can useful internal computation be made less analytically exposed than the current toy?
-5. Can finer sub-block/neuron activation beyond structured prefix width remain physically cheap on a suitable backend?
+1. Can the sequence result move beyond prefix-depth elasticity to **separately optional attention and MLP expert groups** inside decoder-like blocks while preserving physical skip?
+2. Can the hard-cap + soft-price sequence mechanism be lowered to a generated/analyzable backend with explicit finite work classes?
+3. On a controlled RTOS/time-predictable target, can target/build-specific upper bounds be attached to those classes?
+4. Does the mechanism survive a small autoregressive-generation task before any LLM-scale experiment?
+5. Can useful internal computation be made less analytically exposed than the current toy?
 
 ## Secondary diagnostics
 
@@ -180,11 +219,11 @@ hard admissible work region + soft resource price
 4. Universal latency benefit from nominal MAC reduction; PyTorch provides a direct counterexample in the structured-width experiment.
 5. Joule-level energy savings or measured memory-bandwidth reduction.
 6. Universal learned-policy superiority over fixed policies or external schedulers.
-7. Necessity of learned price-to-width control when an external quality/work table is analytically available.
-8. Training-time sparse execution in the loss-conditioned experiment.
+7. Necessity of learned price-to-width/depth control when an external quality/work table is analytically available.
+8. Training-time sparse execution in the loss-conditioned/sequence experiments.
 9. General/unconstrained self-organized architecture discovery or arbitrary neuron sparsity.
 10. Arbitrary hardware/timing portability.
-11. LLM-scale generalization.
+11. Autoregressive LM behavior or LLM-scale generalization.
 12. Novelty of LUT neurons/networks, dynamic routing, NAS, or runtime subnetwork switching.
 
 ## Direction lock
