@@ -1,0 +1,42 @@
+{
+  "setup": {
+    "dataset": "sklearn handwritten digits real data",
+    "sequence": "8 row tokens",
+    "split": "fixed stratified 60/20/20",
+    "architecture": "6 optional self-attention+MLP blocks with exits",
+    "budget": "continuous b in [0,1] lowered to 7 finite depths",
+    "policy": "validation chooses maximum useful depth; entropy may stop earlier",
+    "formal_seeds": [60,61,62,63,64]
+  },
+  "per_seed": [
+    {"seed":60,"validation_max_depth":2,"test_exact":[0.491666675,0.922222197,0.930555582,0.936111093,0.930555582,0.936111093,0.936111093],"policy_accuracy":0.930555582,"policy_compute":0.188425913},
+    {"seed":61,"validation_max_depth":3,"test_exact":[0.491666675,0.899999976,0.919444442,0.922222197,0.913888872,0.916666687,0.916666687],"policy_accuracy":0.922222197,"policy_compute":0.213425934},
+    {"seed":62,"validation_max_depth":2,"test_exact":[0.508333325,0.933333337,0.933333337,0.933333337,0.930555582,0.933333337,0.933333337],"policy_accuracy":0.927777767,"policy_compute":0.169444442},
+    {"seed":63,"validation_max_depth":5,"test_exact":[0.474999994,0.911111116,0.941666663,0.938888907,0.933333337,0.933333337,0.925000012],"policy_accuracy":0.941666663,"policy_compute":0.226388887},
+    {"seed":64,"validation_max_depth":2,"test_exact":[0.513888896,0.919444442,0.952777803,0.944444418,0.941666662,0.944444418,0.944444418],"policy_accuracy":0.955555558,"policy_compute":0.213888884}
+  ],
+  "aggregate": {
+    "exact_mean": [0.496111113,0.917222214,0.935555565,0.934999990,0.930000007,0.932777774,0.931111109],
+    "oracle_best_exact": 0.935555565,
+    "validation_selected_exact_test_accuracy": 0.934444451,
+    "policy_accuracy": 0.935555553,
+    "policy_compute": 0.202314812,
+    "gap_vs_validation_selected_pp": 0.111110210,
+    "gap_vs_oracle_best_pp": -0.000001192,
+    "capability_gain_pp": 43.83333385,
+    "violations": 0,
+    "hard_cap_pass": true,
+    "anchors": [
+      {"budget":0.0,"accuracy":0.496111113,"compute":0.0},
+      {"budget":0.2,"accuracy":0.917222214,"compute":0.166666672},
+      {"budget":0.35,"accuracy":0.935555553,"compute":0.198888886},
+      {"budget":0.5,"accuracy":0.936111104,"compute":0.200833333},
+      {"budget":0.7,"accuracy":0.936111104,"compute":0.201666665},
+      {"budget":0.85,"accuracy":0.935555553,"compute":0.202314812},
+      {"budget":1.0,"accuracy":0.935555553,"compute":0.202314812}
+    ],
+    "passing_seeds": 5,
+    "decision": "PASS"
+  },
+  "nonclaims": ["this is independent-sample real spatial-sequence generalization, not chronological temporal-shift robustness", "no WCET or hard-real-time claim"]
+}
