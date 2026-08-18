@@ -1,0 +1,26 @@
+{
+  "setup": {
+    "dataset": "statsmodels weekly atmospheric CO2",
+    "task": "quartile of 13-week future change",
+    "split": "chronological 60/20/20",
+    "formal_seeds": [10,11,12,13,14],
+    "external_budget": "b in [0,1], 21 points",
+    "stopping": "validation-tuned entropy threshold"
+  },
+  "aggregate": {
+    "exact_mean": [0.675955057,0.711011243,0.705168533,0.702921343,0.702471900,0.700224710,0.701123607],
+    "policy_full_accuracy": 0.690786517,
+    "policy_full_mean_compute": 0.062921345,
+    "full_exact_accuracy": 0.701123607,
+    "accuracy_gap_pp": -1.033709049,
+    "nested_violations": 0,
+    "cap_or_count_violations": 0,
+    "all_hard_cap_pass": true,
+    "capability_gain_pp": 3.505618572,
+    "passing_seeds": 3,
+    "total_seeds": 5,
+    "decision": "FAIL"
+  },
+  "interpretation": "chronological distribution shift changes depth utility and makes validation-tuned stopping transfer unstable; this boundary is kept separate from the independent-sample real-sequence PASS",
+  "nonclaims": ["does not establish temporal-distribution-shift robustness", "does not negate the independent-sample real-sequence generalization result"]
+}
