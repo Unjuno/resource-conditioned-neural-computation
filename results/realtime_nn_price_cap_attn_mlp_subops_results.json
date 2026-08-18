@@ -1,0 +1,35 @@
+{
+  "setup": {
+    "task": "5-token sequence-like XOR reconstruction; four decoder-like blocks, each with separately optional local-attention and MLP suboperations",
+    "suboperations": "A0,M0,A1,M1,A2,M2,A3,M3; attention and MLP each count as one work unit",
+    "hard_cap": "maximum active suboperation count, structurally enforced by controller selection",
+    "soft_price": "controller is post-trained from exact finite-mask task-loss + price*active_ops/8 frontier",
+    "training_boundary": "capability network trained across random suboperation masks; controller amortized afterward; not end-to-end sparse training",
+    "timing_boundary": "ordinary Linux/PyTorch batch-1 central timing; not WCET"
+  },
+  "per_seed_full_accuracy": [0.9144737124443054, 0.9144737720489502, 0.8478617668151855],
+  "price_sweep": {
+    "0.0": {"seed_composition":[{"attn":4,"mlp":3,"ops":7},{"attn":4,"mlp":3,"ops":7},{"attn":4,"mlp":3,"ops":7}],"mean_accuracy":0.8922697504361471,"mean_hard_median_us":696.1619999999999,"mean_dense_median_us":766.2141666666666},
+    "0.05": {"seed_composition":[{"attn":4,"mlp":3,"ops":7},{"attn":4,"mlp":3,"ops":7},{"attn":4,"mlp":2,"ops":6}],"mean_accuracy":0.8922697504361471,"mean_hard_median_us":669.2886666666667,"mean_dense_median_us":756.2658333333334},
+    "0.1": {"seed_composition":[{"attn":4,"mlp":2,"ops":6},{"attn":4,"mlp":2,"ops":6},{"attn":3,"mlp":1,"ops":4}],"mean_accuracy":0.890350878238678,"mean_hard_median_us":562.921,"mean_dense_median_us":751.8576666666667},
+    "0.2": {"seed_composition":[{"attn":4,"mlp":1,"ops":5},{"attn":4,"mlp":1,"ops":5},{"attn":3,"mlp":1,"ops":4}],"mean_accuracy":0.890350878238678,"mean_hard_median_us":517.9876666666667,"mean_dense_median_us":767.7331666666666},
+    "0.3": {"seed_composition":[{"attn":4,"mlp":0,"ops":4},{"attn":4,"mlp":1,"ops":5},{"attn":3,"mlp":0,"ops":3}],"mean_accuracy":0.890350878238678,"mean_hard_median_us":479.83133333333336,"mean_dense_median_us":772.4618333333333},
+    "0.5": {"seed_composition":[{"attn":4,"mlp":0,"ops":4},{"attn":4,"mlp":0,"ops":4},{"attn":3,"mlp":0,"ops":3}],"mean_accuracy":0.8840460578600565,"mean_hard_median_us":459.26233333333334,"mean_dense_median_us":776.6631666666666},
+    "0.8": {"seed_composition":[{"attn":1,"mlp":0,"ops":1},{"attn":2,"mlp":0,"ops":2},{"attn":2,"mlp":0,"ops":2}],"mean_accuracy":0.7434210777282715,"mean_hard_median_us":245.78916666666666,"mean_dense_median_us":781.2448333333334},
+    "1.0": {"seed_composition":[{"attn":1,"mlp":0,"ops":1},{"attn":2,"mlp":0,"ops":2},{"attn":2,"mlp":0,"ops":2}],"mean_accuracy":0.7434210777282715,"mean_hard_median_us":236.28899999999996,"mean_dense_median_us":765.3513333333333},
+    "1.5": {"seed_composition":[{"attn":0,"mlp":0,"ops":0},{"attn":0,"mlp":0,"ops":0},{"attn":0,"mlp":0,"ops":0}],"mean_accuracy":0.5526315967241923,"mean_hard_median_us":40.42183333333334,"mean_dense_median_us":807.4035}
+  },
+  "checks": {
+    "hard_cap_respected_all_tested_points": true,
+    "physical_vs_dense_prediction_mismatches": 0,
+    "max_physical_vs_dense_logit_abs_diff": 0.0,
+    "loss_oracle_agreement": {"count":24,"total":27},
+    "price_blind_changes_with_price_any_seed": false,
+    "mlp_reduction_before_attention_reduction_all_seeds": true
+  },
+  "blind_fixed_composition_by_seed": [{"attn":1,"mlp":0,"ops":1},{"attn":2,"mlp":0,"ops":2},{"attn":2,"mlp":0,"ops":2}],
+  "interpretation": {
+    "supported": "In this supplied decoder-like toy, a hard work cap plus scalar resource price changes which attention and MLP suboperations are physically executed; across all three seeds MLP computation is reduced before attention depth is reduced, showing composition adaptation beyond prefix-depth selection.",
+    "negative_boundary": "Seed 2 has weaker full capability (~84.8%), and controller-to-exact-loss-oracle agreement is 24/27 rather than perfect. The result is mechanism evidence, not an optimal subgraph-discovery claim."
+  }
+}
