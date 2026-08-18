@@ -1,0 +1,88 @@
+{
+  "setup": {
+    "seeds": 3,
+    "production_exporter": "experiments/export_realtime_nn_q4_i8_header.py",
+    "production_core": "experiments/realtime_nn_q4_i8_core.c",
+    "effective_input_bits": 9,
+    "effective_input_states": 512,
+    "certificate_domain_q4": [-128, 128],
+    "hard_realtime_claim": false
+  },
+  "seed_audit": [
+    {
+      "seed": 0,
+      "certificate": {
+        "tanh_pre": [-75, 75],
+        "gelu_pre": [-55, 61],
+        "residual_tanh_pre": [-66, 69]
+      },
+      "class_accuracies": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "class_logit_checksums": [131328, -12928, 2288, 500, -12769],
+      "undefined_symbol_count": 0
+    },
+    {
+      "seed": 1,
+      "certificate": {
+        "tanh_pre": [-71, 70],
+        "gelu_pre": [-62, 62],
+        "residual_tanh_pre": [-74, 66]
+      },
+      "class_accuracies": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "class_logit_checksums": [-80128, 36160, 31216, 28272, 33649],
+      "undefined_symbol_count": 0
+    },
+    {
+      "seed": 2,
+      "certificate": {
+        "tanh_pre": [-69, 65],
+        "gelu_pre": [-112, 90],
+        "residual_tanh_pre": [-64, 67]
+      },
+      "class_accuracies": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "class_logit_checksums": [8704, 2624, -2016, 5104, 14721],
+      "undefined_symbol_count": 0
+    }
+  ],
+  "legacy_header_compile_negative": {
+    "certificate_macros_removed": true,
+    "production_compile_rejected": true,
+    "failure_mode": "explicit compile-time certificate requirement"
+  },
+  "execution_classes": [
+    {"class": 0, "blocks": 0, "linear_macs": 64, "activation_lut_calls": 0},
+    {"class": 1, "blocks": 2, "linear_macs": 182336, "activation_lut_calls": 3456},
+    {"class": 2, "blocks": 4, "linear_macs": 364608, "activation_lut_calls": 6912},
+    {"class": 3, "blocks": 6, "linear_macs": 546880, "activation_lut_calls": 10368},
+    {"class": 4, "blocks": 8, "linear_macs": 729152, "activation_lut_calls": 13824}
+  ],
+  "cross_target_production_object": {
+    "cortex_m0": {"conditional_branch_sites": 19, "text_bytes": 88408, "undefined_symbol_count": 0},
+    "cortex_m4_soft": {"conditional_branch_sites": 18, "text_bytes": 88534, "undefined_symbol_count": 0},
+    "rv32im": {"conditional_branch_sites": 27, "text_bytes": 86928, "undefined_symbol_count": 0}
+  },
+  "baremetal_link": {
+    "cortex_m0": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 88548, "bss_bytes": 4048},
+    "cortex_m4_soft": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 88692, "bss_bytes": 4048},
+    "rv32im": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 87056, "bss_bytes": 4048},
+    "rv32i_negative": {"link_ok": false, "requires_mul_helper": true}
+  },
+  "aggregate": {
+    "ordinary_production_export_certifies_all_3_seeds": true,
+    "all_3_seeds_preserve_full_domain_outputs": true,
+    "all_host_objects_helper_free": true,
+    "legacy_noncertified_header_rejected": true,
+    "embedded_helper_free": true,
+    "m0_m4_rv32im_baremetal_link_pass": true,
+    "rv32i_capability_boundary_preserved": true,
+    "historical_clamped_baseline_preserved_as_audit_fixture": true
+  },
+  "interpretation": {
+    "supported": "The ordinary Q4 production export/build path now requires an exhaustive finite-domain LUT-range certificate before compiling a direct-index, branch-reduced production core. The tested three seeds preserve the prior full-domain outputs and embedded helper/link capability boundaries.",
+    "not_supported": [
+      "WCET or hard-real-time guarantee",
+      "hardware execution",
+      "RTOS timing guarantee",
+      "general range analysis for arbitrary neural inputs or models"
+    ]
+  }
+}
