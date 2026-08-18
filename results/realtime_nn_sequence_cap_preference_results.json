@@ -1,0 +1,63 @@
+{
+  "setup": {
+    "preferred_compute_training": "backbone/ranking first trained on all exact classes; preferred compute controller then trained from per-input task CE only, no relevance/path labels",
+    "coarse_classes": [0,2,4,6],
+    "fine_classes": [0,1,2,3,4,5,6],
+    "backbone_steps": 400,
+    "policy_steps": 1200,
+    "seeds": 5,
+    "environment": {"python":"3.13.5","torch":"2.10.0+cpu","architecture":"x86_64","cpu":"AMD EPYC 7763 64-Core Processor","torch_intraop_threads":1}
+  },
+  "coarse": {
+    "per_seed_full_cap": [
+      {"seed":0,"forced_k6_token":0.9609375,"forced_k6_exact":0.875,"cap6_token":1.0,"cap6_exact":1.0,"cap6_mean_blocks":4.875,"preferred_distribution":{"4":18,"6":14}},
+      {"seed":1,"forced_k6_token":0.96875,"forced_k6_exact":0.875,"cap6_token":0.984375,"cap6_exact":0.9375,"cap6_mean_blocks":4.0,"preferred_distribution":{"4":32}},
+      {"seed":2,"forced_k6_token":0.953125,"forced_k6_exact":0.8125,"cap6_token":0.9921875,"cap6_exact":0.96875,"cap6_mean_blocks":5.1875,"preferred_distribution":{"4":13,"6":19}},
+      {"seed":3,"forced_k6_token":0.953125,"forced_k6_exact":0.84375,"cap6_token":0.984375,"cap6_exact":0.96875,"cap6_mean_blocks":5.0,"preferred_distribution":{"4":16,"6":16}},
+      {"seed":4,"forced_k6_token":0.96875,"forced_k6_exact":0.875,"cap6_token":0.96875,"cap6_exact":0.875,"cap6_mean_blocks":6.0,"preferred_distribution":{"6":32}}
+    ],
+    "aggregate": {
+      "mean_by_cap": {
+        "0":{"token_acc":0.5625,"exact":0.125,"teacher_ce":0.6862968023866415,"mean_effective_blocks":0.0},
+        "2":{"token_acc":0.740625,"exact":0.44375,"teacher_ce":0.37982900403431186,"mean_effective_blocks":2.0},
+        "4":{"token_acc":0.9453125,"exact":0.85625,"teacher_ce":0.07634340076710569,"mean_effective_blocks":4.0},
+        "6":{"token_acc":0.9859375,"exact":0.95,"teacher_ce":0.03159870969074215,"mean_effective_blocks":5.0125}
+      },
+      "strict_token_monotonic_seeds":5,
+      "strict_exact_monotonic_seeds":5,
+      "total_seeds":5,
+      "nested_violations":0,
+      "cap_or_count_monotonic_violations":0,
+      "all_hard_cap_pass":true,
+      "full_cap_vs_forced_exact_k6":{"token_accuracy_pp":2.5,"exact_sequence_pp":9.375,"mean_blocks_saved":0.9875},
+      "hypothesis":{"H":"Treat runtime budget as a hard cap and learn an input-specific preferred computation level from task loss; this should remove forced-extra-work regressions without exceeding the cap.","decision":"PASS"}
+    }
+  },
+  "fine": {
+    "per_seed_full_cap": [
+      {"seed":0,"cap6_token":0.9921875,"cap6_exact":0.96875,"cap6_mean_blocks":5.25,"preferred_distribution":{"4":12,"6":20}},
+      {"seed":1,"cap6_token":0.9921875,"cap6_exact":0.96875,"cap6_mean_blocks":4.5,"preferred_distribution":{"4":21,"5":6,"6":5}},
+      {"seed":2,"cap6_token":0.984375,"cap6_exact":0.9375,"cap6_mean_blocks":3.78125,"preferred_distribution":{"3":7,"4":25}},
+      {"seed":3,"cap6_token":0.9765625,"cap6_exact":0.90625,"cap6_mean_blocks":5.15625,"preferred_distribution":{"4":9,"5":9,"6":14}},
+      {"seed":4,"cap6_token":0.9609375,"cap6_exact":0.90625,"cap6_mean_blocks":5.0,"preferred_distribution":{"5":32}}
+    ],
+    "aggregate": {
+      "mean_by_cap": {
+        "0":{"token_acc":0.5625,"exact":0.11875,"teacher_ce":0.6869022879749537,"mean_effective_blocks":0.0},
+        "1":{"token_acc":0.696875,"exact":0.3,"teacher_ce":0.4897226952569326,"mean_effective_blocks":1.0},
+        "2":{"token_acc":0.7703125,"exact":0.4625,"teacher_ce":0.35436061952896125,"mean_effective_blocks":2.0},
+        "3":{"token_acc":0.853125,"exact":0.675,"teacher_ce":0.16419221066849446,"mean_effective_blocks":3.0},
+        "4":{"token_acc":0.928125,"exact":0.825,"teacher_ce":0.07545573846017337,"mean_effective_blocks":3.95625},
+        "5":{"token_acc":0.96875,"exact":0.9125,"teacher_ce":0.03917369437556051,"mean_effective_blocks":4.49375},
+        "6":{"token_acc":0.98125,"exact":0.9375,"teacher_ce":0.026725464462273762,"mean_effective_blocks":4.7375}
+      },
+      "strict_token_monotonic_seeds":5,
+      "strict_exact_monotonic_seeds":5,
+      "total_seeds":5,
+      "nested_violations":0,
+      "cap_or_count_monotonic_violations":0,
+      "comparison_to_coarse_full_cap":{"token_accuracy_pp":-0.46875,"exact_sequence_pp":-1.25,"mean_effective_blocks_delta":-0.275},
+      "hypothesis":{"H":"Refining the runtime cap grid from 4 classes to all 0..6 counts preserves monotonicity and reduces full-cap mean work with at most 1 pp token-accuracy and 2 pp exact-sequence loss.","decision":"PASS"}
+    }
+  }
+}
