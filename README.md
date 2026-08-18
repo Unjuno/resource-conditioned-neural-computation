@@ -76,7 +76,7 @@ See [`notes/realtime_nn_structured_width.md`](notes/realtime_nn_structured_width
 
 ### 3. Resource price can make the same NN choose a narrower or wider physical expert set
 
-The previous experiments give the runtime an explicit work class. A new sparse-NN experiment instead gives the **same fixed NN a scalar resource price `λ`** and lets an internal width controller choose how many expensive experts to execute.
+The previous experiments give the runtime an explicit work class. A sparse-NN experiment instead gives the **same fixed NN a scalar resource price `λ`** and lets an internal width controller choose how many expensive experts to execute.
 
 The controller is not trained from handwritten width labels. For candidate widths `k ∈ {0,1,3,4,6,8}`, training forms
 
@@ -116,15 +116,49 @@ This is a **soft price mechanism**, not a hard scheduling guarantee. In a real R
 
 See [`notes/realtime_nn_loss_conditioned_elastic_width.md`](notes/realtime_nn_loss_conditioned_elastic_width.md).
 
-### 4. Learned selection inside a hard runtime cap
+### 4. Hard cap + soft price also works inside a transformer-like sequence stack
 
-The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. Hard top-k structurally prevents the NN from exceeding the admitted work cap.
+A small sequence model replaces the independent expert toy with **8 optional local self-attention + MLP residual blocks**. Token 0 reconstructs a 9-token binary sequence; each local-attention block expands token 0's receptive field by one token, so deeper physical execution carries genuinely more sequence information.
+
+The runtime supplies a hard maximum depth `cap ∈ {0,2,4,6,8}`. Depths above the cap are structurally masked before controller selection. Inside the cap, the controller receives resource price `λ` and amortizes the loss/work frontier
+
+\[
+E_d(\lambda)=\overline{BCE}_d+0.7\lambda d/8.
+\]
+
+With full cap, all three seeds traverse **all five physical execution depths in the same order**:
+
+| price | executed attention+MLP blocks | weighted sequence accuracy | mean hard median | mean dense-equivalent median |
+|---:|---:|---:|---:|---:|
+| 0.0 | 8 | **100%** | ~1.11 ms | ~1.08 ms |
+| 0.5 | 6 | **94.83%** | ~0.85 ms | ~1.07 ms |
+| 0.85 | 4 | **86.21%** | ~0.59 ms | ~1.13 ms |
+| 1.0 | 2 | **74.14%** | ~0.37 ms | ~1.14 ms |
+| 1.5 | 0 | **58.62%** | ~0.09 ms | ~1.04 ms |
+
+Across three seeds:
+
+- price-aware depth is non-increasing with price in **3/3**;
+- the public sweep uses all `8→6→4→2→0` depths in **3/3**;
+- analytic loss/work-oracle agreement is **27/27** tested seed×price points;
+- all tested hard-cap interventions obey the cap;
+- forward-hook count exactly matches physically selected depth;
+- physical hard-skip vs dense-equivalent gives **0/750 prediction-vector mismatches** and maximum logit difference **0**;
+- matched price-blind controllers do not change depth with price at fixed cap.
+
+This is a **small transformer-like sequence bridge**, not an LM result: there is no autoregressive generation, no LLM-scale claim, and controller training is post-training amortization of a measured capability frontier rather than end-to-end sparse training.
+
+See [`notes/realtime_nn_price_cap_sequence.md`](notes/realtime_nn_price_cap_sequence.md).
+
+### 5. Learned selection inside a hard runtime cap
+
+The runtime admits exactly `k ∈ {1,2,4,8}` expert calls. Hard top-k structurally prevents budget violation.
 
 At `k=4`, an explicitly supervised learned selector reaches **100% accuracy** versus **78.18%** for fixed-prefix execution at the same expert-call cap. Controller overhead is included in timing.
 
 See [`notes/realtime_nn_learned_budget_gate.md`](notes/realtime_nn_learned_budget_gate.md).
 
-### 5. Learned selection + empirical deadline admission
+### 6. Learned selection + empirical deadline admission
 
 At a representative intermediate deadline regime:
 
@@ -141,7 +175,7 @@ Learned control is not universally better: tight/full-budget regimes can favor s
 
 See [`notes/realtime_nn_learned_deadline.md`](notes/realtime_nn_learned_deadline.md), [`notes/realtime_nn_common_deadline_frontier.md`](notes/realtime_nn_common_deadline_frontier.md), and [`results/realtime_nn_loss_conditioned_deadline_results.json`](results/realtime_nn_loss_conditioned_deadline_results.json).
 
-### 6. Useful budget-compliant selection can arise from task loss alone
+### 7. Useful budget-compliant selection can arise from task loss alone
 
 Removing relevance labels, auxiliary relevance loss, capability warmup, and expert freezing still gives the following three-seed mean result:
 
@@ -210,23 +244,24 @@ Supported in supplied toy systems:
 1. budget changes **physical depth** in one fixed NN;
 2. budget can also change **structured active channel width** in one maximum-size parameter set;
 3. a scalar resource price can move one fixed sparse NN across multiple **physically executed expert widths**;
-4. exact executed work changes with those physical circuits;
-5. a compatible backend converts reduced work into reduced central latency;
-6. a general framework can fail to do so, so backend behavior is part of the mechanism;
-7. quality/work trade-offs emerge from the same parameters;
-8. hard runtime work caps can coexist with learned internal selection;
-9. price-conditioned width can be derived from task loss plus work cost rather than handwritten width labels;
-10. useful budget-compliant selection can be learned from task loss alone in supplied search spaces;
-11. finite-class work metadata can be separated cleanly from target/build-specific timing certification;
-12. uncontrolled Linux machine-state timing cannot be reduced to a stable empirical P95 hard contract.
+4. hard cap + soft price can move one fixed transformer-like **sequence stack** across `8/6/4/2/0` physically executed attention+MLP depths;
+5. exact executed work changes with those physical circuits;
+6. a compatible backend converts reduced work into reduced central latency;
+7. a general framework can fail to do so, so backend behavior is part of the mechanism;
+8. quality/work trade-offs emerge from the same parameters;
+9. hard runtime work caps can coexist with learned internal selection;
+10. price-conditioned width/depth can be derived from task loss plus work cost rather than handwritten route labels;
+11. useful budget-compliant selection can be learned from task loss alone in supplied search spaces;
+12. finite-class work metadata can be separated cleanly from target/build-specific timing certification;
+13. uncontrolled Linux machine-state timing cannot be reduced to a stable empirical P95 hard contract.
 
 Open:
 
-1. combine a **hard RTOS-admitted work cap** with the **soft price-conditioned elastic width** in one generated/analyzable implementation;
-2. attach defensible per-class upper timing bounds on a concrete RTOS/time-predictable target and certified build;
-3. transfer the mechanism to a small sequence/transformer model with optional attention/MLP computation before considering LM scale;
-4. make useful internal computation less analytically exposed than the current toy;
-5. test sub-block/arbitrary channel groups only where the backend physically skips them.
+1. replace **prefix-depth-only sequence elasticity** with separately optional attention and MLP expert groups inside a small decoder-like block;
+2. lower the hard-cap + soft-price sequence mechanism into a generated/analyzable backend;
+3. attach defensible per-class upper timing bounds on a concrete RTOS/time-predictable target and certified build;
+4. test autoregressive generation only after the physical sequence mechanism is stable; no scale-up is required;
+5. make useful internal computation less analytically exposed than the current toy.
 
 ## Secondary diagnostics
 
@@ -242,7 +277,7 @@ hard admissible work region + soft resource price
 
 ## Nonclaims
 
-This repository does **not** claim hard real time/WCET, production RTOS deployment, universal speedup from nominal MAC reduction, energy savings, arbitrary hardware/timing portability, universal superiority over fixed/analytic schedulers, necessity of learned price-to-width control when an analytic quality/work table is available, training-time sparse execution, unconstrained architecture discovery, arbitrary neuron sparsity, or LLM-scale generalization.
+This repository does **not** claim hard real time/WCET, production RTOS deployment, universal speedup from nominal MAC reduction, energy savings, arbitrary hardware/timing portability, universal superiority over fixed/analytic schedulers, necessity of learned price-to-width/depth control when an analytic quality/work table is available, training-time sparse execution, unconstrained architecture discovery, arbitrary neuron sparsity, autoregressive LM behavior, or LLM-scale generalization.
 
 ## Reproduce primary experiments
 
@@ -259,13 +294,15 @@ python experiments/realtime_nn_task_only_gate.py
 python experiments/realtime_nn_loss_conditioned_elastic_width.py --seed 0 --mode aware
 python experiments/realtime_nn_loss_conditioned_elastic_width.py --seed 0 --mode blind
 python experiments/realtime_nn_loss_conditioned_deadline.py --seed 0
+python experiments/realtime_nn_price_cap_sequence.py --seed 0 --mode aware
+python experiments/realtime_nn_price_cap_sequence.py --seed 0 --mode blind
 python experiments/realtime_nn_structured_width.py --seed 0 --steps 160 --export /tmp/rtnn_structured_width.bin
 
 g++ -O2 -std=c++17 experiments/realtime_nn_structured_width_cpp.cpp -o /tmp/rtnn_structured_width_cpp
 /tmp/rtnn_structured_width_cpp /tmp/rtnn_structured_width.bin 2500
 ```
 
-Timing numbers are machine-dependent. Reproduction should focus on physical execution, output-equivalent dense controls, exact work counts, cost/price interventions, matched price-blind controls, backend conversion of work into latency, hard-cap compliance, and the explicit timing-certification boundary.
+Timing numbers are machine-dependent. Reproduction should focus on physical execution, output-equivalent dense controls, exact work counts, hard-cap and cost/price interventions, matched price-blind controls, backend conversion of work into latency, and the explicit timing-certification boundary.
 
 ## Related work
 
