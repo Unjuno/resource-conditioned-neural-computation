@@ -16,8 +16,8 @@ Test the intended system directly:
 - **Task-loss-only useful-computation selection:** PASS in the supplied toy search space.
 - **Learned selection + empirical soft deadline admission:** PASS with caveats.
 - **Execution-class granularity / capability co-design:** PASS as a toy audit.
-- **Less analytically exposed useful-computation task:** OPEN.
-- **Arbitrary neuron/sub-block physical activation:** OPEN; structured prefix width is not arbitrary sparsity.
+- **Less analytically exposed useful-computation task:** PASS as a small real-data audit on 8x8 handwritten digits; broader tasks remain OPEN.
+- **Arbitrary neuron/sub-block physical activation:** OPEN; structured prefix width and row-local experts are not arbitrary sparsity.
 
 ### Runtime / implementation side
 
@@ -60,6 +60,29 @@ The PyTorch batch-1 control is an important negative: despite large MAC reductio
 2. a backend that maps the smaller circuit to genuinely cheaper execution.
 
 See `notes/realtime_nn_structured_width.md`.
+
+## Less-analytically-exposed task result
+
+The earlier key/query task supplied a simple analytic relevance relation. A follow-up instead uses the scikit-learn 8x8 handwritten-digits dataset with eight row-local experts.
+
+The controller sees only each row's pixels, row position, and the admitted budget `k ∈ {1,2,4,8}`. Training uses task cross-entropy only. At hard inference exactly `k` experts are physically called.
+
+Three-seed held-out test means:
+
+| k | learned hard | best static subset selected on validation | prefix |
+|---:|---:|---:|---:|
+| 1 | **72.31%** | 52.04% | 20.74% |
+| 2 | **86.76%** | 72.50% | 34.17% |
+| 4 | **93.70%** | 90.28% | 71.48% |
+| 8 | 95.93% | 95.93% | 95.93% |
+
+Selection-identity falsifications collapse toward chance: shuffling selected row content gives approximately `12.22 / 10.83 / 10.00 / 9.63%`, while replacing selected expert outputs by identity-dependent constants gives `8.43 / 13.98 / 10.83 / 9.72%`.
+
+On a 20-point common-deadline sweep, comparing learned activation with the validation-selected static baseline at points whose mean miss rates differ by at most three percentage points, learned has higher on-time-correct at **7/10** points; mean delta is **+3.13 points** and median **+4.17 points**. Tight deadlines can favor the lower-overhead static policy, and full-work operation removes the selection benefit.
+
+This closes only the narrow open question that useful budget-conditioned physical activation can survive beyond an analytically exposed relevance toy. It is still a small dataset, not hard RT, architecture discovery, or a universal learned-policy result.
+
+See `notes/realtime_nn_digits_budget_activation.md`.
 
 ## Execution-class rule
 
@@ -106,11 +129,11 @@ If no RTOS target is available, do not manufacture a WCET result from host P95/P
 
 ## Next model-side falsification
 
-The next useful model-side tests are narrower, not larger:
+The next useful model-side tests remain narrow:
 
-- make useful computation less analytically exposed than the current toy;
-- test sub-block/channel groups beyond simple prefix width only if the backend physically skips them;
-- retain matched dense controls and exact output/function comparisons;
+- repeat the non-analytic-selection result on another small task/decomposition before generalizing it;
+- test sub-block/channel groups beyond simple prefix width or row-local experts only if the backend physically skips them;
+- retain matched dense controls, validation-selected static controls, and content/identity interventions;
 - measure controller/backend overhead rather than reporting nominal MAC reduction alone.
 
 Do not increase model scale unless the mechanism requires it.

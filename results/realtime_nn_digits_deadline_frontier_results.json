@@ -1,0 +1,33 @@
+{
+  "setup": {
+    "dataset": "same sklearn digits 8x8 model/split as realtime_nn_digits_budget_gate_results.json",
+    "seeds": 3,
+    "deadline_points_per_seed": 20,
+    "policies": ["learned input-dependent", "validation-selected static subset", "prefix"],
+    "admission": "largest k whose policy-specific empirical monotone P95 bound fits the common absolute deadline within each seed",
+    "timing_boundary": "ordinary Linux/PyTorch empirical P95; soft/weakly-hard only; not WCET"
+  },
+  "aggregate": {
+    "matched_definition": "abs(mean learned miss - mean static miss) <= 0.03, both non-fully-rejected",
+    "matched_count": 10,
+    "learned_positive_count": 7,
+    "mean_delta_otc": 0.03129629629629628,
+    "median_delta_otc": 0.04166666666666663
+  },
+  "matched_points": [
+    {"deadline_index": 9, "mean_deadline_us": 152.25664245711872, "learned_mean_k": 1.3333333333333333, "static_mean_k": 2, "learned_miss": 0.037037037037037035, "static_miss": 0.027777777777777776, "learned_otc": 0.6907407407407408, "static_otc": 0.7185185185185186, "delta_otc": -0.02777777777777779},
+    {"deadline_index": 10, "mean_deadline_us": 167.27737041016255, "learned_mean_k": 1.6666666666666667, "static_mean_k": 2, "learned_miss": 0.022222222222222223, "static_miss": 0.03518518518518519, "learned_otc": 0.7555555555555555, "static_otc": 0.7185185185185186, "delta_otc": 0.03703703703703698},
+    {"deadline_index": 11, "mean_deadline_us": 183.78122285557725, "learned_mean_k": 2, "static_mean_k": 2, "learned_miss": 0.02777777777777778, "static_miss": 0.007407407407407408, "learned_otc": 0.8240740740740741, "static_otc": 0.737037037037037, "delta_otc": 0.08703703703703702},
+    {"deadline_index": 13, "mean_deadline_us": 221.83906176008645, "learned_mean_k": 2.6666666666666665, "static_mean_k": 3.3333333333333335, "learned_miss": 0.02962962962962963, "static_miss": 0.029629629629629627, "learned_otc": 0.837037037037037, "static_otc": 0.837037037037037, "delta_otc": 0.0},
+    {"deadline_index": 14, "mean_deadline_us": 243.73110404964038, "learned_mean_k": 4, "static_mean_k": 3.3333333333333335, "learned_miss": 0.020370370370370372, "static_miss": 0.011111111111111112, "learned_otc": 0.9111111111111111, "static_otc": 0.8518518518518519, "delta_otc": 0.059259259259259234},
+    {"deadline_index": 15, "mean_deadline_us": 267.7853945746892, "learned_mean_k": 4, "static_mean_k": 3.3333333333333335, "learned_miss": 0.020370370370370372, "static_miss": 0.007407407407407408, "learned_otc": 0.9166666666666666, "static_otc": 0.8555555555555555, "delta_otc": 0.061111111111111116},
+    {"deadline_index": 16, "mean_deadline_us": 294.2156768762063, "learned_mean_k": 4, "static_mean_k": 4, "learned_miss": 0.011111111111111112, "static_miss": 0.009259259259259259, "learned_otc": 0.924074074074074, "static_otc": 0.8777777777777778, "delta_otc": 0.04629629629629628},
+    {"deadline_index": 17, "mean_deadline_us": 323.2568413281456, "learned_mean_k": 5.333333333333333, "static_mean_k": 4, "learned_miss": 0.016666666666666666, "static_miss": 0.001851851851851852, "learned_otc": 0.9333333333333333, "static_otc": 0.8851851851851852, "delta_otc": 0.04814814814814816},
+    {"deadline_index": 18, "mean_deadline_us": 355.16701905143026, "learned_mean_k": 8, "static_mean_k": 8, "learned_miss": 0.02962962962962963, "static_miss": 0.014814814814814815, "learned_otc": 0.9296296296296296, "static_otc": 0.9407407407407408, "delta_otc": -0.011111111111111183},
+    {"deadline_index": 19, "mean_deadline_us": 390.22988333333325, "learned_mean_k": 8, "static_mean_k": 8, "learned_miss": 0.007407407407407408, "static_miss": 0.020370370370370372, "learned_otc": 0.9481481481481482, "static_otc": 0.9351851851851852, "delta_otc": 0.012962962962962954}
+  ],
+  "interpretation": {
+    "supported": "At matched-miss common-deadline points, learned input-dependent activation improves on-time-correct in 7/10 points, with +3.13 percentage points mean and +4.17 points median delta versus the validation-selected static subset.",
+    "negative_boundary": "Very tight deadlines can favor the static subset because controller overhead prevents the learned policy from admitting as much work; full-work deadlines remove the selection advantage."
+  }
+}
