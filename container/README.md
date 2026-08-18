@@ -9,6 +9,7 @@ The main-line PyTorch experiments can be reproduced without host Python dependen
 | `container/Dockerfile.robustness.cpu` | incremental-refinement negative control + minibatch-order robustness | two corresponding result JSON files |
 | `container/Dockerfile.sequence_nested.cpu` | sequence nested non-prefix routing + coarse/fine budget-as-cap audits | three sequence result JSON files |
 | `container/Dockerfile.sequence_stop.cpu` | direct/online preferred-compute training audit against the post-trained sequence baseline | `results/realtime_nn_sequence_stop_training_audit_results_raw.json` |
+| `container/Dockerfile.continuous_horizon.cpu` | normalized `b in [0,1]` budget + horizon-value stopping audit | `results/realtime_nn_continuous_horizon_value_results.json` |
 
 Example:
 
@@ -24,6 +25,15 @@ docker build -f container/Dockerfile.sequence_stop.cpu -t rtnn-sequence-stop .
 docker run --rm -v "$PWD/results:/workspace/results" rtnn-sequence-stop
 ```
 
-Environment variables allow shorter smoke runs. For the sequence images, use for example `SEEDS=1 STEPS=40`; the cap-policy image also accepts `POLICY_STEPS`. The robustness image supports controls such as `INC_SEEDS`, `MODEL_SEEDS`, and `BATCH_SEEDS`.
+For the continuous normalized-budget/horizon-value audit:
+
+```bash
+docker build -f container/Dockerfile.continuous_horizon.cpu -t rtnn-continuous-horizon .
+docker run --rm -v "$PWD/results:/workspace/results" rtnn-continuous-horizon
+```
+
+Environment variables allow shorter smoke runs. For the sequence images, use for example `SEEDS=1 STEPS=40`; the cap-policy image also accepts `POLICY_STEPS`. The continuous-horizon image accepts `SEEDS`, `STEPS`, `PRED_STEPS`, and `POST_STEPS`. The robustness image supports controls such as `INC_SEEDS`, `MODEL_SEEDS`, and `BATCH_SEEDS`.
+
+The normalized external budget is continuous (`0` to `1`, or 0% to 100%), but the physical implementation is deliberately lowered to finite work classes for later certification.
 
 These containers reproduce Linux/PyTorch functional experiments. They do **not** constitute an RTOS, WCET, or hard-real-time environment.
