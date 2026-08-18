@@ -1,0 +1,147 @@
+{
+  "setup": {
+    "task": "same 5-bit two-mode causal generation task as the sequence cap experiments",
+    "external_budget": "continuous normalized b in [0,1] (0-100%)",
+    "budget_grid_points": 21,
+    "budget_grid_step": 0.05,
+    "physical_classes_fraction": [0.0, 0.1666666667, 0.3333333333, 0.5, 0.6666666667, 0.8333333333, 1.0],
+    "lowering_rule": "admit the largest finite physical execution fraction <= b",
+    "effective_compute": "min(input-specific preferred compute, admitted class), reported as fraction/percentage of maximum physical compute",
+    "horizon_value": "V_k(x) = L_k(x) - min_{j>k} L_j(x); continue while predicted V_k > 0",
+    "predictor_state": "current prompt hidden state (last-token + mean state) plus current normalized compute",
+    "predictor_target": "counterfactual teacher-forced task CE on a stable jointly-trained capability frontier",
+    "capability_steps": 400,
+    "predictor_steps": 250,
+    "post_policy_steps": 1200,
+    "seeds": 5,
+    "crossfit": "4-fold held-out-prompt cross-fitting",
+    "pass_conditions": {
+      "full_budget_token_gap_pp_min": -1.0,
+      "full_budget_exact_gap_pp_min": -2.0,
+      "mean_compute_increase_pct_points_max": 4.1666666667,
+      "nested_violations": 0,
+      "cap_or_count_violations": 0,
+      "hard_cap": true
+    },
+    "environment": {
+      "python": "3.13.5",
+      "torch": "2.10.0+cpu",
+      "platform": "x86_64",
+      "torch_threads": 1
+    }
+  },
+  "per_seed_full_budget": [
+    {
+      "seed": 0,
+      "post": {"token_acc": 0.9921875, "exact": 0.96875, "mean_compute": 0.875},
+      "prompt_crossfit": {"token_acc": 0.9765625, "exact": 0.90625, "mean_compute": 0.9166666865},
+      "state_crossfit": {"token_acc": 0.9609375, "exact": 0.90625, "mean_compute": 0.7916666865},
+      "prompt_fullfit": {"token_acc": 0.9765625, "exact": 0.90625, "mean_compute": 0.9114583135},
+      "state_fullfit": {"token_acc": 1.0, "exact": 1.0, "mean_compute": 0.84375},
+      "sign_accuracy": {"prompt_crossfit": 0.8638743455, "state_crossfit": 0.8430232558, "prompt_fullfit": 0.8900523560, "state_fullfit": 0.9388888889}
+    },
+    {
+      "seed": 1,
+      "post": {"token_acc": 0.9921875, "exact": 0.96875, "mean_compute": 0.75},
+      "prompt_crossfit": {"token_acc": 0.9609375, "exact": 0.875, "mean_compute": 0.7708333135},
+      "state_crossfit": {"token_acc": 0.890625, "exact": 0.71875, "mean_compute": 0.53125},
+      "prompt_fullfit": {"token_acc": 0.9609375, "exact": 0.875, "mean_compute": 0.7864583135},
+      "state_fullfit": {"token_acc": 0.9921875, "exact": 0.96875, "mean_compute": 0.7291666865},
+      "sign_accuracy": {"prompt_crossfit": 0.8529411765, "state_crossfit": 0.7938931298, "prompt_fullfit": 0.8685714286, "state_fullfit": 0.8827160494}
+    },
+    {
+      "seed": 2,
+      "post": {"token_acc": 0.984375, "exact": 0.9375, "mean_compute": 0.6302083135},
+      "prompt_crossfit": {"token_acc": 0.9296875, "exact": 0.8125, "mean_compute": 0.7916666865},
+      "state_crossfit": {"token_acc": 0.9375, "exact": 0.75, "mean_compute": 0.5885416865},
+      "prompt_fullfit": {"token_acc": 0.953125, "exact": 0.90625, "mean_compute": 0.75},
+      "state_fullfit": {"token_acc": 1.0, "exact": 1.0, "mean_compute": 0.7239583135},
+      "sign_accuracy": {"prompt_crossfit": 0.8531073446, "state_crossfit": 0.8085106383, "prompt_fullfit": 0.8850574713, "state_fullfit": 0.9101796407}
+    },
+    {
+      "seed": 3,
+      "post": {"token_acc": 0.9765625, "exact": 0.90625, "mean_compute": 0.859375},
+      "prompt_crossfit": {"token_acc": 0.9375, "exact": 0.8125, "mean_compute": 0.828125},
+      "state_crossfit": {"token_acc": 0.84375, "exact": 0.625, "mean_compute": 0.6927083135},
+      "prompt_fullfit": {"token_acc": 0.953125, "exact": 0.84375, "mean_compute": 0.84375},
+      "state_fullfit": {"token_acc": 0.984375, "exact": 0.9375, "mean_compute": 0.7708333135},
+      "sign_accuracy": {"prompt_crossfit": 0.8688524590, "state_crossfit": 0.8, "prompt_fullfit": 0.9076086957, "state_fullfit": 0.9360465116}
+    },
+    {
+      "seed": 4,
+      "post": {"token_acc": 0.9609375, "exact": 0.90625, "mean_compute": 0.8333333135},
+      "prompt_crossfit": {"token_acc": 0.984375, "exact": 0.9375, "mean_compute": 0.8125},
+      "state_crossfit": {"token_acc": 0.8671875, "exact": 0.6875, "mean_compute": 0.5989583135},
+      "prompt_fullfit": {"token_acc": 0.9609375, "exact": 0.90625, "mean_compute": 0.828125},
+      "state_fullfit": {"token_acc": 1.0, "exact": 1.0, "mean_compute": 0.7135416865},
+      "sign_accuracy": {"prompt_crossfit": 0.9027027027, "state_crossfit": 0.8125, "prompt_fullfit": 0.8563829787, "state_fullfit": 0.9523809524}
+    }
+  ],
+  "aggregate": {
+    "post": {"token_acc": 0.98125, "exact": 0.9375, "mean_compute": 0.7895833254, "mean_compute_pct": 78.95833254},
+    "state_fullfit": {
+      "token_acc": 0.9953125,
+      "exact": 0.98125,
+      "mean_compute": 0.75625,
+      "mean_compute_pct": 75.625,
+      "vs_post": {"token_pp": 1.40625, "exact_pp": 4.375, "mean_compute_pct_points": -3.33333254},
+      "horizon_value_sign_accuracy": 0.9240424086,
+      "nested_violations": 0,
+      "cap_or_count_violations": 0,
+      "all_hard_cap_pass": true,
+      "decision": "PASS"
+    },
+    "state_crossfit": {
+      "token_acc": 0.9,
+      "exact": 0.7375,
+      "mean_compute": 0.640625,
+      "mean_compute_pct": 64.0625,
+      "vs_post": {"token_pp": -8.125, "exact_pp": -20.0, "mean_compute_pct_points": -14.89583254},
+      "horizon_value_sign_accuracy": 0.8115854048,
+      "nested_violations": 0,
+      "cap_or_count_violations": 0,
+      "all_hard_cap_pass": true,
+      "decision": "FAIL"
+    },
+    "prompt_fullfit": {
+      "token_acc": 0.9609375,
+      "exact": 0.8875,
+      "mean_compute": 0.8239583254,
+      "vs_post": {"token_pp": -2.03125, "exact_pp": -5.0, "mean_compute_pct_points": 3.4375},
+      "decision": "FAIL under the matched 250-step predictor fit"
+    },
+    "prompt_crossfit": {
+      "token_acc": 0.9578125,
+      "exact": 0.86875,
+      "mean_compute": 0.8239583373,
+      "vs_post": {"token_pp": -2.34375, "exact_pp": -6.875, "mean_compute_pct_points": 3.43750119},
+      "decision": "FAIL"
+    }
+  },
+  "continuous_budget_anchor_means_state_fullfit": [
+    {"budget_pct": 0.0, "admitted_class_pct": 0.0, "token_acc": 0.5625, "exact": 0.11875, "mean_effective_pct": 0.0},
+    {"budget_pct": 20.0, "admitted_class_pct": 16.66666667, "token_acc": 0.696875, "exact": 0.3, "mean_effective_pct": 16.66666716},
+    {"budget_pct": 35.0, "admitted_class_pct": 33.33333333, "token_acc": 0.7703125, "exact": 0.4625, "mean_effective_pct": 33.33333433},
+    {"budget_pct": 50.0, "admitted_class_pct": 50.0, "token_acc": 0.8640625, "exact": 0.6875, "mean_effective_pct": 49.58333313},
+    {"budget_pct": 70.0, "admitted_class_pct": 66.66666667, "token_acc": 0.94375, "exact": 0.86875, "mean_effective_pct": 62.60416746},
+    {"budget_pct": 85.0, "admitted_class_pct": 83.33333333, "token_acc": 0.9828125, "exact": 0.95, "mean_effective_pct": 71.77083254},
+    {"budget_pct": 100.0, "admitted_class_pct": 100.0, "token_acc": 0.9953125, "exact": 0.98125, "mean_effective_pct": 75.625}
+  ],
+  "hypotheses": {
+    "primary": {
+      "H": "With external compute budget represented continuously as b in [0,1], a hidden-state horizon-value predictor fitted on the stable capability frontier can recover the post-trained quality/work frontier while preserving hard cap and nested physical execution.",
+      "decision": "PASS"
+    },
+    "heldout_prompt": {
+      "H": "The same hidden-state horizon-value predictor generalizes under 4-fold held-out-prompt cross-fitting.",
+      "decision": "FAIL"
+    }
+  },
+  "additional_control": "A longer seed-0 prompt-only fit also reached 100% token/exact quality, so the experiment does not establish that hidden state is uniquely necessary; the matched 250-step state representation is easier to fit on this supplied toy.",
+  "nonclaims": [
+    "continuous external budget does not imply continuous machine instruction count; execution is lowered to finite classes",
+    "no held-out-prompt value-generalization claim",
+    "no real-data generalization",
+    "no WCET, RTOS deployment, or hard-real-time claim"
+  ]
+}
