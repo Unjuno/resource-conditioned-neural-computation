@@ -5,10 +5,28 @@
 #define RTNN_MAX_RAW_LINEAR_ACC (RTNN_F * RTNN_Q_ABS_STORAGE_BOUND * RTNN_Q_ABS_STORAGE_BOUND)
 #define RTNN_MAX_POSTSHIFT_F2 ((RTNN_MAX_RAW_LINEAR_ACC >> 4) + RTNN_Q_ABS_STORAGE_BOUND + 1)
 
+/*
+ * Exact linear MACs for one executed block.
+ *
+ * self  : 9 * 32 * 32   =  9,216
+ * neigh : 8 * 32 * 32   =  8,192  (p == 8 copies neighbor bias; no matvec)
+ * ff1   : 9 * 128 * 32  = 36,864
+ * ff2   : 9 * 32 * 128  = 36,864
+ * total                  = 91,136
+ */
+#define RTNN_BLOCK_LINEAR_MACS \
+    ((RTNN_L * RTNN_C * RTNN_C) + \
+     ((RTNN_L - 1) * RTNN_C * RTNN_C) + \
+     (RTNN_L * RTNN_F * RTNN_C) + \
+     (RTNN_L * RTNN_C * RTNN_F))
+#define RTNN_HEAD_LINEAR_MACS (2u * RTNN_C)
+#define RTNN_BLOCK_LUT_CALLS 1728u
+
 _Static_assert(sizeof(RTNNQ4I8Workspace) == RTNN_Q4_I8_WORKSPACE_BYTES, "workspace changed");
 _Static_assert(RTNN_MAX_RAW_LINEAR_ACC == 2097152, "unexpected accumulator bound");
 _Static_assert(RTNN_MAX_RAW_LINEAR_ACC < INT32_MAX, "int32 accumulator is insufficient");
 _Static_assert((RTNN_MAX_POSTSHIFT_F2 * 3) < INT32_MAX, "residual multiply can overflow int32");
+_Static_assert(RTNN_BLOCK_LINEAR_MACS == 91136u, "unexpected block MAC count");
 
 typedef struct {
     const int8_t *sw, *sb, *nw, *nb, *f1w, *f1b, *f2w, *f2b;
@@ -24,11 +42,11 @@ typedef struct {
 static Model M;
 
 static const RTNNQ4I8ExecutionClass CLASSES[RTNN_CLASS_COUNT] = {
-    {0, 0, 64u, 0u},
-    {1, 2, 184384u, 3456u},
-    {2, 4, 368704u, 6912u},
-    {3, 6, 553024u, 10368u},
-    {4, 8, 737344u, 13824u}
+    {0, 0, RTNN_HEAD_LINEAR_MACS, 0u},
+    {1, 2, RTNN_HEAD_LINEAR_MACS + 2u * RTNN_BLOCK_LINEAR_MACS, 2u * RTNN_BLOCK_LUT_CALLS},
+    {2, 4, RTNN_HEAD_LINEAR_MACS + 4u * RTNN_BLOCK_LINEAR_MACS, 4u * RTNN_BLOCK_LUT_CALLS},
+    {3, 6, RTNN_HEAD_LINEAR_MACS + 6u * RTNN_BLOCK_LINEAR_MACS, 6u * RTNN_BLOCK_LUT_CALLS},
+    {4, 8, RTNN_HEAD_LINEAR_MACS + 8u * RTNN_BLOCK_LINEAR_MACS, 8u * RTNN_BLOCK_LUT_CALLS}
 };
 
 static const int8_t* take(unsigned long* offset, unsigned long n) {
