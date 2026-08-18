@@ -1,0 +1,8 @@
+FROM python:3.13.5-slim
+RUN pip install --no-cache-dir torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+WORKDIR /workspace
+COPY experiments/realtime_nn_continuous_budget_ordering.py experiments/
+COPY experiments/realtime_nn_joint_budget_training.py experiments/
+COPY container/run_joint_budget_training.sh container/
+RUN mkdir -p results && chmod +x container/run_joint_budget_training.sh
+CMD ["container/run_joint_budget_training.sh"]
