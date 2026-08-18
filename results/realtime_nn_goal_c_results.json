@@ -1,0 +1,54 @@
+{
+  "setup": {
+    "external_budget": "continuous b in [0,1], encoded Q0.16 uint16_t",
+    "finite_classes_fraction": [0.0,0.25,0.5,0.75,1.0],
+    "max_work_semantics": "effective=min(budget ceiling, preferred useful class, deadline-certified class)",
+    "freestanding_build": "gcc -O2 -std=c11 -ffreestanding -fno-builtin",
+    "neural_core_build_sha256": "9f2dfee5ad9ffe4ce46819d83fddf05b8535e86ba11736ddab32c761ecbc8629",
+    "manifest_sha256": "c17d5c3137b5e5efb57d9e505cd66cdffe173444debdc5841373a502552fa6bf",
+    "platform": "x86_64 Linux container"
+  },
+  "continuous_contract": {
+    "budget_lowering_cases": 65536,
+    "budget_x_preferred_cases": 16777216,
+    "deadline_composition_cases": 655360,
+    "all_properties_pass": true,
+    "undefined_external_symbols": 0,
+    "stack_bytes_per_contract_function": 8,
+    "decision": "PASS"
+  },
+  "neural_core_reproduction": {
+    "accuracy_by_class": [0.63671875,0.71484375,0.78515625,0.86328125,1.0],
+    "invalid_class_matches_class0": true,
+    "workspace_bytes": 8064,
+    "undefined_external_symbols": 0
+  },
+  "timing": {
+    "classification": "EMPIRICAL_ONLY",
+    "three_affinity_pinned_runs_observed_max_cycles": [
+      [107188,4283164,4831376,4463851,16710697],
+      [11515,1258222,4862197,17724570,4503002],
+      [14798,10893190,8758358,11292883,3886760]
+    ],
+    "observation": "median cycles track physical work, but maximum-cycle ordering is unstable because scheduler/preemption outliers dominate",
+    "calibration_heldout_examples": [
+      {"run":1,"factor1_exceed_by_class":[1,11,0,1,2],"factor2_exceed_by_class":[0,2,0,0,0],"factor4_exceed_by_class":[0,0,0,0,0],"factor4_demo_miss":"1/4000"},
+      {"run":2,"factor1_exceed_by_class":[0,5,1,1,8],"factor2_exceed_by_class":[0,4,0,2,0],"factor4_exceed_by_class":[0,1,0,0,0],"factor4_demo_miss":"0/4000"}
+    ],
+    "wcet_tool_available": false,
+    "sched_fifo_available": false,
+    "decision": "UNCERTAIN for hard timing certification"
+  },
+  "deadline_admission": {
+    "contract_properties_pass": true,
+    "wrong_build_rejected": true,
+    "partial_certification_never_admits_uncertified_classes": true,
+    "decision": "PASS as interface/property test and empirical demonstrator; NOT a hard-RT proof"
+  },
+  "hypotheses": {
+    "L_M": {"H":"continuous budget and maximum-work semantics lower safely into a freestanding finite-class contract","decision":"PASS"},
+    "N": {"H":"a defensible target-specific hard timing bound can be established in the available environment","decision":"UNCERTAIN"},
+    "O": {"H":"deadline admission logic can safely compose explicit timing bounds with continuous budget and preferred compute","decision":"PASS as interface/property test; empirical runtime demo only"}
+  },
+  "nonclaims": ["no WCET", "no hard-real-time guarantee", "no claim that Linux observed maximum or a safety-factor multiple is a safe upper bound"]
+}

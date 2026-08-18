@@ -2,7 +2,7 @@
 
 This index separates the main physical-computation chain from secondary router/topology diagnostics. The research target is not router accuracy; it is a neural network whose runtime-admitted resource budget changes **physical internal execution** while remaining compatible with finite execution classes and later timing certification.
 
-The preferred external control variable is now a normalized continuous budget `b in [0,1]` (0% to 100%). This is an interface/contract coordinate, not a claim of continuously variable machine instructions: an analyzable backend may lower `b` fail-closed to a finite certified maximum-work class.
+The preferred external control variable is a normalized continuous budget `b in [0,1]` (0% to 100%). This is an interface/contract coordinate, not a claim of continuously variable machine instructions: an analyzable backend lowers `b` fail-closed to a finite certified maximum-work class.
 
 ## Main-line mechanism experiments
 
@@ -23,35 +23,44 @@ The preferred external control variable is now a normalized continuous budget `b
 | Budget-as-cap + preferred compute | PASS | 5/5 token/exact monotonic; full cap improves +2.50 pp token and +9.375 pp exact vs forced `k=6` while saving 0.9875 blocks on average |
 | Fine-grained sequence caps | PASS under tradeoff bound | `0..6` finite caps remain 5/5 monotonic; full-cap mean work falls another 0.275 blocks for -0.469 pp token / -1.25 pp exact vs coarse caps |
 | Concurrent preferred-compute training | **FAIL / credit-assignment boundary** | 5-seed ST, relaxed-soft, and online-decoupled audits all preserve hard caps but miss the post-trained frontier; best online-decoupled result is -3.44 pp token / -8.13 pp exact at nearly identical mean work |
-| Continuous normalized budget + horizon value | **PASS + held-out boundary** | external `b in [0,1]`, 7 finite physical fractions, 21 budget points: stable-frontier hidden-state horizon value reaches 99.53% token / 98.13% exact at 75.63% mean compute vs post baseline 98.13% / 93.75% at 78.96%; cap/nested violations 0. Four-fold held-out-prompt cross-fit FAILS at 90.0% / 73.75%. |
+| Continuous normalized budget + horizon value | PASS + held-out boundary | supplied exhaustive sequence toy: state horizon value reaches 99.53% token / 98.13% exact at 75.63% mean compute; four-fold held-out-prompt cross-fit FAILS at 90.0% / 73.75% |
+| **Real independent-sequence generalization** | **PASS** | held-out handwritten-digit row sequences, formal seeds 60--64: adaptive policy 93.56% accuracy at 20.23% mean compute, +43.83 pp capability gain from 0% exit, 5/5 seeds pass, cap violations 0 |
+| **Chronological temporal distribution shift** | **FAIL / unresolved** | weekly CO2 future-change task: 69.08% adaptive vs 70.11% full-depth, -1.03 pp, only 3/5 seeds pass; validation/test depth utility shifts over time |
+| **Continuous freestanding runtime contract** | **PASS** | exhaustive 65,536 Q0.16 budgets, 16,777,216 budget×preferred cases, and 655,360 deadline-composition cases all pass; invalid preferred class fails closed |
+| **Continuous maximum-work manifest** | **PASS** | 0/25/50/75/100% finite ceilings expose max blocks/MACs/LUT calls/workspace and allowed nested block IDs; target timing bounds remain null |
+| **Controlled Linux timing as hard bound** | **FAIL / hard timing UNCERTAIN** | affinity-pinned exact binary has class-ordered medians but multi-million-cycle preemption maxima; calibration maxima and even arbitrary 2x/4x factors can be exceeded later |
+| Deadline + budget + preferred-class admission | PASS as interface / empirical demo | explicit timing bindings compose correctly, build/manifest mismatch rejects, partial certification never admits uncertified classes; no hard-RT timing claim |
 
 ## RTOS / analyzable implementation bridge
 
-The repository also contains generated C/C++, freestanding integer cores, fixed work manifests, LUT/numeric-range audits, cross-ISA compile/link audits, and build-bound execution contracts. These establish an analyzable implementation boundary but **not WCET**.
+The repository contains generated C/C++, freestanding integer/float cores, fixed work manifests, LUT/numeric-range audits, cross-ISA compile/link audits, build-bound execution contracts, and now a continuous Q0.16 budget lowering contract. These establish an analyzable implementation boundary but **not WCET**.
 
 The latest external/runtime contract is:
 
 ```text
 continuous normalized budget b in [0,1]
-    -> largest certified finite maximum-work class <= b
-    -> input/state-specific preferred compute
-    -> cap truncation
+    -> largest finite maximum-work class <= b
+    -> preferred maximum useful compute
+    -> deadline-certified class
+    -> min of all three ceilings
     -> nested physical execution
 ```
 
-The remaining hard-real-time target is to attach defensible target/compiler/RTOS/interference-specific upper bounds `T_j` to those finite physical classes. The model may choose a cheaper nested path inside the admitted maximum class.
+The latest real-data generalization model and the existing freestanding core are still separate artifacts; lowering the exact real-sequence model is an integration task, not something inferred from the generic runtime-contract PASS.
 
 ## Timing boundary
 
-Ordinary Linux percentile timing has already been falsified as a stable hard-admission contract because scheduler/preemption mixture modes create quantile cliffs. Linux timing remains diagnostic only.
+Ordinary Linux percentile timing was already falsified as a stable hard-admission contract. The new exact-binary cycle audit strengthens that boundary: observed calibration maxima are not stable upper bounds, and multiplying an observed maximum by an arbitrary safety factor is not certification. A defensible target/compiler/build/RTOS-specific WCET or equivalent upper bound remains required.
 
-## Container entrypoints
+## Current research-goal status
 
-See [`container/README.md`](container/README.md). Sequence nested-routing and cap-semantics audits are reproduced with `container/Dockerfile.sequence_nested.cpu`; direct preferred-compute training is audited with `container/Dockerfile.sequence_stop.cpu`; continuous normalized-budget horizon value is reproduced with `container/Dockerfile.continuous_horizon.cpu`.
+- **Goal A — physical budget-conditioned computation:** PASS.
+- **Goal B — generalizable adaptive computation:** PASS on independent held-out real sequence samples; chronological temporal nonstationarity remains unresolved.
+- **Goal C — hard-real-time RTNN:** interface/max-work/deadline composition PASS, but exact real-data-model lowering is still an integration item and hard target timing certification is **UNCERTAIN**.
 
 ## Next falsification priorities
 
-1. Test continuous-budget horizon-value stopping on a **real temporal/sequence dataset with genuine train/test separation**. The held-out-prompt failure is now the primary ML uncertainty.
-2. Lower the continuous `b in [0,1]` contract plus finite maximum-work class semantics into the generated/freestanding backend; the manifest should expose normalized class fractions and maximum admitted work.
-3. Decide whether the deployed preferred-compute mechanism should remain a stable-frontier value predictor or use a simpler post-trained policy; do not reintroduce concurrent stopping optimization unless it addresses the demonstrated credit-assignment failure.
-4. After the policy/backend boundary stabilizes on real data, attach target-specific timing bounds and RTOS admission logic.
+1. Run the finite-class system on a **concrete time-predictable target or defensible WCET/static timing analyzer**; do not substitute more Linux percentile/max timing.
+2. Lower the exact held-out-real-sequence model/policy into the freestanding boundary and cross-check predictions, exit decisions, and work classes against Python.
+3. Treat chronological/nonstationary temporal generalization as a separate research problem: train/validation/test depth utility drift must be modeled or bounded rather than hidden inside the independent-sample PASS.
+4. Once a defensible target timing table exists for the same deployed model/build, run the final RTOS deadline/on-time-correct experiment.

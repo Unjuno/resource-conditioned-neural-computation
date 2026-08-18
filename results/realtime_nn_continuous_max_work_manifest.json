@@ -1,0 +1,16 @@
+{
+  "schema": "rtnn-max-work-manifest-v2",
+  "budget_semantics": "continuous external b in [0,1], fail-closed to largest finite class <= b",
+  "class_semantics": "maximum admitted work; actual effective class=min(budget ceiling, preferred useful class, deadline-certified class)",
+  "route_family": "canonical nested prefix for this freestanding core",
+  "model_identity": "realtime_nn_budget_execution seed=0 / regenerated 2026-08-19",
+  "classes": [
+    {"class":0,"normalized_fraction":0.0,"normalized_q16":0,"max_blocks":0,"max_linear_macs":64,"max_activation_lut_calls":0,"max_residual_scale_ops":0,"max_linear_outputs":2,"max_workspace_bytes":8064,"allowed_block_ids":[]},
+    {"class":1,"normalized_fraction":0.25,"normalized_q16":16383,"max_blocks":2,"max_linear_macs":182336,"max_activation_lut_calls":3456,"max_residual_scale_ops":576,"max_linear_outputs":3970,"max_workspace_bytes":8064,"allowed_block_ids":[0,1]},
+    {"class":2,"normalized_fraction":0.5,"normalized_q16":32767,"max_blocks":4,"max_linear_macs":364608,"max_activation_lut_calls":6912,"max_residual_scale_ops":1152,"max_linear_outputs":7938,"max_workspace_bytes":8064,"allowed_block_ids":[0,1,2,3]},
+    {"class":3,"normalized_fraction":0.75,"normalized_q16":49151,"max_blocks":6,"max_linear_macs":546880,"max_activation_lut_calls":10368,"max_residual_scale_ops":1728,"max_linear_outputs":11906,"max_workspace_bytes":8064,"allowed_block_ids":[0,1,2,3,4,5]},
+    {"class":4,"normalized_fraction":1.0,"normalized_q16":65535,"max_blocks":8,"max_linear_macs":729152,"max_activation_lut_calls":13824,"max_residual_scale_ops":2304,"max_linear_outputs":15874,"max_workspace_bytes":8064,"allowed_block_ids":[0,1,2,3,4,5,6,7]}
+  ],
+  "target_timing_bounds": null,
+  "canonical_sha256_without_hash_field": "c17d5c3137b5e5efb57d9e505cd66cdffe173444debdc5841373a502552fa6bf"
+}
