@@ -120,7 +120,7 @@ def main():
         (td / "rv.ld").write_text(bare.RV_LD)
 
         sources = {
-            "production": EXP / "realtime_nn_q4_i8_core.c",
+            "production": EXP / "realtime_nn_q4_i8_clamped_reference_core.c",
             "branchless_clamp": EXP / "realtime_nn_q4_i8_branchless_core.c",
             "certified_direct": EXP / "realtime_nn_q4_i8_certified_core.c",
         }
@@ -234,6 +234,7 @@ def main():
         out = {
             "setup": {
                 "seeds": 3,
+                "historical_production_source": "realtime_nn_q4_i8_clamped_reference_core.c",
                 "effective_input_bits": 9,
                 "effective_input_states": 512,
                 "api_input_bits": 16,
@@ -253,7 +254,7 @@ def main():
                 "rv32i_still_requires_mul_helper": (not baremetal["rv32i_negative"].get("link_ok")) and baremetal["rv32i_negative"].get("requires_mul_helper", False),
             },
             "interpretation": {
-                "supported": "For this finite-input Q4 toy, the generated weight header can carry an exhaustive model-specific certificate proving every reachable activation-LUT index is in range. A certified direct-index core is bit-exact to the clamped variants in three seeds and can omit runtime LUT clamp logic.",
+                "supported": "For this finite-input Q4 toy, the generated weight header can carry an exhaustive model-specific certificate proving every reachable activation-LUT index is in range. A certified direct-index core is bit-exact to the historical clamped and branchless-clamp variants in three seeds and can omit runtime LUT clamp logic.",
                 "not_supported": [
                     "a general proof for arbitrary neural inputs/models",
                     "WCET or constant cycles",

@@ -43,36 +43,16 @@ def main():
     parser.add_argument("--out", required=True)
     args = parser.parse_args()
 
-    model = budget_model.train(args.seed).eval()
-    values = []
-    values.extend(q8_exact(model.emb.weight.detach().numpy()).reshape(-1).tolist())
-    for block in model.blocks:
-        for layer in (block.selfp, block.neigh, block.ff1, block.ff2):
-            values.extend(q8_exact(layer.weight.detach().numpy()).reshape(-1).tolist())
-            values.extend(q8_exact(layer.bias.detach().numpy()).reshape(-1).tolist())
-    values.extend(q8_exact(model.head.weight.detach().numpy()).reshape(-1).tolist())
-    values.extend(q8_exact(model.head.bias.detach().numpy()).reshape(-1).tolist())
+    # The production Q4 core performs unchecked direct LUT indexing. Therefore
+    # every production header must be generated through the exhaustive finite-
+    # domain range certificate. This local import avoids a module-level cycle:
+    # the certified exporter reuses q8_exact/q8_saturating/emit_array above.
+    from export_realtime_nn_q4_certified_header import export_certified
 
-    xs = np.linspace(LUT_LO, LUT_HI, LUT_POINTS)
-    tanh_lut = q8_saturating(np.tanh(xs))
-    gelu_lut = q8_saturating(0.5 * xs * (1.0 + np.vectorize(math.erf)(xs / math.sqrt(2.0))))
-
-    out = Path(args.out)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    with out.open("w") as handle:
-        handle.write("#ifndef RTNN_Q4_I8_GENERATED_H\n#define RTNN_Q4_I8_GENERATED_H\n#include <stdint.h>\n")
-        handle.write("#define RTNN_Q_SCALE 16\n")
-        handle.write(f"#define RTNN_Q_WEIGHT_COUNT {len(values)}\n")
-        handle.write(f"#define RTNN_Q_LUT_N {LUT_POINTS}\n")
-        handle.write("#define RTNN_Q_LUT_LO (-128)\n#define RTNN_Q_LUT_HI 128\n")
-        emit_array(handle, "RTNN_Q_WEIGHTS", values)
-        emit_array(handle, "RTNN_Q_TANH", tanh_lut)
-        emit_array(handle, "RTNN_Q_GELU", gelu_lut)
-        handle.write("#endif\n")
-
+    result = export_certified(args.seed, args.out)
     print(
-        f"seed={args.seed} weight_min={min(values)} weight_max={max(values)} "
-        f"weight_bytes={len(values)} lut_bytes={len(tanh_lut) + len(gelu_lut)}"
+        f"seed={args.seed} certified=1 effective_states={result['effective_input_states']} "
+        f"ranges={result['ranges']} weight_count={result['weight_count']}"
     )
 
 

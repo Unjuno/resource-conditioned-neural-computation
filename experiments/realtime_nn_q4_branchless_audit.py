@@ -26,6 +26,8 @@ def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--out',default=str(ROOT/'results'/'realtime_nn_q4_branchless_results.json')); a=ap.parse_args()
     clang=shutil.which('clang'); objdump=shutil.which('llvm-objdump'); gcc=shutil.which('gcc'); nm=shutil.which('nm'); size=shutil.which('llvm-size') or shutil.which('size')
     if not all((clang,objdump,gcc,nm,size)): raise SystemExit('requires clang, llvm-objdump, gcc, nm, size')
+    original=EXP/'realtime_nn_q4_i8_clamped_reference_core.c'
+    branchless=EXP/'realtime_nn_q4_i8_branchless_core.c'
     with tempfile.TemporaryDirectory(prefix='rtnn_branchless_') as td:
         td=Path(td); (td/'check.c').write_text(CHECK_C)
         seed_rows=[]
@@ -33,7 +35,7 @@ def main():
             gen=td/'realtime_nn_q4_i8_generated.h'
             run([sys.executable,str(EXP/'export_realtime_nn_q4_i8_header.py'),'--seed',str(seed),'--out',str(gen)])
             outs={}
-            for name,src in [('original',EXP/'realtime_nn_q4_i8_core.c'),('branchless',EXP/'realtime_nn_q4_i8_branchless_core.c')]:
+            for name,src in [('original',original),('branchless',branchless)]:
                 obj=td/f'{name}_{seed}.o'; exe=td/f'{name}_{seed}'
                 run([gcc,'-O2','-std=c11','-ffreestanding','-fno-builtin',f'-I{td}',f'-I{EXP}','-c',str(src),'-o',str(obj)])
                 run([gcc,'-O2','-std=c11',f'-I{td}',f'-I{EXP}',str(td/'check.c'),str(obj),'-o',str(exe)])
@@ -44,7 +46,7 @@ def main():
         targets={}
         for target,flags in TARGETS.items():
             tr={}
-            for name,src in [('original',EXP/'realtime_nn_q4_i8_core.c'),('branchless',EXP/'realtime_nn_q4_i8_branchless_core.c')]:
+            for name,src in [('original',original),('branchless',branchless)]:
                 obj=td/f'{target}_{name}.o'
                 run([clang,*flags,'-O2','-std=c11','-ffreestanding','-fno-builtin',f'-I{td}',f'-I{EXP}','-c',str(src),'-o',str(obj)])
                 dis=run([objdump,'-d',str(obj)]).stdout
@@ -53,6 +55,6 @@ def main():
                 fields=run([size,str(obj)]).stdout.splitlines()[-1].split()
                 tr[name]={'conditional_branch_sites':len(pat.findall(dis)),'text_bytes':int(fields[0]),'undefined_symbol_count':len(undefined)}
             targets[target]=tr
-        out={'setup':{'compiler':run([clang,'--version']).stdout.splitlines()[0],'seeds':3,'timing_claim':False},'seed_functional_audit':seed_rows,'targets':targets,'aggregate':{'all_3_seeds_exact_output_match':all(x['bit_exact_checksum_output_match'] for x in seed_rows),'all_targets_helper_free':all(v[k]['undefined_symbol_count']==0 for v in targets.values() for k in ('original','branchless')),'branch_site_reduction':{t:targets[t]['original']['conditional_branch_sites']-targets[t]['branchless']['conditional_branch_sites'] for t in targets}},'interpretation':{'supported':'Replacing activation-value-dependent Q4 rounding/clamp branches with bitwise branchless arithmetic preserves full-domain outputs in three seeds and reduces compiled conditional-branch sites on Cortex-M0, Cortex-M4 soft-float, and RV32IM with this Clang build.','not_supported':['cycle-count invariance','WCET','hardware execution','universal compiler behavior']}}
+        out={'setup':{'compiler':run([clang,'--version']).stdout.splitlines()[0],'seeds':3,'original_source':'realtime_nn_q4_i8_clamped_reference_core.c','timing_claim':False},'seed_functional_audit':seed_rows,'targets':targets,'aggregate':{'all_3_seeds_exact_output_match':all(x['bit_exact_checksum_output_match'] for x in seed_rows),'all_targets_helper_free':all(v[k]['undefined_symbol_count']==0 for v in targets.values() for k in ('original','branchless')),'branch_site_reduction':{t:targets[t]['original']['conditional_branch_sites']-targets[t]['branchless']['conditional_branch_sites'] for t in targets}},'interpretation':{'supported':'Replacing activation-value-dependent Q4 rounding/clamp branches with bitwise branchless arithmetic preserves full-domain outputs in three seeds and reduces compiled conditional-branch sites on Cortex-M0, Cortex-M4 soft-float, and RV32IM with this Clang build. The original baseline is pinned to a historical reference source so the audit remains reproducible after production evolves.','not_supported':['cycle-count invariance','WCET','hardware execution','universal compiler behavior']}}
         Path(a.out).write_text(json.dumps(out,indent=2)); print(json.dumps(out['aggregate'],indent=2))
 if __name__=='__main__': main()
