@@ -1,19 +1,13 @@
 #include "realtime_nn_q4_i8_core.h"
 #include "realtime_nn_q4_i8_generated.h"
 
+#ifndef RTNN_Q_LUT_RANGE_CERTIFIED
+#error "Q4 production core requires a generated LUT-range certificate"
+#endif
+
 #define RTNN_Q_ABS_STORAGE_BOUND 128
 #define RTNN_MAX_RAW_LINEAR_ACC (RTNN_F * RTNN_Q_ABS_STORAGE_BOUND * RTNN_Q_ABS_STORAGE_BOUND)
 #define RTNN_MAX_POSTSHIFT_F2 ((RTNN_MAX_RAW_LINEAR_ACC >> 4) + RTNN_Q_ABS_STORAGE_BOUND + 1)
-
-/*
- * Exact linear MACs for one executed block.
- *
- * self  : 9 * 32 * 32   =  9,216
- * neigh : 8 * 32 * 32   =  8,192  (p == 8 copies neighbor bias; no matvec)
- * ff1   : 9 * 128 * 32  = 36,864
- * ff2   : 9 * 32 * 128  = 36,864
- * total                  = 91,136
- */
 #define RTNN_BLOCK_LINEAR_MACS \
     ((RTNN_L * RTNN_C * RTNN_C) + \
      ((RTNN_L - 1) * RTNN_C * RTNN_C) + \
@@ -27,6 +21,14 @@ _Static_assert(RTNN_MAX_RAW_LINEAR_ACC == 2097152, "unexpected accumulator bound
 _Static_assert(RTNN_MAX_RAW_LINEAR_ACC < INT32_MAX, "int32 accumulator is insufficient");
 _Static_assert((RTNN_MAX_POSTSHIFT_F2 * 3) < INT32_MAX, "residual multiply can overflow int32");
 _Static_assert(RTNN_BLOCK_LINEAR_MACS == 91136u, "unexpected block MAC count");
+_Static_assert(RTNN_Q_CERT_EFFECTIVE_INPUT_BITS == RTNN_L, "certificate input width mismatch");
+_Static_assert(RTNN_Q_CERT_EFFECTIVE_INPUT_STATES == (1u << RTNN_L), "certificate state count mismatch");
+_Static_assert(RTNN_Q_CERT_TANH_PRE_MIN >= RTNN_Q_LUT_LO, "certified tanh input below LUT");
+_Static_assert(RTNN_Q_CERT_TANH_PRE_MAX <= RTNN_Q_LUT_HI, "certified tanh input above LUT");
+_Static_assert(RTNN_Q_CERT_GELU_PRE_MIN >= RTNN_Q_LUT_LO, "certified GELU input below LUT");
+_Static_assert(RTNN_Q_CERT_GELU_PRE_MAX <= RTNN_Q_LUT_HI, "certified GELU input above LUT");
+_Static_assert(RTNN_Q_CERT_RESIDUAL_PRE_MIN >= RTNN_Q_LUT_LO, "certified residual input below LUT");
+_Static_assert(RTNN_Q_CERT_RESIDUAL_PRE_MAX <= RTNN_Q_LUT_HI, "certified residual input above LUT");
 
 typedef struct {
     const int8_t *sw, *sb, *nw, *nb, *f1w, *f1b, *f2w, *f2b;
@@ -71,12 +73,15 @@ int rtnn_q4_i8_init(void) {
 }
 
 static inline int32_t round_q4(int32_t x) {
-    return x >= 0 ? (x + 8) >> 4 : -(((-x) + 8) >> 4);
+    uint32_t ux = (uint32_t)x;
+    uint32_t sign = ux >> 31;
+    uint32_t mask = 0u - sign;
+    uint32_t mag = (ux ^ mask) + sign;
+    uint32_t q = (mag + 8u) >> 4;
+    return (int32_t)((q ^ mask) + sign);
 }
 
 static inline int8_t lut_direct(const int8_t* table, int32_t x) {
-    if (x <= RTNN_Q_LUT_LO) return table[0];
-    if (x >= RTNN_Q_LUT_HI) return table[RTNN_Q_LUT_N - 1];
     return table[x - RTNN_Q_LUT_LO];
 }
 
