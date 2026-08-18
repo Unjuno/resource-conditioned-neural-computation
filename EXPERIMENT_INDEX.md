@@ -17,12 +17,15 @@ This index separates the main physical-computation chain from secondary router/t
 | Joint all-class training | PASS | reduces sampled-budget high-class regression from ~1.88 pp to ~0.017 pp in the original 3-seed audit |
 | Additive logit refinement | **FAIL / no advantage** | 10-seed matched audit: shared and additive are both 9/10 monotonic; additive residual regression is slightly worse |
 | Minibatch-order robustness | PASS on supplied task | 3 initialization × 3 batch streams: 9/9 strict monotonic, zero observed adjacent regression |
+| Sequence nested non-prefix routing | PASS + negative boundary | 5-seed causal generation: input-dependent routing beats prefix by +14.38 pp token at `k=2` and +11.25 pp at `k=4`; forcing exact work is quality-monotone in only 3/5 seeds |
+| Budget-as-cap + preferred compute | PASS | 5/5 token/exact monotonic; full cap improves +2.50 pp token and +9.375 pp exact vs forced `k=6` while saving 0.9875 blocks on average |
+| Fine-grained sequence caps | PASS under tradeoff bound | `0..6` finite caps remain 5/5 monotonic; full-cap mean work falls another 0.275 blocks for -0.469 pp token / -1.25 pp exact vs coarse caps |
 
 ## RTOS / analyzable implementation bridge
 
 The repository also contains generated C/C++, freestanding integer cores, fixed work manifests, LUT/numeric-range audits, cross-ISA compile/link audits, and build-bound execution contracts. These establish an analyzable implementation boundary but **not WCET**.
 
-The remaining hard-real-time target is to attach defensible target/compiler/RTOS/interference-specific upper bounds `T_j` to finite execution classes and admit the largest class satisfying the remaining deadline.
+The remaining hard-real-time target is to attach defensible target/compiler/RTOS/interference-specific upper bounds `T_j` to finite execution classes. The latest sequence experiments sharpen the runtime contract: the admitted class is a **maximum work cap**, and the model may choose a cheaper nested physical path inside that cap.
 
 ## Timing boundary
 
@@ -30,11 +33,11 @@ Ordinary Linux percentile timing has already been falsified as a stable hard-adm
 
 ## Container entrypoints
 
-See [`container/README.md`](container/README.md). Main new robustness audits are reproduced with `container/Dockerfile.robustness.cpu`.
+See [`container/README.md`](container/README.md). Sequence nested-routing and cap-semantics audits are reproduced with `container/Dockerfile.sequence_nested.cpu`.
 
 ## Next falsification priorities
 
-1. Move continuous-budget/nested ordering from the synthetic expert task into the sequence/autoregressive bridge without exploding execution-class count.
-2. Lower the continuous-budget learned ordering into the existing generated/freestanding backend.
-3. Test joint all-class training robustness on at least one real-data task and one sequence task.
-4. Only then attach target-specific timing bounds and RTOS admission logic.
+1. Lower the sequence input-dependent ranking + preferred-compute cap policy into the existing generated/freestanding backend and make the finite class manifest describe the maximum admitted work.
+2. Replace the post-trained preferred-compute controller with direct task-loss policy optimization / straight-through or RL stopping, then compare stability and frontier quality.
+3. Test the cap semantics and joint all-class training on a real-data workload with sequence structure or temporal dependence.
+4. After the policy/backend boundary stabilizes, attach target-specific timing bounds and RTOS admission logic.
