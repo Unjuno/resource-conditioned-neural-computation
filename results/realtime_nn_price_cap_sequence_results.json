@@ -1,0 +1,60 @@
+{
+  "setup": {
+    "task": "9-token finite-domain sequence reconstruction from token-0 representation; local attention reaches only self/right-neighbor, so each block expands receptive field by one token",
+    "blocks": "8 optional local self-attention + MLP residual blocks in one fixed parameter set",
+    "execution_depths": [0, 2, 4, 6, 8],
+    "controller": "inputs = scalar resource price + hard max-depth cap; disallowed depths are structurally masked; target derived from full-domain weighted BCE + 0.7*price*depth/8",
+    "training_boundary": "capability network trained across all depths; price/cap controller post-trained from the loss/work frontier; not a claim of end-to-end sparse training",
+    "timing_boundary": "ordinary Linux/PyTorch batch-1 CPU central timing; not WCET"
+  },
+  "three_seed_fixed_depth": {
+    "0": {"mean_bit_accuracy": 0.5555555820465088, "mean_weighted_bit_accuracy": 0.5862069129943848, "mean_weighted_bce": 0.576702336470286},
+    "2": {"mean_bit_accuracy": 0.6666666865348816, "mean_weighted_bit_accuracy": 0.7413792808850607, "mean_weighted_bce": 0.3599644998709361},
+    "4": {"mean_bit_accuracy": 0.7777777910232544, "mean_weighted_bit_accuracy": 0.8620690703392029, "mean_weighted_bce": 0.1927938461303711},
+    "6": {"mean_bit_accuracy": 0.8888888955116272, "mean_weighted_bit_accuracy": 0.9482759833335876, "mean_weighted_bce": 0.07238798588514328},
+    "8": {"mean_bit_accuracy": 1.0, "mean_weighted_bit_accuracy": 1.0, "mean_weighted_bce": 0.0002009242307394743}
+  },
+  "three_seed_full_cap_price_sweep": {
+    "0.0": {"seed_depth": [8,8,8], "mean_weighted_bit_accuracy": 1.0, "mean_hard_median_us": 1110.9098333333334, "mean_dense_median_us": 1076.863},
+    "0.2": {"seed_depth": [8,8,8], "mean_weighted_bit_accuracy": 1.0, "mean_hard_median_us": 1210.1223333333335, "mean_dense_median_us": 1159.8476666666668},
+    "0.3": {"seed_depth": [8,8,8], "mean_weighted_bit_accuracy": 1.0, "mean_hard_median_us": 1082.9553333333333, "mean_dense_median_us": 1069.5473333333334},
+    "0.5": {"seed_depth": [6,6,6], "mean_weighted_bit_accuracy": 0.9482759833335876, "mean_hard_median_us": 850.217, "mean_dense_median_us": 1067.0885},
+    "0.85": {"seed_depth": [4,4,4], "mean_weighted_bit_accuracy": 0.8620690703392029, "mean_hard_median_us": 594.3126666666666, "mean_dense_median_us": 1131.7875},
+    "1.0": {"seed_depth": [2,2,2], "mean_weighted_bit_accuracy": 0.7413792808850607, "mean_hard_median_us": 371.2823333333333, "mean_dense_median_us": 1135.6166666666668},
+    "1.2": {"seed_depth": [2,2,2], "mean_weighted_bit_accuracy": 0.7413792808850607, "mean_hard_median_us": 347.14466666666664, "mean_dense_median_us": 1061.0461666666667},
+    "1.5": {"seed_depth": [0,0,0], "mean_weighted_bit_accuracy": 0.5862069129943848, "mean_hard_median_us": 88.381, "mean_dense_median_us": 1039.7528333333335},
+    "2.0": {"seed_depth": [0,0,0], "mean_weighted_bit_accuracy": 0.5862069129943848, "mean_hard_median_us": 89.28716666666668, "mean_dense_median_us": 1068.3719999999998}
+  },
+  "checks": {
+    "price_aware_depth_nonincreasing_all_seeds": true,
+    "all_five_depths_used_in_full_cap_sweep_all_seeds": true,
+    "loss_oracle_agreement": {"count": 27, "total": 27},
+    "hard_cap_respected_all_tested_seed_price_cap_points": true,
+    "hook_execution_matches_selected_depth_all_tested_seeds": true,
+    "physical_vs_dense_prediction_vector_mismatches": 0,
+    "physical_vs_dense_cases": 750,
+    "physical_vs_dense_max_logit_abs_diff": 0.0,
+    "price_blind_full_cap_changes_with_price_any_seed": false,
+    "price_blind_cap4_changes_with_price_any_seed": false
+  },
+  "representative_cap_matrix": {
+    "0": {"0.2":{"depth":0,"within_cap":true},"0.5":{"depth":0,"within_cap":true},"0.7":{"depth":0,"within_cap":true},"1.0":{"depth":0,"within_cap":true},"1.5":{"depth":0,"within_cap":true}},
+    "2": {"0.2":{"depth":2,"within_cap":true},"0.5":{"depth":2,"within_cap":true},"0.7":{"depth":2,"within_cap":true},"1.0":{"depth":2,"within_cap":true},"1.5":{"depth":0,"within_cap":true}},
+    "4": {"0.2":{"depth":4,"within_cap":true},"0.5":{"depth":4,"within_cap":true},"0.7":{"depth":4,"within_cap":true},"1.0":{"depth":2,"within_cap":true},"1.5":{"depth":0,"within_cap":true}},
+    "6": {"0.2":{"depth":6,"within_cap":true},"0.5":{"depth":6,"within_cap":true},"0.7":{"depth":4,"within_cap":true},"1.0":{"depth":2,"within_cap":true},"1.5":{"depth":0,"within_cap":true}},
+    "8": {"0.2":{"depth":8,"within_cap":true},"0.5":{"depth":6,"within_cap":true},"0.7":{"depth":6,"within_cap":true},"1.0":{"depth":2,"within_cap":true},"1.5":{"depth":0,"within_cap":true}}
+  },
+  "seed0_cap_hook_audit": [
+    {"cap":8,"price":0.2,"depth":8,"hook_blocks":[0,1,2,3,4,5,6,7],"cap_respected":true},
+    {"cap":6,"price":0.2,"depth":6,"hook_blocks":[0,1,2,3,4,5],"cap_respected":true},
+    {"cap":4,"price":0.2,"depth":4,"hook_blocks":[0,1,2,3],"cap_respected":true},
+    {"cap":4,"price":0.7,"depth":4,"hook_blocks":[0,1,2,3],"cap_respected":true},
+    {"cap":2,"price":0.2,"depth":2,"hook_blocks":[0,1],"cap_respected":true},
+    {"cap":2,"price":1.0,"depth":2,"hook_blocks":[0,1],"cap_respected":true},
+    {"cap":0,"price":0.2,"depth":0,"hook_blocks":[],"cap_respected":true}
+  ],
+  "interpretation": {
+    "supported": "In this supplied local-attention sequence toy, one fixed sequence model can obey a runtime hard max-depth cap while a scalar resource price moves it across physically executed attention+MLP depths, producing a reproducible quality/latency trade-off.",
+    "not_supported": ["hard real-time/WCET","language-model generation behavior","necessity of learned controller when the complete loss/work frontier is externally available","training-time sparse compute","arbitrary transformer subgraph discovery"]
+  }
+}
