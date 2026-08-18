@@ -1,0 +1,65 @@
+{
+  "setup": {
+    "seeds": 3,
+    "compiler": "clang 17.0.0",
+    "comparison": "current Q4 core vs branchless Q4 rounding/LUT clamp variant",
+    "timing_claim": false
+  },
+  "seed_functional_audit": [
+    {
+      "seed": 0,
+      "exact_output_checksum_match": true,
+      "class_accuracies": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "class_logit_checksums": [131328, -12928, 2288, 500, -12769]
+    },
+    {
+      "seed": 1,
+      "exact_output_checksum_match": true,
+      "class_accuracies": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "class_logit_checksums": [-80128, 36160, 31216, 28272, 33649]
+    },
+    {
+      "seed": 2,
+      "exact_output_checksum_match": true,
+      "class_accuracies": [0.63671875, 0.71484375, 0.78515625, 0.86328125, 1.0],
+      "class_logit_checksums": [8704, 2624, -2016, 5104, 14721]
+    }
+  ],
+  "targets": {
+    "cortex_m0": {
+      "original": {"conditional_branch_sites": 69, "text_bytes": 88784, "undefined_symbol_count": 0},
+      "branchless": {"conditional_branch_sites": 59, "text_bytes": 88500, "undefined_symbol_count": 0}
+    },
+    "cortex_m4_soft": {
+      "original": {"conditional_branch_sites": 39, "text_bytes": 88604, "undefined_symbol_count": 0},
+      "branchless": {"conditional_branch_sites": 18, "text_bytes": 88332, "undefined_symbol_count": 0}
+    },
+    "rv32im": {
+      "original": {"conditional_branch_sites": 40, "text_bytes": 86984, "undefined_symbol_count": 0},
+      "branchless": {"conditional_branch_sites": 33, "text_bytes": 86960, "undefined_symbol_count": 0}
+    }
+  },
+  "aggregate": {
+    "all_3_seeds_exact_output_match": true,
+    "all_targets_helper_free": true,
+    "conditional_branch_site_reduction": {
+      "cortex_m0": 10,
+      "cortex_m4_soft": 21,
+      "rv32im": 7
+    },
+    "conditional_branch_site_reduction_fraction": {
+      "cortex_m0": 0.14492753623188406,
+      "cortex_m4_soft": 0.5384615384615384,
+      "rv32im": 0.175
+    }
+  },
+  "interpretation": {
+    "supported": "Activation-value-dependent rounding and LUT clamp branches can be replaced by branchless integer arithmetic without changing full-domain outputs in the tested three seeds, while reducing compiled conditional-branch sites on all three helper-free embedded targets.",
+    "not_supported": [
+      "cycle-count invariance",
+      "WCET or hard-real-time guarantee",
+      "hardware execution",
+      "universal compiler behavior"
+    ]
+  }
+}
