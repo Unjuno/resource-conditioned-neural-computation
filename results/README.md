@@ -7,6 +7,8 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_learned_deadline_results.json` — learned activation integrated with empirical P95 deadline admission.
 - `realtime_nn_common_deadline_frontier_results.json` — dense common-deadline learned-vs-prefix frontier audit.
 - `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with hard-budget/timing/deadline audits.
+- `realtime_nn_digits_budget_gate_results.json` — task-loss-only input-dependent hard-budget activation on held-out 8x8 handwritten digits, with validation-selected static controls and content/identity falsification interventions.
+- `realtime_nn_digits_deadline_frontier_results.json` — common-deadline learned-vs-validation-selected-static frontier for the digits experiment; records both intermediate-budget gains and tight/full-budget negative boundaries.
 - `realtime_nn_structured_width_results.json` — structured channel-width/depth activation audit: one maximum-width NN, exact sliced work counts, matched dense-mask control, PyTorch backend negative, and plain-C++ physical-width speedup across three seeds.
 - `realtime_nn_structured_width_q7_results.json` — freestanding Q7 lowering of the structured-width classes: Q5/Q6 precision failure boundary, 3-seed float-prediction equivalence at Q7, static numeric bounds, and explicit physical width loop bounds.
 - `realtime_nn_machine_state_timing_audit_results.json` — repeated idle/load P95 calibration stability audit and same-core preemption/quantile-cliff diagnostic; negative runtime result.
@@ -49,6 +51,8 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - physical work counts derived from actual control flow and checked by instrumentation;
 - structured depth/width activation where inactive channels are physically absent from the executed matrix dimensions;
 - matched dense-mask controls that preserve output while retaining wasteful full-width computation;
+- input-dependent hard-budget selection on held-out data against static subsets selected only on validation;
+- content/identity interventions that test whether useful selected computation, rather than path identity alone, carries task information;
 - backend sensitivity: reduced neural work must be shown to become reduced physical latency on the intended runtime;
 - fixed-point precision as part of execution-class capability validation rather than assuming one Q-format transfers across architectures;
 - embedded ISA capability requirements and compiler-generated helper dependencies as part of the deployed-build contract;
