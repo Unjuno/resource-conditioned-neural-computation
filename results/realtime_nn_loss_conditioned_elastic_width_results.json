@@ -1,0 +1,93 @@
+{
+  "setup": {
+    "task": "8 candidate evidence experts; cheap metadata exposes evidence importance but not sign/content; label is sign of weighted evidence sum",
+    "execution_widths": [0, 1, 3, 4, 6, 8],
+    "training": "all widths trained for task capability; internal width controller target is derived from mean task CE + 0.55 * resource_price * k/8; no handwritten width label",
+    "inference": "price-conditioned controller chooses k; selector ranks experts from cheap metadata; only selected top-k experts are physically executed",
+    "timing_boundary": "ordinary Linux/PyTorch batch-1 CPU; median/empirical timing only; not WCET"
+  },
+  "three_seed_fixed_width_mean_accuracy": {"0": 0.4964, "1": 0.8132, "3": 0.8768, "4": 0.9176, "6": 0.952, "8": 0.9688},
+  "three_seed_price_sweep": {
+    "0.0": {"mean_k": 8, "seed_k": [8,8,8], "mean_accuracy": 0.9688, "mean_hard_median_us": 427.0346666666667},
+    "0.05": {"mean_k": 8, "seed_k": [8,8,8], "mean_accuracy": 0.9688, "mean_hard_median_us": 434.67583333333334},
+    "0.1": {"mean_k": 7.333333333333333, "seed_k": [8,6,8], "mean_accuracy": 0.9630666666666666, "mean_hard_median_us": 406.22883333333334},
+    "0.2": {"mean_k": 6.666666666666667, "seed_k": [8,6,6], "mean_accuracy": 0.9574666666666667, "mean_hard_median_us": 372.92466666666667},
+    "0.4": {"mean_k": 5.333333333333333, "seed_k": [6,6,4], "mean_accuracy": 0.9384, "mean_hard_median_us": 321.6318333333333},
+    "0.7": {"mean_k": 4, "seed_k": [4,4,4], "mean_accuracy": 0.9176, "mean_hard_median_us": 268.40749999999997},
+    "1.0": {"mean_k": 3.3333333333333335, "seed_k": [3,3,4], "mean_accuracy": 0.8909333333333334, "mean_hard_median_us": 244.97833333333332},
+    "1.5": {"mean_k": 3, "seed_k": [3,3,3], "mean_accuracy": 0.8768, "mean_hard_median_us": 226.9465},
+    "2.5": {"mean_k": 0.3333333333333333, "seed_k": [0,1,0], "mean_accuracy": 0.5972000000000001, "mean_hard_median_us": 98.007},
+    "4.0": {"mean_k": 0, "seed_k": [0,0,0], "mean_accuracy": 0.4964, "mean_hard_median_us": 75.84416666666667},
+    "7.0": {"mean_k": 0, "seed_k": [0,0,0], "mean_accuracy": 0.4964, "mean_hard_median_us": 74.73233333333333}
+  },
+  "per_seed": {
+    "0": {
+      "fixed_width": {
+        "0": {"accuracy": 0.4892, "ce": 0.69332087, "overlap": null},
+        "1": {"accuracy": 0.814, "ce": 0.55467618, "overlap": 0.9812},
+        "3": {"accuracy": 0.8732, "ce": 0.27609655, "overlap": 0.9422666667},
+        "4": {"accuracy": 0.914, "ce": 0.21163183, "overlap": 0.9264},
+        "6": {"accuracy": 0.9448, "ce": 0.13098116, "overlap": 0.9059333333},
+        "8": {"accuracy": 0.9612, "ce": 0.10043224, "overlap": 1.0}
+      },
+      "chosen_k_by_price": {"0.0":8,"0.05":8,"0.1":8,"0.2":8,"0.4":6,"0.7":4,"1.0":3,"1.5":3,"2.5":0,"4.0":0,"7.0":0},
+      "accuracy_by_price": {"0.0":0.9612,"0.05":0.9612,"0.1":0.9612,"0.2":0.9612,"0.4":0.9448,"0.7":0.914,"1.0":0.8732,"1.5":0.8732,"2.5":0.4892,"4.0":0.4892,"7.0":0.4892},
+      "hard_median_us_by_price": {"0.0":429.0005,"0.05":441.399,"0.1":446.1365,"0.2":430.944,"0.4":352.3775,"0.7":268.3425,"1.0":229.395,"1.5":223.837,"2.5":75.2865,"4.0":75.672,"7.0":75.712},
+      "loss_oracle_k_by_price": {"0.0":8,"0.05":8,"0.1":8,"0.2":8,"0.4":6,"0.7":4,"1.0":3,"1.5":3,"2.5":0,"4.0":0,"7.0":0},
+      "price_blind_k_for_all_prices": 8
+    },
+    "1": {
+      "fixed_width": {
+        "0": {"accuracy": 0.5108, "ce": 0.69313586, "overlap": null},
+        "1": {"accuracy": 0.8132, "ce": 0.50049251, "overlap": 0.9996},
+        "3": {"accuracy": 0.8832, "ce": 0.26526308, "overlap": 0.9832},
+        "4": {"accuracy": 0.9224, "ce": 0.18914188, "overlap": 0.9617},
+        "6": {"accuracy": 0.954, "ce": 0.10893744, "overlap": 0.9366},
+        "8": {"accuracy": 0.9712, "ce": 0.07931563, "overlap": 1.0}
+      },
+      "chosen_k_by_price": {"0.0":8,"0.05":8,"0.1":6,"0.2":6,"0.4":6,"0.7":4,"1.0":3,"1.5":3,"2.5":1,"4.0":0,"7.0":0},
+      "accuracy_by_price": {"0.0":0.9712,"0.05":0.9712,"0.1":0.954,"0.2":0.954,"0.4":0.954,"0.7":0.9224,"1.0":0.8832,"1.5":0.8832,"2.5":0.8132,"4.0":0.5108,"7.0":0.5108},
+      "hard_median_us_by_price": {"0.0":425.1705,"0.05":429.2865,"0.1":345.873,"0.2":343.234,"0.4":345.7575,"0.7":265.288,"1.0":228.294,"1.5":229.185,"2.5":141.55,"4.0":76.9795,"7.0":74.3655},
+      "loss_oracle_k_by_price": {"0.0":8,"0.05":8,"0.1":8,"0.2":8,"0.4":6,"0.7":4,"1.0":4,"1.5":3,"2.5":1,"4.0":0,"7.0":0},
+      "price_blind_k_for_all_prices": 6
+    },
+    "2": {
+      "fixed_width": {
+        "0": {"accuracy": 0.4892, "ce": 0.69364303, "overlap": null},
+        "1": {"accuracy": 0.8124, "ce": 0.56441432, "overlap": 0.988},
+        "3": {"accuracy": 0.874, "ce": 0.27676034, "overlap": 0.9418666667},
+        "4": {"accuracy": 0.9164, "ce": 0.21093281, "overlap": 0.9199},
+        "6": {"accuracy": 0.9572, "ce": 0.12745333, "overlap": 0.8944666667},
+        "8": {"accuracy": 0.974, "ce": 0.10049438, "overlap": 1.0}
+      },
+      "chosen_k_by_price": {"0.0":8,"0.05":8,"0.1":8,"0.2":6,"0.4":4,"0.7":4,"1.0":4,"1.5":3,"2.5":0,"4.0":0,"7.0":0},
+      "accuracy_by_price": {"0.0":0.974,"0.05":0.974,"0.1":0.974,"0.2":0.9572,"0.4":0.9164,"0.7":0.9164,"1.0":0.9164,"1.5":0.874,"2.5":0.4892,"4.0":0.4892,"7.0":0.4892},
+      "hard_median_us_by_price": {"0.0":426.933,"0.05":433.342,"0.1":426.677,"0.2":344.596,"0.4":266.7605,"0.7":271.592,"1.0":277.246,"1.5":227.8175,"2.5":77.1845,"4.0":74.881,"7.0":74.1195},
+      "loss_oracle_k_by_price": {"0.0":8,"0.05":8,"0.1":8,"0.2":6,"0.4":6,"0.7":4,"1.0":3,"1.5":3,"2.5":0,"4.0":0,"7.0":0},
+      "price_blind_k_for_all_prices": 8
+    }
+  },
+  "checks": {
+    "price_aware_width_nonincreasing_with_price_all_seeds": true,
+    "price_blind_width_changes_with_price_any_seed": false,
+    "loss_oracle_agreement": {"count":28,"total":33,"rate":0.8484848484848485},
+    "seed0_physical_vs_dense_prediction_mismatches": 0,
+    "seed0_physical_vs_dense_max_logit_abs_diff": 4.76837158203125e-07,
+    "seed0_same_input_price_transition_scan": [[0.0,8],[0.3325,6],[0.525,4],[0.805,3],[1.75,0]],
+    "seed0_same_input_hook_trace": [
+      {"price":0.0,"k":8,"ids":[0,5,6,2,7,3,1,4]},
+      {"price":0.5,"k":6,"ids":[0,5,6,2,7,3]},
+      {"price":0.8,"k":3,"ids":[0,5,6]},
+      {"price":1.8,"k":0,"ids":[]}
+    ]
+  },
+  "interpretation": {
+    "supported": "In this supplied sparse-NN toy, a scalar resource price can condition one fixed NN to select a narrower or wider physically executed expert set; lower price uses more experts and achieves higher accuracy at longer measured latency, while higher price reduces work and central latency at lower task quality.",
+    "not_supported": [
+      "hard real-time/WCET",
+      "necessity or superiority of learned width control over an external analytic scheduler when the loss/work table is exposed",
+      "LLM-scale generalization",
+      "training-time sparse execution (the training surrogate evaluates all widths/experts)"
+    ]
+  }
+}
