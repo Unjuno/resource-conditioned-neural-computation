@@ -20,6 +20,7 @@ This index separates the main physical-computation chain from secondary router/t
 | Sequence nested non-prefix routing | PASS + negative boundary | 5-seed causal generation: input-dependent routing beats prefix by +14.38 pp token at `k=2` and +11.25 pp at `k=4`; forcing exact work is quality-monotone in only 3/5 seeds |
 | Budget-as-cap + preferred compute | PASS | 5/5 token/exact monotonic; full cap improves +2.50 pp token and +9.375 pp exact vs forced `k=6` while saving 0.9875 blocks on average |
 | Fine-grained sequence caps | PASS under tradeoff bound | `0..6` finite caps remain 5/5 monotonic; full-cap mean work falls another 0.275 blocks for -0.469 pp token / -1.25 pp exact vs coarse caps |
+| Concurrent preferred-compute training | **FAIL / credit-assignment boundary** | 5-seed ST, relaxed-soft, and online-decoupled audits all preserve hard caps but miss the post-trained frontier; best online-decoupled result is -3.44 pp token / -8.13 pp exact at nearly identical mean work |
 
 ## RTOS / analyzable implementation bridge
 
@@ -33,11 +34,11 @@ Ordinary Linux percentile timing has already been falsified as a stable hard-adm
 
 ## Container entrypoints
 
-See [`container/README.md`](container/README.md). Sequence nested-routing and cap-semantics audits are reproduced with `container/Dockerfile.sequence_nested.cpu`.
+See [`container/README.md`](container/README.md). Sequence nested-routing and cap-semantics audits are reproduced with `container/Dockerfile.sequence_nested.cpu`; direct preferred-compute training is audited with `container/Dockerfile.sequence_stop.cpu`.
 
 ## Next falsification priorities
 
-1. Lower the sequence input-dependent ranking + preferred-compute cap policy into the existing generated/freestanding backend and make the finite class manifest describe the maximum admitted work.
-2. Replace the post-trained preferred-compute controller with direct task-loss policy optimization / straight-through or RL stopping, then compare stability and frontier quality.
-3. Test the cap semantics and joint all-class training on a real-data workload with sequence structure or temporal dependence.
+1. Test a state-based **value of additional computation** predictor that learns marginal future task benefit from a stable/slowly changing capability model, while using only current execution state at inference.
+2. Lower the currently strongest sequence input-dependent ranking + post-trained preferred-compute cap policy into the generated/freestanding backend and make the finite class manifest describe maximum admitted work.
+3. Test cap semantics and joint all-class training on a real-data workload with sequence structure or temporal dependence.
 4. After the policy/backend boundary stabilizes, attach target-specific timing bounds and RTOS admission logic.

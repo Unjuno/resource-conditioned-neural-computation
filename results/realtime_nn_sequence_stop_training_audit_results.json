@@ -1,0 +1,67 @@
+{
+  "setup": {
+    "task": "same 5-bit two-mode causal generation task as the sequence cap experiments",
+    "classes": [0, 2, 4, 6],
+    "seeds": 5,
+    "steps": 400,
+    "pass_conditions": {
+      "full_cap_token_gap_pp_min": -1.0,
+      "full_cap_exact_gap_pp_min": -2.0,
+      "full_cap_mean_work_delta_max_blocks": 0.25,
+      "nested_violations": 0,
+      "cap_violations": 0,
+      "hard_cap": true
+    },
+    "baseline": "post-trained preferred-compute policy from realtime_nn_sequence_cap_preference_results.json"
+  },
+  "baseline_full_cap": {"token_acc": 0.9859375, "exact": 0.95, "mean_effective_blocks": 5.0125},
+  "straight_through": {
+    "per_seed_full_cap": [
+      {"seed":0,"token_acc":0.875,"exact":0.6875,"mean_effective_blocks":2.0,"preferred_distribution":{"2":32}},
+      {"seed":1,"token_acc":0.640625,"exact":0.25,"mean_effective_blocks":0.25,"preferred_distribution":{"0":28,"2":4}},
+      {"seed":2,"token_acc":0.6796875,"exact":0.34375,"mean_effective_blocks":0.5,"preferred_distribution":{"0":24,"2":8}},
+      {"seed":3,"token_acc":0.890625,"exact":0.78125,"mean_effective_blocks":4.0,"preferred_distribution":{"4":32}},
+      {"seed":4,"token_acc":0.828125,"exact":0.5625,"mean_effective_blocks":2.0,"preferred_distribution":{"2":32}}
+    ],
+    "mean_by_cap": {"0":{"token_acc":0.5625,"exact":0.125,"mean_effective_blocks":0.0},"2":{"token_acc":0.746875,"exact":0.4625,"mean_effective_blocks":1.35},"4":{"token_acc":0.7828125,"exact":0.525,"mean_effective_blocks":1.75},"6":{"token_acc":0.7828125,"exact":0.525,"mean_effective_blocks":1.75}},
+    "vs_post_full":{"token_pp":-20.3125,"exact_pp":-42.5,"mean_blocks_delta":-3.2625},
+    "nested_violations":0,"cap_or_count_monotonic_violations":0,"all_hard_cap_pass":true,"decision":"FAIL"
+  },
+  "relaxed_soft": {
+    "per_seed_full_cap": [
+      {"seed":0,"token_acc":0.9296875,"exact":0.75,"mean_effective_blocks":4.0,"preferred_distribution":{"4":32}},
+      {"seed":1,"token_acc":0.9140625,"exact":0.84375,"mean_effective_blocks":4.0,"preferred_distribution":{"4":32}},
+      {"seed":2,"token_acc":0.984375,"exact":0.9375,"mean_effective_blocks":4.0,"preferred_distribution":{"4":32}},
+      {"seed":3,"token_acc":0.8515625,"exact":0.625,"mean_effective_blocks":4.0,"preferred_distribution":{"4":32}},
+      {"seed":4,"token_acc":0.921875,"exact":0.84375,"mean_effective_blocks":4.0,"preferred_distribution":{"4":32}}
+    ],
+    "mean_by_cap": {"0":{"token_acc":0.5625,"exact":0.125,"mean_effective_blocks":0.0},"2":{"token_acc":0.7703125,"exact":0.45625,"mean_effective_blocks":2.0},"4":{"token_acc":0.9203125,"exact":0.8,"mean_effective_blocks":4.0},"6":{"token_acc":0.9203125,"exact":0.8,"mean_effective_blocks":4.0}},
+    "vs_post_full":{"token_pp":-6.5625,"exact_pp":-15.0,"mean_blocks_delta":-1.0125},
+    "nested_violations":0,"cap_or_count_monotonic_violations":0,"all_hard_cap_pass":true,"decision":"FAIL"
+  },
+  "online_decoupled": {
+    "method": "each step: backbone/ranking gets uniform all-class task loss; stop policy gets one detached current counterfactual-loss update",
+    "per_seed_full_cap": [
+      {"seed":0,"token_acc":1.0,"exact":1.0,"mean_effective_blocks":5.25,"preferred_distribution":{"4":12,"6":20}},
+      {"seed":1,"token_acc":0.96875,"exact":0.90625,"mean_effective_blocks":4.0,"preferred_distribution":{"4":32}},
+      {"seed":2,"token_acc":0.9609375,"exact":0.84375,"mean_effective_blocks":4.0,"preferred_distribution":{"4":32}},
+      {"seed":3,"token_acc":0.8828125,"exact":0.75,"mean_effective_blocks":6.0,"preferred_distribution":{"6":32}},
+      {"seed":4,"token_acc":0.9453125,"exact":0.84375,"mean_effective_blocks":6.0,"preferred_distribution":{"6":32}}
+    ],
+    "mean_by_cap": {"0":{"token_acc":0.5625,"exact":0.11875,"mean_effective_blocks":0.0},"2":{"token_acc":0.7734375,"exact":0.5,"mean_effective_blocks":2.0},"4":{"token_acc":0.9390625,"exact":0.8375,"mean_effective_blocks":4.0},"6":{"token_acc":0.9515625,"exact":0.86875,"mean_effective_blocks":5.05}},
+    "vs_post_full":{"token_pp":-3.4375,"exact_pp":-8.125,"mean_blocks_delta":0.0375},
+    "nested_violations":0,"cap_or_count_monotonic_violations":0,"all_hard_cap_pass":true,"decision":"FAIL"
+  },
+  "exploratory_negative_controls": {
+    "gumbel_st_seed0":{"full_token_acc":0.7890625,"full_exact":0.53125,"preferred_distribution":{"2":32}},
+    "policy_gradient_seed0":{"full_token_acc":0.90625,"full_exact":0.78125,"preferred_distribution":{"4":32}},
+    "warmup_best_seed0":{"warmup_steps":200,"full_token_acc":0.953125,"full_exact":0.875,"preferred_distribution":{"4":32}},
+    "coverage_aux_best_seed0":{"weight":0.25,"full_token_acc":0.9453125,"full_exact":0.78125,"preferred_distribution":{"4":32}}
+  },
+  "conclusion": {
+    "H": "Concurrent capability and preferred-compute optimization can replace the post-trained preferred-compute stage while preserving the quality/work frontier.",
+    "decision": "FAIL",
+    "supported_interpretation": "The current sequence task strongly benefits from separating capability learning from preferred-compute fitting. Direct co-optimization preserves structural hard caps but collapses or homogenizes stopping choices and degrades task quality.",
+    "next_hypothesis": "A counterfactual value-of-compute predictor trained after or with a slowly changing capability model may preserve the post-trained frontier while making the stopping decision state-based and deployable."
+  }
+}

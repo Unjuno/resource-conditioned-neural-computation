@@ -1,0 +1,7 @@
+FROM python:3.13.5-slim
+WORKDIR /workspace
+RUN pip install --no-cache-dir torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+COPY experiments/realtime_nn_sequence_nested_routing.py experiments/realtime_nn_sequence_stop_training_audit.py experiments/
+COPY results/realtime_nn_sequence_cap_preference_results.json results/
+COPY container/run_sequence_stop_training_audit.sh container/
+CMD ["bash", "container/run_sequence_stop_training_audit.sh"]
