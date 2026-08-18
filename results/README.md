@@ -9,6 +9,7 @@ Authoritative compact summaries for the current public reproduction include:
 - `realtime_nn_task_only_gate_results.json` — task-loss-only learned selection with hard-budget/timing/deadline audits.
 - `realtime_nn_loss_conditioned_elastic_width_results.json` — three-seed scalar-resource-price experiment: task-loss/work-derived internal width control changes the physically executed expert count, accuracy, and measured median latency in one fixed NN; includes price-blind, dense-equivalent, same-input, and analytic-loss-oracle audits.
 - `realtime_nn_loss_conditioned_deadline_results.json` — seed-0 soft deadline integration for the loss-conditioned elastic-width NN; shows useful on-time-correct trade-offs and retains the Linux empirical-P95 instability boundary.
+- `realtime_nn_price_cap_sequence_results.json` — three-seed local-attention sequence-model bridge: a hard max-depth cap is structurally obeyed while a soft resource price moves one fixed sequence model through 8/6/4/2/0 physically executed attention+MLP blocks; includes dense-equivalent, price-blind, hook, and loss-oracle audits.
 - `realtime_nn_digits_budget_gate_results.json` — task-loss-only input-dependent hard-budget activation on held-out 8x8 handwritten digits, with validation-selected static controls and content/identity falsification interventions.
 - `realtime_nn_digits_deadline_frontier_results.json` — common-deadline learned-vs-validation-selected-static frontier for the digits experiment; records both intermediate-budget gains and tight/full-budget negative boundaries.
 - `realtime_nn_structured_width_results.json` — structured channel-width/depth activation audit: one maximum-width NN, exact sliced work counts, matched dense-mask control, PyTorch backend negative, and plain-C++ physical-width speedup across three seeds.
@@ -55,6 +56,7 @@ For the Real-Time NN line, machine-specific microsecond values are not the prima
 - matched dense-mask controls that preserve output while retaining wasteful full-width computation;
 - scalar resource-price intervention changing the physically executed expert width in the same parameter set;
 - task-loss-plus-work-cost derivation of the price-to-width policy, with matched price-blind and external loss-oracle controls;
+- hard-cap + soft-price intervention inside a transformer-like sequence stack, with physical attention+MLP block skipping;
 - input-dependent hard-budget selection on held-out data against static subsets selected only on validation;
 - content/identity interventions that test whether useful selected computation, rather than path identity alone, carries task information;
 - backend sensitivity: reduced neural work must be shown to become reduced physical latency on the intended runtime;
