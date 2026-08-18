@@ -60,14 +60,14 @@
     }
   },
   "certified_direct_object_audit": {
-    "cortex_m0": {"undefined_symbol_count": 0, "text_bytes": 88332},
-    "cortex_m4_soft": {"undefined_symbol_count": 0, "text_bytes": 88456},
-    "rv32im": {"undefined_symbol_count": 0, "text_bytes": 86856}
+    "cortex_m0": {"undefined_symbol_count": 0, "text_bytes": 88408},
+    "cortex_m4_soft": {"undefined_symbol_count": 0, "text_bytes": 88534},
+    "rv32im": {"undefined_symbol_count": 0, "text_bytes": 86928}
   },
   "certified_direct_baremetal_link": {
-    "cortex_m0": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 88472, "bss_bytes": 4048},
-    "cortex_m4_soft": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 88612, "bss_bytes": 4048},
-    "rv32im": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 86984, "bss_bytes": 4048},
+    "cortex_m0": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 88548, "bss_bytes": 4048},
+    "cortex_m4_soft": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 88692, "bss_bytes": 4048},
+    "rv32im": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 87056, "bss_bytes": 4048},
     "rv32i_negative": {"link_ok": false, "requires_mul_helper": true}
   },
   "host_seed0_alternating_timing": {
