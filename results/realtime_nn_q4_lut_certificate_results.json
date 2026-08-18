@@ -1,0 +1,98 @@
+{
+  "setup": {
+    "seeds": 3,
+    "effective_input_bits": 9,
+    "effective_input_states": 512,
+    "api_input_bits": 16,
+    "certificate_domain_q4": [-128, 128],
+    "certificate_scope": "all distinct low-9-bit states consumed by the Q4 core; upper API input bits are ignored",
+    "timing_boundary": "host timing is secondary and nonportable; no WCET claim"
+  },
+  "seed_certificates": [
+    {
+      "seed": 0,
+      "tanh_pre_range": [-75, 75],
+      "gelu_pre_range": [-55, 61],
+      "residual_tanh_pre_range": [-66, 69],
+      "exact_output_match_production_branchless_certified": true,
+      "high_input_bits_alias_to_low9": true,
+      "class_logit_checksums": [131328, -12928, 2288, 500, -12769]
+    },
+    {
+      "seed": 1,
+      "tanh_pre_range": [-71, 70],
+      "gelu_pre_range": [-62, 62],
+      "residual_tanh_pre_range": [-74, 66],
+      "exact_output_match_production_branchless_certified": true,
+      "high_input_bits_alias_to_low9": true,
+      "class_logit_checksums": [-80128, 36160, 31216, 28272, 33649]
+    },
+    {
+      "seed": 2,
+      "tanh_pre_range": [-69, 65],
+      "gelu_pre_range": [-112, 90],
+      "residual_tanh_pre_range": [-64, 67],
+      "exact_output_match_production_branchless_certified": true,
+      "high_input_bits_alias_to_low9": true,
+      "class_logit_checksums": [8704, 2624, -2016, 5104, 14721]
+    }
+  ],
+  "negative_certificate_test": {
+    "mutation": "seed-0 quantized block-0 ff1 bias set to legal int8 value 127",
+    "certificate_rejected": true,
+    "detected_unsafe_range": {"gelu_pre": [-55, 154]}
+  },
+  "cross_target_conditional_branch_sites": {
+    "cortex_m0": {
+      "production_clamped": 69,
+      "branchless_clamp": 59,
+      "certified_direct": 19
+    },
+    "cortex_m4_soft": {
+      "production_clamped": 39,
+      "branchless_clamp": 18,
+      "certified_direct": 18
+    },
+    "rv32im": {
+      "production_clamped": 40,
+      "branchless_clamp": 33,
+      "certified_direct": 27
+    }
+  },
+  "certified_direct_object_audit": {
+    "cortex_m0": {"undefined_symbol_count": 0, "text_bytes": 88408},
+    "cortex_m4_soft": {"undefined_symbol_count": 0, "text_bytes": 88534},
+    "rv32im": {"undefined_symbol_count": 0, "text_bytes": 86928}
+  },
+  "certified_direct_baremetal_link": {
+    "cortex_m0": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 88548, "bss_bytes": 4048},
+    "cortex_m4_soft": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 88692, "bss_bytes": 4048},
+    "rv32im": {"link_ok": true, "undefined_symbol_count": 0, "binary_bytes": 87056, "bss_bytes": 4048},
+    "rv32i_negative": {"link_ok": false, "requires_mul_helper": true}
+  },
+  "host_seed0_alternating_timing": {
+    "runs_per_variant": 3,
+    "repetitions_per_class_per_run": 1200,
+    "branchless_clamp_median_of_p50_us": [0.201, 18.86, 37.613, 56.363, 75.073],
+    "certified_direct_median_of_p50_us": [0.201, 15.93, 31.632, 47.349, 63.104],
+    "interpretation": "Removing runtime clamp arithmetic lowers central host latency in this one build/run family, but this is not a portable target speed claim."
+  },
+  "aggregate": {
+    "all_3_seeds_range_certified": true,
+    "all_3_seeds_exact_output_match": true,
+    "all_3_seeds_high_bits_alias_to_low9": true,
+    "unsafe_weight_mutation_rejected": true,
+    "helper_free_certified_targets": ["cortex_m0", "cortex_m4_soft", "rv32im"],
+    "rv32i_capability_boundary_unchanged": true
+  },
+  "interpretation": {
+    "supported": "For this finite-input Q4 toy, an exhaustive build-time certificate over all 512 effective input states proves every reachable activation-LUT index is in range for the tested generated weights. The certified direct-index core is bit-exact to the clamped variants in three seeds and can omit runtime LUT clamp logic.",
+    "not_supported": [
+      "a general range proof for arbitrary neural networks or unbounded inputs",
+      "constant cycle count",
+      "WCET or hard-real-time guarantee",
+      "hardware/RTOS execution",
+      "target-independent speedup"
+    ]
+  }
+}
