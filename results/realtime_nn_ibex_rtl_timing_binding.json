@@ -1,6 +1,6 @@
 {
   "schema": "rtnn-ibex-rtl-binding-v1",
-  "status": "rtl_validated_candidate_pending_same_build_repeat",
+  "status": "rtl_validated_candidate_final_pr_head_repeat_requested",
   "provenance": {
     "strong_all_class_workflow_run": 32214991830,
     "strong_all_class_artifact_id": 9352155229,
@@ -48,7 +48,7 @@
   "rtl_derived_certification_upper_cycles": [29620, 615569, 1201521, 1787473, 2373425, 2959377, 2959381],
   "rtl_derived_total_upper_cycles": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167870],
   "class_fractions": [0.0, 0.16666666666666666, 0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333334, 1.0],
-  "derivation": "The certification table is the exact cycle count measured by mcycle for every finite class on three distinct held-out inputs in the stronger pinned-RTL harness. Every class has zero input-to-input cycle range. The previous candidate was exactly one cycle low after the harness was strengthened, demonstrating that the binding is exact-build-specific rather than a portable formula. The runtime table is the observed maximum-work admission+infer_budget envelope for the same final harness shape; preferred exits 1, 3, and 5 are exercised. The next same-source-shape RTL run must reproduce or remain below these values before promotion from candidate to validated binding.",
+  "derivation": "The certification table is the exact cycle count measured by mcycle for every finite class on three distinct held-out inputs in the stronger pinned-RTL harness. Every class has zero input-to-input cycle range. The previous candidate was exactly one cycle low after the harness was strengthened, demonstrating that the binding is exact-build-specific rather than a portable formula. The runtime table is the observed maximum-work admission+infer_budget envelope for the same final harness shape; preferred exits 1, 3, and 5 are exercised. The final PR head must reproduce or remain below these values before merge.",
   "artifact_policy": {
     "research_reproduction": "training seed/recipe supports statistical experiment reproduction but is not a bitwise certification identity",
     "timing_certification": "timing evidence must bind to the exact frozen Q15 artifact and exact loadable machine image hashes used in the validation run"
