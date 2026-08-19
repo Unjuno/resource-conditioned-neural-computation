@@ -8,8 +8,8 @@
 #define HARNESS_MODEL_ID UINT32_C(0x52544e4e)
 #define HARNESS_BUILD_ID UINT32_C(0x52544c31)
 
-/* Measured on the final expanded pinned-RTL harness shape. Class 6 shares
-   the class-5 envelope because deployed policy max_exit=5. */
+/* RTL-derived maximum-work binding for the pinned Simple System configuration.
+   Class 6 shares the class-5 deployed-policy envelope because max_exit=5. */
 static const uint32_t RTL_TOTAL[7] = {
   29843u, 657454u, 1285058u, 1912662u, 2540266u, 3167870u, 3167870u
 };
@@ -70,17 +70,11 @@ int main(void) {
   print_overhead("ONE", oh1);
   print_overhead("TWO", oh2);
 
-  /* Reconfirm fixed-class cycle independence on three held-out inputs. */
-  for (uint8_t c = 0; c < 7; ++c) {
-    uint32_t a = read_mcycle32();
-    rtnn_fixed_certify_class(&W, RTNN_RTL_X[0], c, Z);
-    uint32_t b = read_mcycle32();
-    print_cert(0, c, b - a, argmax10(Z));
-  }
-  for (uint32_t slot = 1; slot < RTNN_RTL_VECTOR_N; ++slot) {
-    const uint8_t anchor[3] = {0u, 3u, 5u};
-    for (unsigned j = 0; j < 3; ++j) {
-      uint8_t c = anchor[j];
+  /* Stronger RTL audit: every finite certification class on three distinct
+     held-out inputs. A class binding is promoted only if all three have the
+     same cycle count and the same prediction as the native integer core. */
+  for (uint32_t slot = 0; slot < RTNN_RTL_VECTOR_N; ++slot) {
+    for (uint8_t c = 0; c < 7; ++c) {
       uint32_t a = read_mcycle32();
       rtnn_fixed_certify_class(&W, RTNN_RTL_X[slot], c, Z);
       uint32_t b = read_mcycle32();
@@ -88,8 +82,8 @@ int main(void) {
     }
   }
 
-  /* Exercise the real admission + adaptive inference path for all three
-     preferred-depth regimes and all seven external budget classes. */
+  /* Exercise real admission + adaptive inference for preferred depths 1/3/5
+     and every external finite budget ceiling. */
   for (uint32_t slot = 0; slot < RTNN_RTL_VECTOR_N; ++slot) {
     for (uint8_t c = 0; c < 7; ++c) {
       uint16_t bq = budget_for_class(c);
