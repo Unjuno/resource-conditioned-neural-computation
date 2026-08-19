@@ -1,0 +1,28 @@
+name: RTNN certification artifact integrity
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/realtime-nn-certification-artifact-integrity.yml'
+      - 'artifacts/certification/ibex_simple_system/**'
+      - 'artifacts/certification/de0_cv_preflight_vectors.json'
+      - 'experiments/audit_realtime_nn_de0_cv_preflight.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  artifact-integrity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify frozen certification package and derived board-free reference
+        run: |
+          set -euo pipefail
+          python -m py_compile experiments/audit_realtime_nn_de0_cv_preflight.py
+          python experiments/audit_realtime_nn_de0_cv_preflight.py \
+            --zip artifacts/certification/ibex_simple_system/rtnn_ibex_rtl_exact.zip \
+            --reference artifacts/certification/de0_cv_preflight_vectors.json
