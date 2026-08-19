@@ -1,15 +1,16 @@
 {
   "schema": "rtnn-ibex-rtl-binding-v1",
-  "status": "candidate_pending_second_rtl_run",
+  "status": "candidate_pending_final_same-shape_rtl_run",
   "provenance": {
-    "github_workflow_run": 32211800616,
-    "github_artifact_id": 9351124475,
-    "artifact_zip_sha256": "8bd3c3edac59f98e90fc5731bf1a20c727c75e331d2a3d173979f602ed987ce4",
+    "first_rtl_workflow_run": 32211800616,
+    "first_rtl_artifact_id": 9351124475,
+    "first_artifact_zip_sha256": "8bd3c3edac59f98e90fc5731bf1a20c727c75e331d2a3d173979f602ed987ce4",
+    "second_rtl_workflow_run": 32212597652,
+    "second_rtl_artifact_id": 9351354060,
+    "second_artifact_zip_sha256": "da1995e61e02fddcb5ea1c5969213accd73d9424979bea1d2b5c0fdfda843a39",
     "ibex_commit": "7b5df75a041affe56e8c235260f98a09b3319008",
     "run_frozen_q15_model_sha256": "3c8c859242b5b111d5334cc25d7d14011556a2c03c572f877534d778db52052e",
-    "run_frozen_q15_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
-    "validation_elf_sha256": "b45f70c712dec3e7a5c1c7e910e2ba7022d388345de4e57e43a253ec819d2dfd",
-    "validation_load_image_sha256": "918f1c1512680b52a6922cb8490a0ed8c0d275ba658c10b518658c3392b5a1ae"
+    "run_frozen_q15_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f"
   },
   "target": {
     "name": "Ibex-Simple-System-SecureIbex-v1",
@@ -34,13 +35,27 @@
     "certification_path_cycles": [29619, 615568, 1201520, 1787472, 2373424, 2959376, 2959380],
     "actual_no_stop_e2e_cycles": [29842, 657453, 1285057, 1912661, 2540265, 3167869, 3167865]
   },
+  "second_rtl_audit": {
+    "decision_with_first_binary_runtime_table": "FAIL only because the expanded final harness binary adds exactly one runtime cycle to classes 0..5",
+    "certification_prediction_mismatches": 0,
+    "e2e_prediction_mismatches": 0,
+    "e2e_execution_mismatches": 0,
+    "unsafe_admissions": 0,
+    "anchor_cycle_range": {"0": 0, "3": 0, "5": 0},
+    "certification_bound_exceedances": 0,
+    "runtime_rows": {
+      "preferred_exit_1": [29843, 657454, 699104, 699104, 699104, 699104, 699100],
+      "preferred_exit_3": [29843, 657454, 1285058, 1912662, 1954312, 1954312, 1954308],
+      "preferred_exit_5": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167866]
+    }
+  },
   "rtl_derived_certification_upper_cycles": [29619, 615568, 1201520, 1787472, 2373424, 2959376, 2959380],
-  "rtl_derived_total_upper_cycles": [29842, 657453, 1285057, 1912661, 2540265, 3167869, 3167869],
+  "rtl_derived_total_upper_cycles": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167870],
   "class_fractions": [0.0, 0.16666666666666666, 0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333334, 1.0],
-  "derivation": "For classes 0..5 the runtime bound is the mcycle-measured actual admission+infer_budget no-early-stop path on held-out test index 57, whose deployed policy prefers exit 5. Class 6 is the monotone maximum of class-5 and class-6 measurements because the deployed policy ceiling is exit 5. No multiplicative safety factor is used. Fixed-loop branchless numeric kernels, SecureIbex data-independent instruction timing, deterministic one-cycle SRAM and no cache make the no-stop class path the structural maximum; early stopping only removes suffix work. The certification-only table is recorded separately from the actual runtime admission+inference table.",
+  "derivation": "The fixed-class certification table is exactly stable across both RTL runs and three held-out anchor inputs. The runtime table is taken from the second run after the harness was expanded to its final 3-input x 7-class shape. Classes 0..5 use the measured no-early-stop admission+infer_budget cycles on held-out test index 57, whose preferred exit is 5; class 6 is the monotone maximum because deployed policy max_exit=5. This is not a multiplicative safety margin. The final same-shape run must reproduce or remain below these exact values before promotion.",
   "nonclaims": [
     "This is an RTL-simulation timing binding, not an FPGA/ASIC silicon WCET certificate.",
     "The old RTNN-IBEX-DIT-v1 arithmetic cycle formula is falsified for this pinned RTL configuration.",
-    "A second RTL run must pass against this table before status is promoted from candidate."
+    "Timing evidence is valid only for the exact final binary/toolchain/RTL configuration identified by the final validation run."
   ]
 }
