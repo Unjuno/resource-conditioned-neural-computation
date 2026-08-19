@@ -36,7 +36,7 @@ One fixed NN can physically change depth/width/expert/block execution under reso
 
 On held-out handwritten-digit row sequences, formal seeds 60--64 reach **93.56%** adaptive test accuracy at **20.23%** average physical compute, with 5/5 passing seeds and zero cap/count violations. A separate chronological weekly-CO2 task remains a negative boundary: temporal/nonstationary depth utility shifts between validation and later test periods.
 
-### Goal C — same-model integration PASS; pinned RTL + independent binary control-flow evidence + formal finite contract reached
+### Goal C — same-model integration PASS; pinned RTL + independent binary control-flow evidence + formal deployed control reached
 
 The same real-data path now connects:
 
@@ -53,6 +53,7 @@ real held-out model
     -> exact-RV32 custom noninterference audit
     -> third-party BINSEC fixed-class control-flow cross-check
     -> CBMC finite runtime-contract proof
+    -> CBMC proof of mechanically extracted deployed control bodies
     -> deadline admission
 ```
 
@@ -145,7 +146,28 @@ The five proof entry points all report `VERIFICATION SUCCESSFUL`:
 4. **effective execution** — for all budgets, deadlines, and preferred exits `0..5`, execution remains below budget, deadline, preference, and policy ceilings, with the committed RTL bound still within the admitted deadline;
 5. **Q15 LUT indices** — arbitrary signed 32-bit inputs remain in the finite exp/GELU table domains after the exact clamp/index arithmetic.
 
-This is a formal result for the represented finite C/runtime contract. It does **not** prove the whole neural arithmetic, compiler preservation, Ibex pipeline, or physical device timing. Those layers retain their separate exact-binary, BINSEC, and RTL evidence.
+This is a formal result for the represented finite C/runtime contract. It does **not** prove the whole neural arithmetic, compiler preservation, Ibex pipeline, or physical device timing.
+
+## CBMC proof of actual deployed control bodies
+
+A second CBMC experiment removes the remaining source-model duplication for the neural execution-control path. A deterministic extractor reads `realtime_nn_real_sequence_fixed_core.c` and copies the exact function bodies for:
+
+- `rtnn_fixed_budget_ceiling_q16()`;
+- `rtnn_fixed_infer_budget()`;
+- `rtnn_fixed_certify_class()`.
+
+The extraction records the full deployed-core SHA and each function-body SHA. Neural numerical kernels are replaced only for this control proof: `entropy10()` is nondeterministic, while `run_block()` is instrumented as the physical optional-block call. Consequently, every possible continue/stop decision sequence is included rather than only observed entropy outcomes.
+
+CBMC 6.10.0 proves all four entry points with bounds/pointer/signed-overflow/divide-by-zero checks and loop unwinding assertions:
+
+1. **actual deployed Q0.16 lowering** — in-range, monotone, fail-closed, greatest-fit for every ordered `uint16_t` budget pair;
+2. **actual adaptive physical-call cap** — for every `uint16_t` budget, every `uint8_t` deadline-class input, and every possible entropy outcome, optional `run_block()` calls remain canonical and do not exceed `min(budget ceiling, normalized deadline, policy max exit)`; reported `executed` equals the physical call count; invalid deadline values `>6` fail closed to zero blocks;
+3. **NULL executed-output path** — passing `executed == NULL` cannot bypass the cap or canonical order;
+4. **actual fixed-class certification work** — every `uint8_t` class input is normalized fail-closed, capped by deployed policy maximum exit 5, and executes exactly the resulting optional-block count in canonical order.
+
+The final documented PR head was re-proved by workflow run `32222548911`; extraction plus all four proof steps completed successfully.
+
+This closes the source-level finite-control modeling gap more strongly than a hand-copied model. It still abstracts neural numerical arithmetic and does **not** prove compiler preservation, the complete compiled neural machine code, Ibex pipeline timing, or physical-device WCET. Those remain separate binary/RTL/target evidence layers.
 
 ## Artifact identity policy
 
@@ -172,7 +194,7 @@ The research path demonstrates items 1--9 and strong target-specific/software ev
 10. target/build-specific timing upper bound;
 11. deadline admission and on-time-correct evidence.
 
-Pinned RTL measurement, two independent fixed-class machine-code control-flow audits, and CBMC verification of the finite software admission/cap contract substantially strengthen items 10--11 over Linux timing and the rejected arithmetic model. They are still **not** an FPGA/ASIC/silicon production WCET certificate or a complete formal proof of target memory/processor physical timing. A different physical implementation, memory system, interrupt/DMA policy, compiler, RTL revision, or processor configuration requires new timing evidence.
+Pinned RTL measurement, two independent fixed-class machine-code control-flow audits, CBMC verification of the finite software admission/cap contract, and CBMC proof of the mechanically extracted deployed neural-control bodies substantially strengthen items 10--11 over Linux timing and the rejected arithmetic model. They are still **not** an FPGA/ASIC/silicon production WCET certificate or a complete formal proof of compiler preservation plus target memory/processor physical timing. A different physical implementation, memory system, interrupt/DMA policy, compiler, RTL revision, or processor configuration requires new timing evidence.
 
 ## Current negative boundaries
 
@@ -183,7 +205,7 @@ Retain these as first-class results:
 - a training seed is not a bitwise certification artifact identity;
 - the custom taint interpreter is useful but is no longer the sole fixed-class control-flow evidence;
 - BINSEC generic full relational memory checking for class 1 exceeds the supplied runner resources; this is not a control-flow failure;
-- CBMC proof of the finite runtime contract does not by itself prove the compiler, full neural machine code, processor RTL, or physical timing;
+- CBMC proof of deployed source control does not by itself prove compiler preservation, full neural machine code, processor RTL, or physical timing;
 - input-dependent LUT addresses are timing-benign only under the explicitly modeled deterministic memory behavior;
 - nominal MAC reduction does not guarantee wall-clock reduction on every backend;
 - forcing exact admitted work can reduce task quality;
@@ -193,7 +215,7 @@ Retain these as first-class results:
 
 ## Immediate priorities
 
-1. Close the remaining **memory/target timing gap** rather than adding more input samples: prove or explicitly bind the four input-indexed LUT accesses to the selected deterministic on-chip memory timing.
+1. Close the remaining **memory/compiler/target timing gap** rather than adding more input samples: bind the four input-indexed LUT accesses to the selected deterministic on-chip memory and strengthen source↔compiled-binary/processor timing correspondence where production proof requires it.
 2. When physical validation is desired, use the available DE0-CV with controlled on-chip memory and a fixed clock; derive a new FPGA-specific timing binding instead of copying the Simple System table.
 3. Freeze the exact certification ELF/bin in a durable artifact location with their recorded hashes before treating the evidence as long-lived deployment certification.
 4. Extend compiled/timing deployment across additional formal seeds only if cross-seed compiled deployment robustness is required.
@@ -210,7 +232,7 @@ Current work does **not** establish:
 - temporal distribution-shift robustness;
 - an LLM-scale real-time generalization.
 
-The current RTL timing binding, custom/BINSEC control-flow evidence, and CBMC runtime-contract proof are valid only within their explicitly stated artifact and model boundaries.
+The current RTL timing binding, custom/BINSEC control-flow evidence, CBMC finite runtime-contract proof, and deployed source-control proof are valid only within their explicitly stated artifact and model boundaries.
 
 ## Direction lock
 
