@@ -26,6 +26,14 @@ Across seeds 60--64, the Q15 reference has 0/12,600 finite-exit prediction misma
 
 Representative seed 63 is lowered to C. Over 360 held-out samples it has 0/2,520 exit prediction mismatches and 0/360 preferred-exit mismatches. Its preferred distribution remains `[0,263,81,7,2,7,0]`.
 
+Canonical seed-63 Q15 model SHA-256:
+
+```text
+b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a
+```
+
+The model identity is calculated over quantized model/LUT/policy bytes, not generated-header text.
+
 ### Machine-code audit
 
 The final integer source is compiled without an FPU for Cortex-M4 and as RV32IM. The Cortex-M4 object has:
@@ -37,6 +45,12 @@ The final integer source is compiled without an FPU for Cortex-M4 and as RV32IM.
 The RV32IM analysis ELF likewise has no DIV/REM or floating-point instructions.
 
 An earlier version incorrectly retained one `__aeabi_uldivmod` helper because a 64-bit entropy-series division survived compilation. That version is rejected. The final version replaces it with the same fixed restoring divider used elsewhere.
+
+The RV32 deployed-build identity is based on the stripped/loadable binary image rather than the ELF container, because ELF metadata can change when source file names change while the loaded program does not. Seed-63 load-image SHA-256:
+
+```text
+234b3ac1ee91ed80858c17b4d2cc7bcbf2899e9ee0a92eb4c1abab7a54d4386a
+```
 
 ### Conditional processor model: `RTNN-IBEX-DIT-v1`
 
@@ -112,6 +126,60 @@ Results:
 - partial certification fails closed;
 - wrong model identity rejects;
 - wrong build identity rejects.
+
+## Reproduce
+
+The generated Q15 model header remains a build artifact and is not committed. Starting from the repository root, first generate the existing seed-63 float/test bundle and the Q15 header:
+
+```bash
+mkdir -p /tmp/rtnn_fixed
+python experiments/export_realtime_nn_real_sequence_c.py --seed 63 --steps 700 --outdir /tmp/rtnn_fixed
+python experiments/export_realtime_nn_real_sequence_fixed_q15.py --seed 63 --steps 700 --outdir /tmp/rtnn_fixed
+```
+
+Host equivalence and deadline-property tests:
+
+```bash
+clang -O2 -std=c11 -ffreestanding -fno-builtin -I/tmp/rtnn_fixed -Iexperiments \
+  experiments/realtime_nn_real_sequence_fixed_core.c \
+  experiments/realtime_nn_real_sequence_fixed_core_test.c -o /tmp/rtnn_fixed/core_test
+/tmp/rtnn_fixed/core_test
+
+clang -O2 -std=c11 -ffreestanding -fno-builtin -I/tmp/rtnn_fixed -Iexperiments \
+  experiments/realtime_nn_real_sequence_fixed_core.c \
+  experiments/realtime_nn_real_sequence_fixed_timing_contract.c \
+  experiments/realtime_nn_real_sequence_fixed_timing_test.c -o /tmp/rtnn_fixed/timing_test
+/tmp/rtnn_fixed/timing_test
+```
+
+Cortex-M4 integer-only object audit:
+
+```bash
+clang -target armv7m-none-eabi -mcpu=cortex-m4 -mfloat-abi=soft -O2 \
+  -std=c11 -ffreestanding -fno-builtin -I/tmp/rtnn_fixed -Iexperiments \
+  -c experiments/realtime_nn_real_sequence_fixed_core.c -o /tmp/rtnn_fixed/core_m4.o
+nm -u /tmp/rtnn_fixed/core_m4.o
+llvm-objdump -d /tmp/rtnn_fixed/core_m4.o
+```
+
+The unresolved-symbol output should be empty. The disassembly audit should contain no floating-point or hardware-divide instructions.
+
+RV32 analysis image and conditional cycle envelope:
+
+```bash
+clang -target riscv32-unknown-elf -march=rv32im -mabi=ilp32 -O2 \
+  -std=c11 -ffreestanding -fno-builtin -I/tmp/rtnn_fixed -Iexperiments \
+  -c experiments/realtime_nn_real_sequence_fixed_core.c -o /tmp/rtnn_fixed/core_rv32.o
+clang -target riscv32-unknown-elf -march=rv32im -mabi=ilp32 -nostdlib \
+  -Wl,-T,experiments/realtime_nn_rv32_flat.ld \
+  /tmp/rtnn_fixed/core_rv32.o -o /tmp/rtnn_fixed/core_rv32.elf
+llvm-objcopy -O binary /tmp/rtnn_fixed/core_rv32.elf /tmp/rtnn_fixed/core_rv32.bin
+sha256sum /tmp/rtnn_fixed/core_rv32.bin
+python experiments/realtime_nn_rv32_cycle_envelope.py /tmp/rtnn_fixed/core_rv32.elf \
+  --out /tmp/rtnn_fixed/cycle_envelope.json
+```
+
+The expected seed-63 load-image SHA is the value above. The analyzer should report identical instruction-category counts across its four held-out inputs for each class.
 
 ## D
 
