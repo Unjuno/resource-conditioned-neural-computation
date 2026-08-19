@@ -18,7 +18,7 @@ def main():
     base,syms=rv.load_elf(Path(a.elf)); rows=[]
     for cls in range(7):
         runs=[rv.emulate(base,syms,p,cls) for p in SAMPLES]
-        keys=['inst','branch','jump','load','store','mul','mul_high','cycle_envelope']
+        keys=['inst','branch','branch_taken','jump','load','store','mul','mul_high','cycle_envelope']
         same=all(all(x[0][k]==runs[0][0][k] for k in keys) for x in runs)
         if not same: raise SystemExit(f'class {cls}: input-dependent dynamic machine-code counts')
         rows.append({'class':cls,'counts':{k:runs[0][0][k] for k in keys},'four_input_counts_identical':True})
