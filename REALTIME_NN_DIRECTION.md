@@ -36,7 +36,7 @@ One fixed NN can physically change depth/width/expert/block execution under reso
 
 On held-out handwritten-digit row sequences, formal seeds 60--64 reach **93.56%** adaptive test accuracy at **20.23%** average physical compute, with 5/5 passing seeds and zero cap/count violations. A separate chronological weekly-CO2 task remains a negative boundary: temporal/nonstationary depth utility shifts between validation and later test periods.
 
-### Goal C — same-model integration PASS; pinned RTL + exact-binary noninterference reached
+### Goal C — same-model integration PASS; pinned RTL + binary noninterference + formal finite contract reached
 
 The same real-data path now connects:
 
@@ -51,6 +51,7 @@ real held-out model
     -> maximum-work manifest
     -> pinned Ibex RTL timing binding
     -> exact-RV32 binary noninterference audit
+    -> CBMC finite runtime-contract proof
     -> deadline admission
 ```
 
@@ -107,6 +108,20 @@ The adaptive `rtnn_fixed_infer_budget` path is intentionally different. Across h
 
 The custom taint interpreter is **not formally verified**. Its instruction semantics were cross-checked on six embedded held-out vector/class cases with 0 prediction mismatches and a synthetic known-tainted-branch negative control that the analyzer correctly detects. Therefore this evidence is `PASS_WITH_SCOPE`, not a WCET theorem.
 
+## CBMC finite software-contract proof
+
+CBMC 6.10.0 now checks the finite runtime contract over complete integer domains. The proof directly links the repository's actual `rtnn_fixed_admit_total_cycles()` implementation.
+
+The five proof entry points all report `VERIFICATION SUCCESSFUL`:
+
+1. **continuous Q0.16 budget lowering** — in-range, monotone, fail-closed, greatest-fit for arbitrary budgets;
+2. **actual deadline admission** — for every 32-bit deadline, the returned RTL-bound class fits and no higher class fits; wrong model/build IDs and null binding fail closed;
+3. **partial certification** — for arbitrary seven-entry timing tables, un-certified `UINT32_MAX` entries are never admitted, and no higher certified class that fits is skipped;
+4. **effective execution** — for all budgets, deadlines, and preferred exits `0..5`, execution remains below budget, deadline, preference, and policy ceilings, with the committed RTL bound still within the admitted deadline;
+5. **Q15 LUT indices** — arbitrary signed 32-bit inputs remain in the finite exp/GELU table domains after the exact clamp/index arithmetic.
+
+This is a formal result for the represented finite C/runtime contract. It does **not** prove the whole neural arithmetic, compiler preservation, Ibex pipeline, or physical device timing. Those layers retain their separate exact-binary and RTL evidence.
+
 ## Artifact identity policy
 
 The first RTL CI attempt exposed a reproducibility boundary: retraining seed 63 on a GitHub runner did not reproduce the earlier local Q15 SHA bit-for-bit. Therefore:
@@ -118,7 +133,7 @@ Every RTL/noninterference evidence artifact records or checks the exact Q15/buil
 
 ## Required evidence for a full production hard-real-time claim
 
-The research path demonstrates items 1--9 and strong target-specific evidence for 10--11 below:
+The research path demonstrates items 1--9 and strong target-specific/software evidence for 10--11 below:
 
 1. same neural model across budgets;
 2. same input in counterfactual budget tests;
@@ -132,7 +147,7 @@ The research path demonstrates items 1--9 and strong target-specific evidence fo
 10. target/build-specific timing upper bound;
 11. deadline admission and on-time-correct evidence.
 
-Pinned RTL measurement plus exact-binary fixed-class noninterference substantially strengthen item 10 over Linux timing and the rejected arithmetic model. They are still **not** an FPGA/ASIC/silicon production WCET certificate or a mechanically verified all-input timing theorem. A different physical implementation, memory system, interrupt/DMA policy, compiler, RTL revision, or processor configuration requires new timing evidence.
+Pinned RTL measurement, exact-binary fixed-class noninterference, and CBMC verification of the finite software admission/cap contract substantially strengthen items 10--11 over Linux timing and the rejected arithmetic model. They are still **not** an FPGA/ASIC/silicon production WCET certificate or a mechanically verified all-input machine-code timing theorem. A different physical implementation, memory system, interrupt/DMA policy, compiler, RTL revision, or processor configuration requires new timing evidence.
 
 ## Current negative boundaries
 
@@ -142,6 +157,7 @@ Retain these as first-class results:
 - the old arithmetic `RTNN-IBEX-DIT-v1` cycle formula is falsified by actual pinned Ibex RTL;
 - a training seed is not a bitwise certification artifact identity;
 - a custom taint interpreter is useful evidence but not a mechanically verified WCET analyzer;
+- CBMC proof of the finite runtime contract does not by itself prove the compiler, full neural machine code, processor RTL, or physical timing;
 - input-dependent LUT addresses are safe only under the explicitly modeled deterministic memory behavior;
 - nominal MAC reduction does not guarantee wall-clock reduction on every backend;
 - forcing exact admitted work can reduce task quality;
@@ -151,9 +167,9 @@ Retain these as first-class results:
 
 ## Immediate priorities
 
-1. If a software-only production-grade timing proof is required, strengthen exact-binary fixed-class noninterference/timing with a mechanically verified static/formal method rather than adding more empirical input samples.
-2. When physical validation is desired, use the available DE0-CV to reproduce the exact-build timing contract with controlled on-chip memory and fixed clock; do not transfer the Simple System table blindly.
-3. Extend compiled/timing deployment across additional formal seeds only if cross-seed deployment robustness is required.
+1. Strengthen exact compiled RV32 fixed-class control-flow/timing evidence with a mechanically verified binary/static formal method; the custom taint interpreter is now the weakest software-side proof link.
+2. When physical validation is desired, use the available DE0-CV with controlled on-chip memory and a fixed clock; do not transfer the Simple System table blindly.
+3. Extend compiled/timing deployment across additional formal seeds only if cross-seed compiled deployment robustness is required.
 4. Treat chronological/nonstationary temporal generalization as a separate ML-side problem.
 5. Larger LM-scale work remains downstream of the target-certification question.
 
@@ -162,13 +178,13 @@ Retain these as first-class results:
 Current work does **not** establish:
 
 - a universal Ibex WCET theorem;
-- a mechanically verified all-input WCET proof;
+- a mechanically verified all-input machine-code WCET proof;
 - an FPGA/ASIC/silicon production WCET guarantee;
 - arbitrary memory/hardware timing portability;
 - temporal distribution-shift robustness;
 - an LLM-scale real-time generalization.
 
-The current RTL timing binding and software noninterference evidence are valid only for the explicitly identified exact binary and pinned target assumptions.
+The current RTL timing binding, software noninterference evidence, and CBMC runtime-contract proof are valid only within their explicitly stated artifact and model boundaries.
 
 ## Direction lock
 

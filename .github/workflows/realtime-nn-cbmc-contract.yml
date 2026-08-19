@@ -1,0 +1,96 @@
+name: RTNN CBMC runtime contract
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/realtime-nn-cbmc-contract.yml'
+      - 'experiments/realtime_nn_cbmc_runtime_contract.c'
+      - 'experiments/realtime_nn_real_sequence_fixed_timing_contract.c'
+      - 'experiments/realtime_nn_real_sequence_fixed_timing_contract.h'
+      - 'results/realtime_nn_cbmc_runtime_contract_results.json'
+      - 'notes/realtime_nn_cbmc_runtime_contract.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rtnn-cbmc-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cbmc-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install CBMC 6.10.0
+        run: |
+          curl -L --fail --retry 3 \
+            -o /tmp/cbmc.deb \
+            https://github.com/diffblue/cbmc/releases/download/cbmc-6.10.0/ubuntu-24.04-cbmc-6.10.0-Linux.deb
+          sudo apt-get update
+          sudo apt-get install -y /tmp/cbmc.deb
+          cbmc --version
+
+      - name: Set proof sources
+        run: |
+          mkdir -p /tmp/cbmc
+          printf '%s\n' \
+            experiments/realtime_nn_cbmc_runtime_contract.c \
+            experiments/realtime_nn_real_sequence_fixed_timing_contract.c \
+            > /tmp/cbmc/sources.txt
+
+      - name: Prove continuous budget lowering
+        run: |
+          cbmc $(cat /tmp/cbmc/sources.txt) \
+            --function prove_budget_lowering \
+            --unwind 8 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc/budget.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc/budget.txt
+
+      - name: Prove actual deadline admission
+        run: |
+          cbmc $(cat /tmp/cbmc/sources.txt) \
+            --function prove_deadline_admission \
+            --unwind 8 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc/admission.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc/admission.txt
+
+      - name: Prove partial-certification fail-closed behavior
+        run: |
+          cbmc $(cat /tmp/cbmc/sources.txt) \
+            --function prove_partial_certification_fail_closed \
+            --unwind 8 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc/partial.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc/partial.txt
+
+      - name: Prove effective execution safety
+        run: |
+          cbmc $(cat /tmp/cbmc/sources.txt) \
+            --function prove_effective_execution_safety \
+            --unwind 8 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc/effective.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc/effective.txt
+
+      - name: Prove Q15 LUT index bounds
+        run: |
+          cbmc $(cat /tmp/cbmc/sources.txt) \
+            --function prove_lut_index_bounds \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc/lut.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc/lut.txt
+
+      - name: Upload CBMC evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rtnn-cbmc-runtime-contract
+          retention-days: 90
+          path: /tmp/cbmc/*.txt
+          if-no-files-found: warn

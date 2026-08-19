@@ -35,11 +35,12 @@ The preferred external control variable is a normalized continuous budget `b in 
 | **Arithmetic RV32 timing model** | **FAIL / falsified by RTL** | the former `RTNN-IBEX-DIT-v1` instruction-category cycle formula underestimates actual pinned Ibex RTL in every full-work certification class; it is retained only as a negative result and must not drive admission |
 | **Pinned Ibex RTL timing binding** | **PASS / RTL measured** | pinned official Ibex Simple System: all 7 fixed classes × 3 held-out inputs have prediction mismatch 0 and exactly identical cycles per class; 21 admission+adaptive cases have prediction/execution mismatch 0, unsafe admission 0, and runtime-binding exceedance 0; exact hashes bind the measured table to the tested Q15 and machine image |
 | **Exact RV32 binary input/control-flow noninterference** | **PASS_WITH_SCOPE** | the exact RTL-tested ELF/bin have 0 input-tainted conditional branches or indirect control targets in every fixed class, 0 input-tainted stores, and only four bounded exp/GELU LUT load-address sites; the adaptive path localizes all input-dependent control to one entropy-stop instruction site; custom analyzer is not a formal WCET theorem |
+| **CBMC finite runtime contract** | **PASS_WITH_SCOPE** | CBMC 6.10.0 proves, over complete integer domains, monotone fail-closed Q0.16 lowering, the actual C deadline-admission implementation, arbitrary partial-certification safety, effective budget/deadline/preference ceilings, and Q15 LUT index bounds; all five proof entry points report `VERIFICATION SUCCESSFUL` |
 | **Empirical RTOS-style same-model demo** | qualified / diagnostic | empirical P99 deadline admission changes physical compute and on-time-correct trade-offs; timing remains diagnostic rather than hard evidence |
 
 ## RTOS / analyzable implementation bridge
 
-The same-model chain now reaches pinned processor RTL plus exact-binary software noninterference analysis:
+The same-model chain now reaches pinned processor RTL plus exact-binary and bit-precise software-contract analysis:
 
 ```text
 held-out real-data model
@@ -52,6 +53,7 @@ held-out real-data model
     -> maximum-work manifest
     -> exact-build pinned Ibex RTL timing binding
     -> exact-RV32 binary input/control-flow noninterference audit
+    -> CBMC finite runtime-contract proof
     -> deadline admission interface
 ```
 
@@ -65,18 +67,20 @@ The strengthened RTL run gives fixed-class cycles 29,620 / 615,569 / 1,201,521 /
 
 The exact-binary taint audit explains why fixed-class timing is insensitive to neural input under that memory model: all seven classes have zero input-derived branch/indirect-control dependence. Four input-derived load-address sites remain, all in exp/GELU LUT interpolation; exhaustive post-clamp indexing stays inside the finite tables. This is compatible with deterministic address-independent RAM but is **not** portable to caches or arbitrary external memory without a new analysis.
 
-This is substantially stronger than a custom instruction-count model, but it remains an **RTL-simulation measured binding plus custom binary noninterference audit for one exact configuration/build**, not an FPGA/ASIC/silicon production WCET theorem and not a mechanically verified all-input timing proof.
+CBMC adds a complete-integer-domain proof of the finite software boundary. The actual `rtnn_fixed_admit_total_cycles()` C function is linked into the proof, and arbitrary partial timing tables are checked fail-closed. The budget-lowering formula and effective-execution algebra are proved bit-precisely, and arbitrary signed-32-bit exp/GELU inputs cannot produce an out-of-range post-clamp LUT index.
+
+This is substantially stronger than sampled property tests, but the combined evidence remains an **RTL-simulation measured binding + custom exact-binary noninterference audit + formal finite software-contract proof** for one identified configuration/build. It is not an FPGA/ASIC/silicon production WCET theorem, and CBMC does not itself prove the compiled neural machine code or Ibex pipeline.
 
 ## Current research-goal status
 
 - **Goal A — physical budget-conditioned computation:** PASS.
 - **Goal B — generalizable adaptive computation:** PASS on independent held-out real sequence samples; chronological temporal nonstationarity remains unresolved.
-- **Goal C — hard-real-time RTNN:** same-model lowering, fixed-point time-predictable execution, maximum-work contract, continuous budget, deadline admission, pinned RTL timing validation, and fixed-class exact-binary control-flow noninterference are demonstrated. The remaining boundary for a production hard-real-time claim is physical FPGA/ASIC/silicon or a mechanically defensible target-specific WCET/formal certification method.
+- **Goal C — hard-real-time RTNN:** same-model lowering, fixed-point time-predictable execution, maximum-work contract, continuous budget, deadline admission, pinned RTL timing validation, exact-binary fixed-class control-flow noninterference, and a CBMC-proved finite software runtime contract are demonstrated. The remaining production boundary is a mechanically defensible exact-machine/target timing proof and/or physical FPGA/ASIC/silicon validation.
 
 ## Next falsification priorities
 
-1. Strengthen the custom exact-binary noninterference evidence with a mechanically verified/static formal method if a software-only production-grade timing proof is required.
-2. For a physical production deployment claim, validate the same exact artifact on FPGA/ASIC/silicon; do not generalize the RTL table to other implementations or memory systems.
+1. Strengthen exact compiled RV32 fixed-class control-flow/timing evidence with a mechanically verified binary/static formal method; the custom taint interpreter remains the weakest software-side proof link.
+2. For physical validation, use the available DE0-CV with controlled on-chip memory and a fixed clock; do not transfer the Simple System table blindly.
 3. Extend integer/timing deployment across additional seeds only if cross-seed compiled deployment robustness is required.
 4. Treat chronological/nonstationary temporal generalization as a separate research problem.
 5. Larger language-model-scale work remains downstream of the production target-certification question.
