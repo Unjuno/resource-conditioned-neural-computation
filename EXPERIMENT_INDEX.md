@@ -35,12 +35,13 @@ The preferred external control variable is a normalized continuous budget `b in 
 | **Arithmetic RV32 timing model** | **FAIL / falsified by RTL** | the former `RTNN-IBEX-DIT-v1` instruction-category cycle formula underestimates actual pinned Ibex RTL in every full-work certification class; it is retained only as a negative result and must not drive admission |
 | **Pinned Ibex RTL timing binding** | **PASS / RTL measured** | pinned official Ibex Simple System: all 7 fixed classes × 3 held-out inputs have prediction mismatch 0 and exactly identical cycles per class; 21 admission+adaptive cases have prediction/execution mismatch 0, unsafe admission 0, and runtime-binding exceedance 0; exact hashes bind the measured table to the tested Q15 and machine image |
 | **Exact RV32 binary input/control-flow noninterference** | **PASS_WITH_SCOPE** | the exact RTL-tested ELF/bin have 0 input-tainted conditional branches or indirect control targets in every fixed class, 0 input-tainted stores, and only four bounded exp/GELU LUT load-address sites; the adaptive path localizes all input-dependent control to one entropy-stop instruction site; custom analyzer is not a formal WCET theorem |
+| **Third-party BINSEC fixed-class control flow** | **PASS_WITH_SCOPE** | pinned BINSEC independently analyzes the exact RTL-tested ELF: 7/7 finite classes complete exactly one path as `secure`, with 933,653/933,653 control-flow checks passing, pending paths 0, unknowns 0, and control-flow leak sites 0; generic full memory constant-time analysis for class 1 hits runner resource limit because LUT addresses remain input-dependent |
 | **CBMC finite runtime contract** | **PASS_WITH_SCOPE** | CBMC 6.10.0 proves, over complete integer domains, monotone fail-closed Q0.16 lowering, the actual C deadline-admission implementation, arbitrary partial-certification safety, effective budget/deadline/preference ceilings, and Q15 LUT index bounds; all five proof entry points report `VERIFICATION SUCCESSFUL` |
 | **Empirical RTOS-style same-model demo** | qualified / diagnostic | empirical P99 deadline admission changes physical compute and on-time-correct trade-offs; timing remains diagnostic rather than hard evidence |
 
 ## RTOS / analyzable implementation bridge
 
-The same-model chain now reaches pinned processor RTL plus exact-binary and bit-precise software-contract analysis:
+The same-model chain now reaches pinned processor RTL plus two independent exact-binary/control-flow audits and a bit-precise finite software-contract proof:
 
 ```text
 held-out real-data model
@@ -52,7 +53,8 @@ held-out real-data model
     -> nested physical execution
     -> maximum-work manifest
     -> exact-build pinned Ibex RTL timing binding
-    -> exact-RV32 binary input/control-flow noninterference audit
+    -> exact-RV32 custom input/control-flow noninterference audit
+    -> third-party BINSEC fixed-class control-flow cross-check
     -> CBMC finite runtime-contract proof
     -> deadline admission interface
 ```
@@ -65,22 +67,26 @@ Ordinary Linux percentile/max timing remains falsified as a hard-admission contr
 
 The strengthened RTL run gives fixed-class cycles 29,620 / 615,569 / 1,201,521 / 1,787,473 / 2,373,425 / 2,959,377 / 2,959,381, with zero cycle range across all three held-out inputs for every class. The admission+adaptive maximum-work binding is 29,843 / 657,454 / 1,285,058 / 1,912,662 / 2,540,266 / 3,167,870 / 3,167,870 cycles.
 
-The exact-binary taint audit explains why fixed-class timing is insensitive to neural input under that memory model: all seven classes have zero input-derived branch/indirect-control dependence. Four input-derived load-address sites remain, all in exp/GELU LUT interpolation; exhaustive post-clamp indexing stays inside the finite tables. This is compatible with deterministic address-independent RAM but is **not** portable to caches or arbitrary external memory without a new analysis.
+The custom exact-binary taint audit explains why fixed-class timing is insensitive to neural input under that memory model: all seven classes have zero input-derived branch/indirect-control dependence. Four input-derived load-address sites remain, all in exp/GELU LUT interpolation; exhaustive post-clamp indexing stays inside the finite tables.
+
+BINSEC independently strengthens the control-flow part of that conclusion on the exact same ELF. Across all seven finite classes it explores 9,176,039 unrolled instructions and 574,502 branching points, completes one path per class with no pending path, and passes all 933,653 control-flow checks with no leak site. This materially reduces reliance on the custom interpreter for the fixed-class control-flow claim.
+
+The memory boundary remains explicit. BINSEC's generic full relational constant-time analysis completes class 0 but class 1 exits 137 under the supplied runner when input-indexed LUT memory accesses are included. This is recorded as a **resource boundary**, not converted into a PASS or a control-flow FAIL. The four LUT address sites are timing-benign only under deterministic address-independent RAM; caches, external SDRAM, arbitration, or another memory implementation require a new argument.
 
 CBMC adds a complete-integer-domain proof of the finite software boundary. The actual `rtnn_fixed_admit_total_cycles()` C function is linked into the proof, and arbitrary partial timing tables are checked fail-closed. The budget-lowering formula and effective-execution algebra are proved bit-precisely, and arbitrary signed-32-bit exp/GELU inputs cannot produce an out-of-range post-clamp LUT index.
 
-This is substantially stronger than sampled property tests, but the combined evidence remains an **RTL-simulation measured binding + custom exact-binary noninterference audit + formal finite software-contract proof** for one identified configuration/build. It is not an FPGA/ASIC/silicon production WCET theorem, and CBMC does not itself prove the compiled neural machine code or Ibex pipeline.
+The combined software/RTL evidence is now substantially stronger than sampled property tests or a custom instruction-count model. It remains an **exact-build RTL measured binding + independent binary control-flow evidence + formal finite C/runtime contract proof** for one identified configuration/build. It is not yet an FPGA/ASIC/silicon production WCET theorem or a complete formal proof of address-dependent memory timing and processor/physical implementation.
 
 ## Current research-goal status
 
 - **Goal A — physical budget-conditioned computation:** PASS.
 - **Goal B — generalizable adaptive computation:** PASS on independent held-out real sequence samples; chronological temporal nonstationarity remains unresolved.
-- **Goal C — hard-real-time RTNN:** same-model lowering, fixed-point time-predictable execution, maximum-work contract, continuous budget, deadline admission, pinned RTL timing validation, exact-binary fixed-class control-flow noninterference, and a CBMC-proved finite software runtime contract are demonstrated. The remaining production boundary is a mechanically defensible exact-machine/target timing proof and/or physical FPGA/ASIC/silicon validation.
+- **Goal C — hard-real-time RTNN:** same-model lowering, fixed-point time-predictable execution, maximum-work contract, continuous budget, deadline admission, pinned RTL timing validation, exact-binary fixed-class noninterference, independent BINSEC fixed-class control-flow verification, and a CBMC-proved finite software runtime contract are demonstrated. The remaining production boundary is target memory/processor timing certification and physical FPGA/ASIC/silicon validation as required.
 
 ## Next falsification priorities
 
-1. Strengthen exact compiled RV32 fixed-class control-flow/timing evidence with a mechanically verified binary/static formal method; the custom taint interpreter remains the weakest software-side proof link.
-2. For physical validation, use the available DE0-CV with controlled on-chip memory and a fixed clock; do not transfer the Simple System table blindly.
-3. Extend integer/timing deployment across additional seeds only if cross-seed compiled deployment robustness is required.
-4. Treat chronological/nonstationary temporal generalization as a separate research problem.
-5. Larger language-model-scale work remains downstream of the production target-certification question.
+1. Close the remaining **memory/timing-model proof gap**: either use a scalable formal/static method for the four input-indexed LUT accesses under the chosen on-chip RAM model, or bind them explicitly through the physical target memory implementation.
+2. For physical validation, use the available DE0-CV with controlled on-chip memory and a fixed clock; do not transfer the Simple System timing table blindly.
+3. Preserve the exact artifact/build identity; Actions artifacts are supporting evidence, not a substitute for a durable certification artifact archive.
+4. Extend integer/timing deployment across additional formal seeds only if cross-seed compiled deployment robustness is required.
+5. Treat chronological/nonstationary temporal generalization as a separate research problem; larger LM-scale work remains downstream of the production target-certification question.
