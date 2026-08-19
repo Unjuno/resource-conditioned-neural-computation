@@ -1,0 +1,62 @@
+{
+  "schema": "rtnn-ibex-rtl-binding-v1",
+  "status": "RTL_MEASURED_BINDING_PASS",
+  "provenance": {
+    "strong_all_class_workflow_run": 32214991830,
+    "strong_all_class_artifact_id": 9352155229,
+    "strong_all_class_artifact_zip_sha256": "9150b0763e5d7b7c305441befdb4161ccf95612edd924b525f8388e06d9a86b0",
+    "ibex_commit": "7b5df75a041affe56e8c235260f98a09b3319008",
+    "run_frozen_q15_model_sha256": "3c8c859242b5b111d5334cc25d7d14011556a2c03c572f877534d778db52052e",
+    "run_frozen_q15_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+    "strong_all_class_elf_sha256": "234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742",
+    "strong_all_class_binary_sha256": "266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1"
+  },
+  "target": {
+    "name": "Ibex-Simple-System-SecureIbex-v1",
+    "rv32m": "RV32MSingleCycle",
+    "secure_ibex": true,
+    "data_ind_timing": "enabled by SecureIbex in pinned RTL",
+    "branch_target_alu": false,
+    "writeback_stage": false,
+    "icache": false,
+    "compressed_generation": false,
+    "instruction_ram": "deterministic one-cycle response; INSTR_CYCLE_DELAY=0 adds no extra instruction-side wait",
+    "data_ram": "deterministic one-cycle response",
+    "interrupts_during_test": false,
+    "dma_or_competing_master": false
+  },
+  "old_arithmetic_model": {
+    "name": "RTNN-IBEX-DIT-v1",
+    "decision": "FAIL",
+    "old_total_cycles": [22180, 549778, 1077368, 1604958, 2132548, 2660139, 2660140],
+    "reason": "Pinned Ibex RTL exceeds the custom arithmetic formula; do not use it for admission."
+  },
+  "strong_all_class_audit": {
+    "decision": "PASS",
+    "held_out_inputs": [0, 24, 57],
+    "preferred_exits": [1, 3, 5],
+    "fixed_class_cases": 21,
+    "fixed_class_prediction_mismatches": 0,
+    "all_7_classes_cycle_identical_across_3_inputs": true,
+    "certification_cycles": [29620, 615569, 1201521, 1787473, 2373425, 2959377, 2959381],
+    "e2e_cases": 21,
+    "e2e_prediction_mismatches": 0,
+    "e2e_execution_mismatches": 0,
+    "unsafe_admissions": 0,
+    "runtime_bound_exceedances": 0
+  },
+  "rtl_derived_certification_upper_cycles": [29620, 615569, 1201521, 1787473, 2373425, 2959377, 2959381],
+  "rtl_derived_total_upper_cycles": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167870],
+  "class_fractions": [0.0, 0.16666666666666666, 0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333334, 1.0],
+  "derivation": "The table is the exact mcycle result from the stronger pinned-RTL harness. All seven finite classes were run on three distinct held-out inputs and every class had zero input-to-input cycle range. Predictions matched the native integer core in all 21 fixed-class cases. The real admission+infer_budget path was also exercised in 21 cases spanning preferred depths 1, 3 and 5 with zero prediction mismatches, zero executed-exit mismatches, zero unsafe admissions and zero runtime-binding exceedances. This is a measured binding for the identified RTL simulation build, not a portable cycle formula or silicon WCET theorem.",
+  "artifact_policy": {
+    "research_reproduction": "training seed/recipe supports statistical experiment reproduction but is not a bitwise certification identity",
+    "timing_certification": "timing evidence binds the exact run-frozen Q15 artifact and exact loadable machine image hashes recorded above"
+  },
+  "nonclaims": [
+    "This is an RTL-simulation measured timing binding, not an FPGA/ASIC silicon WCET certificate.",
+    "The old RTNN-IBEX-DIT-v1 arithmetic cycle formula is falsified for this pinned RTL configuration.",
+    "The 3-input zero-range audit does not prove input-independent timing for all possible inputs as a formal theorem.",
+    "Timing evidence is valid only for the exact RTL configuration, toolchain and build artifact identified by the validation evidence."
+  ]
+}

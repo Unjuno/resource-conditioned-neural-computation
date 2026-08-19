@@ -1,0 +1,75 @@
+{
+  "experiment": "pinned Ibex RTL validation of same-model Q15 RTNN",
+  "decision": "PASS_WITH_SCOPE",
+  "scope": "measured RTL-simulation binding for one pinned Ibex Simple System configuration and exact machine artifact; not a silicon WCET certificate",
+  "ibex": {
+    "commit": "7b5df75a041affe56e8c235260f98a09b3319008",
+    "secure_ibex": true,
+    "data_ind_timing": "enabled through SecureIbex in this RTL revision",
+    "rv32m": "RV32MSingleCycle",
+    "branch_target_alu": false,
+    "writeback_stage": false,
+    "icache": false,
+    "branch_predictor": false,
+    "memory": "official Simple System deterministic one-cycle ram_2p response; zero additional instruction delay",
+    "interrupts_dma_contention": "absent in harness"
+  },
+  "strong_all_class_run": {
+    "workflow_run_id": 32214991830,
+    "job_id": 95954699293,
+    "artifact_id": 9352155229,
+    "artifact_zip_sha256": "9150b0763e5d7b7c305441befdb4161ccf95612edd924b525f8388e06d9a86b0",
+    "q15_model_sha256": "3c8c859242b5b111d5334cc25d7d14011556a2c03c572f877534d778db52052e",
+    "generated_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+    "elf_sha256": "234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742",
+    "binary_sha256": "266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1",
+    "simulated_cycles_total": 62522808,
+    "retired_instructions_total": 48224205
+  },
+  "fixed_class_audit": {
+    "held_out_test_indices": [0, 24, 57],
+    "preferred_exits": [1, 3, 5],
+    "classes": [0, 1, 2, 3, 4, 5, 6],
+    "cases": 21,
+    "prediction_mismatches_vs_native_integer_core": 0,
+    "cycle_counts_identical_across_all_three_inputs_for_every_class": true,
+    "cycles_by_class": [29620, 615569, 1201521, 1787473, 2373425, 2959377, 2959381],
+    "cycle_range_by_class": [0, 0, 0, 0, 0, 0, 0]
+  },
+  "end_to_end_admission_audit": {
+    "cases": 21,
+    "prediction_mismatches": 0,
+    "executed_exit_mismatches": 0,
+    "unsafe_admissions": 0,
+    "runtime_binding_exceedances": 0,
+    "total_upper_cycles": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167870]
+  },
+  "negative_results": {
+    "old_arithmetic_model": {
+      "name": "RTNN-IBEX-DIT-v1",
+      "decision": "FAIL",
+      "certification_exceedance_count": 21,
+      "runtime_exceedance_count": 13,
+      "interpretation": "instruction-category arithmetic underestimated the actual pinned RTL and is not valid for admission"
+    },
+    "artifact_retraining_identity": {
+      "decision": "FAIL as bitwise certification identity",
+      "earlier_local_model_sha256": "b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a",
+      "github_runner_model_sha256": "3c8c859242b5b111d5334cc25d7d14011556a2c03c572f877534d778db52052e",
+      "interpretation": "seed and recipe are suitable for research reproduction but certification must bind a frozen artifact"
+    },
+    "build_shape_sensitivity": {
+      "observation": "strengthening the RTL harness shifted all seven fixed-class counts upward by exactly one cycle while preserving zero range across the three inputs",
+      "interpretation": "timing evidence is exact-build-specific"
+    }
+  },
+  "final_binding": {
+    "certification_upper_cycles": [29620, 615569, 1201521, 1787473, 2373425, 2959377, 2959381],
+    "admission_plus_adaptive_upper_cycles": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167870]
+  },
+  "nonclaims": [
+    "No FPGA, ASIC or physical-silicon WCET guarantee is claimed.",
+    "The measured three-input zero-range result is strong RTL evidence but not a formal all-input WCET proof.",
+    "A different compiler, machine image, RTL revision, memory configuration, interrupt policy, DMA or contention model requires a new binding."
+  ]
+}
