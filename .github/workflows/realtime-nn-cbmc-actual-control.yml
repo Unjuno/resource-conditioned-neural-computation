@@ -1,0 +1,87 @@
+name: RTNN CBMC actual control
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/realtime-nn-cbmc-actual-control.yml'
+      - 'experiments/build_realtime_nn_cbmc_actual_control.py'
+      - 'experiments/realtime_nn_real_sequence_fixed_core.c'
+      - 'results/realtime_nn_cbmc_actual_control_results.json'
+      - 'notes/realtime_nn_cbmc_actual_control.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rtnn-cbmc-actual-control-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cbmc-actual-control:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install CBMC 6.10.0
+        run: |
+          curl -L --fail --retry 3 \
+            -o /tmp/cbmc.deb \
+            https://github.com/diffblue/cbmc/releases/download/cbmc-6.10.0/ubuntu-24.04-cbmc-6.10.0-Linux.deb
+          sudo apt-get update
+          sudo apt-get install -y /tmp/cbmc.deb
+          cbmc --version
+
+      - name: Mechanically extract deployed control functions
+        run: |
+          mkdir -p /tmp/cbmc_actual
+          python experiments/build_realtime_nn_cbmc_actual_control.py \
+            --core experiments/realtime_nn_real_sequence_fixed_core.c \
+            --out /tmp/cbmc_actual/actual_control_proof.c \
+            --meta /tmp/cbmc_actual/extraction_meta.json
+          cat /tmp/cbmc_actual/extraction_meta.json
+
+      - name: Prove actual budget lowering
+        run: |
+          cbmc /tmp/cbmc_actual/actual_control_proof.c \
+            --function prove_actual_budget_lowering \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc_actual/budget.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc_actual/budget.txt
+
+      - name: Prove actual adaptive physical-call caps
+        run: |
+          cbmc /tmp/cbmc_actual/actual_control_proof.c \
+            --function prove_actual_infer_budget_caps \
+            --unwind 8 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc_actual/infer.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc_actual/infer.txt
+
+      - name: Prove NULL executed pointer path
+        run: |
+          cbmc /tmp/cbmc_actual/actual_control_proof.c \
+            --function prove_actual_infer_budget_null_executed \
+            --unwind 8 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc_actual/infer_null.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc_actual/infer_null.txt
+
+      - name: Prove actual certification class work count
+        run: |
+          cbmc /tmp/cbmc_actual/actual_control_proof.c \
+            --function prove_actual_certify_class_work \
+            --unwind 8 --unwinding-assertions \
+            --bounds-check --pointer-check --signed-overflow-check --div-by-zero-check \
+            | tee /tmp/cbmc_actual/certify.txt
+          grep -q 'VERIFICATION SUCCESSFUL' /tmp/cbmc_actual/certify.txt
+
+      - name: Upload exact-control proof evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rtnn-cbmc-actual-control
+          retention-days: 90
+          path: /tmp/cbmc_actual/*
+          if-no-files-found: error
