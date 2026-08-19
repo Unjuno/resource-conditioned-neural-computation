@@ -19,27 +19,36 @@ permissions:
 
 jobs:
   ibex-rtl:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
-      - name: Install RTL toolchain
-        run: |
-          python -m pip install --upgrade pip
-          sudo apt-get update
-          sudo apt-get install -y git make g++ libelf-dev srecord verilator gcc-riscv64-unknown-elf binutils-riscv64-unknown-elf
-          verilator --version
+          python-version: '3.11'
       - name: Restore exact audited seed-63 Q15 artifact
         run: |
           mkdir -p /tmp/rtnn
           cat experiments/ibex_rtl/seed63_q15.b64.* | tr -d '\n' | base64 -d | gzip -dc > /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
           echo '4aa108a79cc578271e063f80530ad921d8b9fc07ff1c1f9ad4772a75fec479ed  /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h' | sha256sum -c -
           echo 'canonical Q15 model identity: b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a'
+      - name: Install pinned Ibex RTL toolchain
+        run: |
+          set -euxo pipefail
+          sudo apt-get update -qq
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends git make g++ libelf-dev srecord curl xz-utils
+          sudo mkdir -p /tools/verilator /tools/riscv
+          curl -Ls https://storage.googleapis.com/verilator-builds/verilator-v4.210.tar.gz -o /tmp/verilator.tar.gz
+          sudo tar -C /tools/verilator -xzf /tmp/verilator.tar.gz
+          curl -Ls https://github.com/lowRISC/lowrisc-toolchains/releases/download/20220210-1/lowrisc-toolchain-gcc-rv32imcb-20220210-1.tar.xz -o /tmp/riscv.tar.xz
+          sudo tar -C /tools/riscv -xf /tmp/riscv.tar.xz --strip-components=1
+          export PATH=/tools/verilator/v4.210/bin:/tools/riscv/bin:$PATH
+          verilator --version
+          riscv32-unknown-elf-gcc --version | head -1
       - name: Build pinned Ibex Simple System
         run: |
+          set -euxo pipefail
+          export PATH=/tools/verilator/v4.210/bin:/tools/riscv/bin:$PATH
           git clone https://github.com/lowRISC/ibex.git /tmp/ibex
           git -C /tmp/ibex checkout 7b5df75a041affe56e8c235260f98a09b3319008
           python -m pip install -r /tmp/ibex/python-requirements.txt
@@ -55,17 +64,20 @@ jobs:
           fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system $OPTS
       - name: Build exact RTNN bare-metal certification ELF
         run: |
+          set -euxo pipefail
+          export PATH=/tools/riscv/bin:$PATH
           CFLAGS='-march=rv32im -mabi=ilp32 -O2 -ffreestanding -fno-builtin -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -mno-relax'
-          riscv64-unknown-elf-gcc $CFLAGS -I/tmp/rtnn -Iexperiments -c experiments/realtime_nn_real_sequence_fixed_core.c -o /tmp/rtnn/core.o
-          riscv64-unknown-elf-gcc $CFLAGS -Iexperiments -c experiments/ibex_rtl/rtnn_ibex_main.c -o /tmp/rtnn/main.o
-          riscv64-unknown-elf-gcc $CFLAGS -c experiments/ibex_rtl/rtnn_ibex_start.S -o /tmp/rtnn/start.o
-          riscv64-unknown-elf-gcc -nostdlib -nostartfiles -march=rv32im -mabi=ilp32 -Wl,--no-relax -T experiments/ibex_rtl/rtnn_ibex_link.ld /tmp/rtnn/start.o /tmp/rtnn/core.o /tmp/rtnn/main.o -o /tmp/rtnn/rtnn_ibex.elf
-          riscv64-unknown-elf-size /tmp/rtnn/rtnn_ibex.elf
-          test -z "$(riscv64-unknown-elf-nm -u /tmp/rtnn/rtnn_ibex.elf)"
-          test -z "$(riscv64-unknown-elf-objdump -d /tmp/rtnn/core.o | grep -E '\b(div|divu|rem|remu|flw|fsw|fadd|fmul|fdiv)\b' || true)"
+          riscv32-unknown-elf-gcc $CFLAGS -I/tmp/rtnn -Iexperiments -c experiments/realtime_nn_real_sequence_fixed_core.c -o /tmp/rtnn/core.o
+          riscv32-unknown-elf-gcc $CFLAGS -Iexperiments -c experiments/ibex_rtl/rtnn_ibex_main.c -o /tmp/rtnn/main.o
+          riscv32-unknown-elf-gcc $CFLAGS -c experiments/ibex_rtl/rtnn_ibex_start.S -o /tmp/rtnn/start.o
+          riscv32-unknown-elf-gcc -nostdlib -nostartfiles -march=rv32im -mabi=ilp32 -Wl,--no-relax -T experiments/ibex_rtl/rtnn_ibex_link.ld /tmp/rtnn/start.o /tmp/rtnn/core.o /tmp/rtnn/main.o -o /tmp/rtnn/rtnn_ibex.elf
+          riscv32-unknown-elf-size /tmp/rtnn/rtnn_ibex.elf
+          test -z "$(riscv32-unknown-elf-nm -u /tmp/rtnn/rtnn_ibex.elf)"
+          test -z "$(riscv32-unknown-elf-objdump -d /tmp/rtnn/core.o | grep -E '\b(div|divu|rem|remu|flw|fsw|fadd|fmul|fdiv)\b' || true)"
           sha256sum /tmp/rtnn/rtnn_ibex.elf | tee /tmp/rtnn/rtl_elf.sha256
       - name: Compute static envelope for exact RTL ELF
         run: |
+          export PATH=/tools/riscv/bin:$PATH
           python experiments/ibex_rtl/realtime_nn_ibex_rtl_cycle_envelope.py /tmp/rtnn/rtnn_ibex.elf --out /tmp/rtnn/static_envelope.json
       - name: Run RTNN on pinned Ibex RTL
         run: |
