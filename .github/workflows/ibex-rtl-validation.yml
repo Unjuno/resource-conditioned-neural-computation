@@ -12,6 +12,10 @@ on:
       - 'results/realtime_nn_ibex_rtl_timing_binding.json'
   workflow_dispatch:
 
+concurrency:
+  group: ibex-rtl-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   rtl-validation:
     runs-on: ubuntu-24.04
