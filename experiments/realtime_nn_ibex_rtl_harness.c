@@ -8,14 +8,14 @@
 #define HARNESS_MODEL_ID UINT32_C(0x52544e4e)
 #define HARNESS_BUILD_ID UINT32_C(0x52544c31)
 
-/* Derived directly from the first pinned-RTL no-early-stop E2E run.
-   Class 6 shares the class-5 envelope because deployed policy max_exit=5. */
+/* Measured on the final expanded pinned-RTL harness shape. Class 6 shares
+   the class-5 envelope because deployed policy max_exit=5. */
 static const uint32_t RTL_TOTAL[7] = {
-  29842u, 657453u, 1285057u, 1912661u, 2540265u, 3167869u, 3167869u
+  29843u, 657454u, 1285058u, 1912662u, 2540266u, 3167870u, 3167870u
 };
 static const RTNNFixedConditionalTimingBinding BINDING = {
   HARNESS_MODEL_ID, HARNESS_BUILD_ID,
-  {29842u, 657453u, 1285057u, 1912661u, 2540265u, 3167869u, 3167869u}
+  {29843u, 657454u, 1285058u, 1912662u, 2540266u, 3167870u, 3167870u}
 };
 
 static RTNNFixedWorkspace W;
