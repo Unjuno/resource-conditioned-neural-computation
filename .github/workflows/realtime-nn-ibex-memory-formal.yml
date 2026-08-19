@@ -1,0 +1,101 @@
+name: RTNN Ibex memory timing formal
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/realtime-nn-ibex-memory-formal.yml'
+      - 'experiments/audit_realtime_nn_ibex_memory_timing.py'
+      - 'experiments/realtime_nn_ibex_ram_latency_formal.sv'
+      - 'results/realtime_nn_ibex_memory_timing_results.json'
+      - 'notes/realtime_nn_ibex_memory_timing.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: rtnn-ibex-memory-formal-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  memory-formal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      IBEX_COMMIT: 7b5df75a041affe56e8c235260f98a09b3319008
+      RTL_ARTIFACT_ID: '9352155229'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install audit and formal tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip binutils yosys z3
+          yosys -V
+          z3 --version
+
+      - name: Fetch exact RTL-tested RTNN artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/rtnn_artifact
+          gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${RTL_ARTIFACT_ID}/zip" > /tmp/rtnn_artifact.zip
+          unzip -q /tmp/rtnn_artifact.zip -d /tmp/rtnn_artifact
+          sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.elf /tmp/rtnn_artifact/rtnn_ibex_rtl.bin
+          test "$(sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.elf | cut -d' ' -f1)" = "234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742"
+          test "$(sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.bin | cut -d' ' -f1)" = "266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1"
+
+      - name: Fetch pinned Ibex memory RTL
+        run: |
+          mkdir -p /tmp/ibex_rtl
+          curl -L --fail --retry 3 -o /tmp/ibex_rtl/ram_2p.sv \
+            "https://raw.githubusercontent.com/lowRISC/ibex/${IBEX_COMMIT}/shared/rtl/ram_2p.sv"
+          curl -L --fail --retry 3 -o /tmp/ibex_rtl/bus.sv \
+            "https://raw.githubusercontent.com/lowRISC/ibex/${IBEX_COMMIT}/shared/rtl/bus.sv"
+          curl -L --fail --retry 3 -o /tmp/ibex_rtl/ibex_simple_system.sv \
+            "https://raw.githubusercontent.com/lowRISC/ibex/${IBEX_COMMIT}/examples/simple_system/rtl/ibex_simple_system.sv"
+          sha256sum /tmp/ibex_rtl/*.sv | tee /tmp/ibex_rtl/source_sha256.txt
+
+      - name: Audit exact ELF LUT ranges and pinned memory structure
+        run: |
+          python experiments/audit_realtime_nn_ibex_memory_timing.py \
+            --elf /tmp/rtnn_artifact/rtnn_ibex_rtl.elf \
+            --bin /tmp/rtnn_artifact/rtnn_ibex_rtl.bin \
+            --ram-rtl /tmp/ibex_rtl/ram_2p.sv \
+            --bus-rtl /tmp/ibex_rtl/bus.sv \
+            --system-rtl /tmp/ibex_rtl/ibex_simple_system.sv \
+            --out /tmp/ibex_memory_audit.json
+          cat /tmp/ibex_memory_audit.json
+
+      - name: Prove ram_2p data-response timing is address-independent
+        run: |
+          # ram_2p includes prim_assert.sv; no primitive assertions are needed
+          # for this local response-valid property.
+          : > /tmp/ibex_rtl/prim_assert.sv
+          cat > /tmp/ibex_rtl/prove.ys <<'YOSYS'
+          read_verilog -formal -sv -I/tmp/ibex_rtl \
+            /tmp/ibex_rtl/ram_2p.sv \
+            experiments/realtime_nn_ibex_ram_latency_formal.sv
+          prep -top rtnn_ram_latency_formal
+          async2sync
+          clk2fflogic
+          opt_clean
+          write_smt2 -wires /tmp/ibex_rtl/ram_latency.smt2
+          YOSYS
+          yosys -ql /tmp/ibex_rtl/yosys.log /tmp/ibex_rtl/prove.ys
+          yosys-smtbmc -s z3 -t 6 --presat /tmp/ibex_rtl/ram_latency.smt2 | tee /tmp/ibex_rtl/smtbmc.txt
+          grep -q 'Status: PASSED' /tmp/ibex_rtl/smtbmc.txt
+
+      - name: Upload memory formal evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rtnn-ibex-memory-formal
+          retention-days: 90
+          path: |
+            /tmp/ibex_memory_audit.json
+            /tmp/ibex_rtl/source_sha256.txt
+            /tmp/ibex_rtl/yosys.log
+            /tmp/ibex_rtl/smtbmc.txt
+          if-no-files-found: warn
