@@ -34,9 +34,10 @@
     "certification_path_cycles": [29619, 615568, 1201520, 1787472, 2373424, 2959376, 2959380],
     "actual_no_stop_e2e_cycles": [29842, 657453, 1285057, 1912661, 2540265, 3167869, 3167865]
   },
+  "rtl_derived_certification_upper_cycles": [29619, 615568, 1201520, 1787472, 2373424, 2959376, 2959380],
   "rtl_derived_total_upper_cycles": [29842, 657453, 1285057, 1912661, 2540265, 3167869, 3167869],
   "class_fractions": [0.0, 0.16666666666666666, 0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333334, 1.0],
-  "derivation": "For classes 0..5 the bound is the mcycle-measured actual admission+infer_budget no-early-stop path on held-out test index 57, whose deployed policy prefers exit 5. Class 6 is the monotone maximum of class-5 and class-6 measurements because the deployed policy ceiling is exit 5. No multiplicative safety factor is used. Fixed-loop branchless numeric kernels, SecureIbex data-independent instruction timing, deterministic one-cycle SRAM and no cache make the no-stop class path the structural maximum; early stopping only removes suffix work.",
+  "derivation": "For classes 0..5 the runtime bound is the mcycle-measured actual admission+infer_budget no-early-stop path on held-out test index 57, whose deployed policy prefers exit 5. Class 6 is the monotone maximum of class-5 and class-6 measurements because the deployed policy ceiling is exit 5. No multiplicative safety factor is used. Fixed-loop branchless numeric kernels, SecureIbex data-independent instruction timing, deterministic one-cycle SRAM and no cache make the no-stop class path the structural maximum; early stopping only removes suffix work. The certification-only table is recorded separately from the actual runtime admission+inference table.",
   "nonclaims": [
     "This is an RTL-simulation timing binding, not an FPGA/ASIC silicon WCET certificate.",
     "The old RTNN-IBEX-DIT-v1 arithmetic cycle formula is falsified for this pinned RTL configuration.",
