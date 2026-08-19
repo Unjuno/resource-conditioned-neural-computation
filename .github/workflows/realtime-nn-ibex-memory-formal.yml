@@ -70,21 +70,21 @@ jobs:
 
       - name: Prove ram_2p response-valid is address-independent
         run: |
-          # ram_2p includes prim_assert.sv; the response-valid proof does not
-          # depend on primitive-RAM data assertions.
+          # YoWASP exposes the process working directory to WASI. Keep every
+          # formal input/output relative to that directory rather than /tmp.
           : > /tmp/ibex_rtl/prim_assert.sv
+          cp experiments/realtime_nn_ibex_ram_latency_formal.sv /tmp/ibex_rtl/harness.sv
           cat > /tmp/ibex_rtl/prove.ys <<'YOSYS'
-          read_verilog -formal -sv -I/tmp/ibex_rtl \
-            /tmp/ibex_rtl/ram_2p.sv \
-            experiments/realtime_nn_ibex_ram_latency_formal.sv
+          read_verilog -formal -sv -I. ram_2p.sv harness.sv
           prep -top rtnn_ram_latency_formal
           async2sync
           flatten
           opt_clean
           sat -verify -prove-asserts -seq 6 -set-init-zero -set-def-inputs
           YOSYS
-          yowasp-yosys -ql /tmp/ibex_rtl/yosys.log /tmp/ibex_rtl/prove.ys
-          grep -q 'SUCCESS' /tmp/ibex_rtl/yosys.log
+          cd /tmp/ibex_rtl
+          yowasp-yosys -ql yosys.log prove.ys
+          grep -q 'SUCCESS' yosys.log
 
       - name: Upload memory formal evidence
         if: always()
