@@ -3,8 +3,9 @@
 #include "realtime_nn_real_sequence_fixed_core.h"
 #include "realtime_nn_real_sequence_fixed_timing_contract.h"
 #include "realtime_nn_real_sequence_test_generated.h"
-#define MODEL_ID UINT32_C(0x4aa108a7)
-#define BUILD_ID UINT32_C(0xd198e287)
+/* seed-63 canonical Q15 model SHA begins b53c6dbc; stripped RV32 load-image SHA begins 234b3ac1. */
+#define MODEL_ID UINT32_C(0xb53c6dbc)
+#define BUILD_ID UINT32_C(0x234b3ac1)
 static const RTNNFixedConditionalTimingBinding B={MODEL_ID,BUILD_ID,{22180u,549778u,1077368u,1604958u,2132548u,2660139u,2660140u}};
 static int argmax(const int32_t*z){int b=0;for(int i=1;i<10;++i)if(z[i]>z[b])b=i;return b;}
 static uint16_t bq(int i){return (uint16_t)((i*65535u+10u)/20u);}
