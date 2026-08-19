@@ -4,8 +4,6 @@ on:
   pull_request:
     paths:
       - '.github/workflows/rtnn-ibex-rtl.yml'
-      - 'EXPERIMENT_INDEX.md'
-      - 'REALTIME_NN_DIRECTION.md'
       - 'experiments/realtime_nn_real_sequence_fixed_core.c'
       - 'experiments/realtime_nn_real_sequence_fixed_core.h'
       - 'experiments/realtime_nn_rv32_cycle_envelope.py'
@@ -19,84 +17,94 @@ permissions:
 
 jobs:
   ibex-rtl:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+
       - name: Restore exact audited seed-63 Q15 artifact
         run: |
-          mkdir -p /tmp/rtnn
-          cat experiments/ibex_rtl/seed63_q15.b64.* | tr -d '\n' | base64 -d | gzip -dc > /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
-          echo '4aa108a79cc578271e063f80530ad921d8b9fc07ff1c1f9ad4772a75fec479ed  /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h' | sha256sum -c -
-          echo 'canonical Q15 model identity: b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a'
-      - name: Install pinned Ibex RTL toolchain
+          set -euxo pipefail
+          test "$(find experiments/ibex_rtl -maxdepth 1 -name 'seed63_q15.b64.*' | wc -l)" -eq 18
+          mkdir -p build/ibex-rtnn
+          cat experiments/ibex_rtl/seed63_q15.b64.* | base64 -d | gzip -dc > build/ibex-rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
+          echo '4aa108a79cc578271e063f80530ad921d8b9fc07ff1c1f9ad4772a75fec479ed  build/ibex-rtnn/realtime_nn_real_sequence_fixed_weights_generated.h' | sha256sum -c -
+
+      - name: Install RTL and compiler dependencies
         run: |
           set -euxo pipefail
           sudo apt-get update -qq
-          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends git make g++ libelf-dev srecord curl xz-utils
-          sudo mkdir -p /tools/verilator /tools/riscv
-          curl -Ls https://storage.googleapis.com/verilator-builds/verilator-v4.210.tar.gz -o /tmp/verilator.tar.gz
-          sudo tar -C /tools/verilator -xzf /tmp/verilator.tar.gz
-          curl -Ls https://github.com/lowRISC/lowrisc-toolchains/releases/download/20220210-1/lowrisc-toolchain-gcc-rv32imcb-20220210-1.tar.xz -o /tmp/riscv.tar.xz
-          sudo tar -C /tools/riscv -xf /tmp/riscv.tar.xz --strip-components=1
-          export PATH=/tools/verilator/v4.210/bin:/tools/riscv/bin:$PATH
+          sudo DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends verilator libelf-dev srecord clang lld llvm python3-venv make g++ git
+          python3 -m venv .venv
+          . .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install fusesoc
           verilator --version
-          riscv32-unknown-elf-gcc --version | head -1
-      - name: Build pinned Ibex Simple System
+          clang --version | head -1
+
+      - name: Pin and build stock Ibex RTL configuration
         run: |
           set -euxo pipefail
-          export PATH=/tools/verilator/v4.210/bin:/tools/riscv/bin:$PATH
-          git clone https://github.com/lowRISC/ibex.git /tmp/ibex
-          git -C /tmp/ibex checkout 7b5df75a041affe56e8c235260f98a09b3319008
-          python -m pip install -r /tmp/ibex/python-requirements.txt
-          cd /tmp/ibex
+          git clone https://github.com/lowRISC/ibex.git ibex
+          git -C ibex checkout 7b5df75a041affe56e8c235260f98a09b3319008
+          . .venv/bin/activate
+          python -m pip install -r ibex/python-requirements.txt
+          cd ibex
           OPTS="$(util/ibex_config.py small fusesoc_opts)"
           OPTS="${OPTS/--RV32M=ibex_pkg::RV32MFast/--RV32M=ibex_pkg::RV32MSingleCycle}"
           OPTS="${OPTS/--SecureIbex=0/--SecureIbex=1}"
-          echo "$OPTS"
+          echo "$OPTS" | tee "$GITHUB_WORKSPACE/build/ibex-rtnn/ibex_config.txt"
           grep -q -- '--WritebackStage=0' <<<"$OPTS"
           grep -q -- '--ICache=0' <<<"$OPTS"
           grep -q -- '--RV32M=ibex_pkg::RV32MSingleCycle' <<<"$OPTS"
           grep -q -- '--SecureIbex=1' <<<"$OPTS"
           fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system $OPTS
+
       - name: Build exact RTNN bare-metal certification ELF
         run: |
           set -euxo pipefail
-          export PATH=/tools/riscv/bin:$PATH
-          CFLAGS='-march=rv32im -mabi=ilp32 -O2 -ffreestanding -fno-builtin -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -mno-relax'
-          riscv32-unknown-elf-gcc $CFLAGS -I/tmp/rtnn -Iexperiments -c experiments/realtime_nn_real_sequence_fixed_core.c -o /tmp/rtnn/core.o
-          riscv32-unknown-elf-gcc $CFLAGS -Iexperiments -c experiments/ibex_rtl/rtnn_ibex_main.c -o /tmp/rtnn/main.o
-          riscv32-unknown-elf-gcc $CFLAGS -c experiments/ibex_rtl/rtnn_ibex_start.S -o /tmp/rtnn/start.o
-          riscv32-unknown-elf-gcc -nostdlib -nostartfiles -march=rv32im -mabi=ilp32 -Wl,--no-relax -T experiments/ibex_rtl/rtnn_ibex_link.ld /tmp/rtnn/start.o /tmp/rtnn/core.o /tmp/rtnn/main.o -o /tmp/rtnn/rtnn_ibex.elf
-          riscv32-unknown-elf-size /tmp/rtnn/rtnn_ibex.elf
-          test -z "$(riscv32-unknown-elf-nm -u /tmp/rtnn/rtnn_ibex.elf)"
-          test -z "$(riscv32-unknown-elf-objdump -d /tmp/rtnn/core.o | grep -E '\b(div|divu|rem|remu|flw|fsw|fadd|fmul|fdiv)\b' || true)"
-          sha256sum /tmp/rtnn/rtnn_ibex.elf | tee /tmp/rtnn/rtl_elf.sha256
+          COMMON='--target=riscv32-unknown-elf -march=rv32im_zicsr -mabi=ilp32 -mno-relax -O2 -ffreestanding -fno-builtin -fno-stack-protector -fno-pic -nostdlib'
+          clang $COMMON -Ibuild/ibex-rtnn -Iexperiments -c experiments/realtime_nn_real_sequence_fixed_core.c -o build/ibex-rtnn/core.o
+          clang $COMMON -Iexperiments -c experiments/ibex_rtl/rtnn_ibex_main.c -o build/ibex-rtnn/main.o
+          clang $COMMON -c experiments/ibex_rtl/rtnn_ibex_start.S -o build/ibex-rtnn/start.o
+          ld.lld -m elf32lriscv --no-relax -T experiments/ibex_rtl/rtnn_ibex_link.ld build/ibex-rtnn/start.o build/ibex-rtnn/core.o build/ibex-rtnn/main.o -o build/ibex-rtnn/rtnn_ibex.elf
+          llvm-size build/ibex-rtnn/rtnn_ibex.elf
+          test -z "$(llvm-nm -u build/ibex-rtnn/rtnn_ibex.elf)"
+          test -z "$(llvm-objdump -d build/ibex-rtnn/core.o | grep -E '\b(div|divu|rem|remu|flw|fsw|fadd|fmul|fdiv)\b' || true)"
+          sha256sum build/ibex-rtnn/rtnn_ibex.elf | tee build/ibex-rtnn/rtl_elf.sha256
+
       - name: Compute static envelope for exact RTL ELF
         run: |
-          export PATH=/tools/riscv/bin:$PATH
-          python experiments/ibex_rtl/realtime_nn_ibex_rtl_cycle_envelope.py /tmp/rtnn/rtnn_ibex.elf --out /tmp/rtnn/static_envelope.json
-      - name: Run RTNN on pinned Ibex RTL
+          set -euxo pipefail
+          python experiments/ibex_rtl/realtime_nn_ibex_rtl_cycle_envelope.py build/ibex-rtnn/rtnn_ibex.elf --out build/ibex-rtnn/static_envelope.json
+          cat build/ibex-rtnn/static_envelope.json
+
+      - name: Run RTNN on pinned stock Ibex RTL
         run: |
-          cd /tmp/ibex
-          ./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system --meminit=ram,/tmp/rtnn/rtnn_ibex.elf
-          cp ibex_simple_system.log /tmp/rtnn/ibex_simple_system.log
-          cp ibex_simple_system_pcount.csv /tmp/rtnn/ibex_simple_system_pcount.csv || true
-          cat /tmp/rtnn/ibex_simple_system.log
+          set -euxo pipefail
+          SIM=ibex/build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system
+          test -x "$SIM"
+          "$SIM" --meminit=ram,"$GITHUB_WORKSPACE/build/ibex-rtnn/rtnn_ibex.elf" | tee build/ibex-rtnn/simulator_stdout.log
+          LOG=ibex_simple_system.log
+          test -f "$LOG" || LOG=ibex/ibex_simple_system.log
+          test -f "$LOG"
+          cp "$LOG" build/ibex-rtnn/ibex_simple_system.log
+          cat build/ibex-rtnn/ibex_simple_system.log
+
       - name: Compare RTL cycles with exact static envelope
         run: |
-          python experiments/ibex_rtl/realtime_nn_ibex_rtl_parse.py --log /tmp/rtnn/ibex_simple_system.log --static /tmp/rtnn/static_envelope.json --out /tmp/rtnn/rtl_validation.json
+          set -euxo pipefail
+          python experiments/ibex_rtl/realtime_nn_ibex_rtl_parse.py --log build/ibex-rtnn/ibex_simple_system.log --static build/ibex-rtnn/static_envelope.json --out build/ibex-rtnn/rtl_validation.json
+          cat build/ibex-rtnn/rtl_validation.json
+
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: rtnn-ibex-rtl-validation
           path: |
-            /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
-            /tmp/rtnn/rtl_elf.sha256
-            /tmp/rtnn/static_envelope.json
-            /tmp/rtnn/ibex_simple_system.log
-            /tmp/rtnn/ibex_simple_system_pcount.csv
-            /tmp/rtnn/rtl_validation.json
+            build/ibex-rtnn/ibex_config.txt
+            build/ibex-rtnn/rtl_elf.sha256
+            build/ibex-rtnn/static_envelope.json
+            build/ibex-rtnn/ibex_simple_system.log
+            build/ibex-rtnn/simulator_stdout.log
+            build/ibex-rtnn/rtl_validation.json
