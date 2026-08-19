@@ -1,6 +1,6 @@
 {
   "schema": "rtnn-ibex-rtl-binding-v1",
-  "status": "rtl_validated_candidate_final_pr_head_repeat_requested",
+  "status": "RTL_MEASURED_BINDING_PASS",
   "provenance": {
     "strong_all_class_workflow_run": 32214991830,
     "strong_all_class_artifact_id": 9352155229,
@@ -32,7 +32,7 @@
     "reason": "Pinned Ibex RTL exceeds the custom arithmetic formula; do not use it for admission."
   },
   "strong_all_class_audit": {
-    "decision": "PASS for data-independence; previous candidate bound was exactly one cycle low because the harness/build shape changed",
+    "decision": "PASS",
     "held_out_inputs": [0, 24, 57],
     "preferred_exits": [1, 3, 5],
     "fixed_class_cases": 21,
@@ -48,14 +48,15 @@
   "rtl_derived_certification_upper_cycles": [29620, 615569, 1201521, 1787473, 2373425, 2959377, 2959381],
   "rtl_derived_total_upper_cycles": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167870],
   "class_fractions": [0.0, 0.16666666666666666, 0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333334, 1.0],
-  "derivation": "The certification table is the exact cycle count measured by mcycle for every finite class on three distinct held-out inputs in the stronger pinned-RTL harness. Every class has zero input-to-input cycle range. The previous candidate was exactly one cycle low after the harness was strengthened, demonstrating that the binding is exact-build-specific rather than a portable formula. The runtime table is the observed maximum-work admission+infer_budget envelope for the same final harness shape; preferred exits 1, 3, and 5 are exercised. The final PR head must reproduce or remain below these values before merge.",
+  "derivation": "The table is the exact mcycle result from the stronger pinned-RTL harness. All seven finite classes were run on three distinct held-out inputs and every class had zero input-to-input cycle range. Predictions matched the native integer core in all 21 fixed-class cases. The real admission+infer_budget path was also exercised in 21 cases spanning preferred depths 1, 3 and 5 with zero prediction mismatches, zero executed-exit mismatches, zero unsafe admissions and zero runtime-binding exceedances. This is a measured binding for the identified RTL simulation build, not a portable cycle formula or silicon WCET theorem.",
   "artifact_policy": {
     "research_reproduction": "training seed/recipe supports statistical experiment reproduction but is not a bitwise certification identity",
-    "timing_certification": "timing evidence must bind to the exact frozen Q15 artifact and exact loadable machine image hashes used in the validation run"
+    "timing_certification": "timing evidence binds the exact run-frozen Q15 artifact and exact loadable machine image hashes recorded above"
   },
   "nonclaims": [
-    "This is an RTL-simulation timing binding, not an FPGA/ASIC silicon WCET certificate.",
+    "This is an RTL-simulation measured timing binding, not an FPGA/ASIC silicon WCET certificate.",
     "The old RTNN-IBEX-DIT-v1 arithmetic cycle formula is falsified for this pinned RTL configuration.",
+    "The 3-input zero-range audit does not prove input-independent timing for all possible inputs as a formal theorem.",
     "Timing evidence is valid only for the exact RTL configuration, toolchain and build artifact identified by the validation evidence."
   ]
 }
