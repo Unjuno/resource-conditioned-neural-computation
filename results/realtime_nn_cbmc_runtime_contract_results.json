@@ -1,0 +1,99 @@
+{
+  "experiment": "CBMC bit-precise verification of RTNN finite runtime contract",
+  "decision": "PASS_WITH_SCOPE",
+  "cbmc": {
+    "version": "6.10.0",
+    "workflow_run_id": 32221590675,
+    "job_id": 95972930266,
+    "artifact_id": 9354096082,
+    "artifact_zip_sha256": "0010ff32c270dcaef429631a9c0b90d3bd71b4b85b02db0ec52163fb46a4722b",
+    "runner": "ubuntu-24.04"
+  },
+  "sources": {
+    "proof_harness": "experiments/realtime_nn_cbmc_runtime_contract.c",
+    "actual_deadline_admission_implementation": "experiments/realtime_nn_real_sequence_fixed_timing_contract.c",
+    "actual_deadline_admission_header": "experiments/realtime_nn_real_sequence_fixed_timing_contract.h",
+    "actual_deadline_admission_linked": true,
+    "budget_lowering_status": "exact deployed one-line Q0.16 formula represented in proof harness; full neural core is not CBMC-linked because generated weights are intentionally external build artifacts"
+  },
+  "rtl_measured_total_upper_cycles": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167870],
+  "proofs": {
+    "continuous_budget_lowering": {
+      "decision": "PASS",
+      "domain": "all uint16_t Q0.16 budgets, plus arbitrary ordered budget pairs",
+      "properties": [
+        "class always lies in 0..6",
+        "lowering is monotone",
+        "selected finite class fraction never exceeds the admitted continuous budget",
+        "selected class is the greatest finite class that fits"
+      ]
+    },
+    "actual_deadline_admission": {
+      "decision": "PASS",
+      "domain": "all uint32_t deadlines for the committed RTL-measured binding",
+      "properties": [
+        "wrong model identity fails closed",
+        "wrong build identity fails closed",
+        "null binding fails closed",
+        "returned class is in range",
+        "returned class timing bound fits the deadline",
+        "no higher class also fits",
+        "negative admission occurs exactly when class zero does not fit"
+      ]
+    },
+    "partial_certification": {
+      "decision": "PASS",
+      "domain": "arbitrary seven-entry uint32_t timing tables, arbitrary uint32_t deadline, arbitrary probe class k in 0..6",
+      "invalid_marker": 4294967295,
+      "properties": [
+        "no-admission implies an arbitrary certified class k does not fit",
+        "an admitted class is not marked invalid",
+        "an admitted class fits the deadline",
+        "an arbitrary higher certified class k cannot also fit"
+      ]
+    },
+    "effective_execution_safety": {
+      "decision": "PASS",
+      "domain": "all uint16_t budgets, all uint32_t deadlines, all preferred exits 0..5",
+      "properties": [
+        "effective execution never exceeds budget ceiling",
+        "effective execution never exceeds deadline ceiling",
+        "effective execution never exceeds preferred compute",
+        "effective execution never exceeds deployed policy max exit 5",
+        "executed class RTL binding is no larger than the admitted class binding",
+        "executed class RTL binding remains within the deadline whenever admission succeeds"
+      ]
+    },
+    "q15_lut_index_bounds": {
+      "decision": "PASS",
+      "domain": "arbitrary signed 32-bit inputs to the exact post-clamp index arithmetic",
+      "properties": [
+        "exp interpolation high index <= 8192 for fx_exp_lut[8193]",
+        "GELU interpolation high index <= 4096 for fx_gelu_lut[4097]",
+        "CBMC signed-overflow instrumentation reports no reachable overflow in the clamp-to-index subtraction"
+      ]
+    }
+  },
+  "solver_result": "all five proof entry points report VERIFICATION SUCCESSFUL with unwinding assertions enabled where loops are present",
+  "checks": [
+    "bounds-check",
+    "pointer-check",
+    "signed-overflow-check",
+    "div-by-zero-check",
+    "unwinding-assertions for bounded loops"
+  ],
+  "evidence_chain": [
+    "real held-out sequence model",
+    "same-model Q15 freestanding lowering",
+    "pinned Ibex RTL measured timing binding",
+    "exact RV32 binary input/control-flow noninterference audit",
+    "CBMC bit-precise finite runtime-contract proof"
+  ],
+  "nonclaims": [
+    "This is not a proof of the full neural arithmetic implementation.",
+    "This is not a proof that the C compiler preserves all source-level noninterference properties; exact-binary taint evidence is separate.",
+    "This is not a formal proof of the Ibex RTL pipeline or memory subsystem; pinned RTL measurement is separate evidence.",
+    "This is not an FPGA, ASIC, or physical-silicon WCET certificate.",
+    "The custom RV32 taint interpreter remains independently unverified and is not converted into a formal theorem by this CBMC result."
+  ]
+}
