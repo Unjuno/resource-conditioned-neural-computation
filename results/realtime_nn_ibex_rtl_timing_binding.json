@@ -1,16 +1,15 @@
 {
   "schema": "rtnn-ibex-rtl-binding-v1",
-  "status": "candidate_pending_final_same-shape_rtl_run",
+  "status": "rtl_validated_candidate_pending_same_build_repeat",
   "provenance": {
-    "first_rtl_workflow_run": 32211800616,
-    "first_rtl_artifact_id": 9351124475,
-    "first_artifact_zip_sha256": "8bd3c3edac59f98e90fc5731bf1a20c727c75e331d2a3d173979f602ed987ce4",
-    "second_rtl_workflow_run": 32212597652,
-    "second_rtl_artifact_id": 9351354060,
-    "second_artifact_zip_sha256": "da1995e61e02fddcb5ea1c5969213accd73d9424979bea1d2b5c0fdfda843a39",
+    "strong_all_class_workflow_run": 32214991830,
+    "strong_all_class_artifact_id": 9352155229,
+    "strong_all_class_artifact_zip_sha256": "9150b0763e5d7b7c305441befdb4161ccf95612edd924b525f8388e06d9a86b0",
     "ibex_commit": "7b5df75a041affe56e8c235260f98a09b3319008",
     "run_frozen_q15_model_sha256": "3c8c859242b5b111d5334cc25d7d14011556a2c03c572f877534d778db52052e",
-    "run_frozen_q15_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f"
+    "run_frozen_q15_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+    "strong_all_class_elf_sha256": "234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742",
+    "strong_all_class_binary_sha256": "266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1"
   },
   "target": {
     "name": "Ibex-Simple-System-SecureIbex-v1",
@@ -21,41 +20,42 @@
     "writeback_stage": false,
     "icache": false,
     "compressed_generation": false,
-    "instruction_ram": "deterministic one-cycle response; INSTR_CYCLE_DELAY=0",
+    "instruction_ram": "deterministic one-cycle response; INSTR_CYCLE_DELAY=0 adds no extra instruction-side wait",
     "data_ram": "deterministic one-cycle response",
     "interrupts_during_test": false,
     "dma_or_competing_master": false
   },
-  "first_rtl_audit": {
-    "old_conditional_table_decision": "FAIL",
-    "prediction_mismatches": 0,
-    "anchor_classes": [0, 3, 5],
-    "anchor_inputs": [0, 24, 57],
-    "anchor_cycle_range": {"0": 0, "3": 0, "5": 0},
-    "certification_path_cycles": [29619, 615568, 1201520, 1787472, 2373424, 2959376, 2959380],
-    "actual_no_stop_e2e_cycles": [29842, 657453, 1285057, 1912661, 2540265, 3167869, 3167865]
+  "old_arithmetic_model": {
+    "name": "RTNN-IBEX-DIT-v1",
+    "decision": "FAIL",
+    "old_total_cycles": [22180, 549778, 1077368, 1604958, 2132548, 2660139, 2660140],
+    "reason": "Pinned Ibex RTL exceeds the custom arithmetic formula; do not use it for admission."
   },
-  "second_rtl_audit": {
-    "decision_with_first_binary_runtime_table": "FAIL only because the expanded final harness binary adds exactly one runtime cycle to classes 0..5",
-    "certification_prediction_mismatches": 0,
+  "strong_all_class_audit": {
+    "decision": "PASS for data-independence; previous candidate bound was exactly one cycle low because the harness/build shape changed",
+    "held_out_inputs": [0, 24, 57],
+    "preferred_exits": [1, 3, 5],
+    "fixed_class_cases": 21,
+    "fixed_class_prediction_mismatches": 0,
+    "all_7_classes_cycle_identical_across_3_inputs": true,
+    "certification_cycles": [29620, 615569, 1201521, 1787473, 2373425, 2959377, 2959381],
+    "e2e_cases": 21,
     "e2e_prediction_mismatches": 0,
     "e2e_execution_mismatches": 0,
     "unsafe_admissions": 0,
-    "anchor_cycle_range": {"0": 0, "3": 0, "5": 0},
-    "certification_bound_exceedances": 0,
-    "runtime_rows": {
-      "preferred_exit_1": [29843, 657454, 699104, 699104, 699104, 699104, 699100],
-      "preferred_exit_3": [29843, 657454, 1285058, 1912662, 1954312, 1954312, 1954308],
-      "preferred_exit_5": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167866]
-    }
+    "runtime_bound_exceedances": 0
   },
-  "rtl_derived_certification_upper_cycles": [29619, 615568, 1201520, 1787472, 2373424, 2959376, 2959380],
+  "rtl_derived_certification_upper_cycles": [29620, 615569, 1201521, 1787473, 2373425, 2959377, 2959381],
   "rtl_derived_total_upper_cycles": [29843, 657454, 1285058, 1912662, 2540266, 3167870, 3167870],
   "class_fractions": [0.0, 0.16666666666666666, 0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333334, 1.0],
-  "derivation": "The fixed-class certification table is exactly stable across both RTL runs and three held-out anchor inputs. The runtime table is taken from the second run after the harness was expanded to its final 3-input x 7-class shape. Classes 0..5 use the measured no-early-stop admission+infer_budget cycles on held-out test index 57, whose preferred exit is 5; class 6 is the monotone maximum because deployed policy max_exit=5. This is not a multiplicative safety margin. The final same-shape run must reproduce or remain below these exact values before promotion.",
+  "derivation": "The certification table is the exact cycle count measured by mcycle for every finite class on three distinct held-out inputs in the stronger pinned-RTL harness. Every class has zero input-to-input cycle range. The previous candidate was exactly one cycle low after the harness was strengthened, demonstrating that the binding is exact-build-specific rather than a portable formula. The runtime table is the observed maximum-work admission+infer_budget envelope for the same final harness shape; preferred exits 1, 3, and 5 are exercised. The next same-source-shape RTL run must reproduce or remain below these values before promotion from candidate to validated binding.",
+  "artifact_policy": {
+    "research_reproduction": "training seed/recipe supports statistical experiment reproduction but is not a bitwise certification identity",
+    "timing_certification": "timing evidence must bind to the exact frozen Q15 artifact and exact loadable machine image hashes used in the validation run"
+  },
   "nonclaims": [
     "This is an RTL-simulation timing binding, not an FPGA/ASIC silicon WCET certificate.",
     "The old RTNN-IBEX-DIT-v1 arithmetic cycle formula is falsified for this pinned RTL configuration.",
-    "Timing evidence is valid only for the exact final binary/toolchain/RTL configuration identified by the final validation run."
+    "Timing evidence is valid only for the exact RTL configuration, toolchain and build artifact identified by the validation evidence."
   ]
 }
