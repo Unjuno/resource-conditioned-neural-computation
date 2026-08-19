@@ -5,17 +5,17 @@
 
 #define SIM_OUT  (*(volatile uint32_t *)UINT32_C(0x00020000))
 #define SIM_HALT (*(volatile uint32_t *)UINT32_C(0x00020008))
-/* These IDs exercise the fail-closed admission function inside this harness.
-   The exact model/ELF SHA identities are recorded separately by the workflow. */
 #define HARNESS_MODEL_ID UINT32_C(0x52544e4e)
 #define HARNESS_BUILD_ID UINT32_C(0x52544c31)
 
-static const uint32_t CONDITIONAL_TOTAL[7] = {
-  22180u, 549778u, 1077368u, 1604958u, 2132548u, 2660139u, 2660140u
+/* Derived directly from the first pinned-RTL no-early-stop E2E run.
+   Class 6 shares the class-5 envelope because deployed policy max_exit=5. */
+static const uint32_t RTL_TOTAL[7] = {
+  29842u, 657453u, 1285057u, 1912661u, 2540265u, 3167869u, 3167869u
 };
 static const RTNNFixedConditionalTimingBinding BINDING = {
   HARNESS_MODEL_ID, HARNESS_BUILD_ID,
-  {22180u, 549778u, 1077368u, 1604958u, 2132548u, 2660139u, 2660140u}
+  {29842u, 657453u, 1285057u, 1912661u, 2540265u, 3167869u, 3167869u}
 };
 
 static RTNNFixedWorkspace W;
@@ -70,7 +70,7 @@ int main(void) {
   print_overhead("ONE", oh1);
   print_overhead("TWO", oh2);
 
-  /* Full class sweep on one held-out input, plus anchor classes on two others. */
+  /* Reconfirm fixed-class cycle independence on three held-out inputs. */
   for (uint8_t c = 0; c < 7; ++c) {
     uint32_t a = read_mcycle32();
     rtnn_fixed_certify_class(&W, RTNN_RTL_X[0], c, Z);
@@ -88,19 +88,19 @@ int main(void) {
     }
   }
 
-  /* Test index 57 preferred exit 5 in the original formal seed-63 build.
-     The comparison audit verifies whether that precondition also holds for
-     this exact CI-generated Q15 artifact before interpreting it as no-stop. */
-  const uint32_t worst_slot = 2u;
-  for (uint8_t c = 0; c < 7; ++c) {
-    uint16_t bq = budget_for_class(c);
-    uint8_t executed = 255u;
-    uint32_t a = read_mcycle32();
-    int8_t admitted = rtnn_fixed_admit_total_cycles(CONDITIONAL_TOTAL[c], HARNESS_MODEL_ID, HARNESS_BUILD_ID, &BINDING);
-    rtnn_fixed_infer_budget(&W, RTNN_RTL_X[worst_slot], bq,
-                            admitted < 0 ? 0u : (uint8_t)admitted, Z, &executed);
-    uint32_t b = read_mcycle32();
-    print_e2e(worst_slot, c, admitted, executed, b - a, argmax10(Z));
+  /* Exercise the real admission + adaptive inference path for all three
+     preferred-depth regimes and all seven external budget classes. */
+  for (uint32_t slot = 0; slot < RTNN_RTL_VECTOR_N; ++slot) {
+    for (uint8_t c = 0; c < 7; ++c) {
+      uint16_t bq = budget_for_class(c);
+      uint8_t executed = 255u;
+      uint32_t a = read_mcycle32();
+      int8_t admitted = rtnn_fixed_admit_total_cycles(RTL_TOTAL[c], HARNESS_MODEL_ID, HARNESS_BUILD_ID, &BINDING);
+      rtnn_fixed_infer_budget(&W, RTNN_RTL_X[slot], bq,
+                              admitted < 0 ? 0u : (uint8_t)admitted, Z, &executed);
+      uint32_t b = read_mcycle32();
+      print_e2e(slot, c, admitted, executed, b - a, argmax10(Z));
+    }
   }
 
   puts_r("DONE\n");
