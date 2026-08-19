@@ -65,11 +65,15 @@ def main():
         exp = host_pred.get((x['slot'], x['class']))
         cert_pred_mismatch += int(exp is None or exp != x['pred'])
 
-    anchors = {}
-    for c in (0, 3, 5):
+    by_class = {}
+    for c in range(7):
         vals = [x['cycles'] for x in cert if x['class'] == c]
-        anchors[str(c)] = {'cycles': vals, 'range': (max(vals) - min(vals)) if vals else None}
-    anchor_identical = all(v['range'] == 0 and len(v['cycles']) == 3 for v in anchors.values())
+        by_class[str(c)] = {
+            'cycles': vals,
+            'range': (max(vals) - min(vals)) if vals else None,
+            'three_inputs_identical': len(vals) == len(host_pref) == 3 and max(vals) == min(vals) if vals else False,
+        }
+    all_class_cycle_identical = all(v['three_inputs_identical'] for v in by_class.values())
 
     e2e_pred_mismatch = 0
     e2e_execution_mismatch = 0
@@ -78,8 +82,8 @@ def main():
         pref = host_pref.get(x['slot'])
         exp_exec = min(x['class'], 5, pref if pref is not None else 255)
         e2e_execution_mismatch += int(x['executed'] != exp_exec)
-        # Equal timing bounds for classes 5 and 6 allow deadline class 5 to
-        # admit label 6; the continuous budget still caps physical work at 5.
+        # Equal timing bounds for classes 5 and 6 permit admission label 6 at
+        # the class-5 deadline. The continuous budget still caps execution.
         e2e_admission_unsafe += int(x['admitted'] < x['class'])
         exp_pred = host_pred.get((x['slot'], x['executed']))
         e2e_pred_mismatch += int(exp_pred is None or exp_pred != x['pred'])
@@ -89,9 +93,11 @@ def main():
     new_cert_exceed = exceed(cert, new_cert)
     new_e2e_exceed = exceed(e2e, new_total)
 
+    expected_cert_cases = len(host_pref) * 7
     expected_e2e_cases = len(host_pref) * 7
     decision = 'PASS' if (
-        cert_pred_mismatch == 0 and anchor_identical
+        len(cert) == expected_cert_cases
+        and cert_pred_mismatch == 0 and all_class_cycle_identical
         and len(e2e) == expected_e2e_cases
         and e2e_pred_mismatch == 0 and e2e_execution_mismatch == 0
         and e2e_admission_unsafe == 0
@@ -107,8 +113,8 @@ def main():
         'rtl_overhead_diagnostics': overhead,
         'certification_cases': len(cert),
         'certification_prediction_mismatches': cert_pred_mismatch,
-        'anchor_class_cycle_data_independence': anchors,
-        'anchor_cycle_counts_identical': anchor_identical,
+        'all_class_cycle_data_independence': by_class,
+        'all_class_cycle_counts_identical': all_class_cycle_identical,
         'old_certification_bound_exceedance_count': len(old_cert_exceed),
         'old_runtime_bound_exceedance_count': len(old_e2e_exceed),
         'revised_certification_bound_exceedances': new_cert_exceed,
