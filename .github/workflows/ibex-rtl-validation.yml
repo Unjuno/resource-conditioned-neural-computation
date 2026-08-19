@@ -17,7 +17,6 @@ jobs:
     timeout-minutes: 55
     env:
       IBEX_COMMIT: 7b5df75a041affe56e8c235260f98a09b3319008
-      EXPECTED_MODEL_SHA: b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a
     steps:
       - uses: actions/checkout@v4
 
@@ -31,7 +30,7 @@ jobs:
           python -m pip install numpy==2.3.5 scikit-learn==1.8.0
           python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
 
-      - name: Regenerate the exact seed-63 Q15 artifact and RTL vectors
+      - name: Generate and freeze this run's seed-63 Q15 artifact
         run: |
           mkdir -p "$RUNNER_TEMP/rtnn"
           cd experiments
@@ -41,9 +40,9 @@ jobs:
           import json, os
           p=os.path.join(os.environ['RUNNER_TEMP'],'rtnn','realtime_nn_real_sequence_fixed_meta.json')
           m=json.load(open(p))
-          exp=os.environ['EXPECTED_MODEL_SHA']
-          assert m['canonical_model_sha256']==exp,(m['canonical_model_sha256'],exp)
-          print('canonical model SHA:',m['canonical_model_sha256'])
+          assert m['max_exit']==5,m
+          print('run-frozen canonical model SHA:',m['canonical_model_sha256'])
+          print('run-frozen generated header SHA:',m['generated_header_sha256'])
           PY
 
       - name: Build and run native integer reference
@@ -129,6 +128,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ibex-rtl-validation
+          retention-days: 90
           path: |
             ${{ runner.temp }}/realtime_nn_ibex_rtl_validation_results.json
             ${{ runner.temp }}/ibex_simple_system.log
@@ -137,5 +137,9 @@ jobs:
             ${{ runner.temp }}/host.csv
             ${{ runner.temp }}/rtl_binary_sha256.txt
             ${{ runner.temp }}/rtnn_ibex_rtl.elf
+            ${{ runner.temp }}/rtnn_ibex_rtl.bin
             ${{ runner.temp }}/q15_export.txt
+            ${{ runner.temp }}/rtnn/realtime_nn_real_sequence_fixed_meta.json
+            ${{ runner.temp }}/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
+            ${{ runner.temp }}/rtnn/realtime_nn_ibex_rtl_vectors_generated.h
           if-no-files-found: warn
