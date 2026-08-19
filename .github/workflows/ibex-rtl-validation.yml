@@ -9,6 +9,7 @@ on:
       - 'experiments/export_realtime_nn_real_sequence_fixed_q15.py'
       - 'experiments/export_realtime_nn_ibex_rtl_vectors.py'
       - 'results/realtime_nn_fixed_time_target_results.json'
+      - 'results/realtime_nn_ibex_rtl_timing_binding.json'
   workflow_dispatch:
 
 jobs:
@@ -116,15 +117,17 @@ jobs:
           if test -f ibex_simple_system_pcount.csv; then cp ibex_simple_system_pcount.csv "$RUNNER_TEMP/"; fi
           cat "$RUNNER_TEMP/ibex_simple_system.log"
 
-      - name: Compare RTL cycles and predictions with the conditional model
+      - name: Compare RTL cycles and predictions with revised RTL-derived binding
         run: |
           python experiments/compare_realtime_nn_ibex_rtl.py \
             --host "$RUNNER_TEMP/host.csv" \
             --rtl "$RUNNER_TEMP/ibex_simple_system.log" \
-            --conditional-results results/realtime_nn_fixed_time_target_results.json \
+            --old-conditional-results results/realtime_nn_fixed_time_target_results.json \
+            --rtl-binding results/realtime_nn_ibex_rtl_timing_binding.json \
             --out "$RUNNER_TEMP/realtime_nn_ibex_rtl_validation_results.json"
 
       - name: Upload RTL validation evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ibex-rtl-validation
