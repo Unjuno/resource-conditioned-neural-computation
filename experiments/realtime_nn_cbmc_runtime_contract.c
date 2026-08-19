@@ -1,17 +1,19 @@
 #include <stdint.h>
 #include <stddef.h>
+#include "realtime_nn_real_sequence_fixed_timing_contract.h"
 
 /*
  * Bit-precise software proof harness for the RTNN runtime contract.
  *
  * Scope:
- *   - continuous Q0.16 budget -> finite class lowering
- *   - RTL-derived timing binding -> deadline admission
+ *   - continuous Q0.16 budget -> finite class lowering formula
+ *   - the repository's actual deadline-admission C implementation
  *   - arbitrary preferred compute -> effective execution ceiling
  *   - exp/GELU LUT index safety after the exact Q15 clamps
  *
  * This does not model the neural arithmetic or processor pipeline. Those are
- * covered by the exact-binary noninterference audit and pinned-Ibex RTL run.
+ * covered separately by the exact-binary noninterference audit and pinned-Ibex
+ * RTL run.
  */
 
 #define RTNN_CLASSES 7u
@@ -22,29 +24,23 @@
 #define RTNN_FX_S INT32_C(32768)
 
 /* Pinned-Ibex admission + adaptive maximum-work binding from the measured RTL run. */
-static const uint32_t RTNN_TOTAL_UPPER[RTNN_CLASSES] = {
-  UINT32_C(29843), UINT32_C(657454), UINT32_C(1285058),
-  UINT32_C(1912662), UINT32_C(2540266), UINT32_C(3167870),
-  UINT32_C(3167870)
+static const RTNNFixedConditionalTimingBinding RTNN_BINDING = {
+  RTNN_MODEL_ID,
+  RTNN_BUILD_ID,
+  {
+    UINT32_C(29843), UINT32_C(657454), UINT32_C(1285058),
+    UINT32_C(1912662), UINT32_C(2540266), UINT32_C(3167870),
+    UINT32_C(3167870)
+  }
 };
 
 extern uint16_t nondet_u16(void);
 extern uint32_t nondet_u32(void);
 extern uint8_t nondet_u8(void);
 
+/* Exact formula used by rtnn_fixed_budget_ceiling_q16 in the deployed core. */
 uint8_t rtnn_cbmc_budget_ceiling_q16(uint16_t b) {
   return (uint8_t)(((uint32_t)b * UINT32_C(6)) / UINT32_C(65535));
-}
-
-int8_t rtnn_cbmc_admit_total_cycles(uint32_t deadline,
-                                    uint32_t model_id,
-                                    uint32_t build_id) {
-  if (model_id != RTNN_MODEL_ID || build_id != RTNN_BUILD_ID) return -1;
-  int8_t best = -1;
-  for (uint8_t c = 0; c < RTNN_CLASSES; ++c) {
-    if (RTNN_TOTAL_UPPER[c] <= deadline) best = (int8_t)c;
-  }
-  return best;
 }
 
 static uint8_t min_u8(uint8_t a, uint8_t b) { return a < b ? a : b; }
@@ -82,23 +78,53 @@ void prove_budget_lowering(void) {
 
 void prove_deadline_admission(void) {
   uint32_t d = nondet_u32();
-  int8_t a = rtnn_cbmc_admit_total_cycles(d, RTNN_MODEL_ID, RTNN_BUILD_ID);
+  int8_t a = rtnn_fixed_admit_total_cycles(d, RTNN_MODEL_ID, RTNN_BUILD_ID, &RTNN_BINDING);
 
-  __CPROVER_assert(rtnn_cbmc_admit_total_cycles(d, RTNN_BAD_ID, RTNN_BUILD_ID) == -1,
+  __CPROVER_assert(rtnn_fixed_admit_total_cycles(d, RTNN_BAD_ID, RTNN_BUILD_ID, &RTNN_BINDING) == -1,
                    "wrong model identity fails closed");
-  __CPROVER_assert(rtnn_cbmc_admit_total_cycles(d, RTNN_MODEL_ID, RTNN_BAD_ID) == -1,
+  __CPROVER_assert(rtnn_fixed_admit_total_cycles(d, RTNN_MODEL_ID, RTNN_BAD_ID, &RTNN_BINDING) == -1,
                    "wrong build identity fails closed");
+  __CPROVER_assert(rtnn_fixed_admit_total_cycles(d, RTNN_MODEL_ID, RTNN_BUILD_ID, (const RTNNFixedConditionalTimingBinding *)0) == -1,
+                   "null binding fails closed");
 
   if (a < 0) {
-    __CPROVER_assert(d < RTNN_TOTAL_UPPER[0],
+    __CPROVER_assert(d < RTNN_BINDING.total_upper_cycles[0],
                      "no class is admitted exactly when class zero does not fit");
   } else {
     __CPROVER_assert(a <= 6, "admitted class is in range");
-    __CPROVER_assert(RTNN_TOTAL_UPPER[(uint8_t)a] <= d,
+    __CPROVER_assert(RTNN_BINDING.total_upper_cycles[(uint8_t)a] <= d,
                      "admitted class timing binding fits the deadline");
     for (uint8_t c = (uint8_t)a + 1u; c < RTNN_CLASSES; ++c) {
-      __CPROVER_assert(RTNN_TOTAL_UPPER[c] > d,
+      __CPROVER_assert(RTNN_BINDING.total_upper_cycles[c] > d,
                        "admission chooses the greatest class that fits");
+    }
+  }
+}
+
+void prove_partial_certification_fail_closed(void) {
+  RTNNFixedConditionalTimingBinding b;
+  b.model_id = nondet_u32();
+  b.build_id = nondet_u32();
+  for (uint8_t c = 0; c < RTNN_CLASSES; ++c) b.total_upper_cycles[c] = nondet_u32();
+  uint32_t d = nondet_u32();
+
+  int8_t a = rtnn_fixed_admit_total_cycles(d, b.model_id, b.build_id, &b);
+  if (a < 0) {
+    for (uint8_t c = 0; c < RTNN_CLASSES; ++c) {
+      __CPROVER_assert(b.total_upper_cycles[c] == RTNN_FIXED_BOUND_INVALID ||
+                       b.total_upper_cycles[c] > d,
+                       "negative admission means no certified class fits");
+    }
+  } else {
+    __CPROVER_assert(a <= 6, "partial-certification admission is in range");
+    __CPROVER_assert(b.total_upper_cycles[(uint8_t)a] != RTNN_FIXED_BOUND_INVALID,
+                     "admitted class is certified");
+    __CPROVER_assert(b.total_upper_cycles[(uint8_t)a] <= d,
+                     "admitted certified class fits deadline");
+    for (uint8_t c = (uint8_t)a + 1u; c < RTNN_CLASSES; ++c) {
+      __CPROVER_assert(b.total_upper_cycles[c] == RTNN_FIXED_BOUND_INVALID ||
+                       b.total_upper_cycles[c] > d,
+                       "no higher certified class also fits");
     }
   }
 }
@@ -109,7 +135,7 @@ void prove_effective_execution_safety(void) {
   uint8_t preferred = nondet_u8();
   __CPROVER_assume(preferred <= RTNN_POLICY_MAX_EXIT);
 
-  int8_t admitted = rtnn_cbmc_admit_total_cycles(d, RTNN_MODEL_ID, RTNN_BUILD_ID);
+  int8_t admitted = rtnn_fixed_admit_total_cycles(d, RTNN_MODEL_ID, RTNN_BUILD_ID, &RTNN_BINDING);
   if (admitted >= 0) {
     uint8_t budget_class = rtnn_cbmc_budget_ceiling_q16(bq);
     uint8_t e = effective_exit(bq, (uint8_t)admitted, preferred);
@@ -118,9 +144,9 @@ void prove_effective_execution_safety(void) {
     __CPROVER_assert(e <= (uint8_t)admitted, "execution never exceeds deadline ceiling");
     __CPROVER_assert(e <= preferred, "execution never exceeds preferred useful compute");
     __CPROVER_assert(e <= RTNN_POLICY_MAX_EXIT, "execution never exceeds deployed policy maximum");
-    __CPROVER_assert(RTNN_TOTAL_UPPER[e] <= RTNN_TOTAL_UPPER[(uint8_t)admitted],
+    __CPROVER_assert(RTNN_BINDING.total_upper_cycles[e] <= RTNN_BINDING.total_upper_cycles[(uint8_t)admitted],
                      "executed class is no slower than the admitted class binding");
-    __CPROVER_assert(RTNN_TOTAL_UPPER[e] <= d,
+    __CPROVER_assert(RTNN_BINDING.total_upper_cycles[e] <= d,
                      "executed class timing binding remains within deadline");
   }
 }
@@ -132,36 +158,28 @@ static int32_t ct_select_i32(uint32_t m, int32_t t, int32_t f) {
 
 static uint32_t exp_lut_high_index(int32_t x) {
   const int32_t lo = -32 * RTNN_FX_S;
-  const int32_t step = RTNN_FX_S / 256;
   uint32_t mhi = ct_mask32((uint32_t)(x > 0));
   int32_t xc = ct_select_i32(mhi, 0, x);
   uint32_t mlo = ct_mask32((uint32_t)(xc < lo));
   xc = ct_select_i32(mlo, lo, xc);
   uint32_t off = (uint32_t)(xc - lo);
   uint32_t i = off >> 7;
-  uint32_t r = off & 127u;
   uint32_t top = i >> 13;
   i -= top;
-  r += top << 7;
-  (void)step; (void)r;
   return i + 1u;
 }
 
 static uint32_t gelu_lut_high_index(int32_t x) {
   const int32_t lo = -8 * RTNN_FX_S;
   const int32_t hi = 8 * RTNN_FX_S;
-  const int32_t step = RTNN_FX_S / 256;
   uint32_t mhi = ct_mask32((uint32_t)(x > hi));
   int32_t xc = ct_select_i32(mhi, hi, x);
   uint32_t mlo = ct_mask32((uint32_t)(xc < lo));
   xc = ct_select_i32(mlo, lo, xc);
   uint32_t off = (uint32_t)(xc - lo);
   uint32_t i = off >> 7;
-  uint32_t r = off & 127u;
   uint32_t top = i >> 12;
   i -= top;
-  r += top << 7;
-  (void)step; (void)r;
   return i + 1u;
 }
 
