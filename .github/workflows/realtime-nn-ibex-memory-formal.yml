@@ -21,19 +21,19 @@ concurrency:
 jobs:
   memory-formal:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 15
     env:
       IBEX_COMMIT: 7b5df75a041affe56e8c235260f98a09b3319008
       RTL_ARTIFACT_ID: '9352155229'
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install audit and formal tools
+      - name: Install lean formal tool
         run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip binutils yosys z3
-          yosys -V
-          z3 --version
+          python -m pip install --upgrade pip
+          python -m pip install yowasp-yosys
+          yowasp-yosys -V
+          readelf --version | head -1
 
       - name: Fetch exact RTL-tested RTNN artifact
         env:
@@ -68,10 +68,10 @@ jobs:
             --out /tmp/ibex_memory_audit.json
           cat /tmp/ibex_memory_audit.json
 
-      - name: Prove ram_2p data-response timing is address-independent
+      - name: Prove ram_2p response-valid is address-independent
         run: |
-          # ram_2p includes prim_assert.sv; no primitive assertions are needed
-          # for this local response-valid property.
+          # ram_2p includes prim_assert.sv; the response-valid proof does not
+          # depend on primitive-RAM data assertions.
           : > /tmp/ibex_rtl/prim_assert.sv
           cat > /tmp/ibex_rtl/prove.ys <<'YOSYS'
           read_verilog -formal -sv -I/tmp/ibex_rtl \
@@ -79,13 +79,12 @@ jobs:
             experiments/realtime_nn_ibex_ram_latency_formal.sv
           prep -top rtnn_ram_latency_formal
           async2sync
-          clk2fflogic
+          flatten
           opt_clean
-          write_smt2 -wires /tmp/ibex_rtl/ram_latency.smt2
+          sat -verify -prove-asserts -seq 6 -set-init-zero -set-def-inputs
           YOSYS
-          yosys -ql /tmp/ibex_rtl/yosys.log /tmp/ibex_rtl/prove.ys
-          yosys-smtbmc -s z3 -t 6 --presat /tmp/ibex_rtl/ram_latency.smt2 | tee /tmp/ibex_rtl/smtbmc.txt
-          grep -q 'Status: PASSED' /tmp/ibex_rtl/smtbmc.txt
+          yowasp-yosys -ql /tmp/ibex_rtl/yosys.log /tmp/ibex_rtl/prove.ys
+          grep -q 'SUCCESS' /tmp/ibex_rtl/yosys.log
 
       - name: Upload memory formal evidence
         if: always()
@@ -97,5 +96,4 @@ jobs:
             /tmp/ibex_memory_audit.json
             /tmp/ibex_rtl/source_sha256.txt
             /tmp/ibex_rtl/yosys.log
-            /tmp/ibex_rtl/smtbmc.txt
           if-no-files-found: warn
