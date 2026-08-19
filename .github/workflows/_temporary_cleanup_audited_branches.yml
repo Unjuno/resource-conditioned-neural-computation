@@ -1,0 +1,41 @@
+name: Temporary audited branch cleanup
+
+on:
+  push:
+    branches:
+      - agent/cleanup-audited-branches
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete only audited redundant branches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          branches=(
+            agent/audit-fixes
+            agent/audit-fixes-pr
+            agent/audit-fixes-review
+            agent/audit-fixes-tree
+            agent/audit-fixes-tree2
+            agent/binsec-controlflow-final
+            agent/direct-realtime-nn-chain
+            agent/execution-class-granularity
+            agent/fixed-time-target-audit-check
+            agent/generated-cpp-runtime
+            agent/research-goal-audit
+            agent/runtime-frontier-state-aware
+          )
+          for b in "${branches[@]}"; do
+            echo "Deleting audited redundant branch: $b"
+            git push "$remote" --delete "$b"
+          done
+          echo "Deleting temporary cleanup branch"
+          git push "$remote" --delete agent/cleanup-audited-branches
