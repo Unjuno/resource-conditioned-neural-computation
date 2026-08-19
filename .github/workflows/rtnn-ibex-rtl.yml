@@ -51,9 +51,11 @@ jobs:
           python -m pip install -r ibex/python-requirements.txt
           cd ibex
           OPTS="$(util/ibex_config.py small fusesoc_opts)"
+          OPTS="${OPTS/--BaseIsa=ibex_pkg::BaseIsaRV32I /}"
           OPTS="${OPTS/--RV32M=ibex_pkg::RV32MFast/--RV32M=ibex_pkg::RV32MSingleCycle}"
           OPTS="${OPTS/--SecureIbex=0/--SecureIbex=1}"
           echo "$OPTS" | tee "$GITHUB_WORKSPACE/build/ibex-rtnn/ibex_config.txt"
+          ! grep -q -- '--BaseIsa=' <<<"$OPTS"
           grep -q -- '--WritebackStage=0' <<<"$OPTS"
           grep -q -- '--ICache=0' <<<"$OPTS"
           grep -q -- '--RV32M=ibex_pkg::RV32MSingleCycle' <<<"$OPTS"
