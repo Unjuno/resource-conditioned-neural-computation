@@ -1,235 +1,259 @@
 # Claims and limits
 
-## Strongest supported mechanism statement
+This document states the **strongest claims currently supported by the repository** and the boundaries that must remain explicit. Historical experiment-by-experiment detail is kept in `EXPERIMENT_INDEX.md` and the individual notes/results.
 
-> In supplied toy architectures, one fixed neural parameter set can receive a runtime-admitted work budget and/or a scalar resource price and physically execute different internal computation classes. The tested classes vary depth, structured active channel width, sparse expert width, and transformer-like attention+MLP depth; they produce reproducible quality/work trade-offs and can produce lower measured central latency when the backend actually avoids inactive computation.
+## Strongest supported research statement
 
-This is **not** a hard-real-time/WCET claim. A soft resource price does not replace a hard runtime admission bound.
+> One fixed neural-network parameter set can accept a normalized runtime compute budget `b ∈ [0,1]`, lower that continuous interface fail-closed to finite maximum-work execution classes, choose less work when additional computation is not useful, physically skip inactive computation, and preserve the resulting execution contract through a same-model Q15 freestanding implementation. On one exact pinned Ibex RTL Simple System build, the finite classes have an exact measured cycle binding, and the software-side budget/deadline contract plus fixed-class control-flow properties have been independently checked with CBMC and BINSEC/custom binary analysis.
+
+This is a strong **research-prototype Real-Time NN** statement. It is **not yet a production FPGA/ASIC/silicon WCET certificate**.
 
 ## Supported direct evidence
 
-### Physical budget execution by depth
+### 1. Budget changes physical neural computation
 
-Across three seeds:
+Across the research chain, one fixed NN physically changes optional depth/width/expert/block execution under resource conditions. Inactive operations are structurally skipped rather than merely zero-masked. Finite execution classes provide a maximum-work boundary suitable for later timing binding.
 
-- one fixed NN physically executes `0/2/4/6/8` optional blocks as budget increases;
-- hooks verify inactive blocks are not called;
-- mean accuracy increases **63.67% → 71.48% → 78.52% → 86.33% → 100%**;
-- hard-skip median latency is strictly monotonic in 3/3 seeds;
-- a dense logical mask executes all blocks and does not obtain the speedup.
-
-### Structured channel-width + depth activation
-
-A second toy uses one maximum-width `C=32` parameter set jointly across five classes:
-
-| class | depth | active width | exact slim linear MACs |
-|---:|---:|---:|---:|
-| 0 | 0 | 8 | 16 |
-| 1 | 2 | 8 | 11,408 |
-| 2 | 4 | 16 | 91,168 |
-| 3 | 6 | 24 | 307,632 |
-| 4 | 8 | 32 | 729,152 |
-
-All three seeds preserve the same complete-domain quality ladder **63.67% / 71.48% / 78.52% / 86.33% / 100%**.
-
-The slim path slices actual operands/weights before the matrix operation. A matched dense-width-mask control computes maximum width and zeros inactive channels afterward. In plain C++, slim and dense-mask outputs are identical over all 512 states and all tested classes/seeds.
-
-Three-seed mean central-latency ratios `slim / dense-mask` in the C++ backend are approximately:
-
-- class 1: **0.130**;
-- class 2: **0.363**;
-- class 3: **0.622**;
-- class 4/full width: **0.993**.
-
-This supports structured physical channel activation in the supplied prefix-width architecture.
-
-**Important negative:** on PyTorch CPU batch-1, the same large MAC reductions do not make the slim classes faster; intermediate slim classes are slightly slower than the dense-mask control. Therefore nominal operation reduction alone is not a wall-clock result. The backend/kernel must actually convert the smaller circuit into cheaper execution.
-
-### Loss-conditioned elastic sparse expert width
-
-A third toy gives one fixed sparse NN a scalar resource price `λ`. The internal width controller chooses `k ∈ {0,1,3,4,6,8}` and only the selected top-`k` expensive experts are physically executed.
-
-There are no handwritten price→width labels. For each candidate width the training objective forms
+The preferred public resource interface is continuous:
 
 \[
-E_k(\lambda)=CE_k+0.55\lambda k/8,
+b\in[0,1].
 \]
 
-and trains the internal controller to amortize this task-loss/work frontier.
+The backend lowers `b` to the largest finite admissible class no greater than the resource grant. Budget is a **maximum permission**, not an obligation to consume exact work.
 
-Three-seed forced-width quality ladder:
+### 2. Extra admitted compute need not be consumed
 
-| executed experts | mean accuracy |
-|---:|---:|
-| 0 | 49.64% |
-| 1 | 81.32% |
-| 3 | 87.68% |
-| 4 | 91.76% |
-| 6 | 95.20% |
-| 8 | 96.88% |
+Sequence experiments falsify the stronger assumption that more forced computation must always improve quality. The deployed semantics therefore separate:
 
-Across all three seeds, selected width is non-increasing with increasing price. Representative means:
+- admitted maximum compute;
+- model-preferred useful compute;
+- actual effective execution.
 
-- `λ=0.00`: `k=8/8/8`, **96.88%**, ~**427 us** hard-skip median;
-- `λ=0.70`: `k=4/4/4`, **91.76%**, ~**268 us**;
-- `λ=1.50`: `k=3/3/3`, **87.68%**, ~**227 us**;
-- `λ=4.00`: `k=0/0/0`, **49.64%**, ~**76 us**.
-
-Matched evidence:
-
-- price-blind controllers remain at one fixed width in **3/3 seeds**;
-- seed-0 physical hard-skip and dense-equivalent execution have **0 prediction mismatches** over 300 input/price cases and maximum logit difference `4.77e-7`;
-- forward hooks verify that inactive experts are not called;
-- one fixed input changes physical trace from 8→6→3→0 executed experts as only price changes;
-- the learned controller agrees with a simple held-out `task loss + work cost` width oracle at **28/33** tested seed×price points.
-
-This supports the intended **price → physical propagation → quality/latency** mechanism in a supplied sparse-NN toy.
-
-Important limits:
-
-- the training surrogate evaluates all candidate widths/experts; training-time sparse compute is not demonstrated;
-- the toy exposes a simple loss/work table, so an external analytic scheduler can compute an equivalent argmin and remains a strong baseline;
-- a soft price is not a hard execution guarantee. For a real-time system, a hard admitted work region should be supplied separately by the runtime.
-
-### Hard cap + soft price in a transformer-like sequence stack
-
-A 9-token local-attention sequence toy contains eight optional self-attention + MLP residual blocks in one parameter set. Each block expands token-0 receptive field by one token.
-
-The runtime provides a hard max-depth cap `0/2/4/6/8`. Disallowed depths are structurally removed from controller choice. A scalar resource price then chooses among the allowed physical depths according to an amortized loss/work objective
+Conceptually:
 
 \[
-E_d(\lambda)=\overline{BCE}_d+0.7\lambda d/8.
+e = \min(b,p(x,s)).
 \]
 
-Three-seed fixed-depth weighted sequence quality:
+The model may stop below the admitted ceiling when additional computation is predicted to be unnecessary or harmful.
 
-| blocks | weighted bit accuracy |
+### 3. Held-out real-sequence generalization
+
+On held-out handwritten-digit row sequences, formal seeds 60--64 give:
+
+- adaptive test accuracy: **93.56%** average;
+- average physical compute: **20.23%**;
+- capability gain from the 0% exit to the useful frontier: **+43.83 percentage points**;
+- formal seeds passing the preregistered boundary: **5/5**;
+- cap/count violations: **0**.
+
+This supports generalizable adaptive computation on an independent held-out real-sequence task.
+
+A separate chronological weekly-CO2 experiment remains a negative boundary: later-time depth utility shifts relative to validation and only 3/5 seeds pass. **Temporal/nonstationary distribution-shift robustness is not established.**
+
+### 4. Same-model freestanding lowering
+
+The real-sequence models are exported into one generic freestanding C implementation.
+
+Across seeds 60--64:
+
+- finite-exit Python/C prediction mismatches: **0 / 12,600**;
+- preferred-exit mismatches in the float same-model C path: **0 / 1,800**;
+- unresolved external symbols in the audited freestanding objects: **0**.
+
+Representative seed 63 with 21 continuous-budget audit points gives **7,560** held-out sample×budget cases with prediction mismatch 0, executed-exit mismatch 0, and cap violation 0.
+
+### 5. Fixed-point time-predictable lowering
+
+The same real-data model is lowered to a Q15/fixed-iteration implementation using integer LUTs and fixed-iteration numerical kernels.
+
+Five-seed Q15 reference evidence:
+
+- finite-exit mismatch vs float: **0 / 12,600**;
+- preferred-exit mismatch vs float: **1 / 1,800**.
+
+Representative seed 63 integer C:
+
+- exit-prediction mismatch: **0 / 2,520**;
+- preferred-exit mismatch: **0 / 360**;
+- caller-owned workspace: **4,608 bytes**.
+
+The final audited fixed-class Cortex-M4/RV32 neural paths remove unresolved arithmetic runtime helpers, floating-point operations, and hardware DIV/REM from the neural numeric path.
+
+### 6. Continuous budget + deadline software contract
+
+The freestanding runtime composes:
+
+\[
+C_{\mathrm{effective}}=
+\min(C_{\mathrm{budget}},C_{\mathrm{preferred}},C_{\mathrm{deadline}}).
+\]
+
+Earlier exhaustive/property audits report zero structural mismatches/violations over:
+
+- all 65,536 Q0.16 budget values;
+- 16,777,216 budget×preferred combinations;
+- 655,360 deadline/budget/preference combinations;
+- same-model 52,920 held-out sample×budget×deadline cases.
+
+Invalid identities and partial certification fail closed.
+
+### 7. CBMC finite runtime-contract proof
+
+CBMC 6.10.0 checks the represented finite C/runtime contract over complete integer domains. All five proof entry points report `VERIFICATION SUCCESSFUL`:
+
+1. Q0.16 continuous-budget lowering is in-range, monotone, greatest-fit, and fail-closed;
+2. the actual `rtnn_fixed_admit_total_cycles()` implementation returns the highest timing class that fits every 32-bit deadline and rejects wrong/null identity state;
+3. arbitrary partial-certification tables never admit an uncertified `UINT32_MAX` class and do not skip a higher certified class that fits;
+4. effective execution remains below budget, deadline, preferred, and policy ceilings;
+5. exact Q15 exp/GELU clamp/index arithmetic stays within the finite LUT domains for arbitrary signed-32-bit inputs.
+
+**Boundary:** CBMC proves the modeled C/runtime properties. It does not by itself prove compiler preservation, the complete neural machine code, processor pipeline timing, or physical-device WCET.
+
+### 8. Pinned Ibex RTL measured timing binding
+
+The exact Q15 RV32 artifact was executed on pinned upstream Ibex commit:
+
+`7b5df75a041affe56e8c235260f98a09b3319008`
+
+with the official Simple System configured for:
+
+- `SecureIbex=1` / data-independent timing path in this revision;
+- `RV32MSingleCycle`;
+- two-stage execution;
+- no I-cache or branch predictor;
+- deterministic one-cycle Simple System RAM with zero additional instruction delay;
+- no interrupt, DMA, or competing master in the validation harness.
+
+Exact artifact identity recorded in the RTL evidence:
+
+- ELF SHA-256: `234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742`;
+- loadable binary SHA-256: `266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1`.
+
+Fixed-class measured RTL cycles:
+
+| normalized ceiling | cycles |
 |---:|---:|
-| 0 | 58.62% |
-| 2 | 74.14% |
-| 4 | 86.21% |
-| 6 | 94.83% |
-| 8 | 100% |
+| 0% | 29,620 |
+| 16.7% | 615,569 |
+| 33.3% | 1,201,521 |
+| 50% | 1,787,473 |
+| 66.7% | 2,373,425 |
+| 83.3% | 2,959,377 |
+| 100% | 2,959,381 |
 
-With full cap, **3/3 seeds** use all five execution classes in the same price order: `8 → 6 → 4 → 2 → 0` blocks. Representative mean physical medians are approximately **1.11 ms → 0.85 ms → 0.59 ms → 0.37 ms → 0.09 ms**, while dense-equivalent execution remains near full-depth timing.
+All seven fixed classes were run on three distinct held-out inputs with preferred exits 1, 3, and 5:
 
-Matched evidence:
+- fixed-class cases: **21**;
+- prediction mismatches vs native integer reference: **0**;
+- input-to-input cycle range within every fixed class: **0**.
 
-- hard cap is respected for all tested seed×cap×price points;
-- hook execution count matches selected depth in all tested seeds;
-- physical hard-skip vs dense-equivalent has **0/750 prediction-vector mismatches** and maximum logit difference **0**;
-- full-cap loss/work-oracle agreement is **27/27** tested seed×price points;
-- price-blind controls do not change depth with price at fixed cap.
+The real admission + adaptive-inference path also has 21 RTL cases with prediction mismatch 0, executed-exit mismatch 0, unsafe admission 0, and committed runtime-binding exceedance 0.
 
-This supports **hard admissibility + soft price-conditioned physical sequence computation** in a supplied transformer-like toy.
+This is an **exact-build measured RTL binding**, not a portable timing formula.
 
-Important limits:
+### 9. Old arithmetic timing formula is falsified
 
-- this is not autoregressive language generation;
-- capability parameters are trained across all depths and the controller is post-trained from the capability frontier; end-to-end sparse training is not demonstrated;
-- the current variable graph is prefix-depth only, not arbitrary attention-head/MLP-expert selection;
-- an external analytic scheduler remains a strong baseline when the complete loss/work frontier is available.
+The earlier custom instruction-category timing model `RTNN-IBEX-DIT-v1` underestimates actual pinned Ibex RTL for the full-work certification classes. It is a retained negative result and **must not be used for deadline admission**.
 
-### Learned selection under a hard work cap
+This directly demonstrates why nominal instruction/MAC accounting cannot substitute for target-pipeline validation.
 
-The runtime admits `k ∈ {1,2,4,8}` expert calls. Hard top-k structurally prevents budget violation.
+### 10. Exact-binary fixed-class control-flow noninterference
 
-At `k=4`, the explicitly supervised learned controller reaches **100%** accuracy versus **78.18%** for fixed prefix. Controller overhead is included in timing.
+A custom RV32IM taint interpreter marks all 64 neural input bytes as input-dependent in the exact RTL-tested binary.
 
-With empirical P95 deadline admission, an intermediate `k≈4` regime gives learned on-time-correct **98.46%** versus **76.00%** for prefix at similar miss rates. A 25-point common-deadline audit reduces concern that this benefit came from selecting only favorable deadlines.
+For every fixed class `0..6` it reports:
 
-The loss-conditioned elastic-width model has a preliminary seed-0 soft deadline audit as well: at a 489 us deadline, price-conditioned execution gives **89.33% on-time-correct** versus always-full **83.67%**. Another class misses **15.17%** despite an 8% P95 margin, so this does not change the Linux timing boundary below.
+- input-dependent conditional branches: **0**;
+- input-dependent indirect-control targets: **0**;
+- input-dependent store addresses: **0**;
+- hardware DIV/REM instructions on the fixed-class path: **0**.
 
-Learned control is not universally better: tight/full-budget regimes can favor simpler policies, and external analytic schedulers remain strong baselines when quality/work information is analytically available.
+Four input-dependent load-address instruction sites remain, all belonging to exp/GELU LUT interpolation. Exhaustive post-clamp integer-domain checks keep those accesses within their finite LUTs.
 
-### Task-loss-only selection
+The adaptive path intentionally contains neural-input-dependent control at one machine-code site, the entropy early-stop decision. That is expected behavior, not a hidden fixed-class timing path.
 
-Without relevance labels, relevance auxiliary loss, capability warmup, or expert freezing, a supplied hard-cap toy learns useful selection from task loss alone.
+**Boundary:** the custom interpreter is not itself formally verified.
 
-Three-seed mean:
+### 11. Independent BINSEC control-flow cross-check
 
-| k | task-loss learned | fixed prefix | analytic oracle |
-|---:|---:|---:|---:|
-| 1 | 69.04% | 67.66% | 69.09% |
-| 2 | **81.27%** | 71.37% | 81.80% |
-| 4 | **100.00%** | 78.74% | 100.00% |
-| 8 | 99.82% | 99.82% | 99.82% |
+The exact same RTL-tested ELF was independently analyzed with pinned third-party BINSEC.
 
-This supports task-loss-only useful-computation selection **inside a supplied fixed search space**. It does not establish unconstrained self-organized architecture discovery.
+Across all seven fixed classes:
 
-## RTOS / implementation evidence
+- classes passing: **7 / 7**;
+- completed paths: **1 per class**;
+- pending paths: **0**;
+- `Program status`: **secure** for every class;
+- control-flow leak sites: **0**;
+- control-flow checks: **933,653 / 933,653**;
+- unrolled instructions explored: **9,176,039**;
+- branching points explored: **574,502**.
 
-The direct mechanism has been progressively lowered from PyTorch into generated C++ and a freestanding finite-class C core.
+This materially reduces reliance on the custom interpreter for the fixed-class control-flow claim.
 
-Supported implementation facts include:
+Generic full constant-time memory analysis is **not** claimed: class 0 completes with memory checks secure, while class 1 exceeds the supplied GitHub runner resources (exit 137) when relational memory-address analysis is enabled over the LUT-heavy path. The same class completes and passes all 47,971 control-flow checks when memory relational analysis is disabled. This is recorded as a resource boundary, not a control-flow failure and not a memory proof.
 
-- exact physical work counts derived from actual control flow and checked by instrumentation;
-- freestanding core with no unresolved external symbols;
-- fixed caller-owned workspace and no inference heap/file I/O;
-- Q5 int16 weights/workspace with int32 accumulators preserving all tested class predictions across three seeds;
-- bounded LUT activations and division-free integer residual scaling;
-- conservative static integer-range bounds for the tested generated weights;
-- target-independent execution manifest separated from target timing certification;
-- timing certification interface fails closed for uncertified classes, wrong neural manifest, or wrong deployed-build identity;
-- compiler/optimization audit shows identical neural outputs can compile to distinct machine-code objects, so timing evidence must be build-specific.
+## Artifact identity policy
 
-None of these facts supplies an actual WCET value.
+A training seed is **not** a certification identity. Retraining seed 63 on a different runner did not reproduce the previous Q15 artifact bit-for-bit.
 
-## Runtime machine-state timing boundary
+Therefore:
 
-The hypothesis
+- **research reproducibility:** seed + training recipe + statistical result;
+- **timing certification:** frozen Q15 artifact + exact machine image + compiler/toolchain + processor/RTL/memory configuration + timing evidence.
 
-```text
-coarse machine state → one empirical P95 timing table → admitted budget
-```
+The current RTL/BINSEC evidence records exact hashes. Actions artifacts are supporting evidence; a production certification process should additionally retain the exact ELF/bin in a durable long-term artifact archive.
 
-is **not supported on ordinary Linux**.
+## Timing and memory boundary
 
-Same-core scheduler interference creates a fast/preempted mixture. When the preempted fraction crosses the chosen percentile, empirical P95 can jump from sub-millisecond timing into an ~8 ms mode even though the neural execution class is unchanged.
+The strongest current timing statement is target-specific:
 
-The initial exploratory result suggesting reliable load-specific P95 rescue did not reproduce and is not promoted.
+> For the identified Q15 machine artifact on the identified pinned Ibex Simple System configuration, measured finite-class RTL cycle bindings exist; fixed-class neural input does not influence machine-code control flow according to two independent binary-level analyses; the remaining input-dependent LUT addresses are bounded and execute against deterministic address-independent RAM in that target model.
 
-Empirical Linux P95/P99 is not WCET.
+This still does **not** prove generic memory constant-time behavior or physical-device WCET.
 
-## Current open questions
+If the implementation moves to cache, SDRAM, another SRAM, bus arbitration, DMA, interrupts, FPGA fabric, another compiler, or another processor configuration, timing must be rebound and revalidated.
 
-1. Can the sequence result move beyond prefix-depth elasticity to **separately optional attention and MLP expert groups** inside decoder-like blocks while preserving physical skip?
-2. Can the hard-cap + soft-price sequence mechanism be lowered to a generated/analyzable backend with explicit finite work classes?
-3. On a controlled RTOS/time-predictable target, can target/build-specific upper bounds be attached to those classes?
-4. Does the mechanism survive a small autoregressive-generation task before any LLM-scale experiment?
-5. Can useful internal computation be made less analytically exposed than the current toy?
+## Current major negative boundaries
 
-## Secondary diagnostics
-
-Older router/topology experiments remain useful for capability forgetting, shortcut collapse, feasibility-vs-price separation, non-separable resource-contract failures, optimization sensitivity, and timing-tail instability. They are secondary to:
-
-```text
-hard admissible work region + soft resource price
-    → physical activation
-    → exact work
-    → certified timing bound
-    → deadline / quality
-```
+1. Ordinary Linux P95/P99 and observed maximum×arbitrary safety factor are not hard WCET evidence.
+2. The old arithmetic `RTNN-IBEX-DIT-v1` timing formula is falsified by actual RTL.
+3. Training seed/recipe alone is not bitwise certification identity.
+4. Generic relational full-memory constant-time analysis of the LUT-heavy class-1 path exceeded the supplied runner resources.
+5. Nominal MAC reduction does not guarantee wall-clock speedup on every backend.
+6. Forcing exact admitted work can reduce task quality.
+7. Concurrent end-to-end preferred-compute training did not match the stable post-trained frontier.
+8. Toy held-out horizon-value generalization failed.
+9. Chronological/nonstationary temporal generalization remains unresolved.
 
 ## Explicitly not claimed
 
-1. Hard real-time guarantees or WCET bounds.
-2. A production Real-Time NN or Real-Time LM.
-3. Stable machine-state→P95 admission on ordinary Linux.
-4. Universal latency benefit from nominal MAC reduction; PyTorch provides a direct counterexample in the structured-width experiment.
-5. Joule-level energy savings or measured memory-bandwidth reduction.
-6. Universal learned-policy superiority over fixed policies or external schedulers.
-7. Necessity of learned price-to-width/depth control when an external quality/work table is analytically available.
-8. Training-time sparse execution in the loss-conditioned/sequence experiments.
-9. General/unconstrained self-organized architecture discovery or arbitrary neuron sparsity.
-10. Arbitrary hardware/timing portability.
-11. Autoregressive LM behavior or LLM-scale generalization.
-12. Novelty of LUT neurons/networks, dynamic routing, NAS, or runtime subnetwork switching.
+1. A universal Ibex WCET theorem.
+2. An FPGA/ASIC/silicon production WCET guarantee.
+3. Generic constant-time memory behavior for arbitrary memory hierarchies.
+4. Arbitrary compiler/hardware/timing portability.
+5. Temporal distribution-shift robustness.
+6. Training-time sparse execution for every research training protocol.
+7. Universal learned-policy superiority over fixed or analytic scheduling baselines.
+8. Unconstrained self-organized architecture discovery.
+9. Autoregressive LLM-scale real-time generalization.
+10. That measured RTL timing alone constitutes a formal all-input WCET proof.
+
+## Remaining production-hard-real-time work
+
+The next evidence gap is no longer another router or neural loss experiment. It is the target timing boundary:
+
+1. bind/prove the four input-indexed LUT accesses to the selected deterministic memory implementation;
+2. retain the exact certification machine artifact durably;
+3. when physical validation is desired, map the same contract to the available DE0-CV using controlled on-chip memory and a fixed clock, then derive a **new FPGA-specific timing binding** rather than copying the Simple System cycle table;
+4. if a software-only production proof is required, add a stronger static/formal target-timing method that covers the processor/memory implementation itself.
 
 ## Direction lock
 
 Before promoting a new main-line experiment, ask:
 
-> Does it test the physical chain `hard admissible work + resource price → activation → work → timing bound → deadline/quality`, or a concrete implementation/runtime condition required to make that chain real-time safe?
+> Does it move the same neural model closer to a defensible chain `deadline → admitted finite work → physical neural execution → target/build timing bound → on-time output`?
 
 If not, it belongs under secondary diagnostics.
