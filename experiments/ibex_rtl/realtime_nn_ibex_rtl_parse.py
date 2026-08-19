@@ -20,6 +20,7 @@ for i,c,cy,p in rows:
 classes=[]
 for c in range(7):
     vals=by[c]; classes.append({'class':c,'rtl_cycles':vals,'min':min(vals),'max':max(vals),'spread':max(vals)-min(vals),'static_envelope':bounds[c],'slack_min':bounds[c]-max(vals)})
-out={'measurement_overhead_cycles':over,'prediction_mismatches':pred_mismatch,'envelope_exceedances':exceed,'classes':classes,'rtl_input_cycle_identical':all(x['spread']==0 for x in classes)}
+identical=all(x['spread']==0 for x in classes)
+out={'measurement_overhead_cycles':over,'prediction_mismatches':pred_mismatch,'envelope_exceedances':exceed,'classes':classes,'rtl_input_cycle_identical':identical}
 Path(a.out).write_text(json.dumps(out,indent=2)); print(json.dumps(out,indent=2))
-if pred_mismatch or exceed: raise SystemExit(1)
+if pred_mismatch or exceed or not identical: raise SystemExit(1)
