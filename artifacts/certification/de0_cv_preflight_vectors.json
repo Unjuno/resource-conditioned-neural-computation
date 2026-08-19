@@ -1,0 +1,42 @@
+{
+  "schema": "rtnn-de0-cv-preflight-v1",
+  "status": "BOARD_FREE_REFERENCE_ONLY",
+  "source_artifact": {
+    "frozen_zip_sha256": "9150b0763e5d7b7c305441befdb4161ccf95612edd924b525f8388e06d9a86b0",
+    "elf_sha256": "234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742",
+    "bin_sha256": "266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1"
+  },
+  "finite_classes": [0, 1, 2, 3, 4, 5, 6],
+  "normalized_classes": [0.0, 0.16666666666666666, 0.3333333333333333, 0.5, 0.6666666666666666, 0.8333333333333334, 1.0],
+  "vectors": [
+    {
+      "slot": 0,
+      "test_index": 0,
+      "label": 3,
+      "preferred_exit": 1,
+      "input_u8_64": [0,0,12,16,16,13,1,0,0,4,15,9,12,16,2,0,0,0,2,0,11,15,0,0,0,0,0,12,16,4,0,0,0,0,0,8,16,13,1,0,0,0,0,0,6,16,6,0,0,0,4,6,6,16,6,0,0,0,12,16,16,9,0,0],
+      "expected_fixed_class_prediction": [3,3,3,3,3,3,3]
+    },
+    {
+      "slot": 1,
+      "test_index": 24,
+      "label": 4,
+      "preferred_exit": 3,
+      "input_u8_64": [0,0,0,14,5,0,0,0,0,0,5,16,5,0,0,0,0,0,13,12,0,1,3,0,0,4,16,5,1,15,11,0,0,10,15,4,13,16,3,0,0,8,16,16,16,10,0,0,0,2,11,12,15,1,0,0,0,0,0,16,9,0,0,0],
+      "expected_fixed_class_prediction": [6,6,4,4,4,4,4]
+    },
+    {
+      "slot": 2,
+      "test_index": 57,
+      "label": 2,
+      "preferred_exit": 5,
+      "input_u8_64": [0,0,11,15,4,0,0,0,0,5,16,15,15,0,0,0,0,0,14,11,16,2,0,0,0,0,0,4,16,5,0,0,0,0,0,4,16,6,0,0,0,0,0,7,16,10,3,0,0,0,11,16,16,16,16,6,0,0,11,16,10,5,13,6],
+      "expected_fixed_class_prediction": [1,1,8,8,8,8,8]
+    }
+  ],
+  "nonclaims": [
+    "No DE0-CV measurement has been performed.",
+    "Simple-System cycle counts are intentionally omitted; the FPGA must derive a new target-specific timing table.",
+    "These vectors validate prediction/class behavior, not physical WCET by themselves."
+  ]
+}
