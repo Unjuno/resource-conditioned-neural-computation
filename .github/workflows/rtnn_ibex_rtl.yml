@@ -55,7 +55,7 @@ jobs:
             lowrisc:ibex:ibex_simple_system \
             --RV32M=ibex_pkg::RV32MSingleCycle \
             --RV32B=ibex_pkg::RV32BNone \
-            --RV32ZC=ibex_pkg::RV32ZCNone \
+            --RV32ZC=ibex_pkg::RV32Zca \
             --RegFile=ibex_pkg::RegFileFF \
             --ICache=0 \
             --BranchTargetALU=0 \
