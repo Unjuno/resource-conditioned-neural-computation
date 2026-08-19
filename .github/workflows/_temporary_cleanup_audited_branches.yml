@@ -16,6 +16,7 @@ jobs:
     if: github.event_name == 'push' || github.head_ref == 'agent/cleanup-audited-branches'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Delete only audited redundant branches
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
