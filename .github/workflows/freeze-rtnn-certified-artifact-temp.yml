@@ -1,0 +1,65 @@
+name: TEMP freeze exact RTNN certification artifact
+
+on:
+  push:
+    branches:
+      - agent/software-formal-closure
+    paths:
+      - '.github/workflows/freeze-rtnn-certified-artifact-temp.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  freeze:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      RTL_ARTIFACT_ID: '9352155229'
+      EXPECTED_ELF_SHA256: '234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742'
+      EXPECTED_BIN_SHA256: '266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1'
+  
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/software-formal-closure
+          fetch-depth: 1
+
+      - name: Fetch and verify exact prior RTL artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/rtnn_cert && mkdir -p /tmp/rtnn_cert/unpacked
+          gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${RTL_ARTIFACT_ID}/zip" > /tmp/rtnn_cert/rtnn_ibex_rtl_exact.zip
+          unzip -q /tmp/rtnn_cert/rtnn_ibex_rtl_exact.zip -d /tmp/rtnn_cert/unpacked
+          test "$(sha256sum /tmp/rtnn_cert/unpacked/rtnn_ibex_rtl.elf | cut -d' ' -f1)" = "${EXPECTED_ELF_SHA256}"
+          test "$(sha256sum /tmp/rtnn_cert/unpacked/rtnn_ibex_rtl.bin | cut -d' ' -f1)" = "${EXPECTED_BIN_SHA256}"
+          sha256sum /tmp/rtnn_cert/rtnn_ibex_rtl_exact.zip /tmp/rtnn_cert/unpacked/rtnn_ibex_rtl.elf /tmp/rtnn_cert/unpacked/rtnn_ibex_rtl.bin
+
+      - name: Freeze exact package and identity manifest in Git
+        run: |
+          set -euo pipefail
+          dst=artifacts/certification/ibex_simple_system
+          mkdir -p "$dst"
+          cp /tmp/rtnn_cert/rtnn_ibex_rtl_exact.zip "$dst/rtnn_ibex_rtl_exact.zip"
+          ZIP_SHA="$(sha256sum "$dst/rtnn_ibex_rtl_exact.zip" | cut -d' ' -f1)"
+          cat > "$dst/MANIFEST.md" <<EOF
+          # Frozen RTNN Ibex Simple System certification artifact
+
+          This directory freezes the exact GitHub Actions artifact package used by the pinned Ibex RTL timing, exact-binary noninterference/BINSEC, and deterministic-memory audits.
+
+          - source Actions artifact ID: \`${RTL_ARTIFACT_ID}\`
+          - frozen ZIP SHA-256: \`${ZIP_SHA}\`
+          - contained ELF SHA-256: \`${EXPECTED_ELF_SHA256}\`
+          - contained loadable BIN SHA-256: \`${EXPECTED_BIN_SHA256}\`
+          - pinned Ibex commit: \`7b5df75a041affe56e8c235260f98a09b3319008\`
+
+          The ZIP is the durable repository copy. Consumers must still unpack it and verify the contained ELF/BIN hashes before using any timing evidence. A different compiler artifact, RTL revision/configuration, memory integration, or physical target requires a new certification identity and timing binding.
+          EOF
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add "$dst/rtnn_ibex_rtl_exact.zip" "$dst/MANIFEST.md"
+          git commit -m 'Freeze exact Ibex RTNN certification artifact'
+          git push origin HEAD:agent/software-formal-closure
