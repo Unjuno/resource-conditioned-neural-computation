@@ -1,0 +1,122 @@
+name: RTNN Ibex memory timing formal
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/realtime-nn-ibex-memory-formal.yml'
+      - 'artifacts/certification/ibex_simple_system/**'
+      - 'experiments/audit_realtime_nn_ibex_memory_timing.py'
+      - 'experiments/audit_realtime_nn_yosys_ram_fanin.py'
+      - 'results/realtime_nn_ibex_memory_timing_results.json'
+      - 'notes/realtime_nn_ibex_memory_timing.md'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rtnn-ibex-memory-formal-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  memory-formal:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      IBEX_COMMIT: 7b5df75a041affe56e8c235260f98a09b3319008
+      FROZEN_ZIP: artifacts/certification/ibex_simple_system/rtnn_ibex_rtl_exact.zip
+      EXPECTED_ZIP_SHA256: 9150b0763e5d7b7c305441befdb4161ccf95612edd924b525f8388e06d9a86b0
+      EXPECTED_ELF_SHA256: 234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742
+      EXPECTED_BIN_SHA256: 266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install lean netlist tool
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install yowasp-yosys
+          yowasp-yosys -V
+          readelf --version | head -1
+
+      - name: Unpack and verify durable exact RTL-tested RTNN artifact
+        run: |
+          set -euo pipefail
+          test "$(sha256sum "${FROZEN_ZIP}" | cut -d' ' -f1)" = "${EXPECTED_ZIP_SHA256}"
+          mkdir -p /tmp/rtnn_artifact
+          unzip -q "${FROZEN_ZIP}" -d /tmp/rtnn_artifact
+          sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.elf /tmp/rtnn_artifact/rtnn_ibex_rtl.bin
+          test "$(sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.elf | cut -d' ' -f1)" = "${EXPECTED_ELF_SHA256}"
+          test "$(sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.bin | cut -d' ' -f1)" = "${EXPECTED_BIN_SHA256}"
+
+      - name: Fetch pinned Ibex memory RTL
+        run: |
+          mkdir -p /tmp/ibex_rtl
+          curl -L --fail --retry 3 -o /tmp/ibex_rtl/ram_2p.sv \
+            "https://raw.githubusercontent.com/lowRISC/ibex/${IBEX_COMMIT}/shared/rtl/ram_2p.sv"
+          curl -L --fail --retry 3 -o /tmp/ibex_rtl/bus.sv \
+            "https://raw.githubusercontent.com/lowRISC/ibex/${IBEX_COMMIT}/shared/rtl/bus.sv"
+          curl -L --fail --retry 3 -o /tmp/ibex_rtl/ibex_simple_system.sv \
+            "https://raw.githubusercontent.com/lowRISC/ibex/${IBEX_COMMIT}/examples/simple_system/rtl/ibex_simple_system.sv"
+          sha256sum /tmp/ibex_rtl/*.sv | tee /tmp/ibex_rtl/source_sha256.txt
+
+      - name: Audit exact ELF LUT ranges and pinned memory structure
+        run: |
+          python experiments/audit_realtime_nn_ibex_memory_timing.py \
+            --elf /tmp/rtnn_artifact/rtnn_ibex_rtl.elf \
+            --bin /tmp/rtnn_artifact/rtnn_ibex_rtl.bin \
+            --ram-rtl /tmp/ibex_rtl/ram_2p.sv \
+            --bus-rtl /tmp/ibex_rtl/bus.sv \
+            --system-rtl /tmp/ibex_rtl/ibex_simple_system.sv \
+            --out /tmp/ibex_memory_audit.json
+          cat /tmp/ibex_memory_audit.json
+
+      - name: Build actual ram_2p control netlist
+        run: |
+          : > /tmp/ibex_rtl/prim_assert.sv
+          cat > /tmp/ibex_rtl/prim_ram_stub.sv <<'SV'
+          module prim_ram_2p #(
+            parameter integer Width=32, Depth=128, DataBitsPerMask=8,
+            parameter MemInitFile=""
+          )(
+            input wire clk_a_i, clk_b_i, a_req_i, a_write_i,
+            input wire [$clog2(Depth)-1:0] a_addr_i,
+            input wire [Width-1:0] a_wdata_i, a_wmask_i,
+            output wire [Width-1:0] a_rdata_o,
+            input wire b_req_i, b_write_i,
+            input wire [$clog2(Depth)-1:0] b_addr_i,
+            input wire [Width-1:0] b_wdata_i, b_wmask_i,
+            output wire [Width-1:0] b_rdata_o,
+            input wire cfg_i, output wire cfg_o
+          );
+            assign a_rdata_o={Width{1'b0}};
+            assign b_rdata_o={Width{1'b0}};
+            assign cfg_o=1'b0;
+          endmodule
+          SV
+          cat > /tmp/ibex_rtl/netlist.ys <<'YOSYS'
+          read_verilog -formal -sv -I. ram_2p.sv prim_ram_stub.sv
+          prep -top ram_2p
+          write_json ram_netlist.json
+          YOSYS
+          cd /tmp/ibex_rtl
+          yowasp-yosys -ql yosys.log netlist.ys
+
+      - name: Prove response-valid one-cycle register has no address fan-in
+        run: |
+          python experiments/audit_realtime_nn_yosys_ram_fanin.py \
+            --json /tmp/ibex_rtl/ram_netlist.json \
+            --out /tmp/ibex_ram_fanin.json
+          cat /tmp/ibex_ram_fanin.json
+
+      - name: Upload memory timing evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rtnn-ibex-memory-formal
+          retention-days: 90
+          path: |
+            /tmp/ibex_memory_audit.json
+            /tmp/ibex_ram_fanin.json
+            /tmp/ibex_rtl/source_sha256.txt
+            /tmp/ibex_rtl/yosys.log
+          if-no-files-found: warn
