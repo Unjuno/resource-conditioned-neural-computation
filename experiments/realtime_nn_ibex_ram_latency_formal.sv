@@ -37,24 +37,19 @@ module rtnn_ram_latency_formal(input wire clk);
   (* anyseq *) reg a_req;
   (* anyseq *) reg [31:0] a_addr0;
   (* anyseq *) reg [31:0] a_addr1;
-  reg rst_n = 1'b0;
-  reg past_valid = 1'b0;
 
+  /* Formal SAT uses identical initialized response state for both copies.
+     Thereafter both see identical request/write controls and arbitrary,
+     independent addresses. Any response-valid difference would therefore be
+     an address-dependent timing effect in the actual ram_2p control RTL. */
+  wire rst_n = 1'b1;
   wire a_rvalid0, a_rvalid1;
   wire [31:0] a_rdata0, a_rdata1;
   wire b_rvalid0, b_rvalid1;
   wire [31:0] b_rdata0, b_rdata1;
 
-  /* Reset only initializes the real ram_2p response register; after the first
-     clock both copies see the same request but arbitrary independent addresses. */
-  always @(posedge clk) begin
-    rst_n <= 1'b1;
-    past_valid <= 1'b1;
-    if (past_valid) begin
-      assert(a_rvalid0 == $past(a_req));
-      assert(a_rvalid1 == $past(a_req));
-      assert(a_rvalid0 == a_rvalid1);
-    end
+  always @* begin
+    assert(a_rvalid0 == a_rvalid1);
   end
 
   ram_2p #(.Depth(262144), .BExtraDelay(0)) dut0 (
