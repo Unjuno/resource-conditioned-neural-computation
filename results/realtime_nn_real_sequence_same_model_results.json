@@ -1,0 +1,73 @@
+{
+  "setup": {
+    "model": "same real-data 8-row-token transformer from realtime_nn_real_sequence_generalization.py",
+    "formal_seeds": [60,61,62,63,64],
+    "external_budget": "continuous b in [0,1], Q0.16 at C boundary",
+    "C_backend": "float32 freestanding core with generated exp/GELU LUTs and fixed-iteration rsqrt"
+  },
+  "five_seed_lowering": {
+    "per_seed": [
+      {"seed":60,"tau":0.7199472188949585,"max_exit":2,"exit_acc":[0.49166666666666664,0.9222222222222223,0.9305555555555556,0.9361111111111111,0.9305555555555556,0.9361111111111111,0.9361111111111111],"policy_acc":0.9305555820465088,"policy_compute":0.1884259134531021,"pref_dist":[0,313,47,0,0,0,0],"exit_prediction_mismatches":0,"preferred_exit_mismatches":0,"freestanding_undefined_symbols":0},
+      {"seed":61,"tau":0.848700225353241,"max_exit":3,"exit_acc":[0.49166666666666664,0.9,0.9194444444444444,0.9222222222222223,0.9138888888888889,0.9166666666666666,0.9166666666666666],"policy_acc":0.9222221970558167,"policy_compute":0.21342593431472778,"pref_dist":[0,264,91,5,0,0,0],"exit_prediction_mismatches":0,"preferred_exit_mismatches":0,"freestanding_undefined_symbols":0},
+      {"seed":62,"tau":1.2925821542739868,"max_exit":2,"exit_acc":[0.5083333333333333,0.9333333333333333,0.9333333333333333,0.9333333333333333,0.9305555555555556,0.9333333333333333,0.9333333333333333],"policy_acc":0.9277777671813965,"policy_compute":0.16944444179534912,"pref_dist":[0,354,6,0,0,0,0],"exit_prediction_mismatches":0,"preferred_exit_mismatches":0,"freestanding_undefined_symbols":0},
+      {"seed":63,"tau":0.565179169178009,"max_exit":5,"exit_acc":[0.475,0.9111111111111111,0.9416666666666667,0.9388888888888889,0.9333333333333333,0.9333333333333333,0.925],"policy_acc":0.9416666626930237,"policy_compute":0.22638888657093048,"pref_dist":[0,263,81,7,2,7,0],"exit_prediction_mismatches":0,"preferred_exit_mismatches":0,"freestanding_undefined_symbols":0},
+      {"seed":64,"tau":0.6088458299636841,"max_exit":2,"exit_acc":[0.5138888888888888,0.9194444444444444,0.9527777777777777,0.9444444444444444,0.9416666666666667,0.9444444444444444,0.9444444444444444],"policy_acc":0.9555555582046509,"policy_compute":0.21388888359069824,"pref_dist":[0,258,102,0,0,0,0],"exit_prediction_mismatches":0,"preferred_exit_mismatches":0,"freestanding_undefined_symbols":0}
+    ],
+    "total_exit_prediction_cases":12600,
+    "total_exit_prediction_mismatches":0,
+    "total_preferred_exit_cases":1800,
+    "total_preferred_exit_mismatches":0,
+    "all_freestanding_undefined_symbols_zero":true,
+    "decision":"PASS"
+  },
+  "representative_seed63": {
+    "budget_grid_cases":7560,
+    "budget_grid_prediction_mismatches":0,
+    "budget_grid_executed_exit_mismatches":0,
+    "budget_grid_cap_violations":0,
+    "deadline_budget_model_cases":52920,
+    "deadline_admission_mismatches":0,
+    "deadline_executed_exit_mismatches":0,
+    "deadline_prediction_mismatches":0,
+    "partial_certification_fail_closed":true,
+    "wrong_build_rejected":true,
+    "wrong_manifest_rejected":true,
+    "workspace_bytes":4608,
+    "combined_freestanding_undefined_symbols":0,
+    "combined_object_sha256":"648556ab7a7938a2d6f3fcdf2f8f4e5fb255a2dbe112e06a701e27cd18dad2aa",
+    "manifest_canonical_sha256":"f71de73fcc437408002110d8a1e5cc3ad317f0e007df63a56e162789ab1c4fe8",
+    "cross_compile":{"armv7m-none-eabi":"PASS","riscv32-unknown-elf":"PASS","aarch64-none-elf":"PASS"}
+  },
+  "timing_boundary": {
+    "platform":"x86_64 KVM Linux, affinity pinned, RDTSCP",
+    "classification":"EMPIRICAL_ONLY",
+    "timing_binary_sha256":"40edc829a825227ce5175eb9e88e88e7f086b9b35007a05f17508635e75ca1f5",
+    "runs":15,
+    "calibration_observed_max":[44720,148746,378092,382356,1652534,141414,274300],
+    "heldout_observed_max":[7514,1858595,566826,3590808,1638156,1106014,2775630],
+    "heldout_over_calibration_ratio":[0.1680232558139535,12.49509230500316,1.4991748040159538,9.391268869849041,0.991299422583741,7.821106821106821,10.118957345971564],
+    "max_ratio":12.49509230500316,
+    "factor_exceed_classes":{"1":[1,2,3,5,6],"2":[1,3,5,6],"4":[1,3,5,6],"8":[1,3,6]},
+    "wcet_decision":"UNCERTAIN; observed maxima and safety factors are not defensible bounds",
+    "sched_fifo_available":false,
+    "wcet_analyzer_available":false
+  },
+  "empirical_rtos_demo": {
+    "repeats":3,
+    "mean_by_deadline_class": {
+      "0":{"rtnn_otc":0.47851866666666665,"full_otc":0.0,"fixed1_otc":0.0,"rtnn_miss":0.01,"full_miss":1.0,"fixed1_miss":1.0,"rtnn_compute":0.0},
+      "1":{"rtnn_otc":0.708148,"full_otc":0.0,"fixed1_otc":0.7077776666666666,"rtnn_miss":0.214815,"full_miss":1.0,"fixed1_miss":0.21555566666666667,"rtnn_compute":0.166667},
+      "2":{"rtnn_otc":0.8885186666666667,"full_otc":0.218148,"fixed1_otc":0.9125923333333333,"rtnn_miss":0.06518533333333333,"full_miss":0.7651853333333334,"fixed1_miss":0.0037036666666666667,"rtnn_compute":0.211111},
+      "3":{"rtnn_otc":0.9344446666666666,"full_otc":0.29037033333333334,"fixed1_otc":0.9059263333333334,"rtnn_miss":0.014815,"full_miss":0.6896296666666667,"fixed1_miss":0.0018516666666666666,"rtnn_compute":0.219074},
+      "4":{"rtnn_otc":0.932963,"full_otc":0.16555566666666668,"fixed1_otc":0.912222,"rtnn_miss":0.017037,"full_miss":0.8225926666666666,"fixed1_miss":0.001111,"rtnn_compute":0.223704},
+      "5":{"rtnn_otc":0.9385186666666666,"full_otc":0.5914813333333333,"fixed1_otc":0.9070373333333334,"rtnn_miss":0.010370333333333334,"full_miss":0.368889,"fixed1_miss":0.0018516666666666666,"rtnn_compute":0.22537}
+    },
+    "interpretation":"diagnostic only; empirical P99 admission is not a hard-real-time proof"
+  },
+  "goal_decision": {
+    "same_model_real_data_to_freestanding":"PASS",
+    "same_model_deadline_contract":"PASS",
+    "concrete_hard_timing_certification":"UNCERTAIN",
+    "overall":"PASS through integrated demonstrator; hard-real-time certification remains externally blocked"
+  }
+}
