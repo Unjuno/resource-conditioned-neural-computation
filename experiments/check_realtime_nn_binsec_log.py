@@ -14,6 +14,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--log', required=True)
     ap.add_argument('--class-id', type=int, required=True)
+    ap.add_argument('--mode', choices=['control', 'full'], default='control')
     ap.add_argument('--out', required=True)
     args = ap.parse_args()
     text = Path(args.log).read_text(errors='replace')
@@ -25,21 +26,37 @@ def main():
     memory_leaks = sorted(set(re.findall(r"Instruction\s+(0x[0-9a-fA-F]+)\s+has memory access leak", text)))
     incomplete = 'Exploration is incomplete' in text
 
-    # Class 0 never executes an optional block and should have neither
-    # control-flow nor LUT-address dependence. Classes >=1 are expected to
-    # retain data-dependent exp/GELU LUT addresses, while control flow must
-    # remain independent of neural input.
-    expected_memory_leak = args.class_id >= 1
-    decision = (
-        status is not None
+    control_ok = (
+        status == 'secure'
         and not incomplete
         and cf is not None and cf[0] == cf[1]
         and not control_leaks
-        and mem is not None
-        and ((mem[0] < mem[1] and bool(memory_leaks)) if expected_memory_leak else (mem[0] == mem[1] and not memory_leaks))
     )
+
+    if args.mode == 'control':
+        decision = control_ok and mem is None
+        expected_memory_leak = None
+    else:
+        expected_memory_leak = args.class_id >= 1
+        memory_ok = mem is not None and (
+            (mem[0] < mem[1] and bool(memory_leaks))
+            if expected_memory_leak
+            else (mem[0] == mem[1] and not memory_leaks)
+        )
+        # Generic full constant-time status may be insecure when the expected
+        # LUT memory-address dependence is found. Control flow is judged
+        # independently from that target-specific memory boundary.
+        decision = (
+            not incomplete
+            and cf is not None and cf[0] == cf[1]
+            and not control_leaks
+            and memory_ok
+            and status in ('secure', 'insecure')
+        )
+
     out = {
         'class': args.class_id,
+        'mode': args.mode,
         'decision': 'PASS_WITH_SCOPE' if decision else 'FAIL',
         'binsec_program_status': status,
         'exploration_incomplete': incomplete,
@@ -49,8 +66,9 @@ def main():
         'memory_access_leak_sites': memory_leaks,
         'expected_memory_address_dependence': expected_memory_leak,
         'interpretation': (
-            'Independent BINSEC cross-check: fixed-class neural input must not alter control flow. '
-            'Input-dependent LUT addresses are expected for nonzero classes and are target-timing benign only under the pinned deterministic RAM model.'
+            'Independent BINSEC cross-check of the exact RTL-tested RV32 artifact. '
+            'The all-class production audit checks neural-input independence of fixed-class control flow only. '
+            'Known exp/GELU LUT address dependence remains a separate memory-model assumption.'
         )
     }
     Path(args.out).write_text(json.dumps(out, indent=2) + '\n')
