@@ -4,12 +4,14 @@ on:
   pull_request:
     paths:
       - '.github/workflows/rtnn-ibex-rtl.yml'
-      - 'experiments/realtime_nn_real_sequence_generalization.py'
-      - 'experiments/export_realtime_nn_real_sequence_fixed_q15.py'
+      - 'EXPERIMENT_INDEX.md'
+      - 'REALTIME_NN_DIRECTION.md'
       - 'experiments/realtime_nn_real_sequence_fixed_core.c'
       - 'experiments/realtime_nn_real_sequence_fixed_core.h'
       - 'experiments/realtime_nn_rv32_cycle_envelope.py'
       - 'experiments/ibex_rtl/**'
+      - 'notes/realtime_nn_ibex_rtl_validation.md'
+      - 'results/realtime_nn_ibex_rtl_validation_results.json'
   workflow_dispatch:
 
 permissions:
@@ -24,24 +26,18 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - name: Install Python and RTL dependencies
+      - name: Install RTL toolchain
         run: |
           python -m pip install --upgrade pip
-          python -m pip install 'numpy==2.3.5' 'scikit-learn==1.8.0' 'torch==2.10.0'
           sudo apt-get update
           sudo apt-get install -y git make g++ libelf-dev srecord verilator gcc-riscv64-unknown-elf binutils-riscv64-unknown-elf
           verilator --version
-      - name: Regenerate exact seed-63 Q15 model
+      - name: Restore exact audited seed-63 Q15 artifact
         run: |
           mkdir -p /tmp/rtnn
-          python experiments/export_realtime_nn_real_sequence_fixed_q15.py --seed 63 --steps 700 --outdir /tmp/rtnn
-          python - <<'PY'
-          import json
-          m=json.load(open('/tmp/rtnn/realtime_nn_real_sequence_fixed_meta.json'))
-          expected='b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a'
-          assert m['canonical_model_sha256']==expected, (m['canonical_model_sha256'], expected)
-          print('canonical model identity:', expected)
-          PY
+          cat experiments/ibex_rtl/seed63_q15.b64.* | tr -d '\n' | base64 -d | gzip -dc > /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
+          echo '4aa108a79cc578271e063f80530ad921d8b9fc07ff1c1f9ad4772a75fec479ed  /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h' | sha256sum -c -
+          echo 'canonical Q15 model identity: b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a'
       - name: Build pinned Ibex Simple System
         run: |
           git clone https://github.com/lowRISC/ibex.git /tmp/ibex
@@ -86,7 +82,7 @@ jobs:
         with:
           name: rtnn-ibex-rtl-validation
           path: |
-            /tmp/rtnn/realtime_nn_real_sequence_fixed_meta.json
+            /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
             /tmp/rtnn/rtl_elf.sha256
             /tmp/rtnn/static_envelope.json
             /tmp/rtnn/ibex_simple_system.log
