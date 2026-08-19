@@ -1,0 +1,94 @@
+name: RTNN Ibex RTL timing validation
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/rtnn-ibex-rtl.yml'
+      - 'experiments/realtime_nn_real_sequence_generalization.py'
+      - 'experiments/export_realtime_nn_real_sequence_fixed_q15.py'
+      - 'experiments/realtime_nn_real_sequence_fixed_core.c'
+      - 'experiments/realtime_nn_real_sequence_fixed_core.h'
+      - 'experiments/realtime_nn_rv32_cycle_envelope.py'
+      - 'experiments/ibex_rtl/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ibex-rtl:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install Python and RTL dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'numpy==2.3.5' 'scikit-learn==1.8.0' 'torch==2.10.0'
+          sudo apt-get update
+          sudo apt-get install -y git make g++ libelf-dev srecord verilator gcc-riscv64-unknown-elf binutils-riscv64-unknown-elf
+          verilator --version
+      - name: Regenerate exact seed-63 Q15 model
+        run: |
+          mkdir -p /tmp/rtnn
+          python experiments/export_realtime_nn_real_sequence_fixed_q15.py --seed 63 --steps 700 --outdir /tmp/rtnn
+          python - <<'PY'
+          import json
+          m=json.load(open('/tmp/rtnn/realtime_nn_real_sequence_fixed_meta.json'))
+          expected='b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a'
+          assert m['canonical_model_sha256']==expected, (m['canonical_model_sha256'], expected)
+          print('canonical model identity:', expected)
+          PY
+      - name: Build pinned Ibex Simple System
+        run: |
+          git clone https://github.com/lowRISC/ibex.git /tmp/ibex
+          git -C /tmp/ibex checkout 7b5df75a041affe56e8c235260f98a09b3319008
+          python -m pip install -r /tmp/ibex/python-requirements.txt
+          cd /tmp/ibex
+          OPTS="$(util/ibex_config.py small fusesoc_opts)"
+          OPTS="${OPTS/--RV32M=ibex_pkg::RV32MFast/--RV32M=ibex_pkg::RV32MSingleCycle}"
+          OPTS="${OPTS/--SecureIbex=0/--SecureIbex=1}"
+          echo "$OPTS"
+          grep -q -- '--WritebackStage=0' <<<"$OPTS"
+          grep -q -- '--ICache=0' <<<"$OPTS"
+          grep -q -- '--RV32M=ibex_pkg::RV32MSingleCycle' <<<"$OPTS"
+          grep -q -- '--SecureIbex=1' <<<"$OPTS"
+          fusesoc --cores-root=. run --target=sim --setup --build lowrisc:ibex:ibex_simple_system $OPTS
+      - name: Build exact RTNN bare-metal certification ELF
+        run: |
+          CFLAGS='-march=rv32im -mabi=ilp32 -O2 -ffreestanding -fno-builtin -fno-stack-protector -fno-unwind-tables -fno-asynchronous-unwind-tables -mno-relax'
+          riscv64-unknown-elf-gcc $CFLAGS -I/tmp/rtnn -Iexperiments -c experiments/realtime_nn_real_sequence_fixed_core.c -o /tmp/rtnn/core.o
+          riscv64-unknown-elf-gcc $CFLAGS -Iexperiments -c experiments/ibex_rtl/rtnn_ibex_main.c -o /tmp/rtnn/main.o
+          riscv64-unknown-elf-gcc $CFLAGS -c experiments/ibex_rtl/rtnn_ibex_start.S -o /tmp/rtnn/start.o
+          riscv64-unknown-elf-gcc -nostdlib -nostartfiles -march=rv32im -mabi=ilp32 -Wl,--no-relax -T experiments/ibex_rtl/rtnn_ibex_link.ld /tmp/rtnn/start.o /tmp/rtnn/core.o /tmp/rtnn/main.o -o /tmp/rtnn/rtnn_ibex.elf
+          riscv64-unknown-elf-size /tmp/rtnn/rtnn_ibex.elf
+          test -z "$(riscv64-unknown-elf-nm -u /tmp/rtnn/rtnn_ibex.elf)"
+          test -z "$(riscv64-unknown-elf-objdump -d /tmp/rtnn/core.o | grep -E '\b(div|divu|rem|remu|flw|fsw|fadd|fmul|fdiv)\b' || true)"
+          sha256sum /tmp/rtnn/rtnn_ibex.elf | tee /tmp/rtnn/rtl_elf.sha256
+      - name: Compute static envelope for exact RTL ELF
+        run: |
+          python experiments/ibex_rtl/realtime_nn_ibex_rtl_cycle_envelope.py /tmp/rtnn/rtnn_ibex.elf --out /tmp/rtnn/static_envelope.json
+      - name: Run RTNN on pinned Ibex RTL
+        run: |
+          cd /tmp/ibex
+          ./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system --meminit=ram,/tmp/rtnn/rtnn_ibex.elf
+          cp ibex_simple_system.log /tmp/rtnn/ibex_simple_system.log
+          cp ibex_simple_system_pcount.csv /tmp/rtnn/ibex_simple_system_pcount.csv || true
+          cat /tmp/rtnn/ibex_simple_system.log
+      - name: Compare RTL cycles with exact static envelope
+        run: |
+          python experiments/ibex_rtl/realtime_nn_ibex_rtl_parse.py --log /tmp/rtnn/ibex_simple_system.log --static /tmp/rtnn/static_envelope.json --out /tmp/rtnn/rtl_validation.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rtnn-ibex-rtl-validation
+          path: |
+            /tmp/rtnn/realtime_nn_real_sequence_fixed_meta.json
+            /tmp/rtnn/rtl_elf.sha256
+            /tmp/rtnn/static_envelope.json
+            /tmp/rtnn/ibex_simple_system.log
+            /tmp/rtnn/ibex_simple_system_pcount.csv
+            /tmp/rtnn/rtl_validation.json
