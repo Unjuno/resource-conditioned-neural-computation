@@ -57,7 +57,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y verilator libelf-dev srecord gcc-riscv64-unknown-elf binutils-riscv64-unknown-elf g++ make
-          python -m pip install fusesoc
+          python -m pip install fusesoc==2.4.3 packaging
           verilator --version
           fusesoc --version
           riscv64-unknown-elf-gcc --version | head -1
@@ -75,7 +75,7 @@ jobs:
         run: |
           riscv64-unknown-elf-gcc -O2 -std=c11 -march=rv32im_zicsr -mabi=ilp32 \
             -ffreestanding -fno-builtin -fno-stack-protector -ffunction-sections -fdata-sections \
-            -mno-relax -nostdlib -Wl,--no-relax -Wl,--gc-sections \
+            -msmall-data-limit=0 -mno-relax -nostdlib -Wl,--no-relax -Wl,--gc-sections \
             -Wl,-T,experiments/realtime_nn_ibex_simple_system.ld \
             -Iexperiments -I"$RUNNER_TEMP/rtnn" \
             experiments/realtime_nn_ibex_start.S \
