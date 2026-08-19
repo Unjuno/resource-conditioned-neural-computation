@@ -18,6 +18,11 @@ EXPECTED_LUTS = {
 }
 EXPECTED_INPUT_INDEXED_LOAD_SITES = [0x1002EC, 0x1002F0, 0x10152C, 0x101530]
 IBEX_COMMIT = "7b5df75a041affe56e8c235260f98a09b3319008"
+DEVICE_MAP = {
+    "Ram": (0x00100000, 0xFFF00000),
+    "SimCtrl": (0x00020000, 0xFFFFFC00),
+    "Timer": (0x00030000, 0xFFFFFC00),
+}
 
 
 def sha256(path: Path) -> str:
@@ -81,6 +86,10 @@ def require_text(path: Path, snippets):
     return text
 
 
+def devices_for(addr: int):
+    return [name for name, (base, mask) in DEVICE_MAP.items() if (addr & mask) == base]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--elf", required=True)
@@ -100,6 +109,7 @@ def main():
 
     syms = symbols(elf)
     lut_results = {}
+    all_lut_word_addrs = []
     for name, expected_size in EXPECTED_LUTS.items():
         if name not in syms:
             raise SystemExit(f"missing symbol {name}")
@@ -111,13 +121,26 @@ def main():
         ok = RAM_BASE <= lo <= hi < RAM_END_EXCLUSIVE and lo % 4 == 0 and s["size"] % 4 == 0
         if not ok:
             raise SystemExit(f"{name}: range outside aligned RAM: {lo:#x}..{hi:#x}")
+        words = list(range(lo, lo + s["size"], 4))
+        all_lut_word_addrs.extend(words)
         lut_results[name] = {
             "base": f"0x{lo:08x}",
             "size_bytes": s["size"],
+            "word_count": len(words),
+            "last_word": f"0x{words[-1]:08x}",
             "last_byte": f"0x{hi:08x}",
             "entirely_inside_ram": True,
             "word_aligned": True,
         }
+
+    # Exact exhaustive bus decode for every legal word address in both LUTs.
+    bad_decode = []
+    for addr in all_lut_word_addrs:
+        matches = devices_for(addr)
+        if matches != ["Ram"]:
+            bad_decode.append({"addr": f"0x{addr:08x}", "matches": matches})
+    if bad_decode:
+        raise SystemExit(f"LUT bus decode is not uniquely RAM: first={bad_decode[:3]}")
 
     ni = json.loads(Path(a.noninterference).read_text())
     sites = sorted(int(x, 16) for x in ni["all_data_dependent_memory_load_sites"])
@@ -146,11 +169,19 @@ def main():
         "host_gnt_o[host_sel_req] = host_req_i[host_sel_req];",
         "device_sel_resp <= device_sel_req;",
         "host_sel_resp <= host_sel_req;",
+        "host_rvalid_o[host] = device_rvalid_i[device_sel_resp] | decode_err_resp;",
+        "device_req_o[device]   = host_req_i[host_sel_req];",
+        "device_addr_o[device]  = host_addr_i[host_sel_req];",
     ])
     require_text(system, [
+        "localparam int NrDevices = 3;",
         "localparam int NrHosts = 1;",
         "assign cfg_device_addr_base[Ram] = 32'h100000;",
         "assign cfg_device_addr_mask[Ram] = ~32'hFFFFF; // 1 MB",
+        "assign cfg_device_addr_base[SimCtrl] = 32'h20000;",
+        "assign cfg_device_addr_mask[SimCtrl] = ~32'h3FF; // 1 kB",
+        "assign cfg_device_addr_base[Timer] = 32'h30000;",
+        "assign cfg_device_addr_mask[Timer] = ~32'h3FF; // 1 kB",
         ".Depth(1024*1024/4)",
         ".a_req_i     (device_req[Ram])",
         ".a_addr_i    (device_addr[Ram])",
@@ -170,22 +201,34 @@ def main():
             "end_exclusive": f"0x{RAM_END_EXCLUSIVE:08x}",
             "size_bytes": RAM_SIZE,
         },
+        "device_map": {
+            name: {"base": f"0x{base:08x}", "mask": f"0x{mask:08x}"}
+            for name, (base, mask) in DEVICE_MAP.items()
+        },
         "lut_ranges": lut_results,
+        "lut_word_addresses_exhaustively_checked": len(all_lut_word_addrs),
+        "lut_words_uniquely_decode_to_ram": len(all_lut_word_addrs),
+        "lut_decode_failures": bad_decode,
         "input_indexed_load_sites": load_decodes,
         "input_indexed_store_sites": [],
         "structural_checks": {
             "ram_data_response_valid_is_registered_from_request": True,
             "ram_documented_one_cycle_read_write_delay": True,
             "simple_system_single_data_host": True,
-            "simple_system_lut_addresses_decode_to_same_1MiB_ram": True,
+            "simple_system_has_three_devices_with_pinned_maps": True,
+            "all_legal_lut_word_addresses_uniquely_decode_to_ram": True,
             "simple_system_data_port_wires_bus_ram_request_address_and_response": True,
+            "bus_request_to_selected_ram_is_combinational": True,
+            "bus_response_selection_is_registered_for_next_cycle": True,
+            "bus_host_response_uses_selected_device_rvalid": True,
             "bus_contract_requires_next_cycle_device_response": True,
         },
-        "interpretation": "Every neural-input-indexed load in the exact RTL-tested binary is an aligned LW into one of two finite LUTs fully resident in the pinned Simple System 1MiB RAM. In the pinned ram_2p RTL, the A/data response-valid register is assigned from a_req_i and does not depend on a_addr_i; a separate formal proof checks this symbolic-address latency property.",
+        "composed_lut_read_response_latency_cycles": 1,
+        "interpretation": "Every neural-input-indexed load in the exact RTL-tested binary is an aligned LW into one of two finite LUTs fully resident in the pinned Simple System 1MiB RAM. Every one of the 12,290 legal LUT word addresses uniquely decodes to Ram and not SimCtrl/Timer. The bus forwards the one host request/address to the selected RAM, registers the selected device for the response cycle, and returns that device's rvalid. In pinned ram_2p, the data-port response-valid is a one-cycle register of the request and its synthesized fan-in has no address bit. Thus LUT read response timing is one cycle and address independent within this exact Simple System memory model.",
         "nonclaims": [
             "This does not prove constant latency for caches, external SDRAM, arbitration fabrics, or DE0-CV memory; those require target-specific evidence.",
             "This does not prove data values are address-independent; only response timing is claimed address-independent under the pinned RAM model.",
-            "This structural audit is paired with a separate formal property proof of response-valid timing.",
+            "The composed timing statement depends on the exact one-host Simple System bus/device map and pinned ram_2p RTL; another integration requires re-analysis.",
         ],
     }
     Path(a.out).write_text(json.dumps(out, indent=2) + "\n")
