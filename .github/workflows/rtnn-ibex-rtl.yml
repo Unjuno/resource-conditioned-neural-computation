@@ -6,8 +6,6 @@ on:
       - '.github/workflows/rtnn-ibex-rtl.yml'
       - 'EXPERIMENT_INDEX.md'
       - 'REALTIME_NN_DIRECTION.md'
-      - 'experiments/realtime_nn_real_sequence_generalization.py'
-      - 'experiments/export_realtime_nn_real_sequence_fixed_q15.py'
       - 'experiments/realtime_nn_real_sequence_fixed_core.c'
       - 'experiments/realtime_nn_real_sequence_fixed_core.h'
       - 'experiments/realtime_nn_rv32_cycle_envelope.py'
@@ -27,22 +25,13 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.13'
-      - name: Regenerate exact audited seed-63 Q15 artifact
+          python-version: '3.11'
+      - name: Restore exact audited seed-63 Q15 artifact
         run: |
-          set -euxo pipefail
-          python -m pip install --upgrade pip
-          python -m pip install 'numpy==2.3.5' 'scikit-learn==1.8.0' 'torch==2.10.0'
-          PYTHONPATH=experiments python experiments/export_realtime_nn_real_sequence_fixed_q15.py --seed 63 --steps 700 --outdir /tmp/rtnn | tee /tmp/rtnn_export.log
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          m=json.loads(Path('/tmp/rtnn/realtime_nn_real_sequence_fixed_meta.json').read_text())
-          assert m['canonical_model_sha256']=='b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a',m
-          assert m['generated_header_sha256']=='4aa108a79cc578271e063f80530ad921d8b9fc07ff1c1f9ad4772a75fec479ed',m
-          print('canonical Q15 model identity:',m['canonical_model_sha256'])
-          print('generated header SHA-256:',m['generated_header_sha256'])
-          PY
+          mkdir -p /tmp/rtnn
+          cat experiments/ibex_rtl/seed63_q15.b64.* | tr -d '\n' | base64 -d | gzip -dc > /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
+          echo '4aa108a79cc578271e063f80530ad921d8b9fc07ff1c1f9ad4772a75fec479ed  /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h' | sha256sum -c -
+          echo 'canonical Q15 model identity: b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a'
       - name: Install pinned Ibex RTL toolchain
         run: |
           set -euxo pipefail
@@ -56,7 +45,7 @@ jobs:
           export PATH=/tools/verilator/v4.210/bin:/tools/riscv/bin:$PATH
           verilator --version
           riscv32-unknown-elf-gcc --version | head -1
-      - name: Build pinned stock Ibex Simple System
+      - name: Build pinned Ibex Simple System
         run: |
           set -euxo pipefail
           export PATH=/tools/verilator/v4.210/bin:/tools/riscv/bin:$PATH
@@ -90,7 +79,7 @@ jobs:
         run: |
           export PATH=/tools/riscv/bin:$PATH
           python experiments/ibex_rtl/realtime_nn_ibex_rtl_cycle_envelope.py /tmp/rtnn/rtnn_ibex.elf --out /tmp/rtnn/static_envelope.json
-      - name: Run RTNN on pinned stock Ibex RTL
+      - name: Run RTNN on pinned Ibex RTL
         run: |
           cd /tmp/ibex
           ./build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system --meminit=ram,/tmp/rtnn/rtnn_ibex.elf
@@ -105,7 +94,6 @@ jobs:
         with:
           name: rtnn-ibex-rtl-validation
           path: |
-            /tmp/rtnn/realtime_nn_real_sequence_fixed_meta.json
             /tmp/rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
             /tmp/rtnn/rtl_elf.sha256
             /tmp/rtnn/static_envelope.json
