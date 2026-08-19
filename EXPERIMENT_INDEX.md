@@ -33,7 +33,7 @@ The preferred external control variable is a normalized continuous budget `b in 
 | **Controlled Linux timing as hard bound** | **FAIL** | same seed-63 adaptive binary, CPU affinity + RDTSCP: held-out observed maxima reach 12.50× the first calibration maximum; even `max×8` is exceeded for multiple classes |
 | **Q15 fixed-iteration same-model lowering** | **PASS** | seeds 60--64: 0/12,600 exit-prediction mismatches and 1/1,800 preferred-exit mismatches vs float; seed 63 integer C has 0/2,520 exit and 0/360 preferred mismatches; final Cortex-M4 object has no unresolved, floating-point, or divide instructions |
 | **Arithmetic RV32 timing model** | **FAIL / falsified by RTL** | the former `RTNN-IBEX-DIT-v1` instruction-category cycle formula underestimates actual pinned Ibex RTL in every full-work certification class; it is retained only as a negative result and must not drive admission |
-| **Pinned Ibex RTL timing binding** | **PASS pending final same-build repeat** | pinned official Ibex Simple System: all 7 fixed classes × 3 held-out inputs have prediction mismatch 0 and exactly identical cycles per class; 21 admission+adaptive cases have prediction/execution mismatch 0 and unsafe admission 0; strengthening the harness shifted all fixed-class counts by exactly +1 cycle, proving build-specific timing identity |
+| **Pinned Ibex RTL timing binding** | **PASS / RTL measured** | pinned official Ibex Simple System: all 7 fixed classes × 3 held-out inputs have prediction mismatch 0 and exactly identical cycles per class; 21 admission+adaptive cases have prediction/execution mismatch 0, unsafe admission 0, and runtime-binding exceedance 0; exact hashes bind the measured table to the tested Q15 and machine image |
 | **Empirical RTOS-style same-model demo** | qualified / diagnostic | empirical P99 deadline admission changes physical compute and on-time-correct trade-offs; timing remains diagnostic rather than hard evidence |
 
 ## RTOS / analyzable implementation bridge
@@ -59,20 +59,19 @@ The representative integer core has no unresolved arithmetic helpers, floating-p
 
 Ordinary Linux percentile/max timing remains falsified as a hard-admission contract. The former custom arithmetic processor model is also now falsified by actual pinned Ibex RTL. The stronger route is an exact-build RTL binding on Ibex commit `7b5df75a041affe56e8c235260f98a09b3319008`, `SecureIbex=1`, `RV32MSingleCycle`, no I-cache/branch predictor, and deterministic one-cycle Simple System RAM with zero additional instruction delay.
 
-The strengthened derivation run gives fixed-class cycles 29,620 / 615,569 / 1,201,521 / 1,787,473 / 2,373,425 / 2,959,377 / 2,959,381, with zero cycle range across all three held-out inputs for every class. The admission+adaptive maximum-work binding is 29,843 / 657,454 / 1,285,058 / 1,912,662 / 2,540,266 / 3,167,870 / 3,167,870 cycles.
+The strengthened RTL run gives fixed-class cycles 29,620 / 615,569 / 1,201,521 / 1,787,473 / 2,373,425 / 2,959,377 / 2,959,381, with zero cycle range across all three held-out inputs for every class. The admission+adaptive maximum-work binding is 29,843 / 657,454 / 1,285,058 / 1,912,662 / 2,540,266 / 3,167,870 / 3,167,870 cycles.
 
-This is substantially stronger than a custom instruction-count model, but it remains an **RTL-simulation binding for one exact configuration/build**, not an FPGA/ASIC/silicon production WCET theorem.
+This is substantially stronger than a custom instruction-count model, but it remains an **RTL-simulation measured binding for one exact configuration/build**, not an FPGA/ASIC/silicon production WCET theorem and not a formal all-input timing proof.
 
 ## Current research-goal status
 
 - **Goal A — physical budget-conditioned computation:** PASS.
 - **Goal B — generalizable adaptive computation:** PASS on independent held-out real sequence samples; chronological temporal nonstationarity remains unresolved.
-- **Goal C — hard-real-time RTNN:** same-model lowering, fixed-point time-predictable execution, maximum-work contract, continuous budget, deadline admission, and pinned RTL timing validation are now demonstrated. The remaining boundary for a production hard-real-time claim is physical FPGA/ASIC/silicon or another accepted target-specific WCET certification method.
+- **Goal C — hard-real-time RTNN:** same-model lowering, fixed-point time-predictable execution, maximum-work contract, continuous budget, deadline admission, and pinned RTL timing validation are demonstrated. The remaining boundary for a production hard-real-time claim is physical FPGA/ASIC/silicon or another accepted target-specific WCET certification method.
 
 ## Next falsification priorities
 
-1. Complete the final same-build repeat of the committed RTL-derived binding and freeze its workflow/model/header/ELF/binary evidence.
-2. For a production deployment claim, validate the same exact artifact on FPGA/ASIC/silicon or with an accepted WCET/static-timing methodology; do not generalize the RTL table to other implementations.
-3. Extend integer/timing deployment across additional seeds only if cross-seed compiled deployment robustness is required.
-4. Treat chronological/nonstationary temporal generalization as a separate research problem.
-5. Larger language-model-scale work remains downstream of the target-certification question.
+1. For a production deployment claim, validate the same exact artifact on FPGA/ASIC/silicon or with an accepted WCET/static-timing methodology; do not generalize the RTL table to other implementations.
+2. Extend integer/timing deployment across additional seeds only if cross-seed compiled deployment robustness is required.
+3. Treat chronological/nonstationary temporal generalization as a separate research problem.
+4. Larger language-model-scale work remains downstream of the production target-certification question.
