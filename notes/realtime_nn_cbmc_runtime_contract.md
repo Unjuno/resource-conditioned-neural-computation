@@ -110,3 +110,5 @@ Remaining uncertainty is concentrated above and below the proved software contra
 5. FPGA/ASIC/silicon WCET remains outside this software-only proof.
 
 The appropriate next software-only target is therefore a stronger mechanically checkable statement about the exact compiled RV32 fixed-class control flow, rather than more Linux timing samples or more neural router tuning.
+
+The PR workflow intentionally includes this note/result path so the final documented branch head is re-verified before merge; documentation synchronization is not accepted as a substitute for a final-head proof run.
