@@ -1,0 +1,114 @@
+name: RTNN Ibex RTL validation
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/rtnn_ibex_rtl.yml'
+      - 'certification/ibex/**'
+      - 'experiments/realtime_nn_real_sequence_fixed_core.c'
+      - 'experiments/realtime_nn_real_sequence_fixed_core.h'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ibex-rtl:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install RTL and compiler dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y verilator libelf-dev srecord clang lld llvm python3-venv make g++ git
+          python3 -m venv .venv
+          . .venv/bin/activate
+          python -m pip install --upgrade pip
+          python -m pip install fusesoc
+
+      - name: Pin and patch Ibex RTL
+        run: |
+          git clone https://github.com/lowRISC/ibex.git ibex
+          git -C ibex checkout 7b5df75a041affe56e8c235260f98a09b3319008
+          . .venv/bin/activate
+          python -m pip install -r ibex/python-requirements.txt
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib
+          p = Path('ibex/rtl/ibex_core.sv')
+          s = p.read_text()
+          old = 'localparam bit          DataIndTiming     = SecureIbex;'
+          new = "localparam bit          DataIndTiming     = 1'b1; // RTNN-IBEX-DIT-v1 validation patch"
+          assert s.count(old) == 1, s.count(old)
+          p.write_text(s.replace(old, new))
+          print('patched_ibex_core_sha256', hashlib.sha256(p.read_bytes()).hexdigest())
+          PY
+          grep -n 'DataIndTiming' ibex/rtl/ibex_core.sv | head
+
+      - name: Build pinned Ibex Verilator simple system
+        run: |
+          . .venv/bin/activate
+          cd ibex
+          fusesoc --cores-root=. run --target=sim --setup --build \
+            lowrisc:ibex:ibex_simple_system \
+            --RV32M=ibex_pkg::RV32MSingleCycle \
+            --RV32B=ibex_pkg::RV32BNone \
+            --RV32ZC=ibex_pkg::RV32ZCNone \
+            --RegFile=ibex_pkg::RegFileFF \
+            --ICache=0 \
+            --BranchTargetALU=0 \
+            --WritebackStage=0 \
+            --SecureIbex=0 \
+            --BranchPredictor=0 \
+            --MHPMCounterNum=10 \
+            --MHPMCounterWidth=40
+
+      - name: Build exact Q15 RTNN bare-metal ELF
+        run: |
+          mkdir -p build/ibex-rtnn
+          gzip -dc certification/ibex/realtime_nn_real_sequence_fixed_weights_generated.h.gz > build/ibex-rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
+          COMMON='--target=riscv32-unknown-elf -march=rv32im_zicsr -mabi=ilp32 -mno-relax -O2 -ffreestanding -fno-builtin -fno-stack-protector -fno-pic -nostdlib'
+          clang $COMMON -Ibuild/ibex-rtnn -Iexperiments -c experiments/realtime_nn_real_sequence_fixed_core.c -o build/ibex-rtnn/core.o
+          clang $COMMON -Icertification/ibex -Iexperiments -c certification/ibex/ibex_cycle_harness.c -o build/ibex-rtnn/harness.o
+          clang $COMMON -c certification/ibex/ibex_crt0.S -o build/ibex-rtnn/crt0.o
+          ld.lld -m elf32lriscv --no-relax -T certification/ibex/ibex_link.ld \
+            build/ibex-rtnn/crt0.o build/ibex-rtnn/core.o build/ibex-rtnn/harness.o \
+            -o build/ibex-rtnn/rtnn_ibex_cycle.elf
+          echo 'Undefined symbols:'
+          llvm-nm -u build/ibex-rtnn/rtnn_ibex_cycle.elf
+          sha256sum build/ibex-rtnn/rtnn_ibex_cycle.elf | tee build/ibex-rtnn/elf.sha256
+          llvm-objdump -h build/ibex-rtnn/rtnn_ibex_cycle.elf
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('build/ibex-rtnn/rtnn_ibex_cycle.elf')
+          assert p.stat().st_size < 192*1024, p.stat().st_size
+          print('ELF bytes', p.stat().st_size)
+          PY
+
+      - name: Run exact RTNN build on Ibex RTL
+        run: |
+          SIM=ibex/build/lowrisc_ibex_ibex_simple_system_0/sim-verilator/Vibex_simple_system
+          test -x "$SIM"
+          "$SIM" --meminit=ram,"$GITHUB_WORKSPACE/build/ibex-rtnn/rtnn_ibex_cycle.elf" | tee build/ibex-rtnn/simulator_stdout.log
+          cat ibex_simple_system.log 2>/dev/null || true
+          cat ibex/ibex_simple_system.log 2>/dev/null || true
+          LOG=ibex_simple_system.log
+          test -f "$LOG" || LOG=ibex/ibex_simple_system.log
+          cp "$LOG" build/ibex-rtnn/ibex_simple_system.log
+
+      - name: Compare RTL cycles with conditional static envelope
+        run: |
+          cd build/ibex-rtnn
+          python "$GITHUB_WORKSPACE/certification/ibex/parse_ibex_rtl_cycles.py" ibex_simple_system.log
+          mv ibex_rtl_validation.json "$GITHUB_WORKSPACE/ibex_rtl_validation.json"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rtnn-ibex-rtl-validation
+          path: |
+            ibex_rtl_validation.json
+            build/ibex-rtnn/ibex_simple_system.log
+            build/ibex-rtnn/simulator_stdout.log
+            build/ibex-rtnn/elf.sha256
