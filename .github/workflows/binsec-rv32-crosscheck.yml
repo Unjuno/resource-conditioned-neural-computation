@@ -16,14 +16,17 @@ concurrency:
   group: binsec-rv32-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
+env:
+  BINSEC_IMAGE: binsec/binsec@sha256:2a51e455f055874d71cbf030a778e8be19455876bcd57c1845c163fed6fc482f
+
 jobs:
-  smoke:
+  fixed-class-control-flow:
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        class_id: [0, 1]
+        class_id: [0, 1, 2, 3, 4, 5, 6]
     steps:
       - uses: actions/checkout@v4
 
@@ -42,44 +45,47 @@ jobs:
           echo '234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742  '"$RUNNER_TEMP/rtnn/artifact/rtnn_ibex_rtl.elf" | sha256sum -c -
           echo '266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1  '"$RUNNER_TEMP/rtnn/artifact/rtnn_ibex_rtl.bin" | sha256sum -c -
 
-      - name: Pull and identify BINSEC
+      - name: Pull and identify pinned BINSEC
         run: |
-          docker pull binsec/binsec:latest
-          docker image inspect binsec/binsec:latest --format '{{json .RepoDigests}}' | tee "$RUNNER_TEMP/binsec_image_digest.txt"
-          docker run --rm binsec/binsec:latest binsec --version | tee "$RUNNER_TEMP/binsec_version.txt"
+          set -o pipefail
+          docker pull "$BINSEC_IMAGE"
+          docker image inspect "$BINSEC_IMAGE" --format '{{json .RepoDigests}}' | tee "$RUNNER_TEMP/binsec_image_digest.txt"
+          docker run --rm "$BINSEC_IMAGE" binsec -version | tee "$RUNNER_TEMP/binsec_version.txt"
 
       - name: Generate concrete class script
         run: |
           sed 's/__CLASS__/${{ matrix.class_id }}/g' experiments/binsec_rtnn_fixed_class.ini > "$RUNNER_TEMP/class.ini"
           cat "$RUNNER_TEMP/class.ini"
 
-      - name: Run BINSEC fixed-class check
+      - name: Run BINSEC control-flow-only fixed-class check
         run: |
           set -o pipefail
           docker run --rm \
             -v "$RUNNER_TEMP/rtnn/artifact:/rtnn:ro" \
             -v "$RUNNER_TEMP/class.ini:/work/class.ini:ro" \
-            binsec/binsec:latest \
+            "$BINSEC_IMAGE" \
             binsec -sse -checkct \
+              -checkct-features control-flow \
+              -checkct-no-cv -checkct-no-relse \
               -sse-script /work/class.ini \
-              -sse-depth 700000 \
-              -sse-timeout 900 \
-              -checkct-stats-file /tmp/checkct.toml \
+              -sse-depth 3000000 \
+              -sse-timeout 600 \
               /rtnn/rtnn_ibex_rtl.elf \
             2>&1 | tee "$RUNNER_TEMP/binsec-class-${{ matrix.class_id }}.log"
 
-      - name: Check expected control/memory result
+      - name: Require complete secure control-flow exploration
         run: |
           python experiments/check_realtime_nn_binsec_log.py \
             --log "$RUNNER_TEMP/binsec-class-${{ matrix.class_id }}.log" \
             --class-id '${{ matrix.class_id }}' \
+            --mode control \
             --out "$RUNNER_TEMP/binsec-class-${{ matrix.class_id }}.json"
 
       - name: Upload evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: binsec-rv32-class-${{ matrix.class_id }}
+          name: binsec-rv32-control-class-${{ matrix.class_id }}
           retention-days: 30
           path: |
             ${{ runner.temp }}/binsec-class-${{ matrix.class_id }}.log
