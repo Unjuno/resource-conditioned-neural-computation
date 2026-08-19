@@ -4,6 +4,7 @@
     "external_budget": "continuous b in [0,1]",
     "quantization": "Q15 activations/weights, Q17 softmax probabilities",
     "representative_seed": 63,
+    "canonical_q15_model_sha256": "b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a",
     "certification_target_model": "RTNN-IBEX-DIT-v1",
     "target_model_assumptions": [
       "RV32IM Ibex-style core",
@@ -37,14 +38,12 @@
     "decision": "PASS"
   },
   "machine_code_audit": {
-    "cortex_m4_soft_float_object_sha256": "9ce1c87634daaea7d88828122792f12d460ca0ecbb65a12019d1014a2245a034",
-    "cortex_m4_object_bytes_text": 116358,
     "cortex_m4_undefined_external_symbols": 0,
     "cortex_m4_floating_or_divide_mnemonics": 0,
-    "rv32im_elf_sha256": "d198e287e992133cdd9a600b705b0e475eb24479f83733a4f7a6721770e07840",
-    "rv32im_combined_core_contract_object_sha256": "ba32acc8c478f9afb78663a396b3774ec0b4c7502448e5f66ab2829e44e05895",
+    "rv32im_load_image_sha256": "234b3ac1ee91ed80858c17b4d2cc7bcbf2899e9ee0a92eb4c1abab7a54d4386a",
     "rv32im_undefined_external_symbols": 0,
-    "rv32im_divide_or_fp_instructions": 0
+    "rv32im_divide_or_fp_instructions": 0,
+    "identity_note": "ELF/object hashes can include non-loaded metadata such as source file names; the deployed build identity therefore uses the stripped/loadable binary image hash rather than the raw ELF container hash."
   },
   "rv32_instruction_envelope": {
     "cycle_formula": "N_inst + N_cond_branch + N_jump + 2*N_load + N_store + N_mul_high + 4",
@@ -70,7 +69,7 @@
     "prediction_mismatches": 0,
     "cap_violations": 0,
     "partial_certification_fail_closed": true,
-    "wrong_manifest_rejected": true,
+    "wrong_model_rejected": true,
     "wrong_build_rejected": true,
     "decision": "PASS"
   },
