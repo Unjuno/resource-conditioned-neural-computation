@@ -4,7 +4,7 @@ This document states the **strongest claims currently supported by the repositor
 
 ## Strongest supported research statement
 
-> One fixed neural-network parameter set can accept a normalized runtime compute budget `b ∈ [0,1]`, lower that continuous interface fail-closed to finite maximum-work execution classes, choose less work when additional computation is not useful, physically skip inactive computation, and preserve the resulting execution contract through a same-model Q15 freestanding implementation. On one exact pinned Ibex RTL Simple System build, the finite classes have an exact measured cycle binding, and the software-side budget/deadline contract plus fixed-class control-flow properties have been independently checked with CBMC and BINSEC/custom binary analysis.
+> One fixed neural-network parameter set can accept a normalized runtime compute budget `b ∈ [0,1]`, lower that continuous interface fail-closed to finite maximum-work execution classes, choose less work when additional computation is not useful, physically skip inactive computation, and preserve the resulting execution contract through a same-model Q15 freestanding implementation. On one exact pinned Ibex RTL Simple System build, the finite classes have an exact measured cycle binding, while the finite/deployed source control contract and fixed-class compiled control-flow properties have been independently checked with CBMC and BINSEC/custom binary analysis.
 
 This is a strong **research-prototype Real-Time NN** statement. It is **not yet a production FPGA/ASIC/silicon WCET certificate**.
 
@@ -111,6 +111,30 @@ CBMC 6.10.0 checks the represented finite C/runtime contract over complete integ
 
 **Boundary:** CBMC proves the modeled C/runtime properties. It does not by itself prove compiler preservation, the complete neural machine code, processor pipeline timing, or physical-device WCET.
 
+### 7b. CBMC proof of the deployed neural-control bodies
+
+A complementary CBMC experiment mechanically extracts the exact source bodies of:
+
+- `rtnn_fixed_budget_ceiling_q16()`;
+- `rtnn_fixed_infer_budget()`;
+- `rtnn_fixed_certify_class()`
+
+from the deployed `realtime_nn_real_sequence_fixed_core.c`. The extraction records the deployed-core SHA and individual function-body SHAs.
+
+For this control proof, neural numerical kernels are intentionally abstracted: `entropy10()` is nondeterministic so **every possible continue/stop outcome** is covered, and `run_block()` is instrumented as the physical optional-block call.
+
+CBMC 6.10.0 proves:
+
+1. the actual deployed Q0.16 lowering body is in-range, monotone, fail-closed, and greatest-fit for all ordered `uint16_t` budgets;
+2. for all `uint16_t` budgets, all `uint8_t` deadline-class inputs, and all possible entropy stop sequences, the actual adaptive body executes optional blocks only in canonical order and never exceeds `min(budget ceiling, normalized deadline, policy max exit)`;
+3. reported `executed` equals the physical `run_block()` call count, and invalid deadline classes `>6` fail closed to zero optional blocks;
+4. the same cap/order remains true when the optional `executed` pointer is NULL;
+5. the actual fixed-class certification body executes exactly the normalized/policy-capped class count in canonical order for every `uint8_t` class input.
+
+The final documented head was re-proved by GitHub Actions workflow run `32222548911`; extraction and all four proof steps completed successfully.
+
+**Boundary:** this closes the source-model duplication gap for finite neural-control behavior, but neural arithmetic is abstracted and compiler preservation of the source-level control proof is not established by CBMC alone.
+
 ### 8. Pinned Ibex RTL measured timing binding
 
 The exact Q15 RV32 artifact was executed on pinned upstream Ibex commit:
@@ -210,9 +234,9 @@ The current RTL/BINSEC evidence records exact hashes. Actions artifacts are supp
 
 The strongest current timing statement is target-specific:
 
-> For the identified Q15 machine artifact on the identified pinned Ibex Simple System configuration, measured finite-class RTL cycle bindings exist; fixed-class neural input does not influence machine-code control flow according to two independent binary-level analyses; the remaining input-dependent LUT addresses are bounded and execute against deterministic address-independent RAM in that target model.
+> For the identified Q15 machine artifact on the identified pinned Ibex Simple System configuration, measured finite-class RTL cycle bindings exist; fixed-class neural input does not influence machine-code control flow according to two independent binary-level analyses; source-level deployed budget/adaptive/certification control has been proved against all finite inputs/early-stop outcomes; and the remaining input-dependent LUT addresses are bounded and execute against deterministic address-independent RAM in that target model.
 
-This still does **not** prove generic memory constant-time behavior or physical-device WCET.
+This still does **not** prove generic memory constant-time behavior, compiler preservation of every source proof property, or physical-device WCET.
 
 If the implementation moves to cache, SDRAM, another SRAM, bus arbitration, DMA, interrupts, FPGA fabric, another compiler, or another processor configuration, timing must be rebound and revalidated.
 
@@ -222,11 +246,12 @@ If the implementation moves to cache, SDRAM, another SRAM, bus arbitration, DMA,
 2. The old arithmetic `RTNN-IBEX-DIT-v1` timing formula is falsified by actual RTL.
 3. Training seed/recipe alone is not bitwise certification identity.
 4. Generic relational full-memory constant-time analysis of the LUT-heavy class-1 path exceeded the supplied runner resources.
-5. Nominal MAC reduction does not guarantee wall-clock speedup on every backend.
-6. Forcing exact admitted work can reduce task quality.
-7. Concurrent end-to-end preferred-compute training did not match the stable post-trained frontier.
-8. Toy held-out horizon-value generalization failed.
-9. Chronological/nonstationary temporal generalization remains unresolved.
+5. CBMC proof of deployed source control does not by itself prove compiler preservation, the full neural machine code, processor RTL, or physical timing.
+6. Nominal MAC reduction does not guarantee wall-clock speedup on every backend.
+7. Forcing exact admitted work can reduce task quality.
+8. Concurrent end-to-end preferred-compute training did not match the stable post-trained frontier.
+9. Toy held-out horizon-value generalization failed.
+10. Chronological/nonstationary temporal generalization remains unresolved.
 
 ## Explicitly not claimed
 
@@ -239,16 +264,16 @@ If the implementation moves to cache, SDRAM, another SRAM, bus arbitration, DMA,
 7. Universal learned-policy superiority over fixed or analytic scheduling baselines.
 8. Unconstrained self-organized architecture discovery.
 9. Autoregressive LLM-scale real-time generalization.
-10. That measured RTL timing alone constitutes a formal all-input WCET proof.
+10. That measured RTL timing or source-level CBMC alone constitutes a formal all-input physical WCET proof.
 
 ## Remaining production-hard-real-time work
 
-The next evidence gap is no longer another router or neural loss experiment. It is the target timing boundary:
+The next evidence gap is no longer another router or neural loss experiment. It is the source/binary/memory/target timing boundary:
 
 1. bind/prove the four input-indexed LUT accesses to the selected deterministic memory implementation;
 2. retain the exact certification machine artifact durably;
-3. when physical validation is desired, map the same contract to the available DE0-CV using controlled on-chip memory and a fixed clock, then derive a **new FPGA-specific timing binding** rather than copying the Simple System cycle table;
-4. if a software-only production proof is required, add a stronger static/formal target-timing method that covers the processor/memory implementation itself.
+3. strengthen source↔compiled-binary/processor timing correspondence if a software-only production proof requires it;
+4. when physical validation is desired, map the same contract to the available DE0-CV using controlled on-chip memory and a fixed clock, then derive a **new FPGA-specific timing binding** rather than copying the Simple System cycle table.
 
 ## Direction lock
 
