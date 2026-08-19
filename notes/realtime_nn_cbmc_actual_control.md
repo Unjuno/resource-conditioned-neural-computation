@@ -100,3 +100,5 @@ This proof does not establish:
 5. FPGA/ASIC/silicon WCET.
 
 The remaining software-side weak link is therefore no longer the finite control logic. It is the **source/compiled-binary/processor-timing correspondence**. A stronger next step is to mechanically check the exact compiled RV32 control-flow properties or otherwise prove that compiler lowering preserves the relevant fixed-class noninterference structure.
+
+The workflow watches this note/result set so the final documented PR head is re-proved before merge; documentation synchronization alone is not treated as verification.
