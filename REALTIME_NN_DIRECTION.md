@@ -36,7 +36,7 @@ One fixed NN can physically change depth/width/expert/block execution under reso
 
 On held-out handwritten-digit row sequences, formal seeds 60--64 reach **93.56%** adaptive test accuracy at **20.23%** average physical compute, with 5/5 passing seeds and zero cap/count violations. A separate chronological weekly-CO2 task remains a negative boundary: temporal/nonstationary depth utility shifts between validation and later test periods.
 
-### Goal C — same-model integration PASS; pinned RTL + independent binary control-flow evidence + formal finite contract reached
+### Goal C — same-model integration PASS; pinned RTL + independent binary control-flow + formal deployed control reached
 
 The same real-data path now connects:
 
@@ -53,6 +53,7 @@ real held-out model
     -> exact-RV32 custom noninterference audit
     -> third-party BINSEC fixed-class control-flow cross-check
     -> CBMC finite runtime-contract proof
+    -> CBMC mechanically extracted deployed-control proof
     -> deadline admission
 ```
 
@@ -147,6 +148,27 @@ The five proof entry points all report `VERIFICATION SUCCESSFUL`:
 
 This is a formal result for the represented finite C/runtime contract. It does **not** prove the whole neural arithmetic, compiler preservation, Ibex pipeline, or physical device timing. Those layers retain their separate exact-binary, BINSEC, and RTL evidence.
 
+## CBMC proof of actual deployed control bodies
+
+A second CBMC experiment removes a remaining source-model duplication. A deterministic extractor reads `realtime_nn_real_sequence_fixed_core.c` and copies the exact function bodies for:
+
+- `rtnn_fixed_budget_ceiling_q16()`;
+- `rtnn_fixed_infer_budget()`;
+- `rtnn_fixed_certify_class()`.
+
+The extraction records the full deployed-core SHA and each function-body SHA. Neural numerical kernels are replaced only for this control proof: `entropy10()` is nondeterministic, while `run_block()` is instrumented as the physical optional-block call. Consequently, every possible early-stop decision sequence is included.
+
+CBMC proves:
+
+- the **actual deployed budget-lowering body** is monotone, fail-closed, in-range, and greatest-fit for all Q0.16 budgets;
+- for every Q0.16 budget, every `uint8_t` deadline-class input, and every possible entropy outcome, the **actual deployed adaptive body** executes optional blocks in canonical order and never exceeds `min(budget, deadline, policy max)`;
+- the returned `executed` value equals the physical `run_block()` count;
+- invalid deadline classes `>6` fail closed to zero optional blocks;
+- the same cap holds when the optional `executed` output pointer is NULL;
+- the **actual deployed certification body** calls exactly the normalized maximum-work number of optional blocks and preserves canonical order for every `uint8_t` class input.
+
+This removes the finite source-control modeling gap more strongly than a hand-copied proof model. Combined with the independent BINSEC result, the remaining software/target issue is no longer hidden branching or cap enforcement; it is chiefly the timing treatment of the four input-indexed LUT loads under the chosen memory implementation.
+
 ## Artifact identity policy
 
 The first RTL CI attempt exposed a reproducibility boundary: retraining seed 63 on a GitHub runner did not reproduce the earlier local Q15 SHA bit-for-bit. Therefore:
@@ -172,7 +194,7 @@ The research path demonstrates items 1--9 and strong target-specific/software ev
 10. target/build-specific timing upper bound;
 11. deadline admission and on-time-correct evidence.
 
-Pinned RTL measurement, two independent fixed-class machine-code control-flow audits, and CBMC verification of the finite software admission/cap contract substantially strengthen items 10--11 over Linux timing and the rejected arithmetic model. They are still **not** an FPGA/ASIC/silicon production WCET certificate or a complete formal proof of target memory/processor physical timing. A different physical implementation, memory system, interrupt/DMA policy, compiler, RTL revision, or processor configuration requires new timing evidence.
+Pinned RTL measurement, two independent fixed-class machine-code control-flow audits, CBMC verification of the finite admission contract, and CBMC proof of the deployed source control substantially strengthen items 10--11 over Linux timing and the rejected arithmetic model. They are still **not** an FPGA/ASIC/silicon production WCET certificate or a complete formal proof of target memory/processor physical timing. A different physical implementation, memory system, interrupt/DMA policy, compiler, RTL revision, or processor configuration requires new timing evidence.
 
 ## Current negative boundaries
 
@@ -183,7 +205,7 @@ Retain these as first-class results:
 - a training seed is not a bitwise certification artifact identity;
 - the custom taint interpreter is useful but is no longer the sole fixed-class control-flow evidence;
 - BINSEC generic full relational memory checking for class 1 exceeds the supplied runner resources; this is not a control-flow failure;
-- CBMC proof of the finite runtime contract does not by itself prove the compiler, full neural machine code, processor RTL, or physical timing;
+- CBMC proof of deployed source control does not by itself prove compiler equivalence, full neural arithmetic, processor RTL, or physical timing;
 - input-dependent LUT addresses are timing-benign only under the explicitly modeled deterministic memory behavior;
 - nominal MAC reduction does not guarantee wall-clock reduction on every backend;
 - forcing exact admitted work can reduce task quality;
@@ -210,7 +232,7 @@ Current work does **not** establish:
 - temporal distribution-shift robustness;
 - an LLM-scale real-time generalization.
 
-The current RTL timing binding, custom/BINSEC control-flow evidence, and CBMC runtime-contract proof are valid only within their explicitly stated artifact and model boundaries.
+The current RTL timing binding, custom/BINSEC control-flow evidence, and CBMC software/control proofs are valid only within their explicitly stated artifact and model boundaries.
 
 ## Direction lock
 
