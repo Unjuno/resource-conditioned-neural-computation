@@ -1,30 +1,36 @@
 # Claims and limits
 
-This document states the **strongest claims currently supported by the repository** and the boundaries that must remain explicit. Historical experiment-by-experiment detail is kept in `EXPERIMENT_INDEX.md` and the individual notes/results.
+This document states the **strongest claims currently supported by the repository** and the boundaries that must remain explicit. Historical experiment detail is retained in `EXPERIMENT_INDEX.md` and the individual notes/results.
 
 ## Strongest supported research statement
 
-> One fixed neural-network parameter set can accept a normalized runtime compute budget `b ∈ [0,1]`, lower that continuous interface fail-closed to finite maximum-work execution classes, choose less work when additional computation is not useful, physically skip inactive computation, and preserve the resulting execution contract through a same-model Q15 freestanding implementation. On one exact pinned Ibex RTL Simple System build, the finite classes have an exact measured cycle binding, while the finite/deployed source control contract and fixed-class compiled control-flow properties have been independently checked with CBMC and BINSEC/custom binary analysis.
+> One fixed neural-network parameter set can accept a normalized runtime compute budget `b ∈ [0,1]`, lower that continuous interface fail-closed to finite maximum-work execution classes, choose less work when additional computation is not useful, physically skip inactive computation, and preserve the execution contract through a same-model Q15 freestanding implementation. For one exact frozen RV32 artifact on one pinned Ibex Simple-System configuration, the repository has an exact-build measured RTL cycle binding, two independent compiled control-flow analyses, a target-specific deterministic LUT-memory timing argument, and CBMC proofs of the finite/deployed source control contract.
 
-This is a strong **research-prototype Real-Time NN** statement. It is **not yet a production FPGA/ASIC/silicon WCET certificate**.
+This supports a strong **research-prototype Real-Time NN** statement. It is **not yet a production FPGA/ASIC/silicon WCET certificate**.
 
-## Supported direct evidence
+## 1. Budget changes physical neural computation
 
-### 1. Budget changes physical neural computation
+One fixed NN physically changes optional depth/width/expert/block execution under resource conditions. Inactive operations are structurally skipped rather than merely zero-masked.
 
-Across the research chain, one fixed NN physically changes optional depth/width/expert/block execution under resource conditions. Inactive operations are structurally skipped rather than merely zero-masked. Finite execution classes provide a maximum-work boundary suitable for later timing binding.
-
-The preferred public resource interface is continuous:
+The public resource interface is continuous:
 
 \[
 b\in[0,1].
 \]
 
-The backend lowers `b` to the largest finite admissible class no greater than the resource grant. Budget is a **maximum permission**, not an obligation to consume exact work.
+An analyzable backend lowers `b` to the largest finite admissible class no greater than the grant. Budget is a **maximum permission**, not an obligation to consume exact work.
 
-### 2. Extra admitted compute need not be consumed
+Current finite normalized classes are:
 
-Sequence experiments falsify the stronger assumption that more forced computation must always improve quality. The deployed semantics therefore separate:
+\[
+q_j\in\{0,1/6,2/6,3/6,4/6,5/6,1\}.
+\]
+
+This is not a claim of continuously variable machine instruction count.
+
+## 2. Extra admitted compute need not be consumed
+
+Sequence experiments falsify the stronger assumption that more forced computation must always improve quality. The deployed semantics separate:
 
 - admitted maximum compute;
 - model-preferred useful compute;
@@ -33,45 +39,39 @@ Sequence experiments falsify the stronger assumption that more forced computatio
 Conceptually:
 
 \[
-e = \min(b,p(x,s)).
+e=\min(b,p(x,s)).
 \]
 
-The model may stop below the admitted ceiling when additional computation is predicted to be unnecessary or harmful.
+The model may stop below the admitted ceiling.
 
-### 3. Held-out real-sequence generalization
+## 3. Held-out real-sequence generalization
 
 On held-out handwritten-digit row sequences, formal seeds 60--64 give:
 
 - adaptive test accuracy: **93.56%** average;
 - average physical compute: **20.23%**;
-- capability gain from the 0% exit to the useful frontier: **+43.83 percentage points**;
-- formal seeds passing the preregistered boundary: **5/5**;
+- capability gain from 0% exit to the useful frontier: **+43.83 percentage points**;
+- seeds passing the preregistered boundary: **5/5**;
 - cap/count violations: **0**.
 
-This supports generalizable adaptive computation on an independent held-out real-sequence task.
+This supports adaptive computation on an independent held-out real-sequence task.
 
-A separate chronological weekly-CO2 experiment remains a negative boundary: later-time depth utility shifts relative to validation and only 3/5 seeds pass. **Temporal/nonstationary distribution-shift robustness is not established.**
+A separate chronological weekly-CO2 experiment remains a negative boundary. Later-time depth utility shifts relative to validation. **Temporal/nonstationary distribution-shift robustness is not established.**
 
-### 4. Same-model freestanding lowering
+## 4. Same-model freestanding and Q15 lowering
 
-The real-sequence models are exported into one generic freestanding C implementation.
+Across seeds 60--64, one generic freestanding implementation preserves the finite-exit model path.
 
-Across seeds 60--64:
+Float same-model C evidence:
 
 - finite-exit Python/C prediction mismatches: **0 / 12,600**;
-- preferred-exit mismatches in the float same-model C path: **0 / 1,800**;
-- unresolved external symbols in the audited freestanding objects: **0**.
+- preferred-exit mismatches: **0 / 1,800**;
+- unresolved external symbols in audited freestanding objects: **0**.
 
-Representative seed 63 with 21 continuous-budget audit points gives **7,560** held-out sample×budget cases with prediction mismatch 0, executed-exit mismatch 0, and cap violation 0.
+Q15 evidence:
 
-### 5. Fixed-point time-predictable lowering
-
-The same real-data model is lowered to a Q15/fixed-iteration implementation using integer LUTs and fixed-iteration numerical kernels.
-
-Five-seed Q15 reference evidence:
-
-- finite-exit mismatch vs float: **0 / 12,600**;
-- preferred-exit mismatch vs float: **1 / 1,800**.
+- finite-exit mismatch versus float: **0 / 12,600**;
+- preferred-exit mismatch versus float: **1 / 1,800**.
 
 Representative seed 63 integer C:
 
@@ -79,83 +79,67 @@ Representative seed 63 integer C:
 - preferred-exit mismatch: **0 / 360**;
 - caller-owned workspace: **4,608 bytes**.
 
-The final audited fixed-class Cortex-M4/RV32 neural paths remove unresolved arithmetic runtime helpers, floating-point operations, and hardware DIV/REM from the neural numeric path.
+The final fixed-class Cortex-M4/RV32 neural numeric path removes unresolved arithmetic helpers, floating-point instructions, and hardware DIV/REM.
 
-### 6. Continuous budget + deadline software contract
+## 5. Continuous budget + deadline software contract
 
-The freestanding runtime composes:
+The runtime composes finite ceilings conceptually as:
 
 \[
-C_{\mathrm{effective}}=
-\min(C_{\mathrm{budget}},C_{\mathrm{preferred}},C_{\mathrm{deadline}}).
+C_{effective}=\min(C_{budget},C_{preferred},C_{deadline},C_{policy}).
 \]
 
-Earlier exhaustive/property audits report zero structural mismatches/violations over:
-
-- all 65,536 Q0.16 budget values;
-- 16,777,216 budget×preferred combinations;
-- 655,360 deadline/budget/preference combinations;
-- same-model 52,920 held-out sample×budget×deadline cases.
+Earlier exhaustive/property audits report zero structural mismatches/violations over complete or large finite domains, including all 65,536 Q0.16 budget values and same-model held-out budget/deadline cases.
 
 Invalid identities and partial certification fail closed.
 
-### 7. CBMC finite runtime-contract proof
+## 6. CBMC finite runtime-contract proof
 
 CBMC 6.10.0 checks the represented finite C/runtime contract over complete integer domains. All five proof entry points report `VERIFICATION SUCCESSFUL`:
 
 1. Q0.16 continuous-budget lowering is in-range, monotone, greatest-fit, and fail-closed;
-2. the actual `rtnn_fixed_admit_total_cycles()` implementation returns the highest timing class that fits every 32-bit deadline and rejects wrong/null identity state;
-3. arbitrary partial-certification tables never admit an uncertified `UINT32_MAX` class and do not skip a higher certified class that fits;
+2. the actual deadline-admission implementation returns the highest certified timing class that fits every 32-bit deadline and rejects wrong/null identity state;
+3. arbitrary partial-certification tables never admit an uncertified `UINT32_MAX` class and do not skip a higher fitting certified class;
 4. effective execution remains below budget, deadline, preferred, and policy ceilings;
-5. exact Q15 exp/GELU clamp/index arithmetic stays within the finite LUT domains for arbitrary signed-32-bit inputs.
+5. exact Q15 exp/GELU clamp/index arithmetic stays inside the finite LUT domains for arbitrary signed-32-bit inputs.
 
-**Boundary:** CBMC proves the modeled C/runtime properties. It does not by itself prove compiler preservation, the complete neural machine code, processor pipeline timing, or physical-device WCET.
+**Boundary:** this proves the represented C/runtime properties. It does not prove the entire neural arithmetic, compiler preservation, processor pipeline, or physical-device WCET.
 
-### 7b. CBMC proof of the deployed neural-control bodies
+## 7. CBMC proof of deployed neural-control bodies
 
-A complementary CBMC experiment mechanically extracts the exact source bodies of:
+A complementary proof mechanically extracts the exact deployed source bodies of:
 
 - `rtnn_fixed_budget_ceiling_q16()`;
 - `rtnn_fixed_infer_budget()`;
-- `rtnn_fixed_certify_class()`
+- `rtnn_fixed_certify_class()`.
 
-from the deployed `realtime_nn_real_sequence_fixed_core.c`. The extraction records the deployed-core SHA and individual function-body SHAs.
+For the control proof, neural numerical kernels are intentionally abstracted: `entropy10()` is nondeterministic so every possible continue/stop outcome is covered, while `run_block()` is instrumented as the physical optional-block call.
 
-For this control proof, neural numerical kernels are intentionally abstracted: `entropy10()` is nondeterministic so **every possible continue/stop outcome** is covered, and `run_block()` is instrumented as the physical optional-block call.
+CBMC proves:
 
-CBMC 6.10.0 proves:
+- the deployed Q0.16 lowering body is in-range, monotone, fail-closed, and greatest-fit;
+- for all budgets, deadline-class bytes, and entropy outcomes, optional blocks execute only in canonical order and never exceed the effective ceiling;
+- reported `executed` equals physical `run_block()` count;
+- invalid deadline classes fail closed;
+- the cap remains true when the optional `executed` pointer is NULL;
+- certification executes exactly the normalized/policy-capped fixed class in canonical order.
 
-1. the actual deployed Q0.16 lowering body is in-range, monotone, fail-closed, and greatest-fit for all ordered `uint16_t` budgets;
-2. for all `uint16_t` budgets, all `uint8_t` deadline-class inputs, and all possible entropy stop sequences, the actual adaptive body executes optional blocks only in canonical order and never exceeds `min(budget ceiling, normalized deadline, policy max exit)`;
-3. reported `executed` equals the physical `run_block()` call count, and invalid deadline classes `>6` fail closed to zero optional blocks;
-4. the same cap/order remains true when the optional `executed` pointer is NULL;
-5. the actual fixed-class certification body executes exactly the normalized/policy-capped class count in canonical order for every `uint8_t` class input.
+**Boundary:** numerical kernels are abstracted and source-level CBMC does not establish compiler or processor timing equivalence.
 
-The final documented head was re-proved by GitHub Actions workflow run `32222548911`; extraction and all four proof steps completed successfully.
-
-**Boundary:** this closes the source-model duplication gap for finite neural-control behavior, but neural arithmetic is abstracted and compiler preservation of the source-level control proof is not established by CBMC alone.
-
-### 8. Pinned Ibex RTL measured timing binding
+## 8. Pinned Ibex RTL measured timing binding
 
 The exact Q15 RV32 artifact was executed on pinned upstream Ibex commit:
 
 `7b5df75a041affe56e8c235260f98a09b3319008`
 
-with the official Simple System configured for:
+with the recorded Simple-System configuration, including the data-independent timing path in that revision, `RV32MSingleCycle`, two-stage execution, no I-cache/branch predictor, deterministic one-cycle Simple-System RAM, and no interfering master in the validation harness.
 
-- `SecureIbex=1` / data-independent timing path in this revision;
-- `RV32MSingleCycle`;
-- two-stage execution;
-- no I-cache or branch predictor;
-- deterministic one-cycle Simple System RAM with zero additional instruction delay;
-- no interrupt, DMA, or competing master in the validation harness.
-
-Exact artifact identity recorded in the RTL evidence:
+Exact artifact identity:
 
 - ELF SHA-256: `234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742`;
-- loadable binary SHA-256: `266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1`.
+- loadable BIN SHA-256: `266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1`.
 
-Fixed-class measured RTL cycles:
+Fixed-class measured cycles:
 
 | normalized ceiling | cycles |
 |---:|---:|
@@ -170,20 +154,18 @@ Fixed-class measured RTL cycles:
 All seven fixed classes were run on three distinct held-out inputs with preferred exits 1, 3, and 5:
 
 - fixed-class cases: **21**;
-- prediction mismatches vs native integer reference: **0**;
+- prediction mismatches versus native integer reference: **0**;
 - input-to-input cycle range within every fixed class: **0**.
 
 The real admission + adaptive-inference path also has 21 RTL cases with prediction mismatch 0, executed-exit mismatch 0, unsafe admission 0, and committed runtime-binding exceedance 0.
 
-This is an **exact-build measured RTL binding**, not a portable timing formula.
+This is an **exact-build measured RTL binding**, not a portable timing formula or universal WCET theorem.
 
-### 9. Old arithmetic timing formula is falsified
+## 9. Old arithmetic timing formula is falsified
 
-The earlier custom instruction-category timing model `RTNN-IBEX-DIT-v1` underestimates actual pinned Ibex RTL for the full-work certification classes. It is a retained negative result and **must not be used for deadline admission**.
+The earlier custom instruction-category model `RTNN-IBEX-DIT-v1` underestimates actual pinned Ibex RTL for the full-work certification classes. It is retained as a negative result and **must not be used for deadline admission**.
 
-This directly demonstrates why nominal instruction/MAC accounting cannot substitute for target-pipeline validation.
-
-### 10. Exact-binary fixed-class control-flow noninterference
+## 10. Exact-binary fixed-class control-flow noninterference
 
 A custom RV32IM taint interpreter marks all 64 neural input bytes as input-dependent in the exact RTL-tested binary.
 
@@ -192,93 +174,125 @@ For every fixed class `0..6` it reports:
 - input-dependent conditional branches: **0**;
 - input-dependent indirect-control targets: **0**;
 - input-dependent store addresses: **0**;
-- hardware DIV/REM instructions on the fixed-class path: **0**.
+- hardware DIV/REM on the fixed-class path: **0**.
 
-Four input-dependent load-address instruction sites remain, all belonging to exp/GELU LUT interpolation. Exhaustive post-clamp integer-domain checks keep those accesses within their finite LUTs.
+Four input-dependent load-address instruction sites remain, all belonging to exp/GELU LUT interpolation. The custom interpreter is not formally verified.
 
-The adaptive path intentionally contains neural-input-dependent control at one machine-code site, the entropy early-stop decision. That is expected behavior, not a hidden fixed-class timing path.
+The adaptive path intentionally contains neural-input-dependent control at the entropy early-stop decision. That is expected and is not a hidden fixed-class branch.
 
-**Boundary:** the custom interpreter is not itself formally verified.
+## 11. Independent BINSEC control-flow cross-check
 
-### 11. Independent BINSEC control-flow cross-check
-
-The exact same RTL-tested ELF was independently analyzed with pinned third-party BINSEC.
+The same exact RTL-tested ELF was independently analyzed with pinned third-party BINSEC.
 
 Across all seven fixed classes:
 
 - classes passing: **7 / 7**;
 - completed paths: **1 per class**;
 - pending paths: **0**;
-- `Program status`: **secure** for every class;
+- program status: **secure** for every class;
 - control-flow leak sites: **0**;
 - control-flow checks: **933,653 / 933,653**;
-- unrolled instructions explored: **9,176,039**;
-- branching points explored: **574,502**.
+- unrolled instructions: **9,176,039**;
+- branching points: **574,502**.
 
-This materially reduces reliance on the custom interpreter for the fixed-class control-flow claim.
+Generic full relational memory analysis is not claimed. A LUT-heavy class exceeds the supplied runner resources when relational memory-address analysis is enabled. This is recorded as a resource boundary, not a memory proof and not a control-flow failure.
 
-Generic full constant-time memory analysis is **not** claimed: class 0 completes with memory checks secure, while class 1 exceeds the supplied GitHub runner resources (exit 137) when relational memory-address analysis is enabled over the LUT-heavy path. The same class completes and passes all 47,971 control-flow checks when memory relational analysis is disabled. This is recorded as a resource boundary, not a control-flow failure and not a memory proof.
+## 12. Pinned Simple-System LUT-memory timing
 
-## Artifact identity policy
+The four input-dependent load addresses are now bound to the actual pinned Simple-System deterministic RAM/bus integration.
 
-A training seed is **not** a certification identity. Retraining seed 63 on a different runner did not reproduce the previous Q15 artifact bit-for-bit.
+Exact audit results:
 
-Therefore:
+- all four sites remain aligned RV32 `LW` instructions;
+- input-indexed stores: **0**;
+- both exp/GELU LUTs are wholly inside the 1 MiB RAM region;
+- legal LUT word addresses exhaustively checked: **12,290**;
+- addresses uniquely decoding to RAM: **12,290 / 12,290**;
+- decode failures: **0**.
 
-- **research reproducibility:** seed + training recipe + statistical result;
-- **timing certification:** frozen Q15 artifact + exact machine image + compiler/toolchain + processor/RTL/memory configuration + timing evidence.
+Yosys synthesis of the pinned `ram_2p` response-valid control shows:
 
-The current RTL/BINSEC evidence records exact hashes. Actions artifacts are supporting evidence; a production certification process should additionally retain the exact ELF/bin in a durable long-term artifact archive.
+- one async-reset FF drives `a_rvalid_o`;
+- its D input is exactly `a_req_i`;
+- the response-valid transitive primary-input fan-in is request/clock/reset;
+- address signals in that fan-in: **0**.
+
+Together with the one-host bus response-selection structure, legal LUT reads have **one-cycle address-independent response latency in this exact Simple-System memory model**.
+
+This closes the four-LUT-load timing gap **for the pinned Simple System only**. It does not prove constant latency for caches, SDRAM, banked/interleaved memory, arbitration, another RAM wrapper, or DE0-CV.
+
+## 13. Durable certification artifact
+
+A training seed is not a certification identity. The exact machine package used by the Ibex timing/binary/memory evidence is now frozen in Git under:
+
+`artifacts/certification/ibex_simple_system/`
+
+with:
+
+- frozen ZIP SHA-256: `9150b0763e5d7b7c305441befdb4161ccf95612edd924b525f8388e06d9a86b0`;
+- contained ELF SHA-256: `234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742`;
+- contained BIN SHA-256: `266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1`.
+
+The deterministic-memory workflow consumes this repository-frozen package and rechecks the hashes; it no longer depends on the original Actions artifact retention lifetime.
+
+Research reproducibility remains seed/recipe/statistical. Timing certification remains exact-artifact/build/target-specific.
 
 ## Timing and memory boundary
 
 The strongest current timing statement is target-specific:
 
-> For the identified Q15 machine artifact on the identified pinned Ibex Simple System configuration, measured finite-class RTL cycle bindings exist; fixed-class neural input does not influence machine-code control flow according to two independent binary-level analyses; source-level deployed budget/adaptive/certification control has been proved against all finite inputs/early-stop outcomes; and the remaining input-dependent LUT addresses are bounded and execute against deterministic address-independent RAM in that target model.
+> For the identified frozen Q15/RV32 artifact on the identified pinned Ibex Simple-System configuration, measured finite-class RTL cycle bindings exist; fixed-class neural input does not influence compiled control flow according to two independent binary-level analyses; the remaining varying LUT addresses select a deterministic one-cycle RAM response path under an exhaustively checked legal address domain; and the finite/deployed source control contract is proved over its represented input domains with CBMC.
 
-This still does **not** prove generic memory constant-time behavior, compiler preservation of every source proof property, or physical-device WCET.
+This is materially stronger than Linux percentile timing or a custom instruction-count model. It still does **not** prove the entire processor/physical implementation as a production hard-WCET theorem.
 
-If the implementation moves to cache, SDRAM, another SRAM, bus arbitration, DMA, interrupts, FPGA fabric, another compiler, or another processor configuration, timing must be rebound and revalidated.
+If the implementation moves to another FPGA memory, cache, SDRAM, arbitration, DMA, interrupts, another compiler, another processor configuration, or another physical target, timing must be rebound and revalidated.
 
 ## Current major negative boundaries
 
-1. Ordinary Linux P95/P99 and observed maximum×arbitrary safety factor are not hard WCET evidence.
+1. Ordinary Linux P95/P99 and observed maximum × arbitrary safety factor are not hard WCET evidence.
 2. The old arithmetic `RTNN-IBEX-DIT-v1` timing formula is falsified by actual RTL.
 3. Training seed/recipe alone is not bitwise certification identity.
-4. Generic relational full-memory constant-time analysis of the LUT-heavy class-1 path exceeded the supplied runner resources.
-5. CBMC proof of deployed source control does not by itself prove compiler preservation, the full neural machine code, processor RTL, or physical timing.
-6. Nominal MAC reduction does not guarantee wall-clock speedup on every backend.
-7. Forcing exact admitted work can reduce task quality.
-8. Concurrent end-to-end preferred-compute training did not match the stable post-trained frontier.
-9. Toy held-out horizon-value generalization failed.
-10. Chronological/nonstationary temporal generalization remains unresolved.
+4. Generic BINSEC full relational-memory analysis of a LUT-heavy path exceeds the supplied runner resources.
+5. CBMC source/control proof does not by itself prove compiler preservation, full neural machine code, whole processor RTL, or physical timing.
+6. The Simple-System deterministic-memory result does not transfer to DE0-CV or arbitrary memories.
+7. Nominal MAC reduction does not guarantee wall-clock speedup on every backend.
+8. Forcing exact admitted work can reduce task quality.
+9. Concurrent end-to-end preferred-compute training did not match the stable post-trained frontier.
+10. Toy held-out horizon-value generalization failed.
+11. Chronological/nonstationary temporal generalization remains unresolved.
 
 ## Explicitly not claimed
 
 1. A universal Ibex WCET theorem.
 2. An FPGA/ASIC/silicon production WCET guarantee.
 3. Generic constant-time memory behavior for arbitrary memory hierarchies.
-4. Arbitrary compiler/hardware/timing portability.
-5. Temporal distribution-shift robustness.
-6. Training-time sparse execution for every research training protocol.
-7. Universal learned-policy superiority over fixed or analytic scheduling baselines.
-8. Unconstrained self-organized architecture discovery.
-9. Autoregressive LLM-scale real-time generalization.
-10. That measured RTL timing or source-level CBMC alone constitutes a formal all-input physical WCET proof.
+4. DE0-CV timing or memory behavior.
+5. Cache/SDRAM/DMA/multi-master/interrupt timing tolerance.
+6. Compiler equivalence of every source-level proof property.
+7. Temporal distribution-shift robustness.
+8. Universal learned-policy superiority over fixed or analytic scheduling baselines.
+9. Unconstrained self-organized architecture discovery.
+10. Autoregressive LLM-scale real-time generalization.
 
 ## Remaining production-hard-real-time work
 
-The next evidence gap is no longer another router or neural loss experiment. It is the source/binary/memory/target timing boundary:
+The next evidence gap is no longer another router/loss experiment or the four Simple-System LUT addresses.
 
-1. bind/prove the four input-indexed LUT accesses to the selected deterministic memory implementation;
-2. retain the exact certification machine artifact durably;
-3. strengthen source↔compiled-binary/processor timing correspondence if a software-only production proof requires it;
-4. when physical validation is desired, map the same contract to the available DE0-CV using controlled on-chip memory and a fixed clock, then derive a **new FPGA-specific timing binding** rather than copying the Simple System cycle table.
+The remaining path is:
+
+1. optionally strengthen whole-processor/target timing proof methodology before hardware;
+2. prepare frozen board vectors and machine-readable output checks;
+3. when physical validation is resumed, deploy the same seed-63 Q15 seven-class contract to **DE0-CV** with controlled on-chip RAM and a fixed clock;
+4. derive a **new FPGA-specific** cycle/time table and memory argument rather than copying the Simple-System table;
+5. test deadline admission against that new binding;
+6. only then add interference, external memory, DMA/multi-master effects, or mixed criticality.
+
+The preregistered DE0-CV plan is in `notes/realtime_nn_de0_cv_next_stage.md`.
 
 ## Direction lock
 
-Before promoting a new main-line experiment, ask:
+Future main-line work should answer:
 
-> Does it move the same neural model closer to a defensible chain `deadline → admitted finite work → physical neural execution → target/build timing bound → on-time output`?
+> Does this move the **same neural model** closer to controllable physical execution under `b ∈ [0,1]`, a finite maximum-work envelope, and a defensible deadline guarantee?
 
-If not, it belongs under secondary diagnostics.
+If not, it is secondary diagnostics.
