@@ -68,7 +68,10 @@ jobs:
       - name: Build exact Q15 RTNN bare-metal ELF
         run: |
           mkdir -p build/ibex-rtnn
-          gzip -dc certification/ibex/realtime_nn_real_sequence_fixed_weights_generated.h.gz > build/ibex-rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
+          cat certification/ibex/realtime_nn_real_sequence_fixed_weights_generated.h.gz.part{00,01,02,03,04,05,06,07} > build/ibex-rtnn/weights.h.gz
+          echo 'ccb47b1ff36fd3fbf53625918c8415ad73e891548b7a3d12a3afb606dda39424  build/ibex-rtnn/weights.h.gz' | sha256sum -c -
+          gzip -dc build/ibex-rtnn/weights.h.gz > build/ibex-rtnn/realtime_nn_real_sequence_fixed_weights_generated.h
+          echo '4aa108a79cc578271e063f80530ad921d8b9fc07ff1c1f9ad4772a75fec479ed  build/ibex-rtnn/realtime_nn_real_sequence_fixed_weights_generated.h' | sha256sum -c -
           COMMON='--target=riscv32-unknown-elf -march=rv32im_zicsr -mabi=ilp32 -mno-relax -O2 -ffreestanding -fno-builtin -fno-stack-protector -fno-pic -nostdlib'
           clang $COMMON -Ibuild/ibex-rtnn -Iexperiments -c experiments/realtime_nn_real_sequence_fixed_core.c -o build/ibex-rtnn/core.o
           clang $COMMON -Icertification/ibex -Iexperiments -c certification/ibex/ibex_cycle_harness.c -o build/ibex-rtnn/harness.o
