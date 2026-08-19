@@ -1,0 +1,89 @@
+name: BINSEC RV32 fixed-class cross-check
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/binsec-rv32-crosscheck.yml'
+      - 'experiments/binsec_rtnn_fixed_class.ini'
+      - 'experiments/check_realtime_nn_binsec_log.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: binsec-rv32-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        class_id: [0, 1]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download exact retained RTL evidence artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p "$RUNNER_TEMP/rtnn"
+          gh api \
+            -H 'Accept: application/vnd.github+json' \
+            "/repos/${GITHUB_REPOSITORY}/actions/artifacts/9352155229/zip" \
+            > "$RUNNER_TEMP/rtnn/artifact.zip"
+          unzip -q "$RUNNER_TEMP/rtnn/artifact.zip" -d "$RUNNER_TEMP/rtnn/artifact"
+          test -f "$RUNNER_TEMP/rtnn/artifact/rtnn_ibex_rtl.elf"
+          test -f "$RUNNER_TEMP/rtnn/artifact/rtnn_ibex_rtl.bin"
+          echo '234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742  '"$RUNNER_TEMP/rtnn/artifact/rtnn_ibex_rtl.elf" | sha256sum -c -
+          echo '266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1  '"$RUNNER_TEMP/rtnn/artifact/rtnn_ibex_rtl.bin" | sha256sum -c -
+
+      - name: Pull and identify BINSEC
+        run: |
+          docker pull binsec/binsec:latest
+          docker image inspect binsec/binsec:latest --format '{{json .RepoDigests}}' | tee "$RUNNER_TEMP/binsec_image_digest.txt"
+          docker run --rm binsec/binsec:latest binsec --version | tee "$RUNNER_TEMP/binsec_version.txt"
+
+      - name: Generate concrete class script
+        run: |
+          sed 's/__CLASS__/${{ matrix.class_id }}/g' experiments/binsec_rtnn_fixed_class.ini > "$RUNNER_TEMP/class.ini"
+          cat "$RUNNER_TEMP/class.ini"
+
+      - name: Run BINSEC fixed-class check
+        run: |
+          set -o pipefail
+          docker run --rm \
+            -v "$RUNNER_TEMP/rtnn/artifact:/rtnn:ro" \
+            -v "$RUNNER_TEMP/class.ini:/work/class.ini:ro" \
+            binsec/binsec:latest \
+            binsec -sse -checkct \
+              -sse-script /work/class.ini \
+              -sse-depth 700000 \
+              -sse-timeout 900 \
+              -checkct-stats-file /tmp/checkct.toml \
+              /rtnn/rtnn_ibex_rtl.elf \
+            2>&1 | tee "$RUNNER_TEMP/binsec-class-${{ matrix.class_id }}.log"
+
+      - name: Check expected control/memory result
+        run: |
+          python experiments/check_realtime_nn_binsec_log.py \
+            --log "$RUNNER_TEMP/binsec-class-${{ matrix.class_id }}.log" \
+            --class-id '${{ matrix.class_id }}' \
+            --out "$RUNNER_TEMP/binsec-class-${{ matrix.class_id }}.json"
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: binsec-rv32-class-${{ matrix.class_id }}
+          retention-days: 30
+          path: |
+            ${{ runner.temp }}/binsec-class-${{ matrix.class_id }}.log
+            ${{ runner.temp }}/binsec-class-${{ matrix.class_id }}.json
+            ${{ runner.temp }}/binsec_image_digest.txt
+            ${{ runner.temp }}/binsec_version.txt
+          if-no-files-found: warn
