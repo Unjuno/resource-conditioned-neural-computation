@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/realtime-nn-ibex-memory-formal.yml'
+      - 'artifacts/certification/ibex_simple_system/**'
       - 'experiments/audit_realtime_nn_ibex_memory_timing.py'
       - 'experiments/audit_realtime_nn_yosys_ram_fanin.py'
       - 'results/realtime_nn_ibex_memory_timing_results.json'
@@ -12,7 +13,6 @@ on:
 
 permissions:
   contents: read
-  actions: read
 
 concurrency:
   group: rtnn-ibex-memory-formal-${{ github.event.pull_request.number || github.ref }}
@@ -24,7 +24,10 @@ jobs:
     timeout-minutes: 15
     env:
       IBEX_COMMIT: 7b5df75a041affe56e8c235260f98a09b3319008
-      RTL_ARTIFACT_ID: '9352155229'
+      FROZEN_ZIP: artifacts/certification/ibex_simple_system/rtnn_ibex_rtl_exact.zip
+      EXPECTED_ZIP_SHA256: 9150b0763e5d7b7c305441befdb4161ccf95612edd924b525f8388e06d9a86b0
+      EXPECTED_ELF_SHA256: 234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742
+      EXPECTED_BIN_SHA256: 266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1
     steps:
       - uses: actions/checkout@v4
 
@@ -35,16 +38,15 @@ jobs:
           yowasp-yosys -V
           readelf --version | head -1
 
-      - name: Fetch exact RTL-tested RTNN artifact
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Unpack and verify durable exact RTL-tested RTNN artifact
         run: |
+          set -euo pipefail
+          test "$(sha256sum "${FROZEN_ZIP}" | cut -d' ' -f1)" = "${EXPECTED_ZIP_SHA256}"
           mkdir -p /tmp/rtnn_artifact
-          gh api "/repos/${GITHUB_REPOSITORY}/actions/artifacts/${RTL_ARTIFACT_ID}/zip" > /tmp/rtnn_artifact.zip
-          unzip -q /tmp/rtnn_artifact.zip -d /tmp/rtnn_artifact
+          unzip -q "${FROZEN_ZIP}" -d /tmp/rtnn_artifact
           sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.elf /tmp/rtnn_artifact/rtnn_ibex_rtl.bin
-          test "$(sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.elf | cut -d' ' -f1)" = "234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742"
-          test "$(sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.bin | cut -d' ' -f1)" = "266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1"
+          test "$(sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.elf | cut -d' ' -f1)" = "${EXPECTED_ELF_SHA256}"
+          test "$(sha256sum /tmp/rtnn_artifact/rtnn_ibex_rtl.bin | cut -d' ' -f1)" = "${EXPECTED_BIN_SHA256}"
 
       - name: Fetch pinned Ibex memory RTL
         run: |
