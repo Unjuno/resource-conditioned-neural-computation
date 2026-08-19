@@ -1,0 +1,23 @@
+{
+  "schema": "rtnn-real-sequence-max-work-v1",
+  "model": "digits row-token 6-block transformer",
+  "seed": 63,
+  "external_budget": "Q0.16 b in [0,1]",
+  "policy": {"max_exit": 5,"entropy_tau": 0.565179169178009},
+  "workspace_bytes": 4608,
+  "heap_allocations": 0,
+  "file_io": 0,
+  "libm_calls": 0,
+  "classes": [
+    {"class":0,"fraction":0.0,"q16_min":0,"capability_max_blocks":0,"deployed_policy_max_blocks":0,"max_head_calls":1,"max_total_float_macs":1184,"max_attention_exp_lut_calls":0,"max_entropy_exp_lut_calls":0,"max_gelu_lut_calls":0,"max_rsqrt_calls":0},
+    {"class":1,"fraction":0.16666666666666666,"q16_min":10923,"capability_max_blocks":1,"deployed_policy_max_blocks":1,"max_head_calls":2,"max_total_float_macs":19776,"max_attention_exp_lut_calls":128,"max_entropy_exp_lut_calls":10,"max_gelu_lut_calls":256,"max_rsqrt_calls":16},
+    {"class":2,"fraction":0.3333333333333333,"q16_min":21845,"capability_max_blocks":2,"deployed_policy_max_blocks":2,"max_head_calls":3,"max_total_float_macs":38368,"max_attention_exp_lut_calls":256,"max_entropy_exp_lut_calls":20,"max_gelu_lut_calls":512,"max_rsqrt_calls":32},
+    {"class":3,"fraction":0.5,"q16_min":32768,"capability_max_blocks":3,"deployed_policy_max_blocks":3,"max_head_calls":4,"max_total_float_macs":56960,"max_attention_exp_lut_calls":384,"max_entropy_exp_lut_calls":30,"max_gelu_lut_calls":768,"max_rsqrt_calls":48},
+    {"class":4,"fraction":0.6666666666666666,"q16_min":43690,"capability_max_blocks":4,"deployed_policy_max_blocks":4,"max_head_calls":5,"max_total_float_macs":75552,"max_attention_exp_lut_calls":512,"max_entropy_exp_lut_calls":40,"max_gelu_lut_calls":1024,"max_rsqrt_calls":64},
+    {"class":5,"fraction":0.8333333333333334,"q16_min":54613,"capability_max_blocks":5,"deployed_policy_max_blocks":5,"max_head_calls":6,"max_total_float_macs":94144,"max_attention_exp_lut_calls":640,"max_entropy_exp_lut_calls":50,"max_gelu_lut_calls":1280,"max_rsqrt_calls":80},
+    {"class":6,"fraction":1.0,"q16_min":65535,"capability_max_blocks":6,"deployed_policy_max_blocks":5,"max_head_calls":6,"max_total_float_macs":94144,"max_attention_exp_lut_calls":640,"max_entropy_exp_lut_calls":50,"max_gelu_lut_calls":1280,"max_rsqrt_calls":80}
+  ],
+  "target_timing_bounds": null,
+  "canonical_sha256_without_sha_field": "f71de73fcc437408002110d8a1e5cc3ad317f0e007df63a56e162789ab1c4fe8",
+  "manifest_id_u64": "0xf71de73fcc437408"
+}

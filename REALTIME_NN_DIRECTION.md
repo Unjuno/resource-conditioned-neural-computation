@@ -62,21 +62,44 @@ This establishes an independent-sample real-sequence generalization result.
 
 A separate chronological weekly-CO2 experiment is a negative boundary: validation-tuned stopping reaches 69.08% versus 70.11% full-depth, only 3/5 seeds pass, and useful depth shifts between validation and later test periods. **Temporal/nonstationary distribution-shift robustness remains unresolved.**
 
-### Goal C — hard-real-time RTNN: PARTIAL; hard timing remains UNCERTAIN
+### Goal C — same-model integration PASS; hard timing remains UNCERTAIN
 
-The continuous runtime contract is now implemented as Q0.16 in a freestanding C object. Exhaustive audits cover:
+The exact real-data sequence model has now been lowered to a generic freestanding C core.
 
-- all 65,536 normalized budget values;
-- 16,777,216 budget × uint8 preferred-class combinations;
-- 655,360 deadline/budget/preferred composition cases.
+Across seeds 60--64:
 
-All contract properties pass, invalid preferred classes fail closed, and the contract object has zero unresolved external symbols. A maximum-work manifest exposes 0/25/50/75/100% ceilings for the existing freestanding core, with exact maximum blocks, MACs, LUT calls, workspace, and allowed nested block IDs.
+- **12,600 / 12,600** finite-exit held-out predictions match PyTorch;
+- **1,800 / 1,800** preferred-exit decisions match PyTorch;
+- all five freestanding core objects have zero unresolved external symbols.
 
-The deadline admission interface also passes identity and partial-certification properties: wrong build/manifest rejects, and uncertified classes are never inferred or admitted.
+For representative seed 63, the same deployed model additionally passes:
 
-However, **hard timing certification is not established**. The exact regenerated neural object was affinity-pinned and measured with `RDTSCP`; class medians scale with physical work, but scheduler/preemption produces multi-million-cycle maxima whose class ordering changes across runs. Calibration maxima are exceeded by held-out measurements, and even arbitrary 2x/4x safety factors are not stable proof. The current environment has no WCET analyzer or time-predictable bare-metal target, and real-time `SCHED_FIFO` privilege is unavailable.
+- 7,560 held-out sample × continuous-budget cases with zero prediction/executed-exit/cap mismatches;
+- 52,920 held-out sample × budget × deadline-contract cases with zero admission/executed-exit/prediction mismatches;
+- partial-certification fail-closed behavior;
+- wrong build and wrong manifest rejection;
+- combined freestanding core + runtime contract with zero unresolved external symbols;
+- freestanding Clang compilation for ARMv7-M, RV32, and AArch64 targets.
 
-Therefore measurement maxima remain empirical diagnostics, not WCET.
+The seed-63 export emits a target-independent maximum-work manifest with seven normalized classes, a 4,608-byte caller-owned workspace, explicit maximum structural work, and `target_timing_bounds = null`.
+
+The earlier integration gap is therefore closed:
+
+```text
+real held-out model
+    -> generated weights / policy / LUTs
+    -> same-model freestanding C
+    -> continuous budget
+    -> preferred early stopping
+    -> maximum-work manifest
+    -> deadline admission interface
+```
+
+**Hard timing certification is still not established.** The exact seed-63 adaptive binary was CPU-affinity pinned and measured with `RDTSCP`; across 15 timing runs, later observed maxima reach about **12.50×** the first calibration maximum, and even `observed max × 8` is exceeded for multiple classes. The current environment has no WCET analyzer, no time-predictable bare-metal execution target, and no permission for `SCHED_FIFO`.
+
+Therefore Linux observed maxima remain empirical diagnostics, not WCET.
+
+An empirical RTOS-style same-model demonstrator is also implemented. It shows that deadline admission changes physical compute and can improve on-time-correct behavior versus always-full execution in several deadline regimes, but its P99 timing table is deliberately not promoted to a hard real-time guarantee.
 
 ## Required evidence for the full Real-Time NN claim
 
@@ -94,7 +117,7 @@ The complete claim requires all of the following in **one deployed system**:
 10. defensible target/compiler/build/RTOS timing upper bound per admitted class;
 11. deadline admission and on-time-correct/deadline-miss measurements.
 
-The current evidence does **not** yet satisfy items 9--11 for the same real-data model. The real-sequence model and the existing freestanding timing core are separate artifacts; cross-backend lowering of the exact real-sequence model remains an integration step.
+Items 1--9 and the software/interface part of item 11 are now demonstrated for the same real-data model path. **Item 10 is the principal missing proof**, and a hard interpretation of item 11 depends on it.
 
 ## Current negative boundaries
 
@@ -111,11 +134,10 @@ Retain these as first-class results:
 
 ## Immediate priorities
 
-1. **Concrete hard-timing target:** run the finite-class binary on a time-predictable target or with a defensible WCET/static timing analyzer under fixed compiler, memory/cache, interrupt, DMA, and scheduling assumptions.
-2. **Same-model integration:** lower the exact real-sequence model and its maximum-useful-depth/early-exit policy into the freestanding boundary, then require Python/C prediction, exit, and work-class equality.
-3. **Final RTOS experiment:** only after the same deployed model has defensible `T_j` bounds, evaluate deadline miss, on-time correct, admitted `b`, effective compute, actual cycles, and bound slack.
-4. **Temporal-shift research:** treat nonstationary time-series depth-utility drift as a separate generalization problem rather than silently merging it into the independent-sample PASS.
-5. Larger language-model-scale work remains downstream of these items.
+1. **Concrete hard-timing target:** run the same exported real-data model/build on a time-predictable target or with a defensible WCET/static timing analyzer under fixed compiler, memory/cache, interrupt, DMA, and scheduling assumptions.
+2. **Certified final RTOS experiment:** populate the timing binding only from defensible bounds for that exact build, then measure deadline misses, on-time correct, admitted class, effective compute, actual cycles, and bound slack.
+3. **Temporal-shift research:** treat nonstationary time-series depth-utility drift as a separate generalization problem rather than silently merging it into the independent-sample PASS.
+4. Larger language-model-scale work remains downstream of these items.
 
 ## Explicit nonclaims
 
@@ -123,7 +145,6 @@ Current work does not establish:
 
 - hard real-time or WCET guarantees;
 - a complete production Real-Time NN;
-- a single same-model chain from real-data generalization through certified timing;
 - temporal distribution-shift robustness;
 - a Real-Time LM or LLM-scale generalization;
 - universal wall-clock benefit from nominal compute reduction;
