@@ -1,0 +1,97 @@
+{
+  "experiment": "pinned Ibex Simple System timing audit for RTNN input-indexed LUT loads",
+  "decision": "PASS_WITH_SCOPE",
+  "workflow": {
+    "run_id": 32225250507,
+    "job_id": 95983544767,
+    "artifact_id": 9355305985,
+    "artifact_zip_sha256": "68082d41bad4da1b4fd7a40a495b79b6a133d956796987d0e7e89af91d11b03a",
+    "runner": "ubuntu-24.04",
+    "yowasp_yosys": "0.68 (git 38e001a6f)"
+  },
+  "exact_rtnn_artifact": {
+    "elf_sha256": "234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742",
+    "binary_sha256": "266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1"
+  },
+  "pinned_ibex": {
+    "commit": "7b5df75a041affe56e8c235260f98a09b3319008",
+    "source_sha256": {
+      "shared/rtl/bus.sv": "b24c2cbe36cee25230c61d533258a66707ee03c7c3857cc97494c8d95a2a2953",
+      "examples/simple_system/rtl/ibex_simple_system.sv": "0e8d45f70096302e77bc0f83dc56a4a2c3c35cf46adab82a75cc4bb8092fed11",
+      "shared/rtl/ram_2p.sv": "c479f3814048706cdeea24138c465d7cc4d3129326568deaa3590c66df0465a5"
+    },
+    "ram_region": {
+      "base": "0x00100000",
+      "end_exclusive": "0x00200000",
+      "size_bytes": 1048576
+    },
+    "data_hosts": 1,
+    "devices": {
+      "Ram": {"base": "0x00100000", "mask": "0xfff00000"},
+      "SimCtrl": {"base": "0x00020000", "mask": "0xfffffc00"},
+      "Timer": {"base": "0x00030000", "mask": "0xfffffc00"}
+    }
+  },
+  "lut_ranges": {
+    "fx_gelu_lut": {
+      "base": "0x00102308",
+      "size_bytes": 16388,
+      "word_count": 4097,
+      "last_word": "0x00106308",
+      "last_byte": "0x0010630b",
+      "entirely_inside_ram": true
+    },
+    "fx_exp_lut": {
+      "base": "0x0010630c",
+      "size_bytes": 32772,
+      "word_count": 8193,
+      "last_word": "0x0010e30c",
+      "last_byte": "0x0010e30f",
+      "entirely_inside_ram": true
+    }
+  },
+  "exact_binary_input_indexed_memory": {
+    "load_sites": {
+      "0x001002ec": {"word": "0x0007a803", "instruction": "LW", "rs1": 15, "rd": 16, "imm12": 0},
+      "0x001002f0": {"word": "0x0006a583", "instruction": "LW", "rs1": 13, "rd": 11, "imm12": 0},
+      "0x0010152c": {"word": "0x0007a583", "instruction": "LW", "rs1": 15, "rd": 11, "imm12": 0},
+      "0x00101530": {"word": "0x0006a803", "instruction": "LW", "rs1": 13, "rd": 16, "imm12": 0}
+    },
+    "store_sites": [],
+    "legal_lut_word_addresses_exhaustively_checked": 12290,
+    "addresses_uniquely_decoding_to_ram": 12290,
+    "decode_failures": 0
+  },
+  "ram_control_netlist": {
+    "module": "ram_2p",
+    "target": "a_rvalid_o",
+    "driver_type": "$adff",
+    "d_is_exact_a_req_i": true,
+    "clock_is_exact_clk_i": true,
+    "async_reset_is_exact_rst_ni": true,
+    "async_reset_value": "0",
+    "primary_input_fanin": ["a_req_i", "clk_i", "rst_ni"],
+    "address_signals_in_fanin": [],
+    "address_independent_response_valid": true
+  },
+  "composition": {
+    "all_lut_addresses_select_only_ram": true,
+    "bus_request_to_selected_ram_is_combinational": true,
+    "bus_response_device_selection_is_registered": true,
+    "host_response_uses_selected_device_rvalid": true,
+    "ram_data_rvalid_is_one_cycle_registered_request": true,
+    "lut_read_response_latency_cycles": 1,
+    "address_independent_for_legal_lut_words": true
+  },
+  "interpretation": "For the exact RTL-tested RTNN binary and pinned one-host Ibex Simple System, all neural-input-indexed memory loads are aligned LW instructions into two finite LUTs wholly resident in the 1 MiB on-chip simulation RAM. All 12,290 legal LUT word addresses uniquely decode to that RAM. The synthesized ram_2p response-valid control is a single async-reset FF whose D input is exactly the request and whose transitive fan-in contains no address signal. Together with the pinned bus response-selection structure, the LUT address may change the returned value but not the one-cycle response latency in this memory model.",
+  "negative_or_discarded_controls": [
+    "An earlier sequential SAT harness using async2sync with an unconstrained clock was discarded as an unsuitable model; its counterexample was not interpreted as a RAM timing failure.",
+    "BINSEC generic relational memory analysis for class 1 previously hit runner resource limits; the present result is target-specific to deterministic address-independent Simple System RAM rather than a generic memory constant-time theorem."
+  ],
+  "nonclaims": [
+    "No constant-latency claim is transferred to caches, external SDRAM, arbitration fabrics, or DE0-CV memory.",
+    "Data values are address-dependent; only response timing is address-independent under this pinned RAM/bus model.",
+    "This is not an FPGA/ASIC/silicon WCET certificate.",
+    "A different bus map, number of hosts, memory RTL, compiler artifact, or target integration requires new evidence."
+  ]
+}
