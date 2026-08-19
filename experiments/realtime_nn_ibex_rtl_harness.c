@@ -5,14 +5,16 @@
 
 #define SIM_OUT  (*(volatile uint32_t *)UINT32_C(0x00020000))
 #define SIM_HALT (*(volatile uint32_t *)UINT32_C(0x00020008))
-#define MODEL_ID UINT32_C(0xb53c6dbc)
-#define BUILD_ID UINT32_C(0x234b3ac1)
+/* These IDs exercise the fail-closed admission function inside this harness.
+   The exact model/ELF SHA identities are recorded separately by the workflow. */
+#define HARNESS_MODEL_ID UINT32_C(0x52544e4e)
+#define HARNESS_BUILD_ID UINT32_C(0x52544c31)
 
 static const uint32_t CONDITIONAL_TOTAL[7] = {
   22180u, 549778u, 1077368u, 1604958u, 2132548u, 2660139u, 2660140u
 };
 static const RTNNFixedConditionalTimingBinding BINDING = {
-  MODEL_ID, BUILD_ID,
+  HARNESS_MODEL_ID, HARNESS_BUILD_ID,
   {22180u, 549778u, 1077368u, 1604958u, 2132548u, 2660139u, 2660140u}
 };
 
@@ -37,7 +39,6 @@ static inline uint32_t read_mcycle32(void) {
   return v;
 }
 __attribute__((noinline)) static void empty_call(void) { __asm__ volatile ("" ::: "memory"); }
-__attribute__((noinline)) static void empty_two_calls(void) { empty_call(); empty_call(); }
 
 static int argmax10(const int32_t z[10]) {
   int b = 0;
@@ -51,7 +52,7 @@ static uint32_t measure_one_overhead(void) {
   uint32_t a = read_mcycle32(); empty_call(); uint32_t b = read_mcycle32(); return b - a;
 }
 static uint32_t measure_two_overhead(void) {
-  uint32_t a = read_mcycle32(); empty_two_calls(); uint32_t b = read_mcycle32(); return b - a;
+  uint32_t a = read_mcycle32(); empty_call(); empty_call(); uint32_t b = read_mcycle32(); return b - a;
 }
 static void print_overhead(const char *name, uint32_t v) {
   puts_r("OVERHEAD,"); puts_r(name); comma(); putu_r(v); nl();
@@ -69,8 +70,7 @@ int main(void) {
   print_overhead("ONE", oh1);
   print_overhead("TWO", oh2);
 
-  /* Full class sweep on a cheap input, plus three anchor classes on two
-     structurally different held-out inputs. */
+  /* Full class sweep on one held-out input, plus anchor classes on two others. */
   for (uint8_t c = 0; c < 7; ++c) {
     uint32_t a = read_mcycle32();
     rtnn_fixed_certify_class(&W, RTNN_RTL_X[0], c, Z);
@@ -88,14 +88,15 @@ int main(void) {
     }
   }
 
-  /* Test index 57 is a formal held-out sample whose deployed Q15 policy
-     prefers exit 5, so classes 0..5 exercise the actual no-early-stop path. */
+  /* Test index 57 preferred exit 5 in the original formal seed-63 build.
+     The comparison audit verifies whether that precondition also holds for
+     this exact CI-generated Q15 artifact before interpreting it as no-stop. */
   const uint32_t worst_slot = 2u;
   for (uint8_t c = 0; c < 7; ++c) {
     uint16_t bq = budget_for_class(c);
     uint8_t executed = 255u;
     uint32_t a = read_mcycle32();
-    int8_t admitted = rtnn_fixed_admit_total_cycles(CONDITIONAL_TOTAL[c], MODEL_ID, BUILD_ID, &BINDING);
+    int8_t admitted = rtnn_fixed_admit_total_cycles(CONDITIONAL_TOTAL[c], HARNESS_MODEL_ID, HARNESS_BUILD_ID, &BINDING);
     rtnn_fixed_infer_budget(&W, RTNN_RTL_X[worst_slot], bq,
                             admitted < 0 ? 0u : (uint8_t)admitted, Z, &executed);
     uint32_t b = read_mcycle32();
