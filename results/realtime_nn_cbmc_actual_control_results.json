@@ -1,0 +1,80 @@
+{
+  "experiment": "CBMC proof of mechanically extracted deployed RTNN control functions",
+  "decision": "PASS_WITH_SCOPE",
+  "cbmc": {
+    "version": "6.10.0",
+    "workflow_run_id": 32222225890,
+    "job_id": 95974722074,
+    "artifact_id": 9354292298,
+    "artifact_zip_sha256": "730f84744beea15c0d29108e676d8acdb5fbb8f0ceeb39a788c91950ffd8a2c0",
+    "runner": "ubuntu-24.04"
+  },
+  "extraction": {
+    "core_path": "experiments/realtime_nn_real_sequence_fixed_core.c",
+    "core_sha256": "a6b2807bd4a60534c250fca3005322cf14ba0a92f6b16e28241109385efc6809",
+    "proof_source_sha256": "e2754972e14484a0f93648021e96446598c44be2118f7350802c9394c80dc679",
+    "functions": {
+      "rtnn_fixed_budget_ceiling_q16": {
+        "sha256": "dbcbc27c4e4c0e931797520e8ff33dd2ce2d65c7765e92bab9c0802a80a61744",
+        "bytes": 94
+      },
+      "rtnn_fixed_infer_budget": {
+        "sha256": "9d9e7d5a8a5b4697d883bd6d720d610e4e6a50a0761123622b128bef63afe1ee",
+        "bytes": 471
+      },
+      "rtnn_fixed_certify_class": {
+        "sha256": "fc9a33dc6c5be141188c8a959c1a960d7be1bcbae37ccdb5451098bfe174a330",
+        "bytes": 284
+      }
+    },
+    "method": "function bodies mechanically extracted from the deployed core; numerical kernels are nondeterministic stubs only for control-flow and physical run_block call-count proof"
+  },
+  "proofs": {
+    "actual_budget_lowering": {
+      "decision": "PASS",
+      "domain": "all uint16_t Q0.16 budget pairs b0<=b1",
+      "properties": [
+        "class remains in 0..6",
+        "monotone lowering",
+        "fail-closed class fraction",
+        "greatest finite fitting class"
+      ]
+    },
+    "actual_adaptive_physical_call_cap": {
+      "decision": "PASS",
+      "domain": "all uint16_t budgets, all uint8_t deadline classes, all possible entropy continue/stop outcomes",
+      "properties": [
+        "run_block calls remain in canonical nested order",
+        "run_block call count never exceeds min(budget ceiling, normalized deadline, policy max exit)",
+        "reported executed exit equals physical run_block call count",
+        "reported execution never exceeds budget ceiling",
+        "deadline values >6 fail closed to zero physical blocks"
+      ]
+    },
+    "null_executed_pointer": {
+      "decision": "PASS",
+      "properties": [
+        "NULL executed-output pointer does not change canonical block order",
+        "NULL executed-output pointer does not bypass the effective physical work cap"
+      ]
+    },
+    "actual_fixed_class_work_count": {
+      "decision": "PASS",
+      "domain": "all uint8_t class inputs",
+      "properties": [
+        "invalid class >6 normalizes to zero",
+        "class is capped by deployed policy maximum exit 5",
+        "certification path calls run_block exactly the normalized class count",
+        "blocks execute in canonical nested order"
+      ]
+    }
+  },
+  "solver_result": "all four proof entry points report VERIFICATION SUCCESSFUL with unwinding assertions on adaptive/certification loops",
+  "relationship_to_binary_evidence": "source-level physical-work control proof complements the independent BINSEC exact-binary fixed-class control-flow result already on main",
+  "nonclaims": [
+    "Neural numerical kernels are abstracted as nondeterministic stubs; their arithmetic correctness is not proved here.",
+    "The entropy threshold value is abstracted because the proof includes every possible continue/stop outcome.",
+    "This is source-level control proof and does not prove compiler preservation of the control semantics.",
+    "This does not prove Ibex RTL timing or physical FPGA/ASIC/silicon WCET; those are separate evidence layers."
+  ]
+}
