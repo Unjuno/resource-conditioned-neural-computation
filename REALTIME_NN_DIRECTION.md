@@ -36,7 +36,7 @@ One fixed NN can physically change depth/width/expert/block execution under reso
 
 On held-out handwritten-digit row sequences, formal seeds 60--64 reach **93.56%** adaptive test accuracy at **20.23%** average physical compute, with 5/5 passing seeds and zero cap/count violations. A separate chronological weekly-CO2 task remains a negative boundary: temporal/nonstationary depth utility shifts between validation and later test periods.
 
-### Goal C — same-model integration PASS; pinned RTL validation reached
+### Goal C — same-model integration PASS; pinned RTL + exact-binary noninterference reached
 
 The same real-data path now connects:
 
@@ -50,16 +50,17 @@ real held-out model
     -> nested physical execution
     -> maximum-work manifest
     -> pinned Ibex RTL timing binding
+    -> exact-RV32 binary noninterference audit
     -> deadline admission
 ```
 
-The five-seed Q15 reference has 0/12,600 exit-prediction mismatches and 1/1,800 preferred-exit mismatches versus float. Representative seed 63 integer C has 0/2,520 exit-prediction mismatches and 0/360 preferred-exit mismatches. The final Cortex-M4 and RV32 analysis cores eliminate unresolved runtime arithmetic helpers, floating-point operations, and hardware DIV/REM from the neural numeric path.
+The five-seed Q15 reference has 0/12,600 exit-prediction mismatches and 1/1,800 preferred-exit mismatches versus float. Representative seed 63 integer C has 0/2,520 exit-prediction mismatches and 0/360 preferred-exit mismatches. The final Cortex-M4 and RV32 fixed-class analysis cores eliminate unresolved runtime arithmetic helpers, floating-point operations, and hardware DIV/REM from the neural numeric path.
 
-The previous custom arithmetic processor model, `RTNN-IBEX-DIT-v1`, is now a **negative result**: actual pinned Ibex RTL exceeded that arithmetic cycle estimate for every full-work certification class. It must not be used for admission.
+The previous custom arithmetic processor model, `RTNN-IBEX-DIT-v1`, is a **negative result**: actual pinned Ibex RTL exceeded that arithmetic cycle estimate for every full-work certification class. It must not be used for admission.
 
-The current RTL experiment pins upstream Ibex commit `7b5df75a041affe56e8c235260f98a09b3319008` and uses the official Simple System with `SecureIbex=1` (which enables the internal data-independent timing path in this revision), `RV32MSingleCycle`, two-stage execution, no I-cache/branch predictor, and deterministic one-cycle Simple System RAM with zero additional instruction delay.
+The RTL experiment pins upstream Ibex commit `7b5df75a041affe56e8c235260f98a09b3319008` and uses the official Simple System with `SecureIbex=1` (which enables the internal data-independent timing path in this revision), `RV32MSingleCycle`, two-stage execution, no I-cache/branch predictor, and deterministic one-cycle Simple System RAM with zero additional instruction delay.
 
-A strengthened RTL audit runs every one of the seven fixed classes on three distinct held-out inputs with preferred depths 1, 3, and 5. In the derivation run, all 21 fixed-class predictions match the native integer reference and every class has **zero input-to-input cycle range**. The resulting exact-build certification counts are:
+A strengthened RTL audit runs every one of the seven fixed classes on three distinct held-out inputs with preferred depths 1, 3, and 5. All 21 fixed-class predictions match the native integer reference and every class has **zero input-to-input cycle range**. The exact-build measured certification counts are:
 
 | external class ceiling | fixed-class RTL cycles |
 |---:|---:|
@@ -85,20 +86,39 @@ The admission + real adaptive-inference maximum-work envelope is:
 
 The 100% class shares the deployed runtime envelope of the 83.3% class because the validated preferred maximum is exit 5/6. A full resource grant does not force useless extra work.
 
-The exact timing table is **build-specific**. Strengthening only the harness changed every fixed-class count by exactly one cycle, while the three inputs still remained identical. This confirms that timing evidence must be bound to the exact frozen Q15 artifact, exact machine image, compiler/toolchain, RTL commit, and RTL configuration rather than to a training seed or a portable cycle formula.
+The exact timing table is **build-specific**. Strengthening only the harness changed every fixed-class count by exactly one cycle while the three inputs still remained identical. Timing evidence therefore binds the frozen Q15 artifact, exact machine image, compiler/toolchain, RTL commit, and RTL configuration rather than a training seed or portable cycle formula.
+
+## Exact-binary software timing audit
+
+The same exact ELF/bin used in the RTL evidence was audited with a custom RV32IM taint interpreter. All 64 neural input bytes are tainted and taint is propagated through registers and memory.
+
+For every fixed class `0..6`:
+
+- neural-input-dependent conditional branches: **0**;
+- neural-input-dependent indirect-control targets: **0**;
+- neural-input-dependent store addresses: **0**;
+- hardware DIV/REM instructions on the fixed-class path: **0**.
+
+Exactly four load instruction sites have input-dependent addresses: `0x1002ec`, `0x1002f0`, `0x10152c`, and `0x101530`. They are exp/GELU LUT interpolation reads. The complete post-clamp Q15 index domains were enumerated and remain inside `fx_exp_lut[8193]` and `fx_gelu_lut[4097]`.
+
+This gives a structural explanation for the observed fixed-class RTL cycle invariance **under the pinned memory model**: hidden neural-input-dependent machine-code branching was not found, while the remaining input-dependent addresses access deterministic address-independent Simple System RAM. The same statement does not transfer to a cache, external SDRAM, arbitration fabric, or another memory implementation without a new analysis.
+
+The adaptive `rtnn_fixed_infer_budget` path is intentionally different. Across held-out inputs whose preferred exits are 1, 3, and 5, all neural-input-dependent conditional-control events localize to a single machine-code site, `0x101848`, the entropy early-stop decision. There is no input-dependent indirect control or store address. The wrapper contains one `DIVU` for public Q16 budget lowering; the fixed-class certification path contains none. Under the pinned `SecureIbex=1` configuration, the divider's early completion is disabled by the data-independent timing mode.
+
+The custom taint interpreter is **not formally verified**. Its instruction semantics were cross-checked on six embedded held-out vector/class cases with 0 prediction mismatches and a synthetic known-tainted-branch negative control that the analyzer correctly detects. Therefore this evidence is `PASS_WITH_SCOPE`, not a WCET theorem.
 
 ## Artifact identity policy
 
-The first RTL CI attempt also exposed a separate reproducibility boundary: retraining seed 63 on a GitHub runner did not reproduce the earlier local Q15 SHA bit-for-bit. Therefore:
+The first RTL CI attempt exposed a reproducibility boundary: retraining seed 63 on a GitHub runner did not reproduce the earlier local Q15 SHA bit-for-bit. Therefore:
 
 - **research reproducibility** uses seed + training recipe and is judged statistically;
 - **timing certification** uses a frozen Q15 artifact and exact machine-image hashes.
 
-Every RTL evidence artifact records the Q15 canonical/header hashes plus ELF/binary hashes.
+Every RTL/noninterference evidence artifact records or checks the exact Q15/build identity.
 
 ## Required evidence for a full production hard-real-time claim
 
-The research path demonstrates items 1--9 and the RTL/software portion of 10--11 below:
+The research path demonstrates items 1--9 and strong target-specific evidence for 10--11 below:
 
 1. same neural model across budgets;
 2. same input in counterfactual budget tests;
@@ -112,7 +132,7 @@ The research path demonstrates items 1--9 and the RTL/software portion of 10--11
 10. target/build-specific timing upper bound;
 11. deadline admission and on-time-correct evidence.
 
-The pinned RTL experiment substantially strengthens item 10 over Linux timing and over the rejected arithmetic model. It is still **not** an FPGA/ASIC/silicon production WCET certificate. A different physical implementation, memory system, interrupt/DMA policy, compiler, RTL revision, or processor configuration requires its own timing evidence.
+Pinned RTL measurement plus exact-binary fixed-class noninterference substantially strengthen item 10 over Linux timing and the rejected arithmetic model. They are still **not** an FPGA/ASIC/silicon production WCET certificate or a mechanically verified all-input timing theorem. A different physical implementation, memory system, interrupt/DMA policy, compiler, RTL revision, or processor configuration requires new timing evidence.
 
 ## Current negative boundaries
 
@@ -121,6 +141,8 @@ Retain these as first-class results:
 - Linux P95/P99 or observed-max × arbitrary margin is not a hard admission contract;
 - the old arithmetic `RTNN-IBEX-DIT-v1` cycle formula is falsified by actual pinned Ibex RTL;
 - a training seed is not a bitwise certification artifact identity;
+- a custom taint interpreter is useful evidence but not a mechanically verified WCET analyzer;
+- input-dependent LUT addresses are safe only under the explicitly modeled deterministic memory behavior;
 - nominal MAC reduction does not guarantee wall-clock reduction on every backend;
 - forcing exact admitted work can reduce task quality;
 - concurrent preferred-compute optimization missed the stable-frontier baseline;
@@ -129,8 +151,8 @@ Retain these as first-class results:
 
 ## Immediate priorities
 
-1. Keep RTL timing evidence bound to the exact frozen Q15 artifact and machine image; any changed build requires revalidation.
-2. If production hard-real-time deployment is required, reproduce the validated binding on an FPGA/ASIC or apply an accepted WCET/static timing methodology to the same target configuration.
+1. If a software-only production-grade timing proof is required, strengthen exact-binary fixed-class noninterference/timing with a mechanically verified static/formal method rather than adding more empirical input samples.
+2. When physical validation is desired, use the available DE0-CV to reproduce the exact-build timing contract with controlled on-chip memory and fixed clock; do not transfer the Simple System table blindly.
 3. Extend compiled/timing deployment across additional formal seeds only if cross-seed deployment robustness is required.
 4. Treat chronological/nonstationary temporal generalization as a separate ML-side problem.
 5. Larger LM-scale work remains downstream of the target-certification question.
@@ -140,12 +162,13 @@ Retain these as first-class results:
 Current work does **not** establish:
 
 - a universal Ibex WCET theorem;
+- a mechanically verified all-input WCET proof;
 - an FPGA/ASIC/silicon production WCET guarantee;
-- arbitrary hardware/timing portability;
+- arbitrary memory/hardware timing portability;
 - temporal distribution-shift robustness;
 - an LLM-scale real-time generalization.
 
-The RTL timing binding is valid only for the explicitly pinned simulation configuration and exact build evidence to which it is attached.
+The current RTL timing binding and software noninterference evidence are valid only for the explicitly identified exact binary and pinned target assumptions.
 
 ## Direction lock
 

@@ -1,0 +1,303 @@
+{
+  "experiment": "exact-RV32-binary input/control-flow noninterference audit",
+  "decision": "PASS_WITH_SCOPE",
+  "scope": "custom taint interpreter over the exact pinned-RTL certification binary; proves no detected input-tainted branch/indirect-control dependence in fixed-class paths, conditional on interpreter correctness; not a formal WCET theorem",
+  "artifact": {
+    "elf_sha256": "234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742",
+    "binary_sha256": "266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1",
+    "entry_rtnn_fixed_certify_class": "0x1018f4",
+    "vector_symbol_address": "0x11cad4"
+  },
+  "classes": [
+    {
+      "class": 0,
+      "retired_instruction_model_steps": 21754,
+      "data_dependent_conditional_branch_events": 0,
+      "data_dependent_conditional_branch_sites": [],
+      "data_dependent_indirect_control_events": 0,
+      "data_dependent_indirect_control_sites": [],
+      "data_dependent_memory_address_events": 0,
+      "data_dependent_memory_load_sites": [],
+      "data_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 0,
+      "pc_trace_sha256": "d768ef20da3c8e2b965cb21f3a186fe20d4a2755c590d56ac891b3bda637b6fa",
+      "instruction_categories": {
+        "alu": 13854,
+        "store": 378,
+        "branch": 1669,
+        "auipc": 156,
+        "jump": 313,
+        "lui": 7,
+        "load": 3009,
+        "mul": 1184,
+        "mul_high": 1184
+      }
+    },
+    {
+      "class": 1,
+      "retired_instruction_model_steps": 472942,
+      "data_dependent_conditional_branch_events": 0,
+      "data_dependent_conditional_branch_sites": [],
+      "data_dependent_indirect_control_events": 0,
+      "data_dependent_indirect_control_sites": [],
+      "data_dependent_memory_address_events": 768,
+      "data_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "data_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 0,
+      "pc_trace_sha256": "c8593537a4488e0bab7d24cbdecb5de965427b8a92f1bc6d855883147c0b0482",
+      "instruction_categories": {
+        "alu": 315826,
+        "store": 3951,
+        "branch": 29810,
+        "auipc": 9080,
+        "jump": 18193,
+        "lui": 1413,
+        "load": 47565,
+        "mul": 24512,
+        "mul_high": 22592
+      }
+    },
+    {
+      "class": 2,
+      "retired_instruction_model_steps": 924129,
+      "data_dependent_conditional_branch_events": 0,
+      "data_dependent_conditional_branch_sites": [],
+      "data_dependent_indirect_control_events": 0,
+      "data_dependent_indirect_control_sites": [],
+      "data_dependent_memory_address_events": 1536,
+      "data_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "data_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 0,
+      "pc_trace_sha256": "3214d3b800635d6f2f75eaf09388dae4d832f3b836566b1dc0e2a4d01e3abf10",
+      "instruction_categories": {
+        "alu": 617797,
+        "store": 7524,
+        "branch": 57951,
+        "auipc": 18004,
+        "jump": 36073,
+        "lui": 2819,
+        "load": 92121,
+        "mul": 47840,
+        "mul_high": 44000
+      }
+    },
+    {
+      "class": 3,
+      "retired_instruction_model_steps": 1375316,
+      "data_dependent_conditional_branch_events": 0,
+      "data_dependent_conditional_branch_sites": [],
+      "data_dependent_indirect_control_events": 0,
+      "data_dependent_indirect_control_sites": [],
+      "data_dependent_memory_address_events": 2304,
+      "data_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "data_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 0,
+      "pc_trace_sha256": "b0a8a61e103e1136eda5aa07c72957e9c59381694223045229fc78e703dd8a30",
+      "instruction_categories": {
+        "alu": 919768,
+        "store": 11097,
+        "branch": 86092,
+        "auipc": 26928,
+        "jump": 53953,
+        "lui": 4225,
+        "load": 136677,
+        "mul": 71168,
+        "mul_high": 65408
+      }
+    },
+    {
+      "class": 4,
+      "retired_instruction_model_steps": 1826503,
+      "data_dependent_conditional_branch_events": 0,
+      "data_dependent_conditional_branch_sites": [],
+      "data_dependent_indirect_control_events": 0,
+      "data_dependent_indirect_control_sites": [],
+      "data_dependent_memory_address_events": 3072,
+      "data_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "data_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 0,
+      "pc_trace_sha256": "a605db93b7fb0d677374a6ef7bd663b9a7c401c74be89f79356ede321fb5fb27",
+      "instruction_categories": {
+        "alu": 1221739,
+        "store": 14670,
+        "branch": 114233,
+        "auipc": 35852,
+        "jump": 71833,
+        "lui": 5631,
+        "load": 181233,
+        "mul": 94496,
+        "mul_high": 86816
+      }
+    },
+    {
+      "class": 5,
+      "retired_instruction_model_steps": 2277690,
+      "data_dependent_conditional_branch_events": 0,
+      "data_dependent_conditional_branch_sites": [],
+      "data_dependent_indirect_control_events": 0,
+      "data_dependent_indirect_control_sites": [],
+      "data_dependent_memory_address_events": 3840,
+      "data_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "data_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 0,
+      "pc_trace_sha256": "82ff2628fde15f18b5ba1543dbf71f5d7bd0a04eec662d7210c13509ad621ad5",
+      "instruction_categories": {
+        "alu": 1523710,
+        "store": 18243,
+        "branch": 142374,
+        "auipc": 44776,
+        "jump": 89713,
+        "lui": 7037,
+        "load": 225789,
+        "mul": 117824,
+        "mul_high": 108224
+      }
+    },
+    {
+      "class": 6,
+      "retired_instruction_model_steps": 2277691,
+      "data_dependent_conditional_branch_events": 0,
+      "data_dependent_conditional_branch_sites": [],
+      "data_dependent_indirect_control_events": 0,
+      "data_dependent_indirect_control_sites": [],
+      "data_dependent_memory_address_events": 3840,
+      "data_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "data_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 0,
+      "pc_trace_sha256": "7d7e36b7b229007d2ce1ccdeb210cec534c1de9de630ca076814bb755c638c2f",
+      "instruction_categories": {
+        "alu": 1523711,
+        "store": 18243,
+        "branch": 142373,
+        "auipc": 44776,
+        "jump": 89714,
+        "lui": 7037,
+        "load": 225789,
+        "mul": 117824,
+        "mul_high": 108224
+      }
+    }
+  ],
+  "all_classes_zero_data_dependent_control_flow": true,
+  "all_data_dependent_memory_load_sites": [
+    "0x1002ec",
+    "0x1002f0",
+    "0x10152c",
+    "0x101530"
+  ],
+  "all_data_dependent_memory_store_sites": [],
+  "fixed_classes_zero_hardware_div_rem": true,
+  "memory_address_interpretation": "data-dependent addresses are LUT lookups; the pinned Simple System RAM has address-independent deterministic response, but this assumption must be revalidated for caches/external memories",
+  "exact_embedded_vector_prediction_cases": 6,
+  "exact_embedded_vector_prediction_mismatches": [],
+  "adaptive_path_audit": [
+    {
+      "slot": 0,
+      "executed_exit": 1,
+      "expected_preferred_exit": 1,
+      "retired_instruction_model_steps": 543260,
+      "input_dependent_branch_events": 2,
+      "input_dependent_branch_sites": [
+        "0x101848"
+      ],
+      "input_dependent_indirect_control_events": 0,
+      "input_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "input_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 1
+    },
+    {
+      "slot": 1,
+      "executed_exit": 3,
+      "expected_preferred_exit": 3,
+      "retired_instruction_model_steps": 1515926,
+      "input_dependent_branch_events": 4,
+      "input_dependent_branch_sites": [
+        "0x101848"
+      ],
+      "input_dependent_indirect_control_events": 0,
+      "input_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "input_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 1
+    },
+    {
+      "slot": 2,
+      "executed_exit": 5,
+      "expected_preferred_exit": 5,
+      "retired_instruction_model_steps": 2453446,
+      "input_dependent_branch_events": 5,
+      "input_dependent_branch_sites": [
+        "0x101848"
+      ],
+      "input_dependent_indirect_control_events": 0,
+      "input_dependent_memory_load_sites": [
+        "0x1002ec",
+        "0x1002f0",
+        "0x10152c",
+        "0x101530"
+      ],
+      "input_dependent_memory_store_sites": [],
+      "hardware_div_rem_instructions": 1
+    }
+  ],
+  "adaptive_execution_mismatches": [],
+  "adaptive_unique_input_dependent_control_sites": [
+    "0x101848"
+  ],
+  "lut_index_exhaustive_audit": {
+    "exp_lut_length": 8193,
+    "exp_index_min": 0,
+    "exp_index_max": 8192,
+    "exp_in_bounds": true,
+    "gelu_lut_length": 4097,
+    "gelu_index_min": 0,
+    "gelu_index_max": 4096,
+    "gelu_in_bounds": true
+  },
+  "taint_analyzer_negative_control_detects_known_input_branch": true,
+  "nonclaims": [
+    "The custom taint interpreter is not a formally verified analyzer.",
+    "Data-dependent LUT addresses remain; only control-flow noninterference is established by this audit.",
+    "The result does not establish FPGA/ASIC/silicon WCET or timing under address-dependent memory latency.",
+    "The adaptive early-stop path intentionally contains input-dependent stopping control flow; the audited fixed-class certification path is the maximum-work reference."
+  ]
+}
