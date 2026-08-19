@@ -37,6 +37,7 @@ The preferred external control variable is a normalized continuous budget `b in 
 | **Exact RV32 binary input/control-flow noninterference** | **PASS_WITH_SCOPE** | the exact RTL-tested ELF/bin have 0 input-tainted conditional branches or indirect control targets in every fixed class, 0 input-tainted stores, and only four bounded exp/GELU LUT load-address sites; the adaptive path localizes all input-dependent control to one entropy-stop instruction site; custom analyzer is not a formal WCET theorem |
 | **Third-party BINSEC fixed-class control flow** | **PASS_WITH_SCOPE** | pinned BINSEC independently analyzes the exact RTL-tested ELF: 7/7 finite classes complete exactly one path as `secure`, with 933,653/933,653 control-flow checks passing, pending paths 0, unknowns 0, and control-flow leak sites 0; generic full memory constant-time analysis for class 1 hits runner resource limit because LUT addresses remain input-dependent |
 | **Pinned Simple-System LUT memory timing** | **PASS_WITH_SCOPE** | exact ELF: all four input-indexed memory sites remain aligned `LW`; both exp/GELU LUTs are wholly inside the 1 MiB RAM; all 12,290 legal LUT word addresses uniquely decode to RAM; Yosys netlist of pinned `ram_2p` shows `a_rvalid_o` is one request-register stage with zero address fan-in, closing address-dependent response timing for this memory model |
+| **Durable exact certification artifact** | **PASS** | the exact Ibex timing/binary/memory evidence package is frozen in Git; ZIP/ELF/BIN hashes are pinned and CI derives the board-free reference directly from the frozen package rather than relying on Actions retention |
 | **CBMC finite runtime contract** | **PASS_WITH_SCOPE** | CBMC 6.10.0 proves, over complete integer domains, monotone fail-closed Q0.16 lowering, the actual C deadline-admission implementation, arbitrary partial-certification safety, effective budget/deadline/preference ceilings, and Q15 LUT index bounds; all five proof entry points report `VERIFICATION SUCCESSFUL` |
 | **CBMC deployed control functions** | **PASS_WITH_SCOPE** | exact deployed bodies of `budget_ceiling`, adaptive `infer_budget`, and `certify_class` are mechanically extracted by SHA and proved: for all budgets/deadline bytes and all possible stop outcomes, physical `run_block` calls stay canonical and within the effective cap; certification executes exactly the normalized maximum-work class |
 | **Empirical RTOS-style same-model demo** | qualified / diagnostic | empirical P99 deadline admission changes physical compute and on-time-correct trade-offs; timing remains diagnostic rather than hard evidence |
@@ -58,12 +59,15 @@ held-out real-data model
     -> exact-RV32 custom input/control-flow noninterference audit
     -> third-party BINSEC fixed-class control-flow cross-check
     -> pinned Simple-System LUT memory-timing audit
+    -> durable exact certification artifact identity
     -> CBMC finite runtime-contract proof
     -> CBMC mechanically extracted deployed-control proof
     -> deadline admission interface
 ```
 
 The representative integer core has no unresolved arithmetic helpers, floating-point instructions, or hardware DIV/REM in the fixed-class neural numeric path. Timing certification identity is separated from training reproducibility: seeds/recipes reproduce experiments statistically, while timing evidence binds the exact frozen Q15 artifact and exact machine image to the pinned RTL/toolchain/configuration.
+
+The exact certification package is now frozen under `artifacts/certification/ibex_simple_system/`. CI verifies the ZIP/ELF/BIN hashes and derives `artifacts/certification/de0_cv_preflight_vectors.json` directly from that frozen package, so the current software evidence no longer depends on the retention lifetime of the original Actions artifact.
 
 ## Timing boundary
 
@@ -87,12 +91,12 @@ The combined software/RTL evidence is now substantially stronger than sampled pr
 
 - **Goal A — physical budget-conditioned computation:** PASS.
 - **Goal B — generalizable adaptive computation:** PASS on independent held-out real sequence samples; chronological temporal nonstationarity remains unresolved.
-- **Goal C — hard-real-time RTNN:** same-model lowering, fixed-point time-predictable execution, maximum-work contract, continuous budget, deadline admission, pinned RTL timing validation, exact-binary fixed-class noninterference, independent BINSEC fixed-class control-flow verification, target-specific deterministic LUT-memory timing, CBMC finite software contract, and CBMC proof of the actual deployed source control are demonstrated. The remaining production boundary is physical-target/processor certification rather than an unresolved software memory-address timing path.
+- **Goal C — hard-real-time RTNN:** same-model lowering, fixed-point time-predictable execution, maximum-work contract, continuous budget, deadline admission, pinned RTL timing validation, exact-binary fixed-class noninterference, independent BINSEC fixed-class control-flow verification, target-specific deterministic LUT-memory timing, durable artifact identity, CBMC finite software contract, and CBMC proof of the actual deployed source control are demonstrated. The remaining production boundary is physical-target/processor certification rather than an unresolved software memory-address timing path.
 
 ## Next falsification priorities
 
-1. Preserve the exact artifact/build identity durably; Actions artifacts are supporting evidence, not a long-term certification archive.
+1. Keep the Git-frozen certification package, its ZIP/ELF/BIN hashes, derived board-free vectors, and claim documents synchronized in CI.
 2. If one more software/formal layer is desired before hardware, target processor-level proof/certification methodology rather than repeating input sampling or generic Linux timing.
-3. For physical validation, use the available DE0-CV with controlled on-chip memory and a fixed clock; derive a new FPGA-specific timing binding instead of copying the Simple System table.
+3. For physical validation, use the available DE0-CV with controlled on-chip memory and a fixed clock; derive a new FPGA-specific timing binding instead of copying the Simple System table. The preregistration is in `notes/realtime_nn_de0_cv_next_stage.md`.
 4. Extend integer/timing deployment across additional seeds only if cross-seed compiled deployment robustness is required.
 5. Treat chronological/nonstationary temporal generalization as a separate research problem; larger language-model-scale work remains downstream of production target certification.
