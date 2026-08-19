@@ -25,42 +25,49 @@ The preferred external control variable is a normalized continuous budget `b in 
 | Concurrent preferred-compute training | **FAIL / credit-assignment boundary** | 5-seed ST, relaxed-soft, and online-decoupled audits all preserve hard caps but miss the post-trained frontier; best online-decoupled result is -3.44 pp token / -8.13 pp exact at nearly identical mean work |
 | Continuous normalized budget + horizon value | PASS + held-out boundary | supplied exhaustive sequence toy: state horizon value reaches 99.53% token / 98.13% exact at 75.63% mean compute; four-fold held-out-prompt cross-fit FAILS at 90.0% / 73.75% |
 | **Real independent-sequence generalization** | **PASS** | held-out handwritten-digit row sequences, formal seeds 60--64: adaptive policy 93.56% accuracy at 20.23% mean compute, +43.83 pp capability gain from 0% exit, 5/5 seeds pass, cap violations 0 |
+| **Same-model real-data → freestanding C** | **PASS** | the exact real-sequence models for seeds 60--64 are exported to one generic C core: 12,600 exit predictions and 1,800 preferred-exit decisions have 0 Python/C mismatches; all five freestanding objects have 0 unresolved symbols |
+| **Same-model continuous budget execution** | **PASS** | representative seed 63: 7,560 test-sample × 21-budget cases have 0 prediction, executed-exit, or cap mismatches; inference is single-pass and never executes beyond the admitted ceiling |
 | **Chronological temporal distribution shift** | **FAIL / unresolved** | weekly CO2 future-change task: 69.08% adaptive vs 70.11% full-depth, -1.03 pp, only 3/5 seeds pass; validation/test depth utility shifts over time |
-| **Continuous freestanding runtime contract** | **PASS** | exhaustive 65,536 Q0.16 budgets, 16,777,216 budget×preferred cases, and 655,360 deadline-composition cases all pass; invalid preferred class fails closed |
-| **Continuous maximum-work manifest** | **PASS** | 0/25/50/75/100% finite ceilings expose max blocks/MACs/LUT calls/workspace and allowed nested block IDs; target timing bounds remain null |
-| **Controlled Linux timing as hard bound** | **FAIL / hard timing UNCERTAIN** | affinity-pinned exact binary has class-ordered medians but multi-million-cycle preemption maxima; calibration maxima and even arbitrary 2x/4x factors can be exceeded later |
-| Deadline + budget + preferred-class admission | PASS as interface / empirical demo | explicit timing bindings compose correctly, build/manifest mismatch rejects, partial certification never admits uncertified classes; no hard-RT timing claim |
+| **Same-model maximum-work manifest** | **PASS** | seed-63 export exposes seven normalized classes, capability and deployed-policy ceilings, maximum MAC/LUT/rsqrt/head counts, 4,608-byte workspace, build/manifest identity, and null target timing bounds |
+| **Same-model deadline + budget + stopping contract** | **PASS as interface/property test** | 52,920 held-out sample × budget × deadline cases: 0 admitted-class, executed-exit, or prediction mismatches; partial certification and wrong build/manifest fail closed |
+| **Controlled Linux timing as hard bound** | **FAIL / hard timing UNCERTAIN** | same seed-63 adaptive binary, CPU affinity + RDTSCP: across 15 runs held-out observed maxima reach 12.50× the first calibration maximum; even `max×8` is exceeded for multiple classes |
+| **Empirical RTOS-style same-model demo** | qualified / diagnostic | empirical P99 deadline admission changes physical compute and on-time-correct trade-offs; at deadline classes 3--5 three-run mean RTNN on-time-correct is about 93--94%, but the timing table is not a hard bound |
 
 ## RTOS / analyzable implementation bridge
 
-The repository contains generated C/C++, freestanding integer/float cores, fixed work manifests, LUT/numeric-range audits, cross-ISA compile/link audits, build-bound execution contracts, and now a continuous Q0.16 budget lowering contract. These establish an analyzable implementation boundary but **not WCET**.
+The repository contains generated C/C++, freestanding integer/float cores, fixed work manifests, LUT/numeric-range audits, cross-ISA compile/link audits, build-bound execution contracts, and a continuous Q0.16 budget lowering contract.
 
-The latest external/runtime contract is:
+The previously open same-model integration gap is now closed for the independent-sample real-sequence experiment:
 
 ```text
-continuous normalized budget b in [0,1]
-    -> largest finite maximum-work class <= b
-    -> preferred maximum useful compute
-    -> deadline-certified class
-    -> min of all three ceilings
+held-out real-data model
+    -> generated static weights / policy / LUTs
+    -> same-model freestanding C
+    -> continuous b in [0,1]
+    -> budget/deadline ceiling
+    -> entropy early stopping
     -> nested physical execution
+    -> maximum-work manifest
+    -> deadline admission interface
 ```
 
-The latest real-data generalization model and the existing freestanding core are still separate artifacts; lowering the exact real-sequence model is an integration task, not something inferred from the generic runtime-contract PASS.
+For representative seed 63, the combined freestanding core + deadline contract has zero unresolved external symbols and compiles freestanding with Clang for `armv7m-none-eabi`, `riscv32-unknown-elf`, and `aarch64-none-elf`. Cross-compilation is not timing certification.
 
 ## Timing boundary
 
-Ordinary Linux percentile timing was already falsified as a stable hard-admission contract. The new exact-binary cycle audit strengthens that boundary: observed calibration maxima are not stable upper bounds, and multiplying an observed maximum by an arbitrary safety factor is not certification. A defensible target/compiler/build/RTOS-specific WCET or equivalent upper bound remains required.
+Ordinary Linux percentile timing was already falsified as a stable hard-admission contract. The same-model cycle audit strengthens that boundary: observed calibration maxima are not stable upper bounds, and multiplying an observed maximum by an arbitrary safety factor is not certification. The available environment has no WCET analyzer, time-predictable bare-metal target, or `SCHED_FIFO` permission.
+
+A defensible target/compiler/build/RTOS-specific upper bound remains the only missing evidence needed to turn the current same-model demonstrator into a hard-real-time demonstrator.
 
 ## Current research-goal status
 
 - **Goal A — physical budget-conditioned computation:** PASS.
 - **Goal B — generalizable adaptive computation:** PASS on independent held-out real sequence samples; chronological temporal nonstationarity remains unresolved.
-- **Goal C — hard-real-time RTNN:** interface/max-work/deadline composition PASS, but exact real-data-model lowering is still an integration item and hard target timing certification is **UNCERTAIN**.
+- **Goal C — hard-real-time RTNN:** same-model real-data lowering, maximum-work manifest, continuous-budget execution, and deadline-admission interface all PASS. **Hard target timing certification remains UNCERTAIN.**
 
 ## Next falsification priorities
 
-1. Run the finite-class system on a **concrete time-predictable target or defensible WCET/static timing analyzer**; do not substitute more Linux percentile/max timing.
-2. Lower the exact held-out-real-sequence model/policy into the freestanding boundary and cross-check predictions, exit decisions, and work classes against Python.
-3. Treat chronological/nonstationary temporal generalization as a separate research problem: train/validation/test depth utility drift must be modeled or bounded rather than hidden inside the independent-sample PASS.
-4. Once a defensible target timing table exists for the same deployed model/build, run the final RTOS deadline/on-time-correct experiment.
+1. Run this **same exported real-data model/build** on a concrete time-predictable target or through a defensible WCET/static timing analyzer, with compiler, memory/cache, interrupt, DMA, and scheduling assumptions fixed.
+2. Populate the currently-null timing table only from that defensible target evidence, bind it to the exact deployed build identity, and rerun the final deadline/on-time-correct experiment.
+3. Treat chronological/nonstationary temporal generalization as a separate research problem: train/validation/test depth-utility drift must be modeled or bounded rather than hidden inside the independent-sample PASS.
+4. Larger language-model-scale work remains downstream of the hard-timing target and temporal-shift work.
