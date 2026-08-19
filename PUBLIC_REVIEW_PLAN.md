@@ -42,7 +42,7 @@ The following are limitations or downstream work, not automatic falsifications o
 
 - lack of LLM-scale experiments;
 - lack of production silicon/FPGA WCET certification;
-- DE0-CV not yet being executed, provided no FPGA timing claim is made;
+- DE0-CV has not yet been executed, provided no FPGA timing claim is made;
 - generic BINSEC relational-memory analysis exceeding the supplied runner resources, because the accepted memory claim is target-specific and independently scoped;
 - chronological/nonstationary temporal generalization remaining unresolved, provided that negative result remains explicit;
 - different absolute timing on another target, because timing must be rebound to that target rather than assumed portable;
