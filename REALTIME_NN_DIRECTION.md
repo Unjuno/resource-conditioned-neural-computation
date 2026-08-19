@@ -24,7 +24,7 @@ certified target/build-specific timing bound
 output before the deadline when admission is feasible
 ```
 
-`b=0` means 0% and `b=1` means 100% of the maximum neural compute envelope. Intermediate values are ordinary continuous percentages at the interface. This does **not** imply continuously interpolated machine instructions: the backend lowers `b` fail-closed to finite physical classes.
+`b=0` means 0% and `b=1` means 100% of the maximum neural compute envelope. Intermediate values are continuous percentages at the interface; the backend lowers them fail-closed to finite physical classes.
 
 ## Current preferred runtime contract
 
@@ -37,57 +37,25 @@ continuous runtime budget b ∈ [0,1]
     -> nested physical execution
 ```
 
-Budget is a **maximum admissible amount of work**, not an obligation to consume all admitted work. Forced extra computation has already been falsified as universally useful.
+Budget is a **maximum admissible amount of work**, not an obligation to consume all admitted work.
 
 ## Research-goal status
 
 ### Goal A — physical budget-conditioned computation: PASS
 
-The repository supports one fixed NN changing physical depth/width/expert/block execution under resource conditions, including hard physical skip audits and finite work classes.
+One fixed NN can physically change depth/width/expert/block execution under resource conditions with hard skip audits and finite work classes.
 
 ### Goal B — generalizable adaptive computation: PASS with a temporal-shift boundary
 
-A formal held-out real-sequence experiment treats each handwritten digit as eight row tokens and uses six optional self-attention/MLP blocks with exits. Validation chooses the maximum useful depth; entropy may stop earlier. Test labels are not used for policy fitting.
+On held-out handwritten-digit row sequences, formal seeds 60--64 reach **93.56%** adaptive test accuracy at **20.23%** average physical compute, with 5/5 passing seeds and zero cap/count violations. A separate chronological weekly-CO2 task remains a negative boundary: temporal/nonstationary depth utility shifts between validation and later test periods.
 
-Across formal seeds 60--64:
+### Goal C — same-model integration PASS; conditional static timing now exists
 
-- adaptive held-out test accuracy: **93.56%**;
-- validation-selected-depth test accuracy: 93.44%;
-- average physical compute: **20.23%**;
-- capability gain from the 0% exit to useful compute: **+43.83 pp**;
-- cap/count violations: 0;
-- passing seeds: 5/5.
-
-This establishes an independent-sample real-sequence generalization result.
-
-A separate chronological weekly-CO2 experiment is a negative boundary: validation-tuned stopping reaches 69.08% versus 70.11% full-depth, only 3/5 seeds pass, and useful depth shifts between validation and later test periods. **Temporal/nonstationary distribution-shift robustness remains unresolved.**
-
-### Goal C — same-model integration PASS; hard timing remains UNCERTAIN
-
-The exact real-data sequence model has now been lowered to a generic freestanding C core.
-
-Across seeds 60--64:
-
-- **12,600 / 12,600** finite-exit held-out predictions match PyTorch;
-- **1,800 / 1,800** preferred-exit decisions match PyTorch;
-- all five freestanding core objects have zero unresolved external symbols.
-
-For representative seed 63, the same deployed model additionally passes:
-
-- 7,560 held-out sample × continuous-budget cases with zero prediction/executed-exit/cap mismatches;
-- 52,920 held-out sample × budget × deadline-contract cases with zero admission/executed-exit/prediction mismatches;
-- partial-certification fail-closed behavior;
-- wrong build and wrong manifest rejection;
-- combined freestanding core + runtime contract with zero unresolved external symbols;
-- freestanding Clang compilation for ARMv7-M, RV32, and AArch64 targets.
-
-The seed-63 export emits a target-independent maximum-work manifest with seven normalized classes, a 4,608-byte caller-owned workspace, explicit maximum structural work, and `target_timing_bounds = null`.
-
-The earlier integration gap is therefore closed:
+The exact real-data sequence model is already connected through:
 
 ```text
 real held-out model
-    -> generated weights / policy / LUTs
+    -> generated static model/policy
     -> same-model freestanding C
     -> continuous budget
     -> preferred early stopping
@@ -95,29 +63,54 @@ real held-out model
     -> deadline admission interface
 ```
 
-**Hard timing certification is still not established.** The exact seed-63 adaptive binary was CPU-affinity pinned and measured with `RDTSCP`; across 15 timing runs, later observed maxima reach about **12.50×** the first calibration maximum, and even `observed max × 8` is exceeded for multiple classes. The current environment has no WCET analyzer, no time-predictable bare-metal execution target, and no permission for `SCHED_FIFO`.
+The float same-model path has 0/12,600 finite-exit prediction mismatches and 0/1,800 preferred-exit mismatches across seeds 60--64.
 
-Therefore Linux observed maxima remain empirical diagnostics, not WCET.
+The latest hard-timing audit adds a **Q15 fixed-iteration path**:
 
-An empirical RTOS-style same-model demonstrator is also implemented. It shows that deadline admission changes physical compute and can improve on-time-correct behavior versus always-full execution in several deadline regimes, but its P99 timing table is deliberately not promoted to a hard real-time guarantee.
+- five-seed Q15 reference: 0/12,600 exit-prediction mismatches and 1/1,800 preferred-exit mismatches versus float;
+- representative seed 63 integer C: 0/2,520 exit-prediction mismatches and 0/360 preferred-exit mismatches;
+- fixed 64-iteration integer division, fixed 32-iteration integer square root, integer exp/GELU LUTs;
+- data-dependent numerical select/max operations lowered through explicit mask/select helpers;
+- final Cortex-M4 soft-float object: zero unresolved external symbols, zero floating-point instructions, zero hardware divide instructions;
+- RV32IM analysis build: no DIV/REM or floating-point instructions.
+
+The certification path forces execution to the admitted maximum class while retaining the entropy-evaluation overhead. Four distinct held-out inputs have identical RV32 dynamic instruction-category counts for every class.
+
+Under the explicit conditional processor/memory model `RTNN-IBEX-DIT-v1` (RV32IM, Ibex-style `DataIndTiming`, single-cycle multiplier, aligned zero-wait SRAM, no cache/interrupt/DMA/debug/bus contention), the total admission + worst adaptive-inference envelopes are:
+
+| external ceiling | conditional total upper cycles |
+|---:|---:|
+| 0% | 22,180 |
+| 16.7% | 549,778 |
+| 33.3% | 1,077,368 |
+| 50% | 1,604,958 |
+| 66.7% | 2,132,548 |
+| 83.3% | 2,660,139 |
+| 100% | 2,660,140 |
+
+A fixed-point 360 × 21-budget × 7-deadline audit gives 52,920 cases with zero admission, executed-exit, prediction, or cap mismatches. Partial certification and wrong model/build identity fail closed.
+
+This is a meaningful advance over Linux timing: it is a finite **static conditional timing model**, not an empirical percentile or observed-maximum margin.
+
+However, it is still **not a physical-device WCET certificate**. No matching Ibex RTL simulation, FPGA/ASIC run, or accepted target WCET analyzer was available in-session. The custom RV32 instruction interpreter is an audit tool, not a formal ISA/RTL proof.
 
 ## Required evidence for the full Real-Time NN claim
 
-The complete claim requires all of the following in **one deployed system**:
+A complete deployed hard-real-time claim requires:
 
 1. same weights across all budgets;
 2. same input in counterfactual budget tests;
 3. normalized external budget `b ∈ [0,1]`;
-4. budget-dependent active internal computation;
+4. budget-dependent physical internal computation;
 5. inactive computation physically skipped;
-6. exact or conservatively bounded work for each finite class;
+6. exact or conservatively bounded work per finite class;
 7. held-out task quality under the budget frontier;
 8. target-independent maximum-work manifest;
 9. exact deployed build identity;
 10. defensible target/compiler/build/RTOS timing upper bound per admitted class;
-11. deadline admission and on-time-correct/deadline-miss measurements.
+11. deadline admission and on-time-correct/deadline-miss evidence.
 
-Items 1--9 and the software/interface part of item 11 are now demonstrated for the same real-data model path. **Item 10 is the principal missing proof**, and a hard interpretation of item 11 depends on it.
+Items 1--9 and the software/interface part of 11 are demonstrated on the same real-data path. Item 10 now has a **conditional processor-model candidate**, but still requires RTL/physical/static-analyzer validation before becoming a deployed timing certificate. A hard interpretation of item 11 depends on that validation.
 
 ## Current negative boundaries
 
@@ -125,30 +118,32 @@ Retain these as first-class results:
 
 - Linux P95/P99 is not a hard real-time admission contract;
 - observed maximum latency/cycles, even multiplied by an arbitrary safety factor, is not a certified upper bound;
+- an early integer Cortex-M4 build still contained `__aeabi_uldivmod`; it was rejected and replaced by fixed restoring division;
 - nominal MAC reduction does not guarantee wall-clock reduction on every backend;
 - forcing exact admitted work can reduce task quality;
-- additive logit refinement gave no matched advantage;
 - concurrent preferred-compute optimization missed the stable-frontier baseline;
 - toy held-out horizon-value prediction failed;
-- chronological temporal distribution shift remains unresolved even though independent-sample real-sequence generalization passes.
+- chronological temporal distribution shift remains unresolved.
 
 ## Immediate priorities
 
-1. **Concrete hard-timing target:** run the same exported real-data model/build on a time-predictable target or with a defensible WCET/static timing analyzer under fixed compiler, memory/cache, interrupt, DMA, and scheduling assumptions.
-2. **Certified final RTOS experiment:** populate the timing binding only from defensible bounds for that exact build, then measure deadline misses, on-time correct, admitted class, effective compute, actual cycles, and bound slack.
-3. **Temporal-shift research:** treat nonstationary time-series depth-utility drift as a separate generalization problem rather than silently merging it into the independent-sample PASS.
-4. Larger language-model-scale work remains downstream of these items.
+1. **Validate the conditional timing model on a matching target.** Run the exact Q15 RV32IM build on Ibex RTL/FPGA/ASIC with `DataIndTiming`, the selected multiplier configuration, controlled SRAM latency, and interrupts/DMA/interference disabled, or apply an accepted WCET/static timing analyzer.
+2. Compare every measured/analyzed class against the conditional envelope. If any class exceeds it, identify the failed pipeline/memory/integration assumption and revise the target binding rather than adding empirical margin.
+3. If the model survives, issue the exact target/build-specific `T_j` table and run the final certified deadline/on-time-correct experiment.
+4. Extend the integer deployment audit across all five formal seeds if cross-seed compiled deployment robustness is needed.
+5. Treat temporal distribution shift as a separate ML-side problem; larger LM-scale work remains downstream of physical-target timing validation.
 
 ## Explicit nonclaims
 
-Current work does not establish:
+Current work does **not** establish:
 
-- hard real-time or WCET guarantees;
-- a complete production Real-Time NN;
+- a physical-device or production WCET guarantee;
+- a complete production hard-real-time RTNN;
 - temporal distribution-shift robustness;
-- a Real-Time LM or LLM-scale generalization;
-- universal wall-clock benefit from nominal compute reduction;
-- arbitrary hardware/timing portability.
+- arbitrary hardware/timing portability;
+- a Real-Time LM or LLM-scale generalization.
+
+The `RTNN-IBEX-DIT-v1` table is valid only as a conditional upper-bound model under its explicit assumptions until independent RTL/target validation is obtained.
 
 ## Direction lock
 

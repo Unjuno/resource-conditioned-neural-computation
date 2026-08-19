@@ -1,0 +1,87 @@
+{
+  "setup": {
+    "model": "same held-out real-data 8-row-token transformer",
+    "external_budget": "continuous b in [0,1]",
+    "quantization": "Q15 activations/weights, Q17 softmax probabilities",
+    "representative_seed": 63,
+    "canonical_q15_model_sha256": "b53c6dbc270d0f95e9959bdc2eacb1608b91496437a7b4b159fda3e74e7b488a",
+    "certification_target_model": "RTNN-IBEX-DIT-v1",
+    "target_model_assumptions": [
+      "RV32IM Ibex-style core",
+      "DataIndTiming enabled",
+      "RV32MSingleCycle multiplier",
+      "32-bit uncompressed instructions",
+      "zero-wait aligned instruction/data SRAM",
+      "no cache, interrupts, DMA, debug or competing masters",
+      "no division instructions or runtime arithmetic helpers"
+    ]
+  },
+  "five_seed_q15": {
+    "formal_seeds": [60, 61, 62, 63, 64],
+    "total_exit_prediction_cases": 12600,
+    "total_exit_prediction_mismatches": 0,
+    "total_preferred_exit_cases": 1800,
+    "total_preferred_exit_mismatches": 1,
+    "validation_preferred_exit_mismatches": 0,
+    "mean_test_policy_accuracy": 0.9355555555555556,
+    "mean_test_compute_fraction": 0.20222222222222222,
+    "decision": "PASS under quantization tolerance"
+  },
+  "seed63_integer_c": {
+    "exit_prediction_cases": 2520,
+    "exit_prediction_mismatches": 0,
+    "preferred_exit_cases": 360,
+    "preferred_exit_mismatches": 0,
+    "test_accuracy_by_exit": [0.475, 0.9111111111111111, 0.9416666666666667, 0.9388888888888889, 0.9333333333333333, 0.9333333333333333, 0.925],
+    "preferred_exit_distribution": [0, 263, 81, 7, 2, 7, 0],
+    "workspace_bytes": 4608,
+    "decision": "PASS"
+  },
+  "machine_code_audit": {
+    "cortex_m4_undefined_external_symbols": 0,
+    "cortex_m4_floating_or_divide_mnemonics": 0,
+    "rv32im_load_image_sha256": "234b3ac1ee91ed80858c17b4d2cc7bcbf2899e9ee0a92eb4c1abab7a54d4386a",
+    "rv32im_undefined_external_symbols": 0,
+    "rv32im_divide_or_fp_instructions": 0,
+    "identity_note": "ELF/object hashes can include non-loaded metadata such as source file names; the deployed build identity therefore uses the stripped/loadable binary image hash rather than the raw ELF container hash."
+  },
+  "rv32_instruction_envelope": {
+    "cycle_formula": "N_inst + N_cond_branch + N_jump + 2*N_load + N_store + N_mul_high + 4",
+    "cycle_formula_interpretation": "one base cycle per retired instruction; fixed-time branch adds one; jump adds one; load adds one LSU wait plus one conservative load-use allowance; store adds one LSU wait; MULH/MULHU/MULHSU add one; four-cycle pipeline/entry slack",
+    "four_distinct_input_traces_identical_by_class": true,
+    "classes": [
+      {"class":0,"fraction":0.0,"instructions":15378,"branches":163,"jumps":313,"loads":2279,"stores":380,"mul":1184,"mul_high":1184,"certification_path_cycles":21980,"worst_actual_infer_budget_cycles":22006,"total_with_admission_cycles":22180},
+      {"class":1,"fraction":0.16666666666666666,"instructions":409360,"branches":10429,"jumps":21399,"loads":41290,"stores":4052,"mul":25096,"mul_high":21747,"certification_path_cycles":549571,"worst_actual_infer_budget_cycles":549604,"total_with_admission_cycles":549778},
+      {"class":2,"fraction":0.3333333333333333,"instructions":803340,"branches":20694,"jumps":42485,"loads":80301,"stores":7724,"mul":49008,"mul_high":42310,"certification_path_cycles":1077159,"worst_actual_infer_budget_cycles":1077194,"total_with_admission_cycles":1077368},
+      {"class":3,"fraction":0.5,"instructions":1197320,"branches":30959,"jumps":63571,"loads":119312,"stores":11396,"mul":72920,"mul_high":62873,"certification_path_cycles":1604747,"worst_actual_infer_budget_cycles":1604784,"total_with_admission_cycles":1604958},
+      {"class":4,"fraction":0.6666666666666666,"instructions":1591300,"branches":41224,"jumps":84657,"loads":158323,"stores":15068,"mul":96832,"mul_high":83436,"certification_path_cycles":2132335,"worst_actual_infer_budget_cycles":2132374,"total_with_admission_cycles":2132548},
+      {"class":5,"fraction":0.8333333333333334,"instructions":1985281,"branches":51489,"jumps":105743,"loads":197334,"stores":18740,"mul":120744,"mul_high":103999,"certification_path_cycles":2659924,"worst_actual_infer_budget_cycles":2659965,"total_with_admission_cycles":2660139},
+      {"class":6,"fraction":1.0,"instructions":1985281,"branches":51489,"jumps":105743,"loads":197334,"stores":18740,"mul":120744,"mul_high":103999,"certification_path_cycles":2659924,"worst_actual_infer_budget_cycles":2659966,"total_with_admission_cycles":2660140}
+    ],
+    "admission_success_path_cycles": 174,
+    "native_vs_rv32_interpreter_logit_mismatch_cases": 0,
+    "native_vs_rv32_interpreter_logit_cases_checked": 6
+  },
+  "deadline_property_test": {
+    "cases": 52920,
+    "admission_mismatches": 0,
+    "executed_exit_mismatches": 0,
+    "prediction_mismatches": 0,
+    "cap_violations": 0,
+    "partial_certification_fail_closed": true,
+    "wrong_model_rejected": true,
+    "wrong_build_rejected": true,
+    "decision": "PASS"
+  },
+  "decisions": {
+    "integer_time_predictable_lowering": "PASS",
+    "conditional_static_timing_bound": "PASS under RTNN-IBEX-DIT-v1 assumptions",
+    "physical_target_wcet_certification": "UNCERTAIN",
+    "production_hard_real_time_claim": "NOT YET ESTABLISHED"
+  },
+  "nonclaims": [
+    "The conditional cycle table is not a measured or certified physical-device WCET.",
+    "No claim is made for flash wait states, caches, interrupts, DMA, bus contention, or a different Ibex configuration.",
+    "An RTL or physical-target timing validation remains required before promoting these bounds to a deployed hard-real-time certificate."
+  ]
+}
