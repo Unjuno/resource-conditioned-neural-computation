@@ -8,24 +8,18 @@
 - [RTNN_Codex_FPGA_environment_handoff_2026-10-31.zip](./RTNN_Codex_FPGA_environment_handoff_2026-10-31.zip) — 1840392 bytes; SHA-256 `c81f7bd81625247712fcea5d0a954dc3a7f24d2908e82e841de7eddfe908011e`
 - [RTNN_parallel_paper_eval_2026-11-02.zip](./RTNN_parallel_paper_eval_2026-11-02.zip) — 52039 bytes; SHA-256 `02ad8a83daabcef44335d58513c2f4ae0aef622089eae62026df6b2406ede137`
 
-### Windows PowerShell (from this repo checkout)
+### Windows PowerShell (safe binary downloads)
 
-```powershell
-powershell -ExecutionPolicy Bypass -File .\handoff\download-inputs.ps1 -Destination 'C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\inputs'
-```
-
-Or fetch this branch without switching from the existing branch:
+From your existing repository checkout, fetch this handoff branch without switching branches; extract only the text download script, review it, then run it:
 
 ```powershell
 git fetch origin handoff/de0cv-stage2-2026-11-03
-New-Item -ItemType Directory -Force .\inputs | Out-Null
-git show 'FETCH_HEAD:handoff/RTNN_DE0CV_RV32_stage2_2026-10-31.zip' > .\inputs\RTNN_DE0CV_RV32_stage2_2026-10-31.zip
-git show 'FETCH_HEAD:handoff/RTNN_Codex_FPGA_environment_handoff_2026-10-31.zip' > .\inputs\RTNN_Codex_FPGA_environment_handoff_2026-10-31.zip
-git show 'FETCH_HEAD:handoff/RTNN_parallel_paper_eval_2026-11-02.zip' > .\inputs\RTNN_parallel_paper_eval_2026-11-02.zip
-Get-FileHash .\inputs\*.zip -Algorithm SHA256
+git show 'FETCH_HEAD:handoff/download-inputs.ps1' | Set-Content -Encoding UTF8 (Join-Path $env:TEMP 'rtnn-download-inputs.ps1')
+Get-Content (Join-Path $env:TEMP 'rtnn-download-inputs.ps1')
+& (Join-Path $env:TEMP 'rtnn-download-inputs.ps1') -Destination 'C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\inputs'
 ```
 
-**Note:** PowerShell output redirection can alter binary data in some versions; prefer the provided download script, which saves raw response bytes and verifies SHA-256. Do not use `git show ... > file.zip` unless the shell's binary redirection is known safe.
+The script writes binary ZIP files using `Invoke-WebRequest -OutFile`, checks SHA-256, and refuses to overwrite an existing file with a different hash. **Do not** use PowerShell `git show ... > file.zip`: Windows PowerShell may corrupt binary redirects.
 
 ### Linux / WSL
 
