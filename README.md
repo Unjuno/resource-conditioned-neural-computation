@@ -150,7 +150,7 @@ CI rechecks the frozen package and derives the board-free preflight reference fr
 
 ## Next physical stage — DE0-CV
 
-**DE0-CV has not yet been tested.** Hardware work is intentionally deferred.
+**No validated DE0-CV physical inference or performance result is yet incorporated here.** A local 2026-11-03 operator report describes completed host/RV32/SoC simulation checks and executed Quartus Fitter/STA, but the best reported 50 MHz setup result did not close (HPerf seed 2: 48.29 MHz; slack -0.710 ns). That report said the board was **not programmed**. Its raw local evidence and any later Stage 3 results must be audited before these reported results can be promoted to independently verified repository claims.
 
 The preregistered next physical experiment is:
 
@@ -165,6 +165,12 @@ Board-free vectors are already frozen in:
 Detailed plan:
 
 [`notes/realtime_nn_de0_cv_next_stage.md`](notes/realtime_nn_de0_cv_next_stage.md)
+
+Current review/handoff (documentation, not a measured FPGA result):
+
+- [2026-11-06 Stage 2 reported results and timing/Stage 3 gates](notes/de0_cv_stage2_stage3_status_2026-11-06.md)
+- [DE0-CV paper-grade measurement protocol (review draft)](notes/de0_cv_paper_protocol_2026-11-06.md)
+- [Codex execution handoff, with evidence and hardware-safety stops](notes/de0_cv_codex_handoff_2026-11-06.md)
 
 ## Important negative results retained
 
