@@ -1,6 +1,9 @@
 # RTNN DE0-CV paper-grade measurement protocol (review draft, 2026-11-06)
 
-**State: draft integration plan; not a completed experiment, not a new frozen campaign.**
+**Research protocol remains a draft; no measurements have been added.**
+
+> **2026-11-11 update:** A *later diagnostic SOF* was reported to pass all-corner Fitter/STA (worst setup **+0.916 ns**, hold **+0.122 ns**) and the physical DE0-CV C1 autonomous 20-request self-test asserted **LEDR[3:0]=1000**, observed by post-configuration boundary scan and operator visual confirmation. Reported local SHA audit: **145/145**. This is scoped **C1 built-in test PASS, operator-reported**; raw source/checker, SOF and logs are not in this GitHub PR for independent review. External 3.3-V USB-UART input, board oscillator ppm and the 360-input paper campaign remain **NOT_RUN / NOT_MEASURED**. The latest status and next gate are in [C1 board self-test note](de0_cv_c1_board_selftest_2026-11-11.md). Reconcile this newer evidence *first* before pursuing old timing-failure instructions; any new campaign SOF needs its own STA closure and exact identity.
+
 This note builds on [the existing target preregistration](realtime_nn_de0_cv_next_stage.md) and the [Stage 2 evidence ledger](de0_cv_stage2_stage3_status_2026-11-06.md). It does not authorize changing the frozen seed-63 Q15 model, test-set labels, or existing experiment schedules.
 
 ## 1. Research claim to test
