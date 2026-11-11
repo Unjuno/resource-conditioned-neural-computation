@@ -150,7 +150,7 @@ CI rechecks the frozen package and derives the board-free preflight reference fr
 
 ## Next physical stage — DE0-CV
 
-**No validated DE0-CV physical inference or performance result is yet incorporated here.** A local 2026-11-03 operator report describes completed host/RV32/SoC simulation checks and executed Quartus Fitter/STA, but the best reported 50 MHz setup result did not close (HPerf seed 2: 48.29 MHz; slack -0.710 ns). That report said the board was **not programmed**. Its raw local evidence and any later Stage 3 results must be audited before these reported results can be promoted to independently verified repository claims.
+**The physical target now has an operator-reported 20-case C1 autonomous diagnostic self-test on DE0-CV; the public repository does not yet include the raw C1 evidence for independent audit.** The 2026-11-03 first-pass timing failure (best reported 48.29 MHz, setup slack -0.710 ns) is historical. On 2026-11-10/11, a later exact diagnostic SOF reportedly passed all-corner STA (worst setup +0.916 ns; hold +0.122 ns), was successfully programmed into volatile SRAM and exposed LEDR[3:0]=1000 via post-configuration JTAG boundary scan and operator visual confirmation. This supports the *scoped C1 built-in 20-request PASS status*, not PC-controlled arbitrary-input validation, measured performance, clock calibration, or hard deadline guarantees. Raw checker RTL, programming logs, SHA manifest and STA reports require independent review before publication.
 
 The preregistered next physical experiment is:
 
@@ -171,6 +171,7 @@ Current review/handoff (documentation, not a measured FPGA result):
 - [2026-11-06 Stage 2 reported results and timing/Stage 3 gates](notes/de0_cv_stage2_stage3_status_2026-11-06.md)
 - [DE0-CV paper-grade measurement protocol (review draft)](notes/de0_cv_paper_protocol_2026-11-06.md)
 - [Codex execution handoff, with evidence and hardware-safety stops](notes/de0_cv_codex_handoff_2026-11-06.md)
+- [2026-11-11 C1 autonomous 20-case board self-test report (operator reported; independent audit pending)](notes/de0_cv_c1_board_selftest_2026-11-11.md)
 
 ## Important negative results retained
 
