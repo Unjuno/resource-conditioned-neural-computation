@@ -1,6 +1,9 @@
 # Codex handoff: reconcile DE0-CV Stage 3, then collect paper-grade RTNN data
 
-**As of 2026-11-06. Execution instructions, not a completed test report.**
+**Historical handoff from 2026-11-06; preserve its initial 50 MHz FAIL as dated history.**
+
+> **2026-11-11 update:** A *later diagnostic SOF* was reported to pass all-corner Fitter/STA (worst setup **+0.916 ns**, hold **+0.122 ns**) and the physical DE0-CV C1 autonomous 20-request self-test asserted **LEDR[3:0]=1000**, observed by post-configuration boundary scan and operator visual confirmation. Reported local SHA audit: **145/145**. This is scoped **C1 built-in test PASS, operator-reported**; raw source/checker, SOF and logs are not in this GitHub PR for independent review. External 3.3-V USB-UART input, board oscillator ppm and the 360-input paper campaign remain **NOT_RUN / NOT_MEASURED**. The latest status and next gate are in [C1 board self-test note](de0_cv_c1_board_selftest_2026-11-11.md). Reconcile this newer evidence *first* before pursuing old timing-failure instructions; any new campaign SOF needs its own STA closure and exact identity.
+
 
 This is the operating handoff for Codex on the **actual local Stage 2/Stage 3 working tree**. Its inputs are [reported status](de0_cv_stage2_stage3_status_2026-11-06.md), [paper measurement protocol](de0_cv_paper_protocol_2026-11-06.md), the existing [physical-stage preregistration](realtime_nn_de0_cv_next_stage.md), and local raw evidence. The public GitHub repository **does not automatically contain** the latest local Quartus builds, Stage 2 ZIP overlays or the parallel paper track.
 
