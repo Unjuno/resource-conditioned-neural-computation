@@ -77,8 +77,8 @@ $checks['effective_sld_hub_async_clock_group_detected'] = $effectiveClockGroupCu
 if (-not $effectiveClockGroupCut) { $failures.Add('EXPECTED_SLD_HUB_ASYNC_CLOCK_GROUP_NOT_FOUND') }
 
 $mtbfText = Select-String -Path (Join-Path $c2 'rtnn_c2.sta.rpt') -Pattern 'Number of Synchronizer Chains Found: 392','Fraction of Chains for which MTBFs Could Not be Calculated: 0.977' | ForEach-Object {$_.Line}
-$checks['incomplete_mtbf_coverage_detected'] = ($mtbfText.Count -ge 8)
-if ($mtbfText.Count -lt 8) { $failures.Add("EXPECTED_MTBF_COVERAGE_LIMITATION_NOT_FOUND count=$($mtbfText.Count)") }
+$checks['raw_mtbf_uncalculated_fraction_recorded'] = ($mtbfText.Count -ge 8)
+if ($mtbfText.Count -lt 8) { $failures.Add("EXPECTED_RAW_MTBF_SUMMARY_NOT_FOUND count=$($mtbfText.Count)") }
 
 $emptySkewReports = 0
 for ($corner = 0; $corner -lt 4; $corner++) {

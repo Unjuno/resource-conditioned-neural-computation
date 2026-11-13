@@ -18,7 +18,7 @@ Quartusの保存済みC2J2結果、D101個別処置監査、全コーナーCDC p
 | D101 801個別処置とglobal rules有効の保存audit照合 | PASS |
 | 4コーナー request 800/800・response 384/384 path/net-delay audit照合 | PASS |
 | JTAG未制約I/Oと外部仕様不足の確認 | PASS（不足を確認） |
-| embedded asynchronous clock-group cutとMTBF coverage不足の確認 | PASS（制限を確認） |
+| embedded asynchronous clock-group cutとQuartus raw MTBF未計算fractionの確認 | PASS（raw fieldを確認。383 payload auto-chainは後続詳細監査で再分類） |
 | max-skew raw reportsの判定 | NOT_EVALUATED（4件とも `Nothing to report.`） |
 | Gate B全体 | BLOCKED |
 | 新C3の実機書込み・42件・360入力campaign | NOT_RUN |
@@ -42,7 +42,7 @@ inner manifest SHA-256: `f0b558dea10db382fa4728f55eb44fac469201041c04a7fe202633a
 & '.\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C2\evidence\verify_gate_b_evidence.ps1' *> '.\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C2\evidence\gate_b_evidence_recheck_20261114.log'
 ```
 
-直後にPowerShellの`$?`を確認し、成功時にexit sentinel `0`を書き込んだ。結果: **exit 0**。出力は `gate_b_evidence_recheck_20261114.log` に保存。QSF/SDC/flat RTL/SOFのSHA、Quartus 59項目・移送JTAG資料63項目のmanifest、D101全フラグ、各corner/path array件数・bound、embedded async group、MTBF coverage不足、max-skew空出力、unconstrained portsを検査した。整合性再検査はPASSだが、JTAG I/O外部タイミングとCDCの物理signoffが未完了のため、スクリプトもGate B decisionをBLOCKEDのまま記録する。
+直後にPowerShellの`$?`を確認し、成功時にexit sentinel `0`を書き込んだ。結果: **exit 0**。出力は `gate_b_evidence_recheck_20261114.log` に保存。QSF/SDC/flat RTL/SOFのSHA、Quartus 59項目・移送JTAG資料63項目のmanifest、D101全フラグ、各corner/path array件数・bound、embedded async group、Quartus raw MTBF summary field、max-skew空出力、unconstrained portsを検査した。整合性再検査はPASSだが、JTAG I/O外部タイミングとCDCの物理signoffが未完了のため、スクリプトもGate B decisionをBLOCKEDのまま記録する。後続の392-chain詳細監査では、raw 0.977の未計算fractionのうち383件をresponse payload auto-chain、残る9件をMTBF算定済みのreset/control同期器と特定した。従ってraw summary fieldの検出をscalar synchronizerのMTBF欠落と解釈しない。
 
 その他の再確認はPowerShell `Get-FileHash`, `Get-Content`, `Select-String` による読み取りだけである。
 

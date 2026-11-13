@@ -9,7 +9,7 @@ Quartus: Prime Lite `25.1std.0 Build 1129` (Windows)
 
 ## 判定
 
-**Gate B: BLOCKED。** 保存済み結果では、同一clock group内の50 MHz / 30 MHz-model STAと、指定されたCDC payloadのmax-net-delay検査がpassしている。しかしSLD hubの非同期clock-group cut、Quartus MTBFが算出できない同期チェーンの割合、DE0-CV上のJTAG外部I/Oタイミング未制約が残り、CDC全体とboard-level timingのsignoff条件は成立していない。
+**Gate B: BLOCKED。** 4コーナーで50 MHz / JTAG-domain分析と800/384-bit全payload endpointのmax-net-delay検査はpassしており、RTLの2FF＋capture-pending手順には最小3 destination cycleのbundle capture windowがある。詳細chain report上の383件MTBF未計算はpayload経路の自動分類で、実際のreset/control同期器9件は算定済みと判明した。一方でSLD hubの非同期clock-group cutのため通常のcross-clock setup/hold・phase/skew signoffは出ず、DE0-CV onboard USB-BlasterのJTAG外部遅延・TDO受信条件も未確定である。さらに、response payloadをconsume前に再書込みしないfirmware C sourceがこの監査repoに含まれず、source-hold条件を完全には監査できない。従ってCDC protocolの所見は改善したが、Gate B全体とboard-level timing signoffは成立していない。
 
 根拠のない `set_input_delay` / `set_output_delay`、false path、クロック緩和は追加していない。保存済みのC2J2 SOF、QSF、SDC、RTLも変更していない。Gate Cは新C3構成では未実施である。
 
@@ -41,11 +41,28 @@ SOFのSHAは過去のC2J2実機run recordとの同一性確認用であり、こ
 
 SDCの `set_net_delay` はfalse pathではないが、このcutを解除する同期setup/hold制約でもない。指定されたmailbox payload経路の遅延上限だけを補助的に確認する。requestの16 nsは20 ns `CLOCK_50` 周期の0.8倍、responseの24 nsは30 ns JTAG最小周期の0.8倍として設定されている。Quartus path reportとPython監査は4コーナーそれぞれでrequest 800/800 endpoint、response 384/384 endpointを検査し、response payloadのsource collection 394個と384個のdestinationを区別している。これらは経路遅延と端点対応の根拠であり、clock-group cutを埋めるclock phase/skew解析ではない。
 
-同じ保存済みSTAレポートのmetastability summaryは、各cornerで392 synchronizer chain、うちMTBFを算出できない割合0.977、worst available settling time 31.844–32.685 nsを記録する。Quartus表示のworst-case MTBF `1e+09 years`を、算出不能chainを含むdesign全CDCの保証値とは解釈しない。
+同じ保存済みSTAレポートのmetastability summaryは、各cornerで392 chain、うちMTBFを算出できない割合0.977を記録する。詳細再生成レポートで内訳を確認した結果、この383件は `response_words_q[...]` から `rsp_hold_tck_q[...]`、応答shift register、SLD hub TDOへ続くresponse payloadの自動識別chainだった。独立した1-bit synchronizerではないため、0.977という割合のみを「実際の同期器のMTBF coverage不足」と解釈するのは不適切である。残る9件は2つのreset-release chainと7つのscalar control/status toggle chainで、すべてMTBF算定済みかつQuartus Design MTBFに含まれる。Quartus表示 `>1e+09 years` はこの認識された同期器集合の結果であり、payload保持条件や基板外部JTAG timingを保証する値ではない。
 
 2026-11-14に正確なC2J2 Quartus入力を別ディレクトリ `D:\RTNN_C3_GateB_STA_rebuild_20261114` へ複製し、Quartus Prime Lite 25.1std.0 Build 1129で `quartus_sh --flow compile rtnn_c2` を再実行した。QSF/SDC/flat RTLのhashは対象C2J2記録と一致したが、再生成SOFはSHA-256 `15bdd8462f1a2c6fbad92b0ca0df7b2007790aa1d91e275fd6244bbcbc53132` であり、過去の実機SOF `5aa5be2e...` と異なる。このため再生成物は別のbuild artifactであり、過去の42件実機測定に対応するSOFとは扱わない。Fitter/Assembler/STAはexit 0、compile logには392 warningsが記録された。コマンド、終了コード、全warning、build/fit/STA report SHA、再生成SOF SHAは `GATE_B_QUARTUS_REBUILD_RUN_RECORD_JA.md` と `GATE_B_QUARTUS_REBUILD_SHA256_20261114.txt` に残した。31.7 MBの詳細報告と全Quartus生ログ・一時生成物はD:の隔離run領域に保存し、working treeへはQuartus databaseを追加していない。
 
-同じ再構築に対して `report_metastability -nchains 1000` を実行し、全392 chainの詳細を得た。9 chainはQuartus上でMTBF計算済み（reset/control synchronizerを含む）だが、残る383 chainは `Not Calculated` / `Included in Design MTBF: No`。その全てはresponse payload source `response_words_q[...]` からJTAG-domain `rsp_hold_tck_q[...]` への自動識別chainとして列挙され、うち381 unique bit pairing（別途2件duplicate alias pathを含む）であった。詳細欄はこの経路を `Synchronization Registers` としてpayload hold register、shift register、SLD hub TDOまで含めている。これはQuartusの自動分類であり、それ自体はpayloadが独立した同期ビット列であることも、bundled-data handshakeの安定保持条件が満たされることも証明しない。MTBF summary上、これら383 chainは設計MTBFに含まれない。再生成レポート全体は31,751,098 bytesでD:の隔離run領域に保存し、レポートSHA-256と抽出した392行chain summaryをrun recordに記録する。コマンド、終了コード、hash詳細は `GATE_B_QUARTUS_REBUILD_RUN_RECORD_JA.md` に保存した。したがってcoverage不足判定を維持し、CDC全体のMTBFや物理的整合性はPASSとしない。
+同じ再構築に対して `report_metastability -nchains 1000` を実行し、全392 chainの詳細を得た。9 chainは2つのreset-release chainと7つのscalar control/status chainでMTBF計算済み（`Included in Design MTBF: Yes`）。残る383 chainは `Not Calculated` / `Included in Design MTBF: No`。その全てはresponse payload source `response_words_q[...]` からJTAG-domain `rsp_hold_tck_q[...]` への自動識別chainとして列挙され、うち381 unique bit pairing（別途2件duplicate alias pathを含む）であった。詳細欄はpayload hold register、shift register、SLD hub TDOまでをchainとして連結する。これはデータ経路を自動検出したQuartus分類で、各payload bitが同期器chainであることを示さない。従ってMTBF summaryの0.977は実際のscalar synchronizerを未計算とする証拠ではなく、MTBF適用対象ではないbundled-data pathを含む分母である。payloadの正しさは別途、RTLのcapture遅延・source hold handshakeと4コーナーの全bit max-net-delayで評価する。再生成レポート全体は31,751,098 bytesでD:の隔離run領域に保存し、レポートSHA-256と抽出した392行chain summaryをrun recordに記録する。コマンド、終了コード、hash詳細は `GATE_B_QUARTUS_REBUILD_RUN_RECORD_JA.md` に保存した。
+
+## Bundled-data capture envelope
+
+build-id `43324a32` のexact flat RTLでは、request toggleをTCKから2段sys同期し、差分検出でcapture-pendingを立て、その次のsys edgeで800-bit busをcaptureする。responseはsys-side commit toggleを2段TCK同期し、差分検出の次のTCK edgeで384-bit busをcaptureする。いずれもsource toggle edgeからcaptureまで最低3つのdestination clock periodを置くRTLである。request source registerはackが往復してから次要求を許可する。response pathはresponse wordsをcommitしてからhostがscan完了を通知する構成で、ソフトウェア側がconsume前に同じpayloadを再書込みしないことを前提とする（このrun recordにはfirmware C source自体がなく、当該前提はRTL-onlyの静的所見を超えて完全には証明していない）。
+
+四コーナーの既存 `set_net_delay` path reportはrequest 800/800、response 384/384のdestinationを網羅し、worst observed net delayはそれぞれ3.358 ns、3.157 ns（slow/85 C）以下だった。比較のための保守的なcapture envelopeを以下に示す。これはsetup slackではなく、最小3 destination periodsからreportされた最大net delayだけを差し引いた比較値であり、clock-to-Q/setup、clock uncertainty、TCK基板source envelopeを含まない。
+
+| 変数 | 意味 | 値・単位 | 定義域・前提 |
+|---|---|---:|---|
+| `N` | toggle eventからcaptureまでの最小destination edge数 | 3 cycles | exact RTLの2FF同期、差分検出、pending capture順 |
+| `Tsys` | sys clock period | 20 ns | QSF/SDCで50 MHz |
+| `Ttck_min` | Cyclone V JTAGの最小TCK period | 30 ns | FPGA datasheet上の合法動作下限 |
+| `Dreq_net` | request bundleで最悪のpost-fit max net delay | 3.358 ns | 4コーナー最大、800 endpoints |
+| `Drsp_net` | response bundleで最悪のpost-fit max net delay | 3.157 ns | 4コーナー最大、384 endpoints |
+| `Wreq`, `Wrsp` | capture envelopeからobserved net delayを除いた比較値 | 56.642 ns, 86.843 ns | `N*Tsys-Dreq_net`, `N*Ttck_min-Drsp_net`。setup slackではない |
+
+ここで`N`は無次元cycle数、`Tsys`と`Ttck_min`および各`Dnet`は時間、`W`も時間である。両辺の次元はnsで一致する。なおSDCのrequest 16 ns / response 24 ns上限自体もそれぞれ60 ns / 90 nsの最小capture envelopeより短く、全destinationを指定している。これはbundled-data pathの大きなサイクル余裕を示すが、response firmware hold前提の不足、制御toggleのmetastability、JTAG external I/O timingを代替しない。 独立実行した `audit_bundled_capture_envelope.py` は、full reportと392行CSVのSHA、4コーナー全端点、exact flat RTLを照合し、`PASS_BUNDLE_ENVELOPE_ONLY` を出力した。CSV SHA-256は `d11668beeaffde1744313c0275412473550ac5e20221174be7734d082fdc8656`。再現コマンドと結果JSONは `GATE_B_QUARTUS_REBUILD_RUN_RECORD_JA.md` と `bundled_capture_envelope_audit_20261114.json` に保存した。
 
 保存済み4つの `report_max_skew` 出力は `Nothing to report.`。よって有効なskew値は存在せず、skew検証PASSとは扱わない。既存 `c2_postfit_path_audit.json` の `max_skew` false値は、その生成scriptが文字列 `No paths were found` のみを検出し、実出力の `Nothing to report.` と一致しなかった結果である。falseはskew検証成功の意味ではない。
 
@@ -60,7 +77,7 @@ SDCの `set_net_delay` はfalse pathではないが、このcutを解除する�
 * native SystemVerilogとsv2vのVerilator回帰記録は42要求、reset replay 2件、negative/recovery 7件を含む。response capture edgeのsnapshot一致をprocedural assertionで確認した記録がある。これはRTL simulation evidenceであり、Gate Bの物理CDC証明ではない。
 * exact-node buildのDesign Assistant監査JSONはD101 801対象（request 800、response 1 representative）とQSFの局所設定の一致を記録する。global D101/D102/D103はOnのまま。未waivedのraw D101 reportも別フォルダに保全されている。これは限定的な警告処置の記録であって、CDCメタスタビリティの形式証明ではない。
 
-従ってCDCの根拠は、RTL上のheld-data/toggle/ack protocol、4コーナーの端点対応付きmax-net-delay監査、native/sv2vの機能回帰、D101の個別warning dispositionで構成される。Quartusのclock-group cutを考慮した完全なphase/skew・metastability解析があるとは主張しない。
+従ってCDCの根拠は、RTL上のheld-data/toggle/ack protocol、4コーナーの全端点max-net-delay監査、protocol capture envelope、native/sv2vの機能回帰、9 scalar synchronizerのMTBFレポート、D101の個別warning dispositionで構成される。request-side hold/ackはRTLで確認した。response-side source stabilityは固定firmware動作に依存し、そのC source不在のため未完了の監査項目として残す。Quartusのclock-group cutを考慮した通常のcross-clock phase/skew・setup/hold解析が成立したとは主張しない。
 
 再監査したsaved evidence上では、Fitter、Assembler、Timing Analyzer、post-fit Design Assistantの各実行と補助監査は終了コード0。Quartus compileには392 warningsが残り、warning inventoryは `quartus_d101/QUARTUS_WARNING_REVIEW_JA.md` にある。0 warningsと主張しない。
 
@@ -81,7 +98,7 @@ Gate Bを解除するには、対象board revisionに対してTCK/TDI/TMS間のm
 | Gate | 状態 | 理由 |
 |---|---|---|
 | A — SV source reproducibility | PASS (限定) | recovered source identityと記録済み回帰の範囲。exact physical C2J2 SOFの再ビルド同一性を主張しない。|
-| B — timing / CDC / I/O | **BLOCKED** | FPGA内clock・net-delay検査は保存記録上pass。一方、board JTAG external timingとTDO captureが未確定。|
+| B — timing / CDC / I/O | **BLOCKED** | Bundle path boundとscalar sync MTBF evidenceは得た。response firmware source-hold条件の証拠が不足し、board JTAG external timing / TDO captureも未確定。|
 | C — 新C3構成の実機42件 | NOT_RUN | Gate B成立前。以前のC2J2 42件記録をC3再試験に代用しない。|
 | D — 360入力 campaign | NOT_RUN | 新C3 identityの確定後に実施する。|
 | E — 統計解析 | NOT_RUN | 360入力実測campaignが未実施。|

@@ -1,0 +1,51 @@
+{
+  "audit": "C2_BUNDLED_DATA_CAPTURE_ENVELOPE",
+  "status": "PASS_BUNDLE_ENVELOPE_ONLY",
+  "build_id": "43324a32",
+  "flat_rtl_sha256": "fdfcdf037eb55225e3e6eef06b01fc92e608951c54ece946461408131f2e5ca7",
+  "mtbf_summary_sha256": "d11668beeaffde1744313c0275412473550ac5e20221174be7734d082fdc8656",
+  "mtbf_full_report_sha256": "00120db779ae93c5aaf3bc083bbafd8259cdf2c3ffda5cdd9920ca328faef038",
+  "mtbf_summary": {
+    "chain_count": 392,
+    "calculated_count": 9,
+    "uncalculated_count": 383,
+    "uncalculated_response_payload_auto_chains": 383,
+    "calculated_included_in_design_mtbf": true
+  },
+  "capture_cycle_count_min": 3,
+  "request": {
+    "destination_period_ns": 20.0,
+    "capture_envelope_ns": 60.0,
+    "path_endpoints_each_corner": 800,
+    "max_observed_net_delay_ns": 3.358,
+    "sd_c_max_net_delay_bound_ns": 16.0,
+    "window_minus_observed_net_delay_ns_not_setup_slack": 56.642,
+    "corner_values_ns": [
+      3.358,
+      3.263,
+      2.085,
+      1.822
+    ]
+  },
+  "response": {
+    "destination_period_min_ns": 30.0,
+    "capture_envelope_ns": 90.0,
+    "path_endpoints_each_corner": 384,
+    "max_observed_net_delay_ns": 3.157,
+    "sd_c_max_net_delay_bound_ns": 24.0,
+    "window_minus_observed_net_delay_ns_not_setup_slack": 86.843,
+    "corner_values_ns": [
+      3.157,
+      3.037,
+      2.067,
+      1.798
+    ]
+  },
+  "limitations": [
+    "The reported difference is a protocol-envelope comparison, not STA setup slack.",
+    "The comparison omits clock-to-Q, destination setup, clock uncertainty, and measured board TCK envelope.",
+    "Response source stability before snapshot depends on firmware not rewriting response words before host consume; firmware C source is absent from this migrated audit tree.",
+    "This does not close the embedded asynchronous clock-group cut or external TDI/TMS/TDO board timing."
+  ],
+  "gate_b_overall": "BLOCKED"
+}
