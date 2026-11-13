@@ -1,0 +1,130 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+Info: Running Quartus Prime Design Assistant
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions
+    Info: and other software and tools, and any partner logic
+    Info: functions, and any output files from any of the foregoing
+    Info: (including device programming or simulation files), and any
+    Info: associated documentation or information are expressly subject
+    Info: to the terms and conditions of the Altera Program License
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Fri Nov 13 19:23:46 2026
+Info: Command: quartus_drc rtnn_c2 --post_fit=on
+Info (332164): Evaluating HDL-embedded SDC commands
+    Info (332165): Entity sld_hub
+        Info (332166): create_clock -name altera_reserved_tck [get_ports {altera_reserved_tck}] -period 30MHz
+        Info (332166): if { [string equal quartus_fit $::TimeQuestInfo(nameofexecutable)] } { set_max_delay -to [get_ports { altera_reserved_tdo } ] 0 }
+        Info (332166): set_clock_groups -asynchronous -group {altera_reserved_tck}
+Info (332104): Reading SDC File: 'rtnn_de0_cv_c2.sdc'
+Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Critical Warning (308060): (High) Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains. (Value defined:2). Found 801 asynchronous clock domain interface structure(s) related to this rule.
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[552]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[616]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[584]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[520]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[680]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[648]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[712]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[744]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[776]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[392]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[8]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[264]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[136]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[488]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[232]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[104]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[360]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[456]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[328]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[72]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[200]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[424]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[168]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[296]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[40]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[384]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[256]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[320]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[288]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Critical Warning (308012): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[352]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Info (308002): Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
+Info (308046): (Information) Rule T101: Nodes with more than the specified number of fan-outs. (Value defined:30). Found 291 node(s) with highest fan-out.
+    Info (308011): Node  "altera_internal_jtag~TCKUTAPCLKENA0"
+    Info (308011): Node  "~GND"
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|tck_reset_release_q[1]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19451
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|build_shift_tck_q~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19448
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_shift_tck_q[0]~1" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_capture_pending_tck_q" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19447
+    Info (308011): Node  "CLOCK_50~inputCLKENA0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_de0_cv_c2_top.sv Line: 3
+    Info (308011): Node  "rst_pipe_q[2]~CLKENA0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_de0_cv_c2_top.sv Line: 23
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|jtag_response_commit_o~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19140
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|mmio_write_valid~1" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19170
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~105" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_register_file_ff:gen_regfile_ff.register_file_i|we_a_dec[8]~32" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 16963
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_id_stage:id_stage_i|rf_we_id_o~3" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 11687
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|Equal76~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 9185
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|instr_rdata_id_o[24]~DUPLICATE" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 12703
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|instr_new_id_d~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 12408
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_id_stage:id_stage_i|ibex_controller:controller_i|Selector36~2" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 8545
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|instr_rdata_id_o[25]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 12703
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|ibex_fetch_fifo:fifo_i|out_rdata_o[12]~3" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 11321
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~121" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|instr_rdata_id_o[17]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 12703
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|ibex_fetch_fifo:fifo_i|out_rdata_o[9]~13" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 11321
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_load_store_unit:load_store_unit_i|Selector1~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 13131
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|instr_rdata_id_o[12]~DUPLICATE" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 12703
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|ibex_fetch_fifo:fifo_i|out_rdata_o[14]~2" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 11321
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem2_rtl_0|altsyncram_ki32:auto_generated|decode_61a:rden_decode_b|w_anode1000w[3]~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/db/decode_61a.tdf Line: 32
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|instr_rdata_id_o[18]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 12703
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|ibex_fetch_fifo:fifo_i|out_rdata_o[4]~10" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 11321
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem2_rtl_0|altsyncram_ki32:auto_generated|decode_61a:rden_decode_a|w_anode1000w[3]~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/db/decode_61a.tdf Line: 32
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~1" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308002): Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
+Info (308044): (Information) Rule T102: Top nodes with the highest number of fan-outs. (Value defined:50). Found 50 node(s) with highest fan-out.
+    Info (308011): Node  "CLOCK_50~inputCLKENA0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_de0_cv_c2_top.sv Line: 3
+    Info (308011): Node  "~GND"
+    Info (308011): Node  "rst_pipe_q[2]~CLKENA0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_de0_cv_c2_top.sv Line: 23
+    Info (308011): Node  "altera_internal_jtag~TCKUTAPCLKENA0"
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|tck_reset_release_q[1]" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19451
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_shift_tck_q~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19442
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_shift_tck_q[0]~2" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[421]~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|req_capture_pending_sys_q" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19446
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~89" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_shift_tck_q~0" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19444
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_capture_pending_tck_q" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19447
+    Info (308011): Node  "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_shift_tck_q[0]~1" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 19527
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~93" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~113" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~117" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~109" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~105" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~97" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~101" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~33" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~45" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~41" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~37" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i|Add0~29" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 6803
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|instr_addr~14" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 13991
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|instr_addr~15" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 13991
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|instr_addr~5" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 13991
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|instr_addr~4" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 13991
+    Info (308011): Node  "rtnn_de0_cv_soc_c2:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|instr_addr~9" File: D:/rtnn_c2_bundled_capture_20261113_quartus/rtnn_c2_soc_flat.v Line: 13991
+    Info (308002): Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
+Info (308007): Design Assistant information: finished post-fitting analysis of current design -- generated 341 information messages and 801 warning messages
+Info: Quartus Prime Design Assistant was successful. 0 errors, 31 warnings
+    Info: Peak virtual memory: 4956 megabytes
+    Info: Processing ended: Fri Nov 13 19:23:57 2026
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:11
