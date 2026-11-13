@@ -1,0 +1,514 @@
+%Warning-WIDTHEXPAND: ibex_flat.v:19441:20: Operator VAR 'prim_ram_1p_pkg_RAM_1P_CFG_REQ_DEFAULT' expects 12 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc'
+19441 |  localparam [11:0] prim_ram_1p_pkg_RAM_1P_CFG_REQ_DEFAULT = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.020
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: ibex_flat.v:19461:20: Operator VAR 'sv2v_uu_u_ibex_ext_trvk_revbm_rdata_i_0' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc'
+19461 |  localparam [31:0] sv2v_uu_u_ibex_ext_trvk_revbm_rdata_i_0 = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:19462:19: Operator VAR 'sv2v_uu_u_ibex_ext_trvk_revbm_rdata_intg_i_0' expects 7 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc'
+19462 |  localparam [6:0] sv2v_uu_u_ibex_ext_trvk_revbm_rdata_intg_i_0 = 1'sb0;
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:19465:21: Operator VAR 'sv2v_uu_u_ibex_ext_scramble_key_i_0' expects 128 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc'
+19465 |  localparam [127:0] sv2v_uu_u_ibex_ext_scramble_key_i_0 = 1'sb0;
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:19467:20: Operator VAR 'sv2v_uu_u_ibex_ext_scramble_nonce_i_0' expects 64 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc'
+19467 |  localparam [63:0] sv2v_uu_u_ibex_ext_scramble_nonce_i_0 = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHTRUNC: ibex_flat.v:19050:49: Operator FUNCREF 'sv2v_cast_23CCF_signed' expects 9 bits on the Function Argument, but Function Argument's SUB generates 32 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart'
+19050 |  localparam [COUNT_BITS - 1:0] DIVISOR_RELOAD = sv2v_cast_23CCF_signed(DIVISOR - 1);
+      |                                                 ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHTRUNC: ibex_flat.v:18503:18: Operator FUNCREF 'sv2v_cast_DEBC9' expects 32 bits on the Function Argument, but Function Argument's VARREF 'prim_secded_pkg_SecdedInv3932ZeroWord' generates 39 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex'
+18503 |     .WordZeroVal(sv2v_cast_DEBC9(prim_secded_pkg_SecdedInv3932ZeroWord))
+      |                  ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:8970:46: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's VARREF 'RV32E' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 8970 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                              ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:8970:81: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's LOGNOT generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 8970 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                                                                 ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:8970:179: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's VARREF 'ibex_pkg_CSR_MISA_MXL' generates 2 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 8970 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                                                                                                                                                                   ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:14505:19: Operator VAR 'sv2v_uu_lfsr_i_ext_entropy_i_0' expects 8 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+14505 |  localparam [7:0] sv2v_uu_lfsr_i_ext_entropy_i_0 = 1'sb0;
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:10096:26: Operator VAR 'ResetValue' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_cpuctrlsts_part_csr'
+10096 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:10096:26: Operator VAR 'ResetValue' expects 18 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mie_csr'
+10096 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:10096:26: Operator VAR 'ResetValue' expects 7 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mcause_csr'
+10096 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:10096:26: Operator VAR 'ResetValue' expects 3 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mcounteren_csr'
+10096 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:10096:26: Operator VAR 'ResetValue' expects 8 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_cpuctrlsts_part_csr'
+10096 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:3922:27: Operator VAR 'CustomCoeffs' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 3922 |  parameter [LfsrDw - 1:0] CustomCoeffs = 1'sb0;
+      |                           ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:3953:7: Operator FUNCREF 'sv2v_cast_64' expects 64 bits on the Function Argument, but Function Argument's VARREF 'LfsrType' generates 56 bits.
+                                        : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 3953 |   if (sv2v_cast_64(LfsrType) == 64'd20056519619399506) begin : gen_gal_xor
+      |       ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:3960:30: Operator FUNCREF 'sv2v_cast_C2EBB' expects 32 bits on the Function Argument, but Function Argument's VARREF 'entropy_i' generates 8 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 3960 |    assign next_lfsr_state = (sv2v_cast_C2EBB(entropy_i) ^ ({LfsrDw {lfsr_q[0]}} & coeffs)) ^ (lfsr_q >> 1);
+      |                              ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:11387:19: Operator ASSIGNDLY expects 31 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+11387 |      instr_addr_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:11428:12: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+11428 |    valid_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:11438:27: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+11438 |       rdata_q[i * 32+:32] <= 1'sb0;
+      |                           ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:1186:12: Operator FUNCREF 'sv2v_cast_39' expects 39 bits on the Function Argument, but Function Argument's VARREF 'data_i' generates 32 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.load_store_unit_i.g_mem_wdata_ecc.u_data_gen'
+ 1186 |   data_o = sv2v_cast_39(data_i);
+      |            ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:10182:16: Operator ASSIGNDLY expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i.minstret_counter_i'
+10182 |      counter_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:10205:30: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i.mcycle_counter_i'
+10205 |     assign counter_val_upd_o = 1'sb0;
+      |                              ^
+%Warning-WIDTHEXPAND: ibex_flat.v:13331:18: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+13331 |    div_counter_q <= 1'sb0;
+      |                  ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:13333:19: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+13333 |    op_numerator_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:13334:18: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+13334 |    op_quotient_q <= 1'sb0;
+      |                  ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:13447:16: Operator ASSIGN expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+13447 |       summand1 = 1'sb0;
+      |                ^
+%Warning-WIDTHEXPAND: ibex_flat.v:13585:21: Operator ASSIGN expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh1' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+13585 |      op_remainder_d = 1'sb1;
+      |                     ^
+%Warning-WIDTHEXPAND: ibex_flat.v:13598:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+13598 |     op_quotient_d = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7531:25: Operator ASSIGNW expects 6 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7531 |    assign bitcnt_result = 1'sb0;
+      |                         ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7532:25: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7532 |    assign minmax_result = 1'sb0;
+      |                         ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7534:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7534 |    assign sv2v_tmp_A0513 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7536:23: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7536 |    assign sext_result = 1'sb0;
+      |                       ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7538:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7538 |    assign sv2v_tmp_75CE4 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7541:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7541 |    assign sv2v_tmp_FA09A = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7544:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7544 |    assign sv2v_tmp_4A308 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7546:24: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7546 |    assign xperm_result = 1'sb0;
+      |                        ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7548:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7548 |    assign sv2v_tmp_98122 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7551:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7551 |    assign sv2v_tmp_B39E0 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7554:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7554 |    assign sv2v_tmp_31DA6 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7557:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7557 |    assign sv2v_tmp_BC1B9 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:7570:12: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 7570 |   result_o = 1'sb0;
+      |            ^
+%Warning-WIDTHEXPAND: ibex_flat.v:8456:31: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i'
+ 8456 |      mem_resp_intg_err_addr_q <= 1'sb0;
+      |                               ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:8526:15: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i'
+ 8526 |   csr_mtval_o = 1'sb0;
+      |               ^
+%Warning-WIDTHEXPAND: ibex_flat.v:14501:23: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+14501 |    dummy_instr_seed_q <= 1'sb0;
+      |                       ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:14532:16: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+14532 |    dummy_cnt_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:7762:14: Operator ASSIGN expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 7762 |    imm[11:7] = 1'sb0;
+      |              ^
+%Warning-WIDTHEXPAND: ibex_flat.v:8153:17: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 8153 |      cm_rlist_q <= 1'sb0;
+      |                 ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:8154:21: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 8154 |      cm_sp_offset_q <= 1'sb0;
+      |                     ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:14037:20: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i'
+14037 |      stored_addr_q <= 1'sb0;
+      |                    ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:14053:19: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i'
+14053 |      fetch_addr_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:9092:17: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9092 |   csr_rdata_int = 1'sb0;
+      |                 ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9103:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9103 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9110:27: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9110 |    12'h310: csr_rdata_int = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9111:36: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9111 |    12'h30a, 12'h31a: csr_rdata_int = 1'sb0;
+      |                                    ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9114:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9114 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9127:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9127 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9135:20: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9135 |      csr_rdata_int = 1'sb0;
+      |                    ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9144:20: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9144 |      csr_rdata_int = 1'sb0;
+      |                    ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9208:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9208 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9212:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9212 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9216:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9216 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9220:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9220 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9224:27: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9224 |    12'h7c1: csr_rdata_int = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9267:18: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9267 |   mhpmcounter_we = 1'sb0;
+      |                  ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9268:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9268 |   mhpmcounterh_we = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9734:27: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9734 |     assign sv2v_tmp_D50E5 = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9736:29: Operator ASSIGNW expects 8 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9736 |     assign pmp_cfg_rdata[i] = 1'sb0;
+      |                             ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9742:69: Operator ASSIGNW expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9742 |     assign csr_pmp_addr_o[0 + (((PMPNumRegions - 1) - i) * 34)+:34] = 1'sb0;
+      |                                                                     ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9745:23: Operator ASSIGNW expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9745 |    assign pmp_mseccfg = 1'sb0;
+      |                       ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9800:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9800 |      mhpmevent[i] = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9805:16: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9805 |   mhpmevent[1] = 1'sb0;
+      |                ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9810:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9810 |      mhpmevent[i] = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9838:24: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9838 |  assign mhpmcounter[1] = 1'sb0;
+      |                        ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9873:29: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9873 |     assign mhpmcounter[Cnt] = 1'sb0;
+      |                             ^
+%Warning-WIDTHEXPAND: ibex_flat.v:9895:20: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 9895 |    mcountinhibit_q <= 1'sb0;
+      |                    ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:14442:19: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.wb_stage_i'
+14442 |    assign pc_wb_o = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: ibex_flat.v:12994:12: Operator ASSIGNDLY expects 24 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.load_store_unit_i'
+12994 |    rdata_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:13013:16: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.load_store_unit_i'
+13013 |    addr_last_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:11854:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i'
+11854 |    assign sv2v_tmp_1FCCD = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:11857:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i'
+11857 |    assign sv2v_tmp_B876E = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:11883:34: Operator ASSIGNDLY expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i'
+11883 |      imd_val_q[(1 - i) * 34+:34] <= 1'sb0;
+      |                                  ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:12692:23: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i'
+12692 |      instr_rdata_id_o <= 1'sb0;
+      |                       ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:12693:27: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i'
+12693 |      instr_rdata_alu_id_o <= 1'sb0;
+      |                           ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:12696:25: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i'
+12696 |      instr_rdata_c_id_o <= 1'sb0;
+      |                         ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:12699:26: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i'
+12699 |      instr_expanded_id_o <= 1'sb0;
+      |                          ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:12701:14: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.if_stage_i'
+12701 |      pc_id_o <= 1'sb0;
+      |              ^~
+%Warning-WIDTHTRUNC: ibex_flat.v:16974:33: Operator FUNCREF 'sv2v_cast_5' expects 5 bits on the Function Argument, but Function Argument's VARREF 'i' generates 32 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.gen_lockstep.u_ibex_lockstep.gen_shadow_regfile_ff.register_file_shadow_i'
+16974 |     we_a_dec[i] = (waddr_a_i == sv2v_cast_5(i) ? we_a_i : 1'b0);
+      |                                 ^~~~~~~~~~~
+%Warning-ASCRANGE: ibex_flat.v:14865:7: Ascending bit range vector: left < right of bit range: [0:2]
+                                      : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.gen_lockstep.u_ibex_lockstep.u_shadow_core'
+14865 |  wire [0:2] pmp_req_err;
+      |       ^
+%Warning-WIDTHEXPAND: ibex_flat.v:17821:25: Operator FUNCREF 'sv2v_cast_EC223' expects 177 bits on the Function Argument, but Function Argument's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.gen_lockstep.u_ibex_lockstep'
+17821 |      shadow_inputs_q <= sv2v_cast_EC223(1'sb0);
+      |                         ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:18593:26: Operator ASSIGNW expects 128 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex'
+18593 |    assign sv2v_tmp_E270A = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:18596:26: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex'
+18596 |    assign sv2v_tmp_F758A = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: ibex_flat.v:19001:29: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex'
+19001 |    assign trvk_revbm_addr_o = 1'sb0;
+      |                             ^
+%Warning-WIDTHEXPAND: ibex_flat.v:19119:12: Operator ASSIGNDLY expects 9 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart_rx'
+19119 |    ticks_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:19120:12: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart_rx'
+19120 |    index_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:19121:12: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart_rx'
+19121 |    shift_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: ibex_flat.v:19122:11: Operator ASSIGNDLY expects 8 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart_rx'
+19122 |    byte_o <= 1'sb0;
+      |           ^~
+%Warning-WIDTHTRUNC: ibex_flat.v:19134:18: Operator FUNCREF 'sv2v_cast_23CCF_signed' expects 9 bits on the Function Argument, but Function Argument's SUB generates 32 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart_rx'
+19134 |       ticks_q <= sv2v_cast_23CCF_signed((DIVISOR / 2) - 1);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHTRUNC: ibex_flat.v:19143:18: Operator FUNCREF 'sv2v_cast_23CCF_signed' expects 9 bits on the Function Argument, but Function Argument's SUB generates 32 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart_rx'
+19143 |       ticks_q <= sv2v_cast_23CCF_signed(DIVISOR - 1);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHTRUNC: ibex_flat.v:19152:18: Operator FUNCREF 'sv2v_cast_23CCF_signed' expects 9 bits on the Function Argument, but Function Argument's SUB generates 32 bits.
+                                         : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart_rx'
+19152 |       ticks_q <= sv2v_cast_23CCF_signed(DIVISOR - 1);
+      |                  ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:19057:12: Operator ASSIGNDLY expects 9 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_uart'
+19057 |    ticks_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:68:14: Operator ASSIGNDLY expects 256 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   68 |    request_q <= 1'sb0;
+      |              ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:69:15: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   69 |    tx_index_q <= 1'sb0;
+      |               ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:70:15: Operator ASSIGNDLY expects 6 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   70 |    rx_index_q <= 1'sb0;
+      |               ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:71:14: Operator ASSIGNDLY expects 27 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   71 |    timeout_q <= 1'sb0;
+      |              ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:72:15: Operator ASSIGNDLY expects 384 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   72 |    response_o <= 1'sb0;
+      |               ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:79:15: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   79 |    tx_index_q <= 1'sb0;
+      |               ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:80:15: Operator ASSIGNDLY expects 6 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   80 |    rx_index_q <= 1'sb0;
+      |               ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:81:14: Operator ASSIGNDLY expects 27 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   81 |    timeout_q <= 1'sb0;
+      |              ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:82:15: Operator ASSIGNDLY expects 384 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   82 |    response_o <= 1'sb0;
+      |               ^~
+%Warning-WIDTHTRUNC: rtnn_c1_autonomous_selftest_sv2v.v:89:59: Operator FUNCREF 'sv2v_cast_590F0_signed' expects 27 bits on the Function Argument, but Function Argument's SUB generates 32 bits.
+                                                             : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_packet'
+   89 |    if (((state_q == 2'd3) && rx_framing) || (timeout_q == sv2v_cast_590F0_signed(TIMEOUT_CYCLES - 1))) begin
+      |                                                           ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: ibex_flat.v:19412:21: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                          : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc'
+19412 |    mmio_read_data_q <= 1'sb0;
+      |                     ^~
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:311:41: Operator COND expects 32 or 6 bits on the Conditional True, but Conditional True's VARREF 'index' generates 5 bits.
+                                                               : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut'
+  311 |    deadline = DEADLINE[(6 - (index <= 6 ? index : 6)) * 32+:32];
+      |                                         ^
+%Warning-WIDTHEXPAND: rtnn_c1_autonomous_selftest_sv2v.v:366:8: Operator ASSIGN expects 256 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                              : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut'
+  366 |    req = 1'sb0;
+      |        ^
+%Warning-UNOPTFLAT: ibex_flat.v:11693:14: Signal unoptimizable: Circular combinational logic: 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.en_wb_o'
+                                        : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i'
+11693 |  output wire en_wb_o;
+      |              ^~~~~~~
+                    ibex_flat.v:11693:14:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.en_wb_o
+                    ibex_flat.v:12046:21:      Example path: ASSIGNW
+                    ibex_flat.v:11637:14:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.csr_op_en_o
+                    ibex_flat.v:8375:21:      Example path: ASSIGNW
+                    ibex_flat.v:8335:7:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i.special_req
+                    ibex_flat.v:8516:2:      Example path: ALWAYS
+                    ibex_flat.v:8331:6:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i.halt_if
+                    ibex_flat.v:8745:23:      Example path: ASSIGNW
+                    ibex_flat.v:11601:14:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o
+                    ibex_flat.v:8516:2:      Example path: ALWAYS
+%Warning-UNOPTFLAT: ibex_flat.v:11729:7: Signal unoptimizable: Circular combinational logic: 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.instr_executing_spec'
+                                       : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i'
+11729 |  wire instr_executing_spec;
+      |       ^~~~~~~~~~~~~~~~~~~~
+                    ibex_flat.v:11729:7:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.instr_executing_spec
+                    ibex_flat.v:12106:2:      Example path: ALWAYS
+                    ibex_flat.v:11727:6:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.jump_set_raw
+                    ibex_flat.v:12076:18:      Example path: ASSIGNW
+                    ibex_flat.v:11726:7:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.jump_set
+                    ibex_flat.v:8516:2:      Example path: ALWAYS
+                    ibex_flat.v:8331:6:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i.halt_if
+                    ibex_flat.v:8745:23:      Example path: ASSIGNW
+                    ibex_flat.v:11601:14:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o
+                    ibex_flat.v:8516:2:      Example path: ALWAYS
+%Warning-UNOPTFLAT: ibex_flat.v:11601:14: Signal unoptimizable: Circular combinational logic: 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o'
+                                        : ... note: In instance 'tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i'
+11601 |  output wire id_in_ready_o;
+      |              ^~~~~~~~~~~~~
+                    ibex_flat.v:11601:14:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o
+                    ibex_flat.v:8516:2:      Example path: ALWAYS
+                    ibex_flat.v:8331:6:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i.halt_if
+                    ibex_flat.v:8745:23:      Example path: ASSIGNW
+                    ibex_flat.v:11601:14:      Example path: tb_rtnn_c1_autonomous_selftest.dut.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o
+make: Entering directory '/mnt/d/rtnn_de0cv_c1_autonomous_selftest_20261110/sim_sv2v_retry/obj_dir'
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /usr/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /usr/share/verilator/include/verilated_timing.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /usr/share/verilator/include/verilated_threads.cpp
+/usr/bin/python3 /usr/share/verilator/bin/verilator_includer -DVL_INCLUDE_OPT=include Vtb_rtnn_c1_autonomous_selftest.cpp Vtb_rtnn_c1_autonomous_selftest___024root__DepSet_hcded11f8__0.cpp Vtb_rtnn_c1_autonomous_selftest___024root__DepSet_h248c0a7b__0.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_if_stage__pi7__DepSet_h02529cb5__0.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_id_stage__pi8__DepSet_hde537020__0.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_id_stage__pi8__DepSet_h1305eaa3__0.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_cs_registers__pi9__DepSet_ha124d6c4__0.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_cs_registers__pi9__DepSet_hc7d34547__0.cpp Vtb_rtnn_c1_autonomous_selftest__main.cpp Vtb_rtnn_c1_autonomous_selftest__ConstPool_0.cpp Vtb_rtnn_c1_autonomous_selftest___024root__Slow.cpp Vtb_rtnn_c1_autonomous_selftest___024root__DepSet_hcded11f8__0__Slow.cpp Vtb_rtnn_c1_autonomous_selftest___024root__DepSet_h248c0a7b__0__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_if_stage__pi7__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_if_stage__pi7__DepSet_h02529cb5__0__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_if_stage__pi7__DepSet_h67057f36__0__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_id_stage__pi8__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_id_stage__pi8__DepSet_hde537020__0__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_id_stage__pi8__DepSet_h1305eaa3__0__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_cs_registers__pi9__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_cs_registers__pi9__DepSet_ha124d6c4__0__Slow.cpp Vtb_rtnn_c1_autonomous_selftest_ibex_cs_registers__pi9__DepSet_hc7d34547__0__Slow.cpp Vtb_rtnn_c1_autonomous_selftest__Syms.cpp > Vtb_rtnn_c1_autonomous_selftest__ALL.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o Vtb_rtnn_c1_autonomous_selftest__ALL.o Vtb_rtnn_c1_autonomous_selftest__ALL.cpp
+echo "" > Vtb_rtnn_c1_autonomous_selftest__ALL.verilator_deplist.tmp
+Archive ar -rcs Vtb_rtnn_c1_autonomous_selftest__ALL.a Vtb_rtnn_c1_autonomous_selftest__ALL.o
+g++     verilated.o verilated_timing.o verilated_threads.o Vtb_rtnn_c1_autonomous_selftest__ALL.a    -pthread -lpthread -latomic   -o Vtb_rtnn_c1_autonomous_selftest
+rm Vtb_rtnn_c1_autonomous_selftest__ALL.verilator_deplist.tmp
+make: Leaving directory '/mnt/d/rtnn_de0cv_c1_autonomous_selftest_20261110/sim_sv2v_retry/obj_dir'

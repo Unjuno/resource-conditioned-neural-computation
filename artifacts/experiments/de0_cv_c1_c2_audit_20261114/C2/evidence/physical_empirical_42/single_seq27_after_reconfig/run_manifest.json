@@ -1,0 +1,43 @@
+{
+  "schema": "rtnn-c2-jtag-run-manifest-v2",
+  "experiment_id": "C2J2_HW_SINGLE_SEQ27_20261113",
+  "status": "PASS_RUN_AND_ARTIFACT_AUDIT",
+  "scope": "subset",
+  "selected_sequences": [
+    27
+  ],
+  "expected_count": 1,
+  "quartus_stp_tcl_exit_code": 0,
+  "quartus_stp_tcl_path": "C:\\altera_lite\\25.1std\\quartus\\bin64\\quartus_stp_tcl.exe",
+  "quartus_stp_tcl_sha256": "79d33bbb250a7684865c3efce13cc80f7ee3373b8c1a8e1c397b3e76a6388ce7",
+  "command_arguments": [
+    "-t",
+    "C:\\rtnn_c2_20261113\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\host\\run_c2_jtag.tcl",
+    "C:\\rtnn_c2_20261113\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\evidence\\c2j2_candidate_20261112\\host\\c2_cases.csv",
+    "C:\\rtnn_c2_20261113\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\evidence\\physical_empirical_after_user_scope_20261113\\single_seq27_after_reconfig",
+    "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+    "C2J2_HW_SINGLE_SEQ27_20261113",
+    "27"
+  ],
+  "cwd": "C:\\Users\\junny\\OneDrive\\ドキュメント\\ChatGPT\\RTNN",
+  "quartus_process_cwd": "C:\\altera_lite\\25.1std\\quartus\\bin64",
+  "quartus_ascii_repo_alias": "C:\\rtnn_c2_20261113",
+  "host_tcl_sha256": "fa720ab36aabca46e1059ca54df3f75240d9889ebaca176383d631bb897de4dd",
+  "result_audit_exit_code": 0,
+  "result_auditor_sha256": "a31e6464978743c9047c1c2bd239666745fb6c43c9e57e15fe3cd1334b7f3c63",
+  "cases_csv_sha256": "52b7fdae7c465fd4b6409876e258e00fbaad5656e93ad3b9fb79f2f8741aec5d",
+  "sof_filename": "rtnn_c2.sof",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "expected_virtual_jtag_build_id": "43324a32",
+  "uart_used": false,
+  "flash_written": false,
+  "board_programming_performed_by_this_script": false,
+  "output_sha256": {
+    "quartus_stp_tcl.log": "61da1f546de25f0c8f07882345746313257b7f775511ea8bd75cc7bdd9d17d10",
+    "result_audit.json": "07628207c4c881b8300a8213f68e59a9fcf0ddedaf90e5d2675da4527d6f3bd3",
+    "c2_jtag_results.csv": "9415771fa714686cbf9e6ed6e049fafc1d200f1d3cf028ebc9eec5171bcb34fa",
+    "result_audit.log": "b6fff5070448cdd63a8faf584de285c41c534a23592e72cd13328e906c337575",
+    "c2_jtag_raw.log": "5b64c2b109559b2349e15387a13eeab91bfb17b9baebbbbd32a0ef4671d9d8c5",
+    "c2_jtag_results.json": "24b0c39cf30dacf73103dd403d8604a7064f8375323a419ca5d1f9c54ec8d1f6"
+  }
+}

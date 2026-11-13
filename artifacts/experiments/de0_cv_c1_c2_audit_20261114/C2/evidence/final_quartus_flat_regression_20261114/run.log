@@ -1,0 +1,3 @@
+[11591] %Fatal: tb_rtnn_c2_soc_42.sv:113: Assertion failed in TOP.tb_rtnn_c2_soc_42: CDC request bundle mismatch at CLOCK_50 capture
+%Error: tb_rtnn_c2_soc_42.sv:113: Verilog $stop
+Aborting...

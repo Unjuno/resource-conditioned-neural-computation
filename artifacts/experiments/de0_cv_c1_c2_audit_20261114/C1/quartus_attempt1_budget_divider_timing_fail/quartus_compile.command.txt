@@ -1,0 +1,2 @@
+cwd=D:\rtnn_de0cv_c1_autonomous_selftest_20261110\quartus
+command=C:\altera_lite\25.1std\quartus\bin64\quartus_sh.exe --flow compile rtnn_de0_cv

@@ -1,0 +1,240 @@
+{
+  "schema": "rtnn-c2j2-run-manifest-v1",
+  "experiment_id": "RTNN-C2-JTAG-20261112-C2J2",
+  "build_id": "43324a32",
+  "created_local": "2026-11-12 Asia/Tokyo",
+  "branch": "codex/stage-c2-jtag-20261111",
+  "commit": "48f2e81d87a710ac89b3bcf8ef36f71440d1e6c9",
+  "statuses": {
+    "host_case_payload": "PASS",
+    "firmware_rv32_image": "PASS_BUILT",
+    "mailbox_native": "PASS",
+    "mailbox_sv2v": "PASS",
+    "soc_native_42": "PASS_RTL_SIM_ONLY",
+    "soc_sv2v_42": "PASS_RTL_SIM_ONLY",
+    "quartus_analysis_synthesis": "BLOCKED_CODE_INTEGRITY_IP_GENERATION",
+    "fitter": "NOT_RUN",
+    "sta_all_corners": "NOT_RUN",
+    "design_assistant": "NOT_RUN",
+    "physical_single_input": "NOT_RUN",
+    "physical_42_cases": "NOT_RUN",
+    "flash": "NOT_TOUCHED",
+    "quartus_linux": "BLOCKED_AUTH_REQUIRED_NOT_INSTALLED"
+  },
+  "source": {
+    "cases_csv_sha256": "52b7fdae7c465fd4b6409876e258e00fbaad5656e93ad3b9fb79f2f8741aec5d",
+    "cases_manifest_sha256": "654d579d336ad2d6b3b3da05a945015577021b97c998e11ed2e813c702b24b75",
+    "mailbox_rtl_sha256": "935f541c1d6d8d612c0a4bbf314c4ab83d729f5b3dca9a9448a8a041d4be61ee",
+    "soc_top_sha256": "9fbc58508e023f05c8dba59d085ef7cf673a04b7d9e9a6b0d6cc18dd0ca5acdc",
+    "physical_top_sha256": "142becf52b0139b694c38664a6e53f32bd07fa915e5aa986773e8af085452eff",
+    "firmware_source_sha256": "a6964666d08695bdc447f2315b1683c90a08750a76db1188cb8d8669428cc917",
+    "ibex_source_graph_sha256": "4c06223e8d9b601716fac77f54854854b2ba029cfbd5cd79a75df29873962a80",
+    "ibex_commit": "7b5df75a041affe56e8c235260f98a09b3319008",
+    "ibex_graph_source_count": 146,
+    "flat_sha256": "6ab1da57a247f609ee66e399ecd7095f78d1f0e0a8411cb1f52d5f34d50b491b"
+  },
+  "tools": {
+    "verilator": "5.020",
+    "sv2v": "0.0.13",
+    "quartus": "Prime Lite 25.1std.0 Build 1129",
+    "clang": "18.1.8",
+    "wsl": "Ubuntu 22.04",
+    "powershell": "7.6.9"
+  },
+  "artifacts": {
+    "firmware_manifest_sha256": "16acc8375c18868c2e70885b1ecdb88c98598a98e53d94f8fda309aee0230c16",
+    "elf_sha256": "625daf8cc194f1bc7d48eefff0f07939c5e0988bb07fc8a3e7efad7e613a15fd",
+    "bin_sha256": "379ab1ad0444d28ff2bf2172f837ac0aa01c64fc948aba93a7615c3e4d63659c",
+    "ram_lanes_sha256": [
+      "7704b387d02830327de288cfcced5d1a485c75b6f0cb838db1da4e87661f5f5a",
+      "8c98d35b71595a0fc6fb40be2177dbac3883b4439a5ae894355bd3c3288af1c6",
+      "8e8d201adf2f8e383d42bb116d75fa3e0fb6675d8bf96c694a8fc969547d5873",
+      "affa1411c8c1ea6c443b2b6729502b58b63a6561fcf3177c65d7f34e635e1d11"
+    ],
+    "requests_hex_sha256": "bad64237f63199725dc1a68526861ee6f687fc1b3f1a18ede05f10e5581ba1be",
+    "expected_hex_sha256": "4662662c1921a1704ee315cd2c60a8bff2da1d6ab3a64934464d6d4c5af0b017",
+    "soc_results_csv_sha256": "dd15b0f87e059c7279392ae4e59a647c63f78db5a278572ae34d8046d9cd002e",
+    "mailbox_native_pass_log_sha256": "dcefb37865ea1f24575346d5505b71b1a3a638e9e845b2d8f3e8cb0f12bb8f41",
+    "mailbox_sv2v_pass_log_sha256": "dcefb37865ea1f24575346d5505b71b1a3a638e9e845b2d8f3e8cb0f12bb8f41",
+    "quartus_log_sha256": "a4f786f5298f7a2a8984bfac39f8b8737d1f1006c47ea0121c85c9ad3c05b1b4",
+    "native_compile_log_sha256": "3a86a94dd7950346be2e653232c22da92d3ef2e38323bf6bf2b2f9900cd981b6",
+    "native_run_log_sha256": "605d9839609d28dc36ddc5e170f53168a5764aa7021179bc11a706402c728a9c",
+    "sv2v_compile_log_sha256": "2d3bbaad9138cb27b916fc6fe932c4cc68a7d3c5f8e1cb14f28b98d56c44f501",
+    "sv2v_run_log_sha256": "605d9839609d28dc36ddc5e170f53168a5764aa7021179bc11a706402c728a9c"
+  },
+  "proof": {
+    "native_audit_status": "PASS_RTL_SIMULATION_ONLY",
+    "sv2v_audit_status": "PASS_RTL_SIMULATION_ONLY",
+    "count": 42,
+    "reset_replays": 2,
+    "negative_cases": [
+      "bad frame CRC",
+      "payload CRC",
+      "unknown input",
+      "unknown model",
+      "unknown build",
+      "duplicate sequence",
+      "busy reset"
+    ],
+    "cycle_source": "Ibex mcycle in RTL simulation only",
+    "hardware_measurements": false,
+    "quartus_error": "Windows Code Integrity prevented unsigned ip-generate.exe; sld_hub:auto_hub could not elaborate",
+    "quartus_exit_code": 3,
+    "quartus_warning_count": 386,
+    "quartus_peak_virtual_memory_mb": 5349,
+    "programmed_sof": false,
+    "flash_write": false,
+    "native_verilator_warning_count": 136,
+    "sv2v_verilator_warning_count": 208,
+    "quartus_warning_classes": {
+      "unknown_attributes": 216,
+      "ignored_full_case": 76,
+      "unused_signals": 89,
+      "assignment_truncations": 4,
+      "processor_count_notice": 1
+    }
+  },
+  "commands": [
+    {
+      "command": "bash run.sh",
+      "exit_code": 0,
+      "cwd": "D:\\rtnn_c2_jtag_20261112\\c2j2_native_after_resetfix_20261112"
+    },
+    {
+      "command": "bash run.sh",
+      "exit_code": 0,
+      "cwd": "D:\\rtnn_c2_jtag_20261112\\c2j2_sv2v_42_after_resetfix_20261112"
+    },
+    {
+      "command": "quartus_sh.exe --flow compile rtnn_c2",
+      "exit_code": 3,
+      "cwd": "D:\\rtnn_c2_jtag_20261112\\quartus_c2j2_resetfix_20261112"
+    }
+  ],
+  "current_clean_retest_2026_11_12": {
+    "native_soc": "PASS_RTL_SIM_ONLY",
+    "sv2v_soc": "PASS_RTL_SIM_ONLY",
+    "mailbox_native": "PASS_RTL_SIM_ONLY",
+    "mailbox_sv2v": "PASS_RTL_SIM_ONLY",
+    "build_id": "43324a32",
+    "soc_cases_each": 42,
+    "reset_replays_each": 2,
+    "negative_cases_each": 7,
+    "soc_results_csv_sha256_both": "dd15b0f87e059c7279392ae4e59a647c63f78db5a278572ae34d8046d9cd002e",
+    "soc_results_json_sha256_both": "3fff1c5a9afc3b59190559bd902e5cc8904056f6c2709919d0e3982ecc019db7",
+    "native_warning_count": 136,
+    "sv2v_warning_count": 208,
+    "evidence": "evidence/c2j2_candidate_20261112/current_soc_retest_20261112/RUN_RECORD.md",
+    "cycles_are_hardware_measurements": false
+  },
+  "nonclaims": [
+    "No physical FPGA result or cycle count is included.",
+    "No C2 SOF was produced or programmed.",
+    "Quartus Fitter, all-corner STA, and Design Assistant are not passed.",
+    "C1 diagnostic image and results are not C2 evidence."
+  ],
+  "linux_quartus_candidate": {
+    "official_release": "Quartus Prime Lite 25.1std.0 Build 1129",
+    "os": "Ubuntu 22.04 listed supported for Lite 25.1",
+    "wsl_deployment": "not yet experimentally verified",
+    "quartus_file": "QuartusLiteSetup-25.1std.0.1129-linux.run",
+    "quartus_published_sha1": "ce0773469eacab5b7035c175484625f4ec3737d1",
+    "cyclone_v_file": "cyclonev-25.1std.0.1129.qdz",
+    "cyclone_v_published_sha1": "a7225ec1bd36ccfd6826ea6273df5d21dd95633b",
+    "download_authentication": "Altera customer sign-in required by current official link",
+    "download_path": "D:\\rtnn_quartus_lite_25_1_linux",
+    "rechecked_at": "2026-11-12 Asia/Tokyo",
+    "payloads_present": false,
+    "verification_helper": "tools/Verify-QuartusLinuxPayloads.ps1",
+    "verification_helper_sha256": "74e6f17bbcce8e86dd1767b82297a9fa39b0b0a6359117ff4bebb301e19e3ea9",
+    "missing_payload_guard": "PASS_EXPECTED_EXIT_1_NO_RECEIPT",
+    "patch_page_status": "official Windows Lite 25.1 patch link found; target inaccessible in research session; no fix inferred",
+    "installed": false
+  },
+  "physical_jtag_readonly_recheck_2026_11_12": {
+    "status": "PASS_CABLE_AND_IDCODE_ONLY",
+    "quartus": "Prime Lite 25.1std.0 Build 1129",
+    "jtag_cable": "USB-Blaster [USB-0]",
+    "idcode": "02B050DD",
+    "quartus_project_device": "5CEBA4F23C7",
+    "user_virtual_jtag_node_enumerated": false,
+    "physical_transaction_performed": false,
+    "sof_loaded": false,
+    "flash_touched": false,
+    "evidence": "evidence/jtag_readonly_recheck_20261112/RUN_RECORD.md"
+  },
+  "host_entrypoint_validation_2026_11_12": {
+    "status": "PASS_HOST_ONLY",
+    "script": "host/Invoke-C2J2JtagExperiment.ps1",
+    "test": "tests/test_c2_j2_host_entrypoint.ps1",
+    "case_count": 42,
+    "build_id": "43324a32",
+    "cases_csv_sha256": "52b7fdae7c465fd4b6409876e258e00fbaad5656e93ad3b9fb79f2f8741aec5d",
+    "correct_sha_accepted": true,
+    "wrong_sha_rejected": true,
+    "validate_only_hardware_access": false,
+    "evidence": "evidence/c2j2_candidate_20261112/current_entrypoint_validation_20261112/RUN_RECORD.md"
+  },
+  "quartus_retry_after_resume_2026_11_12": {
+    "status": "BLOCKED_CODE_INTEGRITY_IP_GENERATION",
+    "quartus": "Prime Lite 25.1std.0 Build 1129",
+    "command": "quartus_sh.exe --flow compile rtnn_c2",
+    "cwd": "D:\\rtnn_c2_jtag_20261112\\quartus_retry_after_resume_20261112",
+    "exit_code": 3,
+    "elapsed": "00:03:33",
+    "peak_virtual_memory_mb": 5349,
+    "warning_count": 386,
+    "errors": [
+      "112002 ip-generate.exe launch failure",
+      "12154 sld_hub:auto_hub elaboration failure"
+    ],
+    "fitter": "NOT_RUN",
+    "sta_all_corners": "NOT_RUN",
+    "design_assistant": "NOT_RUN",
+    "sof": "NOT_GENERATED",
+    "flash": "NOT_TOUCHED",
+    "evidence": "evidence/quartus_retry_after_resume_20261112/RUN_RECORD.md",
+    "code_integrity_confirmed": true,
+    "ip_generate_authenticode_status": "NotSigned",
+    "ip_generate_sha256": "87a7d36360151c7933b2a8c3974ee9d04da05b7c29f47d9ca2af0861b9c616ab",
+    "code_integrity_event_ids": [
+      3077,
+      3033
+    ],
+    "code_integrity_event_time_local": "2026-11-12 22:09:17",
+    "code_integrity_policy_id": "0283ac0f-fff1-49ae-ada1-8a933130cad6",
+    "code_integrity_evidence": "evidence/quartus_retry_after_resume_20261112/CODE_INTEGRITY_EVENTS.txt"
+  },
+  "cycle_measurement_host_recheck_2026_11_12": {
+    "status": "PASS_HOST_SCRIPTED_CALLBACK_ONLY",
+    "distro": "WSL2 Ubuntu 22.04",
+    "clang": "14.0.0-1ubuntu1.1",
+    "command": "bash tools/test_c2_cycle_measurement.sh /mnt/d/rtnn_c2_cycle_recheck_20261112",
+    "exit_code": 0,
+    "u64_wrap_delta": 100,
+    "low32_wrap_delta": 64,
+    "zero_delta": "REJECTED_INTERNAL",
+    "delta_over_u32": "REJECTED_INTERNAL",
+    "clock_callback_reads_per_case": 2,
+    "physical_measurement": false,
+    "evidence": "evidence/current_cycle_boundary_recheck_20261112/RUN_RECORD.md"
+  },
+  "host_mock_recheck_2026_11_12": {
+    "status": "PASS_HOST_MOCK_ONLY",
+    "tclsh": "Quartus Tclsh 8.6.1",
+    "case_count": 42,
+    "build_id": "43324a32",
+    "cases_csv_sha256": "52b7fdae7c465fd4b6409876e258e00fbaad5656e93ad3b9fb79f2f8741aec5d",
+    "scenarios": {
+      "normal": "PASS_42_SYNTHETIC_CYCLES",
+      "bad_build": "REJECTED_BEFORE_REQUEST",
+      "timeout": "TIMEOUT_INVALID_CYCLE",
+      "timeout_second": "PRIOR_PASS_RETAINED_NEXT_TIMEOUT",
+      "no_hardware": "REJECTED_ZERO_REQUESTS"
+    },
+    "all_harness_exit_codes": 0,
+    "physical_jtag": false,
+    "synthetic_cycle_values_only": true,
+    "evidence": "evidence/current_host_mock_recheck_resume_20261112/RUN_RECORD.md"
+  }
+}

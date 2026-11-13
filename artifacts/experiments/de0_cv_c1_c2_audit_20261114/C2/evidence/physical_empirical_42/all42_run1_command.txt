@@ -1,0 +1,4 @@
+cwd=C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN
+command=& "C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\host\Invoke-C2J2JtagExperiment.ps1" -SofPath "C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\quartus_d101_exact_disposition_20261113\rtnn_c2.sof" -ExperimentId C2J2_HW_ALL42_RUN1_20261113 -OutputDirectory "C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\physical_empirical_after_user_scope_20261113\all42_run1"
+sof_sha256=5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6
+scope=all_frozen_42

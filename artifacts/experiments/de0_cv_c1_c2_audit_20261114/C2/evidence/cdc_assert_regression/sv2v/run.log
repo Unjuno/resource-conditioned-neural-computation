@@ -1,0 +1,52 @@
+C2_SOC_CASE_PASS index=0 seq=1 input=0 mode=1 pred=3 label=3 admitted=0 executed=0 mcycle=20148
+C2_SOC_CASE_PASS index=1 seq=2 input=0 mode=1 pred=3 label=3 admitted=1 executed=1 mcycle=482034
+C2_SOC_CASE_PASS index=2 seq=3 input=0 mode=1 pred=3 label=3 admitted=2 executed=2 mcycle=943925
+C2_SOC_CASE_PASS index=3 seq=4 input=0 mode=1 pred=3 label=3 admitted=3 executed=3 mcycle=1405815
+C2_SOC_CASE_PASS index=4 seq=5 input=0 mode=1 pred=3 label=3 admitted=4 executed=4 mcycle=1867705
+C2_SOC_CASE_PASS index=5 seq=6 input=0 mode=1 pred=3 label=3 admitted=5 executed=5 mcycle=2329595
+C2_SOC_CASE_PASS index=6 seq=7 input=0 mode=1 pred=3 label=3 admitted=6 executed=6 mcycle=2791485
+C2_SOC_CASE_PASS index=7 seq=8 input=24 mode=1 pred=6 label=4 admitted=0 executed=0 mcycle=20146
+C2_SOC_CASE_PASS index=8 seq=9 input=24 mode=1 pred=6 label=4 admitted=1 executed=1 mcycle=482034
+C2_SOC_CASE_PASS index=9 seq=10 input=24 mode=1 pred=4 label=4 admitted=2 executed=2 mcycle=943925
+C2_SOC_CASE_PASS index=10 seq=11 input=24 mode=1 pred=4 label=4 admitted=3 executed=3 mcycle=1405815
+C2_SOC_CASE_PASS index=11 seq=12 input=24 mode=1 pred=4 label=4 admitted=4 executed=4 mcycle=1867705
+C2_SOC_CASE_PASS index=12 seq=13 input=24 mode=1 pred=4 label=4 admitted=5 executed=5 mcycle=2329595
+C2_SOC_CASE_PASS index=13 seq=14 input=24 mode=1 pred=4 label=4 admitted=6 executed=6 mcycle=2791485
+C2_SOC_CASE_PASS index=14 seq=15 input=57 mode=1 pred=1 label=2 admitted=0 executed=0 mcycle=20149
+C2_SOC_CASE_PASS index=15 seq=16 input=57 mode=1 pred=1 label=2 admitted=1 executed=1 mcycle=482036
+C2_SOC_CASE_PASS index=16 seq=17 input=57 mode=1 pred=8 label=2 admitted=2 executed=2 mcycle=943924
+C2_SOC_CASE_PASS index=17 seq=18 input=57 mode=1 pred=8 label=2 admitted=3 executed=3 mcycle=1405814
+C2_SOC_CASE_PASS index=18 seq=19 input=57 mode=1 pred=8 label=2 admitted=4 executed=4 mcycle=1867703
+C2_SOC_CASE_PASS index=19 seq=20 input=57 mode=1 pred=8 label=2 admitted=5 executed=5 mcycle=2329594
+C2_SOC_CASE_PASS index=20 seq=21 input=57 mode=1 pred=8 label=2 admitted=6 executed=6 mcycle=2791483
+C2_SOC_CASE_PASS index=21 seq=22 input=0 mode=3 pred=3 label=3 admitted=0 executed=0 mcycle=20206
+C2_SOC_CASE_PASS index=22 seq=23 input=0 mode=3 pred=3 label=3 admitted=1 executed=1 mcycle=525754
+C2_SOC_CASE_PASS index=23 seq=24 input=0 mode=3 pred=3 label=3 admitted=2 executed=1 mcycle=565952
+C2_SOC_CASE_PASS index=24 seq=25 input=0 mode=3 pred=3 label=3 admitted=3 executed=1 mcycle=565952
+C2_SOC_CASE_PASS index=25 seq=26 input=0 mode=3 pred=3 label=3 admitted=4 executed=1 mcycle=565952
+C2_SOC_CASE_PASS index=26 seq=27 input=0 mode=3 pred=3 label=3 admitted=5 executed=1 mcycle=565950
+C2_SOC_CASE_PASS index=27 seq=28 input=0 mode=3 pred=3 label=3 admitted=6 executed=1 mcycle=565950
+C2_SOC_CASE_PASS index=28 seq=29 input=24 mode=3 pred=6 label=4 admitted=0 executed=0 mcycle=20204
+C2_SOC_CASE_PASS index=29 seq=30 input=24 mode=3 pred=6 label=4 admitted=1 executed=1 mcycle=525754
+C2_SOC_CASE_PASS index=30 seq=31 input=24 mode=3 pred=4 label=4 admitted=2 executed=2 mcycle=1031301
+C2_SOC_CASE_PASS index=31 seq=32 input=24 mode=3 pred=4 label=4 admitted=3 executed=3 mcycle=1536847
+C2_SOC_CASE_PASS index=32 seq=33 input=24 mode=3 pred=4 label=4 admitted=4 executed=3 mcycle=1577045
+C2_SOC_CASE_PASS index=33 seq=34 input=24 mode=3 pred=4 label=4 admitted=5 executed=3 mcycle=1577043
+C2_SOC_CASE_PASS index=34 seq=35 input=24 mode=3 pred=4 label=4 admitted=6 executed=3 mcycle=1577043
+C2_SOC_CASE_PASS index=35 seq=36 input=57 mode=3 pred=1 label=2 admitted=0 executed=0 mcycle=20207
+C2_SOC_CASE_PASS index=36 seq=37 input=57 mode=3 pred=1 label=2 admitted=1 executed=1 mcycle=525756
+C2_SOC_CASE_PASS index=37 seq=38 input=57 mode=3 pred=8 label=2 admitted=2 executed=2 mcycle=1031300
+C2_SOC_CASE_PASS index=38 seq=39 input=57 mode=3 pred=8 label=2 admitted=3 executed=3 mcycle=1536846
+C2_SOC_CASE_PASS index=39 seq=40 input=57 mode=3 pred=8 label=2 admitted=4 executed=4 mcycle=2042391
+C2_SOC_CASE_PASS index=40 seq=41 input=57 mode=3 pred=8 label=2 admitted=5 executed=5 mcycle=2547936
+C2_SOC_CASE_PASS index=41 seq=42 input=57 mode=3 pred=8 label=2 admitted=6 executed=5 mcycle=2547936
+C2_SOC_CASE_PASS index=0 seq=1 input=0 mode=1 pred=3 label=3 admitted=0 executed=0 mcycle=20148
+C2_SOC_NEGATIVE_PASS tag=bad_frame_crc response_status=2
+C2_SOC_NEGATIVE_PASS tag=duplicate_sequence response_status=4
+C2_SOC_NEGATIVE_PASS tag=bad_payload_crc response_status=4
+C2_SOC_NEGATIVE_PASS tag=unknown_input_id response_status=4
+C2_SOC_NEGATIVE_PASS tag=unknown_model_id response_status=3
+C2_SOC_NEGATIVE_PASS tag=unknown_build_id response_status=3
+C2_SOC_CASE_PASS index=0 seq=1 input=0 mode=1 pred=3 label=3 admitted=0 executed=0 mcycle=20148
+C2_FIXED_IBEX_Q15_SOC_PASS cases=42 reset_recovery=PASS negatives=bad_crc,duplicate,busy_reset,payload_crc,unknown_input,unknown_model,unknown_build
+- tb_rtnn_c2_soc_42.sv:299: Verilog $finish

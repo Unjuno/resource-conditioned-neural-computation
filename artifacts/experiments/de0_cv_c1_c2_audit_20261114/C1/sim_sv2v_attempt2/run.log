@@ -1,0 +1,10 @@
+sv2v_version_exit=0
+verilator_version_exit=0
+sv2v_exit=0
+compile_exit=0
+warning_lines=119
+wrapper_warning_lines=15
+C1_AUTONOMOUS_SELFTEST_PASS run=1 cases=20 LEDR=1000
+C1_AUTONOMOUS_SELFTEST_ALL_PASS runs=2 cases_per_run=20 reset_recovery=PASS LEDR=1000
+- rtnn_c1_autonomous_selftest_sv2v.v:574: Verilog $finish
+sim_exit=0

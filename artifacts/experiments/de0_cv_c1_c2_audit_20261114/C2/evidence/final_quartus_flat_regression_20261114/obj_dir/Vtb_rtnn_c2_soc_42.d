@@ -1,0 +1,1 @@
+Vtb_rtnn_c2_soc_42.o: Vtb_rtnn_c2_soc_42.cpp Vtb_rtnn_c2_soc_42__pch.h

@@ -1,0 +1,2 @@
+exit_code=0
+sof_sha256=a5ee8af78b05e1875d1f0fb2da4789e5d9debb6e96b5af78f5078749ea084a79

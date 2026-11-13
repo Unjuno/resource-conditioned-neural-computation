@@ -1,0 +1,39 @@
+{
+  "status": "C2_CASES_GENERATED_FROM_FROZEN_REFERENCES",
+  "count": 42,
+  "cert_cases": 21,
+  "adaptive_budget_cases": 21,
+  "input_ids": [
+    0,
+    24,
+    57
+  ],
+  "adaptive_budget_indices": [
+    0,
+    4,
+    7,
+    10,
+    14,
+    17,
+    20
+  ],
+  "adaptive_budget_q16": [
+    0,
+    13107,
+    22937,
+    32768,
+    45874,
+    55705,
+    65535
+  ],
+  "legacy_cycles_used_as_fpga_expectation": false,
+  "source_sha256": {
+    "known_good_sim_uart.log": "41fa947ba20e5aa1e76cb3fd99807690e12de32f2ac991815ec05d805757c115",
+    "preflight_reference.json": "43d6a70dd3f79cb5589d4efc75011552e322aafb9e107e46232abd8a0cf0175e",
+    "heldout360.json": "eeba9000a918bcba911007e78905c5052fc743422f95cb314a0fc9f4ecdfb14c",
+    "host_actual_q15_firmware.csv": "1f9b08987a9d7368b663f604eb1dce6e077073e099552532468509c846d6bdc8",
+    "native_firmware_verdict.json": "81f35dab218a8aed82b635a85f4390ead3bf4aa3e00f0e535fce10e3f935483d"
+  },
+  "c2_cases_csv_sha256": "7016910c20d47ce7c5487cfbec2490e2afcfb755d22f835b2038876e007ab2da",
+  "simulation_case_file_sha256": "828b759fe3a8f2fb1d82416c1fc1dd261ed18de7851a0e3f5baeadeab0876d1d"
+}

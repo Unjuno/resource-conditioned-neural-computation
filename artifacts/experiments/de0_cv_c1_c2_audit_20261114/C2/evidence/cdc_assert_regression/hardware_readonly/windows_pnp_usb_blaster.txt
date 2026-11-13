@@ -1,0 +1,19 @@
+
+Status       : OK
+Class        : USB
+FriendlyName : Altera USB-Blaster
+InstanceId   : USB\VID_09FB&PID_6001\91D28408
+
+
+InstanceId : USB\VID_09FB&PID_6001\91D28408
+KeyName    : DEVPKEY_Device_HardwareIds
+Data       : {USB\VID_09FB&PID_6001&REV_0400, USB\VID_09FB&PID_6001}
+
+InstanceId : USB\VID_09FB&PID_6001\91D28408
+KeyName    : DEVPKEY_Device_Manufacturer
+Data       : Altera
+
+InstanceId : USB\VID_09FB&PID_6001\91D28408
+KeyName    : DEVPKEY_Device_Service
+Data       : AlteraUSBBlaster
+

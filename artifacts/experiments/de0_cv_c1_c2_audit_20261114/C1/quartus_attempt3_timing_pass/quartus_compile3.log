@@ -1,0 +1,1054 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+Info: Running Quartus Prime Shell
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Tue Nov 10 14:42:21 2026
+Info: Command: quartus_sh --flow compile rtnn_de0_cv
+Info: Quartus(args): compile rtnn_de0_cv
+Info: Project Name = D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_de0_cv
+Info: Revision Name = rtnn_de0_cv
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Processing started: Tue Nov 10 14:42:22 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off rtnn_de0_cv -c rtnn_de0_cv
+Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
+Info (20032): Parallel compilation is enabled and will use up to 4 processors
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(2726) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 2726
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(2726) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 2726
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(4131) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4131
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(4131) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4131
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(4174) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4174
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(4174) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4174
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6764) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6764
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6764) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6764
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6783) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6783
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6783) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6783
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6796) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6796
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6796) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6796
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6812) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6812
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6812) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6812
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6832) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6832
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6832) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6832
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6889) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6889
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6889) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6889
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6912) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6912
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6912) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6912
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6940) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6940
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6940) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6940
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(6956) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6956
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(6956) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6956
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7007) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7007
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7007) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7007
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7065) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7065
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7065) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7065
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7076) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7076
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7076) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7076
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7175) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7175
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7175) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7175
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7252) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7252
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7252) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7252
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7305) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7305
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7305) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7305
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7454) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7454
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7454) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7454
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7485) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7485
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7485) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7485
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7571) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7571
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7571) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7571
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7637) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7637
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7637) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7637
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7687) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7687
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7687) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7687
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7714) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7714
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7714) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7714
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7858) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7858
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7858) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7858
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7861) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7861
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7861) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7861
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7872) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7872
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7872) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7872
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7876) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7876
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7876) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7876
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7884) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7884
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7884) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7884
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7898) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7898
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7898) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7898
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7911) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7911
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7911) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7911
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7920) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7920
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7920) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7920
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7934) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7934
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7934) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7934
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7954) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7954
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7954) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7954
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7984) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7984
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7984) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7984
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(7988) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7988
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(7988) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7988
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(8027) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8027
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(8027) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8027
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(8059) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8059
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(8059) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8059
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(8086) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8086
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(8086) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8086
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(8090) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8090
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(8090) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8090
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(8110) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8110
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(8110) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8110
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(8544) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8544
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(8544) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8544
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(8682) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8682
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(8682) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8682
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(8953) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8953
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(8953) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8953
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(9095) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9095
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(9095) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9095
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(9273) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9273
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(9273) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9273
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(9317) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9317
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(9317) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9317
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(9320) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9320
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(9320) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9320
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(9394) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9394
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(9394) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9394
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(9656) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9656
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(9656) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9656
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10413) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10413
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10413) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10413
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10438) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10438
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10438) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10438
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10453) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10453
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10453) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10453
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10466) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10466
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10466) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10466
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10483) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10483
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10483) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10483
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10487) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10487
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10487) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10487
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10498) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10498
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10498) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10498
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10510) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10510
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10510) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10510
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10542) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10542
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10542) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10542
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10592) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10592
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10592) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10592
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10607) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10607
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10607) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10607
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10625) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10625
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10625) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10625
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10663) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10663
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10663) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10663
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10702) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10702
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10702) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10702
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10760) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10760
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10760) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10760
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10770) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10770
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10770) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10770
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10783) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10783
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10783) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10783
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10839) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10839
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10839) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10839
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10875) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10875
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10875) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10875
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(10914) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10914
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(10914) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10914
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(11073) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11073
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(11073) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11073
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(11801) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11801
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(11801) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11801
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(11815) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11815
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(11815) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11815
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(11825) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11825
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(11825) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11825
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(11837) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11837
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(11837) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11837
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(11862) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11862
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(11862) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11862
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(11894) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11894
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(11894) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11894
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12120) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12120
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12120) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12120
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12123) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12123
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12123) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12123
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12461) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12461
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12461) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12461
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12474) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12474
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12474) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12474
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12935) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12935
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12935) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12935
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12939) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12939
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12939) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12939
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12948) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12948
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12948) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12948
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12958) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12958
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12958) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12958
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12969) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12969
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12969) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12969
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(12983) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12983
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(12983) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12983
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13019) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13019
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13019) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13019
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13031) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13031
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13031) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13031
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13059) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13059
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13059) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13059
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13087) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13087
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13087) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13087
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13130) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13130
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13130) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13130
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13431) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13431
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13431) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13431
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13485) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13485
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13485) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13485
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13581) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13581
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13581) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13581
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13745) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13745
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13745) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13745
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13750) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13750
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13750) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13750
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13804) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13804
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13804) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13804
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13807) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13807
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13807) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13807
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13847) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13847
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13847) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13847
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13871) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13871
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13871) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13871
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(13897) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13897
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(13897) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13897
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(14146) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14146
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(14146) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14146
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(14240) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14240
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(14240) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14240
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(14539) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14539
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(14539) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14539
+Warning (10335): Unrecognized synthesis attribute "full_case" at ibex_flat.v(19423) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19423
+Warning (10335): Unrecognized synthesis attribute "parallel_case" at ibex_flat.v(19423) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19423
+Info (12021): Found 133 design units, including 133 entities, in source file ibex_flat.v
+    Info (12023): Found entity 1: prim_and2 File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1
+    Info (12023): Found entity 2: prim_buf File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12
+    Info (12023): Found entity 3: prim_clock_buf File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 23
+    Info (12023): Found entity 4: prim_clock_gating File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 35
+    Info (12023): Found entity 5: prim_flop File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 58
+    Info (12023): Found entity 6: prim_flop_no_rst File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 76
+    Info (12023): Found entity 7: prim_usb_diff_rx File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 87
+    Info (12023): Found entity 8: prim_xnor2 File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 124
+    Info (12023): Found entity 9: prim_xor2 File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 135
+    Info (12023): Found entity 10: prim_secded_22_16_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 146
+    Info (12023): Found entity 11: prim_secded_22_16_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 187
+    Info (12023): Found entity 12: prim_secded_28_22_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 211
+    Info (12023): Found entity 13: prim_secded_28_22_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 258
+    Info (12023): Found entity 14: prim_secded_39_32_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 282
+    Info (12023): Found entity 15: prim_secded_39_32_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 340
+    Info (12023): Found entity 16: prim_secded_64_57_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 365
+    Info (12023): Found entity 17: prim_secded_64_57_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 448
+    Info (12023): Found entity 18: prim_secded_72_64_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 473
+    Info (12023): Found entity 19: prim_secded_72_64_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 564
+    Info (12023): Found entity 20: prim_secded_hamming_22_16_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 590
+    Info (12023): Found entity 21: prim_secded_hamming_22_16_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 631
+    Info (12023): Found entity 22: prim_secded_hamming_39_32_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 655
+    Info (12023): Found entity 23: prim_secded_hamming_39_32_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 713
+    Info (12023): Found entity 24: prim_secded_hamming_72_64_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 738
+    Info (12023): Found entity 25: prim_secded_hamming_72_64_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 829
+    Info (12023): Found entity 26: prim_secded_hamming_76_68_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 855
+    Info (12023): Found entity 27: prim_secded_hamming_76_68_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 950
+    Info (12023): Found entity 28: prim_secded_inv_22_16_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 976
+    Info (12023): Found entity 29: prim_secded_inv_22_16_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1017
+    Info (12023): Found entity 30: prim_secded_inv_28_22_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1042
+    Info (12023): Found entity 31: prim_secded_inv_28_22_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1089
+    Info (12023): Found entity 32: prim_secded_inv_39_32_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1114
+    Info (12023): Found entity 33: prim_secded_inv_39_32_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1172
+    Info (12023): Found entity 34: prim_secded_inv_64_57_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1198
+    Info (12023): Found entity 35: prim_secded_inv_64_57_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1281
+    Info (12023): Found entity 36: prim_secded_inv_72_64_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1307
+    Info (12023): Found entity 37: prim_secded_inv_72_64_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1398
+    Info (12023): Found entity 38: prim_secded_inv_hamming_22_16_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1425
+    Info (12023): Found entity 39: prim_secded_inv_hamming_22_16_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1466
+    Info (12023): Found entity 40: prim_secded_inv_hamming_39_32_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1491
+    Info (12023): Found entity 41: prim_secded_inv_hamming_39_32_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1549
+    Info (12023): Found entity 42: prim_secded_inv_hamming_72_64_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1575
+    Info (12023): Found entity 43: prim_secded_inv_hamming_72_64_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1666
+    Info (12023): Found entity 44: prim_secded_inv_hamming_76_68_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1693
+    Info (12023): Found entity 45: prim_secded_inv_hamming_76_68_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1788
+    Info (12023): Found entity 46: ibex_icache File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 1815
+    Info (12023): Found entity 47: prim_cdc_rand_delay File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 2784
+    Info (12023): Found entity 48: prim_subst_perm File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 2800
+    Info (12023): Found entity 49: prim_present File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 2883
+    Info (12023): Found entity 50: prim_prince File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3108
+    Info (12023): Found entity 51: prim_count File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3446
+    Info (12023): Found entity 52: prim_clock_mux2 File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3539
+    Info (12023): Found entity 53: prim_pad_attr File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3552
+    Info (12023): Found entity 54: prim_pad_wrapper File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3597
+    Info (12023): Found entity 55: prim_ram_1p File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3659
+    Info (12023): Found entity 56: prim_ram_1r1w File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3718
+    Info (12023): Found entity 57: prim_ram_2p File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3782
+    Info (12023): Found entity 58: prim_rom File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3866
+    Info (12023): Found entity 59: prim_lfsr File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3902
+    Info (12023): Found entity 60: prim_sec_anchor_buf File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4073
+    Info (12023): Found entity 61: prim_sec_anchor_flop File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4085
+    Info (12023): Found entity 62: stream_fork File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4107
+    Info (12023): Found entity 63: stream_join_dynamic File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4202
+    Info (12023): Found entity 64: prim_clock_inv File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4224
+    Info (12023): Found entity 65: prim_flop_2sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4250
+    Info (12023): Found entity 66: prim_flop_en File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4293
+    Info (12023): Found entity 67: prim_mubi4_sender File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4326
+    Info (12023): Found entity 68: prim_mubi4_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4391
+    Info (12023): Found entity 69: prim_mubi4_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4488
+    Info (12023): Found entity 70: prim_mubi8_sender File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4549
+    Info (12023): Found entity 71: prim_mubi8_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4614
+    Info (12023): Found entity 72: prim_mubi8_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4711
+    Info (12023): Found entity 73: prim_mubi12_sender File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4772
+    Info (12023): Found entity 74: prim_mubi12_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4837
+    Info (12023): Found entity 75: prim_mubi12_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4934
+    Info (12023): Found entity 76: prim_mubi16_sender File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4995
+    Info (12023): Found entity 77: prim_mubi16_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5060
+    Info (12023): Found entity 78: prim_mubi16_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5157
+    Info (12023): Found entity 79: prim_mubi20_sender File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5218
+    Info (12023): Found entity 80: prim_mubi20_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5283
+    Info (12023): Found entity 81: prim_mubi20_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5380
+    Info (12023): Found entity 82: prim_mubi24_sender File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5441
+    Info (12023): Found entity 83: prim_mubi24_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5506
+    Info (12023): Found entity 84: prim_mubi24_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5603
+    Info (12023): Found entity 85: prim_mubi28_sender File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5664
+    Info (12023): Found entity 86: prim_mubi28_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5729
+    Info (12023): Found entity 87: prim_mubi28_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5826
+    Info (12023): Found entity 88: prim_mubi32_sender File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5887
+    Info (12023): Found entity 89: prim_mubi32_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 5952
+    Info (12023): Found entity 90: prim_mubi32_dec File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6049
+    Info (12023): Found entity 91: prim_onehot_enc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6110
+    Info (12023): Found entity 92: prim_onehot_mux File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6128
+    Info (12023): Found entity 93: prim_onehot_check File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6166
+    Info (12023): Found entity 94: prim_ram_1p_adv File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6250
+    Info (12023): Found entity 95: ibex_alu File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6707
+    Info (12023): Found entity 96: ibex_branch_predict File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7596
+    Info (12023): Found entity 97: ibex_compressed_decoder File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7652
+    Info (12023): Found entity 98: ibex_controller File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8170
+    Info (12023): Found entity 99: ibex_cs_registers File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8773
+    Info (12023): Found entity 100: ibex_csr File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10086
+    Info (12023): Found entity 101: ibex_counter File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10125
+    Info (12023): Found entity 102: ibex_decoder File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10212
+    Info (12023): Found entity 103: ibex_ex_block File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11117
+    Info (12023): Found entity 104: ibex_fetch_fifo File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11291
+    Info (12023): Found entity 105: ibex_id_stage File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11457
+    Info (12023): Found entity 106: ibex_if_stage File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12249
+    Info (12023): Found entity 107: ibex_load_store_unit File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12833
+    Info (12023): Found entity 108: ibex_multdiv_fast File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13239
+    Info (12023): Found entity 109: ibex_multdiv_slow File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13651
+    Info (12023): Found entity 110: ibex_prefetch_buffer File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13932
+    Info (12023): Found entity 111: ibex_pmp File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14099
+    Info (12023): Found entity 112: ibex_wb_stage File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14263
+    Info (12023): Found entity 113: ibex_dummy_instr File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14452
+    Info (12023): Found entity 114: ibex_core File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14568
+    Info (12023): Found entity 115: prim_fifo_async_sram_adapter File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15492
+    Info (12023): Found entity 116: prim_fifo_async_simple File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15777
+    Info (12023): Found entity 117: prim_fifo_async File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15845
+    Info (12023): Found entity 118: prim_fifo_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 16066
+    Info (12023): Found entity 119: prim_fifo_sync_cnt File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 16223
+    Info (12023): Found entity 120: prim_clock_div File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 16355
+    Info (12023): Found entity 121: prim_rst_sync File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 16452
+    Info (12023): Found entity 122: prim_ram_1p_scr File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 16513
+    Info (12023): Found entity 123: ibex_register_file_ff File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 16929
+    Info (12023): Found entity 124: ibex_register_file_fpga File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17014
+    Info (12023): Found entity 125: ibex_register_file_latch File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17069
+    Info (12023): Found entity 126: ibex_trvk File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17201
+    Info (12023): Found entity 127: ibex_lockstep File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17506
+    Info (12023): Found entity 128: ibex_top File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18076
+    Info (12023): Found entity 129: rtnn_uart_tx File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19027
+    Info (12023): Found entity 130: rtnn_uart_rx File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19086
+    Info (12023): Found entity 131: rtnn_de0_cv_ram File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19174
+    Info (12023): Found entity 132: rtnn_de0_cv_soc File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19271
+    Info (12023): Found entity 133: rtnn_de0_cv_top File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19552
+Info (12021): Found 1 design units, including 1 entities, in source file rtnn_diag_packet_engine.sv
+    Info (12023): Found entity 1: rtnn_diag_packet_engine File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_diag_packet_engine.sv Line: 3
+Info (12021): Found 1 design units, including 1 entities, in source file rtnn_c1_selftest_checker.sv
+    Info (12023): Found entity 1: rtnn_c1_selftest_checker File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_c1_selftest_checker.sv Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file rtnn_c1_autonomous_selftest.sv
+    Info (12023): Found entity 1: rtnn_de0_cv_selftest File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_c1_autonomous_selftest.sv Line: 1
+Info (12127): Elaborating entity "rtnn_de0_cv_selftest" for the top level hierarchy
+Info (12128): Elaborating entity "rtnn_diag_packet_engine" for hierarchy "rtnn_diag_packet_engine:u_packet" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_c1_autonomous_selftest.sv Line: 116
+Info (10264): Verilog HDL Case Statement information at rtnn_diag_packet_engine.sv(66): all case item expressions in this case statement are onehot File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_diag_packet_engine.sv Line: 66
+Info (12128): Elaborating entity "rtnn_uart_tx" for hierarchy "rtnn_diag_packet_engine:u_packet|rtnn_uart_tx:u_request_tx" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_diag_packet_engine.sv Line: 32
+Info (12128): Elaborating entity "rtnn_uart_rx" for hierarchy "rtnn_diag_packet_engine:u_packet|rtnn_uart_rx:u_response_rx" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_diag_packet_engine.sv Line: 36
+Info (12128): Elaborating entity "rtnn_de0_cv_soc" for hierarchy "rtnn_de0_cv_soc:u_soc" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_c1_autonomous_selftest.sv Line: 121
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(19424): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19424
+Info (12128): Elaborating entity "rtnn_de0_cv_ram" for hierarchy "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19356
+Info (12128): Elaborating entity "prim_secded_inv_39_32_enc" for hierarchy "rtnn_de0_cv_soc:u_soc|prim_secded_inv_39_32_enc:u_data_secded" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19454
+Info (12128): Elaborating entity "ibex_top" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 19550
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(18585): object "unused_scramble_inputs" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18585
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(18726): object "unused_ram_cfg" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18726
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(18727): object "unused_ram_inputs" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18727
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(18999): object "unused_trvk" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18999
+Info (12128): Elaborating entity "prim_flop" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|prim_flop:g_clock_en_secure.u_prim_core_busy_flop" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18359
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|prim_buf:u_fetch_enable_buf" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18379
+Info (12128): Elaborating entity "ibex_core" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18491
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(14903): object "unused_illegal_insn_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14903
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15316): object "unused_rf_ren_a" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15316
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15317): object "unused_rf_ren_b" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15317
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15318): object "unused_rf_rd_a_wb_match" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15318
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15319): object "unused_rf_rd_b_wb_match" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15319
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15468): object "unused_priv_lvl_ls" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15468
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15469): object "unused_csr_pmp_addr" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15469
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15470): object "unused_csr_pmp_cfg" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15470
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15471): object "unused_csr_pmp_mseccfg" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15471
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15481): object "unused_instr_new_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15481
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15482): object "unused_instr_id_done" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15482
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15483): object "unused_instr_done_wb" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15483
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15484): object "unused_instr_expanded_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15484
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15485): object "unused_instr_gets_expanded_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15485
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|prim_buf:g_core_busy_secure.u_fetch_enable_buf" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14914
+Info (12128): Elaborating entity "ibex_if_stage" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15013
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12415): object "unused_fetch_addr_n0" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12415
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12448): object "unused_boot_addr" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12448
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12449): object "unused_csr_mtvec" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12449
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12450): object "unused_exc_cause" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12450
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12577): object "unused_icen" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12577
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12578): object "unused_icinv" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12578
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12579): object "unused_scr_key_valid" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12579
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12580): object "unused_tag_ram_input" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12580
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12581): object "unused_data_ram_input" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12581
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12462): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12462
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12475): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12475
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|prim_buf:g_mem_ecc.u_prim_buf_instr_rdata" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12493
+Info (12128): Elaborating entity "prim_secded_inv_39_32_dec" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|prim_secded_inv_39_32_dec:g_mem_ecc.u_instr_intg_dec" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12499
+Info (12128): Elaborating entity "ibex_prefetch_buffer" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12576
+Info (12128): Elaborating entity "ibex_fetch_fifo" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_prefetch_buffer:gen_prefetch_buffer.prefetch_buffer_i|ibex_fetch_fifo:fifo_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14026
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(11350): object "unused_addr_in" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11350
+Info (12128): Elaborating entity "ibex_compressed_decoder" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_compressed_decoder:compressed_decoder_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12622
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7877): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7877
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7885): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7885
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7873): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7873
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7862): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7862
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7935): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7935
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7921): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7921
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7912): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7912
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7899): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7899
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7715): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7715
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7688): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7688
+Warning (10230): Verilog HDL assignment warning at ibex_flat.v(7699): truncated value with size 32 to match size of target (7) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7699
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7989): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7989
+Info (10264): Verilog HDL Case Statement information at ibex_flat.v(7989): all case item expressions in this case statement are onehot File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7989
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(8060): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8060
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(8028): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8028
+Info (10264): Verilog HDL Case Statement information at ibex_flat.v(8028): all case item expressions in this case statement are onehot File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8028
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(8091): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8091
+Info (10264): Verilog HDL Case Statement information at ibex_flat.v(8091): all case item expressions in this case statement are onehot File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8091
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(8111): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8111
+Info (10264): Verilog HDL Case Statement information at ibex_flat.v(8111): all case item expressions in this case statement are onehot File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8111
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(8087): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8087
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7985): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7985
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7955): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7955
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7859): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7859
+Info (12128): Elaborating entity "ibex_dummy_instr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_dummy_instr:gen_dummy_instr.dummy_instr_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12641
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(14540): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14540
+Info (12128): Elaborating entity "prim_lfsr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|ibex_dummy_instr:gen_dummy_instr.dummy_instr_i|prim_lfsr:lfsr_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14520
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(3911): object "_sv2v_0" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 3911
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(4057): object "unused_sbox_out" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 4057
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_if_stage:if_stage_i|prim_buf:g_secure_pc.u_prev_instr_addr_incr_buf" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12746
+Info (12128): Elaborating entity "ibex_id_stage" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_id_stage:id_stage_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15156
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(11849): object "unused_a_mux_sel" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11849
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(11850): object "unused_b_mux_sel" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11850
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12219): object "unused_data_req_done_ex" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12219
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12220): object "unused_rf_waddr_wb" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12220
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12221): object "unused_rf_write_wb" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12221
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12222): object "unused_outstanding_load_wb" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12222
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12223): object "unused_outstanding_store_wb" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12223
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12224): object "unused_wb_exception" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12224
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12225): object "unused_rf_wdata_fwd_wb" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12225
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(12226): object "unused_id_exception" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12226
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(11802): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11802
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(11863): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11863
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(11895): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11895
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12124): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12124
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12121): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12121
+Info (12128): Elaborating entity "ibex_decoder" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_id_stage:id_stage_i|ibex_decoder:decoder_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11958
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(10327): object "unused_instr_alu" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10327
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(10355): object "unused_clk" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10355
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(10356): object "unused_rst_n" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10356
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10439): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10439
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10454): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10454
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10467): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10467
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10499): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10499
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10488): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10488
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10511): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10511
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10484): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10484
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10543): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10543
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10593): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10593
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10608): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10608
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10626): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10626
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10414): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10414
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10703): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10703
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10761): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10761
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10915): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10915
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(11074): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11074
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(10664): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10664
+Info (12128): Elaborating entity "ibex_controller" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_id_stage:id_stage_i|ibex_controller:controller_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12036
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(8352): object "unused_irq_timer" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8352
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(8683): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8683
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(8545): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 8545
+Info (12128): Elaborating entity "ibex_ex_block" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15189
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(11211): object "unused_bt_a_operand" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11211
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(11212): object "unused_bt_b_operand" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11212
+Info (12128): Elaborating entity "ibex_alu" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_alu:alu_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11234
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(6852): object "unused_shift_result_ext" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6852
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(7525): object "unused_imd_val_q" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7525
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(7527): object "unused_butterfly_result" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7527
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(7529): object "unused_invbutterfly_result" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7529
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(7592): object "unused_shift_amt_compl" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7592
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(6765): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6765
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(6784): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6784
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(6797): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6797
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(6813): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6813
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(6833): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6833
+Warning (10230): Verilog HDL assignment warning at ibex_flat.v(6876): truncated value with size 32 to match size of target (6) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6876
+Warning (10230): Verilog HDL assignment warning at ibex_flat.v(6894): truncated value with size 32 to match size of target (1) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6894
+Warning (10230): Verilog HDL assignment warning at ibex_flat.v(6895): truncated value with size 32 to match size of target (1) File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6895
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(6890): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6890
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(6941): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6941
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(6957): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 6957
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(7572): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 7572
+Info (12128): Elaborating entity "ibex_multdiv_fast" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_ex_block:ex_block_i|ibex_multdiv_fast:gen_multdiv_fast.multdiv_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 11286
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(13325): object "unused_mult_sel_i" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13325
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(13350): object "unused_imd_val" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13350
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(13352): object "unused_mac_res_ext" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13352
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(13364): object "unused_mult1_res_uns" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13364
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(13550): object "unused_alu_adder_ext" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13550
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(13647): object "unused_sva_mul_fsm_idle" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13647
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(13432): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13432
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(13582): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13582
+Info (12128): Elaborating entity "ibex_load_store_unit" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_load_store_unit:load_store_unit_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15228
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12940): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12940
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12949): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12949
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12959): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12959
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12970): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12970
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12936): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12936
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(12984): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 12984
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(13020): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13020
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(13032): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13032
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(13060): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13060
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(13088): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13088
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(13131): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 13131
+Info (12128): Elaborating entity "ibex_wb_stage" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_wb_stage:wb_stage_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15264
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(14430): object "unused_clk" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14430
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(14431): object "unused_rst" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14431
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(14432): object "unused_instr_type_wb" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14432
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(14433): object "unused_pc_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14433
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(14434): object "unused_dummy_instr_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14434
+Info (12128): Elaborating entity "ibex_cs_registers" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15433
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9033): object "unused_mhpmcounter_we_1" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9033
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9034): object "unused_mhpmcounterh_we_1" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9034
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9035): object "unused_mhpmcounter_incr_1" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9035
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9058): object "unused_boot_addr" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9058
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9059): object "unused_csr_addr" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9059
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9875): object "unused_instr_ret_compressed_spec_i" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9875
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9881): object "unused_mhphcounter_we" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9881
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9882): object "unused_mhphcounterh_we" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9882
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(9883): object "unused_mhphcounter_incr" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9883
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(10059): object "unused_icen" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10059
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(10062): object "unused_ic_scr_key_valid" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10062
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(9096): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9096
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(9274): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9274
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(9321): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9321
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(9318): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9318
+Warning (10766): Verilog HDL Synthesis Attribute warning at ibex_flat.v(9395): ignoring full_case attribute on case statement with explicit default case item File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9395
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_mstatus_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9429
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_mepc_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9441
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_mie_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9457
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_mcause_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9481
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_mtvec_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9505
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_dcsr_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9518
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_mstack_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9567
+Info (12128): Elaborating entity "ibex_counter" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_counter:mcycle_counter_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9823
+Info (12128): Elaborating entity "ibex_counter" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_counter:minstret_counter_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9836
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_mcounteren_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 9917
+Info (12128): Elaborating entity "ibex_csr" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_core:u_ibex_core|ibex_cs_registers:cs_registers_i|ibex_csr:u_cpuctrlsts_part_csr" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 10082
+Info (12128): Elaborating entity "ibex_register_file_ff" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_register_file_ff:gen_regfile_ff.register_file_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18517
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(16977): object "unused_strobe" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 16977
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(17010): object "unused_test_en" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17010
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|prim_buf:gen_mem_wdata_ecc.u_prim_buf_data_wdata_intg" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18744
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|prim_buf:gen_lockstep.u_signals_prim_buf" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18799
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|prim_buf:gen_lockstep.gen_ways[0].u_tag_prim_buf" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18808
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|prim_buf:gen_lockstep.gen_ways[0].u_data_prim_buf" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18812
+Info (12128): Elaborating entity "ibex_lockstep" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_lockstep:gen_lockstep.u_ibex_lockstep" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18918
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(17739): object "unused_bits" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17739
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(17993): object "unused_shadow_rf_wdata_wb_ecc" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17993
+Info (12128): Elaborating entity "prim_clock_mux2" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_lockstep:gen_lockstep.u_ibex_lockstep|prim_clock_mux2:u_prim_rst_shadow_n_mux2" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17766
+Info (12128): Elaborating entity "ibex_core" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_lockstep:gen_lockstep.u_ibex_lockstep|ibex_core:u_shadow_core" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17991
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(14903): object "unused_illegal_insn_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 14903
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15468): object "unused_priv_lvl_ls" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15468
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15469): object "unused_csr_pmp_addr" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15469
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15470): object "unused_csr_pmp_cfg" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15470
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15471): object "unused_csr_pmp_mseccfg" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15471
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15481): object "unused_instr_new_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15481
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15482): object "unused_instr_id_done" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15482
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15483): object "unused_instr_done_wb" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15483
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15484): object "unused_instr_expanded_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15484
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(15485): object "unused_instr_gets_expanded_id" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 15485
+Info (12128): Elaborating entity "ibex_register_file_ff" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|ibex_lockstep:gen_lockstep.u_ibex_lockstep|ibex_register_file_ff:gen_shadow_regfile_ff.register_file_shadow_i" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18016
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(16977): object "unused_strobe" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 16977
+Warning (10036): Verilog HDL or VHDL warning at ibex_flat.v(17010): object "unused_test_en" assigned a value but never read File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 17010
+Info (12128): Elaborating entity "prim_buf" for hierarchy "rtnn_de0_cv_soc:u_soc|ibex_top:u_ibex|prim_buf:gen_lockstep.u_prim_buf_alert_minor" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/ibex_flat.v Line: 18922
+Info (12128): Elaborating entity "rtnn_c1_selftest_checker" for hierarchy "rtnn_c1_selftest_checker:u_checker" File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_c1_autonomous_selftest.sv Line: 131
+Info (19000): Inferred 4 megafunctions from design logic
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|mem0_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to BIDIR_DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 8
+        Info (286033): Parameter WIDTH_B set to 8
+        Info (286033): Parameter WIDTHAD_A set to 16
+        Info (286033): Parameter WIDTHAD_B set to 16
+        Info (286033): Parameter NUMWORDS_A set to 65536
+        Info (286033): Parameter NUMWORDS_B set to 65536
+        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_REG_B set to CLOCK0
+        Info (286033): Parameter WRCONTROL_WRADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter RAM_BLOCK_TYPE set to M10K
+        Info (286033): Parameter INIT_FILE set to db/rtnn_de0_cv.ram0_rtnn_de0_cv_ram_54962163.hdl.mif
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|mem1_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to BIDIR_DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 8
+        Info (286033): Parameter WIDTH_B set to 8
+        Info (286033): Parameter WIDTHAD_A set to 16
+        Info (286033): Parameter WIDTHAD_B set to 16
+        Info (286033): Parameter NUMWORDS_A set to 65536
+        Info (286033): Parameter NUMWORDS_B set to 65536
+        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_REG_B set to CLOCK0
+        Info (286033): Parameter WRCONTROL_WRADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter RAM_BLOCK_TYPE set to M10K
+        Info (286033): Parameter INIT_FILE set to db/rtnn_de0_cv.ram1_rtnn_de0_cv_ram_54962163.hdl.mif
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|mem2_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to BIDIR_DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 8
+        Info (286033): Parameter WIDTH_B set to 8
+        Info (286033): Parameter WIDTHAD_A set to 16
+        Info (286033): Parameter WIDTHAD_B set to 16
+        Info (286033): Parameter NUMWORDS_A set to 65536
+        Info (286033): Parameter NUMWORDS_B set to 65536
+        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_REG_B set to CLOCK0
+        Info (286033): Parameter WRCONTROL_WRADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter RAM_BLOCK_TYPE set to M10K
+        Info (286033): Parameter INIT_FILE set to db/rtnn_de0_cv.ram2_rtnn_de0_cv_ram_54962163.hdl.mif
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|mem3_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to BIDIR_DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 8
+        Info (286033): Parameter WIDTH_B set to 8
+        Info (286033): Parameter WIDTHAD_A set to 16
+        Info (286033): Parameter WIDTHAD_B set to 16
+        Info (286033): Parameter NUMWORDS_A set to 65536
+        Info (286033): Parameter NUMWORDS_B set to 65536
+        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_REG_B set to CLOCK0
+        Info (286033): Parameter WRCONTROL_WRADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter RAM_BLOCK_TYPE set to M10K
+        Info (286033): Parameter INIT_FILE set to db/rtnn_de0_cv.ram3_rtnn_de0_cv_ram_54962163.hdl.mif
+Info (12130): Elaborated megafunction instantiation "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem0_rtl_0"
+Info (12133): Instantiated megafunction "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem0_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "BIDIR_DUAL_PORT"
+    Info (12134): Parameter "WIDTH_A" = "8"
+    Info (12134): Parameter "WIDTH_B" = "8"
+    Info (12134): Parameter "WIDTHAD_A" = "16"
+    Info (12134): Parameter "WIDTHAD_B" = "16"
+    Info (12134): Parameter "NUMWORDS_A" = "65536"
+    Info (12134): Parameter "NUMWORDS_B" = "65536"
+    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info (12134): Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_REG_B" = "CLOCK0"
+    Info (12134): Parameter "WRCONTROL_WRADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info (12134): Parameter "RAM_BLOCK_TYPE" = "M10K"
+    Info (12134): Parameter "INIT_FILE" = "db/rtnn_de0_cv.ram0_rtnn_de0_cv_ram_54962163.hdl.mif"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_ev32.tdf
+    Info (12023): Found entity 1: altsyncram_ev32 File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/db/altsyncram_ev32.tdf Line: 34
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_dla.tdf
+    Info (12023): Found entity 1: decode_dla File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/db/decode_dla.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/decode_61a.tdf
+    Info (12023): Found entity 1: decode_61a File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/db/decode_61a.tdf Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file db/mux_tfb.tdf
+    Info (12023): Found entity 1: mux_tfb File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/db/mux_tfb.tdf Line: 23
+Info (12130): Elaborated megafunction instantiation "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem1_rtl_0"
+Info (12133): Instantiated megafunction "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem1_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "BIDIR_DUAL_PORT"
+    Info (12134): Parameter "WIDTH_A" = "8"
+    Info (12134): Parameter "WIDTH_B" = "8"
+    Info (12134): Parameter "WIDTHAD_A" = "16"
+    Info (12134): Parameter "WIDTHAD_B" = "16"
+    Info (12134): Parameter "NUMWORDS_A" = "65536"
+    Info (12134): Parameter "NUMWORDS_B" = "65536"
+    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info (12134): Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_REG_B" = "CLOCK0"
+    Info (12134): Parameter "WRCONTROL_WRADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info (12134): Parameter "RAM_BLOCK_TYPE" = "M10K"
+    Info (12134): Parameter "INIT_FILE" = "db/rtnn_de0_cv.ram1_rtnn_de0_cv_ram_54962163.hdl.mif"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_fv32.tdf
+    Info (12023): Found entity 1: altsyncram_fv32 File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/db/altsyncram_fv32.tdf Line: 34
+Info (12130): Elaborated megafunction instantiation "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem2_rtl_0"
+Info (12133): Instantiated megafunction "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem2_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "BIDIR_DUAL_PORT"
+    Info (12134): Parameter "WIDTH_A" = "8"
+    Info (12134): Parameter "WIDTH_B" = "8"
+    Info (12134): Parameter "WIDTHAD_A" = "16"
+    Info (12134): Parameter "WIDTHAD_B" = "16"
+    Info (12134): Parameter "NUMWORDS_A" = "65536"
+    Info (12134): Parameter "NUMWORDS_B" = "65536"
+    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info (12134): Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_REG_B" = "CLOCK0"
+    Info (12134): Parameter "WRCONTROL_WRADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info (12134): Parameter "RAM_BLOCK_TYPE" = "M10K"
+    Info (12134): Parameter "INIT_FILE" = "db/rtnn_de0_cv.ram2_rtnn_de0_cv_ram_54962163.hdl.mif"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_gv32.tdf
+    Info (12023): Found entity 1: altsyncram_gv32 File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/db/altsyncram_gv32.tdf Line: 34
+Info (12130): Elaborated megafunction instantiation "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem3_rtl_0"
+Info (12133): Instantiated megafunction "rtnn_de0_cv_soc:u_soc|rtnn_de0_cv_ram:u_ram|altsyncram:mem3_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "BIDIR_DUAL_PORT"
+    Info (12134): Parameter "WIDTH_A" = "8"
+    Info (12134): Parameter "WIDTH_B" = "8"
+    Info (12134): Parameter "WIDTHAD_A" = "16"
+    Info (12134): Parameter "WIDTHAD_B" = "16"
+    Info (12134): Parameter "NUMWORDS_A" = "65536"
+    Info (12134): Parameter "NUMWORDS_B" = "65536"
+    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info (12134): Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_REG_B" = "CLOCK0"
+    Info (12134): Parameter "WRCONTROL_WRADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info (12134): Parameter "RAM_BLOCK_TYPE" = "M10K"
+    Info (12134): Parameter "INIT_FILE" = "db/rtnn_de0_cv.ram3_rtnn_de0_cv_ram_54962163.hdl.mif"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_hv32.tdf
+    Info (12023): Found entity 1: altsyncram_hv32 File: D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/db/altsyncram_hv32.tdf Line: 34
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 1217 registers lost all their fanouts during netlist optimizations.
+Info (144001): Generated suppressed messages file D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_de0_cv.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (21057): Implemented 7080 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 4 output pins
+    Info (21061): Implemented 6815 logic cells
+    Info (21064): Implemented 256 RAM segments
+    Info (21062): Implemented 3 DSP elements
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 379 warnings
+    Info: Peak virtual memory: 5045 megabytes
+    Info: Processing ended: Tue Nov 10 14:43:02 2026
+    Info: Elapsed time: 00:00:40
+    Info: Total CPU time (on all processors): 00:00:47
+Info: *******************************************************************
+Info: Running Quartus Prime Fitter
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Processing started: Tue Nov 10 14:43:03 2026
+Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off rtnn_de0_cv -c rtnn_de0_cv
+Info: qfit2_default_script.tcl version: #1
+Info: Project  = rtnn_de0_cv
+Info: Revision = rtnn_de0_cv
+Info (16303): High Performance Effort optimization mode selected -- timing performance will be prioritized at the potential cost of increased compilation time
+Info (20032): Parallel compilation is enabled and will use up to 4 processors
+Info (119006): Selected device 5CEBA4F23C7 for design "rtnn_de0_cv"
+Info (21076): High junction temperature operating condition is not set. Assuming a default value of '85'.
+Info (21076): Low junction temperature operating condition is not set. Assuming a default value of '0'.
+Info (171004): Fitter is performing a Standard Fit compilation using maximum Fitter effort to optimize design performance
+Warning (292013): Feature LogicLock is only available with a valid subscription license. You can purchase a software subscription to gain full access to this feature.
+Info (176045): Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
+Info (184020): Starting Fitter periphery placement operations
+Info (11178): Promoted 1 clock (1 global)
+    Info (11162): CLOCK_50~inputCLKENA0 with 3276 fanout uses global clock CLKCTRL_G5
+Info (184021): Fitter periphery placement operations ending: elapsed time is 00:00:00
+Info (176233): Starting register packing
+Info (332104): Reading SDC File: 'rtnn_de0_cv.sdc'
+Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332129): Detected timing requirements -- optimizing circuit to achieve only the specified requirements
+Info (332111): Found 1 clocks
+    Info (332111):   Period   Clock Name
+    Info (332111): ======== ============
+    Info (332111):   20.000     CLOCK_50
+Info (176235): Finished register packing
+    Extra Info (176219): No registers were packed into other blocks
+Info (128000): Starting physical synthesis optimizations for speed
+Info (128002): Starting physical synthesis algorithm register retiming
+Info (128003): Physical synthesis algorithm register retiming complete: estimated slack improvement of 0 ps
+Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
+Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
+Info (128002): Starting physical synthesis algorithm register retiming
+Info (128003): Physical synthesis algorithm register retiming complete: estimated slack improvement of 0 ps
+Info (128002): Starting physical synthesis algorithm combinational resynthesis using boolean division
+Info (128003): Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
+Info (128001): Physical synthesis optimizations for speed complete: elapsed time is 00:00:14
+Info (176233): Starting register packing
+Info (176235): Finished register packing
+    Extra Info (176219): No registers were packed into other blocks
+Info (11798): Fitter preparation operations ending: elapsed time is 00:00:20
+Info (170189): Fitter placement preparation operations beginning
+Info (14951): The Fitter is using Advanced Physical Optimization.
+Info (170190): Fitter placement preparation operations ending: elapsed time is 00:00:14
+Info (170191): Fitter placement operations beginning
+Info (170137): Fitter placement was successful
+Info (170192): Fitter placement operations ending: elapsed time is 00:00:17
+Info (170193): Fitter routing operations beginning
+Info (170195): Router estimated average interconnect usage is 12% of the available device resources
+    Info (170196): Router estimated peak interconnect usage is 36% of the available device resources in the region that extends from location X33_Y23 to location X43_Y33
+Info (170194): Fitter routing operations ending: elapsed time is 00:01:04
+Info (11888): Total time spent on timing analysis during the Fitter is 13.02 seconds.
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Info (11801): Fitter post-fit operations ending: elapsed time is 00:00:15
+Info (144001): Generated suppressed messages file D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/rtnn_de0_cv.fit.smsg
+Info: Quartus Prime Fitter was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 6607 megabytes
+    Info: Processing ended: Tue Nov 10 14:45:47 2026
+    Info: Elapsed time: 00:02:44
+    Info: Total CPU time (on all processors): 00:06:08
+Info: *******************************************************************
+Info: Running Quartus Prime Assembler
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Processing started: Tue Nov 10 14:45:48 2026
+Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off rtnn_de0_cv -c rtnn_de0_cv
+Info (115030): Assembler is generating device programming files
+Info: Quartus Prime Assembler was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 5071 megabytes
+    Info: Processing ended: Tue Nov 10 14:45:55 2026
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:05
+Info (293026): Skipped module Power Analyzer due to the assignment FLOW_ENABLE_POWER_ANALYZER
+Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Processing started: Tue Nov 10 14:45:56 2026
+Info: Command: quartus_sta rtnn_de0_cv -c rtnn_de0_cv
+Info: qsta_default_script.tcl version: #1
+Info (20032): Parallel compilation is enabled and will use up to 4 processors
+Info (21076): High junction temperature operating condition is not set. Assuming a default value of '85'.
+Info (21076): Low junction temperature operating condition is not set. Assuming a default value of '0'.
+Info (332104): Reading SDC File: 'rtnn_de0_cv.sdc'
+Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info: Found TIMING_ANALYZER_REPORT_SCRIPT_INCLUDE_DEFAULT_ANALYSIS = ON
+Info: Analyzing Slow 1100mV 85C Model
+Info (332146): Worst-case setup slack is 0.916
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     0.916               0.000 CLOCK_50 
+    Info (332119):     6.421               0.000 n/a 
+Info (332146): Worst-case hold slack is 0.249
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     0.249               0.000 CLOCK_50 
+    Info (332119):    11.247               0.000 n/a 
+Info (332146): Worst-case recovery slack is 11.171
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    11.171               0.000 CLOCK_50 
+Info (332146): Worst-case removal slack is 1.393
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     1.393               0.000 CLOCK_50 
+Info (332146): Worst-case minimum pulse width slack is 8.775
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     8.775               0.000 CLOCK_50 
+Info (332114): Report Metastability: Found 1 synchronizer chains.
+    Info (332114): Worst-Case MTBF of Design is 1e+09 years or 3.15e+16 seconds.
+    Info (332114): Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
+
+    Info (332114): Number of Synchronizer Chains Found: 1
+    Info (332114): Shortest Synchronizer Chain: 3 Registers
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.000
+    Info (332114): Worst Case Available Settling Time: 38.101 ns
+    Info (332114): Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
+    Info (332114):   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 7.8
+    Info (332114): Typical MTBF values are calculated based on the nominal silicon characteristics, at nominal operating conditions.
+    Info (332114):   - Under typical conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 17.8
+Info: Analyzing Slow 1100mV 0C Model
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332146): Worst-case setup slack is 0.926
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     0.926               0.000 CLOCK_50 
+    Info (332119):     7.241               0.000 n/a 
+Info (332146): Worst-case hold slack is 0.235
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     0.235               0.000 CLOCK_50 
+    Info (332119):    10.579               0.000 n/a 
+Info (332146): Worst-case recovery slack is 11.581
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    11.581               0.000 CLOCK_50 
+Info (332146): Worst-case removal slack is 1.319
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     1.319               0.000 CLOCK_50 
+Info (332146): Worst-case minimum pulse width slack is 8.825
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     8.825               0.000 CLOCK_50 
+Info (332114): Report Metastability: Found 1 synchronizer chains.
+    Info (332114): Worst-Case MTBF of Design is 1e+09 years or 3.15e+16 seconds.
+    Info (332114): Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
+
+    Info (332114): Number of Synchronizer Chains Found: 1
+    Info (332114): Shortest Synchronizer Chain: 3 Registers
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.000
+    Info (332114): Worst Case Available Settling Time: 38.167 ns
+    Info (332114): Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
+    Info (332114):   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 2.4
+    Info (332114): Typical MTBF values are calculated based on the nominal silicon characteristics, at nominal operating conditions.
+    Info (332114):   - Under typical conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 17.8
+Info: Analyzing Fast 1100mV 85C Model
+Info (334003): Started post-fitting delay annotation
+Info (334004): Delay annotation completed successfully
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332146): Worst-case setup slack is 9.853
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     9.853               0.000 CLOCK_50 
+    Info (332119):    11.720               0.000 n/a 
+Info (332146): Worst-case hold slack is 0.136
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     0.136               0.000 CLOCK_50 
+    Info (332119):     6.980               0.000 n/a 
+Info (332146): Worst-case recovery slack is 14.344
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    14.344               0.000 CLOCK_50 
+Info (332146): Worst-case removal slack is 0.680
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     0.680               0.000 CLOCK_50 
+Info (332146): Worst-case minimum pulse width slack is 8.469
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     8.469               0.000 CLOCK_50 
+Info (332114): Report Metastability: Found 1 synchronizer chains.
+    Info (332114): Worst-Case MTBF of Design is 1e+09 years or 3.15e+16 seconds.
+    Info (332114): Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
+
+    Info (332114): Number of Synchronizer Chains Found: 1
+    Info (332114): Shortest Synchronizer Chain: 3 Registers
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.000
+    Info (332114): Worst Case Available Settling Time: 39.004 ns
+    Info (332114): Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
+    Info (332114):   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 7.8
+    Info (332114): Typical MTBF values are calculated based on the nominal silicon characteristics, at nominal operating conditions.
+    Info (332114):   - Under typical conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 17.8
+Info: Analyzing Fast 1100mV 0C Model
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332146): Worst-case setup slack is 10.848
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    10.848               0.000 CLOCK_50 
+    Info (332119):    12.692               0.000 n/a 
+Info (332146): Worst-case hold slack is 0.122
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     0.122               0.000 CLOCK_50 
+    Info (332119):     6.275               0.000 n/a 
+Info (332146): Worst-case recovery slack is 15.084
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):    15.084               0.000 CLOCK_50 
+Info (332146): Worst-case removal slack is 0.618
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     0.618               0.000 CLOCK_50 
+Info (332146): Worst-case minimum pulse width slack is 8.423
+    Info (332119):     Slack       End Point TNS Clock 
+    Info (332119): ========= =================== =====================
+    Info (332119):     8.423               0.000 CLOCK_50 
+Info (332114): Report Metastability: Found 1 synchronizer chains.
+    Info (332114): Worst-Case MTBF of Design is 1e+09 years or 3.15e+16 seconds.
+    Info (332114): Typical MTBF of Design is 1e+09 years or 3.15e+16 seconds.
+
+    Info (332114): Number of Synchronizer Chains Found: 1
+    Info (332114): Shortest Synchronizer Chain: 3 Registers
+    Info (332114): Fraction of Chains for which MTBFs Could Not be Calculated: 0.000
+    Info (332114): Worst Case Available Settling Time: 39.067 ns
+    Info (332114): Worst-Case MTBF values are calculated based on the worst-case silicon characteristics, with worst-case operating conditions.
+    Info (332114):   - Under worst-case conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 2.4
+    Info (332114): Typical MTBF values are calculated based on the nominal silicon characteristics, at nominal operating conditions.
+    Info (332114):   - Under typical conditions, an increase of 100ps in available settling time will increase MTBF values by a factor of 17.8
+Info (332101): Design is fully constrained for setup requirements
+Info (332101): Design is fully constrained for hold requirements
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 5518 megabytes
+    Info: Processing ended: Tue Nov 10 14:46:17 2026
+    Info: Elapsed time: 00:00:21
+    Info: Total CPU time (on all processors): 00:00:37
+Info (293000): Quartus Prime Full Compilation was successful. 0 errors, 380 warnings
+Info (23030): Evaluation of Tcl script c:/altera_lite/25.1std/quartus/common/tcl/internal/qsh_flow.tcl was successful
+Info: Quartus Prime Shell was successful. 0 errors, 380 warnings
+    Info: Peak virtual memory: 4660 megabytes
+    Info: Processing ended: Tue Nov 10 14:46:18 2026
+    Info: Elapsed time: 00:03:57
+    Info: Total CPU time (on all processors): 00:00:01

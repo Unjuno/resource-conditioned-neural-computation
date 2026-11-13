@@ -1,0 +1,2 @@
+Attempt 2 (2026-11-12 JST)
+Outcome: exit 9 before compiler output; the generated weights header was empty. The build script expects STAGE2_ROOT as its first argument and appends /fpga/de0_cv internally. This attempt incorrectly passed .../stage2_finalwork/fpga/de0_cv, causing the script to look for .../fpga/de0_cv/fpga/de0_cv/artifacts/rtnn_ibex_rtl_exact.zip. No source input was modified. The failed external output directory is retained as firmware_c2j2_candidate_v2_20261112.

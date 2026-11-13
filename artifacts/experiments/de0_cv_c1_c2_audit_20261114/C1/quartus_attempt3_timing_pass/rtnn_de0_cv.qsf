@@ -1,0 +1,37 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CEBA4F23C7
+set_global_assignment -name SDC_FILE rtnn_de0_cv.sdc
+set_global_assignment -name VERILOG_FILE ibex_flat.v
+set_global_assignment -name SEARCH_PATH .
+set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
+set_global_assignment -name LAST_QUARTUS_VERSION "25.1std.0 Lite Edition"
+set_global_assignment -name SEED 5
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 4
+set_location_assignment PIN_M9 -to CLOCK_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50
+set_location_assignment PIN_U7 -to KEY[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[0]
+set_location_assignment PIN_AA2 -to LEDR[0]
+set_location_assignment PIN_AA1 -to LEDR[1]
+set_location_assignment PIN_W2 -to LEDR[2]
+set_location_assignment PIN_Y3 -to LEDR[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LEDR[0]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LEDR[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LEDR[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW 4MA -to LEDR[3]
+set_instance_assignment -name SLEW_RATE 0 -to LEDR[0]
+set_instance_assignment -name SLEW_RATE 0 -to LEDR[1]
+set_instance_assignment -name SLEW_RATE 0 -to LEDR[2]
+set_instance_assignment -name SLEW_RATE 0 -to LEDR[3]
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to *rst_pipe_q[0]
+set_global_assignment -name TOP_LEVEL_ENTITY rtnn_de0_cv_selftest
+set_global_assignment -name SYSTEMVERILOG_FILE rtnn_diag_packet_engine.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtnn_c1_selftest_checker.sv
+set_global_assignment -name SYSTEMVERILOG_FILE rtnn_c1_autonomous_selftest.sv
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"

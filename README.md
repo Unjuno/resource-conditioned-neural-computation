@@ -37,7 +37,9 @@ On independent held-out handwritten-digit row sequences, formal seeds 60--64 rea
 
 A separate chronological weekly-CO2 experiment remains a negative result: later-time depth utility shifts relative to validation. Temporal/nonstationary robustness is not established.
 
-### Goal C — software/formal integration substantially closed; physical target remains
+### Goal C — software/formal integration substantially closed; DE0-CV empirical qualification recorded
+
+An empirical DE0-CV C2J2 qualification is now archived under `artifacts/experiments/de0_cv_c1_c2_audit_20261114/`: the reported SRAM-only JTAG run completed 42 frozen requests and returned matching frozen-model predictions, execution classes, response IDs, CRCs, and nonzero FPGA cycle counts. A separate Verilator run now also covers the exact final Quartus flat RTL (`fdfcdf...`) for all 42 requests, reset replays, and negative cases. It uses a testbench copy whose CDC checks sample the RTL's explicit capture-pending edges; the original check sampled one cycle too early and its failure is preserved. The native 146-source SystemVerilog rebuild remains blocked because the migrated development RTL lacks the capture-pending source revision represented in the final Quartus flat RTL. This is empirical evidence for one board/build, not board-level timing signoff or a production WCET certificate. The seven-class fixed/admission timing binding preregistered in `notes/realtime_nn_de0_cv_next_stage.md` remains incomplete. The earlier CDC regression flat RTL (`F899...`) is a different source hash and remains identified as an earlier-source run.
 
 Current same-model chain:
 

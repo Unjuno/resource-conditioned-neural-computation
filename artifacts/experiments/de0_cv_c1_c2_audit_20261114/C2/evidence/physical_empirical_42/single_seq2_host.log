@@ -1,0 +1,2 @@
+C2_CASE_PAYLOAD_AUDIT_PASS cases=42 bytes_each=100 bits_each=800 unique_seq=42 adaptive_legacy_admission_differences=[27, 34, 41]
+C2_CASE_PAYLOAD_AUDIT_PASS cases=42 bytes_each=100 bits_each=800 unique_seq=42 adaptive_legacy_admission_differences=[27, 34, 41]

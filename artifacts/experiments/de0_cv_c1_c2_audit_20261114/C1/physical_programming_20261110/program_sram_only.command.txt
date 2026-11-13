@@ -1,0 +1,1 @@
+quartus_pgm.exe -c "USB-Blaster [USB-0]" -m JTAG -o "p;D:\rtnn_de0cv_c1_autonomous_selftest_20261110\quartus\rtnn_de0_cv.sof@1"

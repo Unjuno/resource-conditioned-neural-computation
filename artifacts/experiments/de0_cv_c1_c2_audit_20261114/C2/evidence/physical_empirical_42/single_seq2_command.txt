@@ -1,0 +1,3 @@
+cwd=C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN
+command=& "C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\host\Invoke-C2J2JtagExperiment.ps1" -SofPath "C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\quartus_d101_exact_disposition_20261113\rtnn_c2.sof" -ExperimentId C2J2_HW_SINGLE_SEQ2_20261113 -OutputDirectory "C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\physical_empirical_after_user_scope_20261113\single_seq2" -CaseSequences 2
+note=SRAM C2J2 SOF was programmed immediately before this run; no GPIO loopback or UART used.

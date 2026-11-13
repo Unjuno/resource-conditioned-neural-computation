@@ -1,0 +1,29 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+Info: Running Quartus Prime EDA Netlist Writer
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Tue Nov 10 15:19:38 2026
+Info: Command: quartus_eda rtnn_de0_cv -c rtnn_de0_cv --board_boundary_scan=on --format=bsdl --bsdl_type=POST_CONFIG --output_directory=D:\rtnn_de0cv_c1_autonomous_selftest_20261110\quartus\board_boundary_scan_post_verified --write_settings_files=off
+Info: TOTAL BSCAN REGISTERS IS 288
+Info: TOTAL IO PAD COUNT IS 272
+Info: CYCLONE_V_5CEBA4F23 has 239 JTAG SEQUENCE AVAILABLE
+Info (199065): Generated Boundary-Scan Description Language output file D:/rtnn_de0cv_c1_autonomous_selftest_20261110/quartus/board_boundary_scan_post_verified/5CEBA4F23C7_post.bsd for board-level analysis
+Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4828 megabytes
+    Info: Processing ended: Tue Nov 10 15:19:40 2026
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02

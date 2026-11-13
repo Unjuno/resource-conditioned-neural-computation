@@ -1,0 +1,21 @@
+{
+  "status": "PASS_ARTIFACT_CONSISTENCY",
+  "scope": "subset",
+  "count": 3,
+  "selected_sequences": [
+    2,
+    27,
+    34
+  ],
+  "experiment_id": "C2J2_HW_SUBSET_FINAL_20261113",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "build_id": "43324a32",
+  "hardware_provenance_verified_by_this_checker": false,
+  "note": "Physical provenance requires the actual programming/JTAG run record; mock fixtures can also pass this consistency check.",
+  "input_sha256": {
+    "c2_cases.csv": "52b7fdae7c465fd4b6409876e258e00fbaad5656e93ad3b9fb79f2f8741aec5d",
+    "c2_jtag_results.json": "bea1addb1908f4332449bf4c8d52b204642cda7a2e5d7c2f236f11bd2e374d58",
+    "c2_jtag_results.csv": "5325a5e9b185d9105b42aa36c19ac6c6da6b19880777963f5db6d93e6e68ba18",
+    "c2_jtag_raw.log": "9a163f11fb6b2612f6b67b5664138bcddf1e183e5a934a03cb0977a9474dd70d"
+  }
+}

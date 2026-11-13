@@ -1,0 +1,36 @@
+{
+  "schema": "rtnn-c2-jtag-run-manifest-v2",
+  "experiment_id": "C2J2_HW_SINGLE_SEQ2_20261113",
+  "status": "FAIL",
+  "scope": "subset",
+  "selected_sequences": [
+    2
+  ],
+  "expected_count": 1,
+  "quartus_stp_tcl_exit_code": 3,
+  "quartus_stp_tcl_path": "C:\\altera_lite\\25.1std\\quartus\\bin64\\quartus_stp_tcl.exe",
+  "quartus_stp_tcl_sha256": "79d33bbb250a7684865c3efce13cc80f7ee3373b8c1a8e1c397b3e76a6388ce7",
+  "command_arguments": [
+    "-t",
+    "C:\\Users\\junny\\OneDrive\\ドキュメント\\ChatGPT\\RTNN\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\host\\run_c2_jtag.tcl",
+    "C:\\Users\\junny\\OneDrive\\ドキュメント\\ChatGPT\\RTNN\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\evidence\\c2j2_candidate_20261112\\host\\c2_cases.csv",
+    "C:\\Users\\junny\\OneDrive\\ドキュメント\\ChatGPT\\RTNN\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\evidence\\physical_empirical_after_user_scope_20261113\\single_seq2",
+    "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+    "C2J2_HW_SINGLE_SEQ2_20261113",
+    "2"
+  ],
+  "cwd": "C:\\Users\\junny\\OneDrive\\ドキュメント\\ChatGPT\\RTNN",
+  "host_tcl_sha256": "fa720ab36aabca46e1059ca54df3f75240d9889ebaca176383d631bb897de4dd",
+  "result_audit_exit_code": null,
+  "result_auditor_sha256": "a31e6464978743c9047c1c2bd239666745fb6c43c9e57e15fe3cd1334b7f3c63",
+  "cases_csv_sha256": "52b7fdae7c465fd4b6409876e258e00fbaad5656e93ad3b9fb79f2f8741aec5d",
+  "sof_filename": "rtnn_c2.sof",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "expected_virtual_jtag_build_id": "43324a32",
+  "uart_used": false,
+  "flash_written": false,
+  "board_programming_performed_by_this_script": false,
+  "output_sha256": {
+    "quartus_stp_tcl.log": "c7f5ec8512cee5fac92fcb7911f60ffa4a82c8e354346956e40318fa5ce8ce3b"
+  }
+}

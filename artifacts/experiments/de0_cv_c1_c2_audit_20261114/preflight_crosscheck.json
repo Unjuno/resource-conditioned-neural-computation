@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "case_count": 42,
+  "unique_test_indices": [
+    0,
+    24,
+    57
+  ],
+  "checked_fields_per_case": [
+    "pixels",
+    "label",
+    "expected_prediction_at_expected_executed_class"
+  ],
+  "mismatch_count": 0,
+  "mismatches": []
+}

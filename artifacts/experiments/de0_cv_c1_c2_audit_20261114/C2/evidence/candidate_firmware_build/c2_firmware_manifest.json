@@ -1,0 +1,38 @@
+{
+  "schema": "rtnn-c2-uart-free-jtag-firmware-v1",
+  "status": "RV32_IMAGE_BUILT_NOT_SIMULATED",
+  "build_id": "43324a32",
+  "model_id": "52544e4e",
+  "elf_sha256": "625daf8cc194f1bc7d48eefff0f07939c5e0988bb07fc8a3e7efad7e613a15fd",
+  "bin_sha256": "379ab1ad0444d28ff2bf2172f837ac0aa01c64fc948aba93a7615c3e4d63659c",
+  "compiler": "Ubuntu clang version 18.1.8 (++20240731024944+3b5b5c1ec4a3-1~exp1~20240731145000.144)",
+  "linker": "Ubuntu LLD 18.1.8 (compatible with GNU linkers)",
+  "model_repo_commit": "48f2e81d87a710ac89b3bcf8ef36f71440d1e6c9",
+  "source_sha256": {
+    "firmware/rtnn_c2_main.c": "a6964666d08695bdc447f2315b1683c90a08750a76db1188cb8d8669428cc917",
+    "firmware/rtnn_experiment_runner.c": "d68f8b9dfe5eddbea43e68f840cbe19543f6c450e0711bb40efab4e82a56082e",
+    "firmware/rtnn_experiment_runner.h": "ca34dc893373873403e50996627578c85826a9f93a7ee7f392651ae488347588",
+    "firmware/rtnn_experiment_wire.c": "81dd8c61f3aeea7d05b274c197fc8d09a761cae63462674a2d24ebfcd53502c7",
+    "firmware/rtnn_experiment_wire.h": "2c8c886161e1f9a710c4f7bc309fad68934fe793be871d844a52a2e5ba912f77",
+    "firmware/rtnn_experiment_start.S": "ba4ec0e60fdd0b3bdf39417eeb6067dbae1dca89fe988e7a6e71eebe133a2c1d",
+    "firmware/rtnn_experiment.ld": "b2aa0a930bd3d84ad3de5bc57c1f5aea6fa36f91686f0c44cd2890efb3438a6c",
+    "firmware/rtnn_freestanding_mem.c": "51b08a0fd2f076d3f43b017aaa63cadd5f553ea810a074162a8372a7894ed85c",
+    "generated/heldout360.h": "c9c7401f1ef38e30db9bbc2221f409d2fa1b6c8ff30d160eca8342441bb7b422",
+    "frozen_weights.h": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+    "upstream/realtime_nn_real_sequence_fixed_core.c": "a6b2807bd4a60534c250fca3005322cf14ba0a92f6b16e28241109385efc6809",
+    "upstream/realtime_nn_real_sequence_fixed_core.h": "13fb23119ac7eeb1021d59eb5af26b8804b35329e0dbf8d9b9eb383cc3aebd6b"
+  },
+  "word_hex_sha256": "b6c558fc428f90ee1d05f53e8662573ed03ccec801f98133964fcb916fd5294a",
+  "lane_sha256": {
+    "rtnn_ram_lane0.hex": "7704b387d02830327de288cfcced5d1a485c75b6f0cb838db1da4e87661f5f5a",
+    "rtnn_ram_lane1.hex": "8c98d35b71595a0fc6fb40be2177dbac3883b4439a5ae894355bd3c3288af1c6",
+    "rtnn_ram_lane2.hex": "8e8d201adf2f8e383d42bb116d75fa3e0fb6675d8bf96c694a8fc969547d5873",
+    "rtnn_ram_lane3.hex": "affa1411c8c1ea6c443b2b6729502b58b63a6561fcf3177c65d7f34e635e1d11"
+  },
+  "payload": "100-byte RTNQ frame + pixels + CRC; UART-free MMIO mailbox",
+  "nonclaims": [
+    "not simulated in Ibex",
+    "not synthesized or timed",
+    "not programmed to FPGA"
+  ]
+}

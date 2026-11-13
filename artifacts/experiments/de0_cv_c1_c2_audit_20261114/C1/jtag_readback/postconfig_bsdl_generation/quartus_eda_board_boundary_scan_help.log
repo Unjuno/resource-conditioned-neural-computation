@@ -1,0 +1,12 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+
+Option: --board_boundary_scan[=on|off]
+
+A top-level option that indicates that all other options
+specified on the command line are meant for board level boundary 
+scan-related file generation.
+
+The exact type of output file(s) are specified by the secondary
+options --format=bsdl, and --output_directory The 
+--output_directory option is optional.
+

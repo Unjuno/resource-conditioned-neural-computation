@@ -1,0 +1,1 @@
+Attempted audit with host/c2_cases_sim.csv (simulation generation table, lacking seq header), exit 1: KeyError 'seq'. No test result altered; switched to hashed C2J2 host/c2_cases.csv. 

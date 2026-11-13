@@ -41,6 +41,7 @@ The preferred external control variable is a normalized continuous budget `b in 
 | **CBMC finite runtime contract** | **PASS_WITH_SCOPE** | CBMC 6.10.0 proves, over complete integer domains, monotone fail-closed Q0.16 lowering, the actual C deadline-admission implementation, arbitrary partial-certification safety, effective budget/deadline/preference ceilings, and Q15 LUT index bounds; all five proof entry points report `VERIFICATION SUCCESSFUL` |
 | **CBMC deployed control functions** | **PASS_WITH_SCOPE** | exact deployed bodies of `budget_ceiling`, adaptive `infer_budget`, and `certify_class` are mechanically extracted by SHA and proved: for all budgets/deadline bytes and all possible stop outcomes, physical `run_block` calls stay canonical and within the effective cap; certification executes exactly the normalized maximum-work class |
 | **Empirical RTOS-style same-model demo** | qualified / diagnostic | empirical P99 deadline admission changes physical compute and on-time-correct trade-offs; timing remains diagnostic rather than hard evidence |
+| **DE0-CV C2J2 JTAG 42-request qualification** | empirical PASS on one identified board/build; timing signoff remains blocked | 42 frozen requests were reported passing with FPGA cycle counts; the final Quartus flat RTL was subsequently re-run in Verilator with the capture-edge assertions corrected in a testbench copy |
 
 ## RTOS / analyzable implementation bridge
 
@@ -97,6 +98,6 @@ The combined software/RTL evidence is now substantially stronger than sampled pr
 
 1. Keep the Git-frozen certification package, its ZIP/ELF/BIN hashes, derived board-free vectors, and claim documents synchronized in CI.
 2. If one more software/formal layer is desired before hardware, target processor-level proof/certification methodology rather than repeating input sampling or generic Linux timing.
-3. For physical validation, use the available DE0-CV with controlled on-chip memory and a fixed clock; derive a new FPGA-specific timing binding instead of copying the Simple System table. The preregistration is in `notes/realtime_nn_de0_cv_next_stage.md`.
+3. Complete the DE0-CV target-specific timing program: the C2J2 empirical JTAG run and final Quartus flat RTL regression are archived, but native SystemVerilog source-graph regression, fixed-class/admission timing, complete external JTAG I/O constraints, and a board-specific timing binding are still open. The preregistration is in `notes/realtime_nn_de0_cv_next_stage.md`.
 4. Extend integer/timing deployment across additional seeds only if cross-seed compiled deployment robustness is required.
 5. Treat chronological/nonstationary temporal generalization as a separate research problem; larger language-model-scale work remains downstream of production target certification.

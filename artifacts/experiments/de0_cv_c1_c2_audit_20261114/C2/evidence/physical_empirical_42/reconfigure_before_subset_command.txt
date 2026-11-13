@@ -1,0 +1,4 @@
+cwd=C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN
+command=quartus_pgm -c "USB-Blaster [USB-0]" -m JTAG -o "p;C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\quartus_d101_exact_disposition_20261113\rtnn_c2.sof"
+sof_sha256=5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6
+operation=SRAM-only

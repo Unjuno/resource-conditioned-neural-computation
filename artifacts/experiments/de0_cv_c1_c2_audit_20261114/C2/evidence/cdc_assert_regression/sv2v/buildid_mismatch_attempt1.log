@@ -1,0 +1,3 @@
+[715744] %Fatal: tb_rtnn_c2_soc_42.sv:223: Assertion failed in TOP.tb_rtnn_c2_soc_42.run_case: model/build mismatch case=0
+%Error: tb_rtnn_c2_soc_42.sv:223: Verilog $stop
+Aborting...

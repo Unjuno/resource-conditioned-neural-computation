@@ -1,0 +1,5 @@
+LEDR3 cell=77 pin=IOY3 value=1
+LEDR2 cell=68 pin=IOW2 value=0
+LEDR1 cell=71 pin=IOAA1 value=0
+LEDR0 cell=74 pin=IOAA2 value=0
+LEDR3_to_LEDR0=1000 PASS

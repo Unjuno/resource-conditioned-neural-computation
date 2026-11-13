@@ -1,0 +1,11 @@
+# sv2v変換後のC1自律試験 warning review
+
+- Retry command: `bash /mnt/d/rtnn_de0cv_c1_autonomous_selftest_20261110/sim_sv2v_retry/run_sv2v.sh`
+- CWD: `/mnt/d/rtnn_de0cv_c1_autonomous_selftest_20261110/sim_sv2v_retry`
+- Tool versions: sv2v v0.0.13; Verilator 5.020 (Debian 5.020-1).
+- Result: sv2v=0, Verilator compile=0, simulation=0. `C1_AUTONOMOUS_SELFTEST_ALL_PASS runs=2 cases_per_run=20 reset_recovery=PASS LEDR=1000`.
+- Total 119 Verilator warning diagnostics: WIDTHEXPAND 108, WIDTHTRUNC 7, UNOPTFLAT 3, ASCRANGE 1. No LATCH, MULTIDRIVEN, PINMISSING or new wrapper UNOPTFLAT.
+- 12 warning diagnostics are located in the combined sv2v-generated C1 design/testbench file: 11 WIDTHEXPAND and 1 WIDTHTRUNC. Nine are packet-engine reset/response zero assignments (`'0` becomes `1'sb0` and is widened by destination context); one is the timeout subtraction cast (the positive timeout constant fits the signed 27-bit compare operand); one is the selftest index ternary promoted to an integer-width expression then stored as a 3-bit class for indices 0..6; one is the testbench request zero initialization. No warning was suppressed selectively; converted Verilog and warning log are preserved. All 20 varied cases and full reset-repeat pass.
+- Remaining 107 warnings are in fixed `ibex_flat.v`: WIDTHEXPAND 97, WIDTHTRUNC 6, ASCRANGE 1, and UNOPTFLAT 3. The 3 UNOPTFLAT diagnostics are fixed Ibex ID-stage nets also present in the native run. No CPU configuration or model parameter changed.
+- The runner printed `wrapper_warning_lines=15`; that grep counter also matched context/source-description lines and is not a diagnostic count. Direct parsing of `%Warning-...` records gives the exact counts above. The raw run and compiler log remain unchanged.
+- First attempt (`sim_sv2v_attempt1/run.log`, exit 1) stopped before conversion because staging omitted the packet-engine source file. The RTL file existed in the audited Quartus input set. Retry copied all current Quartus sources plus identical testbench/RAM/reference data into a clean retry folder and passed. This was a staging-input omission, not an RTL failure.

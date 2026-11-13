@@ -1,0 +1,45 @@
+{
+  "schema": "rtnn-c2-jtag-run-manifest-v2",
+  "experiment_id": "C2J2_HW_SUBSET_FINAL_20261113",
+  "status": "PASS_RUN_AND_ARTIFACT_AUDIT",
+  "scope": "subset",
+  "selected_sequences": [
+    2,
+    27,
+    34
+  ],
+  "expected_count": 3,
+  "quartus_stp_tcl_exit_code": 0,
+  "quartus_stp_tcl_path": "C:\\altera_lite\\25.1std\\quartus\\bin64\\quartus_stp_tcl.exe",
+  "quartus_stp_tcl_sha256": "79d33bbb250a7684865c3efce13cc80f7ee3373b8c1a8e1c397b3e76a6388ce7",
+  "command_arguments": [
+    "-t",
+    "C:\\rtnn_c2_20261113\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\host\\run_c2_jtag.tcl",
+    "C:\\rtnn_c2_20261113\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\evidence\\c2j2_candidate_20261112\\host\\c2_cases.csv",
+    "C:\\rtnn_c2_20261113\\de0cv_setup\\stage3_experiments\\ibex_csa_2026-11-03\\c2_jtag_measurement_20261111\\evidence\\physical_empirical_after_user_scope_20261113\\subset_2_27_34_final",
+    "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+    "C2J2_HW_SUBSET_FINAL_20261113",
+    "2,27,34"
+  ],
+  "cwd": "C:\\Users\\junny\\OneDrive\\ドキュメント\\ChatGPT\\RTNN",
+  "quartus_process_cwd": "C:\\altera_lite\\25.1std\\quartus\\bin64",
+  "quartus_ascii_repo_alias": "C:\\rtnn_c2_20261113",
+  "host_tcl_sha256": "4154eaeb04155962c14c89af82ef6051ef13f808d69e2ed0524556678b050612",
+  "result_audit_exit_code": 0,
+  "result_auditor_sha256": "a31e6464978743c9047c1c2bd239666745fb6c43c9e57e15fe3cd1334b7f3c63",
+  "cases_csv_sha256": "52b7fdae7c465fd4b6409876e258e00fbaad5656e93ad3b9fb79f2f8741aec5d",
+  "sof_filename": "rtnn_c2.sof",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "expected_virtual_jtag_build_id": "43324a32",
+  "uart_used": false,
+  "flash_written": false,
+  "board_programming_performed_by_this_script": false,
+  "output_sha256": {
+    "c2_jtag_results.json": "bea1addb1908f4332449bf4c8d52b204642cda7a2e5d7c2f236f11bd2e374d58",
+    "result_audit.json": "a6fe7606f7d55cbe1a014f881c4593d792c1171a9181f9b16607b75652769f33",
+    "c2_jtag_raw.log": "9a163f11fb6b2612f6b67b5664138bcddf1e183e5a934a03cb0977a9474dd70d",
+    "c2_jtag_results.csv": "5325a5e9b185d9105b42aa36c19ac6c6da6b19880777963f5db6d93e6e68ba18",
+    "result_audit.log": "a8a3e8c83916d666215d31ab184c9de9e9719cb3f7371ab726332092289b5ee4",
+    "quartus_stp_tcl.log": "79ffc6529697012b73b7833f8fd4337a5196f7e5a6bfb16e50f0c5b23afcb51d"
+  }
+}

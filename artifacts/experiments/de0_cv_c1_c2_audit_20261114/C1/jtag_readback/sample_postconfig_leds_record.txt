@@ -1,0 +1,8 @@
+exit_code=0
+cwd=D:\rtnn_de0cv_c1_autonomous_selftest_20261110\quartus
+command=quartus_stp_tcl -t D:\rtnn_de0cv_c1_autonomous_selftest_20261110\jtag_readback\sample_postconfig_leds.tcl
+bsdl=board_boundary_scan_post_verified\5CEBA4F23C7_post.bsd
+ir_sample=5
+ir_idcode=6
+flash_write=none
+sof_sha256=a5ee8af78b05e1875d1f0fb2da4789e5d9debb6e96b5af78f5078749ea084a79

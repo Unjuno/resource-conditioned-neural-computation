@@ -1,0 +1,2 @@
+03232dd82de9fae594c977f5ad551a3d59433e6b21bf9256bbe567f875d8e503  /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/RTNN/de0cv_setup/stage3_experiments/ibex_csa_2026-11-03/c2_jtag_measurement_20261111/tests/tb_rtnn_c2_soc_42.sv
+f8994351de4a20e74bd8726f48bb94e759f9b7a142c100a66cf73392f5d4adf2  /mnt/d/rtnn_c2_soc_resetfix_sv2v_cdcassert_20261113/rtnn_c2_soc_flat.v

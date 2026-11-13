@@ -1,0 +1,11 @@
+{
+  "status": "C2_SIM_VECTORS_FROM_FROZEN_CASES",
+  "count": 42,
+  "cases_sha256": "7016910c20d47ce7c5487cfbec2490e2afcfb755d22f835b2038876e007ab2da",
+  "requests_sha256": "4ddeb4626c4bb3c732799b040326fe59032dbc937aeae0e20494455352e52084",
+  "expected_sha256": "4662662c1921a1704ee315cd2c60a8bff2da1d6ab3a64934464d6d4c5af0b017",
+  "nonclaims": [
+    "expected cycles are not present; RTL response cycles are validated nonzero only",
+    "not FPGA measurements"
+  ]
+}

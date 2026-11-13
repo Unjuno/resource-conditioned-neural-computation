@@ -1,0 +1,3 @@
+C2_CASE_PAYLOAD_AUDIT_PASS cases=42 bytes_each=100 bits_each=800 unique_seq=42 adaptive_legacy_admission_differences=[27, 34, 41]
+C2_CASE_PAYLOAD_AUDIT_PASS cases=42 bytes_each=100 bits_each=800 unique_seq=42 adaptive_legacy_admission_differences=[27, 34, 41]
+C2 JTAG run and result audit completed; scope=all_frozen_42 selected_count=42; results=C:\Users\junny\OneDrive\ドキュメント\ChatGPT\RTNN\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\physical_empirical_after_user_scope_20261113\all42_run1

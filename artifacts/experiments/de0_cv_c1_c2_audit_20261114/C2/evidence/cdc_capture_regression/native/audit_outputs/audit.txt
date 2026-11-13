@@ -1,0 +1,1 @@
+C2_SOC_42_CASE_RTL_SIM_PASS cases=42 reset_replay=PASS hardware_measurements=0

@@ -1,0 +1,22 @@
+{
+  "checks": {
+    "assignment_count_801": true,
+    "assignment_targets_unique": true,
+    "all_assignment_entity_mailbox": false,
+    "all_assignment_rule_D101": true,
+    "expected_target_set": true,
+    "drc_local_off_count_801": true,
+    "drc_local_off_unique": true,
+    "drc_off_matches_qsf": true,
+    "global_D101_on": true,
+    "global_D102_on": true,
+    "global_D103_on": true,
+    "zero_high_violations": true,
+    "zero_DRC_errors_and_warnings": true
+  },
+  "assignment_count": 801,
+  "drc_local_off_count": 801,
+  "request_node_count": 800,
+  "response_node_count": 1,
+  "all_pass": false
+}

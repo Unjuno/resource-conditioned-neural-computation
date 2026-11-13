@@ -1,0 +1,7 @@
+cwd=/mnt/d/rtnn_de0cv_c1_autonomous_selftest_20261110/sim_sv2v_retry
+command=bash run_sv2v.sh
+sv2v=0.0.13
+verilator=5.020
+sv2v_exit=0
+compile_exit=0
+simulation_exit=0

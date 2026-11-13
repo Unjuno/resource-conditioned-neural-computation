@@ -1,0 +1,3 @@
+Vtb_rtnn_c2_soc_42___024root__DepSet_h21a8ed6a__0.o: \
+ Vtb_rtnn_c2_soc_42___024root__DepSet_h21a8ed6a__0.cpp \
+ Vtb_rtnn_c2_soc_42__pch.h Vtb_rtnn_c2_soc_42___024root.h

@@ -1,0 +1,7 @@
+%Error: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/RTNN/de0cv_setup/stage3_experiments/ibex_csa_2026-11-03/c2_jtag_measurement_20261111/rtl/rtnn_c2_vjtag_mailbox.sv:33:40: syntax error, unexpected IDENTIFIER, expecting ';'
+   33 |   localparam logic [31:0] BUILD_ID = 32\x27h43324a32;
+      |                                        ^~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:223:61: syntax error, unexpected IDENTIFIER
+  223 |     if (got[255:224] !== 32'h52544e4e || got[287:256] !== 32\x27h43324a32) $fatal(1,"model/build mismatch case=%0d",index);
+      |                                                             ^~~~~~~~~~~~~~
+%Error: Exiting due to 2 error(s)

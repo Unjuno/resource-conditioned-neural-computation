@@ -1,0 +1,5 @@
+cwd=D:\rtnn_de0cv_c1_autonomous_selftest_20261110
+command=quartus_pgm -c "USB-Blaster [USB-0]" -m JTAG -o "p;D:\rtnn_de0cv_c1_autonomous_selftest_20261110\quartus\rtnn_de0_cv.sof@1"
+sof_sha256=a5ee8af78b05e1875d1f0fb2da4789e5d9debb6e96b5af78f5078749ea084a79
+sof_bytes=2441479
+flash_operation=none

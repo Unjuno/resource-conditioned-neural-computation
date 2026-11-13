@@ -1,0 +1,34 @@
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CEBA4F23C7
+set_global_assignment -name TOP_LEVEL_ENTITY rtnn_de0_cv_c2_top
+set_global_assignment -name VERILOG_MACRO "RTNN_C2_BUILD_ID=32'h43324a32"
+set_global_assignment -name SDC_FILE rtnn_de0_cv_c2.sdc
+set_global_assignment -name VERILOG_FILE rtnn_c2_soc_flat.v
+set_global_assignment -name SYSTEMVERILOG_FILE rtnn_de0_cv_c2_top.sv
+set_global_assignment -name SEARCH_PATH .
+set_global_assignment -name OPTIMIZATION_MODE "HIGH PERFORMANCE EFFORT"
+set_global_assignment -name NUM_PARALLEL_PROCESSORS 1
+set_location_assignment PIN_M9 -to CLOCK_50
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to CLOCK_50
+set_location_assignment PIN_U7 -to KEY[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[0]
+set_location_assignment PIN_AA2 -to LEDR[0]
+set_location_assignment PIN_AA1 -to LEDR[1]
+set_location_assignment PIN_W2 -to LEDR[2]
+set_location_assignment PIN_Y3 -to LEDR[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[3]
+
+set_global_assignment -name LAST_QUARTUS_VERSION "25.1std.0 Lite Edition"
+set_global_assignment -name VERILOG_FILE rtnn_c2_global_buf.v
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*u_mailbox|req_sync1_sys_q"
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*u_mailbox|req_ack_sync1_tck_q"
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*u_mailbox|rsp_sync1_tck_q"
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*u_mailbox|rsp_consume_sync1_sys_q"
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*u_mailbox|busy_sync1_tck_q"
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*u_mailbox|error_sync1_tck_q"
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*u_mailbox|done_sync1_tck_q"
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*tck_reset_release_q[*]"
+set_instance_assignment -name SYNCHRONIZER_IDENTIFICATION "FORCED IF ASYNCHRONOUS" -to "*rst_pipe_q[*]"

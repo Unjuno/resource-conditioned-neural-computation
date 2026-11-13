@@ -1,0 +1,12 @@
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Net Delay                                                                                                                                                                                       ;
++---------------+--------+----------+--------+----------------------------------------------------------------------+----------------------------------------------------------------------+------+
+; Name          ; Slack  ; Required ; Actual ; From                                                                 ; To                                                                   ; Type ;
++---------------+--------+----------+--------+----------------------------------------------------------------------+----------------------------------------------------------------------+------+
+; set_net_delay ; 12.642 ; 16.000   ; 3.358  ; [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[*]}] ; [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|request_data_o[*]}] ; max  ;
+;  --           ; 12.642 ; 16.000   ; 3.358  ; rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[485]                  ; rtnn_c2_vjtag_mailbox:u_mailbox|request_data_o[485]                  ; max  ;
+;  --           ; 12.696 ; 16.000   ; 3.304  ; rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[735]                  ; rtnn_c2_vjtag_mailbox:u_mailbox|request_data_o[735]                  ; max  ;
+; set_net_delay ; 20.843 ; 24.000   ; 3.157  ; [get_registers {*rtnn_de0_cv_soc_c2:u_soc|response_words_q[*][*]}]   ; [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_hold_tck_q[*]}] ; max  ;
+;  --           ; 20.843 ; 24.000   ; 3.157  ; rtnn_de0_cv_soc_c2:u_soc|response_words_q[11][19]                    ; rtnn_c2_vjtag_mailbox:u_mailbox|rsp_hold_tck_q[371]                  ; max  ;
+;  --           ; 20.887 ; 24.000   ; 3.113  ; rtnn_de0_cv_soc_c2:u_soc|response_words_q[7][10]                     ; rtnn_c2_vjtag_mailbox:u_mailbox|rsp_hold_tck_q[234]                  ; max  ;
++---------------+--------+----------+--------+----------------------------------------------------------------------+----------------------------------------------------------------------+------+

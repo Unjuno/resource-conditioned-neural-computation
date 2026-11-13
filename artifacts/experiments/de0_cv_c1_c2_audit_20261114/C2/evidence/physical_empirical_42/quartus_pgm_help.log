@@ -1,0 +1,71 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Quartus Prime Programmer
+Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+
+Usage:
+------
+
+quartus_pgm [-h | --help[=<option|topic>] | -v]
+quartus_pgm -c <cable name> filname.cdf  --- If you want to use cdf file
+quartus_pgm -c <cable name> -m <programming mode> -o <value> [-o <value>...] --- If you want to use individual programming file(s)
+quartus_pgm -l --- to display the list of available hardware
+quartus_pgm -c <cable name> -a --- to display the list of devices connected to the cable
+
+Description:
+------------
+
+
+Options:
+--------
+
+	-f <argument file>
+	-a | --auto
+	-b | --bgp
+	-c <cable name> | --cable=<cable name>
+	-i | --initcfg
+	-k | --non_volatile_key
+	-l | --list
+	-m <programming mode> | --mode=<programming mode>
+	-o <programming operation> | --operation=<programming operation>
+	-u | --ufp
+	-z | --haltcc
+	--accept_bad_sysid
+	--base=<base address>
+	--csr=<csr base address>
+	--custom_db_dir=<custom database directory>
+	--debug
+	--device=<device_index>
+	--dualdie
+	--epcq
+	--epcs
+	--erase=<erase>
+	--erase_all
+	--go
+	--host_mode
+	--id=<id>
+	--instance=<instance_id>
+	--lower_priority
+	--mmu
+	--nios2
+	--no_keep_nearby
+	--onchip
+	--override=<override>
+	--pr=<partial reconfiguration>
+	--program
+	--quiet
+	--read=<read all>
+	--read_bytes=<read bytes>
+	--sidp=<sidp>
+	--timestamp=<timestamp>
+	--verify
+	--width=<width>
+
+Help Topics:
+------------
+
+	arguments
+	return_codes
+
+For more information on specific options, use --help=<option|topic>.
+

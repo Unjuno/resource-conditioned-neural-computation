@@ -1,0 +1,5 @@
+Attempt 1 (2026-11-12 JST)
+Command: tools/build_c2_firmware.sh <Stage2 finalwork> <pinned source_repo> D:/rtnn_c2_jtag_20261112/firmware_c2j2_candidate_20261112 43324a32
+Shell: Ubuntu-22.04 WSL2, bash -lc; exit=2
+Observed failure: Missing tool llvm-objcopy
+Diagnosis: system provides /usr/bin/llvm-objcopy-18 and /usr/lib/llvm-18/bin/llvm-objcopy; unversioned name is absent from login PATH. Build script now selects llvm-objcopy-18 as fallback. No build output directory was created by attempt 1.

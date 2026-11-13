@@ -1,0 +1,28 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+Info: Running Quartus Prime Signal Tap TCL Only
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Fri Nov 13 22:26:22 2026
+Info: Command: quartus_stp_tcl -t C:\rtnn_c2_20261113\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\host\run_c2_jtag.tcl C:\rtnn_c2_20261113\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\c2j2_candidate_20261112\host\c2_cases.csv C:\rtnn_c2_20261113\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\physical_empirical_after_user_scope_20261113\subset_2_27_34_final 5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6 C2J2_HW_SUBSET_FINAL_20261113 2,27,34
+Info: Quartus(args): {C:\rtnn_c2_20261113\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\c2j2_candidate_20261112\host\c2_cases.csv} {C:\rtnn_c2_20261113\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\evidence\physical_empirical_after_user_scope_20261113\subset_2_27_34_final} 5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6 C2J2_HW_SUBSET_FINAL_20261113 2,27,34
+C2_JTAG_SUBSET_PASS count=3 sequences=2,27,34 experiment_id=C2J2_HW_SUBSET_FINAL_20261113 build_id=43324a32
+Info (23030): Evaluation of Tcl script C:\rtnn_c2_20261113\de0cv_setup\stage3_experiments\ibex_csa_2026-11-03\c2_jtag_measurement_20261111\host\run_c2_jtag.tcl was successful
+Info: Quartus Prime Signal Tap TCL Only was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4358 megabytes
+    Info: Processing ended: Fri Nov 13 22:26:23 2026
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01

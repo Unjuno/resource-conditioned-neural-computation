@@ -1,0 +1,16 @@
+CHECKER_POSITIVE_PASS normal
+CHECKER_REJECT_PASS bad_crc
+CHECKER_REJECT_PASS wrong_prediction
+CHECKER_REJECT_PASS wrong_executed
+CHECKER_REJECT_PASS stale_sequence
+CHECKER_REJECT_PASS wrong_build_identity
+CHECKER_REJECT_PASS over_deadline
+CHECKER_REJECT_PASS transport_timeout
+CHECKER_REJECT_PASS bus_fault
+CHECKER_REJECT_PASS cpu_halted
+CHECKER_REJECT_PASS uart_not_idle
+CHECKER_REJECT_PASS not_done
+CHECKER_POSITIVE_PASS reject
+CHECKER_REJECT_PASS reject_nonzero_cycles
+CHECKER_ALL_PASS
+- rtnn_c1_selftest_checker_tb.sv:75: Verilog $finish

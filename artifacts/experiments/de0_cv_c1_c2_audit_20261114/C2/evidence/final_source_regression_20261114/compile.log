@@ -1,0 +1,255 @@
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_icache.sv:557:10: Cell pin connected by name with empty reference: 'data_o'
+  557 |         .data_o     (),
+      |          ^~~~~~
+                          ... For warning description see https://verilator.org/warn/PINCONNECTEMPTY?v=5.020
+                          ... Use "/* verilator lint_off PINCONNECTEMPTY */" and lint_on around source to disable this message.
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_icache.sv:558:10: Cell pin connected by name with empty reference: 'syndrome_o'
+  558 |         .syndrome_o (),
+      |          ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_icache.sv:569:10: Cell pin connected by name with empty reference: 'data_o'
+  569 |         .data_o     (),
+      |          ^~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_icache.sv:570:10: Cell pin connected by name with empty reference: 'syndrome_o'
+  570 |         .syndrome_o (),
+      |          ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_adv.sv:249:12: Cell pin connected by name with empty reference: 'syndrome_o'
+  249 |           .syndrome_o ( ),
+      |            ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_adv.sv:260:12: Cell pin connected by name with empty reference: 'syndrome_o'
+  260 |           .syndrome_o ( ),
+      |            ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_adv.sv:273:12: Cell pin connected by name with empty reference: 'syndrome_o'
+  273 |           .syndrome_o ( ),
+      |            ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_adv.sv:284:12: Cell pin connected by name with empty reference: 'syndrome_o'
+  284 |           .syndrome_o ( ),
+      |            ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:931:6: Cell pin connected by name with empty reference: 'rd_error_o'
+  931 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:949:6: Cell pin connected by name with empty reference: 'rd_error_o'
+  949 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:963:6: Cell pin connected by name with empty reference: 'rd_error_o'
+  963 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:977:6: Cell pin connected by name with empty reference: 'rd_error_o'
+  977 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:991:6: Cell pin connected by name with empty reference: 'rd_error_o'
+  991 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1025:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1025 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1039:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1039 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1053:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1053 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1067:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1067 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1082:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1082 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1096:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1096 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1110:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1110 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1387:6: Cell pin connected by name with empty reference: 'counter_val_upd_o'
+ 1387 |     .counter_val_upd_o()
+      |      ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1502:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1502 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1558:8: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1558 |       .rd_error_o()
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1572:10: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1572 |         .rd_error_o()
+      |          ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv:1585:10: Cell pin connected by name with empty reference: 'rd_error_o'
+ 1585 |         .rd_error_o()
+      |          ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_if_stage.sv:245:8: Cell pin connected by name with empty reference: 'data_o'
+  245 |       .data_o     (),
+      |        ^~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_if_stage.sv:246:8: Cell pin connected by name with empty reference: 'syndrome_o'
+  246 |       .syndrome_o (),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_load_store_unit.sv:346:8: Cell pin connected by name with empty reference: 'data_o'
+  346 |       .data_o     (),
+      |        ^~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_load_store_unit.sv:347:8: Cell pin connected by name with empty reference: 'syndrome_o'
+  347 |       .syndrome_o (),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_core.sv:922:8: Cell pin connected by name with empty reference: 'data_o'
+  922 |       .data_o    (),
+      |        ^~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_core.sv:923:8: Cell pin connected by name with empty reference: 'syndrome_o'
+  923 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_core.sv:928:8: Cell pin connected by name with empty reference: 'data_o'
+  928 |       .data_o    (),
+      |        ^~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_core.sv:929:8: Cell pin connected by name with empty reference: 'syndrome_o'
+  929 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync_cnt.sv:91:8: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+   91 |       .cnt_after_commit_o(),
+      |        ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync_cnt.sv:111:8: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+  111 |       .cnt_after_commit_o(),
+      |        ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_scr.sv:272:8: Cell pin connected by name with empty reference: 'valid_o'
+  272 |       .valid_o ( )
+      |        ^~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_scr.sv:505:6: Cell pin connected by name with empty reference: 'rvalid_o'
+  505 |     .rvalid_o ( ),
+      |      ^~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_trvk.sv:218:6: Cell pin connected by name with empty reference: 'full_o'
+  218 |     .full_o  (),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_trvk.sv:219:6: Cell pin connected by name with empty reference: 'depth_o'
+  219 |     .depth_o (),
+      |      ^~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_trvk.sv:220:6: Cell pin connected by name with empty reference: 'err_o'
+  220 |     .err_o   ()
+      |      ^~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_trvk.sv:290:6: Cell pin connected by name with empty reference: 'full_o'
+  290 |     .full_o  (),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_trvk.sv:291:6: Cell pin connected by name with empty reference: 'depth_o'
+  291 |     .depth_o (),
+      |      ^~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_trvk.sv:292:6: Cell pin connected by name with empty reference: 'err_o'
+  292 |     .err_o   ()
+      |      ^~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_trvk.sv:376:8: Cell pin connected by name with empty reference: 'data_o'
+  376 |       .data_o    (),
+      |        ^~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_trvk.sv:377:8: Cell pin connected by name with empty reference: 'syndrome_o'
+  377 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /opt/rtnn-tools/ibex/rtl/ibex_lockstep.sv:163:8: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+  163 |       .cnt_after_commit_o (                       ),
+      |        ^~~~~~~~~~~~~~~~~~
+%Warning-DECLFILENAME: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:15:8: Filename 'ibex_top_gate_bypass' does not match MODULE name: 'ibex_top'
+   15 | module ibex_top import ibex_pkg::*; #(
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:660:12: Cell pin connected by name with empty reference: 'gnt_o'
+  660 |           .gnt_o            (),
+      |            ^~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:668:12: Cell pin connected by name with empty reference: 'rvalid_o'
+  668 |           .rvalid_o         (),
+      |            ^~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:669:12: Cell pin connected by name with empty reference: 'raddr_o'
+  669 |           .raddr_o          (),
+      |            ^~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:670:12: Cell pin connected by name with empty reference: 'rerror_o'
+  670 |           .rerror_o         (),
+      |            ^~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:673:12: Cell pin connected by name with empty reference: 'wr_collision_o'
+  673 |           .wr_collision_o   (),
+      |            ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:674:12: Cell pin connected by name with empty reference: 'write_pending_o'
+  674 |           .write_pending_o  (),
+      |            ^~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:698:12: Cell pin connected by name with empty reference: 'gnt_o'
+  698 |           .gnt_o            (),
+      |            ^~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:706:12: Cell pin connected by name with empty reference: 'rvalid_o'
+  706 |           .rvalid_o         (),
+      |            ^~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:707:12: Cell pin connected by name with empty reference: 'raddr_o'
+  707 |           .raddr_o          (),
+      |            ^~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:708:12: Cell pin connected by name with empty reference: 'rerror_o'
+  708 |           .rerror_o         (),
+      |            ^~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:711:12: Cell pin connected by name with empty reference: 'wr_collision_o'
+  711 |           .wr_collision_o   (),
+      |            ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv:712:12: Cell pin connected by name with empty reference: 'write_pending_o'
+  712 |           .write_pending_o  (),
+      |            ^~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:155:45: Cell pin connected by name with empty reference: 'ram_cfg_icache_tag_o'
+  155 |     .ram_cfg_icache_tag_i(icache_tag_cfg), .ram_cfg_icache_tag_o(),
+      |                                             ^~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:156:47: Cell pin connected by name with empty reference: 'ram_cfg_icache_data_o'
+  156 |     .ram_cfg_icache_data_i(icache_data_cfg), .ram_cfg_icache_data_o(),
+      |                                               ^~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:162:6: Cell pin connected by name with empty reference: 'data_wdata_intg_o'
+  162 |     .data_wdata_intg_o(), .data_tag_o(), .data_rdata_i(data_rdata), .data_rdata_intg_i(data_rdata_intg),
+      |      ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:162:28: Cell pin connected by name with empty reference: 'data_tag_o'
+  162 |     .data_wdata_intg_o(), .data_tag_o(), .data_rdata_i(data_rdata), .data_rdata_intg_i(data_rdata_intg),
+      |                            ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:163:50: Cell pin connected by name with empty reference: 'trvk_revbm_req_o'
+  163 |     .data_tag_i(1'b0), .data_err_i(data_err_q), .trvk_revbm_req_o(), .trvk_revbm_gnt_i(1'b0),
+      |                                                  ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:164:34: Cell pin connected by name with empty reference: 'trvk_revbm_addr_o'
+  164 |     .trvk_revbm_rvalid_i(1'b0), .trvk_revbm_addr_o(), .trvk_revbm_rdata_i('0),
+      |                                  ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:167:77: Cell pin connected by name with empty reference: 'scramble_req_o'
+  167 |     .scramble_key_valid_i('0), .scramble_key_i('0), .scramble_nonce_i('0), .scramble_req_o(),
+      |                                                                             ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:168:26: Cell pin connected by name with empty reference: 'crash_dump_o'
+  168 |     .debug_req_i(1'b0), .crash_dump_o(), .double_fault_seen_o(), .fetch_enable_i(ibex_pkg::IbexMuBiOn),
+      |                          ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:168:43: Cell pin connected by name with empty reference: 'double_fault_seen_o'
+  168 |     .debug_req_i(1'b0), .crash_dump_o(), .double_fault_seen_o(), .fetch_enable_i(ibex_pkg::IbexMuBiOn),
+      |                                           ^~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:169:52: Cell pin connected by name with empty reference: 'alert_minor_o'
+  169 |     .mcounteren_writable_i(ibex_pkg::IbexMuBiOn), .alert_minor_o(), .alert_major_internal_o(),
+      |                                                    ^~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:169:70: Cell pin connected by name with empty reference: 'alert_major_internal_o'
+  169 |     .mcounteren_writable_i(ibex_pkg::IbexMuBiOn), .alert_minor_o(), .alert_major_internal_o(),
+      |                                                                      ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:170:6: Cell pin connected by name with empty reference: 'alert_major_bus_o'
+  170 |     .alert_major_bus_o(), .core_sleep_o(), .lockstep_cmp_en_o(), .data_req_shadow_o(),
+      |      ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:170:28: Cell pin connected by name with empty reference: 'core_sleep_o'
+  170 |     .alert_major_bus_o(), .core_sleep_o(), .lockstep_cmp_en_o(), .data_req_shadow_o(),
+      |                            ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:170:45: Cell pin connected by name with empty reference: 'lockstep_cmp_en_o'
+  170 |     .alert_major_bus_o(), .core_sleep_o(), .lockstep_cmp_en_o(), .data_req_shadow_o(),
+      |                                             ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:170:67: Cell pin connected by name with empty reference: 'data_req_shadow_o'
+  170 |     .alert_major_bus_o(), .core_sleep_o(), .lockstep_cmp_en_o(), .data_req_shadow_o(),
+      |                                                                   ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:171:6: Cell pin connected by name with empty reference: 'data_we_shadow_o'
+  171 |     .data_we_shadow_o(), .data_be_shadow_o(), .data_addr_shadow_o(), .data_wdata_shadow_o(),
+      |      ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:171:27: Cell pin connected by name with empty reference: 'data_be_shadow_o'
+  171 |     .data_we_shadow_o(), .data_be_shadow_o(), .data_addr_shadow_o(), .data_wdata_shadow_o(),
+      |                           ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:171:48: Cell pin connected by name with empty reference: 'data_addr_shadow_o'
+  171 |     .data_we_shadow_o(), .data_be_shadow_o(), .data_addr_shadow_o(), .data_wdata_shadow_o(),
+      |                                                ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:171:71: Cell pin connected by name with empty reference: 'data_wdata_shadow_o'
+  171 |     .data_we_shadow_o(), .data_be_shadow_o(), .data_addr_shadow_o(), .data_wdata_shadow_o(),
+      |                                                                       ^~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:172:6: Cell pin connected by name with empty reference: 'data_wdata_intg_shadow_o'
+  172 |     .data_wdata_intg_shadow_o(), .instr_req_shadow_o(), .instr_addr_shadow_o()
+      |      ^~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:172:35: Cell pin connected by name with empty reference: 'instr_req_shadow_o'
+  172 |     .data_wdata_intg_shadow_o(), .instr_req_shadow_o(), .instr_addr_shadow_o()
+      |                                   ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv:172:58: Cell pin connected by name with empty reference: 'instr_addr_shadow_o'
+  172 |     .data_wdata_intg_shadow_o(), .instr_req_shadow_o(), .instr_addr_shadow_o()
+      |                                                          ^~~~~~~~~~~~~~~~~~~
+%Warning-DECLFILENAME: tb_rtnn_c2_soc_42_capture_edge.sv:1:8: Filename 'tb_rtnn_c2_soc_42_capture_edge' does not match MODULE name: 'tb_rtnn_c2_soc_42'
+    1 | module tb_rtnn_c2_soc_42;
+      |        ^~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42_capture_edge.sv:100:29: Can't find definition of 'rsp_capture_pending_tck_q' in dotted variable: 'u_mailbox.rsp_capture_pending_tck_q'
+  100 |     if (trst_n && u_mailbox.rsp_capture_pending_tck_q) begin
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42_capture_edge.sv:110:28: Can't find definition of 'req_capture_pending_sys_q' in dotted variable: 'u_mailbox.req_capture_pending_sys_q'
+  110 |     if (rst_n && u_mailbox.req_capture_pending_sys_q) begin
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: Exiting due to 2 error(s)

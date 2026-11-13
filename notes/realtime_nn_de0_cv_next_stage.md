@@ -1,6 +1,8 @@
 # Next stage: DE0-CV physical validation of the RTNN contract
 
-Status: **PLANNED / NOT YET EXECUTED**.
+Status: **PARTIALLY EXECUTED; full target timing study remains planned.**
+
+An empirical C2J2 experiment was later reported on one DE0-CV board: 42 frozen JTAG requests returned matching frozen-model predictions, execution-class fields, response identity/CRC, and FPGA cycle counts after SRAM-only SOF configuration. The evidence and its source/hash audit are in `artifacts/experiments/de0_cv_c1_c2_audit_20261114/`. The exact final Quartus flat RTL has also passed a Verilator regression using a testbench copy that samples the RTL's explicit CDC capture-pending edges. Earlier native/sv2v logs used different flat RTL hashes; this source difference and the initial mistimed assertion failure are retained in the audit. The native 146-source attempt is BLOCKED because the migrated development mailbox source does not include the capture-pending revision present in the final flat RTL. These results do not execute the seven fixed classes or establish an FPGA-specific deadline table. Formal board timing signoff remains open.
 
 This note deliberately separates the completed software/formal evidence from the next physical-target experiment. No Simple-System cycle number is transferred to the FPGA by assumption.
 

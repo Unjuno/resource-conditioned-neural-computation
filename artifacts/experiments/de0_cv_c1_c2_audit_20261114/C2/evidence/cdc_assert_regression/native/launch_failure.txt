@@ -1,0 +1,1 @@
+Initial launch failed before RTL invocation: WSL bash -lc quote expansion caused sed to receive an empty source-list path. stderr: sed: can't read : No such file or directory; bash integer-expression/exit follow-on. Not a design-test failure.

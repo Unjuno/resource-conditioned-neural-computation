@@ -1,0 +1,5 @@
+cwd=D:\rtnn_de0cv_c1_autonomous_selftest_20261110\sim_sv2v
+command=sv2v rtnn_diag_packet_engine.sv rtnn_c1_selftest_checker.sv rtnn_c1_autonomous_selftest.sv tb_rtnn_c1_autonomous_selftest.sv > rtnn_c1_autonomous_selftest_sv2v.v
+failure=sv2v: rtnn_diag_packet_engine.sv: openFile: does not exist
+exit=1
+cause=staging omitted packet-engine source; copied current quartus source set and reran from clean sim_sv2v_retry

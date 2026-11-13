@@ -1,0 +1,6 @@
+date=2026-11-11
+source=user confirmation in conversation
+reported_display=1000
+reported_observation=LEDR3 only lit
+comparison=matches JTAG post-configuration BSDL sample and expected self-test PASS marker
+flash_write=none
