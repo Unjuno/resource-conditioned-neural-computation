@@ -1,0 +1,10 @@
+%Error: Cannot find file containing module: SYNTHESIS
+%Error: This may be because there's no search path specified with -I<dir>.
+        ... Looked in:
+             SYNTHESIS
+             SYNTHESIS.v
+             SYNTHESIS.sv
+             /mnt/c/Users/junny/AppData/Local/Temp/rtnn_c3_gateA_sv2v_synthesis_20261114/obj_dir/SYNTHESIS
+             /mnt/c/Users/junny/AppData/Local/Temp/rtnn_c3_gateA_sv2v_synthesis_20261114/obj_dir/SYNTHESIS.v
+             /mnt/c/Users/junny/AppData/Local/Temp/rtnn_c3_gateA_sv2v_synthesis_20261114/obj_dir/SYNTHESIS.sv
+%Error: Exiting due to 2 error(s)
