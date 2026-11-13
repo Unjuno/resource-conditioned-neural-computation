@@ -1,0 +1,65 @@
+----------------
+; Command Info ;
+----------------
+Report Path: Found 1 paths. Longest delay is 2.674 
+
+Tcl Command:
+    report_path -file jtag_register_to_tdo_2.rpt -from [get_registers *] -to [get_ports {altera_reserved_tdo}] -npaths 10 -nworst 1
+
+Options:
+    -from [get_registers *] 
+    -to [get_ports {altera_reserved_tdo}] 
+    -npaths 10 
+    -nworst 1 
+    -file_name "jtag_register_to_tdo_2.rpt" 
+
+Delay Model:
+    Fast 1100mV 85C Model
+
++----------------------------------------------------------+
+; Summary of Paths                                         ;
++-------+----------------------------+---------------------+
+; Delay ; From Node                  ; To Node             ;
++-------+----------------------------+---------------------+
+; 2.674 ; altera_internal_jtag~FF_32 ; altera_reserved_tdo ;
++-------+----------------------------+---------------------+
+
+Path #1: Delay is 2.674
+===============================================================================
++----------------------------------------+
+; Path Summary                           ;
++-----------+----------------------------+
+; Property  ; Value                      ;
++-----------+----------------------------+
+; From Node ; altera_internal_jtag~FF_32 ;
+; To Node   ; altera_reserved_tdo        ;
+; Delay     ; 2.674                      ;
++-----------+----------------------------+
+
++-----------------------------------------------------------------------------------+
+; Statistics                                                                        ;
++------------------------+-------+-------+-------------+------------+-------+-------+
+; Property               ; Value ; Count ; Total Delay ; % of Total ; Min   ; Max   ;
++------------------------+-------+-------+-------------+------------+-------+-------+
+; Data Delay             ; 2.674 ;       ;             ;            ;       ;       ;
+; Number of Logic Levels ;       ; 0     ;             ;            ;       ;       ;
+; Physical Delays        ;       ;       ;             ;            ;       ;       ;
+;  IC                    ;       ; 1     ; 0.000       ; 0          ; 0.000 ; 0.000 ;
+;  Cell                  ;       ; 3     ; 2.674       ; 100        ; 0.000 ; 2.248 ;
++------------------------+-------+-------+-------------+------------+-------+-------+
+Note: Negative delays are omitted from totals when calculating percentages
+
++-----------------------------------------------------------------------------------------+
+; Data Arrival Path                                                                       ;
++---------+---------+----+------+--------+-----------------+------------------------------+
+; Total   ; Incr    ; RF ; Type ; Fanout ; Location        ; Element                      ;
++---------+---------+----+------+--------+-----------------+------------------------------+
+; 2.674   ; 2.674   ;    ;      ;        ;                 ; data path                    ;
+;   0.000 ;   0.000 ;    ;      ; 1      ; JTAG_X0_Y4_N3   ; altera_internal_jtag~FF_32   ;
+;   0.426 ;   0.426 ; FF ; CELL ; 1      ; JTAG_X0_Y4_N3   ; altera_internal_jtag|tdo     ;
+;   0.426 ;   0.000 ; FF ; IC   ; 1      ; IOOBUF_X2_Y0_N2 ; altera_reserved_tdo~output|i ;
+;   2.674 ;   2.248 ; FF ; CELL ; 1      ; IOOBUF_X2_Y0_N2 ; altera_reserved_tdo~output|o ;
+;   2.674 ;   0.000 ; FF ; CELL ; 0      ; PIN_M5          ; altera_reserved_tdo          ;
++---------+---------+----+------+--------+-----------------+------------------------------+
+
+

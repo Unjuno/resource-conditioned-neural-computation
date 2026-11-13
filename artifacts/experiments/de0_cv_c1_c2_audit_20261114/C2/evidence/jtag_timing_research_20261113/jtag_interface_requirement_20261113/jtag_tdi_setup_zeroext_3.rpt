@@ -1,0 +1,113 @@
+----------------
+; Command Info ;
+----------------
+Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 12.541 
+
+Tcl Command:
+    report_timing -setup -file jtag_tdi_setup_zeroext_3.rpt -from [get_ports {altera_reserved_tdi}] -to [get_registers {*req_shift_tck_q*}] -npaths 5 -detail full_path
+
+Options:
+    -from [get_ports {altera_reserved_tdi}] 
+    -to [get_registers {*req_shift_tck_q*}] 
+    -setup 
+    -npaths 5 
+    -detail full_path 
+    -file {jtag_tdi_setup_zeroext_3.rpt} 
+
+Delay Model:
+    Fast 1100mV 0C Model
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Summary of Paths                                                                                                                                                         ;
++--------+---------------------+------------------------------------------------------+---------------------+---------------------+--------------+------------+------------+
+; Slack  ; From Node           ; To Node                                              ; Launch Clock        ; Latch Clock         ; Relationship ; Clock Skew ; Data Delay ;
++--------+---------------------+------------------------------------------------------+---------------------+---------------------+--------------+------------+------------+
+; 12.541 ; altera_reserved_tdi ; rtnn_c2_vjtag_mailbox:u_mailbox|req_shift_tck_q[799] ; altera_reserved_tck ; altera_reserved_tck ; 16.667       ; 2.351      ; 6.377      ;
++--------+---------------------+------------------------------------------------------+---------------------+---------------------+--------------+------------+------------+
+
+Path #1: Setup slack is 12.541 
+===============================================================================
++---------------------------------------------------------------------------+
+; Path Summary                                                              ;
++--------------------+------------------------------------------------------+
+; Property           ; Value                                                ;
++--------------------+------------------------------------------------------+
+; From Node          ; altera_reserved_tdi                                  ;
+; To Node            ; rtnn_c2_vjtag_mailbox:u_mailbox|req_shift_tck_q[799] ;
+; Launch Clock       ; altera_reserved_tck (INVERTED)                       ;
+; Latch Clock        ; altera_reserved_tck                                  ;
+; Data Arrival Time  ; 23.043                                               ;
+; Data Required Time ; 35.584                                               ;
+; Slack              ; 12.541                                               ;
++--------------------+------------------------------------------------------+
+
++---------------------------------------------------------------------------------------+
+; Statistics                                                                            ;
++---------------------------+--------+-------+-------------+------------+-------+-------+
+; Property                  ; Value  ; Count ; Total Delay ; % of Total ; Min   ; Max   ;
++---------------------------+--------+-------+-------------+------------+-------+-------+
+; Setup Relationship        ; 16.667 ;       ;             ;            ;       ;       ;
+; Clock Skew                ; 2.351  ;       ;             ;            ;       ;       ;
+; Data Delay                ; 6.377  ;       ;             ;            ;       ;       ;
+; Number of Logic Levels    ;        ; 3     ;             ;            ;       ;       ;
+; Physical Delays           ;        ;       ;             ;            ;       ;       ;
+;  Arrival Path             ;        ;       ;             ;            ;       ;       ;
+;   Clock                   ;        ;       ;             ;            ;       ;       ;
+;    Clock Network (Lumped) ;        ; 1     ; 0.000       ;            ; 0.000 ; 0.000 ;
+;   Data                    ;        ;       ;             ;            ;       ;       ;
+;    IC                     ;        ; 4     ; 4.924       ; 77         ; 0.000 ; 4.924 ;
+;    Cell                   ;        ; 4     ; 1.453       ; 23         ; 0.125 ; 0.946 ;
+;  Required Path            ;        ;       ;             ;            ;       ;       ;
+;   Clock                   ;        ;       ;             ;            ;       ;       ;
+;    IC                     ;        ; 4     ; 1.613       ; 69         ; 0.000 ; 1.015 ;
+;    Cell                   ;        ; 4     ; 0.738       ; 31         ; 0.135 ; 0.222 ;
++---------------------------+--------+-------+-------------+------------+-------+-------+
+Note: Negative delays are omitted from totals when calculating percentages
+
++----------------------------------------------------------------------------------------------------------------------+
+; Data Arrival Path                                                                                                    ;
++----------+---------+----+------+--------+---------------------+------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location            ; Element                                              ;
++----------+---------+----+------+--------+---------------------+------------------------------------------------------+
+; 16.666   ; 16.666  ;    ;      ;        ;                     ; launch edge time                                     ;
+; 16.666   ; 0.000   ;    ;      ;        ;                     ; clock path                                           ;
+;   16.666 ;   0.000 ; F  ;      ;        ;                     ; clock network delay                                  ;
+; 16.666   ; 0.000   ; F  ; iExt ; 1      ; PIN_W5              ; altera_reserved_tdi                                  ;
+; 23.043   ; 6.377   ;    ;      ;        ;                     ; data path                                            ;
+;   16.666 ;   0.000 ; FF ; IC   ; 1      ; IOIBUF_X3_Y0_N7     ; altera_reserved_tdi~input|i                          ;
+;   17.612 ;   0.946 ; FF ; CELL ; 1      ; IOIBUF_X3_Y0_N7     ; altera_reserved_tdi~input|o                          ;
+;   17.612 ;   0.000 ; FF ; IC   ; 3      ; JTAG_X0_Y4_N3       ; altera_internal_jtag|tdi                             ;
+;   17.786 ;   0.174 ; FF ; CELL ; 9      ; JTAG_X0_Y4_N3       ; altera_internal_jtag|tdiutap                         ;
+;   22.710 ;   4.924 ; FF ; IC   ; 1      ; LABCELL_X21_Y12_N51 ; u_mailbox|req_shift_tck_q[799]~feeder|datab          ;
+;   22.918 ;   0.208 ; FF ; CELL ; 1      ; LABCELL_X21_Y12_N51 ; u_mailbox|req_shift_tck_q[799]~feeder|combout        ;
+;   22.918 ;   0.000 ; FF ; IC   ; 1      ; FF_X21_Y12_N53      ; u_mailbox|req_shift_tck_q[799]|d                     ;
+;   23.043 ;   0.125 ; FF ; CELL ; 1      ; FF_X21_Y12_N53      ; rtnn_c2_vjtag_mailbox:u_mailbox|req_shift_tck_q[799] ;
++----------+---------+----+------+--------+---------------------+------------------------------------------------------+
+
++------------------------------------------------------------------------------------------------------------------+
+; Data Required Path                                                                                               ;
++----------+---------+----+------+--------+-----------------+------------------------------------------------------+
+; Total    ; Incr    ; RF ; Type ; Fanout ; Location        ; Element                                              ;
++----------+---------+----+------+--------+-----------------+------------------------------------------------------+
+; 33.333   ; 33.333  ;    ;      ;        ;                 ; latch edge time                                      ;
+; 35.684   ; 2.351   ;    ;      ;        ;                 ; clock path                                           ;
+;   33.333 ;   0.000 ;    ;      ;        ;                 ; source latency                                       ;
+;   33.333 ;   0.000 ;    ;      ; 1      ; PIN_V5          ; altera_reserved_tck                                  ;
+;   33.333 ;   0.000 ; RR ; IC   ; 1      ; IOIBUF_X3_Y0_N1 ; altera_reserved_tck~input|i                          ;
+;   33.555 ;   0.222 ; RR ; CELL ; 1      ; IOIBUF_X3_Y0_N1 ; altera_reserved_tck~input|o                          ;
+;   33.555 ;   0.000 ; RR ; IC   ; 24     ; JTAG_X0_Y4_N3   ; altera_internal_jtag|tck                             ;
+;   33.754 ;   0.199 ; RR ; CELL ; 1      ; JTAG_X0_Y4_N3   ; altera_internal_jtag|tckutap                         ;
+;   34.352 ;   0.598 ; RR ; IC   ; 1      ; CLKCTRL_G6      ; altera_internal_jtag~TCKUTAPCLKENA0|inclk            ;
+;   34.487 ;   0.135 ; RR ; CELL ; 2544   ; CLKCTRL_G6      ; altera_internal_jtag~TCKUTAPCLKENA0|outclk           ;
+;   35.502 ;   1.015 ; RR ; IC   ; 1      ; FF_X21_Y12_N53  ; u_mailbox|req_shift_tck_q[799]|clk                   ;
+;   35.684 ;   0.182 ; RR ; CELL ; 1      ; FF_X21_Y12_N53  ; rtnn_c2_vjtag_mailbox:u_mailbox|req_shift_tck_q[799] ;
+; 35.584   ; -0.100  ;    ;      ;        ;                 ; clock uncertainty                                    ;
+; 35.584   ; 0.000   ;    ; uTsu ; 1      ; FF_X21_Y12_N53  ; rtnn_c2_vjtag_mailbox:u_mailbox|req_shift_tck_q[799] ;
++----------+---------+----+------+--------+-----------------+------------------------------------------------------+
+
+----------------------------
+; Extra Fitter Information ;
+----------------------------
+HTML report is unavailable in plain text report export.
+
+

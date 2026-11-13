@@ -1,0 +1,177 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Fri Nov 13 21:47:27 2026
+Info: Command: quartus_sta -t D:\rtnn_c2_d101_disposition_20261113\jtag_interface_timing_detail_20261113.tcl
+Warning (12473): User specified to use only one processors but 14 processors were detected which could be used to decrease run time.
+Info (21076): High junction temperature operating condition is not set. Assuming a default value of '85'.
+Info (21076): Low junction temperature operating condition is not set. Assuming a default value of '0'.
+Info (332164): Evaluating HDL-embedded SDC commands
+    Info (332165): Entity sld_hub
+        Info (332166): create_clock -name altera_reserved_tck [get_ports {altera_reserved_tck}] -period 30MHz   
+        Info (332166): if { [string equal quartus_fit $::TimeQuestInfo(nameofexecutable)] } { set_max_delay -to [get_ports { altera_reserved_tdo } ] 0 }
+        Info (332166): set_clock_groups -asynchronous -group {altera_reserved_tck}
+Info (332104): Reading SDC File: 'rtnn_de0_cv_c2.sdc'
+Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+CORNER 0 7_slow_1100mv_85c
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_ports {altera_reserved_tdi}]
+    Info (332115): -to [get_registers {*req_shift_tck_q*}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdi_setup_0.rpt}
+Info (332115): Report Timing: No hold paths were found
+    Info (332115): -from [get_ports {altera_reserved_tdi}]
+    Info (332115): -to [get_registers {*req_shift_tck_q*}]
+    Info (332115): -hold
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdi_hold_0.rpt}
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_ports {altera_reserved_tms}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tms_setup_0.rpt}
+Info (332115): Report Timing: No hold paths were found
+    Info (332115): -from [get_ports {altera_reserved_tms}]
+    Info (332115): -hold
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tms_hold_0.rpt}
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_registers *]
+    Info (332115): -to [get_ports {altera_reserved_tdo}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdo_setup_0.rpt}
+CORNER 1 7_slow_1100mv_0c
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_ports {altera_reserved_tdi}]
+    Info (332115): -to [get_registers {*req_shift_tck_q*}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdi_setup_1.rpt}
+Info (332115): Report Timing: No hold paths were found
+    Info (332115): -from [get_ports {altera_reserved_tdi}]
+    Info (332115): -to [get_registers {*req_shift_tck_q*}]
+    Info (332115): -hold
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdi_hold_1.rpt}
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_ports {altera_reserved_tms}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tms_setup_1.rpt}
+Info (332115): Report Timing: No hold paths were found
+    Info (332115): -from [get_ports {altera_reserved_tms}]
+    Info (332115): -hold
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tms_hold_1.rpt}
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_registers *]
+    Info (332115): -to [get_ports {altera_reserved_tdo}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdo_setup_1.rpt}
+CORNER 2 MIN_fast_1100mv_85c
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_ports {altera_reserved_tdi}]
+    Info (332115): -to [get_registers {*req_shift_tck_q*}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdi_setup_2.rpt}
+Info (332115): Report Timing: No hold paths were found
+    Info (332115): -from [get_ports {altera_reserved_tdi}]
+    Info (332115): -to [get_registers {*req_shift_tck_q*}]
+    Info (332115): -hold
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdi_hold_2.rpt}
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_ports {altera_reserved_tms}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tms_setup_2.rpt}
+Info (332115): Report Timing: No hold paths were found
+    Info (332115): -from [get_ports {altera_reserved_tms}]
+    Info (332115): -hold
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tms_hold_2.rpt}
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_registers *]
+    Info (332115): -to [get_ports {altera_reserved_tdo}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdo_setup_2.rpt}
+CORNER 3 MIN_fast_1100mv_0c
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_ports {altera_reserved_tdi}]
+    Info (332115): -to [get_registers {*req_shift_tck_q*}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdi_setup_3.rpt}
+Info (332115): Report Timing: No hold paths were found
+    Info (332115): -from [get_ports {altera_reserved_tdi}]
+    Info (332115): -to [get_registers {*req_shift_tck_q*}]
+    Info (332115): -hold
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdi_hold_3.rpt}
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_ports {altera_reserved_tms}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tms_setup_3.rpt}
+Info (332115): Report Timing: No hold paths were found
+    Info (332115): -from [get_ports {altera_reserved_tms}]
+    Info (332115): -hold
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tms_hold_3.rpt}
+Info (332115): Report Timing: No setup paths were found
+    Info (332115): -from [get_registers *]
+    Info (332115): -to [get_ports {altera_reserved_tdo}]
+    Info (332115): -setup
+    Info (332115): -npaths 4
+    Info (332115): -detail full_path
+    Info (332115): -file {jtag_tdo_setup_3.rpt}
+Info (23030): Evaluation of Tcl script D:\rtnn_c2_d101_disposition_20261113\jtag_interface_timing_detail_20261113.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 5097 megabytes
+    Info: Processing ended: Fri Nov 13 21:47:33 2026
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:05

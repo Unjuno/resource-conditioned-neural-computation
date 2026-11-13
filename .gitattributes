@@ -1,0 +1,7 @@
+/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/GATE_B_AUDIT_RUN_RECORD_JA.md -text
+/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/GATE_B_TIMING_CDC_AUDIT_JA.md -text
+/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/SHA256SUMS_GATE_B_AUDIT_20261114.txt -text
+/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/gate_b_evidence_recheck_20261114.exitcode.txt -text
+/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/gate_b_evidence_recheck_20261114.log -text
+/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/verify_gate_b_evidence.ps1 -text
+/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/jtag_timing_research_20261113/** -text
