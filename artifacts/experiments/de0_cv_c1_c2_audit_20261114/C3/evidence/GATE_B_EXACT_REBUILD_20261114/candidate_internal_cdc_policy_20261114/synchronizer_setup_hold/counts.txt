@@ -1,0 +1,32 @@
+corner=0 op=7_slow_1100mv_85c pair=req_sync1_sys_q->req_sync2_sys_q setup=1 hold=1
+corner=0 op=7_slow_1100mv_85c pair=rsp_consume_sync1_sys_q->rsp_consume_sync2_sys_q setup=1 hold=1
+corner=0 op=7_slow_1100mv_85c pair=req_ack_sync1_tck_q->req_ack_sync2_tck_q setup=1 hold=1
+corner=0 op=7_slow_1100mv_85c pair=rsp_sync1_tck_q->rsp_sync2_tck_q setup=1 hold=1
+corner=0 op=7_slow_1100mv_85c pair=busy_sync1_tck_q->busy_sync2_tck_q setup=1 hold=1
+corner=0 op=7_slow_1100mv_85c pair=error_sync1_tck_q->error_sync2_tck_q setup=1 hold=1
+corner=0 op=7_slow_1100mv_85c pair=done_sync1_tck_q->done_sync2_tck_q setup=1 hold=1
+corner=0 op=7_slow_1100mv_85c all_tck_to_sys_setup=800 all_sys_to_tck_setup=384
+corner=1 op=7_slow_1100mv_0c pair=req_sync1_sys_q->req_sync2_sys_q setup=1 hold=1
+corner=1 op=7_slow_1100mv_0c pair=rsp_consume_sync1_sys_q->rsp_consume_sync2_sys_q setup=1 hold=1
+corner=1 op=7_slow_1100mv_0c pair=req_ack_sync1_tck_q->req_ack_sync2_tck_q setup=1 hold=1
+corner=1 op=7_slow_1100mv_0c pair=rsp_sync1_tck_q->rsp_sync2_tck_q setup=1 hold=1
+corner=1 op=7_slow_1100mv_0c pair=busy_sync1_tck_q->busy_sync2_tck_q setup=1 hold=1
+corner=1 op=7_slow_1100mv_0c pair=error_sync1_tck_q->error_sync2_tck_q setup=1 hold=1
+corner=1 op=7_slow_1100mv_0c pair=done_sync1_tck_q->done_sync2_tck_q setup=1 hold=1
+corner=1 op=7_slow_1100mv_0c all_tck_to_sys_setup=800 all_sys_to_tck_setup=384
+corner=2 op=MIN_fast_1100mv_85c pair=req_sync1_sys_q->req_sync2_sys_q setup=1 hold=1
+corner=2 op=MIN_fast_1100mv_85c pair=rsp_consume_sync1_sys_q->rsp_consume_sync2_sys_q setup=1 hold=1
+corner=2 op=MIN_fast_1100mv_85c pair=req_ack_sync1_tck_q->req_ack_sync2_tck_q setup=1 hold=1
+corner=2 op=MIN_fast_1100mv_85c pair=rsp_sync1_tck_q->rsp_sync2_tck_q setup=1 hold=1
+corner=2 op=MIN_fast_1100mv_85c pair=busy_sync1_tck_q->busy_sync2_tck_q setup=1 hold=1
+corner=2 op=MIN_fast_1100mv_85c pair=error_sync1_tck_q->error_sync2_tck_q setup=1 hold=1
+corner=2 op=MIN_fast_1100mv_85c pair=done_sync1_tck_q->done_sync2_tck_q setup=1 hold=1
+corner=2 op=MIN_fast_1100mv_85c all_tck_to_sys_setup=800 all_sys_to_tck_setup=384
+corner=3 op=MIN_fast_1100mv_0c pair=req_sync1_sys_q->req_sync2_sys_q setup=1 hold=1
+corner=3 op=MIN_fast_1100mv_0c pair=rsp_consume_sync1_sys_q->rsp_consume_sync2_sys_q setup=1 hold=1
+corner=3 op=MIN_fast_1100mv_0c pair=req_ack_sync1_tck_q->req_ack_sync2_tck_q setup=1 hold=1
+corner=3 op=MIN_fast_1100mv_0c pair=rsp_sync1_tck_q->rsp_sync2_tck_q setup=1 hold=1
+corner=3 op=MIN_fast_1100mv_0c pair=busy_sync1_tck_q->busy_sync2_tck_q setup=1 hold=1
+corner=3 op=MIN_fast_1100mv_0c pair=error_sync1_tck_q->error_sync2_tck_q setup=1 hold=1
+corner=3 op=MIN_fast_1100mv_0c pair=done_sync1_tck_q->done_sync2_tck_q setup=1 hold=1
+corner=3 op=MIN_fast_1100mv_0c all_tck_to_sys_setup=800 all_sys_to_tck_setup=384

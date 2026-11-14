@@ -1,0 +1,18 @@
+再実行メモ
+
+保存物:
+- rtnn_c2_original.qsf / rtnn_de0_cv_c2.sdc: exact-input C2元制約
+- rtnn_c2_candidate.qsf / rtnn_de0_cv_c3_candidate.sdc: SDC_FILEだけを候補へ置換したQSFと候補SDC
+- rtnn_c2_soc_flat.v、rtnn_de0_cv_c2_top.sv、rtnn_c2_global_buf.v、rtnn_c2.sld: QSFが参照する設計入力
+- candidate_sta_final.tcl、candidate_full_cdc_sta_final.tcl: 実行したSTAスクリプト
+- candidate_sta/、synchronizer_setup_hold/: 全4コーナーの生レポート
+
+厳密に同じ既存fitted databaseを使った記録済み実行:
+CWD D:\rtnn_c3_gateb_exact_rebuild_20261114_internal_cdc_sdc_candidate
+C:\altera_lite\25.1std\quartus\bin64\quartus_sta.exe -t .\candidate_sta_final.tcl
+C:\altera_lite\25.1std\quartus\bin64\quartus_sta.exe -t .\candidate_full_cdc_sta_final.tcl
+両方終了コード0。今回のfitted databaseはこのPCの隔離コピーにあり、リポジトリにはQuartus db/fitキャッシュを含めていない。
+
+新規作業場所での再生成: 上記設計入力と候補QSF/SDCを空の作業ディレクトリへコピーし、candidate QSFをrtnn_c2.qsfとして開き、Quartus 25.1 Liteでcompile/Fitterを実行した後、同Tclスクリプトを新cwdに合わせて出力先のみ変更して実行する。再Fitterは配置差を生じ得るため、ここに保存した既存fitted databaseの数値と同一になるとは限らない。その場合は新build ID/SOF SHAを分けて記録する。
+
+最初の統合試験では元SDCもQSFに同時登録しCLOCK_50二重定義Warning 332043が発生した。`initial_duplicate_sdc_warning.log`と初回結果一式は失敗証跡として保存し、最終QSFでは候補SDCだけを参照する。

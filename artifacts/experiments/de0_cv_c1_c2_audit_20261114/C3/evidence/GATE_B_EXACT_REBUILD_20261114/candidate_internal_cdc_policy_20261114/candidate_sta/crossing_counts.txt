@@ -1,0 +1,4 @@
+corner=0 op=7_slow_1100mv_85c tck_to_sys=800 sys_to_tck=384
+corner=1 op=7_slow_1100mv_0c tck_to_sys=800 sys_to_tck=384
+corner=2 op=MIN_fast_1100mv_85c tck_to_sys=800 sys_to_tck=384
+corner=3 op=MIN_fast_1100mv_0c tck_to_sys=800 sys_to_tck=384

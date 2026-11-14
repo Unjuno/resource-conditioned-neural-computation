@@ -1,0 +1,4 @@
+QSF delta against the preserved exact-input C2 QSF (SHA-256 9d270c2f57ca7f6ee1f68f4d525a685625a7cc5311b0a55ee363e23f823f675e):
+  - set_global_assignment -name SDC_FILE rtnn_de0_cv_c2.sdc
+  + set_global_assignment -name SDC_FILE rtnn_de0_cv_c3_candidate.sdc
+All other QSF lines are byte-equivalent after the candidate QSF is normalized for its single SDC_FILE replacement.
