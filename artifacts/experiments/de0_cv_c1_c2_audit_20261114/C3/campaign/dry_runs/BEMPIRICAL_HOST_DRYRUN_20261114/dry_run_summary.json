@@ -1,0 +1,365 @@
+{
+  "schema": "rtnn-c3-bempirical-host-dry-run-v1",
+  "cwd": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114",
+  "repository": "https://github.com/Unjuno/resource-conditioned-neural-computation.git",
+  "branch": "codex/stage-c3-jtag-pilot-20261114",
+  "head": "9af7c44daa3f69ace0abefa899b12effefc5ae7b",
+  "runner_sha256": "1bb3d0a975c93070e215a2249a1507f9f368dd9c852239c3c99000169d4696bd",
+  "campaign_canonical_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "planned_rows": 24840,
+  "sessions": [
+    {
+      "session": "diagnostic_fixed",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "diagnostic_fixed",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\diagnostic_fixed"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"diagnostic_fixed\",\n  \"rows\": 2520,\n  \"modes\": {\n    \"1\": 2520\n  },\n  \"cases_sha256\": \"d9fa19876088aa0a65f666063ac226af7c5ef17238b65abf9904a1b5b3a58f39\",\n  \"schedule_sha256\": \"576edecefe232a4cf619bf3f995223b8c26016fb9c8495f50c15e9cff6bee42b\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 2520,
+      "expected_rows": 2520,
+      "case_csv_sha256": "d9fa19876088aa0a65f666063ac226af7c5ef17238b65abf9904a1b5b3a58f39",
+      "binding_sha256": "74be48bb19c0920b23453fb2ff440d5cf989e87b20cfe06ed3ecce4b03d2f7ea",
+      "modes": {
+        "1": 2520
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "576edecefe232a4cf619bf3f995223b8c26016fb9c8495f50c15e9cff6bee42b",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "diagnostic_adaptive",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "diagnostic_adaptive",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\diagnostic_adaptive"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"diagnostic_adaptive\",\n  \"rows\": 7560,\n  \"modes\": {\n    \"3\": 7560\n  },\n  \"cases_sha256\": \"2d24bc191dac770a41d22c1d944127ba8d7f705334e3e81a2bc1c4118b192cd6\",\n  \"schedule_sha256\": \"8f3ab2f69217689114727b6b7fb4eae371e5cccae6e31adb3bc5d1fa8117ce20\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 7560,
+      "expected_rows": 7560,
+      "case_csv_sha256": "2d24bc191dac770a41d22c1d944127ba8d7f705334e3e81a2bc1c4118b192cd6",
+      "binding_sha256": "2aa428004800a47426223ffec0a8bfe9195eb0828a442199ae669649b4ae65fb",
+      "modes": {
+        "3": 7560
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "8f3ab2f69217689114727b6b7fb4eae371e5cccae6e31adb3bc5d1fa8117ce20",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "diagnostic_capped",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "diagnostic_capped",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\diagnostic_capped"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"diagnostic_capped\",\n  \"rows\": 7560,\n  \"modes\": {\n    \"2\": 7560\n  },\n  \"cases_sha256\": \"96a445b19918b387e8a8fdef6f2f6a4aee58363e3ec09a4be5655c3ab5afb256\",\n  \"schedule_sha256\": \"f0a0ddae3e33ac6debdb1e6317a07c67331509b97cb86f1edbfe535432b65928\",\n  \"mode2_rows\": 7560\n}\n",
+      "rows": 7560,
+      "expected_rows": 7560,
+      "case_csv_sha256": "96a445b19918b387e8a8fdef6f2f6a4aee58363e3ec09a4be5655c3ab5afb256",
+      "binding_sha256": "6633f97b62a463367e0058e9b41abe0f0fa4649cabfd750af6f6cb53fd983259",
+      "modes": {
+        "2": 7560
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "f0a0ddae3e33ac6debdb1e6317a07c67331509b97cb86f1edbfe535432b65928",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_01",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_01",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_01"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_01\",\n  \"rows\": 720,\n  \"modes\": {\n    \"3\": 360,\n    \"1\": 360\n  },\n  \"cases_sha256\": \"25754b7adf5704df8267bdfa38d6a5ed39dad360e88b0266ce4bbc8ed483f701\",\n  \"schedule_sha256\": \"73d37a9bf03a263a01663f5bf2d74695b93493c0660309ac39ad9dba97b414c9\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "25754b7adf5704df8267bdfa38d6a5ed39dad360e88b0266ce4bbc8ed483f701",
+      "binding_sha256": "599e4adf88f18162a78cd1bb401db91e29919fabdd72bf01aab6ea4fe78bffbd",
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "73d37a9bf03a263a01663f5bf2d74695b93493c0660309ac39ad9dba97b414c9",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_02",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_02",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_02"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_02\",\n  \"rows\": 720,\n  \"modes\": {\n    \"1\": 360,\n    \"3\": 360\n  },\n  \"cases_sha256\": \"39048699a00f0f975afabad6609b85efd1aa1301394380ed9b8d62429ce2925b\",\n  \"schedule_sha256\": \"e96669a29f4d188827daa1007ec1362b77b0c55869491abb1263680cd5c61118\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "39048699a00f0f975afabad6609b85efd1aa1301394380ed9b8d62429ce2925b",
+      "binding_sha256": "0b2239cf80acaa6109e694b1060f0c67968fe85c42aa34790ed286bf8e727f80",
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "e96669a29f4d188827daa1007ec1362b77b0c55869491abb1263680cd5c61118",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_03",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_03",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_03"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_03\",\n  \"rows\": 720,\n  \"modes\": {\n    \"1\": 360,\n    \"3\": 360\n  },\n  \"cases_sha256\": \"0d2db877206399f82ecea806f206bd057ffa46f5c678016df507739af358d3b0\",\n  \"schedule_sha256\": \"223873b4a126e03497e71dbcbf791079976bad854efc1b583d75645ab55df54b\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "0d2db877206399f82ecea806f206bd057ffa46f5c678016df507739af358d3b0",
+      "binding_sha256": "bf7f5dae1e77073ff873730493691cff22645bac84950d340f191a0c34a0bd3c",
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "223873b4a126e03497e71dbcbf791079976bad854efc1b583d75645ab55df54b",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_04",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_04",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_04"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_04\",\n  \"rows\": 720,\n  \"modes\": {\n    \"1\": 360,\n    \"3\": 360\n  },\n  \"cases_sha256\": \"e22e87b9967de4d1300807d4aaa7d8655bd3d9dee0d47b4099361d63ee3d3661\",\n  \"schedule_sha256\": \"6d39de778ff9ecae838a430824194d4f9ee83a5416d3d2f2e2d1bd4dbd7e4196\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "e22e87b9967de4d1300807d4aaa7d8655bd3d9dee0d47b4099361d63ee3d3661",
+      "binding_sha256": "781ea57cb37205ed217d53b3a7088014865a005c57101700d4b74c70893a4b91",
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "6d39de778ff9ecae838a430824194d4f9ee83a5416d3d2f2e2d1bd4dbd7e4196",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_05",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_05",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_05"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_05\",\n  \"rows\": 720,\n  \"modes\": {\n    \"1\": 360,\n    \"3\": 360\n  },\n  \"cases_sha256\": \"acfe265cf7239d82fdde74b7b52e316cbfd73432ef0906a75a1bb176f842c648\",\n  \"schedule_sha256\": \"54a5e172d695cf3ba4bd38e378aac2e0a4743d0adcffcf29d4ab7aa45ef58365\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "acfe265cf7239d82fdde74b7b52e316cbfd73432ef0906a75a1bb176f842c648",
+      "binding_sha256": "9fd86ee3a4ab04d34ff491216085a263f2332e93a1a783c9e1a097bf8b5894ab",
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "54a5e172d695cf3ba4bd38e378aac2e0a4743d0adcffcf29d4ab7aa45ef58365",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_06",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_06",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_06"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_06\",\n  \"rows\": 720,\n  \"modes\": {\n    \"3\": 360,\n    \"1\": 360\n  },\n  \"cases_sha256\": \"3da0d774499972edc440b6ba00649c4a3f310f64f4f1ae23faf4973b57ede80f\",\n  \"schedule_sha256\": \"335958e0cde52b7c56fc50eb09d385f1f9ddff870e87991e74e72390567b9587\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "3da0d774499972edc440b6ba00649c4a3f310f64f4f1ae23faf4973b57ede80f",
+      "binding_sha256": "83be6097b6ec01683822e2e1be56636b161285bad071f4e8196b6a4c97575d9d",
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "335958e0cde52b7c56fc50eb09d385f1f9ddff870e87991e74e72390567b9587",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_07",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_07",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_07"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_07\",\n  \"rows\": 720,\n  \"modes\": {\n    \"1\": 360,\n    \"3\": 360\n  },\n  \"cases_sha256\": \"536158223f969b7c585e462ae6d8aea9c9b3ba22b9e8b81050659d7a0b05f907\",\n  \"schedule_sha256\": \"b7f358e18ba9798722226656919a87a8d6615dad6c4e538c6a3c3b9a04ec582b\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "536158223f969b7c585e462ae6d8aea9c9b3ba22b9e8b81050659d7a0b05f907",
+      "binding_sha256": "d6867737a2186d756ce26f50e16d99598b77b657411af07ced910bd000e3c94e",
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "b7f358e18ba9798722226656919a87a8d6615dad6c4e538c6a3c3b9a04ec582b",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_08",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_08",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_08"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_08\",\n  \"rows\": 720,\n  \"modes\": {\n    \"3\": 360,\n    \"1\": 360\n  },\n  \"cases_sha256\": \"fcce55b32db44f8d5be193a65d2000f32097b7369a5732cae1f648e15ed97c17\",\n  \"schedule_sha256\": \"3fb696eff4783ef4ff1d0f2186208501d1821cd233b05e675a2ff88b6d306fab\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "fcce55b32db44f8d5be193a65d2000f32097b7369a5732cae1f648e15ed97c17",
+      "binding_sha256": "92011b81e410787e515257473c96bf9921c58d90e3be0ad0f36b419551480bd4",
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "3fb696eff4783ef4ff1d0f2186208501d1821cd233b05e675a2ff88b6d306fab",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_09",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_09",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_09"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_09\",\n  \"rows\": 720,\n  \"modes\": {\n    \"3\": 360,\n    \"1\": 360\n  },\n  \"cases_sha256\": \"8f6f3cac68f57efa50e0f02921f0e7ecaa01acccccdcb59aeafee75471f573b3\",\n  \"schedule_sha256\": \"738ff472ffa1a98547ce0ab89384439a071a79eda1dbb0292c425a372f15564a\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "8f6f3cac68f57efa50e0f02921f0e7ecaa01acccccdcb59aeafee75471f573b3",
+      "binding_sha256": "1d22c28594ca0a6c7b0b4335b9f94bf61995eac6bd96324cadb159061ca9fa4f",
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "738ff472ffa1a98547ce0ab89384439a071a79eda1dbb0292c425a372f15564a",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    },
+    {
+      "session": "primary_10",
+      "command": [
+        "C:\\Users\\junny\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\source\\prepare_c3_campaign_session.py",
+        "--session",
+        "primary_10",
+        "--out",
+        "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-audit-20261114\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\campaign\\dry_runs\\BEMPIRICAL_HOST_DRYRUN_20261114\\primary_10"
+      ],
+      "exit_code": 0,
+      "stdout_tail": "{\n  \"status\": \"PASS_CASES_BOUND_TO_FROZEN_SCHEDULE\",\n  \"session\": \"primary_10\",\n  \"rows\": 720,\n  \"modes\": {\n    \"3\": 360,\n    \"1\": 360\n  },\n  \"cases_sha256\": \"27d753e5fe603bd9e0f028aeb5e25475bde7773e0e5b7aeb568cd7f8762b9852\",\n  \"schedule_sha256\": \"db154943ab73fab850993cd4cfd76be922642b13d6f9bfa2b50b440128186022\",\n  \"mode2_rows\": 0\n}\n",
+      "rows": 720,
+      "expected_rows": 720,
+      "case_csv_sha256": "27d753e5fe603bd9e0f028aeb5e25475bde7773e0e5b7aeb568cd7f8762b9852",
+      "binding_sha256": "8f992ccc3a1275ce891184272972a5abb44aa9732c74d95905e2d6f3fe776166",
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "unique_input_ids": 360,
+      "binding_build_id": "43324a32",
+      "binding_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+      "schedule_sha256": "db154943ab73fab850993cd4cfd76be922642b13d6f9bfa2b50b440128186022",
+      "timing_classification": "EMPIRICAL_ONLY",
+      "frozen_schedule_modified": false
+    }
+  ],
+  "board_accessed": false,
+  "simulation_cycles_used": false,
+  "completed_sessions": 13,
+  "generated_rows": 24840,
+  "status": "PASS_HOST_DRY_RUN"
+}

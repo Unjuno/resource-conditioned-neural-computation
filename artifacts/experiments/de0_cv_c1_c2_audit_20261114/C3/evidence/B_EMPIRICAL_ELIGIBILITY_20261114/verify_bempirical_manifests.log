@@ -1,0 +1,7 @@
+$ pwsh -NoProfile -File .\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\evidence\B_EMPIRICAL_ELIGIBILITY_20261114\verify_bempirical_manifests.ps1
+
+label                           status matched missing mismatch malformed
+-----                           ------ ------- ------- -------- ---------
+C3 baseline evidence            PASS       827       0        0         0
+C2J2 42-case evidence           PASS       138       0        0         0
+B-EMPIRICAL 13-schedule dry-run PASS        40       0        0         0

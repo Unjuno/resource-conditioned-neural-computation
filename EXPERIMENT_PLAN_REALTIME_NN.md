@@ -20,6 +20,14 @@ The runtime owns **what work is admissible**. The NN may choose less work inside
 
 ## Current status
 
+### Revised DE0-CV measurement gates (2026-11-14)
+
+Formal timing and empirical measurement are independent gates. `B-SIGNOFF` remains **BLOCKED**: actual onboard USB-Blaster TCK frequency/duty and external TDI/TMS/TDO timing are unavailable, and the current Quartus reports show unconstrained JTAG I/O. Existing finite runs do not establish WCET, hard-deadline, or board-wide timing guarantees.
+
+`B-EMPIRICAL` is a separate prerequisite for a new limited pilot and later use of the frozen campaign. It is currently **BLOCKED** because the C2J2 response reports only a 32-bit `mcycle` delta. The saved protocol does not expose the 64-bit start/end samples or an explicit delta-overflow/reset status, so the host cannot establish that a reported nonzero 32-bit value was not truncated. The pinned SOF/ELF/model/RAM/RTL/SDC identity, internal timing and CDC evidence, response/reference checks, and failure logging have been audited; a fresh host-only preparation pass regenerated all 13 frozen schedules and 24,840 expected rows. The ten-input hardware pilot is `NOT_RUN` until cycle-counter integrity is observable. Previously collected 24,840 physical rows remain historical `EMPIRICAL_ONLY` data; this plan change does not upgrade them retrospectively.
+
+The plan revision is triggered by the revised counter-wrap/reset eligibility requirement. Its exact applicability commit is recorded in the adjacent C3 run record after the documentation commit is created. Full gate evidence and reproduction commands: [`B_EMPIRICAL_ELIGIBILITY_20261114_JA.md`](artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/B_EMPIRICAL_ELIGIBILITY_20261114/B_EMPIRICAL_ELIGIBILITY_20261114_JA.md).
+
 ### Goal A — budget changes physical neural computation: PASS
 
 One fixed parameter set has been shown to change physically executed depth/width/expert/block work under runtime resource conditions. Inactive work is structurally skipped. The public resource interface is continuous:

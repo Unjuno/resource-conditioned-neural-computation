@@ -20,6 +20,12 @@ The public budget is continuous (`b ∈ [0,1]`), but the analyzable backend lowe
 
 ## Current evidence snapshot
 
+### Stage C3 revised measurement gates — 2026-11-14
+
+The revised plan keeps formal board timing signoff and empirical measurement eligibility separate. **B-SIGNOFF remains BLOCKED** because the DE0-CV onboard USB-Blaster path's TCK rate/duty and external TDI/TMS/TDO timing are not established, and the current Quartus reports retain unconstrained JTAG I/O. No WCET, hard-deadline, or board-wide timing guarantee follows from the existing results.
+
+**B-EMPIRICAL is BLOCKED pending counter-integrity evidence.** The C2J2 SOF/ELF/model/RAM/RTL/SDC identities are cross-linked, the saved internal CLOCK_50 and bundled-CDC checks are positive within their documented scope, and the preserved C2J2 42-case run passed. A host-only dry-run also regenerated all 13 frozen schedules (24,840 rows) with the pinned campaign/binding checks. However, the current response exposes only a 32-bit `mcycle` delta; it does not preserve the 64-bit start/end samples or an explicit overflow/reset indication. The new ten-input pilot is therefore **NOT_RUN** under the revised gate. The prior 24,840 physical rows remain historical `EMPIRICAL_ONLY` evidence and are not retroactively requalified by this plan change. Details: [`B_EMPIRICAL_ELIGIBILITY_20261114_JA.md`](artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/B_EMPIRICAL_ELIGIBILITY_20261114/B_EMPIRICAL_ELIGIBILITY_20261114_JA.md).
+
 The current main line has progressed from mechanism toys to a same-model real-data/Q15/freestanding/RTL/formal chain.
 
 ### Goal A — physical budget-conditioned computation: PASS
