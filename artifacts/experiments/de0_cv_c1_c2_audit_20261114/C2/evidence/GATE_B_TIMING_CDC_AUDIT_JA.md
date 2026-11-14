@@ -39,7 +39,7 @@ SOFのSHAは過去のC2J2実機run recordとの同一性確認用であり、こ
 
 50 MHz `CLOCK_50` と、Quartus SLD hubの30 MHz modelである `altera_reserved_tck` が個別に解析されている。ただしSTAレポート中のHDL-embedded SLD hub制約には `set_clock_groups -asynchronous -group {altera_reserved_tck}` がある。このためTCKと他clock間の通常setup/hold解析は非同期group cutの対象である。Quartus JTAG cookbookもJTAG signalsを独立domainとして扱い、default fitter constraintでTCKを30 ns clockとして定義しasynchronous groupにする例を示す。従って表のworst setup/holdは全クロック間CDC signoffを意味しないが、このcut自体は独立クロック間のCDC方式に沿った意図的な扱いである。
 
-SDCの `set_net_delay` はfalse pathではないが、このcutを解除する同期setup/hold制約でもない。指定されたmailbox payload経路の遅延上限だけを補助的に確認する。requestの16 nsは20 ns `CLOCK_50` 周期の0.8倍、responseの24 nsは30 ns JTAG最小周期の0.8倍として設定されている。Quartus path reportとPython監査は4コーナーそれぞれでrequest 800/800 endpoint、response 384/384 endpointを検査し、response payloadのsource collection 394個と384個のdestinationを区別している。これらは経路遅延と端点対応の根拠であり、clock-group cutを埋めるclock phase/skew解析ではない。
+SDCの `set_net_delay` はfalse pathではないが、このcutを解除する同期setup/hold制約でもない。指定されたmailbox payload経路の遅延上限だけを補助的に確認する。requestの16 nsは20 ns `CLOCK_50` 周期の0.8倍、responseの24 nsは、このcapture-envelope比較で採用した30 ns周期の0.8倍として設定されている。30 nsはデバイスの通常条件での下限であり、ボード上のTCK実測値ではない。volatile-key programming時のdatasheet例外（167 ns）は本測定条件外である。Quartus path reportとPython監査は4コーナーそれぞれでrequest 800/800 endpoint、response 384/384 endpointを検査し、response payloadのsource collection 394個と384個のdestinationを区別している。これらは経路遅延と端点対応の根拠であり、clock-group cutを埋めるclock phase/skew解析ではない。
 
 同じ保存済みSTAレポートのmetastability summaryは、各cornerで392 chain、うちMTBFを算出できない割合0.977を記録する。詳細再生成レポートで内訳を確認した結果、この383件は `response_words_q[...]` から `rsp_hold_tck_q[...]`、応答shift register、SLD hub TDOへ続くresponse payloadの自動識別chainだった。独立した1-bit synchronizerではないため、0.977という割合のみを「実際の同期器のMTBF coverage不足」と解釈するのは不適切である。残る9件は2つのreset-release chainと7つのscalar control/status toggle chainで、すべてMTBF算定済みかつQuartus Design MTBFに含まれる。Quartus表示 `>1e+09 years` はこの認識された同期器集合の結果であり、payload保持条件や基板外部JTAG timingを保証する値ではない。
 
@@ -57,7 +57,7 @@ build-id `43324a32` のexact flat RTLでは、request toggleをTCKから2段sys�
 |---|---|---:|---|
 | `N` | toggle eventからcaptureまでの最小destination edge数 | 3 cycles | exact RTLの2FF同期、差分検出、pending capture順 |
 | `Tsys` | sys clock period | 20 ns | QSF/SDCで50 MHz |
-| `Ttck_min` | Cyclone V JTAGの最小TCK period | 30 ns | FPGA datasheet上の合法動作下限 |
+| `Ttck_min` | Cyclone V JTAGの通常条件における最小TCK period | 30 ns | FPGA datasheet値。特定のvolatile-key programming（VCCBAT 1.2–1.5 V）では167 nsの注記があるが、本測定条件外。基板上の実TCK値ではない |
 | `Dreq_net` | request bundleで最悪のpost-fit max net delay | 3.358 ns | 4コーナー最大、800 endpoints |
 | `Drsp_net` | response bundleで最悪のpost-fit max net delay | 3.157 ns | 4コーナー最大、384 endpoints |
 | `Wreq`, `Wrsp` | capture envelopeからobserved net delayを除いた比較値 | 56.642 ns, 86.843 ns | `N*Tsys-Dreq_net`, `N*Ttck_min-Drsp_net`。setup slackではない |
