@@ -51,3 +51,11 @@ C2の保存済みQuartus入力（QSF/SDC/flat RTL/board top/global buffer/4 RAM 
 ### 3回目の電源再投入後のJTAG読取り（2026-11-14）
 
 ユーザー確認後、変更操作をせず`jtagconfig -n`を実行。USB-BlasterとIDCODE `02B050DD`に加え、Virtual JTAG node `00406E00`とdesign hash `DF2731CF973C3275CFE6`が見えた。接続とデザイン識別子の読取りはPASS。ただし直前のDC off/onではUSB-Bを接続したままであり、Terasicの配布回路図はUSB VBUS (`VCC5_USB`) を基板5V電源回路へ接続している。このJTAG照会だけでは完全なFPGA rail電源断の有無や構成元を判別できない。cold-boot独立性はUNCERTAINとして、SRAM保持やFlash未変更の新証拠には使わない。詳細は`evidence/physical_post_coldboot3_readonly_20261114/RUN_RECORD_JA.md`。Quartus起動時のTBBmalloc警告も同記録に残した。
+
+### Gate B内部CDC候補SDCの全交差確認（2026-11-14追補）
+
+専用ブランチの後続監査で、C2 fitted databaseのSDCを複製した候補SDCを隔離QSFから読み込み、STAを再実行した。候補QSFは元QSFからSDC_FILE一行だけを置換。重複登録で発生した初回のCLOCK_50重複警告は候補SDC単独参照へ直し、最終実行で解消した。候補SDCでは唯一のSLD TCK/CLOCK_50 clock groupを除き、7 scalar同期器の第1段のみ個別false path、held request/response busへ40/60 ns max-delay・max-skewを設定した。
+
+ここで以前の「clock groupを全除去すると他CDC経路も変わる」という懸念を、現post-fit clock/path inventoryで絞り込めた。対象グラフにはclockが2個、該当groupは1個だけである。候補制約後に両方向の全clock-to-clock setup pathを列挙し、4コーナー全てでTCK→CLOCK_50はrequest 800本、CLOCK_50→TCKはresponse 384本のみ。他の内部clock crossing pathはゼロ。7組のstage1→stage2は各corner setup/holdとも1経路、計28 setup + 28 hold。最小setup slack +18.856 ns、最小hold slack +0.255 ns、違反0。要求/応答のmax-delayも全4コーナー違反0。max-skewの32 path records/コーナーも違反0で、最大skewは要求3.528 ns、応答3.330 ns以下。
+
+これは内部CDCポリシーを網羅した候補SDCの限定STA結果で、先の限定診断より強い。元C2 SDC、RTL、実機SOFは変更していない。候補SDCではFitterを再実行しておらず、外部JTAGのTDI/TMS 2入力port・41 path、TDO 1出力port・5 pathが未制約のためQuartusはsetup/hold fully constrainedではないと報告する。ゆえに内部CDC候補監査はPASS_LIMITED、Gate B全体はBLOCKED、Gate Cは未実施のまま。生レポート、QSF/SDC/source SHA、初回重複警告と修正後の実行ログは`evidence/GATE_B_EXACT_REBUILD_20261114/candidate_internal_cdc_policy_20261114/`。
