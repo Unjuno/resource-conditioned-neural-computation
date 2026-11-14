@@ -126,9 +126,25 @@
   "coverage_counts": "request_source=800 request_destination=800 response_source=394 response_destination=384",
   "path_counts": "corner_count=4",
   "max_skew": [
-    false,
-    false,
-    false,
-    false
+    {
+      "corner": 0,
+      "status": "NOT_EVALUATED",
+      "raw_message": "Nothing to report."
+    },
+    {
+      "corner": 1,
+      "status": "NOT_EVALUATED",
+      "raw_message": "Nothing to report."
+    },
+    {
+      "corner": 2,
+      "status": "NOT_EVALUATED",
+      "raw_message": "Nothing to report."
+    },
+    {
+      "corner": 3,
+      "status": "NOT_EVALUATED",
+      "raw_message": "Nothing to report."
+    }
   ]
 }

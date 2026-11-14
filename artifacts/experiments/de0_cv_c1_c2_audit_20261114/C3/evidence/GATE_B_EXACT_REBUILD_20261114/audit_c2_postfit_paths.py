@@ -40,7 +40,14 @@ for corner in range(4):
     results["net_delay"].append({"corner":corner,"groups":sums})
 results["coverage_counts"]=(root/"c2_allcorners_coverage.txt").read_text().strip()
 results["path_counts"]=(root/"c2_allcorners_count.txt").read_text().strip()
-results["max_skew"]=["No paths were found" in (root/f"c2_allcorners_maxskew_{i}.rpt").read_text(errors="replace") for i in range(4)]
+results["max_skew"]=[]
+for corner in range(4):
+    skew_text=(root/f"c2_allcorners_maxskew_{corner}.rpt").read_text(errors="replace")
+    if "Nothing to report." in skew_text or "No paths were found" in skew_text:
+        results["max_skew"].append({"corner":corner,"status":"NOT_EVALUATED","raw_message":"Nothing to report."})
+    else:
+        results["max_skew"].append({"corner":corner,"status":"REVIEW_REQUIRED","raw_message":skew_text.strip()})
+        results["errors"].append(f"max-skew corner {corner}: unexpected report content requires review")
 (root/"c2_postfit_path_audit.json").write_text(json.dumps(results,indent=2)+"\n",encoding="utf-8")
 print(json.dumps(results,indent=2))
 sys.exit(1 if results["errors"] else 0)

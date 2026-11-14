@@ -1,0 +1,134 @@
+{
+  "corner_count": 4,
+  "request": [
+    {
+      "corner": 0,
+      "path_count": 800,
+      "max_path_delay_ns": 3.358
+    },
+    {
+      "corner": 1,
+      "path_count": 800,
+      "max_path_delay_ns": 3.263
+    },
+    {
+      "corner": 2,
+      "path_count": 800,
+      "max_path_delay_ns": 2.085
+    },
+    {
+      "corner": 3,
+      "path_count": 800,
+      "max_path_delay_ns": 1.822
+    }
+  ],
+  "response": [
+    {
+      "corner": 0,
+      "path_count": 384,
+      "max_path_delay_ns": 3.157
+    },
+    {
+      "corner": 1,
+      "path_count": 384,
+      "max_path_delay_ns": 3.037
+    },
+    {
+      "corner": 2,
+      "path_count": 384,
+      "max_path_delay_ns": 2.067
+    },
+    {
+      "corner": 3,
+      "path_count": 384,
+      "max_path_delay_ns": 1.798
+    }
+  ],
+  "net_delay": [
+    {
+      "corner": 0,
+      "groups": [
+        {
+          "slack_ns": 12.642,
+          "bound_ns": 16.0,
+          "actual_ns": 3.358,
+          "from": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[*]}]",
+          "to": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|request_data_o[*]}]"
+        },
+        {
+          "slack_ns": 20.843,
+          "bound_ns": 24.0,
+          "actual_ns": 3.157,
+          "from": "[get_registers {*rtnn_de0_cv_soc_c2:u_soc|response_words_q[*][*]}]",
+          "to": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_hold_tck_q[*]}]"
+        }
+      ]
+    },
+    {
+      "corner": 1,
+      "groups": [
+        {
+          "slack_ns": 12.737,
+          "bound_ns": 16.0,
+          "actual_ns": 3.263,
+          "from": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[*]}]",
+          "to": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|request_data_o[*]}]"
+        },
+        {
+          "slack_ns": 20.963,
+          "bound_ns": 24.0,
+          "actual_ns": 3.037,
+          "from": "[get_registers {*rtnn_de0_cv_soc_c2:u_soc|response_words_q[*][*]}]",
+          "to": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_hold_tck_q[*]}]"
+        }
+      ]
+    },
+    {
+      "corner": 2,
+      "groups": [
+        {
+          "slack_ns": 13.915,
+          "bound_ns": 16.0,
+          "actual_ns": 2.085,
+          "from": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[*]}]",
+          "to": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|request_data_o[*]}]"
+        },
+        {
+          "slack_ns": 21.933,
+          "bound_ns": 24.0,
+          "actual_ns": 2.067,
+          "from": "[get_registers {*rtnn_de0_cv_soc_c2:u_soc|response_words_q[*][*]}]",
+          "to": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_hold_tck_q[*]}]"
+        }
+      ]
+    },
+    {
+      "corner": 3,
+      "groups": [
+        {
+          "slack_ns": 14.178,
+          "bound_ns": 16.0,
+          "actual_ns": 1.822,
+          "from": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[*]}]",
+          "to": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|request_data_o[*]}]"
+        },
+        {
+          "slack_ns": 22.202,
+          "bound_ns": 24.0,
+          "actual_ns": 1.798,
+          "from": "[get_registers {*rtnn_de0_cv_soc_c2:u_soc|response_words_q[*][*]}]",
+          "to": "[get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_hold_tck_q[*]}]"
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "coverage_counts": "request_source=800 request_destination=800 response_source=394 response_destination=384",
+  "path_counts": "corner_count=4",
+  "max_skew": [
+    false,
+    false,
+    false,
+    false
+  ]
+}

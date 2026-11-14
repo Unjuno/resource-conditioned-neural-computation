@@ -1,0 +1,15 @@
+{
+  "command": "quartus_sta.exe -t c3_mtbf_detail_20261114.tcl",
+  "cwd": "D:\\rtnn_c3_gateb_exact_rebuild_20261114",
+  "tool": "Quartus Prime Lite 25.1std.0 Build 1129",
+  "exit_code": 0,
+  "report_path": "D:\\rtnn_c3_gateb_exact_rebuild_20261114\\c3_mtbf_all_chains.rpt",
+  "report_bytes": 31751098,
+  "report_sha256": "00120db779ae93c5aaf3bc083bbafd8259cdf2c3ffda5cdd9920ca328faef038",
+  "summary_csv_sha256": "d11668beeaffde1744313c0275412473550ac5e20221174be7734d082fdc8656",
+  "chain_count": 392,
+  "calculated_and_included": 9,
+  "not_calculated_payload_auto_chains": 383,
+  "unique_payload_pairings": 381,
+  "duplicate_alias_paths": 2
+}

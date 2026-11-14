@@ -1,0 +1,10 @@
+load_package sta
+load_package report
+project_open rtnn_c2 -revision rtnn_c2
+create_timing_netlist
+read_sdc
+update_timing_netlist
+report_metastability -nchains 1000 -file c3_mtbf_all_chains.rpt
+report_ucp -file c3_unconstrained_after_rebuild.rpt
+delete_timing_netlist
+project_close
