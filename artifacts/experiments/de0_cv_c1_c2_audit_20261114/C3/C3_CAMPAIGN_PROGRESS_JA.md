@@ -51,7 +51,6 @@ C2の保存済みQuartus入力（QSF/SDC/flat RTL/board top/global buffer/4 RAM 
 ### 3回目の電源再投入後のJTAG読取り（2026-11-14）
 
 ユーザー確認後、変更操作をせず`jtagconfig -n`を実行。USB-BlasterとIDCODE `02B050DD`に加え、Virtual JTAG node `00406E00`とdesign hash `DF2731CF973C3275CFE6`が見えた。接続とデザイン識別子の読取りはPASS。ただし直前のDC off/onではUSB-Bを接続したままであり、Terasicの配布回路図はUSB VBUS (`VCC5_USB`) を基板5V電源回路へ接続している。このJTAG照会だけでは完全なFPGA rail電源断の有無や構成元を判別できない。cold-boot独立性はUNCERTAINとして、SRAM保持やFlash未変更の新証拠には使わない。詳細は`evidence/physical_post_coldboot3_readonly_20261114/RUN_RECORD_JA.md`。Quartus起動時のTBBmalloc警告も同記録に残した。
-
 ### Gate B内部CDC候補SDCの全交差確認（2026-11-14追補）
 
 専用ブランチの後続監査で、C2 fitted databaseのSDCを複製した候補SDCを隔離QSFから読み込み、STAを再実行した。候補QSFは元QSFからSDC_FILE一行だけを置換。重複登録で発生した初回のCLOCK_50重複警告は候補SDC単独参照へ直し、最終実行で解消した。候補SDCでは唯一のSLD TCK/CLOCK_50 clock groupを除き、7 scalar同期器の第1段のみ個別false path、held request/response busへ40/60 ns max-delay・max-skewを設定した。
