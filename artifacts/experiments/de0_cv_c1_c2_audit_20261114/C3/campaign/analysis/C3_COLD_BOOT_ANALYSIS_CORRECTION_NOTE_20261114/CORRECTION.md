@@ -1,0 +1,3 @@
+# Cold-boot analysis correction record
+
+The first strict analyzer run raised `KeyError: reference_label`. The frozen prepared case schema names the corresponding expected field `expected_label`. The analyzer lookup was corrected to that canonical column and now additionally rejects duplicate/missing sequence IDs, checks per-row experiment/SOF identity, and verifies reference-label alignment. The corrected analysis completed with 2,160 rows, three distinct confirmed board-power session IDs, and PASS_CROSSED_EMPIRICAL_BOOTSTRAP. The initial traceback is preserved in the task execution record; the corrected rerun logs and outputs are preserved under `C3/campaign/analysis/`.

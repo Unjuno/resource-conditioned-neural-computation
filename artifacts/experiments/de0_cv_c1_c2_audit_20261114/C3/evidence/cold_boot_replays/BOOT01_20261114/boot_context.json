@@ -1,0 +1,16 @@
+{
+  "schema": "rtnn-c3-cold-boot-context-v1",
+  "board_power_session_id": "C3_BOOT01_20261114",
+  "experiment_id": "C3_PRIMARY01_COLD_BOOT_REPLAY01_20261114",
+  "user_confirmation": "基板の5V DCを切ってLEDRと青いPWRランプが消えた後、再投入したとの確認",
+  "all_board_leds_off_confirmed": true,
+  "off_duration_s": "user_prompt_requested_at_least_10; duration not independently timed",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "programming_target": "FPGA SRAM only",
+  "flash_cfm_touched": false,
+  "jtag_idcode": "02B050DD",
+  "design_hash": "DF2731CF973C3275CFE6",
+  "virtual_jtag": "Virtual JTAG #0",
+  "cold_boot_confirmed": true,
+  "time_host_local": "2026-11-14 18:08:47 +09:00"
+}

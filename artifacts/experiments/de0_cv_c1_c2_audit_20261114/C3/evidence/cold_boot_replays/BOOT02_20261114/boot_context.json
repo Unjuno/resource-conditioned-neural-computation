@@ -1,0 +1,12 @@
+{
+  "experiment_id": "C3_BOOT02_20261114",
+  "user_confirmed_power_off_and_on": true,
+  "user_confirmed_all_board_leds_off": true,
+  "off_duration_seconds_independently_timed": false,
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "sof_programming": "SRAM only via Quartus Programmer JTAG; no POF/JIC/Flash/CFM",
+  "jtag_idcode": "02B050DD",
+  "design_hash": "DF2731CF973C3275CFE6",
+  "programmer": "Quartus Prime Lite 25.1std.0 Build 1129",
+  "timestamp_local": "2026-11-14"
+}

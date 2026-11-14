@@ -1,0 +1,13 @@
+Observed first strict-analysis failure (captured output, PowerShell cwd = correct audit repository):
+
+Command: python C3/source/analyze_c3_coldboot_replays.py --c3-root C3 --out-dir C3/campaign/analysis/C3_PRIMARY01_3COLD_BOOT_SENSITIVITY_RERUN2_20261114
+Exit code: 1
+
+Traceback (most recent call last):
+  File ".../C3/source/analyze_c3_coldboot_replays.py", line 210, in <module>
+    raise SystemExit(main())
+  File ".../C3/source/analyze_c3_coldboot_replays.py", line 91, in main
+    or int(r["reference_label"]) != int(case["reference_label"])
+KeyError: 'reference_label'
+
+Cause: prepared primary_01 cases.csv uses `expected_label`; `reference_label` is the results-side column. Fix: compare results.reference_label with cases.expected_label. The failed analysis created no output directory because validation failed before output creation.

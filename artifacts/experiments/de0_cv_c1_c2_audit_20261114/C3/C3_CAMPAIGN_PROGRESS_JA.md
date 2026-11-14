@@ -3,7 +3,7 @@
 更新: 2026-11-14 JST  
 正本: `https://github.com/Unjuno/resource-conditioned-neural-computation`  
 作業ブランチ: `codex/stage-c3-jtag-pilot-20261114`  
-測定時HEAD: `2a7231c8bf0ec2e81f00b307f54123db5dc0dab6`
+測定時HEAD: campaign本体 `bd65b37758654a0166e50790a5c00e4cc3f7ee7a`。cold-boot追試は同じ専用ブランチの未commit作業ツリーで実施。
 
 ## ゲート状況
 
@@ -15,13 +15,14 @@
 | mode 2 capped probe | PASS_EMPIRICAL | frozen seq1–4の部分probe成功。24,840行へは加算しない。 |
 | 13全schedule実機測定 | PASS_EMPIRICAL_DATA | 24,840/24,840行、13/13 runと独立監査PASS。prediction/Exit/cap/CRC/ID/timeout違反0、全件cycle有効。UART未使用、Flash/CFM未書込み。 |
 | 経験的対応比較 | PASS_DESCRIPTIVE_ONLY | 3,600 paired primary observations。条件付きcycle差は+197,601.77 cycles、95% input bootstrap CI [158,616.47, 235,071.07]。削減率20.934%、95% CI [16.804%,24.904%]。 |
-| 速度優位の統計ゲート | BLOCKED | frozen planは速度主張に最低3 confirmed independent cold bootsを要求。今回のrun群にconfirmed boot IDは0。two-way boot bootstrap未成立、速度優位を主張しない。 |
-| accuracy非劣性（1 pp margin） | INCONCLUSIVE | 固定2/adaptiveとも339/360。paired差0.000 pp、95% CI [−1.389,+1.389] ppで1 pp marginを確立できず。 |
+| primary_01 cold-boot追試 | PASS_EMPIRICAL | 3回のユーザー確認済み電源断・再投入後、同一SOFをSRAMへ再設定。primary_01を3 boot各720件、計2,160件再測定。boot ID・SOF/build/input/schedule・全応答を照合。 |
+| cold-boot交差cycle解析 | PASS_EMPIRICAL | input×3 bootの5,000回 crossed bootstrapで固定2−適応差197,601.77 cycles、95% CI [158,616.47,235,071.07]。削減率20.934%、95% CI [16.804%,24.904%]。primary_01に限定された補足感度解析であり、13 schedule全体のboot再現試験ではない。 |
+| accuracy非劣性（1 pp margin） | INCONCLUSIVE | 360独立入力で固定2/adaptiveとも339/360。対応差0.000 pp、95% CI [−1.389,+1.389] pp。測定反復を標本数に加えず、1 pp非劣性は確立していない。 |
 | 内部STA/CDC記録 | PASS_LIMITED | C2 exact-dispositionの4-corner slackは正。request/response pathは限定範囲で確認。完全board timing signoffを意味しない。 |
 | 外部JTAG/全board timing signoff | BLOCKED | 公式device端点spec取得済み。対象board/cable path delayと実TCK不明、Quartus未制約I/Oも残る。 |
 | WCET/hard deadline | NOT_ESTABLISHED | 実測cycleから時間上界またはdeadline保証を推定していない。 |
 
-ユーザーは追加の物理cold bootが可能と回答。既存runを遡及修正せず、cold-boot sensitivity用のreplayを行う場合はprimary_01/02/03の凍結caseを新experiment IDで再実行する。各電源断で揮発SOFが消えるため、起動後に同一SHAのSOFをFPGA SRAMのみへ設定する。Flash/CFM書込みはしない。追加replayはまだ未実施。
+3 cold-boot replayのexperiment IDは`C3_PRIMARY01_COLD_BOOT_REPLAY01/02/03_20261114`。ユーザーが各回でLED全消灯と電源再投入を確認。10秒待機は依頼したが実測タイマーで検証していない。毎回JTAG IDCODE `02B050DD`、SOF SHA `5aa5be2e…`、設計hash `DF2731CF973C3275CFE6`を照合し、FPGA SRAMだけに設定。Flash/CFMは未変更。証拠は`evidence/cold_boot_replays/`、run結果は`campaign/results/`、2,160行の結合データと解析は`campaign/analysis/C3_PRIMARY01_3COLD_BOOT_SENSITIVITY_RERUN4_20261114/`。RERUN3とRERUN4の決定論的結果・manifestを比較する。
 
 完全な値、全13 run ID、入力/結果SHA、コマンド、解析定義は[`C3_FULL_CAMPAIGN_RUN_RECORD_JA.md`](C3_FULL_CAMPAIGN_RUN_RECORD_JA.md)。解析CSV/JSONは`campaign/analysis/C3_FULL24840_RUN4_FINAL_20261114/`。独立再集計RUN5のSHA manifestはRUN4と一致した。
 

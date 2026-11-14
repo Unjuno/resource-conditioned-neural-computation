@@ -1,0 +1,77 @@
+{
+  "accuracy_noninferiority": {
+    "adaptive_correct": 339,
+    "adaptive_minus_fixed2_pp": 0.0,
+    "decision": "INCONCLUSIVE",
+    "fixed2_correct": 339,
+    "independent_input_ids": 360,
+    "noninferiority_margin_pp": 1.0,
+    "paired_input_bootstrap_95pct_ci_pp": [
+      -1.3888888888888888,
+      1.3888888888888888
+    ],
+    "predictions_consistent_across_boots": true
+  },
+  "boot_sessions": [
+    {
+      "board_power_session_id": "C3_BOOT01_20261114",
+      "cold_boot_confirmed": true,
+      "experiment_id": "C3_PRIMARY01_COLD_BOOT_REPLAY01_20261114",
+      "result_audit_sha256": "0b175985fab61432631ad908b2ca0d884b4b21ed58e57dc6bfd202d37adc5cf4",
+      "results_sha256": "6eaaceda3563abef0f21f06782656d3f4ceac4633b819caae7d90add1f5da6d1",
+      "rows": 720,
+      "run_manifest_sha256": "ec6efd217c4a854998f3fe85ab8e1002b05b6761a24040eac00e2b6a2af3e56a"
+    },
+    {
+      "board_power_session_id": "C3_BOOT02_20261114",
+      "cold_boot_confirmed": true,
+      "experiment_id": "C3_PRIMARY01_COLD_BOOT_REPLAY02_20261114",
+      "result_audit_sha256": "438864b8194bdd823592a716d58555e95ea91fa41c6364ddad63652ca400e76d",
+      "results_sha256": "bae46075d56704c0ad6797db54af069621eae7acab2e5fd06dcb947202a1a64b",
+      "rows": 720,
+      "run_manifest_sha256": "6dfa318e439729a9b8a5672ed1dbd61b7fd36d2ade18d94f1a5934063f31c088"
+    },
+    {
+      "board_power_session_id": "C3_BOOT03_20261114",
+      "cold_boot_confirmed": true,
+      "experiment_id": "C3_PRIMARY01_COLD_BOOT_REPLAY03_20261114",
+      "result_audit_sha256": "05fe6810f9d18554a70842c568af79da7131720c202224b9c31240825c099bff",
+      "results_sha256": "d18f4577290b58ba1fd8ddb39e534d482b27c3b9e04253fe7a53b68054633326",
+      "rows": 720,
+      "run_manifest_sha256": "d2f3d32a65b4d906468d24648677234229c18d3e05c01ffe3a0dc9f081324f9b"
+    }
+  ],
+  "classification": "SUPPLEMENTAL_COLD_BOOT_SENSITIVITY; original 24,840-row campaign unchanged",
+  "confirmed_cold_boots": 3,
+  "formal_timing_gate": "BLOCKED_EXTERNAL_JTAG_IO_AND_UNCONSTRAINED_PATHS",
+  "frozen_schedule_sha256": "73d37a9bf03a263a01663f5bf2d74695b93493c0660309ac39ad9dba97b414c9",
+  "frozen_session": "primary_01",
+  "input_ids": 360,
+  "paired_fixed2_adaptive": 1080,
+  "primary_cycles": {
+    "adaptive_mean": 746322.9944444444,
+    "boot_seed": 104729,
+    "bootstrap_replicates": 5000,
+    "crossed_bootstrap_95pct_ci_cycles": [
+      158616.46930555554,
+      235071.0726388889
+    ],
+    "crossed_bootstrap_95pct_ci_percent": [
+      16.803933644260166,
+      24.90358200042772
+    ],
+    "fixed2_mean": 943924.7666666667,
+    "input_seed": 63,
+    "mean_saving_cycles": 197601.77222222224,
+    "mean_saving_percent_fixed2": 20.93405949290051,
+    "minimum_boot_requirement_met": true,
+    "practical_5pct_ci_lower_bound_met": true,
+    "practical_5pct_point_threshold_met": true,
+    "unit": "input_id crossed with independent board cold_boot_session_id"
+  },
+  "rows": 2160,
+  "schema": "rtnn-c3-coldboot-replay-analysis-v1",
+  "speedup_claim_allowed": true,
+  "status": "PASS_CROSSED_EMPIRICAL_BOOTSTRAP",
+  "wcet_or_hard_deadline_claimed": false
+}

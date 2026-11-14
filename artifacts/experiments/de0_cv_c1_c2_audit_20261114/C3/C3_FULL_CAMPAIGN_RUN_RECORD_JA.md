@@ -90,3 +90,15 @@ No false path was added, no timing requirement relaxed, and no hard-deadline/WCE
 * all empirical rows and analysis: `campaign/analysis/C3_FULL24840_RUN4_FINAL_20261114/`。再現実行のSHA照合は`C3_FULL24840_RUN5_REPRO_20261114/SHA256SUMS.txt`。
 
 次の統計速度ゲートには、追跡可能な少なくとも3 independent board power-session IDを含む計画済み再測定が必要である。タイミング保証には対象実機CableのTCKおよび外部経路遅延、I/O制約と全path signoffが別途必要となる。
+
+## 追補：primary_01 3独立cold-boot感度再測定（2026-11-14）
+
+凍結された`primary_01` 720条件を、3回の確認済み電源off/on後に同一のC2J2 SOFで再測定した。experiment IDは`C3_PRIMARY01_COLD_BOOT_REPLAY01/02/03_20261114`、board power session IDは`C3_BOOT01/02/03_20261114`。各回のJTAG IDCODEは`02B050DD`、design hashは`DF2731CF973C3275CFE6`、SOF SHA-256は`5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6`。設定はFPGA SRAMのみで、Flash/CFMに書込みなし。全回でユーザーが基板LED全消灯と電源再投入を確認した。10秒以上の待ち時間は依頼したがCodex側で独立計時していない。
+
+各回720/720件を監査PASS。合計2,160行、360独立input ID、各bootの固定2/adaptive pairは360組。予測とExitは全bootで入力ごとに一貫。timeout、trap、CRC/identity fault、cycle invalid、Q15予測/Exit不一致は0。測定は`EMPIRICAL_ONLY`であり、STA/WCET/hard deadline保証を意味しない。
+
+5,000回のinput×boot crossed bootstrap（input seed 63、boot seed 104729）では、固定2−adaptiveの平均差197,601.77 cycles、95% CI [158,616.47,235,071.07]。固定2比の平均削減率20.934%、95% CI [16.804%,24.904%]。この結果はprimary_01だけの補足cold-boot感度解析で、13 schedule全体のcold-boot反復ではない。主キャンペーンの24,840 planned rowsは変更していない。分類精度は固定2/adaptiveとも339/360で、paired差0.000 percentage point、独立360入力bootstrap 95% CI [−1.389,+1.389] pp。事前の1 pp非劣性条件は引き続きINCONCLUSIVEであり、速度差だけを分類品質の維持と合わせて主張しない。
+
+解析コード：`C3/source/analyze_c3_coldboot_replays.py`。決定論的解析出力は`C3/campaign/analysis/C3_PRIMARY01_3COLD_BOOT_SENSITIVITY_RERUN3_20261114/`と`...RERUN4_20261114/`。後者は重複・欠落seq、実験/SOF identity、reference-label alignmentの追加検査後の結果。補正経緯は`C3/campaign/analysis/C3_COLD_BOOT_ANALYSIS_CORRECTION_NOTE_20261114/CORRECTION.md`、bootごとの物理操作/JTAG証拠は`C3/evidence/cold_boot_replays/`。各回の全raw CSV/JSON・manifest・監査は該当する`C3/campaign/results/C3_PRIMARY01_COLD_BOOT_REPLAY*_20261114/`。
+
+補足：初期の作業計画にある「最低3 cold boot未達」は本追試前の状態だった。今回のprimary_01に限る3 boot測定でboot数条件を満たしたが、キャンペーン全13 scheduleを3 bootで再測定したわけではない。従って全campaignのcold-boot感度を証明したとはしない。

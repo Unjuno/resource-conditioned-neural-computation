@@ -1,0 +1,6 @@
+command=C:\altera_lite\25.1std\quartus\bin64\jtagconfig.exe -n
+cwd=C:\altera_lite\25.1std\quartus\bin64
+exit=0
+output=1) USB-Blaster [USB-0]
+  02B050DD   5CE(BA4|FA4)
+

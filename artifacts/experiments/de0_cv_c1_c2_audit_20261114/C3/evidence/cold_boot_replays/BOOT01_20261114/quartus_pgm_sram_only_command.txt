@@ -1,0 +1,5 @@
+command=C:\altera_lite\25.1std\quartus\bin64\quartus_pgm.exe -c "USB-Blaster [USB-0]" -m JTAG -o "p;C:\rtnn_c3_pilot_20261114\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C2\evidence\quartus_d101\rtnn_c2.sof"
+cwd=C:\altera_lite\25.1std\quartus\bin64
+exit=0
+sof_sha256=5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6
+target=FPGA SRAM only; no POF/JIC/CFM/Flash command used
