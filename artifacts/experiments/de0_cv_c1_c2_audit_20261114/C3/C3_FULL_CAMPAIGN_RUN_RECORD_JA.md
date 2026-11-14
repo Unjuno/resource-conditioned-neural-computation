@@ -73,6 +73,8 @@ SOF、flat RTL、QSF/SDC、source graph、ELF、RAM lane和JTAGの履歴照合�
 
 Altera Cyclone V datasheet Table 56の端点条件（TCK period min 30 ns、high/low min 14 ns、TDI/TMS setup 1/3 ns、hold 5 ns、TDO clock-to-output max 11 ns）は公式資料から照合済み。DE0-CV System CD v1.2.1の回路図sheet 8ではVCCPD3Aが3.3 V網に接続されるため、同版回路図を前提とするTDO端点値には低電圧step加算がない。ただし基板個体revision/抵抗実装は未確認であり、Cyclone V端点値はTerasic board、USB-Blaster回路・USB/target cableの遅延を含まない。照合は`evidence/JTAG_TDO_VOLTAGE_CROSSWALK_JA.md`。Quartus 25.1std.0を確認し`jtagconfig --getparam 1 JtagClock`を読み取り専用実行したところ、exit 4 `No parameter named JtagClock`であり、実際のTCK周波数は確認できなかった。Cable III/Download Cable IIの設定値は今回検出された`USB-Blaster [USB-0]`へ流用しない。query証拠は`evidence/JTAG_EXTERNAL_TIMING_READONLY_20261114/`。
 
+Terasic公式DE0-CV System CD v1.2.1 ZIPの目録を追加監査した。オンボード経路は回路図sheet 17上のFT245BL/EPM240T100/24 MHzである一方、公開ZIPにはEPM240設計ソースまたは専用program imageがなく、同梱の2015 USB-Blaster guideは別体EPM7064AETC44ケーブル用である。従ってこのguideやUSB-Blaster II/IIIの数値を流用しない。ZIP SHA・member inventory・未送信Terasic質問案はvidence/JTAG_CONTROLLER_PACKAGE_AUDIT_20261114/およびvidence/TERASIC_SUPPORT_TIMING_REQUEST_DRAFT_EN.md。
+
 一次資料:
 
 * [Altera Cyclone V Device Datasheet: FPGA JTAG Configuration Timing](https://docs.altera.com/r/docs/683801/current/cyclone-v-device-datasheet/fpga-jtag-configuration-timing?contentId=tHclXha2uF6DJBsBSWaFRA)

@@ -63,3 +63,8 @@ C2の保存済みQuartus入力（QSF/SDC/flat RTL/board top/global buffer/4 RAM 
 Altera Cyclone V HandbookとDatasheet Table 56をTerasic DE0-CV System CD v1.2.1の回路図sheet 8と照合した。回路図上は`VCCPD3A`→`VCCIO_PD_3P3`、R117/R118経由で`VCC3P3`なので、同回路図版ではJTAG専用pin電源が3.3 Vとなり、datasheet `tJPCO`の低電圧step adderは不要（端点max 11 ns）。ただしユーザー基板revision/抵抗実装を個体確認しておらず、EPM240・配線・USB-Blaster遅延、実TCK・duty・phase、TDI/TMS arrival、TDO capture windowは依然不明。よって外部port delayを推測設定せず、Gate Bは**BLOCKED**のまま。詳細と出典は`evidence/JTAG_TDO_VOLTAGE_CROSSWALK_JA.md`。
 
 ユーザー確認のDC電源cycle 3/3後に追加でread-only `jtagconfig -n`とQuartus版照会を実行し、IDCODE `02B050DD`、node `00406E00`、design hash `DF2731CF973C3275CFE6`を再確認した。読み出し記録は`evidence/physical_post_coldboot3_userconfirmed_readonly_20261114/`。USB-Bを抜かなかったため、boot独立性は引き続き**UNCERTAIN**。この照会ではFPGAへ書き込まず、既存campaignの件数も変更していない。
+### On-board USB-Blaster資料の公式System CD監査（2026-11-14）
+
+公式Terasic DE0-CV System CD v1.2.1 ZIP（SHA-256 `ed4ac9cf4ae3d6ce27e6f2e66d42745b0a55fc2cc883b07069363d9947db942e`、1,089 entries、ZIP integrity PASS）を隔離領域へ取得し、実行せずに目録化した。Tools/ControlPanelにはControl Panel `.sof`とJTAG/download DLLがあるが、EPM240/CPLD/USB-Blaster path名を持つ項目や同フォルダ内のPOF/JICはない。唯一のdemo POF/JICはCyclone V `5CEBA4F23C7`/EPCS64のDE0_CV_Default projectに属する。回路図sheet 17はオンボードJTAG制御経路をFT245BL + EPM240T100 + 24 MHz基準として示すが、CPLD RTL/project/firmwareとJTAG pin timing budgetは公開ZIPから特定できない。
+
+Alteraの2015年USB-Blaster Download Cable guideは別体ケーブルのEPM7064AETC44を示す。USB-Blaster II/III資料も別世代のため、これらのTCKや外部delay数値をDE0-CV内蔵回路に流用しない。現時点でTDI/TMS input delay、TDO output delay、TCK period/dutyの根拠値はなく、Gate Bは**BLOCKED**。証跡は`evidence/JTAG_CONTROLLER_PACKAGE_AUDIT_20261114/`、Terasicへ送信していない質問案は`evidence/TERASIC_SUPPORT_TIMING_REQUEST_DRAFT_EN.md`。
