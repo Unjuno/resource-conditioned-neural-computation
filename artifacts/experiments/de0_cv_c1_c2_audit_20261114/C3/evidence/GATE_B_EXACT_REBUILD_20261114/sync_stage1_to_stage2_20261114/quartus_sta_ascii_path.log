@@ -1,0 +1,250 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sat Nov 14 19:59:13 2026
+Info: Command: quartus_sta -t .\sync_stage1_to_stage2_4corner_20261114.tcl
+Warning (12473): User specified to use only one processors but 14 processors were detected which could be used to decrease run time.
+Info (21076): High junction temperature operating condition is not set. Assuming a default value of '85'.
+Info (21076): Low junction temperature operating condition is not set. Assuming a default value of '0'.
+Info (332164): Evaluating HDL-embedded SDC commands
+    Info (332165): Entity sld_hub
+        Info (332166): create_clock -name altera_reserved_tck [get_ports {altera_reserved_tck}] -period 30MHz   
+        Info (332166): if { [string equal quartus_fit $::TimeQuestInfo(nameofexecutable)] } { set_max_delay -to [get_ports { altera_reserved_tdo } ] 0 }
+        Info (332166): set_clock_groups -asynchronous -group {altera_reserved_tck}
+Info (332104): Reading SDC File: 'rtnn_de0_cv_c2.sdc'
+Info (332151): Clock uncertainty is not calculated until you update the timing netlist.
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+PAIR req_sync1_sys_q -> req_sync2_sys_q source_count=1 destination_count=1
+PAIR rsp_consume_sync1_sys_q -> rsp_consume_sync2_sys_q source_count=1 destination_count=1
+PAIR req_ack_sync1_tck_q -> req_ack_sync2_tck_q source_count=1 destination_count=1
+PAIR rsp_sync1_tck_q -> rsp_sync2_tck_q source_count=1 destination_count=1
+PAIR busy_sync1_tck_q -> busy_sync2_tck_q source_count=1 destination_count=1
+PAIR error_sync1_tck_q -> error_sync2_tck_q source_count=1 destination_count=1
+PAIR done_sync1_tck_q -> done_sync2_tck_q source_count=1 destination_count=1
+CORNER 0 7_slow_1100mv_85c
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 18.930
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_sync1_sys_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_sync2_sys_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_0_req_sync1_sys_q_to_req_sync2_sys_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 18.870
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_consume_sync1_sys_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_consume_sync2_sys_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_0_rsp_consume_sync1_sys_q_to_rsp_consume_sync2_sys_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.815
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_ack_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_ack_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_0_req_ack_sync1_tck_q_to_req_ack_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.765
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_0_rsp_sync1_tck_q_to_rsp_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.907
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|busy_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|busy_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_0_busy_sync1_tck_q_to_busy_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.816
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|error_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|error_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_0_error_sync1_tck_q_to_error_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.756
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|done_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|done_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_0_done_sync1_tck_q_to_done_sync2_tck_q.rpt}
+CORNER 1 7_slow_1100mv_0c
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 18.913
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_sync1_sys_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_sync2_sys_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_1_req_sync1_sys_q_to_req_sync2_sys_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 18.856
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_consume_sync1_sys_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_consume_sync2_sys_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_1_rsp_consume_sync1_sys_q_to_rsp_consume_sync2_sys_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.811
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_ack_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_ack_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_1_req_ack_sync1_tck_q_to_req_ack_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.737
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_1_rsp_sync1_tck_q_to_rsp_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.910
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|busy_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|busy_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_1_busy_sync1_tck_q_to_busy_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.806
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|error_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|error_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_1_error_sync1_tck_q_to_error_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 31.716
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|done_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|done_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_1_done_sync1_tck_q_to_done_sync2_tck_q.rpt}
+CORNER 2 MIN_fast_1100mv_85c
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 19.449
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_sync1_sys_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_sync2_sys_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_2_req_sync1_sys_q_to_req_sync2_sys_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 19.443
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_consume_sync1_sys_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_consume_sync2_sys_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_2_rsp_consume_sync1_sys_q_to_rsp_consume_sync2_sys_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.531
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_ack_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_ack_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_2_req_ack_sync1_tck_q_to_req_ack_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.526
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_2_rsp_sync1_tck_q_to_rsp_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.580
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|busy_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|busy_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_2_busy_sync1_tck_q_to_busy_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.538
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|error_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|error_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_2_error_sync1_tck_q_to_error_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.532
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|done_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|done_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_2_done_sync1_tck_q_to_done_sync2_tck_q.rpt}
+CORNER 3 MIN_fast_1100mv_0c
+Info (332123): Deriving Clock Uncertainty. Please refer to report_sdc in the Timing Analyzer to see clock uncertainties.
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 19.476
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_sync1_sys_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_sync2_sys_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_3_req_sync1_sys_q_to_req_sync2_sys_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 19.472
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_consume_sync1_sys_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_consume_sync2_sys_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_3_rsp_consume_sync1_sys_q_to_rsp_consume_sync2_sys_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.589
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_ack_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_ack_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_3_req_ack_sync1_tck_q_to_req_ack_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.579
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_3_rsp_sync1_tck_q_to_rsp_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.632
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|busy_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|busy_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_3_busy_sync1_tck_q_to_busy_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.596
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|error_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|error_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_3_error_sync1_tck_q_to_error_sync2_tck_q.rpt}
+Info (332115): Report Timing: Found 1 setup paths (0 violated).  Worst case slack is 32.584
+    Info (332115): -from [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|done_sync1_tck_q}]
+    Info (332115): -to [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|done_sync2_tck_q}]
+    Info (332115): -setup
+    Info (332115): -npaths 1
+    Info (332115): -detail summary
+    Info (332115): -file {D:/rtnn_c3_gateb_exact_rebuild_20261114/sync_stage1_to_stage2_20261114/corner_3_done_sync1_tck_q_to_done_sync2_tck_q.rpt}
+Info (332102): Design is not fully constrained for setup requirements
+Info (332102): Design is not fully constrained for hold requirements
+Info (23030): Evaluation of Tcl script .\sync_stage1_to_stage2_4corner_20261114.tcl was successful
+Info: Quartus Prime Timing Analyzer was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 5097 megabytes
+    Info: Processing ended: Sat Nov 14 19:59:19 2026
+    Info: Elapsed time: 00:00:06
+    Info: Total CPU time (on all processors): 00:00:04

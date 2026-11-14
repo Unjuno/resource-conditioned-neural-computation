@@ -68,3 +68,25 @@ Gate B remains **BLOCKED**. Official Cyclone V JTAG endpoint numbers do not prov
 ## Evidence index
 
 `quartus_sh_compile.log`, Fitter/map/STA/DRC reports, four-corner path/skew/net-delay reports, D101 and path audit JSON, audit Tcl/scripts, candidate SOF, and `SHA256SUMS.txt` are stored alongside this record. The full repository-relative input evidence is kept at `C2/evidence/quartus_d101/` and was not rewritten.
+
+## 2026-11-14 追補：同期器段間パスの4コーナー確認
+
+元のC2 SDCと既存post-fitデータベースを変更せず、7組の1段目→2段目同期レジスタ間について各コーナーのsetup経路を個別列挙した。Quartus Prime Lite 25.1std.0 Build 1129 の `quartus_sta.exe -t sync_stage1_to_stage2_4corner_20261114.tcl` を `D:\rtnn_c3_gateb_exact_rebuild_20261114` から実行し、終了コード0。スクリプトは各送受信端点が1個、各コーナーで各ペアの経路が1本であることをassertする。
+
+対象はreq、rsp-consume、req-ack、rsp、busy、error、doneの同期段間7ペア、合計28 setup経路。全経路でslackは正。ペア別4コーナー最小/最大slackは以下の通り（TimeQuest表示単位ns）：
+
+| ペア | 最小 | 最大 |
+|---|---:|---:|
+| req_sync1_sys_q → req_sync2_sys_q | +18.913 | +19.476 |
+| rsp_consume_sync1_sys_q → rsp_consume_sync2_sys_q | +18.856 | +19.472 |
+| req_ack_sync1_tck_q → req_ack_sync2_tck_q | +31.811 | +32.589 |
+| rsp_sync1_tck_q → rsp_sync2_tck_q | +31.737 | +32.579 |
+| busy_sync1_tck_q → busy_sync2_tck_q | +31.907 | +32.632 |
+| error_sync1_tck_q → error_sync2_tck_q | +31.806 | +32.596 |
+| done_sync1_tck_q → done_sync2_tck_q | +31.716 | +32.584 |
+
+Quartusは引き続きsetup/holdがfully constrainedでないと報告する。元のSDCの未制約端点一覧、例外一覧、全28経路の生レポートを本ディレクトリに保存した。起動時のTBBmalloc警告とWarning 12473（1 processor設定、14利用可能）あり。
+
+最初の実行はUnicodeを含む作業パスをQuartus CLIへ渡したためログ上のパスが文字化けし、終了コード3となった。失敗ログも親ディレクトリに保持した。TclをASCII専用のD:作業場所へコピーして再実行し、同じ既存データベースを読み取り専用で解析して成功した。
+
+この確認は同期段間の内部setup経路のみに限定され、同期器のMTBF、非同期位相全域、held-bus捕捉窓、外部JTAG TDI/TMS/TDOのsetup/hold、未制約LED出力を証明しない。元SDCの変更・候補SOFの書込みはしていない。従ってGate Bは引き続きBLOCKEDであり、この結果だけではGate Cへ進まない。

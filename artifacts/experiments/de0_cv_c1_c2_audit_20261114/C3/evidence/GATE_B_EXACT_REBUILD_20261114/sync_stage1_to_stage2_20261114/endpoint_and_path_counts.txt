@@ -1,0 +1,35 @@
+req_sync1_sys_q -> req_sync2_sys_q source_count=1 destination_count=1
+rsp_consume_sync1_sys_q -> rsp_consume_sync2_sys_q source_count=1 destination_count=1
+req_ack_sync1_tck_q -> req_ack_sync2_tck_q source_count=1 destination_count=1
+rsp_sync1_tck_q -> rsp_sync2_tck_q source_count=1 destination_count=1
+busy_sync1_tck_q -> busy_sync2_tck_q source_count=1 destination_count=1
+error_sync1_tck_q -> error_sync2_tck_q source_count=1 destination_count=1
+done_sync1_tck_q -> done_sync2_tck_q source_count=1 destination_count=1
+corner=0 pair=req_sync1_sys_q->req_sync2_sys_q setup_path_count=1
+corner=0 pair=rsp_consume_sync1_sys_q->rsp_consume_sync2_sys_q setup_path_count=1
+corner=0 pair=req_ack_sync1_tck_q->req_ack_sync2_tck_q setup_path_count=1
+corner=0 pair=rsp_sync1_tck_q->rsp_sync2_tck_q setup_path_count=1
+corner=0 pair=busy_sync1_tck_q->busy_sync2_tck_q setup_path_count=1
+corner=0 pair=error_sync1_tck_q->error_sync2_tck_q setup_path_count=1
+corner=0 pair=done_sync1_tck_q->done_sync2_tck_q setup_path_count=1
+corner=1 pair=req_sync1_sys_q->req_sync2_sys_q setup_path_count=1
+corner=1 pair=rsp_consume_sync1_sys_q->rsp_consume_sync2_sys_q setup_path_count=1
+corner=1 pair=req_ack_sync1_tck_q->req_ack_sync2_tck_q setup_path_count=1
+corner=1 pair=rsp_sync1_tck_q->rsp_sync2_tck_q setup_path_count=1
+corner=1 pair=busy_sync1_tck_q->busy_sync2_tck_q setup_path_count=1
+corner=1 pair=error_sync1_tck_q->error_sync2_tck_q setup_path_count=1
+corner=1 pair=done_sync1_tck_q->done_sync2_tck_q setup_path_count=1
+corner=2 pair=req_sync1_sys_q->req_sync2_sys_q setup_path_count=1
+corner=2 pair=rsp_consume_sync1_sys_q->rsp_consume_sync2_sys_q setup_path_count=1
+corner=2 pair=req_ack_sync1_tck_q->req_ack_sync2_tck_q setup_path_count=1
+corner=2 pair=rsp_sync1_tck_q->rsp_sync2_tck_q setup_path_count=1
+corner=2 pair=busy_sync1_tck_q->busy_sync2_tck_q setup_path_count=1
+corner=2 pair=error_sync1_tck_q->error_sync2_tck_q setup_path_count=1
+corner=2 pair=done_sync1_tck_q->done_sync2_tck_q setup_path_count=1
+corner=3 pair=req_sync1_sys_q->req_sync2_sys_q setup_path_count=1
+corner=3 pair=rsp_consume_sync1_sys_q->rsp_consume_sync2_sys_q setup_path_count=1
+corner=3 pair=req_ack_sync1_tck_q->req_ack_sync2_tck_q setup_path_count=1
+corner=3 pair=rsp_sync1_tck_q->rsp_sync2_tck_q setup_path_count=1
+corner=3 pair=busy_sync1_tck_q->busy_sync2_tck_q setup_path_count=1
+corner=3 pair=error_sync1_tck_q->error_sync2_tck_q setup_path_count=1
+corner=3 pair=done_sync1_tck_q->done_sync2_tck_q setup_path_count=1
