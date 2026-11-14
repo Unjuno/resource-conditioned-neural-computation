@@ -14,6 +14,8 @@ Branch at audit: `codex/stage-c3-jtag-pilot-20261114`
 
 これは限定した名前検索の結果であり、別名の計測器・未接続機器・他PC上の設備が存在しないことを証明しない。JTAG TCK/TDI/TMS/TDOの電気波形はこの照会では取得していない。基板へのJTAG scan、SOF設定、Flash/CFM操作、設定変更も行っていない。
 
+Quartus 25.1 CLIのhelpも読み取り専用で確認した。`quartus_stp`はSignal TapによるFPGA内部ノード捕捉とJTAG shift機能を説明するが、USB-BlasterとCyclone Vの間のアナログ波形や外部TDO capture窓を直接測る機能ではない。`jtagconfig`には一般的なget/set parameter構文がある一方、保存済みの対象ケーブル`--getparam 1 JtagClock`はparameter unavailable (exit 4)。このhelp確認ではget/set parameter操作を実行していない。出力と終了コードは`quartus_readonly_cli_help_20261114.log`に保存した。
+
 既存の読み取り専用`jtagconfig --getparam 1 JtagClock`は`No parameter named JtagClock`（exit 4）であり、オンボードUSB-BlasterのTCK設定を得られなかった。FPGA端点のCyclone Vデータシート仕様だけでは、オンボードEPM240/配線の相対遅延とTDO capture windowを補えないためGate Bは引き続き**BLOCKED**。
 
 再実行スクリプト、コマンド出力、終了コードは同じディレクトリに保存する。スクリプトはホストの名前を絞った読み取りだけを行う。

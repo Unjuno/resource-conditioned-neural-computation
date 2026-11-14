@@ -1,0 +1,93 @@
+cwd=C:\altera_lite\25.1std\quartus\bin64
+
+COMMAND: "C:\altera_lite\25.1std\quartus\bin64\jtagconfig.exe" --help
+JTAG Server Configuration
+
+Usage: jtagconfig [--enum]
+       jtagconfig --add <type> <port> [<name>]
+       jtagconfig --remove <cable>
+       jtagconfig --getparam <cable> <param>
+       jtagconfig --setparam <cable> <param> <value>
+       jtagconfig --define <jtagid> <name> <irlength>
+       jtagconfig --undefine <jtagid> <name> <irlength>
+       jtagconfig --defined
+       jtagconfig --addserver <server> <password>
+       jtagconfig --enableremote <password>
+       jtagconfig --disableremote
+       jtagconfig --version
+       jtagconfig --serverinfo
+       jtagconfig --help
+       jtagconfig --extrahelp
+
+For more details use jtagconfig --extrahelp
+exit=0
+
+COMMAND: "C:\altera_lite\25.1std\quartus\bin64\quartus_stp.exe" --help
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Quartus Prime Signal Tap
+Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+Copyright (C) 2025  Altera Corporation. All rights reserved.
+
+Usage:
+------
+
+quartus_stp [-h | --help[=<option|topic>] | -v]
+quartus_stp <project name> [<options>]
+quartus_stp -t <script file> [<script args>]
+quartus_stp -s
+quartus_stp --tcl_eval <tcl command>
+
+Description:
+------------
+
+The Quartus Prime Signal Tap Logic Analyzer captures
+signals from internal device nodes while the device is
+running at speed. The captured data is displayed as a waveform
+within the Signal Tap Logic Analyzer and can be saved as a
+Signal Tap File (.stp). A comprehensive trigger condition can
+be specified, and is also saved in a Signal Tap File (.stp).
+The quartus_stp executable creates a Quartus Setting File (.qsf)
+based on the Signal Tap File specified if enabled.  It also
+removes the settings if the Signal Tap Logic Analyzer is
+disabled.  It must be run successfully before running Quartus Prime
+Analysis & Synthesis.
+
+This command also supports Quartus Setting File (.qsf) setup for
+Logic Analyzer Interface.  A Logic Analyzer Interface (.lai) file
+is used to determine how Quartus Setting File should be changed.
+
+This command also loads Tcl packages for a number of tools that
+communicate with the device via the JTAG interface.  The
+::quartus::stp package provides commands for Signal Tap
+acquisition; the ::quartus::jtag package provides commands for
+primitive JTAG shift and virtual JTAG shift; the
+::quartus::insystem_memory_edit package provides commands that
+read and modify memory content when this feature is enabled; the
+::quartus::logic_analyzer_interface package provides commands
+that control the drivers of output pins interfacing with the
+logic analyzer.
+
+Options:
+--------
+
+	-f <argument file>
+	-c <revision name> | --rev=<revision name>
+	-d | --disable
+	-e | --enable
+	--create_signaltap_hdl_file
+	--lai_file=<.lai file>
+	--logic_analyzer_interface
+	--lower_priority
+	--signaltap
+	--stp_file=<.stp>
+
+Help Topics:
+------------
+
+	app_description
+	arguments
+	return_codes
+	tcl
+
+For more information on specific options, use --help=<option|topic>.
+exit=0
