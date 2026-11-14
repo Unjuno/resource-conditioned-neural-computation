@@ -1,0 +1,28 @@
+{
+  "schema": "rtnn-c3-campaign-session-binding-v1",
+  "session_id": "primary_04",
+  "purpose": "PRIMARY_PAIRED",
+  "record_count": 720,
+  "schedule_file": "schedules/primary_04.json",
+  "schedule_canonical_sha256": "6d39de778ff9ecae838a430824194d4f9ee83a5416d3d2f2e2d1bd4dbd7e4196",
+  "campaign_canonical_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "campaign_file_sha256": "3d97a1cd87395e294299cacb617474367c89a9295355cd25fb1b4fa67464c936",
+  "dataset_file_sha256": "eeba9000a918bcba911007e78905c5052fc743422f95cb314a0fc9f4ecdfb14c",
+  "oracle_file_sha256": "4e1a3ddcabe1884b1607c77d19b10da8a86d53da3f4c060c30d7449635ec3cf4",
+  "host_q15_file_sha256": "1f9b08987a9d7368b663f604eb1dce6e077073e099552532468509c846d6bdc8",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "firmware_elf_sha256": "625daf8cc194f1bc7d48eefff0f07939c5e0988bb07fc8a3e7efad7e613a15fd",
+  "firmware_manifest_sha256": "16acc8375c18868c2e70885b1ecdb88c98598a98e53d94f8fda309aee0230c16",
+  "build_id": "43324a32",
+  "model_id": "52544e4e",
+  "case_csv_sha256": "e22e87b9967de4d1300807d4aaa7d8655bd3d9dee0d47b4099361d63ee3d3661",
+  "mode_semantics": {
+    "1": "fixed_exit_from_frozen_schedule",
+    "2": "capped_fixed_exit=floor(budget_q16*6/65535); reference derived from pinned fixed-exit oracle and cross-checked to native Q15 firmware table",
+    "3": "adaptive_budget; reference from pinned native Q15 firmware table"
+  },
+  "frozen_schedule_modified": false,
+  "measurement_scope": "device_cycle_counter:admission_or_cap+NN+exit_heads+entropy+argmax;excludes_UART",
+  "timing_classification": "EMPIRICAL_ONLY",
+  "wcet_or_hard_deadline_claimed": false
+}

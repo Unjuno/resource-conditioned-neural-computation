@@ -1,0 +1,27 @@
+{
+  "schema": "rtnn-c3-campaign-session-audit-v1",
+  "status": "PASS_EMPIRICAL_SESSION_AUDIT",
+  "session_id": "primary_08",
+  "experiment_id": "C3_PRIMARY08_FULL720_RUN1_20261114",
+  "rows": 720,
+  "mode_counts": {
+    "3": 360,
+    "1": 360
+  },
+  "unique_input_ids": 360,
+  "all_cycles_valid": true,
+  "functional_mismatches": 0,
+  "cap_violations": 0,
+  "timeouts": 0,
+  "crc_or_identity_faults": 0,
+  "uart_used": false,
+  "flash_written": false,
+  "timing_classification": "EMPIRICAL_ONLY_NO_WCET_OR_HARD_DEADLINE_CLAIM",
+  "sha256": {
+    "cases.csv": "fcce55b32db44f8d5be193a65d2000f32097b7369a5732cae1f648e15ed97c17",
+    "binding.json": "c398c78379e2b065a3f25145f88baa475a9c62422ae26353be115f2fb7b02c11",
+    "results.csv": "92ed189d38c2fb1ac4721f454ec59788d80683c6cb85ea35332a2a8fa6dc5702",
+    "results.json": "888b94b819017e5116536e3054453b73e2a7814a74b88ed9492c58584be7961a",
+    "raw.log": "6630e01af9b74792a76e0fd0be712458107f0c8085af3046d007ab88f7ddd82a"
+  }
+}

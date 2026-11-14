@@ -1,0 +1,65 @@
+{
+  "schema": "rtnn-c3-jtag-pilot-binding-v1",
+  "status": "FROZEN_INPUTS_VERIFIED_READY_FOR_EMPIRICAL_PILOT",
+  "campaign_id": "existing_method_campaign_frozen_20261102",
+  "campaign_canonical_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "campaign_file_sha256": "3d97a1cd87395e294299cacb617474367c89a9295355cd25fb1b4fa67464c936",
+  "session_id": "primary_01",
+  "full_schedule_sha256": "73d37a9bf03a263a01663f5bf2d74695b93493c0660309ac39ad9dba97b414c9",
+  "full_schedule_row_count": 720,
+  "selected_frozen_schedule_sequences": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "selected_rows": [
+    {
+      "seq": 1,
+      "input_id": 165,
+      "mode": 3,
+      "fixed_exit": 0,
+      "budget_q16": 65535,
+      "deadline_cycles": 0
+    },
+    {
+      "seq": 2,
+      "input_id": 165,
+      "mode": 1,
+      "fixed_exit": 2,
+      "budget_q16": 65535,
+      "deadline_cycles": 0
+    },
+    {
+      "seq": 3,
+      "input_id": 271,
+      "mode": 1,
+      "fixed_exit": 2,
+      "budget_q16": 65535,
+      "deadline_cycles": 0
+    },
+    {
+      "seq": 4,
+      "input_id": 271,
+      "mode": 3,
+      "fixed_exit": 0,
+      "budget_q16": 65535,
+      "deadline_cycles": 0
+    }
+  ],
+  "pilot_case_csv_sha256": "9028ea8ac8ae0d6168e19007b296be82c31c2b3de20d7babf7e51a2411d40332",
+  "dataset_sha256": "e0d056846c19174ad5dbd5c88603b7877334e9d03d2be7c85d5b438a5193322f",
+  "dataset_file_sha256": "eeba9000a918bcba911007e78905c5052fc743422f95cb314a0fc9f4ecdfb14c",
+  "oracle_file_sha256": "4e1a3ddcabe1884b1607c77d19b10da8a86d53da3f4c060c30d7449635ec3cf4",
+  "oracle_predictions_sha256": "03eb958cfa8b4fd2f71a95fb47dbca512820c237c281473817bba685b92c743e",
+  "host_q15_reference_csv_sha256": "1f9b08987a9d7368b663f604eb1dce6e077073e099552532468509c846d6bdc8",
+  "host_q15_reference_verdict_sha256": "81f35dab218a8aed82b635a85f4390ead3bf4aa3e00f0e535fce10e3f935483d",
+  "model_id": "52544e4e",
+  "build_id": "43324a32",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "firmware_elf_sha256": "625daf8cc194f1bc7d48eefff0f07939c5e0988bb07fc8a3e7efad7e613a15fd",
+  "measurement_scope": "device_cycle_counter:admission_or_cap+NN+exit_heads+entropy+argmax;excludes_UART",
+  "purpose": "engineering_pilot_only; not a schedule completion or paper result",
+  "frozen_campaign_modified": false,
+  "timing_claim": "empirical cycles only; no WCET or hard-deadline claim"
+}

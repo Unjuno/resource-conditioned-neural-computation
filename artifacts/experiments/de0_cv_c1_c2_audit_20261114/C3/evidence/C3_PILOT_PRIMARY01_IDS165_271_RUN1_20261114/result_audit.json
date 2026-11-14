@@ -1,0 +1,21 @@
+{
+  "status": "PASS_C3_PILOT_ARTIFACT_AUDIT",
+  "pilot_rows": 4,
+  "input_ids": [
+    165,
+    271
+  ],
+  "experiment_id": "C3_PILOT_PRIMARY01_IDS165_271_RUN1_20261114",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "campaign_canonical_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "full_campaign_rows_counted": 0,
+  "timing_classification": "EMPIRICAL_ONLY_NO_WCET_OR_HARD_DEADLINE_CLAIM",
+  "hardware_provenance_verified_by_checker": false,
+  "sha256": {
+    "c3_pilot_cases.csv": "9028ea8ac8ae0d6168e19007b296be82c31c2b3de20d7babf7e51a2411d40332",
+    "pilot_binding.json": "d54e1b0df7bbc34a8bb546d6df690afd790483c3744bc3b59d5cf407ba5d3899",
+    "c2_jtag_results.csv": "c3628c7017cc5958bf0d4bf264d14abbc12c4241024f3949303b0c7cc6e9b5b6",
+    "c2_jtag_results.json": "ea35752ecdd72972ccf1a93412924212d4bcac964b31f2a12c8c7f2244f7f0f2",
+    "c2_jtag_raw.log": "a05c6bb232243b6f0ce9a8ab803db30fd883d11ef12379b4da6d33a4014a1d50"
+  }
+}

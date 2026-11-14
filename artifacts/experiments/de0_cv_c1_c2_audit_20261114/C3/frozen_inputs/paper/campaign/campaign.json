@@ -1,0 +1,146 @@
+{
+  "schema": "rtnn-existing-method-campaign-v1",
+  "scope": "EXISTING_METHOD_ONLY",
+  "study_type": "FROZEN_MODEL_HARDWARE_REPLICATION_CASE_STUDY",
+  "model_seed": 63,
+  "model_id": 1381256782,
+  "expected_build_id": 1146499122,
+  "binding_id": 0,
+  "dataset_sha256": "e0d056846c19174ad5dbd5c88603b7877334e9d03d2be7c85d5b438a5193322f",
+  "q15_predictions_sha256": "03eb958cfa8b4fd2f71a95fb47dbca512820c237c281473817bba685b92c743e",
+  "dataset_file_sha256": "eeba9000a918bcba911007e78905c5052fc743422f95cb314a0fc9f4ecdfb14c",
+  "primary_sessions": 10,
+  "unique_accuracy_inputs": 360,
+  "prior_test_results_known": true,
+  "independent_new_generalization_claim": false,
+  "measurement_scope": "device_cycle_counter:admission_or_cap+NN+exit_heads+entropy+argmax;excludes_UART",
+  "batch_size": 1,
+  "fixed_baselines": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "primary_comparator": "fixed_exit_2_previously_observed_comparator_not_test_blind_selection",
+  "practical_mean_cycle_saving_fraction": 0.05,
+  "accuracy_noninferiority_margin_pp": 1.0,
+  "statistical_amendment": "2026-11-02_preboard_boot_aware",
+  "bootstrap": {
+    "seed": 63,
+    "samples": 5000,
+    "unit": "input_id; within-input mean over sessions",
+    "interval": "percentile_95; conditional_case_study_not_WCET",
+    "two_way": {
+      "unit": "input_id_x_cold_boot_session",
+      "seed_offset": 104729,
+      "minimum_boot_sessions": 3,
+      "required_for_speedup_claim": true,
+      "scope": "crossed_bootstrap_sensitivity_not_WCET"
+    }
+  },
+  "stopping_rule": "complete_all_planned_sessions;abort_on_integrity_or_functional_fault;no_early_positive_stop",
+  "schedules": [
+    {
+      "session_id": "diagnostic_fixed",
+      "matrix": "schedules/diagnostic_fixed.json",
+      "schedule_sha256": "576edecefe232a4cf619bf3f995223b8c26016fb9c8495f50c15e9cff6bee42b",
+      "record_count": 2520,
+      "purpose": "SECONDARY_DIAGNOSTIC"
+    },
+    {
+      "session_id": "diagnostic_adaptive",
+      "matrix": "schedules/diagnostic_adaptive.json",
+      "schedule_sha256": "8f3ab2f69217689114727b6b7fb4eae371e5cccae6e31adb3bc5d1fa8117ce20",
+      "record_count": 7560,
+      "purpose": "SECONDARY_DIAGNOSTIC"
+    },
+    {
+      "session_id": "diagnostic_capped",
+      "matrix": "schedules/diagnostic_capped.json",
+      "schedule_sha256": "f0a0ddae3e33ac6debdb1e6317a07c67331509b97cb86f1edbfe535432b65928",
+      "record_count": 7560,
+      "purpose": "SECONDARY_DIAGNOSTIC"
+    },
+    {
+      "session_id": "primary_01",
+      "matrix": "schedules/primary_01.json",
+      "schedule_sha256": "73d37a9bf03a263a01663f5bf2d74695b93493c0660309ac39ad9dba97b414c9",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_02",
+      "matrix": "schedules/primary_02.json",
+      "schedule_sha256": "e96669a29f4d188827daa1007ec1362b77b0c55869491abb1263680cd5c61118",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_03",
+      "matrix": "schedules/primary_03.json",
+      "schedule_sha256": "223873b4a126e03497e71dbcbf791079976bad854efc1b583d75645ab55df54b",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_04",
+      "matrix": "schedules/primary_04.json",
+      "schedule_sha256": "6d39de778ff9ecae838a430824194d4f9ee83a5416d3d2f2e2d1bd4dbd7e4196",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_05",
+      "matrix": "schedules/primary_05.json",
+      "schedule_sha256": "54a5e172d695cf3ba4bd38e378aac2e0a4743d0adcffcf29d4ab7aa45ef58365",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_06",
+      "matrix": "schedules/primary_06.json",
+      "schedule_sha256": "335958e0cde52b7c56fc50eb09d385f1f9ddff870e87991e74e72390567b9587",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_07",
+      "matrix": "schedules/primary_07.json",
+      "schedule_sha256": "b7f358e18ba9798722226656919a87a8d6615dad6c4e538c6a3c3b9a04ec582b",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_08",
+      "matrix": "schedules/primary_08.json",
+      "schedule_sha256": "3fb696eff4783ef4ff1d0f2186208501d1821cd233b05e675a2ff88b6d306fab",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_09",
+      "matrix": "schedules/primary_09.json",
+      "schedule_sha256": "738ff472ffa1a98547ce0ab89384439a071a79eda1dbb0292c425a372f15564a",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    },
+    {
+      "session_id": "primary_10",
+      "matrix": "schedules/primary_10.json",
+      "schedule_sha256": "db154943ab73fab850993cd4cfd76be922642b13d6f9bfa2b50b440128186022",
+      "record_count": 720,
+      "purpose": "PRIMARY_PAIRED"
+    }
+  ],
+  "prohibited_claims": [
+    "hard_WCET",
+    "GPU_results",
+    "time_feedback_learning",
+    "fresh_test_set",
+    "zero_misses_implies_guarantee"
+  ],
+  "campaign_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc"
+}

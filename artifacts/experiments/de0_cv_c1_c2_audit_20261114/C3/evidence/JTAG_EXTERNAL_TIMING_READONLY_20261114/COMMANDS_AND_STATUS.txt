@@ -1,0 +1,7 @@
+Quartus command: C:\altera_lite\25.1std\quartus\bin64\quartus_sh.exe --version
+Quartus cwd: C:\altera_lite\25.1std\quartus\bin64
+Quartus exit: 0
+JTAG command: C:\altera_lite\25.1std\quartus\bin64\jtagconfig.exe --getparam 1 JtagClock
+JTAG cwd: C:\altera_lite\25.1std\quartus\bin64
+JTAG exit: 4
+JTAG TCK result: parameter unavailable; no hardware setting changed.

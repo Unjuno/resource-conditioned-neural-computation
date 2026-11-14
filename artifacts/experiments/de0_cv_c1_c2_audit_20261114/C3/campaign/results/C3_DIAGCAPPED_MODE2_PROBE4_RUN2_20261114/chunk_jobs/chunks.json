@@ -1,0 +1,18 @@
+{
+  "schema": "rtnn-c3-campaign-chunks-v1",
+  "full_cases_sha256": "cb67999422c2c9d154dd1cc5d3392aa912fa4f5bb44c8e8fbd63be010bfdaf7c",
+  "full_row_count": 4,
+  "chunk_size": 1000,
+  "chunks": [
+    {
+      "index": 1,
+      "count": 4,
+      "first_seq": 1,
+      "last_seq": 4,
+      "sequences": "1,2,3,4",
+      "case_file": "chunk_0001/input/cases.csv",
+      "case_sha256": "cb67999422c2c9d154dd1cc5d3392aa912fa4f5bb44c8e8fbd63be010bfdaf7c",
+      "result_dir": "chunk_0001/results"
+    }
+  ]
+}

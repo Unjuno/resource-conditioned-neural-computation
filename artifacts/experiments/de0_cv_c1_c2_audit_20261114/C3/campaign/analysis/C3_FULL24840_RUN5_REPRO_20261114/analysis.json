@@ -1,0 +1,274 @@
+{
+  "accuracy_noninferiority": {
+    "adaptive_correct": 339,
+    "adaptive_minus_fixed2_percentage_points": 0.0,
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 63,
+    "decision": "INCONCLUSIVE",
+    "fixed2_correct": 339,
+    "independent_input_ids": 360,
+    "limitation": "Resampling unit is the 360 frozen independent input IDs; repeated hardware measurements are not counted as new inputs.",
+    "margin_percentage_points": 1.0,
+    "paired_input_bootstrap_95pct_ci_percentage_points": [
+      -1.3888888888888888,
+      1.3888888888888888
+    ],
+    "predictions_consistent_across_sessions": true
+  },
+  "campaign_canonical_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "campaign_file_sha256": "3d97a1cd87395e294299cacb617474367c89a9295355cd25fb1b4fa67464c936",
+  "formal_timing_gate": "BLOCKED_EXTERNAL_JTAG_IO_AND_UNCONSTRAINED_PATHS",
+  "input_count": 360,
+  "planned_rows": 24840,
+  "primary_paired_sessions": [
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_01"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_02"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_03"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_04"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_05"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_06"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_07"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_08"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_09"
+    },
+    {
+      "adaptive_faster_inputs": 263,
+      "adaptive_mean_cycles": 746322.9944444444,
+      "adaptive_slower_inputs": 97,
+      "fixed2_mean_cycles": 943924.7666666667,
+      "input_pairs": 360,
+      "mean_saving_cycles": 197601.77222222224,
+      "median_saving_cycles": 377974.0,
+      "session_id": "primary_10"
+    }
+  ],
+  "primary_paired_total": {
+    "bootstrap_replicates": 5000,
+    "bootstrap_seed": 63,
+    "bootstrap_unit": "input_id; mean over the 10 planned schedule sessions",
+    "input_bootstrap_95pct_ci_cycles": [
+      158616.4693055555,
+      235071.07263888879
+    ],
+    "input_bootstrap_95pct_ci_reduction_percent": [
+      16.803933644260166,
+      24.90358200042772
+    ],
+    "limitation": "Frozen plan requires at least 3 confirmed cold-boot sessions for a speedup claim; current logs do not confirm any independent board power cycle. This interval is conditional on the observed board power-session history.",
+    "mean_adaptive_cycles": 746322.9944444444,
+    "mean_fixed2_cycles": 943924.7666666667,
+    "mean_fixed2_minus_adaptive_cycles": 197601.7722222223,
+    "mean_reduction_percent_fixed2_denominator": 20.93405949290051,
+    "pairs": 3600,
+    "practical_5pct_ci_lower_bound_met": true,
+    "practical_5pct_point_threshold_met": true,
+    "speedup_claim_allowed": false,
+    "three_cold_boot_requirement_met": false
+  },
+  "run_manifest_sha256": {
+    "C3_DIAGADAPTIVE_FULL7560_RUN1_20261114": "1570eee702903843a72f3fa0ebccf1553acb69dc40a46a2646e18fefb99c6a2a",
+    "C3_DIAGCAPPED_FULL7560_RUN1_20261114": "6efd1315b3870d2bf5d58a05eb0544fd903be13af0bca8678e543b6fc66849e7",
+    "C3_DIAGFIXED_FULL2520_RUN1_20261114": "c1b9989d5755d0698acf7ea17f9576492acfe3a5d657a2fbd9f50c911b0cd7e4",
+    "C3_PRIMARY01_FULL720_RUN1_20261114": "5ef2a4bc4f3d27e725b291318123857087163a788ae0297be8526f6ad15d7df2",
+    "C3_PRIMARY02_FULL720_RUN1_20261114": "6cc59bf5f3d0ea3334bf843d87c29dafcfccadcd0a794a29409b6daa7565e1a8",
+    "C3_PRIMARY03_FULL720_RUN1_20261114": "346967c9200cca93197705f9a9d06c362247a3ffb2b55ad7054cfbf2b212b799",
+    "C3_PRIMARY04_FULL720_RUN1_20261114": "807eece383d059e4e08de612e418b5edeab2025c973b94e3acf5439d3dd580b3",
+    "C3_PRIMARY05_FULL720_RUN1_20261114": "1cbf48cd783aed1a81afbafd06eb87e15e4e0d40632a7478ca1081ca7b8a7885",
+    "C3_PRIMARY06_FULL720_RUN1_20261114": "77b1fcee615903a691b8f50610b9361929afffb7015efb49ebf3961bce40c420",
+    "C3_PRIMARY07_FULL720_RUN1_20261114": "71f26053934ad5296d667c8a1d86d4cd21bd742c59ced233141217f8c1334384",
+    "C3_PRIMARY08_FULL720_RUN1_20261114": "29fea7839fa9f28409b958665e1de4683ecc8b55eadd8fbbe24df82277263eea",
+    "C3_PRIMARY09_FULL720_RUN1_20261114": "29f3c22cba1401e1788e7e05a0e61a3635e759dd7b8587eec58da3d268b0e2bf",
+    "C3_PRIMARY10_FULL720_RUN1_20261114": "540663d26c7f5dda0a0e874b85d8bd9807d700a886cd3f96186f073924f43126"
+  },
+  "schedule_count": 13,
+  "schema": "rtnn-c3-campaign-analysis-v1",
+  "sessions": [
+    {
+      "board_power_session_id": "UNRECORDED",
+      "cold_boot_confirmed": false,
+      "rows": 2520,
+      "run_manifest_sha256": "c1b9989d5755d0698acf7ea17f9576492acfe3a5d657a2fbd9f50c911b0cd7e4",
+      "session_id": "diagnostic_fixed",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "UNRECORDED",
+      "cold_boot_confirmed": false,
+      "rows": 7560,
+      "run_manifest_sha256": "1570eee702903843a72f3fa0ebccf1553acb69dc40a46a2646e18fefb99c6a2a",
+      "session_id": "diagnostic_adaptive",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "UNRECORDED",
+      "cold_boot_confirmed": false,
+      "rows": 7560,
+      "run_manifest_sha256": "6efd1315b3870d2bf5d58a05eb0544fd903be13af0bca8678e543b6fc66849e7",
+      "session_id": "diagnostic_capped",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "UNRECORDED",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "5ef2a4bc4f3d27e725b291318123857087163a788ae0297be8526f6ad15d7df2",
+      "session_id": "primary_01",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "6cc59bf5f3d0ea3334bf843d87c29dafcfccadcd0a794a29409b6daa7565e1a8",
+      "session_id": "primary_02",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "346967c9200cca93197705f9a9d06c362247a3ffb2b55ad7054cfbf2b212b799",
+      "session_id": "primary_03",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "807eece383d059e4e08de612e418b5edeab2025c973b94e3acf5439d3dd580b3",
+      "session_id": "primary_04",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "1cbf48cd783aed1a81afbafd06eb87e15e4e0d40632a7478ca1081ca7b8a7885",
+      "session_id": "primary_05",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "77b1fcee615903a691b8f50610b9361929afffb7015efb49ebf3961bce40c420",
+      "session_id": "primary_06",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "71f26053934ad5296d667c8a1d86d4cd21bd742c59ced233141217f8c1334384",
+      "session_id": "primary_07",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "29fea7839fa9f28409b958665e1de4683ecc8b55eadd8fbbe24df82277263eea",
+      "session_id": "primary_08",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "29f3c22cba1401e1788e7e05a0e61a3635e759dd7b8587eec58da3d268b0e2bf",
+      "session_id": "primary_09",
+      "status": "PASS_EMPIRICAL_SESSION"
+    },
+    {
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false,
+      "rows": 720,
+      "run_manifest_sha256": "540663d26c7f5dda0a0e874b85d8bd9807d700a886cd3f96186f073924f43126",
+      "session_id": "primary_10",
+      "status": "PASS_EMPIRICAL_SESSION"
+    }
+  ],
+  "status": "PASS_DATA_INTEGRITY_EMPIRICAL_ONLY",
+  "validated_rows": 24840,
+  "wcet_or_hard_deadline_claimed": false
+}

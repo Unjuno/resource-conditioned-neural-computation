@@ -1,0 +1,15 @@
+# C3 Tool and Warning Audit
+Date: 2026-11-14 JST
+Repository branch: codex/stage-c3-jtag-pilot-20261114
+Quartus Prime Lite 25.1std.0 Build 1129 (quartus_sh --version, exit 0)
+Python 3.11.9 (analysis generator)
+Working directories: repository root for PowerShell runner; C:\altera_lite\25.1std\quartus\bin64 for quartus_stp_tcl and jtagconfig.
+
+quartus_stp_tcl logs scanned: 30
+All parsed summaries report 0 errors, 0 warnings: True
+Nonzero error/warning summaries: 0
+Each run directory retains its individual quartus_stp_tcl.log and run_manifest.json. The C2 Fitter/STA/Design Assistant findings remain separately classified in SOURCE_AND_JTAG_TIMING_AUDIT_JA.md; these STP script summaries do not establish timing signoff.
+
+Quartus version command: C:\altera_lite\25.1std\quartus\bin64\quartus_sh.exe --version; cwd=C:\altera_lite\25.1std\quartus\bin64; exit=0.
+TCK query command: C:\altera_lite\25.1std\quartus\bin64\jtagconfig.exe --getparam 1 JtagClock; cwd=C:\altera_lite\25.1std\quartus\bin64; exit=4; output=No parameter named JtagClock; no configuration change.
+Analysis source SHA-256: 4fa83d11b1494cc9be2d53850b516b407f937cfbfe877c5d0b1584f2546d3248

@@ -1,0 +1,4 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Quartus Prime Shell
+Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+Copyright (C) 2025  Altera Corporation. All rights reserved.

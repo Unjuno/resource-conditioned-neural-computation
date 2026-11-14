@@ -1,0 +1,14 @@
+{
+  "status": "NATIVE_Q15_FIRMWARE_MATCHES_PINNED_MODEL",
+  "fixed_cases": 2520,
+  "adaptive_cases": 7560,
+  "prediction_mismatches": 0,
+  "executed_exit_mismatches": 0,
+  "stop_reason_mismatches": 0,
+  "budget_cap_violations": 0,
+  "status_errors": 0,
+  "q15_predictions_sha256": "03eb958cfa8b4fd2f71a95fb47dbca512820c237c281473817bba685b92c743e",
+  "host_csv_sha256": "1f9b08987a9d7368b663f604eb1dce6e077073e099552532468509c846d6bdc8",
+  "real_fpga_claimed": false,
+  "timing_claim": "FORBIDDEN: native fake clock callback"
+}
