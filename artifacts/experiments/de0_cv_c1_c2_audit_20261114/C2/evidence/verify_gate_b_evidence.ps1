@@ -97,6 +97,37 @@ $ucpOk = $ucp.Contains('Unconstrained Input Ports       ; 2') -and
 $checks['unconstrained_external_paths_retained'] = $ucpOk
 if (-not $ucpOk) { $failures.Add('EXPECTED_UNCONSTRAINED_PORTS_NOT_FOUND') }
 
+$qsfText = Get-Content -Raw -LiteralPath (Join-Path $c2 'rtnn_c2.qsf')
+$warningReview = Get-Content -Raw -LiteralPath (Join-Path $c2 'QUARTUS_WARNING_REVIEW_JA.md')
+$outputPathRows = @($ucp -split '\r?\n' | Where-Object { $_ -match 'Unconstrained Output Port Paths|heartbeat_q\[25\]|jtag_response_commit_o|bus_fault_o|altera_internal_jtag~FF_13|altera_reserved_tdo' })
+$indicatorRowsOk =
+    (($outputPathRows | Where-Object { $_ -match 'heartbeat_q\[25\].*LEDR\[0\]' }).Count -eq 2) -and
+    (($outputPathRows | Where-Object { $_ -match 'jtag_response_commit_o.*LEDR\[1\]' }).Count -eq 2) -and
+    (($outputPathRows | Where-Object { $_ -match 'bus_fault_o.*LEDR\[3\]' }).Count -eq 2) -and
+    $warningReview.Contains('LEDR[2]` stuck at GND')
+$ledElectricalAssignmentsOk = $true
+foreach ($led in @(
+    @{ Index = 0; Pin = 'PIN_AA2' },
+    @{ Index = 1; Pin = 'PIN_AA1' },
+    @{ Index = 2; Pin = 'PIN_W2' },
+    @{ Index = 3; Pin = 'PIN_Y3' }
+)) {
+    $pinLine = "set_location_assignment $($led.Pin) -to LEDR[$($led.Index)]"
+    $standardLine = 'set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LEDR[' + $led.Index + ']'
+    if (-not $qsfText.Contains($pinLine) -or -not $qsfText.Contains($standardLine)) {
+        $ledElectricalAssignmentsOk = $false
+    }
+}
+$checks['user_indicator_paths_and_board_assignments_classified'] = $indicatorRowsOk -and $ledElectricalAssignmentsOk
+if (-not $checks['user_indicator_paths_and_board_assignments_classified']) {
+    $failures.Add('USER_INDICATOR_PATH_OR_PIN_ASSIGNMENT_CLASSIFICATION_FAILED')
+}
+$checks['user_indicator_drive_slew_warning_retained'] = $warningReview.Contains('15714') -and
+    $warningReview.Contains('drive-strength and slew-rate assignments')
+if (-not $checks['user_indicator_drive_slew_warning_retained']) {
+    $failures.Add('EXPECTED_LED_DRIVE_SLEW_WARNING_DISPOSITION_NOT_FOUND')
+}
+
 $manifestPath = Join-Path $research 'jtag_interface_requirement_20261113\SHA256SUMS.txt'
 $manifestHashExpected = 'f0b558dea10db382fa4728f55eb44fac469201041c04a7fe202633a49d1f400b'
 $manifestHashActual = (Get-FileHash -Algorithm SHA256 -LiteralPath $manifestPath).Hash.ToLowerInvariant()
@@ -145,6 +176,11 @@ $result = [ordered]@{
     quartusManifestEntriesChecked = $quartusManifestEntries
     maxSkewInterpretation = 'NOT_EVALUATED: Quartus report says Nothing to report.'
     asyncClockGroupCutDetected = $effectiveClockGroupCut
+    unconstrainedIoDisposition = [ordered]@{
+        jtag = 'BLOCKING: board-specific TDI/TMS input and TDO receiver timing are unavailable.'
+        userLeds = 'Non-synchronous human-visible status outputs; no external capture clock/receiver is specified. QSF pin and 3.3-V LVTTL assignments verified.'
+        ledDriveSlew = 'Warning 15714 retained; drive-strength and slew-rate assignments remain unspecified.'
+    }
     checks = $checks
     failures = @($failures)
     status = if ($failures.Count -eq 0) { 'PASS_SAVED_EVIDENCE_INTEGRITY_AND_INTERNAL_CDC_RECORDS' } else { 'FAIL' }

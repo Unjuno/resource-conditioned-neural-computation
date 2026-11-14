@@ -85,6 +85,20 @@ build-id `43324a32` のexact flat RTLでは、request toggleをTCKから2段sys�
 
 exact-node STAのunconstrained summaryは、input 2 ports / 41 paths（`altera_reserved_tdi`, `altera_reserved_tms`）、output 4 ports / 8 paths（`LEDR[0]`, `LEDR[1]`, `LEDR[3]`, `altera_reserved_tdo`）を示す。LEDRは人が見るstatus出力で同期capture endpointは提示されていないが、I/O electrical assignment warningは残る。JTAG TDI/TMS/TDOは基板内USB-Blaster/FPGA間の外部遅延・受信条件が不明であり、未制約のまま正当なboard-level timing signoffとは言えない。
 
+### LED出力とJTAG I/Oの個別分類
+
+Unconstrained-path reportはsetup/holdの各節に同じ出力経路を1回ずつ載せる。ソース名とtop wrapper / QSFを照合すると、3本のLED pathはFPGA内状態を人が目視する表示であり、外部の同期receiverやcapture clockは仕様されていない。従ってLEDには外部同期インターフェースとしての`set_output_delay`を設定せず、Timing Analyzerのunconstrained timing endpointから除外する。ただしI/Oの電気的警告まで解決した意味ではない。
+
+| 出力 | Quartus source / top-level信号 | 用途とSTA分類 | QSFの割当 |
+|---|---|---|---|
+| `LEDR[0]` | `heartbeat_q[25]` | 50 MHz heartbeatを目視表示。外部同期captureなし。タイミング例外は追加しない。| `PIN_AA2`, `3.3-V LVTTL` |
+| `LEDR[1]` | `jtag_response_commit_o` → `response_commit` | 応答commit状態を目視表示。外部同期captureなし。タイミング例外は追加しない。| `PIN_AA1`, `3.3-V LVTTL` |
+| `LEDR[2]` | `halted` | Quartus Fitter warning 13024/13410でGND stuckと記録。遷移する外部pathはない。| `PIN_W2`, `3.3-V LVTTL` |
+| `LEDR[3]` | `bus_fault_o` → `bus_fault` | bus fault状態を目視表示。外部同期captureなし。タイミング例外は追加しない。| `PIN_Y3`, `3.3-V LVTTL` |
+| `altera_reserved_tdo` | SLD hub/JTAG shift path | USB-Blaster側の受信edge/setup/hold条件不明。外部JTAG I/O timingとしてBLOCKED。| FPGA専用JTAG経路 |
+
+QSFには全4 LEDのpin locationと`3.3-V LVTTL`がある。一方、warning 15714は`LEDR[0..3]`のdrive-strengthとslew-rateが未指定と報告する。負荷/電流・立上り条件を裏付ける値はなく、推測のassignmentを足さず、電気的I/O review warningとして未解消のまま保持する。`verify_gate_b_evidence.ps1`は各LEDのsource/end point、QSF pin/standard、stuck-at-GND記録、15714 dispositionを個別に照合する。
+
 Terasic DE0-CV回路図はオンボードUSB-Blaster経路にFT245BL U5、MAX II EPM240T100 U13を示すが、CPLD logic image、実搭載speed suffix、PCB上のTCK/data相対遅延・負荷を示さない。一般USB-Blaster I/IIの数値をこの基板のFT245/EPM240経路へ流用しない。Quartus内の `altera_reserved_tck` 30 MHzはSLD hubのモデル値であり、実ボードで測定したTCK値ではない。
 
 quartus資料のJTAG cookbookは、JTAG pathがunconstrainedとして報告され得ることと、TCK/TMS/TDI/TDOの制約値を対象chain/cable構成に応じて決める例を示す。Cyclone V FPGAのdedicated JTAG pin電気・タイミング要件だけでは、ボード上CPLDからFPGAへ届く相対遅延とCPLD側TDO capture要件を確定できない。保存されたFPGA pin窓（TDI -15.682～+4.747 ns、TMS -15.989～+3.325 ns）はfalling-edge launch仮定かつ0-delay STA baselineから逆算した必要条件で、board delayの実測値ではない。TDO output delayも未確定である。
@@ -118,6 +132,12 @@ Gate Bを解除する残項目は、対象board revisionのオンボードUSB-Bl
 * 新規証拠コピー: 誤った旧worktree側の調査フォルダを読み取り専用で参照し、PowerShell `Copy-Item` で67ファイルだけ複製。内側SHA manifest検証: 63件、mismatch 0、終了コード0。
 * 公式仕様の再確認: Altera documentation web search（2026-11-14 JST）。参照先は下記。
 * Quartus再実行、基板書込み、Flash/CFM操作、commit、push、PR、mergeは行っていない。
+
+### 2026-11-14 unconstrained LED/JTAG I/O再分類
+
+保存済みunconstrained reportをsetup/hold各節と照合し、`LEDR[0]`=`heartbeat_q[25]`、`LEDR[1]`=`jtag_response_commit_o`、`LEDR[3]`=`bus_fault_o`の3つのsource/end-pointを特定した。いずれも人が目視するstatus LEDで、外部同期receiver/capture clockがない。`LEDR[2]`は保存済みwarning inventoryのstuck-at-GND指摘と一致する。4本のpin locationと`3.3-V LVTTL`をQSFで確認した。従ってLEDは外部同期出力delay対象から除外する根拠を記録したが、Warning 15714のdrive-strength/slew未指定は電気的I/O warningとして残した。JTAG TDI/TMS/TDOは引き続きboard-specific timing未確定でGate B blocker。
+
+再現コマンド（cwd: repository root、Windows PowerShell）: `& "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/verify_gate_b_evidence.ps1"`。結果JSONは`gate_b_evidence_recheck_20261114_rerun.json`、全チェックtrue・failures空・status `PASS_SAVED_EVIDENCE_INTEGRITY_AND_INTERNAL_CDC_RECORDS`。分類検査の初回失敗は `user_indicator_classification_initial_failure.json` と `.exitcode.txt` に保存した。setup/hold欄が経路を2度列挙する形式と、warning review上のLED名を引用符込みで扱う必要があり、正規条件に修正した。別PowerShell child processからの起動はexecution policyによりexit 1となったため、そのログを保存し、実行ポリシーは変更せず現在のshellから再実行した。
 
 ## 参照資料
 

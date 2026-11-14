@@ -6,6 +6,11 @@
   "quartusManifestEntriesChecked": 59,
   "maxSkewInterpretation": "NOT_EVALUATED: Quartus report says Nothing to report.",
   "asyncClockGroupCutDetected": true,
+  "unconstrainedIoDisposition": {
+    "jtag": "BLOCKING: board-specific TDI/TMS input and TDO receiver timing are unavailable.",
+    "userLeds": "Non-synchronous human-visible status outputs; no external capture clock/receiver is specified. QSF pin and 3.3-V LVTTL assignments verified.",
+    "ledDriveSlew": "Warning 15714 retained; drive-strength and slew-rate assignments remain unspecified."
+  },
   "checks": {
     "sha256:quartus_d101\\rtnn_c2.qsf": true,
     "sha256:quartus_d101\\rtnn_de0_cv_c2.sdc": true,
@@ -17,6 +22,8 @@
     "raw_mtbf_uncalculated_fraction_recorded": true,
     "four_corner_max_skew_reports_empty_not_pass": true,
     "unconstrained_external_paths_retained": true,
+    "user_indicator_paths_and_board_assignments_classified": true,
+    "user_indicator_drive_slew_warning_retained": true,
     "copied_inner_manifest_sha256": true,
     "copied_inner_manifest_entries": true,
     "quartus_d101_manifest_entry_count": true
