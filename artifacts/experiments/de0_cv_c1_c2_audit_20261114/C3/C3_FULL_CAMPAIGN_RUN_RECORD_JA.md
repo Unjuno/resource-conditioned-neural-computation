@@ -59,9 +59,9 @@ SOF、flat RTL、QSF/SDC、source graph、ELF、RAM lane和JTAGの履歴照合�
 | 削減率の95% input-bootstrap CI | [16.804%, 24.904%] |
 | 事前設定5% point / CI下限 | 両方満たす（条件付き） |
 
-ただしrun manifestには3つ以上の**確認済み独立cold boot**が記録されていない。primary_02–10は`POWER_SESSION_UNCONFIRMED_20261114`, `cold_boot_confirmed=false`として保存した。primary_01と診断runにはpower session記録がない。よって凍結planで速度主張に必須の3 boot two-way bootstrapは成立せず、上記区間は実測したpower historyに条件付けた記述値に限る。**速度優位は主張しない。**
+ただしrun manifestには3つ以上の**確認済み独立cold boot**が記録されていない。primary_02–10は`POWER_SESSION_UNCONFIRMED_20261114`, `cold_boot_confirmed=false`として保存した。primary_01の後続3 replayは各720行の実測データとして追加保存したが、後述の通りUSB-Blaster USB-Bを残したままのDC電源操作であり、独立cold bootと認定できない。よって凍結planで速度主張に必須の3 boot two-way bootstrapは成立していない。上記区間は実測power sessionに条件付けた記述値に限り、**速度優位は主張しない。**
 
-ユーザーは追加のcold bootを実施できると回答した。今回のprimary_02–10をcold bootとして後付け分類せず、条件を満たす場合はprimary_01/02/03の凍結case列を使った追加replayを新experiment IDで作る。既存13 scheduleの行や結果を上書き・変更しない。cold boot後は揮発SOFが失われるため、同一SOF SHAを照合してFPGA SRAMだけに設定し、Flash/CFMへ書かない。追加replayとtwo-way再解析はこの記録時点では未実施。
+ユーザーは追加の電源サイクルを実施できると回答した。primary_01の凍結case列を3つの新experiment IDでreplayし、各720件を保存した。既存13 scheduleの行や結果は上書き・変更していない。各run内の結果・SOF/build/input/schedule identity監査はPASSだが、物理電源断の成立は後述の補正によりUNCERTAIN。これらを独立cold boot条件としてtwo-way bootstrapの根拠にしない。
 
 分類精度はadaptive 339/360、fixed Exit 2も339/360。適応−固定差は0.000 percentage pointsだが、360入力を単位としたpaired 95% bootstrap区間は−1.389から+1.389 pointsで、事前の1-point非劣性幅を確立できない。判定は**INCONCLUSIVE**。反復scheduleは独立評価入力数を増やしていない。
 
@@ -91,14 +91,16 @@ No false path was added, no timing requirement relaxed, and no hard-deadline/WCE
 
 次の統計速度ゲートには、追跡可能な少なくとも3 independent board power-session IDを含む計画済み再測定が必要である。タイミング保証には対象実機CableのTCKおよび外部経路遅延、I/O制約と全path signoffが別途必要となる。
 
-## 追補：primary_01 3独立cold-boot感度再測定（2026-11-14）
+## 追補：primary_01 3電源サイクルreplay（2026-11-14）
 
-凍結された`primary_01` 720条件を、3回の確認済み電源off/on後に同一のC2J2 SOFで再測定した。experiment IDは`C3_PRIMARY01_COLD_BOOT_REPLAY01/02/03_20261114`、board power session IDは`C3_BOOT01/02/03_20261114`。各回のJTAG IDCODEは`02B050DD`、design hashは`DF2731CF973C3275CFE6`、SOF SHA-256は`5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6`。設定はFPGA SRAMのみで、Flash/CFMに書込みなし。全回でユーザーが基板LED全消灯と電源再投入を確認した。10秒以上の待ち時間は依頼したがCodex側で独立計時していない。
+凍結された`primary_01` 720条件を、ユーザー確認による3回のDC電源off/on後に同一のC2J2 SOFで再測定した。experiment IDは`C3_PRIMARY01_COLD_BOOT_REPLAY01/02/03_20261114`、board power session IDは`C3_BOOT01/02/03_20261114`。各runのJTAG IDCODEは`02B050DD`、design hashは`DF2731CF973C3275CFE6`、SOF SHA-256は`5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6`。各runの前にSRAMへ同じSOFを設定し、Flash/CFMへの書込みは行っていない。全回でユーザーは基板LED全消灯と電源再投入を確認した。10秒以上の待ち時間は依頼したがCodex側で独立計時していない。
+
+**電源サイクルの解釈補正：** 当時の指示ではUSB-Blaster USB-Bを接続したままDC電源だけを切った。Terasic配布System CD内の電源回路図Sheet 16では`VCC5_USB`が基板の保護5V電源網に入る。USB-Bを接続した状態では、LED消灯だけでFPGAの全電源railが落ちたとは確認できない。また本追補後、ユーザーが報告した3回目のDC再投入後に読み取り専用`jtagconfig -n`を実行すると、SOF書込み操作をしていないにもかかわらず同じdesign hashとVirtual JTAG nodeが見えた。前の`BOOT03` pre-programログではdevice IDCODEだけでVirtual JTAG nodeは記録されておらず、状態に食い違いがある。完全な電源断の有無、起動時の不揮発構成、外部USB電源の影響を確定できない。従って、runごとの2,160行と入力×3 session bootstrapの**数値再現性**は保持するが、session群を「3独立cold boot」とみなす解釈は**UNCERTAIN**に訂正する。速度主張に必要な3 independent cold boot条件を満たしたとは扱わない。証拠とコマンドは`C3/evidence/physical_post_coldboot3_readonly_20261114/RUN_RECORD_JA.md`および`C3/evidence/cold_boot_replays/`。
 
 各回720/720件を監査PASS。合計2,160行、360独立input ID、各bootの固定2/adaptive pairは360組。予測とExitは全bootで入力ごとに一貫。timeout、trap、CRC/identity fault、cycle invalid、Q15予測/Exit不一致は0。測定は`EMPIRICAL_ONLY`であり、STA/WCET/hard deadline保証を意味しない。
 
-5,000回のinput×boot crossed bootstrap（input seed 63、boot seed 104729）では、固定2−adaptiveの平均差197,601.77 cycles、95% CI [158,616.47,235,071.07]。固定2比の平均削減率20.934%、95% CI [16.804%,24.904%]。この結果はprimary_01だけの補足cold-boot感度解析で、13 schedule全体のcold-boot反復ではない。主キャンペーンの24,840 planned rowsは変更していない。分類精度は固定2/adaptiveとも339/360で、paired差0.000 percentage point、独立360入力bootstrap 95% CI [−1.389,+1.389] pp。事前の1 pp非劣性条件は引き続きINCONCLUSIVEであり、速度差だけを分類品質の維持と合わせて主張しない。
+5,000回のinput×session crossed bootstrap（input seed 63、session seed 104729）では、固定2−adaptiveの平均差197,601.77 cycles、95% CI [158,616.47,235,071.07]。固定2比の平均削減率20.934%、95% CI [16.804%,24.904%]。数値はprimary_01の3 replay sessionに対する補足記述解析で、13 schedule全体の再測定ではない。cold-boot独立性は未確認なのでcold-boot感度とは解釈しない。主キャンペーンの24,840 planned rowsは変更していない。分類精度は固定2/adaptiveとも339/360で、paired差0.000 percentage point、独立360入力bootstrap 95% CI [−1.389,+1.389] pp。事前の1 pp非劣性条件は引き続きINCONCLUSIVEであり、速度差だけを分類品質の維持と合わせて主張しない。
 
 解析コード：`C3/source/analyze_c3_coldboot_replays.py`。決定論的解析出力は`C3/campaign/analysis/C3_PRIMARY01_3COLD_BOOT_SENSITIVITY_RERUN3_20261114/`と`...RERUN4_20261114/`。後者は重複・欠落seq、実験/SOF identity、reference-label alignmentの追加検査後の結果。補正経緯は`C3/campaign/analysis/C3_COLD_BOOT_ANALYSIS_CORRECTION_NOTE_20261114/CORRECTION.md`、bootごとの物理操作/JTAG証拠は`C3/evidence/cold_boot_replays/`。各回の全raw CSV/JSON・manifest・監査は該当する`C3/campaign/results/C3_PRIMARY01_COLD_BOOT_REPLAY*_20261114/`。
 
-補足：初期の作業計画にある「最低3 cold boot未達」は本追試前の状態だった。今回のprimary_01に限る3 boot測定でboot数条件を満たしたが、キャンペーン全13 scheduleを3 bootで再測定したわけではない。従って全campaignのcold-boot感度を証明したとはしない。
+補足：primary_01の3 replay sessionは各720件の有効な測定を持つが、USB-Bを残した電源操作と最新のJTAG状態の食い違いのため、独立cold bootとしてのboot数条件を満たしたとは認定しない。全campaignのcold-boot感度も未証明である。

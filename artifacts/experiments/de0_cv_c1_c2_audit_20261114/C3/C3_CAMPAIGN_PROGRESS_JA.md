@@ -15,14 +15,14 @@
 | mode 2 capped probe | PASS_EMPIRICAL | frozen seq1–4の部分probe成功。24,840行へは加算しない。 |
 | 13全schedule実機測定 | PASS_EMPIRICAL_DATA | 24,840/24,840行、13/13 runと独立監査PASS。prediction/Exit/cap/CRC/ID/timeout違反0、全件cycle有効。UART未使用、Flash/CFM未書込み。 |
 | 経験的対応比較 | PASS_DESCRIPTIVE_ONLY | 3,600 paired primary observations。条件付きcycle差は+197,601.77 cycles、95% input bootstrap CI [158,616.47, 235,071.07]。削減率20.934%、95% CI [16.804%,24.904%]。 |
-| primary_01 cold-boot追試 | PASS_EMPIRICAL | 3回のユーザー確認済み電源断・再投入後、同一SOFをSRAMへ再設定。primary_01を3 boot各720件、計2,160件再測定。boot ID・SOF/build/input/schedule・全応答を照合。 |
-| cold-boot交差cycle解析 | PASS_EMPIRICAL | input×3 bootの5,000回 crossed bootstrapで固定2−適応差197,601.77 cycles、95% CI [158,616.47,235,071.07]。削減率20.934%、95% CI [16.804%,24.904%]。primary_01に限定された補足感度解析であり、13 schedule全体のboot再現試験ではない。 |
+| primary_01 3電源サイクル追試 | PASS_EMPIRICAL_DATA / UNCERTAIN_COLD_BOOT | 凍結caseを各720件、計2,160件測定し、run単位の結果監査はPASS。だが電源断中もUSB-Blaster USB-Bを接続したままで、FPGA railが実際に落ちた証拠がない。3つの独立cold bootとは確認できない。 |
+| 3セッション交差cycle解析 | PASS_NUMERIC_REPRODUCIBILITY / UNCERTAIN_INDEPENDENCE | 5,000回 crossed bootstrapの数値は再現。ただしpower sessionの独立cold boot性が未確認のため、cold-boot感度・独立boot変動の結論はUNCERTAIN。 |
 | accuracy非劣性（1 pp margin） | INCONCLUSIVE | 360独立入力で固定2/adaptiveとも339/360。対応差0.000 pp、95% CI [−1.389,+1.389] pp。測定反復を標本数に加えず、1 pp非劣性は確立していない。 |
 | 内部STA/CDC記録 | PASS_LIMITED | C2 exact-dispositionの4-corner slackは正。request/response pathは限定範囲で確認。完全board timing signoffを意味しない。 |
 | 外部JTAG/全board timing signoff | BLOCKED | 公式device端点spec取得済み。対象board/cable path delayと実TCK不明、Quartus未制約I/Oも残る。 |
 | WCET/hard deadline | NOT_ESTABLISHED | 実測cycleから時間上界またはdeadline保証を推定していない。 |
 
-3 cold-boot replayのexperiment IDは`C3_PRIMARY01_COLD_BOOT_REPLAY01/02/03_20261114`。ユーザーが各回でLED全消灯と電源再投入を確認。10秒待機は依頼したが実測タイマーで検証していない。毎回JTAG IDCODE `02B050DD`、SOF SHA `5aa5be2e…`、設計hash `DF2731CF973C3275CFE6`を照合し、FPGA SRAMだけに設定。Flash/CFMは未変更。証拠は`evidence/cold_boot_replays/`、run結果は`campaign/results/`、2,160行の結合データと解析は`campaign/analysis/C3_PRIMARY01_3COLD_BOOT_SENSITIVITY_RERUN4_20261114/`。RERUN3とRERUN4の決定論的結果・manifestを比較する。
+3つのprimary_01 replay experiment IDは`C3_PRIMARY01_COLD_BOOT_REPLAY01/02/03_20261114`。各回720件のデータと監査は保存済みで、ユーザーはDC電源のoff/onとLED全消灯を確認した。一方、指示によりUSB-Blaster USB-Bを接続したままだった。DE0-CV回路図ではUSB VBUS (`VCC5_USB`) も基板の5V電源網へ入るため、この操作だけではFPGA railの完全な電源断を確認できない。さらに今回の3回目のDC再投入後に読み取り専用`jtagconfig -n`でVirtual JTAG nodeとdesign hashが見えた。現象の原因（完全な電源断後の不揮発起動か、railが維持されたか）は未確定。したがってこれらは**確認済み3独立cold boot**として扱わず、3つの電源サイクルセッションに条件付けた経験値とする。10秒待機も独立計時していない。保存済みの2,160行とbootstrap数値は変更せず、cold-boot独立性に関する推論はUNCERTAINへ訂正する。詳細は`evidence/physical_post_coldboot3_readonly_20261114/RUN_RECORD_JA.md`。
 
 完全な値、全13 run ID、入力/結果SHA、コマンド、解析定義は[`C3_FULL_CAMPAIGN_RUN_RECORD_JA.md`](C3_FULL_CAMPAIGN_RUN_RECORD_JA.md)。解析CSV/JSONは`campaign/analysis/C3_FULL24840_RUN4_FINAL_20261114/`。独立再集計RUN5のSHA manifestはRUN4と一致した。
 
@@ -50,4 +50,4 @@ C2の保存済みQuartus入力（QSF/SDC/flat RTL/board top/global buffer/4 RAM 
 
 ### 3回目の電源再投入後のJTAG読取り（2026-11-14）
 
-ユーザー確認後、変更操作をせず`jtagconfig -n`を実行。USB-BlasterとIDCODE `02B050DD`に加え、Virtual JTAG node `00406E00`とdesign hash `DF2731CF973C3275CFE6`が見えた。接続とデザイン識別子の読取りはPASS。ただしこの情報だけでは、FPGAがSRAMから動作中か、電源投入時に不揮発設定から自動構成されたかを判別できない。cold-boot後の構成元はUNCERTAINとして、SRAM保持やFlash未変更の新たな証拠には使わない。詳細は`evidence/physical_post_coldboot3_readonly_20261114/RUN_RECORD_JA.md`。Quartus起動時のTBBmalloc警告も同記録に残した。
+ユーザー確認後、変更操作をせず`jtagconfig -n`を実行。USB-BlasterとIDCODE `02B050DD`に加え、Virtual JTAG node `00406E00`とdesign hash `DF2731CF973C3275CFE6`が見えた。接続とデザイン識別子の読取りはPASS。ただし直前のDC off/onではUSB-Bを接続したままであり、Terasicの配布回路図はUSB VBUS (`VCC5_USB`) を基板5V電源回路へ接続している。このJTAG照会だけでは完全なFPGA rail電源断の有無や構成元を判別できない。cold-boot独立性はUNCERTAINとして、SRAM保持やFlash未変更の新証拠には使わない。詳細は`evidence/physical_post_coldboot3_readonly_20261114/RUN_RECORD_JA.md`。Quartus起動時のTBBmalloc警告も同記録に残した。
