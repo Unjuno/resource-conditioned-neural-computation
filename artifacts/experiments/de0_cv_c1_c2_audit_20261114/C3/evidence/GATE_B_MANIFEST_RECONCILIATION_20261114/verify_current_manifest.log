@@ -1,0 +1,6 @@
+$ pwsh -NoProfile -File verify_current_manifest.ps1
+
+matched   : 120
+missing   : 0
+mismatch  : 0
+malformed : 0
