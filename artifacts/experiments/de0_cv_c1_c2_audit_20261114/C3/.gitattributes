@@ -1,2 +1,8 @@
 * -text
 **/* -text
+C3_SHA256SUMS.txt whitespace=cr-at-eol
+evidence/GATE_B_EXACT_REBUILD_20261114/*.log whitespace=cr-at-eol
+evidence/GATE_B_EXACT_REBUILD_20261114/*.rpt whitespace=cr-at-eol
+evidence/GATE_B_EXACT_REBUILD_20261114/*.summary whitespace=cr-at-eol
+evidence/GATE_B_EXACT_REBUILD_20261114/*.txt whitespace=cr-at-eol
+evidence/GATE_B_EXACT_REBUILD_20261114/*.exitcode whitespace=cr-at-eol

@@ -41,3 +41,9 @@ Quartus Prime Lite 25.1std.0 Build 1129で`jtagconfig --getparam 1 JtagClock`は
 * `python C3/source/analyze_c3_campaign.py --c3-root C3 --out-dir C3/campaign/analysis/<new-run-id>` — 凍結campaign、run監査、全データSHAを再検査しCSV/JSONを作る。
 
 失敗した準備・分割試行のログは個別のrun directoryに残す。途中失敗のデータをplanned rowへ算入しない。経験的実測、内部STA、board timing保証、統計速度判定は別ゲートで報告する。
+
+### Gate B 再ビルド監査（2026-11-14）
+
+C2の保存済みQuartus入力（QSF/SDC/flat RTL/board top/global buffer/4 RAM lane、各SHA一致）をDドライブの隔離作業領域でQuartus Prime Lite 25.1std.0 Build 1129に再投入した。フルcompile exit 0、Fitter成功、全4コーナーの内部CLOCK_50 setup/hold slackは正、Design Assistantの局所D101処置監査は801件を照合してPASS。request 800/800・response 384/384の保持バス経路も既存net-delay上限内だった。
+
+一方、Timing Analyzerはsetup/holdがfully constrainedではないと再報告し、TDI/TMS入力2ポート・41 path、TDO/LEDR出力4ポート・8 pathが未制約。max-skew reportは全cornerでpathなし。再生成SOF SHA `995633cf…` は実機で測定した旧SOF `5aa5be2e…` と一致せず、候補SOFは実機へ書いていない。したがってGate BはBLOCKED、当該再生成SOFのGate C/DはNOT_RUN。詳細なコマンド、warning分類、全reportとSHAは`evidence/GATE_B_EXACT_REBUILD_20261114/`。
