@@ -44,8 +44,8 @@
   "limitations": [
     "The reported difference is a protocol-envelope comparison, not STA setup slack.",
     "The comparison omits clock-to-Q, destination setup, clock uncertainty, and measured board TCK envelope.",
-    "Response source stability before snapshot depends on firmware not rewriting response words before host consume; firmware C source is absent from this migrated audit tree.",
-    "This does not close the embedded asynchronous clock-group cut or external TDI/TMS/TDO board timing."
+    "Firmware response-source hold is audited separately in firmware_response_hold_20261114_audit.json using SHA-matched C2 source, RTL, and RAM initialization.",
+    "The SLD hub TCK domain remains intentionally asynchronous; this report makes no phase-based inter-clock setup/hold or skew claim. External TDI/TMS/TDO board timing remains unclosed."
   ],
   "gate_b_overall": "BLOCKED"
 }

@@ -148,7 +148,7 @@ $result = [ordered]@{
     checks = $checks
     failures = @($failures)
     status = if ($failures.Count -eq 0) { 'PASS_SAVED_EVIDENCE_INTEGRITY_AND_INTERNAL_CDC_RECORDS' } else { 'FAIL' }
-    gateBDecision = 'BLOCKED_EXTERNAL_JTAG_IO_TIMING_NOT_SIGNED_OFF'
+    gateBDecision = 'BLOCKED_BOARD_LEVEL_EXTERNAL_JTAG_TIMING'
 }
 $result | ConvertTo-Json -Depth 8
 if ($failures.Count -gt 0) { exit 1 }

@@ -1,0 +1,25 @@
+{
+  "audit": "C2_FIRMWARE_RESPONSE_SOURCE_HOLD",
+  "status": "PASS_STATIC_IDENTITY_AND_PROTOCOL_ORDER",
+  "build_id": "43324a32",
+  "source_sha256": {
+    "firmware": "a6964666d08695bdc447f2315b1683c90a08750a76db1188cb8d8669428cc917",
+    "soc": "9fbc58508e023f05c8dba59d085ef7cf673a04b7d9e9a6b0d6cc18dd0ca5acdc",
+    "mailbox": "b4107f64666f27f798be25ba013a15a7f993c9d5bde07b7f9fa241ca498871d0",
+    "flat": "fdfcdf037eb55225e3e6eef06b01fc92e608951c54ece946461408131f2e5ca7"
+  },
+  "firmware_elf_sha256": "625daf8cc194f1bc7d48eefff0f07939c5e0988bb07fc8a3e7efad7e613a15fd",
+  "firmware_manifest_sha256": "16acc8375c18868c2e70885b1ecdb88c98598a98e53d94f8fda309aee0230c16",
+  "quartus_ram_lanes_match_firmware": true,
+  "protocol_findings": [
+    "Firmware copies request words before acknowledging the request, then computes and writes the 48-byte response before the final commit write.",
+    "The captured Gate A mailbox source matches its recovered source-manifest hash; it rejects a new request while a response is pending, busy, or done.",
+    "A response consume toggle is emitted only after a pending 384-bit response scan; the system side clears DONE only after the consume toggle is synchronized.",
+    "All four Quartus RAM lane images match the hashed C2 firmware build lane images loaded by the exact flat RTL."
+  ],
+  "limitations": [
+    "This is a static source/identity audit, not a formal proof or a metastability probability bound.",
+    "The SLD hub TCK domain remains intentionally asynchronous; this static check does not provide phase-based inter-clock setup/hold or skew. External board-level JTAG I/O timing remains unclosed."
+  ],
+  "gate_b_effect": "firmware response-source hold condition is supported for this build; Gate B remains BLOCKED on the board-level external JTAG timing envelope."
+}
