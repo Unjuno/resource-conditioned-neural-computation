@@ -105,13 +105,18 @@ def audit(evidence: Path, mtbf_summary: Path, mtbf_report: Path) -> dict:
     require(all(row["max_path_delay_ns"] <= 24.0 for row in response),
             "response max-net-delay bound failed")
 
-    n_cycles = 3
+    capture_edge_index = 3
+    minimum_full_periods_from_source_update = capture_edge_index - 1
     t_sys_ns = 20.0
     t_tck_min_ns = 30.0
     request_worst_ns = max(row["max_path_delay_ns"] for row in request)
     response_worst_ns = max(row["max_path_delay_ns"] for row in response)
-    request_capture_window_ns = n_cycles * t_sys_ns
-    response_capture_window_ns = n_cycles * t_tck_min_ns
+    # Synchronizer stages and the event/capture logic act on three successive
+    # destination edges. With an arbitrary source/destination phase, the first
+    # destination edge can occur immediately after the source update, leaving
+    # only two complete destination periods before the third-edge capture.
+    request_capture_window_ns = minimum_full_periods_from_source_update * t_sys_ns
+    response_capture_window_ns = minimum_full_periods_from_source_update * t_tck_min_ns
     require(request_worst_ns == 3.358 and response_worst_ns == 3.157,
             "worst path delay differs from signed C2J2 audit evidence")
     mtbf = parse_mtbf_summary(mtbf_summary)
@@ -126,7 +131,8 @@ def audit(evidence: Path, mtbf_summary: Path, mtbf_report: Path) -> dict:
         "mtbf_summary_sha256": sha256(mtbf_summary),
         "mtbf_full_report_sha256": EXPECTED_MTBF_REPORT_SHA256,
         "mtbf_summary": mtbf,
-        "capture_cycle_count_min": n_cycles,
+        "capture_destination_edge_index": capture_edge_index,
+        "minimum_full_periods_from_source_update": minimum_full_periods_from_source_update,
         "request": {
             "destination_period_ns": t_sys_ns,
             "capture_envelope_ns": request_capture_window_ns,
@@ -147,7 +153,8 @@ def audit(evidence: Path, mtbf_summary: Path, mtbf_report: Path) -> dict:
         },
         "limitations": [
             "The reported difference is a protocol-envelope comparison, not STA setup slack.",
-            "The comparison omits clock-to-Q, destination setup, clock uncertainty, and measured board TCK envelope.",
+            "Capture occurs on the third destination edge, but arbitrary phase leaves only two complete destination periods from source update to capture.",
+            "The net-delay comparison omits clock-to-Q, destination setup, clock uncertainty, and measured board TCK envelope; it is not timing slack.",
             "Firmware response-source hold is audited separately in firmware_response_hold_20261114_audit.json using SHA-matched C2 source, RTL, and RAM initialization.",
             "The SLD hub TCK domain remains intentionally asynchronous; this report makes no phase-based inter-clock setup/hold or skew claim. External TDI/TMS/TDO board timing remains unclosed.",
         ],
