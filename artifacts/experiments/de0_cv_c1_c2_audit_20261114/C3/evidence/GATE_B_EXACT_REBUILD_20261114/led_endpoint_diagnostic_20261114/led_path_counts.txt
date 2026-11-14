@@ -1,0 +1,9 @@
+selected_led_port_count=3
+op=7_slow_1100mv_85c before_false_path_setup_paths=0
+op=7_slow_1100mv_85c after_false_path_setup_paths=0
+op=7_slow_1100mv_0c before_false_path_setup_paths=0
+op=7_slow_1100mv_0c after_false_path_setup_paths=0
+op=MIN_fast_1100mv_85c before_false_path_setup_paths=0
+op=MIN_fast_1100mv_85c after_false_path_setup_paths=0
+op=MIN_fast_1100mv_0c before_false_path_setup_paths=0
+op=MIN_fast_1100mv_0c after_false_path_setup_paths=0

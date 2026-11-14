@@ -90,3 +90,13 @@ Quartusは引き続きsetup/holdがfully constrainedでないと報告する。�
 最初の実行はUnicodeを含む作業パスをQuartus CLIへ渡したためログ上のパスが文字化けし、終了コード3となった。失敗ログも親ディレクトリに保持した。TclをASCII専用のD:作業場所へコピーして再実行し、同じ既存データベースを読み取り専用で解析して成功した。
 
 この確認は同期段間の内部setup経路のみに限定され、同期器のMTBF、非同期位相全域、held-bus捕捉窓、外部JTAG TDI/TMS/TDOのsetup/hold、未制約LED出力を証明しない。元SDCの変更・候補SOFの書込みはしていない。従ってGate Bは引き続きBLOCKEDであり、この結果だけではGate Cへ進まない。
+
+## 2026-11-14 追補：ステータスLED出力端点の分類
+
+DE0-CV回路図のSheet 14（Terasic公式System CD、表示器/LEDシート）ではLEDR0–LEDR3は各330 Ωの抵抗ネットワークを介してLEDへ接続され、外部クロック入力や同期capture部品は接続されていない。LEDは視覚表示の負荷であり、外部setup/hold要件を持つ同期インターフェースではない。この根拠に基づき、LEDR[0], LEDR[1], LEDR[3]へのfalse pathを**診断Tcl内だけ**で適用した。IntelのTiming Analyzer Cookbookも、JTAG/デバッグ信号が設計に含まれる場合の制約分類を説明しており、数値制約は装置構成固有とする。Board-specificなJTAG値はこの例から流用していない。
+
+Quartus Prime Lite 25.1std.0 Build 1129で4コーナーを個別解析した。選択したLEDポートは3個ちょうど。false path適用後、各コーナーのUnconstrained Paths Summaryは出力ポート1個・出力経路5本となり、残るのは `altera_reserved_tdo`。元の8経路からLED出力3経路が除外され、JTAG TDOの未制約は残る。解析終了コード0だが、Timing Analyzerはなおsetup/hold fully constrainedでないと報告する。
+
+これはLEDが同期タイミング端点でないことを数え上げ付きで確認した診断であり、false pathを本番SDCへ追加したものではない。JTAG TDI/TMSの入力遅延、TDO受信側の要求、実TCKとlaunch/capture位相は解決していないためGate BはBLOCKEDのまま。RTL/QSF/元SDC、実機状態には変更なし。
+
+参考： [Terasic公式DE0-CV System CD](https://download.terasic.com/downloads/cd-rom/de0-cv/)（基板回路図）、[Intel Quartus Prime Timing Analyzer Cookbook: JTAG Signals](https://docs.altera.com/r/docs/683081/22.2/quartus-prime-timing-analyzer-cookbook/jtag-signals?contentId=HqsgrDMGTE4REitNdjYy5w)。保存した既存JTAG調査記録は `C2/evidence/jtag_timing_research_20261113/JTAG_TIMING_RESEARCH_FOLLOWUP_20261113_JA.md`。
