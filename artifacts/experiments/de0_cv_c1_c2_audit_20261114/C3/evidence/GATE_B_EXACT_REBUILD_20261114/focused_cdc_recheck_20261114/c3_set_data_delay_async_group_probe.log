@@ -1,0 +1,27 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+Info: Running Quartus Prime Timing Analyzer
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sat Nov 14 19:26:12 2026
+Info: Command: quartus_sta -t c3_set_data_delay_async_group_probe.tcl
+Error (23018): Tcl Script File c3_set_data_delay_async_group_probe.tcl not found
+Error (23031): Evaluation of Tcl script c3_set_data_delay_async_group_probe.tcl unsuccessful
+Error: Quartus Prime Timing Analyzer was unsuccessful. 2 errors, 0 warnings
+    Error: Peak virtual memory: 4614 megabytes
+    Error: Processing ended: Sat Nov 14 19:26:12 2026
+    Error: Elapsed time: 00:00:00
+    Error: Total CPU time (on all processors): 00:00:00

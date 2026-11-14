@@ -1,4 +1,4 @@
 * -text
 **/* -text
 C3_SHA256SUMS.txt whitespace=cr-at-eol
-evidence/GATE_B_EXACT_REBUILD_20261114/** whitespace=cr-at-eol,-blank-at-eol
+evidence/GATE_B_EXACT_REBUILD_20261114/** whitespace=cr-at-eol,-blank-at-eol,-blank-at-eof
