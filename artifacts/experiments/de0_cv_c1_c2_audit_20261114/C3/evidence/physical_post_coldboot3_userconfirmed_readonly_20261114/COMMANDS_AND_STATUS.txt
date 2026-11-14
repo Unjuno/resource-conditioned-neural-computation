@@ -1,0 +1,11 @@
+Repository: https://github.com/Unjuno/resource-conditioned-neural-computation.git
+Branch: codex/stage-c3-jtag-pilot-20261114
+HEAD: 851d58daa77ae09f6974b040ee1b89f343f607a4
+CWD: C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-audit-20261114
+Commands:
+  quartus_sh.exe --version
+  exit=0
+  jtagconfig.exe -n
+  exit=0
+Observed at local time: 2026-11-14 20:34:57 +09:00
+No programming or writes to the FPGA were performed.

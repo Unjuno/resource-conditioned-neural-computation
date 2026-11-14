@@ -58,3 +58,8 @@ C2の保存済みQuartus入力（QSF/SDC/flat RTL/board top/global buffer/4 RAM 
 ここで以前の「clock groupを全除去すると他CDC経路も変わる」という懸念を、現post-fit clock/path inventoryで絞り込めた。対象グラフにはclockが2個、該当groupは1個だけである。候補制約後に両方向の全clock-to-clock setup pathを列挙し、4コーナー全てでTCK→CLOCK_50はrequest 800本、CLOCK_50→TCKはresponse 384本のみ。他の内部clock crossing pathはゼロ。7組のstage1→stage2は各corner setup/holdとも1経路、計28 setup + 28 hold。最小setup slack +18.856 ns、最小hold slack +0.255 ns、違反0。要求/応答のmax-delayも全4コーナー違反0。max-skewの32 path records/コーナーも違反0で、最大skewは要求3.528 ns、応答3.330 ns以下。
 
 これは内部CDCポリシーを網羅した候補SDCの限定STA結果で、先の限定診断より強い。元C2 SDC、RTL、実機SOFは変更していない。候補SDCではFitterを再実行しておらず、外部JTAGのTDI/TMS 2入力port・41 path、TDO 1出力port・5 pathが未制約のためQuartusはsetup/hold fully constrainedではないと報告する。ゆえに内部CDC候補監査はPASS_LIMITED、Gate B全体はBLOCKED、Gate Cは未実施のまま。生レポート、QSF/SDC/source SHA、初回重複警告と修正後の実行ログは`evidence/GATE_B_EXACT_REBUILD_20261114/candidate_internal_cdc_policy_20261114/`。
+### JTAG専用電源・TDO端点specの回路図照合（2026-11-14）
+
+Altera Cyclone V HandbookとDatasheet Table 56をTerasic DE0-CV System CD v1.2.1の回路図sheet 8と照合した。回路図上は`VCCPD3A`→`VCCIO_PD_3P3`、R117/R118経由で`VCC3P3`なので、同回路図版ではJTAG専用pin電源が3.3 Vとなり、datasheet `tJPCO`の低電圧step adderは不要（端点max 11 ns）。ただしユーザー基板revision/抵抗実装を個体確認しておらず、EPM240・配線・USB-Blaster遅延、実TCK・duty・phase、TDI/TMS arrival、TDO capture windowは依然不明。よって外部port delayを推測設定せず、Gate Bは**BLOCKED**のまま。詳細と出典は`evidence/JTAG_TDO_VOLTAGE_CROSSWALK_JA.md`。
+
+ユーザー確認のDC電源cycle 3/3後に追加でread-only `jtagconfig -n`とQuartus版照会を実行し、IDCODE `02B050DD`、node `00406E00`、design hash `DF2731CF973C3275CFE6`を再確認した。読み出し記録は`evidence/physical_post_coldboot3_userconfirmed_readonly_20261114/`。USB-Bを抜かなかったため、boot独立性は引き続き**UNCERTAIN**。この照会ではFPGAへ書き込まず、既存campaignの件数も変更していない。

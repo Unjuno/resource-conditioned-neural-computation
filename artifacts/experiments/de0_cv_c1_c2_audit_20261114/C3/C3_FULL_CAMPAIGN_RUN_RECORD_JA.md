@@ -71,7 +71,7 @@ SOF、flat RTL、QSF/SDC、source graph、ELF、RAM lane和JTAGの履歴照合�
 
 内部STA/CDCの保存済みC2結果は限定範囲でPASS（4 corner setup/hold正、worst setup +0.821 ns、worst hold +0.116 ns、要求/応答bundled data path記録あり）。しかしQuartusはsetup/holdがfully constrainedでないと報告し、JTAG TDI/TMS/TDOやLEDR等の未制約pathが残る。`report_max_skew`には該当pathがなく、CDC全体のformal proofにも数えない。したがって正式なboard-level timing gateは**BLOCKED**。
 
-Altera Cyclone V datasheet Table 56の端点条件（TCK period min 30 ns、high/low min 14 ns、TDI/TMS setup 1/3 ns、hold 5 ns、TDO clock-to-output max 11 ns）は公式資料から照合済み。ただしこの値はTerasic board、USB-Blaster回路・USB/target cableの遅延を含まない。Quartus 25.1std.0を確認し`jtagconfig --getparam 1 JtagClock`を読み取り専用実行したところ、exit 4 `No parameter named JtagClock`であり、実際のTCK周波数は確認できなかった。Cable III/Download Cable IIの設定値は今回検出された`USB-Blaster [USB-0]`へ流用しない。query証拠は`evidence/JTAG_EXTERNAL_TIMING_READONLY_20261114/`。
+Altera Cyclone V datasheet Table 56の端点条件（TCK period min 30 ns、high/low min 14 ns、TDI/TMS setup 1/3 ns、hold 5 ns、TDO clock-to-output max 11 ns）は公式資料から照合済み。DE0-CV System CD v1.2.1の回路図sheet 8ではVCCPD3Aが3.3 V網に接続されるため、同版回路図を前提とするTDO端点値には低電圧step加算がない。ただし基板個体revision/抵抗実装は未確認であり、Cyclone V端点値はTerasic board、USB-Blaster回路・USB/target cableの遅延を含まない。照合は`evidence/JTAG_TDO_VOLTAGE_CROSSWALK_JA.md`。Quartus 25.1std.0を確認し`jtagconfig --getparam 1 JtagClock`を読み取り専用実行したところ、exit 4 `No parameter named JtagClock`であり、実際のTCK周波数は確認できなかった。Cable III/Download Cable IIの設定値は今回検出された`USB-Blaster [USB-0]`へ流用しない。query証拠は`evidence/JTAG_EXTERNAL_TIMING_READONLY_20261114/`。
 
 一次資料:
 
