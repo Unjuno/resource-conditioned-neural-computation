@@ -4,7 +4,7 @@
 Repository: `https://github.com/Unjuno/resource-conditioned-neural-computation.git`
 Branch: `codex/stage-c3-jtag-pilot-20261114`
 監査開始HEAD: `9af7c44daa3f69ace0abefa899b12effefc5ae7b`
-適用開始commit: この文書を含む計画改訂commit（正確なOIDは次のprovenance commitで記録）
+適用開始commit: `22b539c840b89bded63923d8d50e29924274ec1b`（詳細は`PLAN_REVISION_PROVENANCE_JA.md`）
 作業cwd: `C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-audit-20261114`
 
 ## 判定
