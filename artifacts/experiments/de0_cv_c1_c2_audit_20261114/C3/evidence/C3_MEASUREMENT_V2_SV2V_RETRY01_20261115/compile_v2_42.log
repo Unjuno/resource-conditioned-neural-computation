@@ -1,0 +1,641 @@
+%Warning-DECLFILENAME: rtnn_c3_measurement_v2_soc_flat.v:1:8: Filename 'rtnn_c3_measurement_v2_soc_flat' does not match MODULE name: 'prim_buf'
+    1 | module prim_buf (
+      |        ^~~~~~~~
+                       ... For warning description see https://verilator.org/warn/DECLFILENAME?v=5.020
+                       ... Use "/* verilator lint_off DECLFILENAME */" and lint_on around source to disable this message.
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:964:7: Cell pin connected by name with empty reference: 'data_o'
+  964 |      .data_o(),
+      |       ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:965:7: Cell pin connected by name with empty reference: 'syndrome_o'
+  965 |      .syndrome_o(),
+      |       ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:975:7: Cell pin connected by name with empty reference: 'data_o'
+  975 |      .data_o(),
+      |       ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:976:7: Cell pin connected by name with empty reference: 'syndrome_o'
+  976 |      .syndrome_o(),
+      |       ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:2709:8: Cell pin connected by name with empty reference: 'syndrome_o'
+ 2709 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:2727:8: Cell pin connected by name with empty reference: 'syndrome_o'
+ 2727 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:2747:8: Cell pin connected by name with empty reference: 'syndrome_o'
+ 2747 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:2765:8: Cell pin connected by name with empty reference: 'syndrome_o'
+ 2765 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5700:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5700 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5716:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5716 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5728:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5728 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5740:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5740 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5752:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5752 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5777:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5777 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5789:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5789 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5801:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5801 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5813:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5813 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5826:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5826 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5838:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5838 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5850:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5850 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6085:4: Cell pin connected by name with empty reference: 'counter_val_upd_o'
+ 6085 |   .counter_val_upd_o()
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6179:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 6179 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6217:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 6217 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6232:7: Cell pin connected by name with empty reference: 'rd_error_o'
+ 6232 |      .rd_error_o()
+      |       ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6244:7: Cell pin connected by name with empty reference: 'rd_error_o'
+ 6244 |      .rd_error_o()
+      |       ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:8792:6: Cell pin connected by name with empty reference: 'data_o'
+ 8792 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:8793:6: Cell pin connected by name with empty reference: 'syndrome_o'
+ 8793 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:9480:6: Cell pin connected by name with empty reference: 'data_o'
+ 9480 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:9481:6: Cell pin connected by name with empty reference: 'syndrome_o'
+ 9481 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:11744:6: Cell pin connected by name with empty reference: 'data_o'
+11744 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:11745:6: Cell pin connected by name with empty reference: 'syndrome_o'
+11745 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:11750:6: Cell pin connected by name with empty reference: 'data_o'
+11750 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:11751:6: Cell pin connected by name with empty reference: 'syndrome_o'
+11751 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:12296:6: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+12296 |     .cnt_after_commit_o(),
+      |      ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:12316:6: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+12316 |     .cnt_after_commit_o(),
+      |      ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:12588:6: Cell pin connected by name with empty reference: 'valid_o'
+12588 |     .valid_o()
+      |      ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:12761:4: Cell pin connected by name with empty reference: 'rvalid_o'
+12761 |   .rvalid_o(),
+      |    ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13227:4: Cell pin connected by name with empty reference: 'full_o'
+13227 |   .full_o(),
+      |    ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13228:4: Cell pin connected by name with empty reference: 'depth_o'
+13228 |   .depth_o(),
+      |    ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13229:4: Cell pin connected by name with empty reference: 'err_o'
+13229 |   .err_o()
+      |    ^~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13262:4: Cell pin connected by name with empty reference: 'full_o'
+13262 |   .full_o(),
+      |    ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13263:4: Cell pin connected by name with empty reference: 'depth_o'
+13263 |   .depth_o(),
+      |    ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13264:4: Cell pin connected by name with empty reference: 'err_o'
+13264 |   .err_o()
+      |    ^~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13350:6: Cell pin connected by name with empty reference: 'data_o'
+13350 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13351:6: Cell pin connected by name with empty reference: 'syndrome_o'
+13351 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13595:6: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+13595 |     .cnt_after_commit_o(),
+      |      ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14510:8: Cell pin connected by name with empty reference: 'gnt_o'
+14510 |       .gnt_o(),
+      |        ^~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14517:8: Cell pin connected by name with empty reference: 'rvalid_o'
+14517 |       .rvalid_o(),
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14518:8: Cell pin connected by name with empty reference: 'raddr_o'
+14518 |       .raddr_o(),
+      |        ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14519:8: Cell pin connected by name with empty reference: 'rerror_o'
+14519 |       .rerror_o(),
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14522:8: Cell pin connected by name with empty reference: 'wr_collision_o'
+14522 |       .wr_collision_o(),
+      |        ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14523:8: Cell pin connected by name with empty reference: 'write_pending_o'
+14523 |       .write_pending_o(),
+      |        ^~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14541:8: Cell pin connected by name with empty reference: 'gnt_o'
+14541 |       .gnt_o(),
+      |        ^~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14548:8: Cell pin connected by name with empty reference: 'rvalid_o'
+14548 |       .rvalid_o(),
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14549:8: Cell pin connected by name with empty reference: 'raddr_o'
+14549 |       .raddr_o(),
+      |        ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14550:8: Cell pin connected by name with empty reference: 'rerror_o'
+14550 |       .rerror_o(),
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14553:8: Cell pin connected by name with empty reference: 'wr_collision_o'
+14553 |       .wr_collision_o(),
+      |        ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14554:8: Cell pin connected by name with empty reference: 'write_pending_o'
+14554 |       .write_pending_o(),
+      |        ^~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14954:6: Cell pin connected by name with empty reference: 'data_o'
+14954 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14955:6: Cell pin connected by name with empty reference: 'syndrome_o'
+14955 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14960:6: Cell pin connected by name with empty reference: 'data_o'
+14960 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14961:6: Cell pin connected by name with empty reference: 'syndrome_o'
+14961 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15282:4: Cell pin connected by name with empty reference: 'ram_cfg_icache_tag_o'
+15282 |   .ram_cfg_icache_tag_o(),
+      |    ^~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15284:4: Cell pin connected by name with empty reference: 'ram_cfg_icache_data_o'
+15284 |   .ram_cfg_icache_data_o(),
+      |    ^~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15302:4: Cell pin connected by name with empty reference: 'data_wdata_intg_o'
+15302 |   .data_wdata_intg_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15303:4: Cell pin connected by name with empty reference: 'data_tag_o'
+15303 |   .data_tag_o(),
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15308:4: Cell pin connected by name with empty reference: 'trvk_revbm_req_o'
+15308 |   .trvk_revbm_req_o(),
+      |    ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15311:4: Cell pin connected by name with empty reference: 'trvk_revbm_addr_o'
+15311 |   .trvk_revbm_addr_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15323:4: Cell pin connected by name with empty reference: 'scramble_req_o'
+15323 |   .scramble_req_o(),
+      |    ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15325:4: Cell pin connected by name with empty reference: 'crash_dump_o'
+15325 |   .crash_dump_o(),
+      |    ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15326:4: Cell pin connected by name with empty reference: 'double_fault_seen_o'
+15326 |   .double_fault_seen_o(),
+      |    ^~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15329:4: Cell pin connected by name with empty reference: 'alert_minor_o'
+15329 |   .alert_minor_o(),
+      |    ^~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15330:4: Cell pin connected by name with empty reference: 'alert_major_internal_o'
+15330 |   .alert_major_internal_o(),
+      |    ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15331:4: Cell pin connected by name with empty reference: 'alert_major_bus_o'
+15331 |   .alert_major_bus_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15332:4: Cell pin connected by name with empty reference: 'core_sleep_o'
+15332 |   .core_sleep_o(),
+      |    ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15333:4: Cell pin connected by name with empty reference: 'lockstep_cmp_en_o'
+15333 |   .lockstep_cmp_en_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15334:4: Cell pin connected by name with empty reference: 'data_req_shadow_o'
+15334 |   .data_req_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15335:4: Cell pin connected by name with empty reference: 'data_we_shadow_o'
+15335 |   .data_we_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15336:4: Cell pin connected by name with empty reference: 'data_be_shadow_o'
+15336 |   .data_be_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15337:4: Cell pin connected by name with empty reference: 'data_addr_shadow_o'
+15337 |   .data_addr_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15338:4: Cell pin connected by name with empty reference: 'data_wdata_shadow_o'
+15338 |   .data_wdata_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15339:4: Cell pin connected by name with empty reference: 'data_wdata_intg_shadow_o'
+15339 |   .data_wdata_intg_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15340:4: Cell pin connected by name with empty reference: 'instr_req_shadow_o'
+15340 |   .instr_req_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15341:4: Cell pin connected by name with empty reference: 'instr_addr_shadow_o'
+15341 |   .instr_addr_shadow_o()
+      |    ^~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:15233:20: Operator VAR 'prim_ram_1p_pkg_RAM_1P_CFG_REQ_DEFAULT' expects 12 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc'
+15233 |  localparam [11:0] prim_ram_1p_pkg_RAM_1P_CFG_REQ_DEFAULT = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:15253:20: Operator VAR 'sv2v_uu_u_ibex_ext_trvk_revbm_rdata_i_0' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc'
+15253 |  localparam [31:0] sv2v_uu_u_ibex_ext_trvk_revbm_rdata_i_0 = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:15254:19: Operator VAR 'sv2v_uu_u_ibex_ext_trvk_revbm_rdata_intg_i_0' expects 7 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc'
+15254 |  localparam [6:0] sv2v_uu_u_ibex_ext_trvk_revbm_rdata_intg_i_0 = 1'sb0;
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:15257:21: Operator VAR 'sv2v_uu_u_ibex_ext_scramble_key_i_0' expects 128 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc'
+15257 |  localparam [127:0] sv2v_uu_u_ibex_ext_scramble_key_i_0 = 1'sb0;
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:15259:20: Operator VAR 'sv2v_uu_u_ibex_ext_scramble_nonce_i_0' expects 64 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc'
+15259 |  localparam [63:0] sv2v_uu_u_ibex_ext_scramble_nonce_i_0 = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHTRUNC: rtnn_c3_measurement_v2_soc_flat.v:14375:18: Operator FUNCREF 'sv2v_cast_DEBC9' expects 32 bits on the Function Argument, but Function Argument's VARREF 'prim_secded_pkg_SecdedInv3932ZeroWord' generates 39 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex'
+14375 |     .WordZeroVal(sv2v_cast_DEBC9(prim_secded_pkg_SecdedInv3932ZeroWord))
+      |                  ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5230:46: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's VARREF 'RV32E' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5230 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                              ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5230:81: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's LOGNOT generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5230 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                                                                 ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5230:179: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's VARREF 'ibex_pkg_CSR_MISA_MXL' generates 2 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5230 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                                                                                                                                                                   ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:10944:19: Operator VAR 'sv2v_uu_lfsr_i_ext_entropy_i_0' expects 8 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+10944 |  localparam [7:0] sv2v_uu_lfsr_i_ext_entropy_i_0 = 1'sb0;
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6359:26: Operator VAR 'ResetValue' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_cpuctrlsts_part_csr'
+ 6359 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6359:26: Operator VAR 'ResetValue' expects 18 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mie_csr'
+ 6359 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6359:26: Operator VAR 'ResetValue' expects 7 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mcause_csr'
+ 6359 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6359:26: Operator VAR 'ResetValue' expects 3 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mcounteren_csr'
+ 6359 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6359:26: Operator VAR 'ResetValue' expects 8 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_cpuctrlsts_part_csr'
+ 6359 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2075:27: Operator VAR 'CustomCoeffs' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2075 |  parameter [LfsrDw - 1:0] CustomCoeffs = 1'sb0;
+      |                           ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2106:7: Operator FUNCREF 'sv2v_cast_64' expects 64 bits on the Function Argument, but Function Argument's VARREF 'LfsrType' generates 56 bits.
+                                                              : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2106 |   if (sv2v_cast_64(LfsrType) == 64'd20056519619399506) begin : gen_gal_xor
+      |       ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2119:30: Operator FUNCREF 'sv2v_cast_C2EBB' expects 32 bits on the Function Argument, but Function Argument's VARREF 'entropy_i' generates 8 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2119 |    assign next_lfsr_state = (sv2v_cast_C2EBB(entropy_i) ^ ({LfsrDw {lfsr_q[0]}} & coeffs)) ^ (lfsr_q >> 1);
+      |                              ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2271:32: Operator FUNCREF 'sv2v_cast_C2EBB' expects 32 bits on the Function Argument, but Function Argument's VARREF 'entropy' generates 8 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2271 |      next_state = next_state ^ sv2v_cast_C2EBB(entropy);
+      |                                ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2281:32: Operator FUNCREF 'sv2v_cast_C2EBB' expects 32 bits on the Function Argument, but Function Argument's VARREF 'entropy' generates 8 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2281 |      next_state = next_state ^ sv2v_cast_C2EBB(entropy);
+      |                                ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2274:13: Operator FUNCREF 'sv2v_cast_64' expects 64 bits on the Function Argument, but Function Argument's VARREF 'LfsrType' generates 56 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2274 |    else if (sv2v_cast_64(LfsrType) == "FIB_XNOR") begin
+      |             ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2263:8: Operator FUNCREF 'sv2v_cast_64' expects 64 bits on the Function Argument, but Function Argument's VARREF 'LfsrType' generates 56 bits.
+                                                              : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2263 |    if (sv2v_cast_64(LfsrType) == 64'd20056519619399506) begin
+      |        ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2293:20: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2293 |     lfsr_perm_test = 1'sb0;
+      |                    ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:2328:12: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2328 |      cnt_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:7664:19: Operator ASSIGNDLY expects 31 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+ 7664 |      instr_addr_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:7705:12: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+ 7705 |    valid_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:7715:27: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+ 7715 |       rdata_q[i * 32+:32] <= 1'sb0;
+      |                           ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:263:12: Operator FUNCREF 'sv2v_cast_39' expects 39 bits on the Function Argument, but Function Argument's VARREF 'data_i' generates 32 bits.
+                                                              : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.load_store_unit_i.g_mem_wdata_ecc.u_data_gen'
+  263 |   data_o = sv2v_cast_39(data_i);
+      |            ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6445:16: Operator ASSIGNDLY expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i.minstret_counter_i'
+ 6445 |      counter_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6468:30: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i.mcycle_counter_i'
+ 6468 |     assign counter_val_upd_o = 1'sb0;
+      |                              ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9749:18: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9749 |    div_counter_q <= 1'sb0;
+      |                  ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9751:19: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9751 |    op_numerator_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9752:18: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9752 |    op_quotient_q <= 1'sb0;
+      |                  ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9865:16: Operator ASSIGN expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9865 |       summand1 = 1'sb0;
+      |                ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:10003:21: Operator ASSIGN expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh1' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+10003 |      op_remainder_d = 1'sb1;
+      |                     ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:10016:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+10016 |     op_quotient_d = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3756:25: Operator ASSIGNW expects 6 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3756 |    assign bitcnt_result = 1'sb0;
+      |                         ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3757:25: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3757 |    assign minmax_result = 1'sb0;
+      |                         ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3759:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3759 |    assign sv2v_tmp_A0513 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3761:23: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3761 |    assign sext_result = 1'sb0;
+      |                       ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3763:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3763 |    assign sv2v_tmp_75CE4 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3766:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3766 |    assign sv2v_tmp_FA09A = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3769:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3769 |    assign sv2v_tmp_4A308 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3771:24: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3771 |    assign xperm_result = 1'sb0;
+      |                        ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3773:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3773 |    assign sv2v_tmp_98122 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3776:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3776 |    assign sv2v_tmp_B39E0 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3779:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3779 |    assign sv2v_tmp_31DA6 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3782:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3782 |    assign sv2v_tmp_BC1B9 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3795:12: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3795 |   result_o = 1'sb0;
+      |            ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:4684:31: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i'
+ 4684 |      mem_resp_intg_err_addr_q <= 1'sb0;
+      |                               ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:4754:15: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i'
+ 4754 |   csr_mtval_o = 1'sb0;
+      |               ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:10940:23: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+10940 |    dummy_instr_seed_q <= 1'sb0;
+      |                       ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:10971:16: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+10971 |    dummy_cnt_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:3987:14: Operator ASSIGN expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 3987 |    imm[11:7] = 1'sb0;
+      |              ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:4378:17: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 4378 |      cm_rlist_q <= 1'sb0;
+      |                 ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:4379:21: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 4379 |      cm_sp_offset_q <= 1'sb0;
+      |                     ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:10461:20: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i'
+10461 |      stored_addr_q <= 1'sb0;
+      |                    ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:10477:19: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i'
+10477 |      fetch_addr_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5352:17: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5352 |   csr_rdata_int = 1'sb0;
+      |                 ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5363:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5363 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5370:27: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5370 |    12'h310: csr_rdata_int = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5371:36: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5371 |    12'h30a, 12'h31a: csr_rdata_int = 1'sb0;
+      |                                    ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5374:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5374 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5387:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5387 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5395:20: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5395 |      csr_rdata_int = 1'sb0;
+      |                    ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5404:20: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5404 |      csr_rdata_int = 1'sb0;
+      |                    ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5468:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5468 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5472:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5472 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5476:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5476 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5480:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5480 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5484:27: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5484 |    12'h7c1: csr_rdata_int = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5527:18: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5527 |   mhpmcounter_we = 1'sb0;
+      |                  ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5528:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5528 |   mhpmcounterh_we = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5997:27: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5997 |     assign sv2v_tmp_D50E5 = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:5999:29: Operator ASSIGNW expects 8 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5999 |     assign pmp_cfg_rdata[i] = 1'sb0;
+      |                             ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6005:69: Operator ASSIGNW expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 6005 |     assign csr_pmp_addr_o[0 + (((PMPNumRegions - 1) - i) * 34)+:34] = 1'sb0;
+      |                                                                     ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6008:23: Operator ASSIGNW expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 6008 |    assign pmp_mseccfg = 1'sb0;
+      |                       ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6063:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 6063 |      mhpmevent[i] = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6068:16: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 6068 |   mhpmevent[1] = 1'sb0;
+      |                ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6073:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 6073 |      mhpmevent[i] = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6101:24: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 6101 |  assign mhpmcounter[1] = 1'sb0;
+      |                        ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6136:29: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 6136 |     assign mhpmcounter[Cnt] = 1'sb0;
+      |                             ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:6158:20: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 6158 |    mcountinhibit_q <= 1'sb0;
+      |                    ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:10870:19: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.wb_stage_i'
+10870 |    assign pc_wb_o = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9369:12: Operator ASSIGNDLY expects 24 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.load_store_unit_i'
+ 9369 |    rdata_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9388:16: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.load_store_unit_i'
+ 9388 |    addr_last_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:8131:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 8131 |    assign sv2v_tmp_1FCCD = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:8134:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 8134 |    assign sv2v_tmp_B876E = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:8160:34: Operator ASSIGNDLY expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 8160 |      imd_val_q[(1 - i) * 34+:34] <= 1'sb0;
+      |                                  ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9000:23: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 9000 |      instr_rdata_id_o <= 1'sb0;
+      |                       ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9001:27: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 9001 |      instr_rdata_alu_id_o <= 1'sb0;
+      |                           ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9004:25: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 9004 |      instr_rdata_c_id_o <= 1'sb0;
+      |                         ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9007:26: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 9007 |      instr_expanded_id_o <= 1'sb0;
+      |                          ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_soc_flat.v:9009:14: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                               : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 9009 |      pc_id_o <= 1'sb0;
+      |              ^~
+%Error-UNSUPPORTED: rtnn_c3_measurement_v2_soc_flat.v:9142:75: Unsupported: Member call on object 'VARXREF 'lfsr_data'' which is a 'BASICDTYPE 'logic''
+                                                             : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 9142 |    assign fcov_dummy_instr_type = gen_dummy_instr.dummy_instr_i.lfsr_data.instr_type;
+      |                                                                           ^~~~~~~~~~
+%Error: Internal Error: rtnn_c3_measurement_v2_soc_flat.v:9142:33: ../V3Width.cpp:6739: Node has no type
+                                                                 : ... note: In instance 'tb_rtnn_c2_soc_42.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 9142 |    assign fcov_dummy_instr_type = gen_dummy_instr.dummy_instr_i.lfsr_data.instr_type;
+      |                                 ^

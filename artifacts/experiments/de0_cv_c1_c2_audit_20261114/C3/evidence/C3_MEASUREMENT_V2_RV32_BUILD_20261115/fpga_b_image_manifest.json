@@ -1,0 +1,19 @@
+{
+  "schema": "rtnn-de0cv-b-firmware-ram-v1",
+  "status": "IMAGE_GENERATED_NOT_SYNTHESIZED",
+  "elf_sha256": "9cbf537bd9440deaf5c78abf6b204da9cbcd2fe3795acf444d733dbd581002b6",
+  "bin_sha256": "d55d2db36d835825b1e23d385f9e4c7555c9200c2f2656bbc4ec649530b2ae53",
+  "image_sha256": "859590ecba45d92163636aa283d1761d98488d4361c2d7f95ef320e74d30f73f",
+  "hex_sha256": "5b2cd69cc6521e38b030fecfe981f9d7d3a00ed2b83b49e4dab3936d023e19f8",
+  "base_addr": 1048576,
+  "entry": 1048704,
+  "stack_top": 1310704,
+  "load_bytes": 174304,
+  "memory_bytes": 178952,
+  "ram_bytes": 262144,
+  "code_limit_bytes": 229376,
+  "nonclaims": [
+    "No FPGA build or validation performed.",
+    "No timing bound is provided. Old Simple System cycle table MUST NOT be imported."
+  ]
+}

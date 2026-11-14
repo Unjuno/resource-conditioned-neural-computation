@@ -1,0 +1,7 @@
+{
+  "status": "PASS_HOST_BINDING_PREP_NOT_PHYSICAL",
+  "schedule_count": 13,
+  "total_rows": 24840,
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "campaign_gate": "NOT_STARTED_WAITING_TEN_INPUT_KEY_RESET_REPLAY_PASS"
+}

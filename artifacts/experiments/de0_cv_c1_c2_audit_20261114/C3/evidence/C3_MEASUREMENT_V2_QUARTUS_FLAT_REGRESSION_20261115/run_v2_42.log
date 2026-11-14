@@ -1,0 +1,5 @@
+%Warning: c2_requests.hex:0: $readmem file not found
+%Warning: c2_expected.hex:0: $readmem file not found
+[217050] %Fatal: tb_rtnn_c2_soc_42.sv:222: Assertion failed in TOP.tb_rtnn_c2_soc_42.run_case.unnamedblk10: mailbox ERROR after case 0 status=c0
+%Error: tb_rtnn_c2_soc_42.sv:222: Verilog $stop
+Aborting...

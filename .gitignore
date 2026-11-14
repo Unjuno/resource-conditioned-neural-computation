@@ -3,3 +3,6 @@ __pycache__/
 .venv/
 venv/
 .DS_Store
+
+# Generated Verilator C3 regression build trees; logs and source inputs remain tracked
+/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/**/obj_v2_*/

@@ -1,0 +1,27 @@
+{
+  "schema": "rtnn-c3-measurement-protocol-v2-build-v1",
+  "build_id": "43334531",
+  "binding_id": "43334531",
+  "response_protocol_version": 2,
+  "response_bytes": 60,
+  "request_bytes": 100,
+  "cycle_start_offset": 24,
+  "cycle_end_offset": 32,
+  "crc_offset": 56,
+  "elf_sha256": "9cbf537bd9440deaf5c78abf6b204da9cbcd2fe3795acf444d733dbd581002b6",
+  "bin_sha256": "d55d2db36d835825b1e23d385f9e4c7555c9200c2f2656bbc4ec649530b2ae53",
+  "ram_words_sha256": "5b2cd69cc6521e38b030fecfe981f9d7d3a00ed2b83b49e4dab3936d023e19f8",
+  "ram_lane_sha256": {
+    "rtnn_ram_lane0.hex": "d22de6d6cb644dfdd2c5d5ef839faa46c94de975f879d1940336833912674867",
+    "rtnn_ram_lane1.hex": "3dafca67ab769cd03b4185dd32b46744a5b69a1bc62672a13abd70db416684ff",
+    "rtnn_ram_lane2.hex": "cb5e7db6eab396208d051f9fbf22409b9508a6ad3b5d3aa155399842249c7994",
+    "rtnn_ram_lane3.hex": "39dacc63ae00262432842df91a343d4ee63d00192944d00509f65c569fa05711"
+  },
+  "measurement_boundary": "64-bit Ibex mcycle sampled after request/pixel validation and immediately before admission/inference; end sampled after inference and argmax; JTAG transfer/response commit excluded",
+  "nonclaims": [
+    "not yet RTL-simulated",
+    "not synthesized or timed",
+    "not programmed to FPGA",
+    "not WCET or timing signoff"
+  ]
+}

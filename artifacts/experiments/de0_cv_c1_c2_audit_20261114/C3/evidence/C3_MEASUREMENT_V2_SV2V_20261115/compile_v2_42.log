@@ -1,0 +1,330 @@
+%Warning-DECLFILENAME: rtnn_c3_measurement_v2_soc_flat.v:1:8: Filename 'rtnn_c3_measurement_v2_soc_flat' does not match MODULE name: 'prim_buf'
+    1 | module prim_buf (
+      |        ^~~~~~~~
+                       ... For warning description see https://verilator.org/warn/DECLFILENAME?v=5.020
+                       ... Use "/* verilator lint_off DECLFILENAME */" and lint_on around source to disable this message.
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:964:7: Cell pin connected by name with empty reference: 'data_o'
+  964 |      .data_o(),
+      |       ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:965:7: Cell pin connected by name with empty reference: 'syndrome_o'
+  965 |      .syndrome_o(),
+      |       ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:975:7: Cell pin connected by name with empty reference: 'data_o'
+  975 |      .data_o(),
+      |       ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:976:7: Cell pin connected by name with empty reference: 'syndrome_o'
+  976 |      .syndrome_o(),
+      |       ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:2709:8: Cell pin connected by name with empty reference: 'syndrome_o'
+ 2709 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:2727:8: Cell pin connected by name with empty reference: 'syndrome_o'
+ 2727 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:2747:8: Cell pin connected by name with empty reference: 'syndrome_o'
+ 2747 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:2765:8: Cell pin connected by name with empty reference: 'syndrome_o'
+ 2765 |       .syndrome_o(),
+      |        ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5700:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5700 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5716:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5716 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5728:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5728 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5740:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5740 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5752:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5752 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5777:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5777 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5789:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5789 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5801:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5801 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5813:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5813 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5826:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5826 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5838:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5838 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:5850:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 5850 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6085:4: Cell pin connected by name with empty reference: 'counter_val_upd_o'
+ 6085 |   .counter_val_upd_o()
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6179:4: Cell pin connected by name with empty reference: 'rd_error_o'
+ 6179 |   .rd_error_o()
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6217:6: Cell pin connected by name with empty reference: 'rd_error_o'
+ 6217 |     .rd_error_o()
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6232:7: Cell pin connected by name with empty reference: 'rd_error_o'
+ 6232 |      .rd_error_o()
+      |       ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:6244:7: Cell pin connected by name with empty reference: 'rd_error_o'
+ 6244 |      .rd_error_o()
+      |       ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:8792:6: Cell pin connected by name with empty reference: 'data_o'
+ 8792 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:8793:6: Cell pin connected by name with empty reference: 'syndrome_o'
+ 8793 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:9480:6: Cell pin connected by name with empty reference: 'data_o'
+ 9480 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:9481:6: Cell pin connected by name with empty reference: 'syndrome_o'
+ 9481 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:11744:6: Cell pin connected by name with empty reference: 'data_o'
+11744 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:11745:6: Cell pin connected by name with empty reference: 'syndrome_o'
+11745 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:11750:6: Cell pin connected by name with empty reference: 'data_o'
+11750 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:11751:6: Cell pin connected by name with empty reference: 'syndrome_o'
+11751 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:12296:6: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+12296 |     .cnt_after_commit_o(),
+      |      ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:12316:6: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+12316 |     .cnt_after_commit_o(),
+      |      ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:12588:6: Cell pin connected by name with empty reference: 'valid_o'
+12588 |     .valid_o()
+      |      ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:12761:4: Cell pin connected by name with empty reference: 'rvalid_o'
+12761 |   .rvalid_o(),
+      |    ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13227:4: Cell pin connected by name with empty reference: 'full_o'
+13227 |   .full_o(),
+      |    ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13228:4: Cell pin connected by name with empty reference: 'depth_o'
+13228 |   .depth_o(),
+      |    ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13229:4: Cell pin connected by name with empty reference: 'err_o'
+13229 |   .err_o()
+      |    ^~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13262:4: Cell pin connected by name with empty reference: 'full_o'
+13262 |   .full_o(),
+      |    ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13263:4: Cell pin connected by name with empty reference: 'depth_o'
+13263 |   .depth_o(),
+      |    ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13264:4: Cell pin connected by name with empty reference: 'err_o'
+13264 |   .err_o()
+      |    ^~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13350:6: Cell pin connected by name with empty reference: 'data_o'
+13350 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13351:6: Cell pin connected by name with empty reference: 'syndrome_o'
+13351 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:13595:6: Cell pin connected by name with empty reference: 'cnt_after_commit_o'
+13595 |     .cnt_after_commit_o(),
+      |      ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14510:8: Cell pin connected by name with empty reference: 'gnt_o'
+14510 |       .gnt_o(),
+      |        ^~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14517:8: Cell pin connected by name with empty reference: 'rvalid_o'
+14517 |       .rvalid_o(),
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14518:8: Cell pin connected by name with empty reference: 'raddr_o'
+14518 |       .raddr_o(),
+      |        ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14519:8: Cell pin connected by name with empty reference: 'rerror_o'
+14519 |       .rerror_o(),
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14522:8: Cell pin connected by name with empty reference: 'wr_collision_o'
+14522 |       .wr_collision_o(),
+      |        ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14523:8: Cell pin connected by name with empty reference: 'write_pending_o'
+14523 |       .write_pending_o(),
+      |        ^~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14541:8: Cell pin connected by name with empty reference: 'gnt_o'
+14541 |       .gnt_o(),
+      |        ^~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14548:8: Cell pin connected by name with empty reference: 'rvalid_o'
+14548 |       .rvalid_o(),
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14549:8: Cell pin connected by name with empty reference: 'raddr_o'
+14549 |       .raddr_o(),
+      |        ^~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14550:8: Cell pin connected by name with empty reference: 'rerror_o'
+14550 |       .rerror_o(),
+      |        ^~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14553:8: Cell pin connected by name with empty reference: 'wr_collision_o'
+14553 |       .wr_collision_o(),
+      |        ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14554:8: Cell pin connected by name with empty reference: 'write_pending_o'
+14554 |       .write_pending_o(),
+      |        ^~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14954:6: Cell pin connected by name with empty reference: 'data_o'
+14954 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14955:6: Cell pin connected by name with empty reference: 'syndrome_o'
+14955 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14960:6: Cell pin connected by name with empty reference: 'data_o'
+14960 |     .data_o(),
+      |      ^~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:14961:6: Cell pin connected by name with empty reference: 'syndrome_o'
+14961 |     .syndrome_o(),
+      |      ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15282:4: Cell pin connected by name with empty reference: 'ram_cfg_icache_tag_o'
+15282 |   .ram_cfg_icache_tag_o(),
+      |    ^~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15284:4: Cell pin connected by name with empty reference: 'ram_cfg_icache_data_o'
+15284 |   .ram_cfg_icache_data_o(),
+      |    ^~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15302:4: Cell pin connected by name with empty reference: 'data_wdata_intg_o'
+15302 |   .data_wdata_intg_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15303:4: Cell pin connected by name with empty reference: 'data_tag_o'
+15303 |   .data_tag_o(),
+      |    ^~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15308:4: Cell pin connected by name with empty reference: 'trvk_revbm_req_o'
+15308 |   .trvk_revbm_req_o(),
+      |    ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15311:4: Cell pin connected by name with empty reference: 'trvk_revbm_addr_o'
+15311 |   .trvk_revbm_addr_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15323:4: Cell pin connected by name with empty reference: 'scramble_req_o'
+15323 |   .scramble_req_o(),
+      |    ^~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15325:4: Cell pin connected by name with empty reference: 'crash_dump_o'
+15325 |   .crash_dump_o(),
+      |    ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15326:4: Cell pin connected by name with empty reference: 'double_fault_seen_o'
+15326 |   .double_fault_seen_o(),
+      |    ^~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15329:4: Cell pin connected by name with empty reference: 'alert_minor_o'
+15329 |   .alert_minor_o(),
+      |    ^~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15330:4: Cell pin connected by name with empty reference: 'alert_major_internal_o'
+15330 |   .alert_major_internal_o(),
+      |    ^~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15331:4: Cell pin connected by name with empty reference: 'alert_major_bus_o'
+15331 |   .alert_major_bus_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15332:4: Cell pin connected by name with empty reference: 'core_sleep_o'
+15332 |   .core_sleep_o(),
+      |    ^~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15333:4: Cell pin connected by name with empty reference: 'lockstep_cmp_en_o'
+15333 |   .lockstep_cmp_en_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15334:4: Cell pin connected by name with empty reference: 'data_req_shadow_o'
+15334 |   .data_req_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15335:4: Cell pin connected by name with empty reference: 'data_we_shadow_o'
+15335 |   .data_we_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15336:4: Cell pin connected by name with empty reference: 'data_be_shadow_o'
+15336 |   .data_be_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15337:4: Cell pin connected by name with empty reference: 'data_addr_shadow_o'
+15337 |   .data_addr_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15338:4: Cell pin connected by name with empty reference: 'data_wdata_shadow_o'
+15338 |   .data_wdata_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15339:4: Cell pin connected by name with empty reference: 'data_wdata_intg_shadow_o'
+15339 |   .data_wdata_intg_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15340:4: Cell pin connected by name with empty reference: 'instr_req_shadow_o'
+15340 |   .instr_req_shadow_o(),
+      |    ^~~~~~~~~~~~~~~~~~
+%Warning-PINCONNECTEMPTY: rtnn_c3_measurement_v2_soc_flat.v:15341:4: Cell pin connected by name with empty reference: 'instr_addr_shadow_o'
+15341 |   .instr_addr_shadow_o()
+      |    ^~~~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:49:18: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+   49 |     end else if (u_mailbox.req_toggle_tck_q != req_toggle_guard) begin
+      |                  ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:49:28: Can't find definition of 'req_toggle_tck_q' in dotted variable: 'u_mailbox.req_toggle_tck_q'
+   49 |     end else if (u_mailbox.req_toggle_tck_q != req_toggle_guard) begin
+      |                            ^~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:50:27: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+   50 |       req_toggle_guard <= u_mailbox.req_toggle_tck_q;
+      |                           ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:50:37: Can't find definition of 'req_toggle_tck_q' in dotted variable: 'u_mailbox.req_toggle_tck_q'
+   50 |       req_toggle_guard <= u_mailbox.req_toggle_tck_q;
+      |                                     ^~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:51:25: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+   51 |       req_hold_guard <= u_mailbox.req_hold_tck_q;
+      |                         ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:51:35: Can't find definition of 'req_hold_tck_q' in dotted variable: 'u_mailbox.req_hold_tck_q'
+   51 |       req_hold_guard <= u_mailbox.req_hold_tck_q;
+      |                                   ^~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:54:11: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+   54 |       if (u_mailbox.req_hold_tck_q !== req_hold_guard)
+      |           ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:54:21: Can't find definition of 'req_hold_tck_q' in dotted variable: 'u_mailbox.req_hold_tck_q'
+   54 |       if (u_mailbox.req_hold_tck_q !== req_hold_guard)
+      |                     ^~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:56:11: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+   56 |       if (u_mailbox.req_ack_sync2_tck_q == req_toggle_guard)
+      |           ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:56:21: Can't find definition of 'req_ack_sync2_tck_q' in dotted variable: 'u_mailbox.req_ack_sync2_tck_q'
+   56 |       if (u_mailbox.req_ack_sync2_tck_q == req_toggle_guard)
+      |                     ^~~~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:73:11: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+   73 |       if (u_mailbox.response_pending_tck_q)
+      |           ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:73:21: Can't find definition of 'response_pending_tck_q' in dotted variable: 'u_mailbox.response_pending_tck_q'
+   73 |       if (u_mailbox.response_pending_tck_q)
+      |                     ^~~~~~~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:83:18: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+   83 |     end else if (u_mailbox.response_pending_tck_q && !rsp_pending_seen) begin
+      |                  ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:83:28: Can't find definition of 'response_pending_tck_q' in dotted variable: 'u_mailbox.response_pending_tck_q'
+   83 |     end else if (u_mailbox.response_pending_tck_q && !rsp_pending_seen) begin
+      |                            ^~~~~~~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:90:12: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+   90 |       if (!u_mailbox.response_pending_tck_q) begin
+      |            ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:90:22: Can't find definition of 'response_pending_tck_q' in dotted variable: 'u_mailbox.response_pending_tck_q'
+   90 |       if (!u_mailbox.response_pending_tck_q) begin
+      |                      ^~~~~~~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:100:19: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+  100 |     if (trst_n && u_mailbox.rsp_capture_pending_tck_q) begin
+      |                   ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:100:29: Can't find definition of 'rsp_capture_pending_tck_q' in dotted variable: 'u_mailbox.rsp_capture_pending_tck_q'
+  100 |     if (trst_n && u_mailbox.rsp_capture_pending_tck_q) begin
+      |                             ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:102:11: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+  102 |       if (u_mailbox.rsp_hold_tck_q !== response_data)
+      |           ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:102:21: Can't find definition of 'rsp_hold_tck_q' in dotted variable: 'u_mailbox.rsp_hold_tck_q'
+  102 |       if (u_mailbox.rsp_hold_tck_q !== response_data)
+      |                     ^~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:110:18: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+  110 |     if (rst_n && u_mailbox.req_capture_pending_sys_q) begin
+      |                  ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:110:28: Can't find definition of 'req_capture_pending_sys_q' in dotted variable: 'u_mailbox.req_capture_pending_sys_q'
+  110 |     if (rst_n && u_mailbox.req_capture_pending_sys_q) begin
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:112:28: Dotted reference to instance that refers to missing module/interface: 'rtnn_c2_vjtag_mailbox'
+  112 |       if (request_data !== u_mailbox.req_hold_tck_q)
+      |                            ^~~~~~~~~
+%Error: tb_rtnn_c2_soc_42.sv:112:38: Can't find definition of 'req_hold_tck_q' in dotted variable: 'u_mailbox.req_hold_tck_q'
+  112 |       if (request_data !== u_mailbox.req_hold_tck_q)
+      |                                      ^~~~~~~~~~~~~~
+%Error: Exiting due to 24 error(s)

@@ -1,0 +1,37 @@
+{
+  "schema": "rtnn-c3-v2-jtag-post-audit-v1",
+  "status": "PASS",
+  "experiment_id": "C3V2_C2J2_REPLAY_RUN2_20261115",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "build_id": "43334531",
+  "response_count": 42,
+  "unique_input_ids": [
+    0,
+    24,
+    57
+  ],
+  "cycle_min": 20151,
+  "cycle_median": 1031305.5,
+  "cycle_max": 2791490,
+  "bad": {
+    "json_status": false,
+    "json_count": false,
+    "row_count": false,
+    "sequence_order": false,
+    "sof": false,
+    "build": false,
+    "model_ids": 0,
+    "crc": 0,
+    "cycle_valid": 0,
+    "counter_status": 0,
+    "prediction": 0,
+    "exits": 0,
+    "response_identity": 0,
+    "case_status": 0,
+    "scope": false,
+    "cable": false
+  },
+  "raw_log_sha256": "3567475429058283bb79e47388eab04c40f8eb1469a0143eb2890a39428d87f7",
+  "results_csv_sha256": "169b47dad189b424d81c0381f4c57c73eb7a8aabb76c3ae468df7f2647e35224",
+  "results_json_sha256": "c709ad03cacfec26cf2b9ef1d568a27d8146bf024edaf0163e152043e457b7f2"
+}

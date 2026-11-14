@@ -1,0 +1,300 @@
+{
+  "schema": "rtnn-c3-gate-b-evidence-audit-v1",
+  "classification": {
+    "B_SIGNOFF": "BLOCKED_EXTERNAL_JTAG_TIMING_AND_UNCONSTRAINED_IO",
+    "internal_sta": "PASS_FOR_REPORTED_CONSTRAINED_PATHS_ONLY",
+    "cdc": "16_D102_WARNINGS_RETAINED; 16NS_INTERNAL_SCREEN_WITHIN_LIMIT",
+    "B_EMPIRICAL": "PASS_LIMITED_NOT_A_TIMING_WCET_OR_DEADLINE_GUARANTEE"
+  },
+  "device": "Cyclone V 5CEBA4F23C7N",
+  "build_id": "43334531",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "elf_sha256": "9cbf537bd9440deaf5c78abf6b204da9cbcd2fe3795acf444d733dbd581002b6",
+  "bin_sha256": "d55d2db36d835825b1e23d385f9e4c7555c9200c2f2656bbc4ec649530b2ae53",
+  "q15_weights_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+  "host_q15_reference_sha256": "1f9b08987a9d7368b663f604eb1dce6e077073e099552532468509c846d6bdc8",
+  "q15_prediction_digest": "03eb958cfa8b4fd2f71a95fb47dbca512820c237c281473817bba685b92c743e",
+  "campaign_schedule_bindings": {
+    "count": 13,
+    "record_count_total": 24840,
+    "identities": [
+      {
+        "session_id": "diagnostic_fixed",
+        "record_count": 2520,
+        "binding_sha256": "d9aacfd8c9b100e17c13883d7c095821d522e189c9f038251ecdb8dafb50fad8"
+      },
+      {
+        "session_id": "diagnostic_adaptive",
+        "record_count": 7560,
+        "binding_sha256": "6eb8311a1a217ea08a6df27eafeabf1f4e06752061ff458eb178f597fce0eb55"
+      },
+      {
+        "session_id": "diagnostic_capped",
+        "record_count": 7560,
+        "binding_sha256": "02eaad582a2714aa0de069ed1115ba25ffac25361cec87946b7f1c5f7b2a5842"
+      },
+      {
+        "session_id": "primary_01",
+        "record_count": 720,
+        "binding_sha256": "9f59e4540524db1e896e20086869c4929a66203758f5ce0dc5c0749165a56113"
+      },
+      {
+        "session_id": "primary_02",
+        "record_count": 720,
+        "binding_sha256": "15d63f73c89b5c6ab6c98fa11a02f343a966f6b8976fc24233a5cdf4307e97b9"
+      },
+      {
+        "session_id": "primary_03",
+        "record_count": 720,
+        "binding_sha256": "734c6d7f8e31cafafe5cb42cb3af30aaf08b50e6afe6594d65efb62b9d7b9aa3"
+      },
+      {
+        "session_id": "primary_04",
+        "record_count": 720,
+        "binding_sha256": "0c0fa7362617a2ae6eea8ee11a369e6b11c50db91dbaa7bf3be888acc7ffb9f5"
+      },
+      {
+        "session_id": "primary_05",
+        "record_count": 720,
+        "binding_sha256": "3a9fcd46e4bdee20a28d3c1e32a2cd486e26deb867db4915c068d164b2d4de63"
+      },
+      {
+        "session_id": "primary_06",
+        "record_count": 720,
+        "binding_sha256": "667fca0df5bfc10f11d8df03517344e12484e8a395a880b27edd16feca050624"
+      },
+      {
+        "session_id": "primary_07",
+        "record_count": 720,
+        "binding_sha256": "ec0ee62e2f215d322d278134d4d303cab042f384f7bc88379d62dcfdf74cfae6"
+      },
+      {
+        "session_id": "primary_08",
+        "record_count": 720,
+        "binding_sha256": "be2148aca566225779c1c87fb7f54494a7ca83baa5bce0c0b266a415a8d40bf3"
+      },
+      {
+        "session_id": "primary_09",
+        "record_count": 720,
+        "binding_sha256": "bb9f8e7632d81831bb4ef3dcbe9874180b1bc82af69c2c465b38c81e4983a4cd"
+      },
+      {
+        "session_id": "primary_10",
+        "record_count": 720,
+        "binding_sha256": "2d5c6b479c96b3b406534860a315ce01de1075d017fe0d7c960b624072fb51d3"
+      }
+    ]
+  },
+  "timing_reports": [
+    {
+      "corner_index": 0,
+      "kind": "setup",
+      "reported_paths": 20,
+      "violated_paths": 0,
+      "worst_slack_ns": 1.803
+    },
+    {
+      "corner_index": 0,
+      "kind": "hold",
+      "reported_paths": 20,
+      "violated_paths": 0,
+      "worst_slack_ns": 0.259
+    },
+    {
+      "corner_index": 1,
+      "kind": "setup",
+      "reported_paths": 20,
+      "violated_paths": 0,
+      "worst_slack_ns": 1.887
+    },
+    {
+      "corner_index": 1,
+      "kind": "hold",
+      "reported_paths": 20,
+      "violated_paths": 0,
+      "worst_slack_ns": 0.242
+    },
+    {
+      "corner_index": 2,
+      "kind": "setup",
+      "reported_paths": 20,
+      "violated_paths": 0,
+      "worst_slack_ns": 10.027
+    },
+    {
+      "corner_index": 2,
+      "kind": "hold",
+      "reported_paths": 20,
+      "violated_paths": 0,
+      "worst_slack_ns": 0.134
+    },
+    {
+      "corner_index": 3,
+      "kind": "setup",
+      "reported_paths": 20,
+      "violated_paths": 0,
+      "worst_slack_ns": 11.154
+    },
+    {
+      "corner_index": 3,
+      "kind": "hold",
+      "reported_paths": 20,
+      "violated_paths": 0,
+      "worst_slack_ns": 0.124
+    }
+  ],
+  "unconstrained": {
+    "input_ports": 2,
+    "input_paths": 41,
+    "output_ports": 4,
+    "output_paths": 8,
+    "ports": [
+      "altera_reserved_tdi",
+      "altera_reserved_tms",
+      "altera_reserved_tdo",
+      "LEDR[0]",
+      "LEDR[1]",
+      "LEDR[3]"
+    ]
+  },
+  "clock_models": {
+    "CLOCK_50_period_ns": 20.0,
+    "altera_reserved_tck_period_ns": 33.333,
+    "note": "Quartus generated clock model; not a measurement of the physical onboard USB-Blaster."
+  },
+  "sdc_exceptions": [
+    "set_false_path -from [get_ports {KEY[0]}] -to [get_registers {*rst_pipe_q*}]",
+    "set_false_path -from [get_ports {KEY[0]}] -to [get_registers {*tck_reset_release_q*}]"
+  ],
+  "bundled_data_screen": {
+    "limit_ns": 16.0,
+    "paths": [
+      {
+        "corner_index": 0,
+        "bus": "req",
+        "path_count": 800,
+        "min_ns": 0.627,
+        "max_ns": 3.323,
+        "spread_ns": 2.696
+      },
+      {
+        "corner_index": 0,
+        "bus": "rsp",
+        "path_count": 480,
+        "min_ns": 0.626,
+        "max_ns": 3.633,
+        "spread_ns": 3.007
+      },
+      {
+        "corner_index": 1,
+        "bus": "req",
+        "path_count": 800,
+        "min_ns": 0.625,
+        "max_ns": 3.186,
+        "spread_ns": 2.561
+      },
+      {
+        "corner_index": 1,
+        "bus": "rsp",
+        "path_count": 480,
+        "min_ns": 0.624,
+        "max_ns": 3.521,
+        "spread_ns": 2.897
+      },
+      {
+        "corner_index": 2,
+        "bus": "req",
+        "path_count": 800,
+        "min_ns": 0.297,
+        "max_ns": 2.183,
+        "spread_ns": 1.886
+      },
+      {
+        "corner_index": 2,
+        "bus": "rsp",
+        "path_count": 480,
+        "min_ns": 0.297,
+        "max_ns": 2.373,
+        "spread_ns": 2.076
+      },
+      {
+        "corner_index": 3,
+        "bus": "req",
+        "path_count": 800,
+        "min_ns": 0.278,
+        "max_ns": 1.891,
+        "spread_ns": 1.613
+      },
+      {
+        "corner_index": 3,
+        "bus": "rsp",
+        "path_count": 480,
+        "min_ns": 0.278,
+        "max_ns": 2.05,
+        "spread_ns": 1.772
+      }
+    ]
+  },
+  "d102_unwaived_structure_count": 16,
+  "source_evidence_sha256": {
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c3_measurement_v2.qsf": "0d1f4e375c12526acab789112882defe903c2044009ea051ad4a2537eddbdebe",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c3_measurement_v2.sdc": "ceaaa6708f0ed8f6d2c1443b60d9511c51d21f96ddaf914117ee6a65410c82eb",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c3_measurement_v2.sof": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c3_measurement_v2_quartus_flat.v": "7c0675a6b2862c6db68f8ec1c0ceb517161389e0a3a64c7cf3bd10f33c4e9bb1",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c2_global_buf.v": "98d4ac6fc5b541197efc046e647af0537f68a42789b3c8fce4872ae60e125a5a",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_ram_lane0.hex": "d22de6d6cb644dfdd2c5d5ef839faa46c94de975f879d1940336833912674867",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_ram_lane1.hex": "3dafca67ab769cd03b4185dd32b46744a5b69a1bc62672a13abd70db416684ff",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_ram_lane2.hex": "cb5e7db6eab396208d051f9fbf22409b9508a6ad3b5d3aa155399842249c7994",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_ram_lane3.hex": "39dacc63ae00262432842df91a343d4ee63d00192944d00509f65c569fa05711",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/quartus_compile.log": "f4200b402018855dbdb17bc7d7a04e06da9d74678b6c5a7e259e58904f7b86b4",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/quartus_compile.exitcode": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/quartus_drc_postfit.log": "87eca2165a9c1a65a3a57cfaa6269715fc649e6dbf131155bee9de71268a150a",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/quartus_drc_postfit.exitcode": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c3_measurement_v2.fit.summary": "48692b90e82360561ffe08d8dec089be40ee38db82b2d378b4549447ba16cb30",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c3_measurement_v2.sta.summary": "20d5c67b4ecaccd760685073a06a19062a8feffe936302b2760e920cff21d06c",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c3_measurement_v2.drc.rpt": "0b22b4b3a14fbc8a920a69731cc1f73acd7d29ed4b3a35713ac17b76a45e20c0",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/rtnn_c3_measurement_v2.asm.rpt": "b0c584cd0acc81a3595d760bea679c723bad355aec835c129cd1211a13b40626",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_QUARTUS_RETRY02_20261115/warning_counts.txt": "fda4a59b1a798ca4ff88d267e2f1926ea8f7e3f20c04ac4e2f9fe2e47740e1e5",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_RV32_BUILD_20261115/rtnn_c3_measurement_v2.elf": "9cbf537bd9440deaf5c78abf6b204da9cbcd2fe3795acf444d733dbd581002b6",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_RV32_BUILD_20261115/rtnn_c3_measurement_v2.bin": "d55d2db36d835825b1e23d385f9e4c7555c9200c2f2656bbc4ec649530b2ae53",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_RV32_BUILD_20261115/build_manifest.json": "b4b15657da4376dccd357562f5d55fa72df80087328549ea6e4c061771f649de",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_RV32_BUILD_20261115/fpga_b_image_manifest.json": "ce81256f8e210f6daa56f87430c1a0bc42f1657e2a0ce1884bb31c840f7244ce",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/frozen_inputs/paper/campaign/campaign.json": "3d97a1cd87395e294299cacb617474367c89a9295355cd25fb1b4fa67464c936",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/frozen_inputs/generated/heldout360.json": "eeba9000a918bcba911007e78905c5052fc743422f95cb314a0fc9f4ecdfb14c",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/frozen_inputs/generated/frozen_q15_oracle.json": "4e1a3ddcabe1884b1607c77d19b10da8a86d53da3f4c060c30d7449635ec3cf4",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/frozen_inputs/evidence/native_q15_firmware/host_actual_q15_firmware.csv": "1f9b08987a9d7368b663f604eb1dce6e077073e099552532468509c846d6bdc8",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/frozen_inputs/evidence/native_q15_firmware/native_firmware_verdict.json": "81f35dab218a8aed82b635a85f4390ead3bf4aa3e00f0e535fce10e3f935483d",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/candidate_firmware_build/realtime_nn_real_sequence_fixed_weights_generated.h": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/diagnostic_fixed/binding.json": "d9aacfd8c9b100e17c13883d7c095821d522e189c9f038251ecdb8dafb50fad8",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/diagnostic_adaptive/binding.json": "6eb8311a1a217ea08a6df27eafeabf1f4e06752061ff458eb178f597fce0eb55",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/diagnostic_capped/binding.json": "02eaad582a2714aa0de069ed1115ba25ffac25361cec87946b7f1c5f7b2a5842",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_01/binding.json": "9f59e4540524db1e896e20086869c4929a66203758f5ce0dc5c0749165a56113",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_02/binding.json": "15d63f73c89b5c6ab6c98fa11a02f343a966f6b8976fc24233a5cdf4307e97b9",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_03/binding.json": "734c6d7f8e31cafafe5cb42cb3af30aaf08b50e6afe6594d65efb62b9d7b9aa3",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_04/binding.json": "0c0fa7362617a2ae6eea8ee11a369e6b11c50db91dbaa7bf3be888acc7ffb9f5",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_05/binding.json": "3a9fcd46e4bdee20a28d3c1e32a2cd486e26deb867db4915c068d164b2d4de63",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_06/binding.json": "667fca0df5bfc10f11d8df03517344e12484e8a395a880b27edd16feca050624",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_07/binding.json": "ec0ee62e2f215d322d278134d4d303cab042f384f7bc88379d62dcfdf74cfae6",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_08/binding.json": "be2148aca566225779c1c87fb7f54494a7ca83baa5bce0c0b266a415a8d40bf3",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_09/binding.json": "bb9f8e7632d81831bb4ef3dcbe9874180b1bc82af69c2c465b38c81e4983a4cd",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_PHYSICAL_PREP_20261115/campaign_sof_bound_v2/primary_10/binding.json": "2d5c6b479c96b3b406534860a315ce01de1075d017fe0d7c960b624072fb51d3",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/run_c3_v2_allcorners_sta_retry03.tcl": "521d6d6b26d23b10150c360af764fef17efb7d8cd5745de321fcf0e9de2e45c5",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/quartus_sta.log": "a30a5df2c505c9768a8d387e4d711335ae4b56d21be074d1b090de0dfc0853f0",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/exitcode.txt": "13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_clocks.rpt": "971159f23c546be27f6945ebd58efac9f450cd075f66ce75d13d2dfe1e4837bb",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_unconstrained_paths.rpt": "d6b1ef57a80ae1bc6ec35d696775bde44e63445c05da0a325ea126fb303f6028",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/cdc_bus_path_delay_summary.txt": "b8780599d319d786530d703cd97f2a7c233c4af93094753bb3e88716dda5a64a",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_setup_0.rpt": "e743d573ec142f247709f06a969a6e1ad246b24938271090f127f0b929a02d3e",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_setup_1.rpt": "90ac1485decc0806dbf870327079a928282efe167276f602212ba6283fe65053",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_setup_2.rpt": "13e7dafd3fe180e8817c1505d8934383e358e005eb3134efaccac60f81133626",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_setup_3.rpt": "4bf4fe09e286c99a06237f94aaee4086fe7a22a7a77a4940efbb469b22340ff5",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_hold_0.rpt": "f419745b1cbefc4e372d9d630586d357f6bb33d4b4ab55dbbff15b7afd7bfcb2",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_hold_1.rpt": "d76ea10aaeefd67cc0fa9076e3e4a231e0a22e28da056fe0a8dc61ad41ee9cf7",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_hold_2.rpt": "aa1b948c8b7edf3734fa4a70e988b5a42e1ae2052df62c2a07a78783b93b69f6",
+    "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_STA_RETRY03_20261115/c3_v2_retry03_hold_3.rpt": "030b08d1b706861d489277d07759f46d9a3a48662acc202b4891b7bcbb7927fe"
+  },
+  "evidence_file_count": 55,
+  "quartus_compile_exit": 0,
+  "timequest_script_exit": 0,
+  "scope_limit": "This consistency audit validates preserved report values and file identity. It does not repair missing external timing constraints, prove CDC metastability/MTBF, or establish board timing signoff."
+}

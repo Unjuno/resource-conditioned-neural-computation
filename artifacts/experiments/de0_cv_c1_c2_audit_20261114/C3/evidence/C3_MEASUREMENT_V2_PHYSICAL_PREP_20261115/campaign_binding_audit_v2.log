@@ -1,0 +1,9 @@
+{
+  "status": "PASS_HOST_BINDING_AUDIT_NOT_PHYSICAL",
+  "schedules": 13,
+  "rows": 24840,
+  "unique_accuracy_inputs": 360,
+  "campaign_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "physical_runs": 0
+}

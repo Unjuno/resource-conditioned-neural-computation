@@ -1,0 +1,24 @@
+{
+  "physical_operations": 1,
+  "output_sha256": {
+    "c2_jtag_raw.log": "4f5f7e43ea2034e62255894cc12f0130bb21e4749467ee3b90a88086fced82a3",
+    "c2_jtag_results.json": "c36f3a94a330e77034847c50edab195a532b20aeb8f4b0c8574c4a4cebec3f8c",
+    "c2_jtag_results.csv": "16a2163547a33ca01a47e3e243a4e2668b3dc82b02b5d3e33249f1ba0688162a"
+  },
+  "experiment_id": "C3V2_C2J2_REPLAY_RUN1_20261115",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "status": "FAIL_POSTRUN_JSON_INVALID",
+  "reason": "c2_jtag_results.json contains unquoted hex identifiers such as response_model_id 52544e4e, invalid JSON number; strict PowerShell ConvertFrom-Json rejected at cases[0].response_model_id",
+  "disposition": "Preserve raw files; correct serializer; repeat under a new experiment ID; this run is not counted as PASS.",
+  "programming": "SRAM only; no Flash/CFM",
+  "csv_checks": {
+    "crc_fail": 0,
+    "prediction_fail": 0,
+    "response_identity_fail": 0,
+    "case_status_fail": 0,
+    "cycle_delta_fail": 0,
+    "exit_fail": 0,
+    "rows": 42
+  },
+  "schema": "rtnn-c3-run-post-audit-v1"
+}

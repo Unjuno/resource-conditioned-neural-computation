@@ -1,0 +1,8 @@
+CWD: C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-audit-20261114
+Command: Get-FileHash SHA256 and verify README.md, run_c3_campaign_v2.tcl, test_c3_campaign_runner.tcl against SHA256SUMS.txt
+Exit: 0
+Result: 3/3 PASS;
+README.md 6f7527432506a7ff6635234a59f0ce09dd5d6d0d98d76e08c3ed6ee306103395 PASS
+run_c3_campaign_v2.tcl d0dcdfead8d6324db15d9d5f86e4ca5e05867b538300795a81af5a31b084bfbc PASS
+test_c3_campaign_runner.tcl 5b92108610f6918387f543965ca88e1aca18091ddc7806f423436f05c1fdfec5 PASS
+Manifest SHA-256: 2c27410465eedf1257b8f488164538755c7ac24f6880d68966968d764538aae5

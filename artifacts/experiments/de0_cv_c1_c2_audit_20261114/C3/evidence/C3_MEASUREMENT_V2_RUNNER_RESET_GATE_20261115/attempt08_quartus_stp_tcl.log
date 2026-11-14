@@ -1,0 +1,33 @@
+CWD: C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-audit-20261114
+Command: quartus_stp_tcl.exe -t D:\rtnn-c3-resetgate-test-retry08-20261115\test_c3_campaign_runner.tcl D:\rtnn-c3-resetgate-test-retry08-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-retry08-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-retry08-20261115
+
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+Info: Running Quartus Prime Signal Tap TCL Only
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun Nov 15 03:07:44 2026
+Info: Command: quartus_stp_tcl -t D:\rtnn-c3-resetgate-test-retry08-20261115\test_c3_campaign_runner.tcl D:\rtnn-c3-resetgate-test-retry08-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-retry08-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-retry08-20261115
+Info: Quartus(args): {D:\rtnn-c3-resetgate-test-retry08-20261115\run_c3_campaign_v2.tcl} {D:\rtnn-c3-resetgate-test-retry08-20261115\run_c3_campaign_v2.tcl} {D:\rtnn-c3-resetgate-test-retry08-20261115}
+C3_CAMPAIGN_TCL_PROTOCOL_PASS u64=2 crc32=1 sha256=1 hex_id_json_strings=3 full_scope_json=1 subset_scope_json=1 frozen_bindings=13 rows=24840 full_all=1 pilot_subset=20 sequence_negative=4
+Info (23030): Evaluation of Tcl script D:\rtnn-c3-resetgate-test-retry08-20261115\test_c3_campaign_runner.tcl was successful
+Info: Quartus Prime Signal Tap TCL Only was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4368 megabytes
+    Info: Processing ended: Sun Nov 15 03:07:46 2026
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+EXIT=0

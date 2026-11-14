@@ -1,0 +1,12 @@
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Net Delay                                                                                                                                                                                            ;
++---------------+--------+----------+--------+----------------------------------------------------------------------+---------------------------------------------------------------------------+------+
+; Name          ; Slack  ; Required ; Actual ; From                                                                 ; To                                                                        ; Type ;
++---------------+--------+----------+--------+----------------------------------------------------------------------+---------------------------------------------------------------------------+------+
+; set_net_delay ; 12.367 ; 16.000   ; 3.633  ; [get_registers {*rtnn_de0_cv_soc_c2:u_soc|response_words_q[*][*]}]   ; [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q[*]}] ; max  ;
+;  --           ; 12.367 ; 16.000   ; 3.633  ; rtnn_de0_cv_soc_c2:u_soc|response_words_q[14][22]                    ; rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q[470]                  ; max  ;
+;  --           ; 12.372 ; 16.000   ; 3.628  ; rtnn_de0_cv_soc_c2:u_soc|response_words_q[14][5]                     ; rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q[453]                  ; max  ;
+; set_net_delay ; 12.677 ; 16.000   ; 3.323  ; [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[*]}] ; [get_registers {*rtnn_c2_vjtag_mailbox:u_mailbox|req_bus_sync1_sys_q[*]}] ; max  ;
+;  --           ; 12.677 ; 16.000   ; 3.323  ; rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[55]                   ; rtnn_c2_vjtag_mailbox:u_mailbox|req_bus_sync1_sys_q[55]                   ; max  ;
+;  --           ; 12.745 ; 16.000   ; 3.255  ; rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q[122]                  ; rtnn_c2_vjtag_mailbox:u_mailbox|req_bus_sync1_sys_q[122]                  ; max  ;
++---------------+--------+----------+--------+----------------------------------------------------------------------+---------------------------------------------------------------------------+------+

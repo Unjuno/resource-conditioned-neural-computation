@@ -1,0 +1,7 @@
+Attempt 01 (failed, preserved)
+CWD: C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-audit-20261114
+Command: quartus_stp_tcl.exe -t D:\rtnn-c3-resetgate-test-20261115\test_c3_campaign_runner.tcl D:\rtnn-c3-resetgate-test-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-20261115\campaign_sof_bound_v2
+Tool: Quartus Prime Signal Tap Tcl Only 25.1std.0 Build 1129
+Exit: 3
+Observed: Tcl evaluation error: can't read "gate": no such variable, while parsing reset gate regex at runner eval line 166. No JTAG device was opened.
+Cause: an unescaped literal closing brace in a Tcl double-quoted regex prematurely ended the enclosing braced procedure body. Corrected by simplifying the capture class; retry is separate.

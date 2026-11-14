@@ -1,0 +1,31 @@
+{
+  "schema": "rtnn-c3-c2j2-replay-v2-preparation-v1",
+  "status": "PASS_REBOUND_CASES_HOST_ONLY",
+  "source_cases_sha256": "52b7fdae7c465fd4b6409876e258e00fbaad5656e93ad3b9fb79f2f8741aec5d",
+  "dataset_sha256": "eeba9000a918bcba911007e78905c5052fc743422f95cb314a0fc9f4ecdfb14c",
+  "oracle_sha256": "4e1a3ddcabe1884b1607c77d19b10da8a86d53da3f4c060c30d7449635ec3cf4",
+  "host_q15_sha256": "1f9b08987a9d7368b663f604eb1dce6e077073e099552532468509c846d6bdc8",
+  "campaign_canonical_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "source_build_id": "43324a32",
+  "target_build_id": "43334531",
+  "model_id": "52544e4e",
+  "case_count": 42,
+  "input_ids": [
+    0,
+    24,
+    57
+  ],
+  "mode_counts": {
+    "fixed": 21,
+    "adaptive": 21
+  },
+  "rebind_scope": "Only RTNQ build_id bytes 24..27 and header CRC bytes 28..31 changed. Input bytes, pixel CRC, sequence/order, modes, budgets, frozen expected values unchanged.",
+  "schedule_id": "C2J2_REPLAY_V2",
+  "schedule_canonical_sha256": "03f1e70d96762473d164110709d7323bf76db00cfa9d87b6c5d141a8e17118d1",
+  "case_csv_sha256": "c2c58f29d46e1d43873f22efbf8b371818c6a8a7d5a4e6299e12bcc25cf5c95f",
+  "schedule_file_sha256": "2737b433291a8c84d6b2139bd8edb52d4b1a524a65bad2e53493053143042adc",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "timing_classification": "EMPIRICAL_ONLY",
+  "wcet_or_hard_deadline_claimed": false,
+  "physical_run": "NOT_RUN"
+}

@@ -1,0 +1,11 @@
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Error (23020): Additional arguments found before a Tcl mode argument
+
+Usage:
+------
+
+quartus_sta [-h | --help[=<option|topic>] | -v]
+quartus_sta <project name> [<options>]
+quartus_sta -t <script file> [<script args>]
+quartus_sta -s
+quartus_sta --tcl_eval <tcl command>

@@ -1,0 +1,3 @@
+command_cwd=D:\rtnn-c3-campaign-runner-v2
+attempt=quartus_stp_tcl.exe -t test_c3_campaign_runner.tcl run_c3_campaign_v2.tcl run_c3_campaign_v2.tcl
+outcome=FAIL_BEFORE_TEST_OUTPUT: Tee-Object could not open relative log path from D:\rtnn-c3-campaign-runner-v2

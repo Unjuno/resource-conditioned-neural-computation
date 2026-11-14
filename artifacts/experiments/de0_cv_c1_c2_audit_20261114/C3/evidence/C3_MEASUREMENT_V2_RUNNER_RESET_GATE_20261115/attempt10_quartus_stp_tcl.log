@@ -1,0 +1,40 @@
+CWD: C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-audit-20261114
+Command: quartus_stp_tcl.exe -t D:\rtnn-c3-resetgate-test-retry10-20261115\test_c3_campaign_runner.tcl D:\rtnn-c3-resetgate-test-retry10-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-retry10-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-retry10-20261115
+
+TBBmalloc: skip allocation functions replacement in ucrtbase.dll: unknown prologue for function _msize
+Info: *******************************************************************
+------------------------------------------------
+Info: Running Quartus Prime Signal Tap TCL Only
+primary physical run did not fail closed before JTAG without reset gate: SOF SHA does not match a completed C3 binding
+    while executing
+"error "primary physical run did not fail closed before JTAG without reset gate: $gate_error""
+    invoked from within
+"if {![catch {c2_run} gate_error] || [string first "KEY-reset replay gate" $gate_error] < 0} {error "primary physical run did not fail closed before JT..."
+    (file "D:\rtnn-c3-resetgate-test-retry10-20261115\test_c3_campaign_runner.tcl" line 54)
+    Info: Version 25.1std.0 Build 1129 10/21/2025 SC Lite Edition
+------------------------------------------------
+    Info: Copyright (C) 2025  Altera Corporation. All rights reserved.
+    Info: Your use of Altera Corporation's design tools, logic functions 
+    Info: and other software and tools, and any partner logic 
+    Info: functions, and any output files from any of the foregoing 
+    Info: (including device programming or simulation files), and any 
+    Info: associated documentation or information are expressly subject 
+    Info: to the terms and conditions of the Altera Program License 
+    Info: Subscription Agreement, the Altera Quartus Prime License Agreement,
+    Info: the Altera IP License Agreement, or other applicable license
+    Info: agreement, including, without limitation, that your use is for
+    Info: the sole purpose of programming logic devices manufactured by
+    Info: Altera and sold by Altera or its authorized distributors.  Please
+    Info: refer to the Altera Software License Subscription Agreements 
+    Info: on the Quartus Prime software download page.
+    Info: Processing started: Sun Nov 15 03:15:39 2026
+Info: Command: quartus_stp_tcl -t D:\rtnn-c3-resetgate-test-retry10-20261115\test_c3_campaign_runner.tcl D:\rtnn-c3-resetgate-test-retry10-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-retry10-20261115\run_c3_campaign_v2.tcl D:\rtnn-c3-resetgate-test-retry10-20261115
+Info: Quartus(args): {D:\rtnn-c3-resetgate-test-retry10-20261115\run_c3_campaign_v2.tcl} {D:\rtnn-c3-resetgate-test-retry10-20261115\run_c3_campaign_v2.tcl} {D:\rtnn-c3-resetgate-test-retry10-20261115}
+Error (23031): Evaluation of Tcl script D:\rtnn-c3-resetgate-test-retry10-20261115\test_c3_campaign_runner.tcl unsuccessful
+Error: Quartus Prime Signal Tap TCL Only was unsuccessful. 1 error, 0 warnings
+    Error: Peak virtual memory: 4378 megabytes
+    Error: Processing ended: Sun Nov 15 03:15:40 2026
+    Error: Elapsed time: 00:00:01
+    Error: Total CPU time (on all processors): 00:00:02
+
+EXIT=3

@@ -1,0 +1,205 @@
+{
+  "status": "PASS_HOST_DRYRUN_NOT_PHYSICAL",
+  "schedule_count": 13,
+  "total_rows": 24840,
+  "campaign_canonical_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "build_id": "43334531",
+  "binding_id": "43334531",
+  "sof_sha256": null,
+  "timing_classification": "EMPIRICAL_ONLY",
+  "wcet_or_hard_deadline_claimed": false,
+  "sessions": [
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "diagnostic_fixed",
+      "rows": 2520,
+      "modes": {
+        "1": 2520
+      },
+      "cases_sha256": "462c6072c3c0d6c9e66f8cf96b73d3aa0683a7d66c9c0584169bde7948741d6c",
+      "schedule_sha256": "576edecefe232a4cf619bf3f995223b8c26016fb9c8495f50c15e9cff6bee42b",
+      "mode2_rows": 0,
+      "binding_sha256": "c1b7a5e71f39ed597da695f11bcffa514db637ce2fda50a3d6658aac76536b63",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "diagnostic_adaptive",
+      "rows": 7560,
+      "modes": {
+        "3": 7560
+      },
+      "cases_sha256": "be85d47b722559f475bd1d253a6a6d7e5bcf3b729d3d2ffba033141f37b26b5b",
+      "schedule_sha256": "8f3ab2f69217689114727b6b7fb4eae371e5cccae6e31adb3bc5d1fa8117ce20",
+      "mode2_rows": 0,
+      "binding_sha256": "d5d1b31b9dff98c4e474211848dc3339fbae99b51d6fd52fa6794f450f0e91b1",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "diagnostic_capped",
+      "rows": 7560,
+      "modes": {
+        "2": 7560
+      },
+      "cases_sha256": "ef440843c1a3dd97819feaa686750977ad91f708d2b7998002a0bddc9a2b735e",
+      "schedule_sha256": "f0a0ddae3e33ac6debdb1e6317a07c67331509b97cb86f1edbfe535432b65928",
+      "mode2_rows": 7560,
+      "binding_sha256": "be12c701a09543dec398ef1c69a7c0df0322473f15caaf521ea555e3dd685c08",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_01",
+      "rows": 720,
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "cases_sha256": "f80c9ebcc17ff744020f0d09069ce3ce58da8e8397093aaac018941850dd3a01",
+      "schedule_sha256": "73d37a9bf03a263a01663f5bf2d74695b93493c0660309ac39ad9dba97b414c9",
+      "mode2_rows": 0,
+      "binding_sha256": "3f1aac6ba23514ce671c95f835d171eb918bcd96f64f8a399d854e9da02e899e",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_02",
+      "rows": 720,
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "cases_sha256": "8e676df77058c6d3bf614fb5cb081e9e14df66814e1c4603f85eccddbb2d2154",
+      "schedule_sha256": "e96669a29f4d188827daa1007ec1362b77b0c55869491abb1263680cd5c61118",
+      "mode2_rows": 0,
+      "binding_sha256": "90a85e5a85441f394a4ff7b088802ab07580879b198b7eddc7632b4b7ef13e88",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_03",
+      "rows": 720,
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "cases_sha256": "ec35e4f63770855ce838db31320b17fd880208914a435b376a137b22e4e521a4",
+      "schedule_sha256": "223873b4a126e03497e71dbcbf791079976bad854efc1b583d75645ab55df54b",
+      "mode2_rows": 0,
+      "binding_sha256": "10d4915205ce8345666dd86e52abc6a93ddf9095121073df5d19f972e4593855",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_04",
+      "rows": 720,
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "cases_sha256": "de0fab8dfd4b5eff3bfafc017966565cd795cf0eac10b0f779b749babe16647f",
+      "schedule_sha256": "6d39de778ff9ecae838a430824194d4f9ee83a5416d3d2f2e2d1bd4dbd7e4196",
+      "mode2_rows": 0,
+      "binding_sha256": "6fc8118c73a10aebf4b26ead51659d8b56ab3622ae809564773d2c2338269363",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_05",
+      "rows": 720,
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "cases_sha256": "1db72f527083affb57e0df3b92b78964aa0c23fef84c54fc7d688c6f85cd07a0",
+      "schedule_sha256": "54a5e172d695cf3ba4bd38e378aac2e0a4743d0adcffcf29d4ab7aa45ef58365",
+      "mode2_rows": 0,
+      "binding_sha256": "d7fee24d5fc2d49cbbfd152ec191e7dbff21cc0dbc5f0f3db253da45f506ffd3",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_06",
+      "rows": 720,
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "cases_sha256": "de7f347cb0f28a5cf0caa117da2d9900288cfc8d1e473e91b18c1255980753e1",
+      "schedule_sha256": "335958e0cde52b7c56fc50eb09d385f1f9ddff870e87991e74e72390567b9587",
+      "mode2_rows": 0,
+      "binding_sha256": "16f786001a6529c7bbed28f1d2c23715a5244132441a0ff80667ab20fd1b8991",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_07",
+      "rows": 720,
+      "modes": {
+        "1": 360,
+        "3": 360
+      },
+      "cases_sha256": "f5ebbe0cf438e9ae22e000a2cb5dca349e46f1904e45d3d035f85dc6e78113e7",
+      "schedule_sha256": "b7f358e18ba9798722226656919a87a8d6615dad6c4e538c6a3c3b9a04ec582b",
+      "mode2_rows": 0,
+      "binding_sha256": "593a20795094db01e229bb9ac5d179b069926508a000e91284968a8bbf9d7b2e",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_08",
+      "rows": 720,
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "cases_sha256": "040d4f8a935b1f98cf5853d2b3794baf7546adce2b21ed22015144f957f6317d",
+      "schedule_sha256": "3fb696eff4783ef4ff1d0f2186208501d1821cd233b05e675a2ff88b6d306fab",
+      "mode2_rows": 0,
+      "binding_sha256": "2b006f3408c3c83d98d664c5839a8dfa9ae824b52a52b29c080ac6865eb85360",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_09",
+      "rows": 720,
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "cases_sha256": "b3aabb5dbd4c46f054de9ba13a977473753245553be24644590b77b48cfec082",
+      "schedule_sha256": "738ff472ffa1a98547ce0ab89384439a071a79eda1dbb0292c425a372f15564a",
+      "mode2_rows": 0,
+      "binding_sha256": "b33147e2946a9c56d8a7499ace47f2217a3a4587599d5e543f1527b466e818ac",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    },
+    {
+      "status": "PASS_CASES_BOUND_TO_FROZEN_SCHEDULE",
+      "session": "primary_10",
+      "rows": 720,
+      "modes": {
+        "3": 360,
+        "1": 360
+      },
+      "cases_sha256": "37448ba642ce6e8c513a4a271ca8ce60b050124014351602f9cfe4e398c778b8",
+      "schedule_sha256": "db154943ab73fab850993cd4cfd76be922642b13d6f9bfa2b50b440128186022",
+      "mode2_rows": 0,
+      "binding_sha256": "414231f6001651c7b2c21e12e1a1f9eb6a4d371a35d8b215ae4c835b7abb5bbe",
+      "sof_sha256": null,
+      "measurement_eligible": false
+    }
+  ]
+}

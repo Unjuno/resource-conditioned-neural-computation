@@ -1,0 +1,10 @@
+{
+  "schema": "rtnn-c3-protocol-v2-soc-regression-vectors-v1",
+  "case_count": 42,
+  "frozen_cases_sha256": "7016910c20d47ce7c5487cfbec2490e2afcfb755d22f835b2038876e007ab2da",
+  "source_frozen_build_id": "43324a31",
+  "simulation_build_id": "43334531",
+  "requests_sha256": "8d29a8c0263f6f1b4c6d6173c9fc189e953a8528006e99ebfb353b7a6a15ab19",
+  "expected_sha256": "4662662c1921a1704ee315cd2c60a8bff2da1d6ab3a64934464d6d4c5af0b017",
+  "rebind_scope": "Only RTNQ build_id and corresponding RTNQ header CRC changed; frozen input, pixel CRC, case order, all expected values remain from original C2 case CSV. Simulation only."
+}

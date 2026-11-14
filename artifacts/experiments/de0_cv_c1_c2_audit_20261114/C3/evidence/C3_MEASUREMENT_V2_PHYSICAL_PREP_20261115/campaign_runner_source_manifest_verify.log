@@ -1,0 +1,8 @@
+cwd=C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-audit-20261114 command=write_verify_c3_physical_manifest.ps1 -EvidenceRoot campaign_runner_v2_20261115 -Mode Write; then Verify exitcode=0 --- write ---
+mode=Write
+files=3
+manifest_sha256=b21c53bde68c32c2e62107c0c0a4efb7b142a77f8145f5b88a164b65749a3759
+--- verify ---
+mode=Verify
+files=3
+manifest_sha256=b21c53bde68c32c2e62107c0c0a4efb7b142a77f8145f5b88a164b65749a3759

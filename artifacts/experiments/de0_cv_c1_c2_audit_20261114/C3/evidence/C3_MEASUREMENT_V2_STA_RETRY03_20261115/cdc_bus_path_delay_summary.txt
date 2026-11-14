@@ -1,0 +1,8 @@
+corner=0 bus=req n=800 min_ns=0.627 max_ns=3.323 spread_ns=2.696
+corner=0 bus=rsp n=480 min_ns=0.626 max_ns=3.633 spread_ns=3.007
+corner=1 bus=req n=800 min_ns=0.625 max_ns=3.186 spread_ns=2.561
+corner=1 bus=rsp n=480 min_ns=0.624 max_ns=3.521 spread_ns=2.897
+corner=2 bus=req n=800 min_ns=0.297 max_ns=2.183 spread_ns=1.886
+corner=2 bus=rsp n=480 min_ns=0.297 max_ns=2.373 spread_ns=2.076
+corner=3 bus=req n=800 min_ns=0.278 max_ns=1.891 spread_ns=1.613
+corner=3 bus=rsp n=480 min_ns=0.278 max_ns=2.05 spread_ns=1.772

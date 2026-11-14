@@ -1,0 +1,248 @@
+{
+  "selected_sequences": [
+    49,
+    50,
+    141,
+    142,
+    209,
+    210,
+    277,
+    278,
+    325,
+    326,
+    379,
+    380,
+    431,
+    432,
+    487,
+    488,
+    559,
+    560,
+    719,
+    720
+  ],
+  "rule": "ascending input_id from frozen primary_01 excluding existing diagnostic IDs 0,24,57; one frozen mode=1 fixed_exit=2 and the same input's mode=3 primary_01 adaptive row",
+  "rows": [
+    {
+      "seq": 49,
+      "input_id": 4,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 9,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 50,
+      "input_id": 4,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 9,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 141,
+      "input_id": 5,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 2,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 142,
+      "input_id": 5,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 2,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 209,
+      "input_id": 7,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 4,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 210,
+      "input_id": 7,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 4,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 277,
+      "input_id": 8,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 1,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 278,
+      "input_id": 8,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 1,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 325,
+      "input_id": 6,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 4,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 326,
+      "input_id": 6,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 4,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 379,
+      "input_id": 1,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 0,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 380,
+      "input_id": 1,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 0,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 431,
+      "input_id": 10,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 1,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 432,
+      "input_id": 10,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 1,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 487,
+      "input_id": 9,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 8,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 488,
+      "input_id": 9,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 8,
+      "expected_admitted": 6,
+      "expected_executed": 4
+    },
+    {
+      "seq": 559,
+      "input_id": 3,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 9,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    },
+    {
+      "seq": 560,
+      "input_id": 3,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 9,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 719,
+      "input_id": 2,
+      "mode": 3,
+      "budget_q16": 65535,
+      "fixed_exit": 0,
+      "expected_prediction": 9,
+      "expected_admitted": 6,
+      "expected_executed": 1
+    },
+    {
+      "seq": 720,
+      "input_id": 2,
+      "mode": 1,
+      "budget_q16": 65535,
+      "fixed_exit": 2,
+      "expected_prediction": 9,
+      "expected_admitted": 2,
+      "expected_executed": 2
+    }
+  ],
+  "schema": "rtnn-c3-10-input-pilot-preselection-v1",
+  "physical_status": "NOT_RUN",
+  "primary_01_schedule_sha256": "73d37a9bf03a263a01663f5bf2d74695b93493c0660309ac39ad9dba97b414c9",
+  "input_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "reset_replay": "repeat same 20 sequences after KEY reset, record distinct run/session; no power-cycle implied",
+  "binding_sha256": "bab047cc34dfb059e5647d0a88af9906510b9c45b31300d009d459e06d6f4d44",
+  "primary_01_case_csv_sha256": "f80c9ebcc17ff744020f0d09069ce3ce58da8e8397093aaac018941850dd3a01",
+  "order": "ascending frozen primary_01 sequence order",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "selected_before_any_C3_v2_physical_result": true
+}
