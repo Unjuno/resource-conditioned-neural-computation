@@ -1,0 +1,9 @@
+test_missing_crc_field_is_rejected (__main__.ContractGapTests.test_missing_crc_field_is_rejected) ... ok
+test_mock_directory_inside_physical_root_is_rejected (__main__.ContractGapTests.test_mock_directory_inside_physical_root_is_rejected) ... ok
+test_old_build_identity_is_rejected_by_c3_auditor (__main__.ContractGapTests.test_old_build_identity_is_rejected_by_c3_auditor) ... ok
+test_uint64_counter_wrap_is_rejected (__main__.ContractGapTests.test_uint64_counter_wrap_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.009s
+
+OK

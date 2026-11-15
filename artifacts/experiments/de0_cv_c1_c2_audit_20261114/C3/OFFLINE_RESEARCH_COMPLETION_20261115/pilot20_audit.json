@@ -1,0 +1,237 @@
+{
+  "schema": "rtnn-c3-v2-saved-run-independent-audit-v1",
+  "status": "PASS_SAVED_PHYSICAL_EVIDENCE_AUDIT",
+  "data_class": "SAVED_PHYSICAL_EVIDENCE_NOT_NEW_MEASUREMENT",
+  "experiment_id": "C3V2_TENINPUT_PILOT_SESSION1_20261115",
+  "build_id": "43334531",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "model_id": "52544e4e",
+  "schedule_id": "primary_01",
+  "schedule_canonical_sha256": "73d37a9bf03a263a01663f5bf2d74695b93493c0660309ac39ad9dba97b414c9",
+  "binding_sha256": "bab047cc34dfb059e5647d0a88af9906510b9c45b31300d009d459e06d6f4d44",
+  "case_csv_sha256": "e9639c0fea350e813b3d8c04ed3cc7c814fd6efacdc930e6c12f14ddf5b1becd",
+  "responses": [
+    {
+      "seq": 49,
+      "input_id": 4,
+      "mode": 3,
+      "prediction": 9,
+      "executed_exit": 1,
+      "cycles_start": 19266737742,
+      "cycles_end": 19267303696,
+      "cycles": 565954
+    },
+    {
+      "seq": 50,
+      "input_id": 4,
+      "mode": 1,
+      "prediction": 9,
+      "executed_exit": 2,
+      "cycles_start": 19268637739,
+      "cycles_end": 19269581669,
+      "cycles": 943930
+    },
+    {
+      "seq": 141,
+      "input_id": 5,
+      "mode": 3,
+      "prediction": 2,
+      "executed_exit": 1,
+      "cycles_start": 19270129598,
+      "cycles_end": 19270695554,
+      "cycles": 565956
+    },
+    {
+      "seq": 142,
+      "input_id": 5,
+      "mode": 1,
+      "prediction": 2,
+      "executed_exit": 2,
+      "cycles_start": 19271799857,
+      "cycles_end": 19272743787,
+      "cycles": 943930
+    },
+    {
+      "seq": 209,
+      "input_id": 7,
+      "mode": 1,
+      "prediction": 4,
+      "executed_exit": 2,
+      "cycles_start": 19273992900,
+      "cycles_end": 19274936829,
+      "cycles": 943929
+    },
+    {
+      "seq": 210,
+      "input_id": 7,
+      "mode": 3,
+      "prediction": 4,
+      "executed_exit": 1,
+      "cycles_start": 19275590700,
+      "cycles_end": 19276156655,
+      "cycles": 565955
+    },
+    {
+      "seq": 277,
+      "input_id": 8,
+      "mode": 3,
+      "prediction": 1,
+      "executed_exit": 1,
+      "cycles_start": 19277091230,
+      "cycles_end": 19277657187,
+      "cycles": 565957
+    },
+    {
+      "seq": 278,
+      "input_id": 8,
+      "mode": 1,
+      "prediction": 1,
+      "executed_exit": 2,
+      "cycles_start": 19278694626,
+      "cycles_end": 19279638557,
+      "cycles": 943931
+    },
+    {
+      "seq": 325,
+      "input_id": 6,
+      "mode": 3,
+      "prediction": 4,
+      "executed_exit": 1,
+      "cycles_start": 19280289296,
+      "cycles_end": 19280855252,
+      "cycles": 565956
+    },
+    {
+      "seq": 326,
+      "input_id": 6,
+      "mode": 1,
+      "prediction": 4,
+      "executed_exit": 2,
+      "cycles_start": 19281781679,
+      "cycles_end": 19282725609,
+      "cycles": 943930
+    },
+    {
+      "seq": 379,
+      "input_id": 1,
+      "mode": 1,
+      "prediction": 0,
+      "executed_exit": 2,
+      "cycles_start": 19283438784,
+      "cycles_end": 19284382715,
+      "cycles": 943931
+    },
+    {
+      "seq": 380,
+      "input_id": 1,
+      "mode": 3,
+      "prediction": 0,
+      "executed_exit": 1,
+      "cycles_start": 19285750238,
+      "cycles_end": 19286316195,
+      "cycles": 565957
+    },
+    {
+      "seq": 431,
+      "input_id": 10,
+      "mode": 1,
+      "prediction": 1,
+      "executed_exit": 2,
+      "cycles_start": 19287230754,
+      "cycles_end": 19288174685,
+      "cycles": 943931
+    },
+    {
+      "seq": 432,
+      "input_id": 10,
+      "mode": 3,
+      "prediction": 1,
+      "executed_exit": 1,
+      "cycles_start": 19289537462,
+      "cycles_end": 19290103419,
+      "cycles": 565957
+    },
+    {
+      "seq": 487,
+      "input_id": 9,
+      "mode": 1,
+      "prediction": 8,
+      "executed_exit": 2,
+      "cycles_start": 19291127652,
+      "cycles_end": 19292071582,
+      "cycles": 943930
+    },
+    {
+      "seq": 488,
+      "input_id": 9,
+      "mode": 3,
+      "prediction": 8,
+      "executed_exit": 4,
+      "cycles_start": 19292731981,
+      "cycles_end": 19294814575,
+      "cycles": 2082594
+    },
+    {
+      "seq": 559,
+      "input_id": 3,
+      "mode": 1,
+      "prediction": 9,
+      "executed_exit": 2,
+      "cycles_start": 19295825470,
+      "cycles_end": 19296769400,
+      "cycles": 943930
+    },
+    {
+      "seq": 560,
+      "input_id": 3,
+      "mode": 3,
+      "prediction": 9,
+      "executed_exit": 1,
+      "cycles_start": 19297329185,
+      "cycles_end": 19297895140,
+      "cycles": 565955
+    },
+    {
+      "seq": 719,
+      "input_id": 2,
+      "mode": 3,
+      "prediction": 9,
+      "executed_exit": 1,
+      "cycles_start": 19298928727,
+      "cycles_end": 19299494681,
+      "cycles": 565954
+    },
+    {
+      "seq": 720,
+      "input_id": 2,
+      "mode": 1,
+      "prediction": 9,
+      "executed_exit": 2,
+      "cycles_start": 19300537700,
+      "cycles_end": 19301481629,
+      "cycles": 943929
+    }
+  ],
+  "response_count": 20,
+  "unique_input_ids": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "cycle_min": 565954,
+  "cycle_max": 2082594,
+  "sha256": {
+    "results_json": "35b12bb4578d39548769f13cf88d8725c4cad8bb57b5a3fba9db13d46a28894e",
+    "results_csv": "895b034937797401ea6e912889b8c74be0faa5fcc7ebb900c7b56cdd351e7c3a",
+    "cases_csv": "e9639c0fea350e813b3d8c04ed3cc7c814fd6efacdc930e6c12f14ddf5b1becd",
+    "binding_json": "bab047cc34dfb059e5647d0a88af9906510b9c45b31300d009d459e06d6f4d44",
+    "raw_log": "f5563a8f150973020545f8afca2a71593a8ce2f21589b1f8a9ce4c51c93f9421"
+  }
+}

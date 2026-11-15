@@ -1,0 +1,2 @@
+PASS: 7,200 paired primary rows; 360 inputs; 10 sessions; 5 adaptive Exit strata
+adaptive faster/slower inputs=263/97; cold-boot independence not established

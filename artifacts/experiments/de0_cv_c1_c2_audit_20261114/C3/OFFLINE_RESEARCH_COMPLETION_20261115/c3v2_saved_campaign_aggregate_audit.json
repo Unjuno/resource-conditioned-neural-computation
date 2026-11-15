@@ -1,0 +1,27 @@
+{
+  "schema": "rtnn-c3-v2-physical-campaign-aggregate-audit-v1",
+  "data_class": "SAVED_PHYSICAL_EVIDENCE_NOT_NEW_MEASUREMENT",
+  "status": "FAIL",
+  "campaign_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "schedule_count": 0,
+  "expected_schedule_count": 13,
+  "rows": 0,
+  "expected_rows": 24840,
+  "all_runs_empirical_only": true,
+  "runs": [],
+  "errors": [
+    "C3V2_DIAGFIXED_FULL2520_RUN2_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_DIAGFIXED_FULL2520_RUN2_20261115\\\\python_independent_audit.json'",
+    "C3V2_DIAGADAPTIVE_FULL7560_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_DIAGADAPTIVE_FULL7560_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_DIAGCAPPED_FULL7560_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_DIAGCAPPED_FULL7560_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY01_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY01_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY02_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY02_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY03_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY03_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY04_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY04_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY05_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY05_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY06_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY06_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY07_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY07_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY08_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY08_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY09_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY09_FULL720_RUN1_20261115\\\\python_independent_audit.json'",
+    "C3V2_PRIMARY10_FULL720_RUN1_20261115: FileNotFoundError: [Errno 2] No such file or directory: 'artifacts\\\\experiments\\\\de0_cv_c1_c2_audit_20261114\\\\C3\\\\evidence\\\\PHYSICAL_C3_V2_20261115\\\\FROZEN_CAMPAIGN\\\\C3V2_PRIMARY10_FULL720_RUN1_20261115\\\\python_independent_audit.json'"
+  ]
+}

@@ -216,8 +216,9 @@ def is_allowed_evidence_path(path: Path, evidence_root: Path) -> bool:
     candidate = _canonical_evidence_path(path)
     root = _canonical_evidence_path(evidence_root)
     try:
-        candidate.relative_to(root)
-        return True
+        relative = candidate.relative_to(root)
+        forbidden = {"mock", "mocks", "synthetic", "synthetics", "fixture", "fixtures"}
+        return not any(part.casefold() in forbidden for part in relative.parts)
     except ValueError:
         return False
 
