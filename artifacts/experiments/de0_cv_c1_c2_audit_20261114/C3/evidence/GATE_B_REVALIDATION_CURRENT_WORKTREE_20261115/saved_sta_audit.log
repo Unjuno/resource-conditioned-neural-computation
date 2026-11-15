@@ -1,0 +1,1 @@
+PASS_REAUDIT_INTERNAL_STA_AND_CDC coverage=4corners request=800/800 response=480/480; UCP remains; output=R:\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\evidence\GATE_B_REVALIDATION_CURRENT_WORKTREE_20261115\saved_sta_audit.json

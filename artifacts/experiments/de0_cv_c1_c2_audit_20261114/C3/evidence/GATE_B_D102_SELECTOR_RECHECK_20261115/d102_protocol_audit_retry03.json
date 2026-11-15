@@ -1,0 +1,272 @@
+{
+  "schema": "rtnn-c3-v2-d102-protocol-audit-v1",
+  "status": "D102_SELECTOR_COUNT_RECONCILED_NOT_FORMAL_CDC_PROOF_B_SIGNOFF_BLOCKED",
+  "data_class": "SAVED_RTL_DRC_PLUS_QUARTUS_STA_ONLY_RECHECK_ON_HASH_VERIFIED_COPY_NO_HARDWARE",
+  "build_id": "43334531",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "flat_rtl_sha256": "7c0675a6b2862c6db68f8ec1c0ceb517161389e0a3a64c7cf3bd10f33c4e9bb1",
+  "drc_sha256": "0b22b4b3a14fbc8a920a69731cc1f73acd7d29ed4b3a35713ac17b76a45e20c0",
+  "testbench_sha256": "17908038fde678f4f5ac3c9c0c0e0fcb638b792028ad976633a0feb427f894dc",
+  "d102_count": 16,
+  "d102_mapping": [
+    {
+      "structure": 1,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[1]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 2,
+      "source": "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|req_bus_sync1_sys_q"
+    },
+    {
+      "structure": 3,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[2]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 4,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[14]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 5,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[13]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 6,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[12]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 7,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[11]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 8,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[10]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 9,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[9]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 10,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[8]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 11,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[7]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 12,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[6]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 13,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[5]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 14,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[4]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 15,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[3]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 16,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[0]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    }
+  ],
+  "four_corner_route_coverage": {
+    "request": [
+      {
+        "corner": 0,
+        "unique_bit_paths": 800,
+        "report_sha256": "672f49b41adfc4034d328d245c31798adf43a9a6a11bce76d0380506125233ab"
+      },
+      {
+        "corner": 1,
+        "unique_bit_paths": 800,
+        "report_sha256": "d7e0be4510ecdaa11baae9076b882f45326f6d20743ad0d96482aa5e8c2045bc"
+      },
+      {
+        "corner": 2,
+        "unique_bit_paths": 800,
+        "report_sha256": "51f9e16d619cce961864975fa1b686ca9e3e763ff721afed8164f8805a47c90f"
+      },
+      {
+        "corner": 3,
+        "unique_bit_paths": 800,
+        "report_sha256": "72a17065d57625a17d409da342d47a66b6a2e48ad6c52ba27f4edbe662e58ffe"
+      }
+    ],
+    "response": [
+      {
+        "corner": 0,
+        "unique_bit_paths": 480,
+        "report_sha256": "f8e932fe21a3c534f90781cfb45142fcff768620faf30a04cd6e496aab1c5181"
+      },
+      {
+        "corner": 1,
+        "unique_bit_paths": 480,
+        "report_sha256": "491638e8620e06cadeef734ad8009a5bd08942fe0c02552dd44d2f1ec4384d6a"
+      },
+      {
+        "corner": 2,
+        "unique_bit_paths": 480,
+        "report_sha256": "4039dece40510a62894d04f6b6b46fb76515f467d3c4b48075d20892b57fd243"
+      },
+      {
+        "corner": 3,
+        "unique_bit_paths": 480,
+        "report_sha256": "9b5e0d0f69cec456694e40096d9db36d95901cbc0b663b8c56df79bb898b0d9c"
+      }
+    ]
+  },
+  "rtl_protocol_signatures": {
+    "request_payload_800": true,
+    "response_payload_480": true,
+    "request_hold_until_ack": true,
+    "request_capture_pending": true,
+    "response_toggle_after_soc_commit": true,
+    "response_capture_pending": true,
+    "new_request_waits_for_previous_response": true
+  },
+  "finite_rtl_testbench_assertions": {
+    "request_stable_until_ack": true,
+    "request_capture_matches_source": true,
+    "response_stable_before_capture": true,
+    "response_capture_matches_source": true,
+    "response_stable_until_consume": true
+  },
+  "d102_suppressed": false,
+  "selector_count_reconciliation": {
+    "quartus_version": "25.1std.0 Build 1129",
+    "timing_analyzer_exit_code": 0,
+    "copied_project_file_count": 318,
+    "copied_project_bytes": 75367201,
+    "response_source_collection_entries": 484,
+    "response_unique_logical_coordinates": 480,
+    "quartus_duplicate_instances": [
+      {
+        "logical_word_bit": [
+          1,
+          15
+        ],
+        "instance_name": "response_words_q[1][15]~DUPLICATE"
+      },
+      {
+        "logical_word_bit": [
+          2,
+          13
+        ],
+        "instance_name": "response_words_q[2][13]~DUPLICATE"
+      },
+      {
+        "logical_word_bit": [
+          2,
+          22
+        ],
+        "instance_name": "response_words_q[2][22]~DUPLICATE"
+      },
+      {
+        "logical_word_bit": [
+          2,
+          23
+        ],
+        "instance_name": "response_words_q[2][23]~DUPLICATE"
+      }
+    ],
+    "response_destination_registers": 480,
+    "four_corner_path_reports": [
+      {
+        "corner": 0,
+        "logical_response_bits_routed": 480,
+        "duplicate_register_sources_used_by_route_report": [
+          [
+            2,
+            22
+          ],
+          [
+            2,
+            23
+          ]
+        ],
+        "min_route_delay_ns": 0.626,
+        "max_route_delay_ns": 3.633,
+        "report_sha256": "f8e932fe21a3c534f90781cfb45142fcff768620faf30a04cd6e496aab1c5181"
+      },
+      {
+        "corner": 1,
+        "logical_response_bits_routed": 480,
+        "duplicate_register_sources_used_by_route_report": [
+          [
+            2,
+            22
+          ],
+          [
+            2,
+            23
+          ]
+        ],
+        "min_route_delay_ns": 0.624,
+        "max_route_delay_ns": 3.521,
+        "report_sha256": "491638e8620e06cadeef734ad8009a5bd08942fe0c02552dd44d2f1ec4384d6a"
+      },
+      {
+        "corner": 2,
+        "logical_response_bits_routed": 480,
+        "duplicate_register_sources_used_by_route_report": [
+          [
+            2,
+            22
+          ],
+          [
+            2,
+            23
+          ]
+        ],
+        "min_route_delay_ns": 0.297,
+        "max_route_delay_ns": 2.373,
+        "report_sha256": "4039dece40510a62894d04f6b6b46fb76515f467d3c4b48075d20892b57fd243"
+      },
+      {
+        "corner": 3,
+        "logical_response_bits_routed": 480,
+        "duplicate_register_sources_used_by_route_report": [
+          [
+            2,
+            22
+          ],
+          [
+            2,
+            23
+          ]
+        ],
+        "min_route_delay_ns": 0.278,
+        "max_route_delay_ns": 2.05,
+        "report_sha256": "9b5e0d0f69cec456694e40096d9db36d95901cbc0b663b8c56df79bb898b0d9c"
+      }
+    ],
+    "disposition": "RECONCILED: 484 fitted register instances = 480 logical payload bits + 4 Quartus duplicate instances; each corner routes every logical bit to its matching synchronizer bit exactly once.",
+    "sta_scope": "STA-only recheck on a SHA-verified copy of the previously fitted project; no synthesis, Fitter, Assembler, new SOF, or board operation."
+  },
+  "limitations": [
+    "A finite 42-case RTL regression and textual protocol signatures do not prove all CDC traces or analog metastability behavior.",
+    "D102 remains enabled and unwaived; external JTAG TDI/TMS/TDO timing is unconstrained, so B-SIGNOFF remains BLOCKED.",
+    "This checker reads saved RTL and reports only; it does not invoke Quartus, JTAG, or the DE0-CV."
+  ]
+}

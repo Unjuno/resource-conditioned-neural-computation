@@ -1,0 +1,10 @@
+distro=Ubuntu-24.04
+Linux sub 6.18.58.1-microsoft-standard-WSL2 #1 SMP PREEMPT_DYNAMIC Tue Oct 27 00:24:11 UTC 2026 x86_64 x86_64 x86_64 GNU/Linux
+ldd (Ubuntu GLIBC 2.39-0ubuntu8.9) 2.39
+Verilator 5.020 2024-01-01 rev (Debian 5.020-1)
+g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+ibex_head=7b5df75a041affe56e8c235260f98a09b3319008
+ibex_origin=https://github.com/lowRISC/ibex.git
+ibex_worktree=clean
+146 native_sources_v2.txt
+source_hash_lines=

@@ -1,0 +1,147 @@
+{
+  "schema": "rtnn-c3-v2-gate-b-saved-report-audit-v1",
+  "status": "INTERNAL_REPORTS_REAUDITED_EXTERNAL_IO_SIGNOFF_BLOCKED",
+  "data_class": "SAVED_STATIC_TIMING_REPORT_AUDIT_NOT_NEW_QUARTUS_RUN",
+  "quartus_version": "25.1std.0 Build 1129",
+  "build_id": "43334531",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "qsf_sha256": "0d1f4e375c12526acab789112882defe903c2044009ea051ad4a2537eddbdebe",
+  "sdc_sha256": "ceaaa6708f0ed8f6d2c1443b60d9511c51d21f96ddaf914117ee6a65410c82eb",
+  "flat_rtl_sha256": "7c0675a6b2862c6db68f8ec1c0ceb517161389e0a3a64c7cf3bd10f33c4e9bb1",
+  "input_manifest_sha256": "5c3b216380f3f223970cf23d0c9309f4e08d543cf0d247ea6027dccf582d6d1a",
+  "input_manifest_record_count": 10,
+  "artifact_manifest_matches": true,
+  "corner_count": 4,
+  "corners": {
+    "0": {
+      "operating_condition": "7_slow_1100mv_85c",
+      "reported_20_path_setup_slack_ns": 1.803,
+      "reported_20_path_hold_slack_ns": 0.259
+    },
+    "1": {
+      "operating_condition": "7_slow_1100mv_0c",
+      "reported_20_path_setup_slack_ns": 1.887,
+      "reported_20_path_hold_slack_ns": 0.242
+    },
+    "2": {
+      "operating_condition": "MIN_fast_1100mv_85c",
+      "reported_20_path_setup_slack_ns": 10.027,
+      "reported_20_path_hold_slack_ns": 0.134
+    },
+    "3": {
+      "operating_condition": "MIN_fast_1100mv_0c",
+      "reported_20_path_setup_slack_ns": 11.154,
+      "reported_20_path_hold_slack_ns": 0.124
+    }
+  },
+  "bundled_data_route_coverage": {
+    "request": [
+      {
+        "corner": 0,
+        "bit_paths": 800,
+        "min_reported_route_delay_ns": 0.627,
+        "max_reported_route_delay_ns": 3.323
+      },
+      {
+        "corner": 1,
+        "bit_paths": 800,
+        "min_reported_route_delay_ns": 0.625,
+        "max_reported_route_delay_ns": 3.186
+      },
+      {
+        "corner": 2,
+        "bit_paths": 800,
+        "min_reported_route_delay_ns": 0.297,
+        "max_reported_route_delay_ns": 2.183
+      },
+      {
+        "corner": 3,
+        "bit_paths": 800,
+        "min_reported_route_delay_ns": 0.278,
+        "max_reported_route_delay_ns": 1.891
+      }
+    ],
+    "response": [
+      {
+        "corner": 0,
+        "bit_paths": 480,
+        "min_reported_route_delay_ns": 0.626,
+        "max_reported_route_delay_ns": 3.633
+      },
+      {
+        "corner": 1,
+        "bit_paths": 480,
+        "min_reported_route_delay_ns": 0.624,
+        "max_reported_route_delay_ns": 3.521
+      },
+      {
+        "corner": 2,
+        "bit_paths": 480,
+        "min_reported_route_delay_ns": 0.297,
+        "max_reported_route_delay_ns": 2.373
+      },
+      {
+        "corner": 3,
+        "bit_paths": 480,
+        "min_reported_route_delay_ns": 0.278,
+        "max_reported_route_delay_ns": 2.05
+      }
+    ]
+  },
+  "bundled_data_net_delay_screen": {
+    "0": {
+      "declared_screen_ns": 16.0,
+      "worst_observed_bus_route_ns": 3.633
+    },
+    "1": {
+      "declared_screen_ns": 16.0,
+      "worst_observed_bus_route_ns": 3.521
+    },
+    "2": {
+      "declared_screen_ns": 16.0,
+      "worst_observed_bus_route_ns": 2.373
+    },
+    "3": {
+      "declared_screen_ns": 16.0,
+      "worst_observed_bus_route_ns": 2.05
+    }
+  },
+  "unconstrained_endpoints": {
+    "input_ports": [
+      "altera_reserved_tdi",
+      "altera_reserved_tms"
+    ],
+    "input_paths_each_setup_hold": 41,
+    "output_ports": [
+      "altera_reserved_tdo",
+      "LEDR[0]",
+      "LEDR[1]",
+      "LEDR[3]"
+    ],
+    "output_paths_each_setup_hold": 8,
+    "unconstrained_clocks": 0
+  },
+  "design_assistant": {
+    "critical": 0,
+    "high": 0,
+    "medium_d102": 16,
+    "d101_d102_suppressed_in_qsf": false
+  },
+  "warning_counts_by_code": {
+    "10036": 89,
+    "10230": 4,
+    "10335": 216,
+    "10766": 76,
+    "12473": 3,
+    "13024": 1,
+    "13410": 1,
+    "15714": 1,
+    "292013": 1
+  },
+  "limitations": [
+    "The 30 MHz altera_reserved_tck clock is HDL/IP-embedded; it is not a measurement or vendor guarantee for the DE0-CV onboard USB-Blaster output.",
+    "TDI/TMS input delay and TDO output delay are absent; Cyclone V pin requirements alone do not establish board/cable timing.",
+    "The 16 ns bundled-data net-delay constraint is explicitly an empirical screening threshold, not an externally derived signoff value.",
+    "The reports do not constitute fully constrained board-level setup/hold signoff or WCET evidence."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "rtnn-c3-v2-ucp-disposition-audit-v1",
+  "status": "LED_INDICATOR_PORTS_CLASSIFIED; EXTERNAL_JTAG_TIMING_STILL_BLOCKED",
+  "data_class": "STATIC_SOURCE_AND_SAVED_REPORT_RECHECK_NOT_QUARTUS_RUN",
+  "repository": "https://github.com/Unjuno/resource-conditioned-neural-computation.git",
+  "branch": "codex/stage-c3-jtag-pilot-20261114",
+  "head": "b332ba02ab992227140998a1d67513c690ae17cf",
+  "build_id": "43334531",
+  "unconstrained": {
+    "inputs": {
+      "ports": 2,
+      "paths_each_setup_hold": 41,
+      "names": [
+        "altera_reserved_tdi",
+        "altera_reserved_tms"
+      ],
+      "disposition": "FUNCTIONAL_EXTERNAL_JTAG_INPUTS; BOARD/CABLE MIN/MAX TIMING REQUIRED"
+    },
+    "outputs": {
+      "ports": 4,
+      "paths_each_setup_hold": 8,
+      "names": [
+        "altera_reserved_tdo",
+        "LEDR[0]",
+        "LEDR[1]",
+        "LEDR[3]"
+      ]
+    },
+    "tdo": "FUNCTIONAL_EXTERNAL_JTAG_OUTPUT; CAPTURE EDGE/SETUP/HOLD REQUIRED",
+    "leds": {
+      "LEDR[0]": {
+        "pin": "PIN_AA2",
+        "function": "heartbeat_q[25]",
+        "timing": "ONBOARD_INDICATOR_NO_EXTERNAL_SYNCHRONOUS_RECEIVER"
+      },
+      "LEDR[1]": {
+        "pin": "PIN_AA1",
+        "function": "response_commit",
+        "timing": "ONBOARD_INDICATOR_NO_EXTERNAL_SYNCHRONOUS_RECEIVER"
+      },
+      "LEDR[3]": {
+        "pin": "PIN_Y3",
+        "function": "bus_fault",
+        "timing": "ONBOARD_INDICATOR_NO_EXTERNAL_SYNCHRONOUS_RECEIVER"
+      },
+      "warning_policy": "UCP entries and Fitter drive/slew warnings retained; no false path added"
+    }
+  },
+  "sdc": {
+    "input_delay_tdi_tms": false,
+    "output_delay_tdo": false,
+    "reset_false_paths_only": true,
+    "internal_net_delay_screens": 2,
+    "screen_limit_ns": 16.0,
+    "tck_note": "altera_reserved_tck 33.333 ns is Quartus embedded model, not board/cable measurement or guarantee"
+  },
+  "gate_classification": {
+    "B_SIGNOFF": "BLOCKED_EXTERNAL_JTAG_TIMING_AND_UNCONSTRAINED_IO",
+    "internal_sta": "PASS_FOR_REPORTED_CONSTRAINED_PATHS_ONLY",
+    "cdc": "16_D102_WARNINGS_RETAINED; 16NS_INTERNAL_SCREEN_WITHIN_LIMIT",
+    "B_EMPIRICAL": "PASS_LIMITED_NOT_A_TIMING_WCET_OR_DEADLINE_GUARANTEE"
+  },
+  "status_chronology": {
+    "old_snapshot": "C2-era B-EMPIRICAL BLOCKED; 32-bit cycle response/source reproducibility issues",
+    "current_scope": "C3 v2 build 43334531 SRAM-only pilot eligibility PASS_LIMITED",
+    "still_unresolved": "native 146-source rebuild dependency identity and external JTAG timing signoff"
+  },
+  "input_sha256": {
+    "rtnn_de0_cv_c2_top.sv": "c6d602e252f8e4f472cd79237f241becc9bdecb535d4ceba88d8bfbcecfe3265",
+    "rtnn_c3_measurement_v2.qsf": "0d1f4e375c12526acab789112882defe903c2044009ea051ad4a2537eddbdebe",
+    "rtnn_c3_measurement_v2.sdc": "ceaaa6708f0ed8f6d2c1443b60d9511c51d21f96ddaf914117ee6a65410c82eb",
+    "c3_v2_retry03_unconstrained_paths.rpt": "d6b1ef57a80ae1bc6ec35d696775bde44e63445c05da0a325ea126fb303f6028"
+  },
+  "quartus_or_hardware_run": false,
+  "formal_cdc_proof": false
+}

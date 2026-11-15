@@ -34,8 +34,10 @@ SOF、flat RTL、QSF/SDC、source graph、ELF、RAM lane和JTAGの履歴照合�
 | diagnostic_adaptive | `C3_DIAGADAPTIVE_FULL7560_RUN1_20261114` | 7,560 | PASS |
 | diagnostic_capped | `C3_DIAGCAPPED_FULL7560_RUN1_20261114` | 7,560 | PASS |
 | primary_01 | `C3_PRIMARY01_FULL720_RUN1_20261114` | 720 | PASS |
-| primary_02–primary_10 | 各`C3_PRIMARYnn_FULL720_RUN1_20261114` | 7,200 | PASS |
+| primary_02–primary_10 | 各`C3_PRIMARYnn_FULL720_RUN1_20261114`（9 session × 720行） | **6,480** | PASS |
 | 合計 | 13 session | **24,840** | **PASS_EMPIRICAL_DATA** |
+
+> **記録訂正（2026-11-15）:** 旧表の`primary_02–primary_10`合計`7,200`は算術誤記。9 session × 各720行 = **6,480行**。全13 sessionの総数24,840は独立再集計で確認済み。生測定CSV・JSON・raw logは変更していない。再集計: `campaign/analysis/C3_C2J2_INDEPENDENT_REAUDIT_20261115_RETRY05/analysis.json`。
 
 結果CSVを凍結case行とsequence/input/mode/期待予測/期待Exitで再照合した。全要求に有効な正の`Ibex_mcycle_delta`と一致する応答cycleがあり、予測不一致0、cap違反0、timeout/trap 0、CRC/要求応答ID identity違反0。UART未使用、Flash/CFM未書込み。正解数を集計する独立入力IDは360件のままで、24,840回の反復を新しい入力標本として数えていない。
 

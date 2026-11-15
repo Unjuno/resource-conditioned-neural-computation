@@ -1,3 +1,5 @@
+> **履歴snapshot:** この文書は2026-11-15の前回statusです。HEAD、独立再集計、現在の人手待ちを含む更新版は[C3_CURRENT_STATUS_20261115_OFFLINE_REPRO_JA.md](C3_CURRENT_STATUS_20261115_OFFLINE_REPRO_JA.md)を参照してください。この本文は履歴として保持しています。
+
 # RTNN Stage C3 現在地 — 2026-11-15
 
 ## 対象と履歴の保全

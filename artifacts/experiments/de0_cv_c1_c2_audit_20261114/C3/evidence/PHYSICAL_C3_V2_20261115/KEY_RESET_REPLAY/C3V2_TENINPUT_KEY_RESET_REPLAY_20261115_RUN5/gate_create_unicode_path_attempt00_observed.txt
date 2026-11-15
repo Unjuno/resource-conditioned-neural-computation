@@ -1,0 +1,3 @@
+Observed console failure for the first gate-creation invocation using the Unicode OneDrive path.
+The tool reported Python FileNotFoundError for the result JSON with the Japanese path characters rendered as replacement/mojibake characters. Exit was nonzero; no gate was created.
+This is a transcribed issue note, not a raw Quartus or Python log. The later ASCII-stage attempts and their captured logs are preserved separately.

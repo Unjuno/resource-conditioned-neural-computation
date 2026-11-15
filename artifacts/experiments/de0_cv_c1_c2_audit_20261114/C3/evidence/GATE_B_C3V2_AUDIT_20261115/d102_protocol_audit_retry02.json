@@ -1,0 +1,169 @@
+{
+  "schema": "rtnn-c3-v2-d102-protocol-audit-v1",
+  "status": "STATIC_STRUCTURE_MATCHED_D102_UNWAIVED_FINITE_RTL_CHECKS_PRESENT_NOT_FORMAL_CDC_PROOF",
+  "data_class": "SAVED_RTL_DRC_AND_ROUTE_REPORT_AUDIT_NOT_NEW_QUARTUS_OR_HARDWARE_RUN",
+  "build_id": "43334531",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "flat_rtl_sha256": "7c0675a6b2862c6db68f8ec1c0ceb517161389e0a3a64c7cf3bd10f33c4e9bb1",
+  "drc_sha256": "0b22b4b3a14fbc8a920a69731cc1f73acd7d29ed4b3a35713ac17b76a45e20c0",
+  "testbench_sha256": "17908038fde678f4f5ac3c9c0c0e0fcb638b792028ad976633a0feb427f894dc",
+  "d102_count": 16,
+  "d102_mapping": [
+    {
+      "structure": 1,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[1]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 2,
+      "source": "rtnn_c2_vjtag_mailbox:u_mailbox|req_hold_tck_q",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|req_bus_sync1_sys_q"
+    },
+    {
+      "structure": 3,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[2]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 4,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[14]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 5,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[13]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 6,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[12]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 7,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[11]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 8,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[10]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 9,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[9]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 10,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[8]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 11,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[7]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 12,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[6]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 13,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[5]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 14,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[4]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 15,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[3]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    },
+    {
+      "structure": 16,
+      "source": "rtnn_de0_cv_soc_c2:u_soc|response_words_q[0]",
+      "synchronizer": "rtnn_c2_vjtag_mailbox:u_mailbox|rsp_bus_sync1_tck_q"
+    }
+  ],
+  "four_corner_route_coverage": {
+    "request": [
+      {
+        "corner": 0,
+        "unique_bit_paths": 800,
+        "report_sha256": "672f49b41adfc4034d328d245c31798adf43a9a6a11bce76d0380506125233ab"
+      },
+      {
+        "corner": 1,
+        "unique_bit_paths": 800,
+        "report_sha256": "d7e0be4510ecdaa11baae9076b882f45326f6d20743ad0d96482aa5e8c2045bc"
+      },
+      {
+        "corner": 2,
+        "unique_bit_paths": 800,
+        "report_sha256": "51f9e16d619cce961864975fa1b686ca9e3e763ff721afed8164f8805a47c90f"
+      },
+      {
+        "corner": 3,
+        "unique_bit_paths": 800,
+        "report_sha256": "72a17065d57625a17d409da342d47a66b6a2e48ad6c52ba27f4edbe662e58ffe"
+      }
+    ],
+    "response": [
+      {
+        "corner": 0,
+        "unique_bit_paths": 480,
+        "report_sha256": "f8e932fe21a3c534f90781cfb45142fcff768620faf30a04cd6e496aab1c5181"
+      },
+      {
+        "corner": 1,
+        "unique_bit_paths": 480,
+        "report_sha256": "491638e8620e06cadeef734ad8009a5bd08942fe0c02552dd44d2f1ec4384d6a"
+      },
+      {
+        "corner": 2,
+        "unique_bit_paths": 480,
+        "report_sha256": "4039dece40510a62894d04f6b6b46fb76515f467d3c4b48075d20892b57fd243"
+      },
+      {
+        "corner": 3,
+        "unique_bit_paths": 480,
+        "report_sha256": "9b5e0d0f69cec456694e40096d9db36d95901cbc0b663b8c56df79bb898b0d9c"
+      }
+    ]
+  },
+  "rtl_protocol_signatures": {
+    "request_payload_800": true,
+    "response_payload_480": true,
+    "request_hold_until_ack": true,
+    "request_capture_pending": true,
+    "response_toggle_after_soc_commit": true,
+    "response_capture_pending": true,
+    "new_request_waits_for_previous_response": true
+  },
+  "finite_rtl_testbench_assertions": {
+    "request_stable_until_ack": true,
+    "request_capture_matches_source": true,
+    "response_stable_before_capture": true,
+    "response_capture_matches_source": true,
+    "response_stable_until_consume": true
+  },
+  "d102_suppressed": false,
+  "unresolved_selector_count": {
+    "request_source": 800,
+    "request_first_stage": 800,
+    "response_source": 484,
+    "response_first_stage": 480,
+    "disposition": "UNRESOLVED_FOUR_EXTRA_RESPONSE_SOURCE_MATCHES; do not infer full 484-to-480 equivalence"
+  },
+  "limitations": [
+    "A finite 42-case RTL regression and textual protocol signatures do not prove all CDC traces or analog metastability behavior.",
+    "The response source selector covers 484 cells while 480 first-stage route paths are listed; the four-cell discrepancy remains unexplained.",
+    "D102 remains enabled and unwaived; external JTAG TDI/TMS/TDO timing is unconstrained, so B-SIGNOFF remains BLOCKED.",
+    "This checker reads saved RTL and reports only; it does not invoke Quartus, JTAG, or the DE0-CV."
+  ]
+}

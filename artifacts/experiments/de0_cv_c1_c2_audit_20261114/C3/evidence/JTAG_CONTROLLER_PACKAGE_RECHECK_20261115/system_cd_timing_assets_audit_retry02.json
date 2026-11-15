@@ -1,0 +1,60 @@
+{
+  "schema": "rtnn-terasic-system-cd-timing-assets-audit-v1",
+  "status": "ARCHIVE_IDENTITY_PASS_NO_ONBOARD_CPLD_TIMING_ASSET",
+  "data_class": "READ_ONLY_ARCHIVE_RECHECK_NO_EXTRACTION_OR_EXECUTION",
+  "archive": "DE0-CV_v.1.2.1_SystemCD.zip",
+  "archive_size": 66908883,
+  "archive_sha256": "ed4ac9cf4ae3d6ce27e6f2e66d42745b0a55fc2cc883b07069363d9947db942e",
+  "zip_integrity": "PASS",
+  "member_count": 1089,
+  "epm240_cpld_usbblaster_named_members": [],
+  "controlpanel_sof_members": [
+    "Tools/ControlPanel/DE0CV_ControlPanel.sof"
+  ],
+  "pof_jic_members": [
+    "Demonstrations/DE0_CV_Default/DE0_CV_Default.pof",
+    "Demonstrations/DE0_CV_Default/demo_batch/DE0_CV_Default.jic",
+    "Demonstrations/DE0_CV_Default/demo_batch/DE0_CV_Default.pof"
+  ],
+  "selected_members": {
+    "Schematic/DE0-CV.pdf": {
+      "size": 1507271,
+      "sha256": "3d41f88c3d03d72263ca776065345fe95548d10e0abe56e0c0653fa2f0e6021c"
+    },
+    "Tools/ControlPanel/DE0CV_ControlPanel.sof": {
+      "size": 2576292,
+      "sha256": "dc46856e4e6f3d7247eccbf5a80dfed9fc57d7a7980c4170480b48413b61a1b5"
+    },
+    "Tools/ControlPanel/TERASIC_JTAG.dll": {
+      "size": 52736,
+      "sha256": "ee915e1c1e53399592d421d498e59c9d5896eb40134ab6e93d878727e2d67bae"
+    },
+    "Tools/ControlPanel/TERASIC_JTAG_DRIVE.dll": {
+      "size": 40960,
+      "sha256": "637ea018bc8b2d45161a3d84f14b74fadb51517dc13e71f4589a6423415f21a9"
+    },
+    "Tools/ControlPanel/TERASIC_DOWNLOAD.dll": {
+      "size": 551424,
+      "sha256": "01c127a3052de64fa97a5c50eb313b0dc4461b7c189ba3e967f9d565316837af"
+    },
+    "Demonstrations/DE0_CV_Default/DE0_CV_Default.qsf": {
+      "size": 29501,
+      "sha256": "d589e7c7f55844a87fd947ce800b9c91329b15280960357c9155e70fb37b1b35"
+    },
+    "Demonstrations/DE0_CV_Default/DE0_CV_Default.pof": {
+      "size": 8388815,
+      "sha256": "fc806018899afba75582d17c66539e1d6f746eb0e939ecd3430fd0d6f08696f0"
+    },
+    "Demonstrations/DE0_CV_Default/demo_batch/DE0_CV_Default.jic": {
+      "size": 8388832,
+      "sha256": "e09a438ddc38e60a3e07376d83865ab959d7a9e4f2cca0b1ee26eca94613de06"
+    }
+  },
+  "default_demo_device_lines": [
+    "set_global_assignment -name DEVICE 5CEBA4F23C7",
+    "set_global_assignment -name USE_CONFIGURATION_DEVICE ON",
+    "set_global_assignment -name STRATIXII_CONFIGURATION_DEVICE EPCS64"
+  ],
+  "conclusion": "The retained System CD contains the documented board schematic and FPGA ControlPanel SOF, but no named EPM240/CPLD/USB-Blaster source or image. It supplies no board-specific external TCK/TDI/TMS/TDO timing envelope.",
+  "hardware_or_programming_operation": false
+}

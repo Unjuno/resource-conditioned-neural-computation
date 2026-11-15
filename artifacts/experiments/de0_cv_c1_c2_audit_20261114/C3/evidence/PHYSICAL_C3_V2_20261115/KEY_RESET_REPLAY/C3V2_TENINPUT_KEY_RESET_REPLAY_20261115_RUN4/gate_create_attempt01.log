@@ -1,0 +1,1 @@
+FAIL: The gate creator could not open c2_jtag_results.json when called with the Unicode OneDrive evidence path; native Python argument encoding mangled the path. No gate file was created. Retried using ASCII staging paths and passed.

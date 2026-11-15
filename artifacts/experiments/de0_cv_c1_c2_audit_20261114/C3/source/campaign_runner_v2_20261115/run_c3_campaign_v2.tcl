@@ -189,6 +189,8 @@ proc c3_require_reset_replay_gate {gate_path sof_sha build_id} {
       ![regexp {"selected_sequences"\s*:\s*\[\s*49\s*,\s*50\s*,\s*141\s*,\s*142\s*,\s*209\s*,\s*210\s*,\s*277\s*,\s*278\s*,\s*325\s*,\s*326\s*,\s*379\s*,\s*380\s*,\s*431\s*,\s*432\s*,\s*487\s*,\s*488\s*,\s*559\s*,\s*560\s*,\s*719\s*,\s*720\s*\]} $gate]} {
     error "primary schedule blocked: reset gate evidence identity or 20-sequence list is incomplete"
   }
+  if {[file pathtype $result_path] ne "absolute"} {set result_path [file normalize [file join [file dirname $gate_path] $result_path]]}
+  if {[file pathtype $audit_path] ne "absolute"} {set audit_path [file normalize [file join [file dirname $gate_path] $audit_path]]}
   if {![file isfile $result_path] || ![file isfile $audit_path]} {error "primary schedule blocked: reset replay result/audit file missing"}
   set result_sha [c3_sha256_file $result_path]
   set audit_sha [c3_sha256_file $audit_path]

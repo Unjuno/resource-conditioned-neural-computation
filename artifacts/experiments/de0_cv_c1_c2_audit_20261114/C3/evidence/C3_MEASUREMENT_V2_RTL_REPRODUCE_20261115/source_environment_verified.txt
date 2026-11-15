@@ -1,0 +1,12 @@
+Distro=Ubuntu-24.04
+Kernel=WSL2 Linux sub 6.18.58.1-microsoft-standard-WSL2 x86_64
+glibc=2.39
+Verilator=5.020 2024-01-01 rev (Debian 5.020-1)
+G++=13.3.0
+Ibex origin=https://github.com/lowRISC/ibex.git
+Ibex HEAD=7b5df75a041affe56e8c235260f98a09b3319008
+Ibex worktree=clean
+Native source-list entries=146; all 146 paths existed at run time
+Native source list SHA-256=4bddc5bd5e37cbd24015189d49e4a21677d570e5cb1c0a7c9dd503da30e6bfba
+Source file hashes=146; see ibex_source_manifest.sha256
+No source/model/build config modifications were made for this run.

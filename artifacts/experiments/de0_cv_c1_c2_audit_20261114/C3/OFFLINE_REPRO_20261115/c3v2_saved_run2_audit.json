@@ -1,0 +1,450 @@
+{
+  "schema": "rtnn-c3-v2-saved-run-independent-audit-v1",
+  "status": "PASS_SAVED_PHYSICAL_EVIDENCE_AUDIT",
+  "data_class": "SAVED_PHYSICAL_EVIDENCE_NOT_NEW_MEASUREMENT",
+  "experiment_id": "C3V2_C2J2_REPLAY_RUN2_20261115",
+  "build_id": "43334531",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "model_id": "52544e4e",
+  "schedule_id": "C2J2_REPLAY_V2",
+  "schedule_canonical_sha256": "03f1e70d96762473d164110709d7323bf76db00cfa9d87b6c5d141a8e17118d1",
+  "binding_sha256": "1170004be07f0386f50814276098f350a55241973f3a9430ee2aea31bc605979",
+  "case_csv_sha256": "c2c58f29d46e1d43873f22efbf8b371818c6a8a7d5a4e6299e12bcc25cf5c95f",
+  "responses": [
+    {
+      "seq": 1,
+      "input_id": 0,
+      "mode": 1,
+      "prediction": 3,
+      "executed_exit": 0,
+      "cycles_start": 10302752076,
+      "cycles_end": 10302772229,
+      "cycles": 20153
+    },
+    {
+      "seq": 2,
+      "input_id": 0,
+      "mode": 1,
+      "prediction": 3,
+      "executed_exit": 1,
+      "cycles_start": 10303751162,
+      "cycles_end": 10304233201,
+      "cycles": 482039
+    },
+    {
+      "seq": 3,
+      "input_id": 0,
+      "mode": 1,
+      "prediction": 3,
+      "executed_exit": 2,
+      "cycles_start": 10305347980,
+      "cycles_end": 10306291910,
+      "cycles": 943930
+    },
+    {
+      "seq": 4,
+      "input_id": 0,
+      "mode": 1,
+      "prediction": 3,
+      "executed_exit": 3,
+      "cycles_start": 10306847981,
+      "cycles_end": 10308253801,
+      "cycles": 1405820
+    },
+    {
+      "seq": 5,
+      "input_id": 0,
+      "mode": 1,
+      "prediction": 3,
+      "executed_exit": 4,
+      "cycles_start": 10309106392,
+      "cycles_end": 10310974102,
+      "cycles": 1867710
+    },
+    {
+      "seq": 6,
+      "input_id": 0,
+      "mode": 1,
+      "prediction": 3,
+      "executed_exit": 5,
+      "cycles_start": 10312142083,
+      "cycles_end": 10314471683,
+      "cycles": 2329600
+    },
+    {
+      "seq": 7,
+      "input_id": 0,
+      "mode": 1,
+      "prediction": 3,
+      "executed_exit": 6,
+      "cycles_start": 10315313174,
+      "cycles_end": 10318104664,
+      "cycles": 2791490
+    },
+    {
+      "seq": 8,
+      "input_id": 24,
+      "mode": 1,
+      "prediction": 6,
+      "executed_exit": 0,
+      "cycles_start": 10319097961,
+      "cycles_end": 10319118112,
+      "cycles": 20151
+    },
+    {
+      "seq": 9,
+      "input_id": 24,
+      "mode": 1,
+      "prediction": 6,
+      "executed_exit": 1,
+      "cycles_start": 10320748213,
+      "cycles_end": 10321230252,
+      "cycles": 482039
+    },
+    {
+      "seq": 10,
+      "input_id": 24,
+      "mode": 1,
+      "prediction": 4,
+      "executed_exit": 2,
+      "cycles_start": 10322242545,
+      "cycles_end": 10323186475,
+      "cycles": 943930
+    },
+    {
+      "seq": 11,
+      "input_id": 24,
+      "mode": 1,
+      "prediction": 4,
+      "executed_exit": 3,
+      "cycles_start": 10323898846,
+      "cycles_end": 10325304666,
+      "cycles": 1405820
+    },
+    {
+      "seq": 12,
+      "input_id": 24,
+      "mode": 1,
+      "prediction": 4,
+      "executed_exit": 4,
+      "cycles_start": 10326188619,
+      "cycles_end": 10328056329,
+      "cycles": 1867710
+    },
+    {
+      "seq": 13,
+      "input_id": 24,
+      "mode": 1,
+      "prediction": 4,
+      "executed_exit": 5,
+      "cycles_start": 10329252660,
+      "cycles_end": 10331582260,
+      "cycles": 2329600
+    },
+    {
+      "seq": 14,
+      "input_id": 24,
+      "mode": 1,
+      "prediction": 4,
+      "executed_exit": 6,
+      "cycles_start": 10332408409,
+      "cycles_end": 10335199899,
+      "cycles": 2791490
+    },
+    {
+      "seq": 15,
+      "input_id": 57,
+      "mode": 1,
+      "prediction": 1,
+      "executed_exit": 0,
+      "cycles_start": 10336288170,
+      "cycles_end": 10336308324,
+      "cycles": 20154
+    },
+    {
+      "seq": 16,
+      "input_id": 57,
+      "mode": 1,
+      "prediction": 1,
+      "executed_exit": 1,
+      "cycles_start": 10337889009,
+      "cycles_end": 10338371050,
+      "cycles": 482041
+    },
+    {
+      "seq": 17,
+      "input_id": 57,
+      "mode": 1,
+      "prediction": 8,
+      "executed_exit": 2,
+      "cycles_start": 10339397947,
+      "cycles_end": 10340341876,
+      "cycles": 943929
+    },
+    {
+      "seq": 18,
+      "input_id": 57,
+      "mode": 1,
+      "prediction": 8,
+      "executed_exit": 3,
+      "cycles_start": 10340897941,
+      "cycles_end": 10342303760,
+      "cycles": 1405819
+    },
+    {
+      "seq": 19,
+      "input_id": 57,
+      "mode": 1,
+      "prediction": 8,
+      "executed_exit": 4,
+      "cycles_start": 10343243165,
+      "cycles_end": 10345110873,
+      "cycles": 1867708
+    },
+    {
+      "seq": 20,
+      "input_id": 57,
+      "mode": 1,
+      "prediction": 8,
+      "executed_exit": 5,
+      "cycles_start": 10346348754,
+      "cycles_end": 10348678353,
+      "cycles": 2329599
+    },
+    {
+      "seq": 21,
+      "input_id": 57,
+      "mode": 1,
+      "prediction": 8,
+      "executed_exit": 6,
+      "cycles_start": 10350039096,
+      "cycles_end": 10352830584,
+      "cycles": 2791488
+    },
+    {
+      "seq": 22,
+      "input_id": 0,
+      "mode": 3,
+      "prediction": 3,
+      "executed_exit": 0,
+      "cycles_start": 10353733539,
+      "cycles_end": 10353753750,
+      "cycles": 20211
+    },
+    {
+      "seq": 23,
+      "input_id": 0,
+      "mode": 3,
+      "prediction": 3,
+      "executed_exit": 1,
+      "cycles_start": 10355297925,
+      "cycles_end": 10355823684,
+      "cycles": 525759
+    },
+    {
+      "seq": 24,
+      "input_id": 0,
+      "mode": 3,
+      "prediction": 3,
+      "executed_exit": 1,
+      "cycles_start": 10356882225,
+      "cycles_end": 10357448182,
+      "cycles": 565957
+    },
+    {
+      "seq": 25,
+      "input_id": 0,
+      "mode": 3,
+      "prediction": 3,
+      "executed_exit": 1,
+      "cycles_start": 10358383813,
+      "cycles_end": 10358949770,
+      "cycles": 565957
+    },
+    {
+      "seq": 26,
+      "input_id": 0,
+      "mode": 3,
+      "prediction": 3,
+      "executed_exit": 1,
+      "cycles_start": 10359886241,
+      "cycles_end": 10360452198,
+      "cycles": 565957
+    },
+    {
+      "seq": 27,
+      "input_id": 0,
+      "mode": 3,
+      "prediction": 3,
+      "executed_exit": 1,
+      "cycles_start": 10361483709,
+      "cycles_end": 10362049664,
+      "cycles": 565955
+    },
+    {
+      "seq": 28,
+      "input_id": 0,
+      "mode": 3,
+      "prediction": 3,
+      "executed_exit": 1,
+      "cycles_start": 10363047917,
+      "cycles_end": 10363613872,
+      "cycles": 565955
+    },
+    {
+      "seq": 29,
+      "input_id": 24,
+      "mode": 3,
+      "prediction": 6,
+      "executed_exit": 0,
+      "cycles_start": 10364632129,
+      "cycles_end": 10364652338,
+      "cycles": 20209
+    },
+    {
+      "seq": 30,
+      "input_id": 24,
+      "mode": 3,
+      "prediction": 6,
+      "executed_exit": 1,
+      "cycles_start": 10366130681,
+      "cycles_end": 10366656440,
+      "cycles": 525759
+    },
+    {
+      "seq": 31,
+      "input_id": 24,
+      "mode": 3,
+      "prediction": 4,
+      "executed_exit": 2,
+      "cycles_start": 10367729453,
+      "cycles_end": 10368760759,
+      "cycles": 1031306
+    },
+    {
+      "seq": 32,
+      "input_id": 24,
+      "mode": 3,
+      "prediction": 4,
+      "executed_exit": 3,
+      "cycles_start": 10370088958,
+      "cycles_end": 10371625810,
+      "cycles": 1536852
+    },
+    {
+      "seq": 33,
+      "input_id": 24,
+      "mode": 3,
+      "prediction": 4,
+      "executed_exit": 3,
+      "cycles_start": 10372397911,
+      "cycles_end": 10373974961,
+      "cycles": 1577050
+    },
+    {
+      "seq": 34,
+      "input_id": 24,
+      "mode": 3,
+      "prediction": 4,
+      "executed_exit": 3,
+      "cycles_start": 10374679676,
+      "cycles_end": 10376256724,
+      "cycles": 1577048
+    },
+    {
+      "seq": 35,
+      "input_id": 24,
+      "mode": 3,
+      "prediction": 4,
+      "executed_exit": 3,
+      "cycles_start": 10376985229,
+      "cycles_end": 10378562277,
+      "cycles": 1577048
+    },
+    {
+      "seq": 36,
+      "input_id": 57,
+      "mode": 3,
+      "prediction": 1,
+      "executed_exit": 0,
+      "cycles_start": 10379287530,
+      "cycles_end": 10379307742,
+      "cycles": 20212
+    },
+    {
+      "seq": 37,
+      "input_id": 57,
+      "mode": 3,
+      "prediction": 1,
+      "executed_exit": 1,
+      "cycles_start": 10380880765,
+      "cycles_end": 10381406526,
+      "cycles": 525761
+    },
+    {
+      "seq": 38,
+      "input_id": 57,
+      "mode": 3,
+      "prediction": 8,
+      "executed_exit": 2,
+      "cycles_start": 10382528499,
+      "cycles_end": 10383559804,
+      "cycles": 1031305
+    },
+    {
+      "seq": 39,
+      "input_id": 57,
+      "mode": 3,
+      "prediction": 8,
+      "executed_exit": 3,
+      "cycles_start": 10384837141,
+      "cycles_end": 10386373992,
+      "cycles": 1536851
+    },
+    {
+      "seq": 40,
+      "input_id": 57,
+      "mode": 3,
+      "prediction": 8,
+      "executed_exit": 4,
+      "cycles_start": 10387029891,
+      "cycles_end": 10389072287,
+      "cycles": 2042396
+    },
+    {
+      "seq": 41,
+      "input_id": 57,
+      "mode": 3,
+      "prediction": 8,
+      "executed_exit": 5,
+      "cycles_start": 10390126886,
+      "cycles_end": 10392674827,
+      "cycles": 2547941
+    },
+    {
+      "seq": 42,
+      "input_id": 57,
+      "mode": 3,
+      "prediction": 8,
+      "executed_exit": 5,
+      "cycles_start": 10393629358,
+      "cycles_end": 10396177299,
+      "cycles": 2547941
+    }
+  ],
+  "response_count": 42,
+  "unique_input_ids": [
+    0,
+    24,
+    57
+  ],
+  "cycle_min": 20151,
+  "cycle_max": 2791490,
+  "sha256": {
+    "results_json": "c709ad03cacfec26cf2b9ef1d568a27d8146bf024edaf0163e152043e457b7f2",
+    "results_csv": "169b47dad189b424d81c0381f4c57c73eb7a8aabb76c3ae468df7f2647e35224",
+    "cases_csv": "c2c58f29d46e1d43873f22efbf8b371818c6a8a7d5a4e6299e12bcc25cf5c95f",
+    "binding_json": "1170004be07f0386f50814276098f350a55241973f3a9430ee2aea31bc605979",
+    "raw_log": "3567475429058283bb79e47388eab04c40f8eb1469a0143eb2890a39428d87f7"
+  }
+}

@@ -37,9 +37,11 @@ set result_path [file join $gate_dir result.json]
 set audit_path [file join $gate_dir audit.json]
 set f [open $result_path w]; puts -nonewline $f "{\"schema\":\"rtnn-c3-jtag-results-v2\",\"experiment_id\":\"$reset_id\",\"status\":\"PASS\",\"count\":20,\"completed_count\":20,\"expected_count\":20,\"sof_sha256\":\"[string repeat a 64]\",\"build_id\":\"43334531\",\"selected_sequences\":\[$seq_json\]}"; close $f
 set f [open $audit_path w]; puts -nonewline $f "{\"schema\":\"rtnn-c3-v2-jtag-post-audit-v1\",\"status\":\"PASS\",\"experiment_id\":\"$reset_id\",\"sof_sha256\":\"[string repeat a 64]\",\"build_id\":\"43334531\",\"response_count\":20}"; close $f
+set result_ref [file tail $result_path]
+set audit_ref [file tail $audit_path]
 set gate_path [file join $gate_dir gate.json]
 set f [open $gate_path w]
-puts -nonewline $f "{\"schema\":\"rtnn-c3-key-reset-replay-gate-v1\",\"status\":\"PASS\",\"audit_status\":\"PASS\",\"reset_action\":\"KEY0_PRESS_RELEASE\",\"user_attested\":true,\"sof_sha256\":\"[string repeat a 64]\",\"build_id\":\"43334531\",\"response_count\":20,\"experiment_id\":\"$reset_id\",\"selected_sequences\":\[$seq_json\],\"result_json_path\":\"$result_path\",\"audit_report_path\":\"$audit_path\",\"result_json_sha256\":\"[c3_sha256_file $result_path]\",\"audit_report_sha256\":\"[c3_sha256_file $audit_path]\"}"
+puts -nonewline $f "{\"schema\":\"rtnn-c3-key-reset-replay-gate-v1\",\"status\":\"PASS\",\"audit_status\":\"PASS\",\"reset_action\":\"KEY0_PRESS_RELEASE\",\"user_attested\":true,\"sof_sha256\":\"[string repeat a 64]\",\"build_id\":\"43334531\",\"response_count\":20,\"experiment_id\":\"$reset_id\",\"selected_sequences\":\[$seq_json\],\"result_json_path\":\"$result_ref\",\"audit_report_path\":\"$audit_ref\",\"result_json_sha256\":\"[c3_sha256_file $result_path]\",\"audit_report_sha256\":\"[c3_sha256_file $audit_path]\"}"
 close $f
 if {[catch {c3_require_reset_replay_gate $gate_path [string repeat a 64] 43334531} gate_sha]} {error "complete reset gate fixture rejected: $gate_sha"}
 set f [open $result_path a]; puts -nonewline $f " "; close $f

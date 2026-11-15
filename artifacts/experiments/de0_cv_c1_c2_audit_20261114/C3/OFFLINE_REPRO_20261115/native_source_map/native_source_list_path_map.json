@@ -1,0 +1,1321 @@
+{
+  "schema": "rtnn-c3-native-source-list-path-map-v1",
+  "source_list_sha256": "4bddc5bd5e37cbd24015189d49e4a21677d570e5cb1c0a7c9dd503da30e6bfba",
+  "mapping_only_not_build_equivalence": true,
+  "entry_count": 146,
+  "repository_entries_present": 5,
+  "repository_entries_missing": 0,
+  "external_ibex_entry_count": 141,
+  "external_ibex_available_in_repository": 0,
+  "entries": [
+    {
+      "index": 1,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 2,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_cheriot_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_cheriot_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_cheriot_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 3,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1p_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1p_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1p_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 4,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_2p_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_2p_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_2p_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 5,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rom_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rom_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rom_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 6,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1r1w_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1r1w_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1r1w_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 7,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_assert.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_assert.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_assert.sv",
+      "sha256": null
+    },
+    {
+      "index": 8,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_flop_macros.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_flop_macros.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_flop_macros.sv",
+      "sha256": null
+    },
+    {
+      "index": 9,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_cipher_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_cipher_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_cipher_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 10,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_and2.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_and2.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_and2.sv",
+      "sha256": null
+    },
+    {
+      "index": 11,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_buf.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_buf.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_buf.sv",
+      "sha256": null
+    },
+    {
+      "index": 12,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_buf.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_buf.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_buf.sv",
+      "sha256": null
+    },
+    {
+      "index": 13,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_gating.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_gating.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_gating.sv",
+      "sha256": null
+    },
+    {
+      "index": 14,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop.sv",
+      "sha256": null
+    },
+    {
+      "index": 15,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_no_rst.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_no_rst.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_no_rst.sv",
+      "sha256": null
+    },
+    {
+      "index": 16,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 17,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_usb_diff_rx.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_usb_diff_rx.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_usb_diff_rx.sv",
+      "sha256": null
+    },
+    {
+      "index": 18,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_xnor2.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_xnor2.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_xnor2.sv",
+      "sha256": null
+    },
+    {
+      "index": 19,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_xor2.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_xor2.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_xor2.sv",
+      "sha256": null
+    },
+    {
+      "index": 20,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_pad_wrapper_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_pad_wrapper_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_pad_wrapper_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 21,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 22,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 23,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 24,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_28_22_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_28_22_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_28_22_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 25,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_28_22_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_28_22_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_28_22_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 26,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_39_32_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_39_32_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_39_32_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 27,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_39_32_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_39_32_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_39_32_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 28,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_64_57_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_64_57_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_64_57_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 29,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_64_57_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_64_57_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_64_57_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 30,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_72_64_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_72_64_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_72_64_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 31,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_72_64_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_72_64_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_72_64_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 32,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_22_16_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_22_16_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_22_16_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 33,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_22_16_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_22_16_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_22_16_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 34,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_39_32_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_39_32_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_39_32_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 35,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_39_32_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_39_32_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_39_32_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 36,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_72_64_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_72_64_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_72_64_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 37,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_72_64_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_72_64_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_72_64_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 38,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_76_68_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_76_68_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_76_68_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 39,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_76_68_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_76_68_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_76_68_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 40,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_22_16_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_22_16_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_22_16_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 41,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_22_16_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_22_16_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_22_16_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 42,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_28_22_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_28_22_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_28_22_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 43,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_28_22_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_28_22_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_28_22_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 44,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_39_32_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_39_32_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_39_32_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 45,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_39_32_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_39_32_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_39_32_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 46,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_64_57_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_64_57_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_64_57_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 47,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_64_57_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_64_57_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_64_57_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 48,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_72_64_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_72_64_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_72_64_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 49,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_72_64_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_72_64_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_72_64_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 50,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_22_16_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_22_16_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_22_16_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 51,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_22_16_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_22_16_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_22_16_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 52,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_39_32_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_39_32_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_39_32_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 53,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_39_32_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_39_32_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_39_32_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 54,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_72_64_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_72_64_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_72_64_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 55,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_72_64_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_72_64_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_72_64_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 56,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_76_68_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_76_68_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_76_68_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 57,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_76_68_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_76_68_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_76_68_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 58,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_icache.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_icache.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_icache.sv",
+      "sha256": null
+    },
+    {
+      "index": 59,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_cdc_rand_delay.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_cdc_rand_delay.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_cdc_rand_delay.sv",
+      "sha256": null
+    },
+    {
+      "index": 60,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_subst_perm.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_subst_perm.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_subst_perm.sv",
+      "sha256": null
+    },
+    {
+      "index": 61,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_present.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_present.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_present.sv",
+      "sha256": null
+    },
+    {
+      "index": 62,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_prince.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_prince.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_prince.sv",
+      "sha256": null
+    },
+    {
+      "index": 63,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_count_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_count_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_count_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 64,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_count.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_count.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_count.sv",
+      "sha256": null
+    },
+    {
+      "index": 65,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_mux2.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_mux2.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_mux2.sv",
+      "sha256": null
+    },
+    {
+      "index": 66,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pad_attr.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pad_attr.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pad_attr.sv",
+      "sha256": null
+    },
+    {
+      "index": 67,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pad_wrapper.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pad_wrapper.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pad_wrapper.sv",
+      "sha256": null
+    },
+    {
+      "index": 68,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1p.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1p.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1p.sv",
+      "sha256": null
+    },
+    {
+      "index": 69,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1r1w.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1r1w.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1r1w.sv",
+      "sha256": null
+    },
+    {
+      "index": 70,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_2p.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_2p.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_2p.sv",
+      "sha256": null
+    },
+    {
+      "index": 71,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rom.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rom.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rom.sv",
+      "sha256": null
+    },
+    {
+      "index": 72,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_lfsr.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_lfsr.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_lfsr.sv",
+      "sha256": null
+    },
+    {
+      "index": 73,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 74,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_sec_anchor_buf.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_sec_anchor_buf.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_sec_anchor_buf.sv",
+      "sha256": null
+    },
+    {
+      "index": 75,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_sec_anchor_flop.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_sec_anchor_flop.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_sec_anchor_flop.sv",
+      "sha256": null
+    },
+    {
+      "index": 76,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_util_pkg.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_util_pkg.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_util_pkg.sv",
+      "sha256": null
+    },
+    {
+      "index": 77,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/pulp_common_cells/rtl/stream_fork.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/pulp_common_cells/rtl/stream_fork.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/pulp_common_cells/rtl/stream_fork.sv",
+      "sha256": null
+    },
+    {
+      "index": 78,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/pulp_common_cells/rtl/stream_join_dynamic.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/pulp_common_cells/rtl/stream_join_dynamic.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/pulp_common_cells/rtl/stream_join_dynamic.sv",
+      "sha256": null
+    },
+    {
+      "index": 79,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_inv.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_inv.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_inv.sv",
+      "sha256": null
+    },
+    {
+      "index": 80,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_2sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_2sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_2sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 81,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_en.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_en.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_en.sv",
+      "sha256": null
+    },
+    {
+      "index": 82,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_sender.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_sender.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_sender.sv",
+      "sha256": null
+    },
+    {
+      "index": 83,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 84,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 85,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_sender.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_sender.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_sender.sv",
+      "sha256": null
+    },
+    {
+      "index": 86,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 87,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 88,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_sender.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_sender.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_sender.sv",
+      "sha256": null
+    },
+    {
+      "index": 89,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 90,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 91,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_sender.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_sender.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_sender.sv",
+      "sha256": null
+    },
+    {
+      "index": 92,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 93,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 94,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_sender.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_sender.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_sender.sv",
+      "sha256": null
+    },
+    {
+      "index": 95,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 96,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 97,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_sender.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_sender.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_sender.sv",
+      "sha256": null
+    },
+    {
+      "index": 98,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 99,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 100,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_sender.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_sender.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_sender.sv",
+      "sha256": null
+    },
+    {
+      "index": 101,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 102,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 103,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_sender.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_sender.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_sender.sv",
+      "sha256": null
+    },
+    {
+      "index": 104,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 105,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_dec.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_dec.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_dec.sv",
+      "sha256": null
+    },
+    {
+      "index": 106,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_enc.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_enc.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_enc.sv",
+      "sha256": null
+    },
+    {
+      "index": 107,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_mux.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_mux.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_mux.sv",
+      "sha256": null
+    },
+    {
+      "index": 108,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_check.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_check.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_check.sv",
+      "sha256": null
+    },
+    {
+      "index": 109,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_adv.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_adv.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_adv.sv",
+      "sha256": null
+    },
+    {
+      "index": 110,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_alu.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_alu.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_alu.sv",
+      "sha256": null
+    },
+    {
+      "index": 111,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_branch_predict.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_branch_predict.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_branch_predict.sv",
+      "sha256": null
+    },
+    {
+      "index": 112,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_compressed_decoder.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_compressed_decoder.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_compressed_decoder.sv",
+      "sha256": null
+    },
+    {
+      "index": 113,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_controller.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_controller.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_controller.sv",
+      "sha256": null
+    },
+    {
+      "index": 114,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_cs_registers.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_cs_registers.sv",
+      "sha256": null
+    },
+    {
+      "index": 115,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_csr.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_csr.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_csr.sv",
+      "sha256": null
+    },
+    {
+      "index": 116,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_counter.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_counter.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_counter.sv",
+      "sha256": null
+    },
+    {
+      "index": 117,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_decoder.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_decoder.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_decoder.sv",
+      "sha256": null
+    },
+    {
+      "index": 118,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_ex_block.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_ex_block.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_ex_block.sv",
+      "sha256": null
+    },
+    {
+      "index": 119,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_fetch_fifo.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_fetch_fifo.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_fetch_fifo.sv",
+      "sha256": null
+    },
+    {
+      "index": 120,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_id_stage.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_id_stage.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_id_stage.sv",
+      "sha256": null
+    },
+    {
+      "index": 121,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_if_stage.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_if_stage.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_if_stage.sv",
+      "sha256": null
+    },
+    {
+      "index": 122,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_load_store_unit.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_load_store_unit.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_load_store_unit.sv",
+      "sha256": null
+    },
+    {
+      "index": 123,
+      "original_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_multdiv_fast.csa.sv",
+      "mapping_kind": "REPO_RELATIVE",
+      "normalized_path": "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_multdiv_fast.csa.sv",
+      "exists_in_repository": true,
+      "sha256": "f74def2c52d42c46dffbabdb1e114dab10fe5120412d9ad7240d427d9ee0f7b0"
+    },
+    {
+      "index": 124,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_multdiv_slow.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_multdiv_slow.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_multdiv_slow.sv",
+      "sha256": null
+    },
+    {
+      "index": 125,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_prefetch_buffer.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_prefetch_buffer.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_prefetch_buffer.sv",
+      "sha256": null
+    },
+    {
+      "index": 126,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_pmp.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_pmp.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_pmp.sv",
+      "sha256": null
+    },
+    {
+      "index": 127,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_wb_stage.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_wb_stage.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_wb_stage.sv",
+      "sha256": null
+    },
+    {
+      "index": 128,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_dummy_instr.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_dummy_instr.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_dummy_instr.sv",
+      "sha256": null
+    },
+    {
+      "index": 129,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_core.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_core.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_core.sv",
+      "sha256": null
+    },
+    {
+      "index": 130,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async_sram_adapter.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async_sram_adapter.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async_sram_adapter.sv",
+      "sha256": null
+    },
+    {
+      "index": 131,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async_simple.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async_simple.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async_simple.sv",
+      "sha256": null
+    },
+    {
+      "index": 132,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async.sv",
+      "sha256": null
+    },
+    {
+      "index": 133,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 134,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync_cnt.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync_cnt.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync_cnt.sv",
+      "sha256": null
+    },
+    {
+      "index": 135,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_div.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_div.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_div.sv",
+      "sha256": null
+    },
+    {
+      "index": 136,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rst_sync.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rst_sync.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rst_sync.sv",
+      "sha256": null
+    },
+    {
+      "index": 137,
+      "original_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_scr.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_scr.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_scr.sv",
+      "sha256": null
+    },
+    {
+      "index": 138,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_register_file_ff.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_register_file_ff.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_register_file_ff.sv",
+      "sha256": null
+    },
+    {
+      "index": 139,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_register_file_fpga.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_register_file_fpga.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_register_file_fpga.sv",
+      "sha256": null
+    },
+    {
+      "index": 140,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_register_file_latch.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_register_file_latch.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_register_file_latch.sv",
+      "sha256": null
+    },
+    {
+      "index": 141,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_trvk.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_trvk.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_trvk.sv",
+      "sha256": null
+    },
+    {
+      "index": 142,
+      "original_path": "/opt/rtnn-tools/ibex/rtl/ibex_lockstep.sv",
+      "mapping_kind": "EXTERNAL_IBEX_DEPENDENCY",
+      "normalized_path": "${IBEX_ROOT}/rtl/ibex_lockstep.sv",
+      "exists_in_repository": false,
+      "repository_candidate": "vendor/ibex/rtl/ibex_lockstep.sv",
+      "sha256": null
+    },
+    {
+      "index": 143,
+      "original_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv",
+      "mapping_kind": "REPO_RELATIVE",
+      "normalized_path": "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/ibex_integration/ibex_top_gate_bypass.sv",
+      "exists_in_repository": true,
+      "sha256": "e1728fb66338b61a815a30062923698de7b6ff5e62d5c2bd3e996633254b3f50"
+    },
+    {
+      "index": 144,
+      "original_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_ram.sv",
+      "mapping_kind": "REPO_RELATIVE",
+      "normalized_path": "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_ram.sv",
+      "exists_in_repository": true,
+      "sha256": "bd8eb683a03cfa7db66f778106e5e1b10317c9930c50d735e4e5175ecae00b02"
+    },
+    {
+      "index": 145,
+      "original_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv",
+      "mapping_kind": "REPO_RELATIVE",
+      "normalized_path": "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/source/rtl/rtnn_de0_cv_soc_c2.sv",
+      "exists_in_repository": true,
+      "sha256": "9fbc58508e023f05c8dba59d085ef7cf673a04b7d9e9a6b0d6cc18dd0ca5acdc"
+    },
+    {
+      "index": 146,
+      "original_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-audit-20261114/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/cdc_capture_delay_candidate/rtnn_c2_vjtag_mailbox.sv",
+      "mapping_kind": "REPO_RELATIVE",
+      "normalized_path": "artifacts/experiments/de0_cv_c1_c2_audit_20261114/C2/evidence/cdc_capture_delay_candidate/rtnn_c2_vjtag_mailbox.sv",
+      "exists_in_repository": true,
+      "sha256": "363a0f3bd601f9c3f2f53d635e1da54887e6754cda2fc4774b43c3fb969fb96f"
+    }
+  ]
+}

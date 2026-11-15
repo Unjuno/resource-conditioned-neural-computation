@@ -1,0 +1,2 @@
+PowerShell wrapper failed before quartus_sta started: Resolve-Path tried to resolve the repository-relative evidence path after Push-Location to the D: copy. No quartus_sta log was created and no project sources were modified.
+Command exit code: 1

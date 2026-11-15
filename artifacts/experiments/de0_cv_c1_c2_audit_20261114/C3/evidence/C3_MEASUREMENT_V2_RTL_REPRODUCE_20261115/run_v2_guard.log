@@ -1,0 +1,2 @@
+C2_RESPONSE_WRITE_GUARD_PASS partial_rejected=1 full_commit=1 empty_recommit_rejected=1
+- tb_rtnn_c2_response_write_guard.sv:64: Verilog $finish

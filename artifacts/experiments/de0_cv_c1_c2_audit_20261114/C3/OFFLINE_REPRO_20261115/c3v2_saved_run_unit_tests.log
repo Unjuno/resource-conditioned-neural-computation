@@ -1,0 +1,18 @@
+test_crc_mismatch_rejected (__main__.SavedRunAuditTests.test_crc_mismatch_rejected) ... ok
+test_cross_build_aggregation_rejected (__main__.SavedRunAuditTests.test_cross_build_aggregation_rejected) ... ok
+test_duplicate_sequence_rejected (__main__.SavedRunAuditTests.test_duplicate_sequence_rejected) ... ok
+test_existing_pre_reset_pilot_cannot_make_reset_gate (__main__.SavedRunAuditTests.test_existing_pre_reset_pilot_cannot_make_reset_gate) ... ok
+test_identity_check_source_has_no_virtual_jtag_write_or_programmer_call (__main__.SavedRunAuditTests.test_identity_check_source_has_no_virtual_jtag_write_or_programmer_call) ... ok
+test_missing_sequence_rejected (__main__.SavedRunAuditTests.test_missing_sequence_rejected) ... ok
+test_mock_or_synthetic_path_cannot_enter_physical_cli (__main__.SavedRunAuditTests.test_mock_or_synthetic_path_cannot_enter_physical_cli) ... ok
+test_nonmonotonic_start_end_rejected (__main__.SavedRunAuditTests.test_nonmonotonic_start_end_rejected) ... ok
+test_response_id_mismatch_rejected (__main__.SavedRunAuditTests.test_response_id_mismatch_rejected) ... ok
+test_saved_20_pilot_physical_record_audits (__main__.SavedRunAuditTests.test_saved_20_pilot_physical_record_audits) ... ok
+test_saved_42_physical_record_audits (__main__.SavedRunAuditTests.test_saved_42_physical_record_audits) ... ok
+test_start_end_delta_mismatch_rejected (__main__.SavedRunAuditTests.test_start_end_delta_mismatch_rejected) ... ok
+test_uint64_overflow_rejected (__main__.SavedRunAuditTests.test_uint64_overflow_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.055s
+
+OK

@@ -1,0 +1,237 @@
+{
+  "schema": "rtnn-historical-c2j2-independent-reaggregation-v1",
+  "status": "PASS_DATA_INTEGRITY_EMPIRICAL_ONLY",
+  "data_class": "HISTORICAL_C2J2_PHYSICAL",
+  "build_id": "43324a32",
+  "model_id": "52544e4e",
+  "sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+  "campaign_canonical_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "campaign_file_sha256": "3d97a1cd87395e294299cacb617474367c89a9295355cd25fb1b4fa67464c936",
+  "q15_weight_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+  "measurement_boundary": "Ibex mcycle after request/model/pixel validation and before admission; through Q15 inference, entropy stop, and argmax. Excludes wire decode/CRC, MMIO request copy, JTAG wait, response encoding, and response transfer.",
+  "input_count_independent": 360,
+  "planned_rows": 24840,
+  "raw_rows_validated": 24840,
+  "schedule_count": 13,
+  "schedule_rows": [
+    {
+      "session_id": "diagnostic_fixed",
+      "experiment_id": "C3_DIAGFIXED_FULL2520_RUN1_20261114",
+      "expected_rows": 2520,
+      "raw_rows": 2520,
+      "unique_seq": 2520,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "UNRECORDED",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "diagnostic_adaptive",
+      "experiment_id": "C3_DIAGADAPTIVE_FULL7560_RUN1_20261114",
+      "expected_rows": 7560,
+      "raw_rows": 7560,
+      "unique_seq": 7560,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "UNRECORDED",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "diagnostic_capped",
+      "experiment_id": "C3_DIAGCAPPED_FULL7560_RUN1_20261114",
+      "expected_rows": 7560,
+      "raw_rows": 7560,
+      "unique_seq": 7560,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "UNRECORDED",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_01",
+      "experiment_id": "C3_PRIMARY01_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "UNRECORDED",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_02",
+      "experiment_id": "C3_PRIMARY02_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_03",
+      "experiment_id": "C3_PRIMARY03_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_04",
+      "experiment_id": "C3_PRIMARY04_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_05",
+      "experiment_id": "C3_PRIMARY05_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_06",
+      "experiment_id": "C3_PRIMARY06_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_07",
+      "experiment_id": "C3_PRIMARY07_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_08",
+      "experiment_id": "C3_PRIMARY08_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_09",
+      "experiment_id": "C3_PRIMARY09_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    },
+    {
+      "session_id": "primary_10",
+      "experiment_id": "C3_PRIMARY10_FULL720_RUN1_20261114",
+      "expected_rows": 720,
+      "raw_rows": 720,
+      "unique_seq": 720,
+      "status": "PASS_REAGGREGATED",
+      "board_power_session_id": "POWER_SESSION_UNCONFIRMED_20261114",
+      "cold_boot_confirmed": false
+    }
+  ],
+  "primary_02_to_10_rows": 6480,
+  "duplicates": 0,
+  "missing_or_extra_sequences": 0,
+  "response_identity_failures": 0,
+  "prediction_vs_frozen_q15_failures": 0,
+  "admitted_or_executed_exit_failures": 0,
+  "cap_violations": 0,
+  "crc_failures": 0,
+  "timeouts_traps_or_case_errors": 0,
+  "teacher_label_accuracy": {
+    "fixed2_correct": 339,
+    "adaptive_correct": 339,
+    "independent_input_ids": 360,
+    "paired_difference_percentage_points": 0.0,
+    "paired_input_bootstrap_95pct_ci_percentage_points": [
+      -1.3888888888888888,
+      1.3888888888888888
+    ],
+    "noninferiority_1pp": "INCONCLUSIVE"
+  },
+  "paired_cycle_summary_preregistered": {
+    "bootstrap_seed": 63,
+    "bootstrap_replicates": 5000,
+    "bootstrap_unit": "360 independent input IDs; average the 10 planned primary schedules within each input",
+    "pairs": 3600,
+    "mean_fixed2_cycles": 943924.7666666667,
+    "mean_adaptive_cycles": 746322.9944444444,
+    "mean_fixed2_minus_adaptive_cycles": 197601.7722222223,
+    "input_bootstrap_95pct_ci_cycles": [
+      158616.4693055555,
+      235071.07263888879
+    ],
+    "mean_reduction_percent": 20.93405949290051,
+    "input_bootstrap_95pct_ci_reduction_percent": [
+      16.803933644260166,
+      24.90358200042772
+    ],
+    "three_confirmed_independent_cold_boots": false,
+    "speedup_claim": "NOT_CLAIMED"
+  },
+  "descriptive_cycle_distributions": {
+    "row_unit": "3,600 repeated primary observations per mode; these are not independent input IDs",
+    "fixed2": {
+      "count": 3600,
+      "mean": 943924.7666666667,
+      "median": 943925.0,
+      "p25": 943924.0,
+      "p75": 943925.0
+    },
+    "adaptive": {
+      "count": 3600,
+      "mean": 746322.9944444444,
+      "median": 565951.0,
+      "p25": 565950.0,
+      "p75": 1071495.0
+    },
+    "per_input_mean_cycle_difference_median": 377974.0,
+    "adaptive_faster_input_count": 263,
+    "adaptive_slower_input_count": 97,
+    "equal_input_count": 0,
+    "executed_exit_counts_by_mode": {
+      "1": {
+        "2": 3600
+      },
+      "3": {
+        "1": 2630,
+        "4": 20,
+        "2": 810,
+        "3": 70,
+        "5": 70
+      }
+    }
+  },
+  "exploratory_analysis": {
+    "slowest_20": "adaptive_slowest_20_inputs.csv",
+    "fastest_20": "adaptive_fastest_20_inputs.csv",
+    "all_primary_rows": "primary_rows_for_figures.csv"
+  },
+  "old_analysis_comparison": {
+    "existing_run4_csv_sha256": "f8651f29f42febe85a3c83a3ae245c0bcea56caadafc1fe9b7dd11a1f77277cf",
+    "existing_run5_csv_sha256": "f8651f29f42febe85a3c83a3ae245c0bcea56caadafc1fe9b7dd11a1f77277cf",
+    "cycle_mean_results_match_existing_run4": true
+  },
+  "limitations": [
+    "Cold-boot independence for the historical 10 primary sessions is not established.",
+    "Accuracy noninferiority at a 1 percentage-point margin remains inconclusive.",
+    "Cycle reductions are descriptive empirical measurements, not a speedup guarantee.",
+    "No absolute time, ppm, WCET, or hard deadline is inferred."
+  ]
+}

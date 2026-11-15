@@ -1,0 +1,15 @@
+{
+  "experiment_id": "C3V2_DIAGADAPTIVE_FULL7560_RUN1_20261115",
+  "schedule_id": "diagnostic_adaptive",
+  "board": "DE0-CV Cyclone V 5CEBA4F23C7N",
+  "jtag": "USB-Blaster USB-0",
+  "build_id": "43334531",
+  "sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d",
+  "model_id": "52544e4e",
+  "campaign_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc",
+  "power_session_id": "POWER_SESSION_CONTINUOUS_AFTER_KEYRESET_20261115_UNVERIFIED",
+  "cold_boot_confirmed": false,
+  "timing_classification": "EMPIRICAL_ONLY",
+  "reset_gate_experiment_id": "C3V2_TENINPUT_KEY_RESET_REPLAY_20261115_RUN2",
+  "reset_evidence_scope": "USER_ATTESTED_KEY0_BEFORE_RESET_REPLAY; GATE_REUSED_FOR_SCHEDULE; NOT_PER_RUN_TELEMETRY"
+}
