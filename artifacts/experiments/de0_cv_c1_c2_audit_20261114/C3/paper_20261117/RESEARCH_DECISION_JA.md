@@ -6,10 +6,15 @@
 
 **達成:** 13スケジュール24,840件のC3 v2原本は保存済み監査PASS。うちprimary 10本の7200 CSV行を自作Python検査器が全件読み取り、入力360 ID×固定2/適応の対応、ID・凍結Q15参照・Exit・cap・64bit cycle差・CSV SHAを照合した。旧C2J2の別build 7200行も対応比較した。正しいモデル/データ/構成を変更していない。
 
+**重要な主張制限（査読で必須）:** primary 7200行の全件で予算はQ0.16の65535（最大値）、deadlineは0。したがって**平均20.934%の削減は最大予算下での適応早期終了 vs 固定Exit 2**の比較であり、予算変化全般の平均削減ではない。また凍結campaignには`prior_test_results_known=true`、比較対象には`previously_observed_comparator_not_test_blind_selection`と明記されており、独立した新規・盲検汎化実験ではない。
+
+予算依存性そのものは別途保存済み診断実験で調べた。固定7クラス×360入力（2,520行）、適応21予算×360（7,560行）、capped 21予算×360（7,560行）の**計17,640行を保存原本から再監査PASS**。最大予算と約半予算でcycleが変わることを確認したが、探索的記述であり優位性の新しい事前検定ではない。
+
 | 対象 | 判定 | 数値 |
 |---|---|---|
 | C3 v2の凍結データ整合性 | **PASS_SAVED_EVIDENCE** | 13/13・24,840/24,840 |
-| C3 v2 primary解析 | **PASS** | 360入力・10 primary schedule・3600対 |
+| C3 v2 primary解析 | **PASS** | 最大予算・deadlineなし、360入力・10 primary schedule・3600対 |
+| C3 v2予算診断 | **PASS_SAVED_EVIDENCE / SECONDARY_ONLY** | 17,640行、固定7クラス、適応とcapped各21予算 |
 | fixed2平均 | 実測 | 943,929.77 cycles |
 | adaptive平均 | 実測 | 746,327.99 cycles |
 | 対応平均cycle削減 | 条件付き記述値 | 197,601.77 cycles |

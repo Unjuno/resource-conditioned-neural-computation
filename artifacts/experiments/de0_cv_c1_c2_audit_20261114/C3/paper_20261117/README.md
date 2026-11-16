@@ -6,7 +6,12 @@ This is a separate **offline paper-audit snapshot** derived from preserved exper
 
 - [English manuscript draft](MANUSCRIPT_DRAFT_EN.md) — empirical case study, limitations and primary literature.
 - [Japanese evidence and next-gates report](RESEARCH_DECISION_JA.md).
-- [Independent stdlib-only analyzer](reanalyze_c3v2_primary.py), [11 focused tests](test_reanalyze_c3v2_primary.py).
+- [Independent primary analyzer](reanalyze_c3v2_primary.py), [11 primary tests](test_reanalyze_c3v2_primary.py).
+- [Independent frozen diagnostic budget analyzer](analyze_budget_diagnostics.py), [4 diagnostic tests](test_budget_diagnostics.py); 17,640 diagnostic rows, 21 budget classes each for adaptive and capped, seven fixed classes.
+- [Secondary diagnostic budget table](diagnostic_run1/budget_summary.csv), [budget-cycle figure](diagnostic_run1/figure_03_budget_vs_cycles.svg), [diagnostic analysis JSON](diagnostic_run1/analysis.json), [SHA manifest](diagnostic_run1/SHA256SUMS.txt).
+- [Publication-readiness audit](PUBLICATION_READINESS_AUDIT_JA.md), [review execution record](REVIEW_RUN_RECORD_JA.md).
+- [Current review SHA manifest](SHA256SUMS_PAPER_REVIEW.txt), which supersedes the archived original SHA256SUMS_PAPER.txt after the reviewer amendments.
+- [Pinned Ibex/project source-hash checker](audit_native_source_portability.py), [145/146 result](NATIVE_SOURCE_PORTABILITY_AUDIT.json), [source reproducibility gap](SOURCE_REPRO_GAP_JA.md). The checker intentionally reports BLOCKED when any source SHA differs; this is not a successful RTL build.
 - [Machine-readable analysis](generated_run1/analysis.json), [360-row input-level table](generated_run1/input_level.csv), [10 schedule summary](generated_run1/primary_sessions.csv).
 - [Paired saving figure](generated_run1/figure_01_paired_cycle_saving.svg), [executed-exit figure](generated_run1/figure_02_exit_cycles.svg).
 - [Output SHA manifest](generated_run1/SHA256SUMS.txt).
@@ -14,15 +19,18 @@ This is a separate **offline paper-audit snapshot** derived from preserved exper
 ## Reproduce from repository root
 
 ```bash
-python3 -m unittest discover -s artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117 -p test_reanalyze_c3v2_primary.py -v
+python3 -m unittest discover -s artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117 -p 'test_*.py' -v
 python3 artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/reanalyze_c3v2_primary.py --out-dir /tmp/rtnn-c3v2-paper-independent-new
+python3 artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/analyze_budget_diagnostics.py --out-dir /tmp/rtnn-c3v2-paper-budget-new
 ```
 
 Requirements: Python 3.10+ standard library; published repository checkout containing original C3 archived physical primary CSV files and the C2J2 historical primary CSVs. No device, administrator rights, statistics service or network access is needed after checkout. The analyzer refuses to overwrite its destination.
 
-For a reproducibility comparison, compute SHA-256 hashes of all generated outputs against `generated_run1/SHA256SUMS.txt`. An independent second run produced byte-identical outputs and matching SHA manifest.
+For a reproducibility comparison, compute SHA-256 hashes of all generated primary outputs against `generated_run1/SHA256SUMS.txt`, the diagnostic outputs against `diagnostic_run1/SHA256SUMS.txt`, and the **current** manuscript/script files against `SHA256SUMS_PAPER_REVIEW.txt` (the earlier SHA256SUMS_PAPER.txt is historical). An independent second run produced byte-identical outputs and matching SHA manifest.
 
 ## Claim boundaries
+
+All primary paired rows use **maximum admitted Q0.16 budget 65535** and no deadline; the 20.934% figure is the full-budget adaptive-versus-fixed-Exit-2 contrast, not a budget-sweep improvement. The baseline fixed Exit 2 was chosen with **prior test results already known** (frozen campaign metadata), so the result is not a new test-blind generalization claim. Budget dependence is separately documented as **secondary diagnostic evidence** in `diagnostic_run1/`.
 
 The input bootstrap (5000 repeats, seed 63) resamples **360 distinct input IDs**, not the ten schedules as independent experimental units. All ten schedule repetitions showed identical cycle deltas for every input/mode. Independent cold boots were *not* verified. No formal board-level JTAG timing signoff, calibrated latency, WCET or one-point accuracy noninferiority is claimed. The observed five-cycle shift from C2J2 to C3 v2 is an association across two specific builds and requires compiler/instrumentation analysis for causal attribution.
 

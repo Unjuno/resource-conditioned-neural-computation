@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 670" role="img">
+<rect width="1100" height="670" fill="#ffffff"/>
+<title>Resource-budget diagnostics on C3 v2</title>
+<text x="68" y="59" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#1c2938">Resource-budget diagnostics on C3 v2</text>
+<text x="68" y="88" font-family="Arial,sans-serif" font-size="16" fill="#5e6876">21 frozen Q0.16 budgets x 360 inputs per mode; mean observed FPGA mcycle, no cold-boot independence.</text>
+<line x1="106" x2="1000" y1="540.00" y2="540.00" stroke="#dfe4e9"/>
+<text x="94" y="545.00" text-anchor="end" font-family="Arial" font-size="14" fill="#475462">0.0M</text>
+<line x1="106" x2="1000" y1="475.33" y2="475.33" stroke="#dfe4e9"/>
+<text x="94" y="480.33" text-anchor="end" font-family="Arial" font-size="14" fill="#475462">0.5M</text>
+<line x1="106" x2="1000" y1="410.67" y2="410.67" stroke="#dfe4e9"/>
+<text x="94" y="415.67" text-anchor="end" font-family="Arial" font-size="14" fill="#475462">1.0M</text>
+<line x1="106" x2="1000" y1="346.00" y2="346.00" stroke="#dfe4e9"/>
+<text x="94" y="351.00" text-anchor="end" font-family="Arial" font-size="14" fill="#475462">1.5M</text>
+<line x1="106" x2="1000" y1="281.33" y2="281.33" stroke="#dfe4e9"/>
+<text x="94" y="286.33" text-anchor="end" font-family="Arial" font-size="14" fill="#475462">2.0M</text>
+<line x1="106" x2="1000" y1="216.67" y2="216.67" stroke="#dfe4e9"/>
+<text x="94" y="221.67" text-anchor="end" font-family="Arial" font-size="14" fill="#475462">2.5M</text>
+<line x1="106" x2="1000" y1="152.00" y2="152.00" stroke="#dfe4e9"/>
+<text x="94" y="157.00" text-anchor="end" font-family="Arial" font-size="14" fill="#475462">3.0M</text>
+<polyline points="106.00,537.39 150.70,537.39 195.41,537.39 240.10,537.39 284.80,472.00 329.50,472.00 374.19,472.00 418.90,450.59 463.60,450.59 508.30,450.59 553.01,446.51 597.70,446.51 642.40,446.51 687.10,446.51 731.79,444.77 776.50,444.77 821.20,444.77 865.90,443.47 910.61,443.47 955.30,443.47 1000.00,443.47" fill="none" stroke="#11747c" stroke-width="4" stroke-linecap="round"/>
+<circle cx="106.00" cy="537.39" r="3.3" fill="#11747c"/>
+<circle cx="150.70" cy="537.39" r="3.3" fill="#11747c"/>
+<circle cx="195.41" cy="537.39" r="3.3" fill="#11747c"/>
+<circle cx="240.10" cy="537.39" r="3.3" fill="#11747c"/>
+<circle cx="284.80" cy="472.00" r="3.3" fill="#11747c"/>
+<circle cx="329.50" cy="472.00" r="3.3" fill="#11747c"/>
+<circle cx="374.19" cy="472.00" r="3.3" fill="#11747c"/>
+<circle cx="418.90" cy="450.59" r="3.3" fill="#11747c"/>
+<circle cx="463.60" cy="450.59" r="3.3" fill="#11747c"/>
+<circle cx="508.30" cy="450.59" r="3.3" fill="#11747c"/>
+<circle cx="553.01" cy="446.51" r="3.3" fill="#11747c"/>
+<circle cx="597.70" cy="446.51" r="3.3" fill="#11747c"/>
+<circle cx="642.40" cy="446.51" r="3.3" fill="#11747c"/>
+<circle cx="687.10" cy="446.51" r="3.3" fill="#11747c"/>
+<circle cx="731.79" cy="444.77" r="3.3" fill="#11747c"/>
+<circle cx="776.50" cy="444.77" r="3.3" fill="#11747c"/>
+<circle cx="821.20" cy="444.77" r="3.3" fill="#11747c"/>
+<circle cx="865.90" cy="443.47" r="3.3" fill="#11747c"/>
+<circle cx="910.61" cy="443.47" r="3.3" fill="#11747c"/>
+<circle cx="955.30" cy="443.47" r="3.3" fill="#11747c"/>
+<circle cx="1000.00" cy="443.47" r="3.3" fill="#11747c"/>
+<polyline points="106.00,537.39 150.70,537.39 195.41,537.39 240.10,537.39 284.80,477.66 329.50,477.66 374.19,477.66 418.90,417.92 463.60,417.92 508.30,417.92 553.01,358.18 597.70,358.18 642.40,358.18 687.10,358.18 731.79,298.44 776.50,298.44 821.20,298.44 865.90,238.70 910.61,238.70 955.30,238.70 1000.00,178.97" fill="none" stroke="#bb6747" stroke-width="4" stroke-linecap="round"/>
+<circle cx="106.00" cy="537.39" r="3.3" fill="#bb6747"/>
+<circle cx="150.70" cy="537.39" r="3.3" fill="#bb6747"/>
+<circle cx="195.41" cy="537.39" r="3.3" fill="#bb6747"/>
+<circle cx="240.10" cy="537.39" r="3.3" fill="#bb6747"/>
+<circle cx="284.80" cy="477.66" r="3.3" fill="#bb6747"/>
+<circle cx="329.50" cy="477.66" r="3.3" fill="#bb6747"/>
+<circle cx="374.19" cy="477.66" r="3.3" fill="#bb6747"/>
+<circle cx="418.90" cy="417.92" r="3.3" fill="#bb6747"/>
+<circle cx="463.60" cy="417.92" r="3.3" fill="#bb6747"/>
+<circle cx="508.30" cy="417.92" r="3.3" fill="#bb6747"/>
+<circle cx="553.01" cy="358.18" r="3.3" fill="#bb6747"/>
+<circle cx="597.70" cy="358.18" r="3.3" fill="#bb6747"/>
+<circle cx="642.40" cy="358.18" r="3.3" fill="#bb6747"/>
+<circle cx="687.10" cy="358.18" r="3.3" fill="#bb6747"/>
+<circle cx="731.79" cy="298.44" r="3.3" fill="#bb6747"/>
+<circle cx="776.50" cy="298.44" r="3.3" fill="#bb6747"/>
+<circle cx="821.20" cy="298.44" r="3.3" fill="#bb6747"/>
+<circle cx="865.90" cy="238.70" r="3.3" fill="#bb6747"/>
+<circle cx="910.61" cy="238.70" r="3.3" fill="#bb6747"/>
+<circle cx="955.30" cy="238.70" r="3.3" fill="#bb6747"/>
+<circle cx="1000.00" cy="178.97" r="3.3" fill="#bb6747"/>
+<text x="106.00" y="567" text-anchor="middle" font-family="Arial" font-size="14" fill="#465363">0.0</text>
+<text x="284.80" y="567" text-anchor="middle" font-family="Arial" font-size="14" fill="#465363">0.2</text>
+<text x="463.60" y="567" text-anchor="middle" font-family="Arial" font-size="14" fill="#465363">0.4</text>
+<text x="642.40" y="567" text-anchor="middle" font-family="Arial" font-size="14" fill="#465363">0.6</text>
+<text x="821.20" y="567" text-anchor="middle" font-family="Arial" font-size="14" fill="#465363">0.8</text>
+<text x="1000.00" y="567" text-anchor="middle" font-family="Arial" font-size="14" fill="#465363">1.0</text>
+<text x="552" y="606" text-anchor="middle" font-family="Arial" font-size="16" fill="#465363">Normalized admitted budget (Q0.16 / 65535)</text>
+<rect x="680" y="105" width="20" height="5" fill="#11747c"/><text x="707" y="112" font-family="Arial" font-size="15" fill="#465363">adaptive</text>
+<rect x="820" y="105" width="20" height="5" fill="#bb6747"/><text x="847" y="112" font-family="Arial" font-size="15" fill="#465363">capped</text>
+<text x="68" y="643" font-family="Arial,sans-serif" font-size="13" fill="#4f5867">DE0-CV | C3 v2 build 43334531 | 360 frozen inputs | one unverified power session | EMPIRICAL_ONLY</text>
+<text x="68" y="661" font-family="Arial,sans-serif" font-size="12" fill="#8a3641">Not cold-boot/generalization evidence. No FPGA JTAG signoff, WCET, or 1 pp noninferiority claim.</text>
+</svg>
