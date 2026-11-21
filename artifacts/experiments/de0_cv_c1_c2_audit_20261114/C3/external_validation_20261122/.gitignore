@@ -1,0 +1,6 @@
+# Rebuildable local outputs; evidence logs and manifests remain tracked.
+**/obj_dir/
+**/*_obj/
+**/db/
+**/incremental_db/
+**/__pycache__/
