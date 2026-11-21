@@ -1,5 +1,7 @@
 # C2J2 to C3 v2 cycle-offset audit
 
+> **2026-11-22 addendum:** A later static disassembly audit became possible with Ubuntu LLVM 18.1.3. It confirms that C3 v2 stores the sampled 64-bit start counter inside the measured interval, making that extra work a plausible contributor. It does **not** prove that this change causes exactly +5 cycles; causal attribution remains unresolved. See `CYCLE_OFFSET_DISASSEMBLY_ADDENDUM_20261122.md`. The tooling-unavailable paragraph below records the earlier audit state and is retained as historical context.
+
 ## Pairwise observation
 
 Existing independent primary-data reanalysis matched 7,200 old/new rows by schedule, sequence, input ID, and mode. Old build `43324a32` (SOF SHA-256 `5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6`) and new build `43334531` (SOF SHA-256 `85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d`) have matching frozen model identity. All 7,200 cycle differences are exactly +5 cycles in the new build; prediction, admitted exit and executed exit are unchanged. This is an observed cross-build offset, not a correction factor.

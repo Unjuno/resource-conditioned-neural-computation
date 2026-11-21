@@ -1,0 +1,156 @@
+
+artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/evidence/C3_MEASUREMENT_V2_RV32_BUILD_20261115/rtnn_c3_measurement_v2.elf:	file format elf32-littleriscv
+
+SYMBOL TABLE:
+00100000 l       .vectors	00000000 $x.0
+00100080 l       .text	00000000 $x.1
+00000000 l       *ABS*	00000000 $d.2
+00000000 l    df *ABS*	00000000 realtime_nn_real_sequence_fixed_core.c
+001000b4 l       .text	00000000 $x.0
+00100154 l     F .text	0000041c init_state
+00100570 l     F .text	00001588 run_block
+00101af8 l     F .text	00000470 finish
+00104cc0 l     O .rodata	00000040 emb_b
+00104ac0 l     O .rodata	00000200 emb_w
+00104d00 l     O .rodata	00000200 pos
+00102b3c l     F .text	00000010 ct_mask64
+00104f00 l     O .rodata	00000120 BW
+00102b4c l     F .text	000008b0 layernorm
+001120a0 l     O .rodata	00008004 fx_exp_lut
+001033fc l     F .text	0000000c ct_mask32
+00103408 l     F .text	00000014 ct_select_i32
+0010343c l     F .text	00000014 ge_u64_u32
+0011a0a4 l     O .rodata	00004004 fx_gelu_lut
+0011e0a8 l     O .rodata	00000038 HW
+001020ec l     F .text	00000898 entropy10
+0010341c l     F .text	00000020 ge_u64_u64
+00104ac0 l       .rodata	00000000 $d.1
+00105020 l     O .rodata	00000040 b0_n1_w
+00105060 l     O .rodata	00000040 b0_n1_b
+001050a0 l     O .rodata	00000c00 b0_att_in_w
+00105ca0 l     O .rodata	000000c0 b0_att_in_b
+00105d60 l     O .rodata	00000400 b0_att_out_w
+00106160 l     O .rodata	00000040 b0_att_out_b
+001061a0 l     O .rodata	00000040 b0_n2_w
+001061e0 l     O .rodata	00000040 b0_n2_b
+00106220 l     O .rodata	00000800 b0_a_w
+00106a20 l     O .rodata	00000080 b0_a_b
+00106aa0 l     O .rodata	00000800 b0_b_w
+001072a0 l     O .rodata	00000040 b0_b_b
+001072e0 l     O .rodata	00000040 b1_n1_w
+00107320 l     O .rodata	00000040 b1_n1_b
+00107360 l     O .rodata	00000c00 b1_att_in_w
+00107f60 l     O .rodata	000000c0 b1_att_in_b
+00108020 l     O .rodata	00000400 b1_att_out_w
+00108420 l     O .rodata	00000040 b1_att_out_b
+00108460 l     O .rodata	00000040 b1_n2_w
+001084a0 l     O .rodata	00000040 b1_n2_b
+001084e0 l     O .rodata	00000800 b1_a_w
+00108ce0 l     O .rodata	00000080 b1_a_b
+00108d60 l     O .rodata	00000800 b1_b_w
+00109560 l     O .rodata	00000040 b1_b_b
+001095a0 l     O .rodata	00000040 b2_n1_w
+001095e0 l     O .rodata	00000040 b2_n1_b
+00109620 l     O .rodata	00000c00 b2_att_in_w
+0010a220 l     O .rodata	000000c0 b2_att_in_b
+0010a2e0 l     O .rodata	00000400 b2_att_out_w
+0010a6e0 l     O .rodata	00000040 b2_att_out_b
+0010a720 l     O .rodata	00000040 b2_n2_w
+0010a760 l     O .rodata	00000040 b2_n2_b
+0010a7a0 l     O .rodata	00000800 b2_a_w
+0010afa0 l     O .rodata	00000080 b2_a_b
+0010b020 l     O .rodata	00000800 b2_b_w
+0010b820 l     O .rodata	00000040 b2_b_b
+0010b860 l     O .rodata	00000040 b3_n1_w
+0010b8a0 l     O .rodata	00000040 b3_n1_b
+0010b8e0 l     O .rodata	00000c00 b3_att_in_w
+0010c4e0 l     O .rodata	000000c0 b3_att_in_b
+0010c5a0 l     O .rodata	00000400 b3_att_out_w
+0010c9a0 l     O .rodata	00000040 b3_att_out_b
+0010c9e0 l     O .rodata	00000040 b3_n2_w
+0010ca20 l     O .rodata	00000040 b3_n2_b
+0010ca60 l     O .rodata	00000800 b3_a_w
+0010d260 l     O .rodata	00000080 b3_a_b
+0010d2e0 l     O .rodata	00000800 b3_b_w
+0010dae0 l     O .rodata	00000040 b3_b_b
+0010db20 l     O .rodata	00000040 b4_n1_w
+0010db60 l     O .rodata	00000040 b4_n1_b
+0010dba0 l     O .rodata	00000c00 b4_att_in_w
+0010e7a0 l     O .rodata	000000c0 b4_att_in_b
+0010e860 l     O .rodata	00000400 b4_att_out_w
+0010ec60 l     O .rodata	00000040 b4_att_out_b
+0010eca0 l     O .rodata	00000040 b4_n2_w
+0010ece0 l     O .rodata	00000040 b4_n2_b
+0010ed20 l     O .rodata	00000800 b4_a_w
+0010f520 l     O .rodata	00000080 b4_a_b
+0010f5a0 l     O .rodata	00000800 b4_b_w
+0010fda0 l     O .rodata	00000040 b4_b_b
+0010fde0 l     O .rodata	00000040 b5_n1_w
+0010fe20 l     O .rodata	00000040 b5_n1_b
+0010fe60 l     O .rodata	00000c00 b5_att_in_w
+00110a60 l     O .rodata	000000c0 b5_att_in_b
+00110b20 l     O .rodata	00000400 b5_att_out_w
+00110f20 l     O .rodata	00000040 b5_att_out_b
+00110f60 l     O .rodata	00000040 b5_n2_w
+00110fa0 l     O .rodata	00000040 b5_n2_b
+00110fe0 l     O .rodata	00000800 b5_a_w
+001117e0 l     O .rodata	00000080 b5_a_b
+00111860 l     O .rodata	00000800 b5_b_w
+00112060 l     O .rodata	00000040 b5_b_b
+0011e0e0 l     O .rodata	00000280 h0_w
+0011e360 l     O .rodata	00000028 h0_b
+0011e388 l     O .rodata	00000280 h1_w
+0011e608 l     O .rodata	00000028 h1_b
+0011e630 l     O .rodata	00000280 h2_w
+0011e8b0 l     O .rodata	00000028 h2_b
+0011e8d8 l     O .rodata	00000280 h3_w
+0011eb58 l     O .rodata	00000028 h3_b
+0011eb80 l     O .rodata	00000280 h4_w
+0011ee00 l     O .rodata	00000028 h4_b
+0011ee28 l     O .rodata	00000280 h5_w
+0011f0a8 l     O .rodata	00000028 h5_b
+0011f0d0 l     O .rodata	00000280 h6_w
+0011f350 l     O .rodata	00000028 h6_b
+00000000 l       *ABS*	00000000 $d.3
+00000000 l    df *ABS*	00000000 rtnn_experiment_wire.c
+00103450 l       .text	00000000 $x.0
+00000000 l       *ABS*	00000000 $d.2
+00000000 l    df *ABS*	00000000 rtnn_experiment_runner.c
+00104174 l       .text	00000000 $x.0
+00124d78 l     O .rodata	00000168 rtnn_test_labels
+0011f378 l     O .rodata	00005a00 rtnn_test_pixels
+00104558 l     F .text	000000f8 admit
+0012a8e0 l     O .bss	00001200 workspace
+0012bae0 l     O .bss	00000028 logits
+00104650 l     F .text	000000e8 argmax10
+0011f378 l       .rodata	00000000 $d.1
+0012a8e0 l       .bss	00000000 $d.2
+00000000 l       *ABS*	00000000 $d.4
+00000000 l    df *ABS*	00000000 rtnn_c2_main.c
+00104738 l       .text	00000000 $x.0
+00124ee0 l     O .rodata	00005a00 rtnn_test_pixels
+00104a8c l     F .text	00000014 machine_cycles
+00124ee0 l       .rodata	00000000 $d.1
+00000000 l       *ABS*	00000000 $d.3
+00000000 l    df *ABS*	00000000 rtnn_freestanding_mem.c
+00104aa0 l       .text	00000000 $x.0
+00000000 l       *ABS*	00000000 $d.2
+00100000 g       .vectors	00000000 _trap
+00100080 g       .text	00000000 _start
+0013fff0 g       *ABS*	00000000 __stack_top
+0012a8e0 g       .bss	00000000 __bss_start
+0012bb08 g       .bss	00000000 __bss_end
+00104738 g     F .text	00000354 main
+001000b4 g     F .text	0000001c rtnn_fixed_budget_ceiling_q16
+001000d0 g     F .text	00000084 rtnn_fixed_infer_exit
+00101f68 g     F .text	00000184 rtnn_fixed_preferred_exit
+00102984 g     F .text	00000108 rtnn_fixed_infer_budget
+00102a8c g     F .text	000000b0 rtnn_fixed_certify_class
+00103450 g     F .text	000000e8 rtnn_wire_crc
+00103538 g     F .text	000001e8 rtnn_wire_encode_request
+00103720 g     F .text	00000300 rtnn_wire_decode_request
+00103a20 g     F .text	000002c8 rtnn_wire_encode_response
+00103ce8 g     F .text	0000048c rtnn_wire_decode_response
+00104174 g     F .text	000003e4 rtnn_fw_execute
+00104aa0 g     F .text	0000001c memset
+0012bb10 g       .bss	00000000 __image_end
