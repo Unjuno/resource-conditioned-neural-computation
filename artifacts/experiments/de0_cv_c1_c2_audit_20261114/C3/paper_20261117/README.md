@@ -7,7 +7,9 @@ This is a separate **offline paper-audit snapshot** derived from preserved exper
 - [English manuscript draft](MANUSCRIPT_DRAFT_EN.md) — empirical case study, limitations and primary literature.
 - [Japanese evidence and next-gates report](RESEARCH_DECISION_JA.md).
 - [Independent primary analyzer](reanalyze_c3v2_primary.py), [11 primary tests](test_reanalyze_c3v2_primary.py).
+- [Input-level Pareto v2 output integrity tests](test_pareto_frontier_v2_outputs.py).
 - [Independent frozen diagnostic budget analyzer](analyze_budget_diagnostics.py), [4 diagnostic tests](test_budget_diagnostics.py); 17,640 diagnostic rows, 21 budget classes each for adaptive and capped, seven fixed classes.
+- [Input-level Pareto v2 analyzer](analyze_pareto_frontier_v2.py) and its [Japanese interpretation](PARETO_INTERPRETATION_JA.md); outputs include 17,640 input-condition rows, 7,560 fixed2 pairs, and budget nonmonotonicity diagnostics.
 - [Secondary diagnostic budget table](diagnostic_run1/budget_summary.csv), [budget-cycle figure](diagnostic_run1/figure_03_budget_vs_cycles.svg), [diagnostic analysis JSON](diagnostic_run1/analysis.json), [SHA manifest](diagnostic_run1/SHA256SUMS.txt).
 - [Publication-readiness audit](PUBLICATION_READINESS_AUDIT_JA.md), [review execution record](REVIEW_RUN_RECORD_JA.md).
 - [Current review SHA manifest](SHA256SUMS_PAPER_REVIEW.txt), which supersedes the archived original SHA256SUMS_PAPER.txt after the reviewer amendments.
@@ -47,8 +49,10 @@ The source CSVs remain in their original locations:
 - `SOURCE_RECOVERY_RESULT.md`: the exact 146th RTL source was not recovered; no substitute was created.
 - `CLAIM_EVIDENCE_MATRIX.csv` and `CRITICAL_REVIEW_JA.md`: claim limits and reviewer-facing open issues.
 - `PAPER_REVIEW_STATUS_20261121_JA.md` and `PAPER_REVIEW_RUN_RECORD_20261121_JA.md`: current disposition and command record.
-- `pareto_final_run1/` and `pareto_final_run2/` are the recorded independent deterministic runs; `pareto_final_run3/` is the final repeat. Intermediate `pareto_run1/` and `pareto_run2/` directories are preserved but superseded because their figure annotations were incomplete.
+- `PREPUBLICATION_CHECKLIST_JA.md` and `FINAL_REVIEW_ADDENDUM_20261121_V2_JA.md`: limited technical-review status, remaining author/editor checks, and this continuation's run record.
+- `pareto_final_run1/`–`pareto_final_run3/` are the v1 deterministic Pareto runs. `analyze_pareto_frontier_v2.py` adds input-level condition records, fixed2 pairing, and budget nonmonotonicity; final identical outputs are in `pareto_input_audit_run3/` and `run4/`. `run1/2` are retained intermediate outputs from before the slow-case-by-exit summary was added.
 - `generated_final_20261121_run1/` is a fresh full primary-data reanalysis (24,840 rows, 13/13 schedules, 7,200 old/new build pairs); outputs are LF-normalized and byte-identical to `generated_run1/`.
 - `SHA256SUMS_PAPER_REVIEW_20261121.txt`: dated manifest for this review package; the historical `SHA256SUMS_PAPER_REVIEW.txt` is not overwritten.
+- `SHA256SUMS_PAPER_REVIEW_20261121_V2.txt`: manifest for the subsequent input-level Pareto and provenance additions; earlier manifests remain unchanged.
 
-The Pareto script uses only the Python standard library. It reads immutable saved CSVs and refuses to overwrite an existing output directory. See the run record for tool versions and verification.
+The Pareto scripts use only the Python standard library. They read immutable saved CSVs and refuse to overwrite an existing output directory. Current review disposition: **REVIEW_READY_LIMITED** for technical peer review only; this is not a publication/submission approval. See the checklist and addendum for remaining human review and exact boundaries.

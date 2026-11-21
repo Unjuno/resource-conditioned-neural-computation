@@ -2,7 +2,7 @@
 
 ## 結論
 
-**論文は書ける。ただし、現時点で防御可能なのは「特定のFPGA・softcore・凍結Q15 buildに限定した経験的ケーススタディ」である。** 早期終了、予算適応、エントロピー停止、FPGA上の動的推論を新規アルゴリズムとして主張する根拠はない。査読論文としての採否や十分な新規性は保証できないが、研究成果がゼロという意味ではない。
+**判定：REVIEW_READY_LIMITED（技術査読用の限定版）**。現時点で提示可能なのは「特定のFPGA・softcore・凍結Q15 buildに限定した経験的ケーススタディ」である。これは投稿・出版準備完了を意味しない。早期終了、予算適応、エントロピー停止、FPGA上の動的推論を新規アルゴリズムとして主張する根拠はない。
 
 ## 今回の再確認
 
@@ -10,6 +10,7 @@
 - 最大budgetでのC3 v2 fixed Exit 2比較は、360入力に対して平均 `mcycle` が固定2で943,929.77、adaptiveで746,327.99、観測差は20.934%。単一基板・独立cold boot未確認・比較器はtest結果を見た後に選ばれており、探索的な結果である。入力bootstrap区間は16.804–24.903%だが、基板・session・温度・クロックの変動を含まない。
 - 両方式とも339/360正解。事前指定の1 percentage point非劣性は、差の95%区間が−1.389から+1.389 ppのため **INCONCLUSIVE**。
 - 診断用17,640要求から、49条件を同一入力で再集計した補足Pareto frontierを作成した。これはpost-hocの探索解析であり、主解析、独立標本、全budgetでの速度優位の証明ではない。
+- 入力別診断v2で17,640行、fixed2対応比較7,560行、単調性診断36行を出力し、最終run3/run4のハッシュを照合した。解析は保存済みデータのみ。
 - 7,200件の旧新build照合ではC3 v2が全行ちょうど+5 cycles。開始counterを測定区間内に保存する追加命令が候補だが、RISC-V disassembly/traceで原因を特定できていない。5 cyclesを補正値として差し引いてはいけない。
 - 146-source graphは145/146 SHA一致の監査記録があり、期待hashの1つのproject-owned RTLが公開checkoutで未回収。clean-checkoutでの完全なRTL再構築は未確立。
 
@@ -40,10 +41,12 @@
 
 ## 出力と保全
 
+技術査読用の限定パッケージは`PREPUBLICATION_CHECKLIST_JA.md`に従って確認できる。投稿先書式、全書誌の最終照合、著者・共著者の承認、完全なRTLソース再現性は未完了であり、出版・投稿可の判定ではない。
+
 - 先行研究・新規性: [`PRIOR_ART_COMPARISON.md`](PRIOR_ART_COMPARISON.md), [`NOVELTY_VERDICT_JA.md`](NOVELTY_VERDICT_JA.md)
 - claim/evidence: [`CLAIM_EVIDENCE_MATRIX.csv`](CLAIM_EVIDENCE_MATRIX.csv), [`CRITICAL_REVIEW_JA.md`](CRITICAL_REVIEW_JA.md)
 - Pareto解析: [`analyze_pareto_frontier.py`](analyze_pareto_frontier.py), [`PARETO_INTERPRETATION_JA.md`](PARETO_INTERPRETATION_JA.md), [`pareto_final_run3/`](pareto_final_run3/)
 - +5 cycle/source recovery: [`CYCLE_OFFSET_AUDIT.md`](CYCLE_OFFSET_AUDIT.md), [`SOURCE_RECOVERY_RESULT.md`](SOURCE_RECOVERY_RESULT.md)
 - 実行記録とSHA: [`PAPER_REVIEW_RUN_RECORD_20261121_JA.md`](PAPER_REVIEW_RUN_RECORD_20261121_JA.md), [`SHA256SUMS_PAPER_REVIEW_20261121.txt`](SHA256SUMS_PAPER_REVIEW_20261121.txt)
 
-この作業はオフラインの保存証拠レビューであり、基板、JTAG、Quartus、外部連絡を使っていない。push/PR/mergeはしていない。
+今回もオフラインの保存証拠レビューのみであり、基板、JTAG、Quartus、外部連絡を使っていない。
