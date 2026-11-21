@@ -29,8 +29,13 @@ def main() -> None:
         files.append(path)
     files += [
         PAPER / "audit_native_source_recovery.py",
+        PAPER / "prepare_native_regression.py",
         PAPER / "SOURCE_RECOVERY_ADDENDUM_20261122_JA.md",
         PAPER / "PAPER_REVIEW_STATUS_20261122_JA.md",
+        PAPER / "MANUSCRIPT_DRAFT_EN.md",
+        PAPER / "CRITICAL_REVIEW_JA.md",
+        PAPER / "PRIOR_ART_COMPARISON.md",
+        PAPER / "NOVELTY_VERDICT_JA.md",
         PAPER / "README.md",
         PAPER / "PREPUBLICATION_CHECKLIST_JA.md",
         PAPER / "CLAIM_EVIDENCE_MATRIX.csv",
