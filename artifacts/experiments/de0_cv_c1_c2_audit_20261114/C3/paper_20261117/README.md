@@ -39,3 +39,16 @@ The source CSVs remain in their original locations:
 - `../campaign/results/C3_PRIMARYnn_FULL720_RUN1_20261114/{c2_jtag_results.csv|merged/c2_jtag_results.csv}`
 
 **Research gate:** data integrity PASS; cycle reduction descriptive only; cold-boot dependence UNCERTAIN; accuracy noninferiority INCONCLUSIVE; board-wide timing signoff BLOCKED.
+# Additional review artifacts (2026-11-21)
+
+- `PRIOR_ART_COMPARISON.md` and `NOVELTY_VERDICT_JA.md`: targeted primary-source review; early exit, budget-adaptive execution, entropy-based FPGA early exit, and FPGA dynamic inference are prior art.
+- `PARETO_INTERPRETATION_JA.md`, `analyze_pareto_frontier.py`, and `pareto_final_run1/`: descriptive secondary Pareto analysis recomputed from the saved diagnostic CSVs. `pareto_final_run2/` is the deterministic duplicate-output check.
+- `CYCLE_OFFSET_AUDIT.md`: exact +5-cycle pairwise observation and unresolved causal attribution.
+- `SOURCE_RECOVERY_RESULT.md`: the exact 146th RTL source was not recovered; no substitute was created.
+- `CLAIM_EVIDENCE_MATRIX.csv` and `CRITICAL_REVIEW_JA.md`: claim limits and reviewer-facing open issues.
+- `PAPER_REVIEW_STATUS_20261121_JA.md` and `PAPER_REVIEW_RUN_RECORD_20261121_JA.md`: current disposition and command record.
+- `pareto_final_run1/` and `pareto_final_run2/` are the recorded independent deterministic runs; `pareto_final_run3/` is the final repeat. Intermediate `pareto_run1/` and `pareto_run2/` directories are preserved but superseded because their figure annotations were incomplete.
+- `generated_final_20261121_run1/` is a fresh full primary-data reanalysis (24,840 rows, 13/13 schedules, 7,200 old/new build pairs); outputs are LF-normalized and byte-identical to `generated_run1/`.
+- `SHA256SUMS_PAPER_REVIEW_20261121.txt`: dated manifest for this review package; the historical `SHA256SUMS_PAPER_REVIEW.txt` is not overwritten.
+
+The Pareto script uses only the Python standard library. It reads immutable saved CSVs and refuses to overwrite an existing output directory. See the run record for tool versions and verification.

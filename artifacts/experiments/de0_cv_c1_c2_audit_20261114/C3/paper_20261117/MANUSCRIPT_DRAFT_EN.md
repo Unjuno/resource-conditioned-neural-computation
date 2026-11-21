@@ -12,14 +12,20 @@ A neural classifier with conditional early stopping can trade computation for re
 
 Resource-adaptive neural execution is useful when additional internal computation has diminishing value and available resource or deadline changes at run time. Earlier work on early exits and conditional routing established several ways to reduce expected computation [1–3]. A hardware claim, however, requires distinguishing *executed neural work*, *software/RTL execution cycles*, *I/O transfer latency*, and *a proof of a deadline bound*. An instruction-count approximation, a host-side time percentile, or a positive FPGA internal-clock slack report alone cannot fill these different evidentiary roles.
 
-This study evaluates an exact build of the repository's resource-conditioned RTNN prototype on one Cyclone V board. It uses the same frozen seed-63 Q15 parameter set under a finite maximum-work ceiling, rather than training a separate model for each budget. The key contributions of the present case study are:
+This study evaluates one exact build of the repository's resource-conditioned RTNN prototype on one Cyclone V board. It uses the same frozen seed-63 Q15 parameter set under a finite maximum-work ceiling, rather than training a separate model for each budget. The contribution is a bounded, artifact-linked empirical case study and its reproducibility audit; we do not claim that early exit, budgeted computation, entropy-based decisions, or FPGA early-exit inference are new mechanisms. The case-study contributions are:
 
 1. A 24,840-row empirical JTAG acquisition audit tied to one C3 v2 SOF, one firmware ELF, one model identity, 13 frozen schedules and original raw request/response traces.
 2. An independently recomputed, input-paired cycle comparison with explicit *input-level* statistical uncertainty, observed failure modes (late exits), and a separate accuracy-noninferiority verdict.
-3. A matched previous-build comparison demonstrating an exact **+5 Ibex-cycle difference for all 7,200 primary rows** while preserving the output prediction and admitted/executed exits.
+3. A matched previous-build audit that found an exact **+5 Ibex-cycle difference for all 7,200 primary rows** while preserving the output prediction and admitted/executed exits; the cause remains unresolved.
 4. An explicit boundary between empirical function/cycle evidence and incomplete onboard JTAG timing/CDC signoff.
 
 These observations are not offered as an original theorem of universal WCET or as an exhaustive comparison with all adaptive-computation systems.
+
+### Prior work and novelty scope
+
+Input-dependent early exits and resource-aware execution predate this study. BranchyNet adds intermediate classifiers and exits when confidence is sufficient [1]. MSDNet explicitly studies anytime prediction and budgeted batch classification with a single multi-exit model [2]. SkipNet learns per-input routing that skips residual blocks [3], and EENet learns exit policies under an average inference budget [5]. Entropy-based early exit on low-precision FPGA hardware was also reported by Kong and Nunez-Yanez [6]; a separate FPGA system adapts processing rate using output entropy [7]. FPGA implementation of dynamic early-exit DNNs, including pipeline and parallel hardware approaches, was evaluated on a ZCU106 in 2025 [8]. Consequently, this paper makes no algorithmic novelty or first-FPGA-early-exit claim. Its limited contribution is the traceable measurement and audit of a particular frozen Q15/Ibex softcore build on a DE0-CV, with request-level JTAG result identity and `mcycle` accounting.
+
+Timing predictability is a separate literature and claim. Pearce et al. compile a neural-network controller into analyzable C for the time-predictable Patmos processor and derive execution bounds [9]. Zhang et al. present static timing analysis for CNN inference on FPGA SoCs with shared multi-DPU engines [10]. The present work provides neither comparable static analysis nor a hard execution bound; its reported cycle counts are empirical and exact-build-specific.
 
 ## 2. System and frozen artifact identity
 
@@ -168,6 +174,8 @@ The most valuable follow-up is to secure reproducible independent power sessions
 
 ## Evidence and reproducibility
 
+The claim-to-artifact limitations are summarized in [`CLAIM_EVIDENCE_MATRIX.csv`](CLAIM_EVIDENCE_MATRIX.csv), and a post-hoc, descriptive budget Pareto analysis is in [`PARETO_INTERPRETATION_JA.md`](PARETO_INTERPRETATION_JA.md). The related-work scope and novelty limits are documented in [`PRIOR_ART_COMPARISON.md`](PRIOR_ART_COMPARISON.md) and [`NOVELTY_VERDICT_JA.md`](NOVELTY_VERDICT_JA.md).
+
 The primary evidence is internal to the publicly readable repository:
 - [C3 v2 full campaign run record](../evidence/PHYSICAL_C3_V2_20261115/FROZEN_CAMPAIGN/RUN_RECORD_JA.md)
 - [C3 v2 aggregate run audit](../evidence/PHYSICAL_C3_V2_20261115/FROZEN_CAMPAIGN/C3V2_CAMPAIGN_AGGREGATE_AUDIT_20261115.json)
@@ -190,5 +198,11 @@ The script checks the 13-schedule manifest totals, hashes all ten C3 v2 primary 
 2. G. Huang, D. Chen, T. Li, F. Wu, L. van der Maaten, K. Q. Weinberger. "Multi-Scale Dense Networks for Resource Efficient Image Classification." *International Conference on Learning Representations* (ICLR), 2018. arXiv: [1703.09844](https://arxiv.org/abs/1703.09844).
 3. X. Wang, F. Yu, Z.-Y. Dou, T. Darrell, J. E. Gonzalez. "SkipNet: Learning Dynamic Routing in Convolutional Networks." *European Conference on Computer Vision* (ECCV), 2018. arXiv: [1711.09485](https://arxiv.org/abs/1711.09485).
 4. F. Pedregosa et al. "Scikit-learn: Machine Learning in Python." *Journal of Machine Learning Research* 12(85):2825–2830, 2011. [JMLR paper](https://www.jmlr.org/papers/v12/pedregosa11a.html); [load_digits dataset documentation](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html).
+5. F. Ilhan, K.-H. Chow, S. Hu, T. Huang, S. Tekin, W. Wei, Y. Wu, M. Lee, R. Kompella, H. Latapie, G. Liu, L. Liu. "Adaptive Deep Neural Network Inference Optimization with EENet." *IEEE/CVF Winter Conference on Applications of Computer Vision* (WACV), 2024. DOI: [10.1109/WACV57701.2024.00140](https://doi.org/10.1109/WACV57701.2024.00140); [author-version paper](https://openaccess.thecvf.com/content/WACV2024/papers/Ilhan_Adaptive_Deep_Neural_Network_Inference_Optimization_With_EENet_WACV_2024_paper.pdf).
+6. M. Kong, J. L. Nunez-Yanez. "Entropy-Based Early-Exit in a FPGA-Based Low-Precision Neural Network." *Applied Reconfigurable Computing*, 2022, pp. 72–86. DOI: [10.1007/978-3-031-19983-7_6](https://doi.org/10.1007/978-3-031-19983-7_6); [institutional postprint](https://liu.diva-portal.org/smash/get/diva2%3A1709087/FULLTEXT02.pdf).
+7. E. Y. L. Kwan, J. Nunez-Yanez. "Entropy-Driven Adaptive Filtering for High-Accuracy and Resource-Efficient FPGA-Based Neural Network Systems." *Electronics* 9(11), 1765, 2020. DOI: [10.3390/electronics9111765](https://doi.org/10.3390/electronics9111765).
+8. A. Dimitriou, L. Xun, J. S. Hare, G. V. Merrett. "Realization of Early-Exit Dynamic Neural Networks on Reconfigurable Hardware." *IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems* 44(6):2195–2203, 2025. DOI: [10.1109/TCAD.2024.3519055](https://doi.org/10.1109/TCAD.2024.3519055); [institutional accepted manuscript and record](https://eprints.soton.ac.uk/499024/).
+9. H. Pearce, X. Yang, P. S. Roop, M. Katzef, T. B. Strøm. "Designing Neural Networks for Real-Time Systems." *IEEE Embedded Systems Letters* 13(3):94–97, 2021. DOI: [10.1109/LES.2020.3009910](https://doi.org/10.1109/LES.2020.3009910); [arXiv:2008.11830](https://arxiv.org/abs/2008.11830).
+10. W. Zhang, Y. Yu, X. Jiang, N. Guan, N. Zhan, L. Ju. "WCET Estimation for CNN Inference on FPGA SoC With Multi-DPU Engines." *IEEE Transactions on Parallel and Distributed Systems* 36(6):1146–1160, 2025. DOI: [10.1109/TPDS.2025.3555968](https://doi.org/10.1109/TPDS.2025.3555968); [institutional publication record](https://scholars.cityu.edu.hk/en/publications/wcet-estimation-for-cnn-inference-on-fpga-soc-with-multi-dpu-engi/).
 
 **Review status:** Numerical claims and archive identities in Sections 3–4 are subject to the included, executable independent reanalysis. This draft is **not publication-ready until the paper's claimed scope, all source links, data license/citation, and coauthor-approved interpretation are reviewed**.

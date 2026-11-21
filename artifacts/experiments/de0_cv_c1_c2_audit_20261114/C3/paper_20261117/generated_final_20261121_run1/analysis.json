@@ -1,0 +1,184 @@
+{
+  "accuracy": {
+    "adaptive_correct": 339,
+    "bootstrap_input_only": {
+      "difference_pp_95pct_ci": [
+        -1.3888888888888888,
+        1.3888888888888888
+      ],
+      "replicates": 5000,
+      "seed": 63
+    },
+    "fixed2_correct": 339,
+    "noninferiority_decision": "INCONCLUSIVE",
+    "noninferiority_margin_percentage_points": 1.0,
+    "paired_contingency": {
+      "adaptive_only_correct": 3,
+      "both_correct": 336,
+      "both_wrong": 18,
+      "fixed_only_correct": 3
+    }
+  },
+  "adaptive_executed_exit_by_input": {
+    "1": {
+      "mean_adaptive_cycles": 565955.6197718631,
+      "unique_inputs": 263
+    },
+    "2": {
+      "mean_adaptive_cycles": 1071501.6419753085,
+      "unique_inputs": 81
+    },
+    "3": {
+      "mean_adaptive_cycles": 1577048.142857143,
+      "unique_inputs": 7
+    },
+    "4": {
+      "mean_adaptive_cycles": 2082594,
+      "unique_inputs": 2
+    },
+    "5": {
+      "mean_adaptive_cycles": 2547941.714285714,
+      "unique_inputs": 7
+    }
+  },
+  "analysis_kind": "saved FPGA experimental data; no new JTAG or Quartus run",
+  "board": "Terasic DE0-CV, Cyclone V 5CEBA4F23C7N, Ibex mcycle counter",
+  "c2j2_to_c3v2": {
+    "delta_mcycle_histogram": {
+      "5": 7200
+    },
+    "functional_mismatches": 0,
+    "interpretation": "observational constant counter offset; compiler/measurement-boundary attribution not proven",
+    "paired_rows": 7200
+  },
+  "data_limitations": [
+    "one board; independent cold boot not verified",
+    "ten schedule repeats are not independent power sessions",
+    "95% bootstrap intervals cover input sampling only, not board/build/power-session uncertainty",
+    "FPGA external JTAG I/O timing not signed off; 16 D102 CDC warnings retained",
+    "cycle counts are not calibrated seconds or WCET bounds",
+    "1 percentage-point accuracy noninferiority not established"
+  ],
+  "planned_full_campaign": {
+    "rows": 24840,
+    "schedules": 13,
+    "status": "PASS_SAVED_EVIDENCE_EMPIRICAL_ONLY"
+  },
+  "primary": {
+    "adaptive_faster_input_ids": 263,
+    "adaptive_mean_cycles": 746327.9944444444,
+    "adaptive_slower_input_ids": 97,
+    "all_inputs_identical_cycle_counts_in_10_schedules": 360,
+    "bootstrap_input_only": {
+      "reduction_percent_95pct_ci": [
+        16.80384463373956,
+        24.90345008605383
+      ],
+      "replicates": 5000,
+      "resampling_unit": "360 distinct input IDs",
+      "saving_95pct_ci": [
+        158616.4693055555,
+        235071.07263888879
+      ],
+      "seed": 63
+    },
+    "fixed2_mean_cycles": 943929.7666666667,
+    "fixed2_minus_adaptive_mean_cycles": 197601.7722222223,
+    "mean_cycle_reduction_percent": 20.933948605098088,
+    "pairs": 3600,
+    "rows": 7200,
+    "schedules": 10,
+    "unique_inputs": 360
+  },
+  "schema": "rtnn-c3v2-paper-analysis-v1",
+  "session_summary": [
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_01",
+      "source_csv_sha256": "7f2d89b1ae709f8f9807197797709d92e6da2008a202b92a6dcd7d944d19ae97"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_02",
+      "source_csv_sha256": "53395d1a272ee93b554540042ee09a0e26cb57d20b930a456b30dd7f27baa630"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_03",
+      "source_csv_sha256": "b01e60a8565a7c459090efa15bd0a5fefbf62d7061758aa14db12c6f60ae77c6"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_04",
+      "source_csv_sha256": "bf01a11616d038531501294072c629d138e4f41cfb3b124f2611d48d8c82f0d0"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_05",
+      "source_csv_sha256": "49ce94d0a383fbd85be4e415d372e1a8c966d37bb788493454c00a8745b40e5f"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_06",
+      "source_csv_sha256": "d94e5219fa27b634d37050a0028227d318e3bd9a0bfc9df1a6f869317b73049e"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_07",
+      "source_csv_sha256": "2e26bc2391482c22e6dfc05323a71ca653b6acb11a757a1b82d939142cd59762"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_08",
+      "source_csv_sha256": "0c580111d512db662fa8909c39c5503e76d00d4b1a72739a516c86e1fe1f6e59"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_09",
+      "source_csv_sha256": "900ae1840f6855c29af456b18c505474aa209abd2096242821cd29f6edd51bca"
+    },
+    {
+      "adaptive_mean_cycles": 746327.9944444444,
+      "cycle_saving_mean": 197601.7722222223,
+      "fixed2_mean_cycles": 943929.7666666667,
+      "rows": 720,
+      "schedule": "primary_10",
+      "source_csv_sha256": "3ea4c41e8a337f265ca5c73adc68952016c6208c1f0ff95e280b15da7051e09c"
+    }
+  ],
+  "source_branch": "codex/stage-c3-jtag-pilot-20261114",
+  "source_build": {
+    "c2j2_build_id": "43324a32",
+    "c2j2_sof_sha256": "5aa5be2e7387e22e43db6a322e1572cceacd3266231af4dbc2de01ee649c37e6",
+    "c3v2_build_id": "43334531",
+    "c3v2_sof_sha256": "85c5fd086cf83c5a897f3de1bba1d3dd0c0a5c06a53eb492a23e5160fb3f1f2d"
+  },
+  "source_frozen_campaign_sha256": "d6c98f59c0c0afe32d0877c01c8411fba8bf3e2a5c8058c5a85371f7f648a8dc"
+}

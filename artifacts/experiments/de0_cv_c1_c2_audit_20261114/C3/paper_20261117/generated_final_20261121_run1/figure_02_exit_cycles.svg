@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 670" role="img">
+<rect width="1100" height="670" fill="#ffffff"/>
+<title>Adaptive cycles by executed exit</title>
+<text x="68" y="59" font-family="Arial,sans-serif" font-size="26" font-weight="bold" fill="#1c2938">Adaptive cycles by executed exit</text>
+<text x="68" y="88" font-family="Arial,sans-serif" font-size="16" fill="#5e6876">Each bar is the mean across distinct input IDs with that exit; line is fixed Exit 2 mean.</text>
+<line x1="95" y1="565.0" x2="1035" y2="565.0" stroke="#e1e6eb"/>
+<text x="83" y="570.0" text-anchor="end" font-family="Arial" font-size="13" fill="#465363">0M</text>
+<line x1="95" y1="490.9" x2="1035" y2="490.9" stroke="#e1e6eb"/>
+<text x="83" y="495.9" text-anchor="end" font-family="Arial" font-size="13" fill="#465363">0.5M</text>
+<line x1="95" y1="416.8" x2="1035" y2="416.8" stroke="#e1e6eb"/>
+<text x="83" y="421.8" text-anchor="end" font-family="Arial" font-size="13" fill="#465363">1M</text>
+<line x1="95" y1="342.7" x2="1035" y2="342.7" stroke="#e1e6eb"/>
+<text x="83" y="347.7" text-anchor="end" font-family="Arial" font-size="13" fill="#465363">1.5M</text>
+<line x1="95" y1="268.6" x2="1035" y2="268.6" stroke="#e1e6eb"/>
+<text x="83" y="273.6" text-anchor="end" font-family="Arial" font-size="13" fill="#465363">2M</text>
+<line x1="95" y1="194.5" x2="1035" y2="194.5" stroke="#e1e6eb"/>
+<text x="83" y="199.5" text-anchor="end" font-family="Arial" font-size="13" fill="#465363">2.5M</text>
+<rect x="165" y="481.12" width="110" height="83.88" fill="#196f7b"/>
+<text x="220" y="473.12" text-anchor="middle" font-family="Arial" font-size="14" fill="#193c48">0.566M</text>
+<text x="220" y="588" text-anchor="middle" font-family="Arial" font-size="15" fill="#465363">Exit 1</text>
+<text x="220" y="608" text-anchor="middle" font-family="Arial" font-size="13" fill="#65717f">n=263</text>
+<rect x="340" y="406.19" width="110" height="158.81" fill="#196f7b"/>
+<text x="395" y="398.19" text-anchor="middle" font-family="Arial" font-size="14" fill="#193c48">1.072M</text>
+<text x="395" y="588" text-anchor="middle" font-family="Arial" font-size="15" fill="#465363">Exit 2</text>
+<text x="395" y="608" text-anchor="middle" font-family="Arial" font-size="13" fill="#65717f">n=81</text>
+<rect x="515" y="331.26" width="110" height="233.74" fill="#196f7b"/>
+<text x="570" y="323.26" text-anchor="middle" font-family="Arial" font-size="14" fill="#193c48">1.577M</text>
+<text x="570" y="588" text-anchor="middle" font-family="Arial" font-size="15" fill="#465363">Exit 3</text>
+<text x="570" y="608" text-anchor="middle" font-family="Arial" font-size="13" fill="#65717f">n=7</text>
+<rect x="690" y="256.33" width="110" height="308.67" fill="#196f7b"/>
+<text x="745" y="248.33" text-anchor="middle" font-family="Arial" font-size="14" fill="#193c48">2.083M</text>
+<text x="745" y="588" text-anchor="middle" font-family="Arial" font-size="15" fill="#465363">Exit 4</text>
+<text x="745" y="608" text-anchor="middle" font-family="Arial" font-size="13" fill="#65717f">n=2</text>
+<rect x="865" y="187.36" width="110" height="377.64" fill="#196f7b"/>
+<text x="920" y="179.36" text-anchor="middle" font-family="Arial" font-size="14" fill="#193c48">2.548M</text>
+<text x="920" y="588" text-anchor="middle" font-family="Arial" font-size="15" fill="#465363">Exit 5</text>
+<text x="920" y="608" text-anchor="middle" font-family="Arial" font-size="13" fill="#65717f">n=7</text>
+<line x1="95" y1="425.10" x2="1035" y2="425.10" stroke="#a74d42" stroke-width="3" stroke-dasharray="9,5"/>
+<text x="1035" y="418.10" text-anchor="end" font-family="Arial" font-size="14" fill="#a74d42">Fixed2 baseline: 943929.8 cycles</text>
+<text x="68" y="643" font-family="Arial,sans-serif" font-size="13" fill="#4f5867">DE0-CV | C3 v2 build 43334531 | 360 frozen inputs | one unverified power session | EMPIRICAL_ONLY</text>
+<text x="68" y="661" font-family="Arial,sans-serif" font-size="12" fill="#8a3641">Not cold-boot/generalization evidence. No FPGA JTAG signoff, WCET, or 1 pp noninferiority claim.</text>
+</svg>
