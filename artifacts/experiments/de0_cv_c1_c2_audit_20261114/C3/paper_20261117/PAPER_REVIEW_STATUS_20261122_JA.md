@@ -1,0 +1,29 @@
+# 論文準備・最新状態（2026-11-22）
+
+## 判定
+
+**REVIEW_READY_LIMITED**。保存データに基づく限定的な技術査読用ケーススタディであり、投稿承認・出版準備完了を示さない。
+
+| 項目 | 状態 | 現在の根拠・範囲 |
+|---|---|---|
+| 24,840要求／13 scheduleの保存実測データ再集計 | PASS（保存証拠の範囲） | 2026-11-21の独立解析記録 |
+| 146-source source identity | PASS（明示source map） | 2026-11-22に141 pinned Ibex + 5 byte-exact project sourcesを検証 |
+| ネイティブVerilator回帰 | PASS | 42ケース、reset recovery、負例、response write guard |
+| 固定2対adaptive cycle差 | OBSERVED / EXPLORATORY | 20.934%; 1 board/build/session、比較器は先行結果を見て選択 |
+| 1 pp accuracy noninferiority | INCONCLUSIVE | 339/360ずつ正解、差の95%区間−1.389～+1.389 pp |
+| B-EMPIRICAL | PASS_LIMITED | 既存の適格性範囲のみ |
+| B-SIGNOFF | BLOCKED_EXTERNAL_BOARD_TIMING | 外部JTAGタイミング資料不足、CDC/D102のopen finding継続 |
+| C3 v2 KEY0 reset replay | PENDING_OPERATOR | 物理操作後に新実験IDで実行する必要あり |
+| C3 v2 full campaign | NOT_RUN | 今回は実施していない |
+| Quartus/SOF bit identity | NOT_ESTABLISHED | native RTL回帰からは推論しない |
+| WCET / hard deadline | NOT_ESTABLISHED | 正式な上界とsignoffなし |
+
+## ソース再現性の意味
+
+2026-11-21時点の145/146記録は、その時点の公開checkout監査として正しい。翌日の作業で、不足していた5つのproject source byte variantsを別の正しいUnjuno audit worktreeから回収し、凍結source mapの全146 SHAを一致させた。ネイティブ42要求/reset/負例/guard回帰もPASSした。この検証は、公開mainや通常のclean checkoutに同じbyte variantsが含まれること、Quartusで同一SOFを作れること、または基板のタイミング保証を意味しない。詳細は[`SOURCE_RECOVERY_ADDENDUM_20261122_JA.md`](SOURCE_RECOVERY_ADDENDUM_20261122_JA.md)。
+
+## 論文での主張範囲
+
+記載できるのは、凍結build/board/sessionで観測されたmcycle、保存された入力単位の解析、source-mapped native regressionの範囲である。広く一般化した速度優位、精度非劣性、アルゴリズム新規性、独立cold-boot変動、絶対時間、WCET、hard deadlineは主張しない。追加の実機操作や投稿判断は別途必要。
+
+最新成果SHA一覧は[`SHA256SUMS_SOURCE_RECOVERY_20261122.txt`](SHA256SUMS_SOURCE_RECOVERY_20261122.txt)。履歴的な2026-11-21文書と失敗ログは書き換えず保持している。
