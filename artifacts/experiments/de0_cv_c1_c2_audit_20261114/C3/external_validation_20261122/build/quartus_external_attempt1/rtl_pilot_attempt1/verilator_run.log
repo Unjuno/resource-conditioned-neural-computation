@@ -1,0 +1,24 @@
+EXT_IMAGE_CASE_PASS index=0 seq=1 input=3660 mode=3 prediction=7 exit=1 cycles=565922
+EXT_IMAGE_CASE_PASS index=1 seq=2 input=3660 mode=1 prediction=7 exit=2 cycles=943904
+EXT_IMAGE_CASE_PASS index=2 seq=3 input=3689 mode=1 prediction=3 exit=2 cycles=943905
+EXT_IMAGE_CASE_PASS index=3 seq=4 input=3689 mode=3 prediction=3 exit=1 cycles=565922
+EXT_IMAGE_CASE_PASS index=4 seq=5 input=277 mode=3 prediction=8 exit=1 cycles=565921
+EXT_IMAGE_CASE_PASS index=5 seq=6 input=277 mode=1 prediction=8 exit=2 cycles=943904
+EXT_IMAGE_CASE_PASS index=6 seq=7 input=525 mode=1 prediction=2 exit=2 cycles=943906
+EXT_IMAGE_CASE_PASS index=7 seq=8 input=525 mode=3 prediction=2 exit=1 cycles=565923
+EXT_IMAGE_CASE_PASS index=8 seq=9 input=921 mode=3 prediction=1 exit=1 cycles=565924
+EXT_IMAGE_CASE_PASS index=9 seq=10 input=921 mode=1 prediction=1 exit=2 cycles=943907
+EXT_IMAGE_CASE_PASS index=10 seq=11 input=519 mode=3 prediction=3 exit=2 cycles=1071469
+EXT_IMAGE_CASE_PASS index=11 seq=12 input=519 mode=1 prediction=3 exit=2 cycles=943906
+EXT_IMAGE_CASE_PASS index=12 seq=13 input=667 mode=3 prediction=3 exit=2 cycles=1071469
+EXT_IMAGE_CASE_PASS index=13 seq=14 input=667 mode=1 prediction=3 exit=2 cycles=943906
+EXT_IMAGE_CASE_PASS index=14 seq=15 input=321 mode=3 prediction=2 exit=1 cycles=565923
+EXT_IMAGE_CASE_PASS index=15 seq=16 input=321 mode=1 prediction=2 exit=2 cycles=943906
+EXT_IMAGE_CASE_PASS index=16 seq=17 input=1673 mode=1 prediction=6 exit=2 cycles=943905
+EXT_IMAGE_CASE_PASS index=17 seq=18 input=1673 mode=3 prediction=6 exit=1 cycles=565922
+EXT_IMAGE_CASE_PASS index=18 seq=19 input=57 mode=1 prediction=0 exit=2 cycles=943907
+EXT_IMAGE_CASE_PASS index=19 seq=20 input=57 mode=3 prediction=0 exit=1 cycles=565924
+EXT_IMAGE_CASE_PASS index=0 seq=1 input=3660 mode=3 prediction=7 exit=1 cycles=565922
+[338177736] %Fatal: tb_rtnn_external_soc.sv:64: Assertion failed in TOP.tb_rtnn_external_soc.wait_done.unnamedblk10: mailbox error status=c0
+%Error: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-c3-paper/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/rtl/tb_rtnn_external_soc.sv:64: Verilog $stop
+Aborting...

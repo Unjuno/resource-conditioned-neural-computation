@@ -1,0 +1,5 @@
+sha256=8f26b2bd9d135c256808f68f14fdabddde6d9c7f869ae419704b051f0f14b3b3
+records=1797
+features=64
+order=sklearn.datasets.load_digits row-major uint8 flattened
+sklearn_version=1.8.0

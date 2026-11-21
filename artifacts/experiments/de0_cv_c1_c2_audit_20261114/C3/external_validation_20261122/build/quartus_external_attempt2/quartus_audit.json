@@ -1,0 +1,27 @@
+{
+  "schema": "rtnn-external-validation-quartus-audit-v1",
+  "status": "EMPIRICAL_BUILD_ELIGIBLE",
+  "classification": "PASS_LIMITED",
+  "external_jtag_timing": "BLOCKED",
+  "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+  "sdc_sha256": "ceaaa6708f0ed8f6d2c1443b60d9511c51d21f96ddaf914117ee6a65410c82eb",
+  "quartus": "25.1std.0 Build 1129",
+  "device": "5CEBA4F23C7",
+  "fitter": "PASS",
+  "assembler": "PASS",
+  "internal_sta": "PASS_REPORTED_CONSTRAINED_PATHS_ONLY",
+  "cdc_review": "PASS_LIMITED_EXISTING_C3_V2_MAILBOX_REVIEW_PLUS_CURRENT_SIMULATION",
+  "d102_warnings": 16,
+  "unconstrained_input_ports": 2,
+  "unconstrained_input_paths": 41,
+  "unconstrained_output_ports": 4,
+  "unconstrained_output_paths": 8,
+  "physical_board_test": "NOT_RUN",
+  "flash_written": false,
+  "notes": [
+    "D102 warnings remain visible; no formal CDC or MTBF claim.",
+    "External JTAG timing and I/O constraints remain unresolved.",
+    "This eligibility permits only the limited empirical pilot protocol; it is not authorization to operate hardware or signoff.",
+    "Native SV, sv2v, and Quartus-flat simulations each passed 20 pilot requests, reset replay, and six negative checks."
+  ]
+}

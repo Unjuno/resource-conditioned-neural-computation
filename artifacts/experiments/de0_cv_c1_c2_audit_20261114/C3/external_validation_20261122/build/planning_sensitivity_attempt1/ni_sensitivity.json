@@ -1,0 +1,74 @@
+{
+  "schema": "rtnn-external-ni-design-sensitivity-v1",
+  "classification": "PLANNING_ONLY_NOT_OBSERVED_DATA",
+  "method": "Exact multinomial enumeration via X~Binomial(n,p10), Y|X~Binomial(n-X,p01/(1-p10)); paired Bonferroni Clopper-Pearson numerical gate.",
+  "assumptions": [
+    "image pairs are independent",
+    "discordance probabilities are fixed scenario inputs",
+    "power is not a guarantee and does not resolve unknown writer clustering",
+    "no RTNN outcome data were read"
+  ],
+  "n": 3813,
+  "scenarios": [
+    {
+      "scenario": "equal_discordance_0p5pct",
+      "n_independent_images": 3813,
+      "assumed_p10_adaptive_only_correct": 0.005,
+      "assumed_p01_fixed_only_correct": 0.005,
+      "assumed_delta_percentage_points": 0.0,
+      "exact_numeric_gate_pass_probability": 0.9989888060153573,
+      "alpha_per_bound": 0.025,
+      "noninferiority_margin_percentage_points": -1.0
+    },
+    {
+      "scenario": "equal_discordance_1pct",
+      "n_independent_images": 3813,
+      "assumed_p10_adaptive_only_correct": 0.01,
+      "assumed_p01_fixed_only_correct": 0.01,
+      "assumed_delta_percentage_points": 0.0,
+      "exact_numeric_gate_pass_probability": 0.9292743780844499,
+      "alpha_per_bound": 0.025,
+      "noninferiority_margin_percentage_points": -1.0
+    },
+    {
+      "scenario": "adaptive_better_0p5pp",
+      "n_independent_images": 3813,
+      "assumed_p10_adaptive_only_correct": 0.01,
+      "assumed_p01_fixed_only_correct": 0.005,
+      "assumed_delta_percentage_points": 0.5,
+      "exact_numeric_gate_pass_probability": 0.9999989319210002,
+      "alpha_per_bound": 0.025,
+      "noninferiority_margin_percentage_points": -1.0
+    },
+    {
+      "scenario": "adaptive_worse_0p5pp",
+      "n_independent_images": 3813,
+      "assumed_p10_adaptive_only_correct": 0.005,
+      "assumed_p01_fixed_only_correct": 0.01,
+      "assumed_delta_percentage_points": -0.5,
+      "exact_numeric_gate_pass_probability": 0.37707282109528,
+      "alpha_per_bound": 0.025,
+      "noninferiority_margin_percentage_points": -1.0
+    },
+    {
+      "scenario": "boundary_adaptive_worse_1pp",
+      "n_independent_images": 3813,
+      "assumed_p10_adaptive_only_correct": 0.01,
+      "assumed_p01_fixed_only_correct": 0.02,
+      "assumed_delta_percentage_points": -1.0,
+      "exact_numeric_gate_pass_probability": 0.0027230880663828257,
+      "alpha_per_bound": 0.025,
+      "noninferiority_margin_percentage_points": -1.0
+    },
+    {
+      "scenario": "adaptive_worse_1p5pp",
+      "n_independent_images": 3813,
+      "assumed_p10_adaptive_only_correct": 0.005,
+      "assumed_p01_fixed_only_correct": 0.02,
+      "assumed_delta_percentage_points": -1.5,
+      "exact_numeric_gate_pass_probability": 1.3929968079544676e-06,
+      "alpha_per_bound": 0.025,
+      "noninferiority_margin_percentage_points": -1.0
+    }
+  ]
+}

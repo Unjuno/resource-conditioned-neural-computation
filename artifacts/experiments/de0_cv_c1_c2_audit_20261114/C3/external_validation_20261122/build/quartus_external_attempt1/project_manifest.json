@@ -1,0 +1,33 @@
+{
+  "schema": "rtnn-external-validation-quartus-project-v1",
+  "status": "PROJECT_INPUTS_PREPARED_NOT_COMPILED",
+  "build_id": "45585631",
+  "device": "5CEBA4F23C7",
+  "top": "rtnn_de0_cv_c2_top",
+  "firmware_manifest_sha256": "538fe6c31c2a6f13c7c15a2425f0678af072aa44d01627de538b8fb563d503a1",
+  "firmware_elf_sha256": "4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e",
+  "firmware_bin_sha256": "f3b02ab923f9c19f9eebb265d08e997a57365dd9dffdea9de4bfc408eaa02cb7",
+  "model_source_sha256": "a6b2807bd4a60534c250fca3005322cf14ba0a92f6b16e28241109385efc6809",
+  "model_weights_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+  "project_input_sha256": {
+    "rtnn_c3_measurement_v2_quartus_flat.v": "3542cd48c73edc34cc51320454a2d542dc31a873e15cb1160f8cd6744e362993",
+    "rtnn_de0_cv_c2_top.sv": "c6d602e252f8e4f472cd79237f241becc9bdecb535d4ceba88d8bfbcecfe3265",
+    "rtnn_c2_global_buf.v": "98d4ac6fc5b541197efc046e647af0537f68a42789b3c8fce4872ae60e125a5a",
+    "rtnn_c3_measurement_v2.sdc": "ceaaa6708f0ed8f6d2c1443b60d9511c51d21f96ddaf914117ee6a65410c82eb",
+    "rtnn_c3_measurement_v2.qsf": "4124610262b6d0c27bcd4490202c6fd8d9529f1328c266f3acc785a85f4a83b2",
+    "rtnn_c3_measurement_v2.qpf": "fe3394f8f56091d816ada755b173b6ca3034845e61f5960d54257346028add79",
+    "rtnn_ram_lane0.hex": "13cdf746b427016f0528ebda83c23beadf9fd13360565bec29e1838f9542cb59",
+    "rtnn_ram_lane1.hex": "97d720edd622b07649fa0097c6809f8f55f74ef9b8ff2da325c67e6fc67b423d",
+    "rtnn_ram_lane2.hex": "439aa03335f5ead3e949f8f53aa4951465db7aa292ac48fc77fbe785a46215c5",
+    "rtnn_ram_lane3.hex": "3730903036eaeca436866df81e9da9528b282f23485d43caf12f0638865f59dc"
+  },
+  "changes": [
+    "patched exactly one generated flat RTL BUILD_ID literal 43334531->45585631",
+    "updated QSF build macro",
+    "replaced all four firmware RAM init lanes from new RV32 image"
+  ],
+  "nonclaims": [
+    "No Quartus compile/fit/timing/physical pass implied.",
+    "Inherited SDC still has unresolved external JTAG timing; formal signoff remains blocked."
+  ]
+}

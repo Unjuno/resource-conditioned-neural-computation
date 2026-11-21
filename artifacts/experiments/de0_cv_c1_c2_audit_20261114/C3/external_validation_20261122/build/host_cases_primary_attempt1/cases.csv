@@ -1,0 +1,1 @@
+experiment_id,session_id,sequence,input_id,mode,pixels_hex,pixels_sha256,teacher_label,expected_prediction,expected_admitted_exit,expected_executed_exit,expected_stop_reason,payload_crc32,model_id,build_id,binding_id

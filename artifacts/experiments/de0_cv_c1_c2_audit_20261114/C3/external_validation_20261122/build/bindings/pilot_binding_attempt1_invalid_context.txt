@@ -1,0 +1,2 @@
+initial SHA256 36025422a929162e686d85daaff2c91b6361b36f7399291ca5b8ab69f80a8e4d
+Reason: generated from OFFLINE_PILOT_20261122/OFFLINE case CSV; do not use for hardware. Correct pilot binding is pilot_run1_binding.json.

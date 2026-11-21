@@ -1,0 +1,7 @@
+scenario,n_independent_images,assumed_p10_adaptive_only_correct,assumed_p01_fixed_only_correct,assumed_delta_percentage_points,exact_numeric_gate_pass_probability,alpha_per_bound,noninferiority_margin_percentage_points
+equal_discordance_0p5pct,3813,0.005,0.005,0.0,0.9989888060153573,0.025,-1.0
+equal_discordance_1pct,3813,0.01,0.01,0.0,0.9292743780844499,0.025,-1.0
+adaptive_better_0p5pp,3813,0.01,0.005,0.5,0.9999989319210002,0.025,-1.0
+adaptive_worse_0p5pp,3813,0.005,0.01,-0.5,0.37707282109528,0.025,-1.0
+boundary_adaptive_worse_1pp,3813,0.01,0.02,-1.0,0.0027230880663828257,0.025,-1.0
+adaptive_worse_1p5pp,3813,0.005,0.02,-1.5,1.3929968079544676e-06,0.025,-1.0

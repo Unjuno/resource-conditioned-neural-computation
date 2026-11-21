@@ -1,0 +1,3 @@
+PY_COMPILE_PASS (14 scripts)
+PowerShell parser: PASS
+Quartus STP syntax checker (info complete only): PASS; JTAG script not sourced or evaluated

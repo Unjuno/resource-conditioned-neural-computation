@@ -1,0 +1,16 @@
+test_bad_pixels_and_mode_fail_closed (test_external_host.ProtocolTests.test_bad_pixels_and_mode_fail_closed) ... ok
+test_request_crc_and_payload_bytes (test_external_host.ProtocolTests.test_request_crc_and_payload_bytes) ... ok
+test_response_crc_counter_and_identity (test_external_host.ProtocolTests.test_response_crc_counter_and_identity) ... ok
+test_response_short_and_wrong_version_reject (test_external_host.ProtocolTests.test_response_short_and_wrong_version_reject) ... ok
+test_verified_response_rejects_wrap_and_wrong_identity (test_external_host.ProtocolTests.test_verified_response_rejects_wrap_and_wrong_identity) ... ok
+test_mock_data_is_rejected_before_csv_import (test_physical_audit_fail_closed.PhysicalGateTests.test_mock_data_is_rejected_before_csv_import) ... ok
+test_old_build_is_rejected (test_physical_audit_fail_closed.PhysicalGateTests.test_old_build_is_rejected) ... ok
+test_bad_pairs_rejected (test_stats_core.StatsTests.test_bad_pairs_rejected) ... ok
+test_cycle_bootstrap_deterministic (test_stats_core.StatsTests.test_cycle_bootstrap_deterministic) ... ok
+test_ni_strong_adaptive_dominance (test_stats_core.StatsTests.test_ni_strong_adaptive_dominance) ... ok
+test_ni_zero_difference_not_pass_for_tight_margin (test_stats_core.StatsTests.test_ni_zero_difference_not_pass_for_tight_margin) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.676s
+
+OK

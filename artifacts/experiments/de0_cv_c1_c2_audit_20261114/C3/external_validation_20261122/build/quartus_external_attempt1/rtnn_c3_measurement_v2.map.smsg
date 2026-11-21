@@ -1,0 +1,1 @@
+Warning (10268): Verilog HDL information at /rtnn_c3_measurement_v2_quartus_flat.v(14379): always construct contains both blocking and non-blocking assignments File: /rtnn_c3_measurement_v2_quartus_flat.v Line: 14379

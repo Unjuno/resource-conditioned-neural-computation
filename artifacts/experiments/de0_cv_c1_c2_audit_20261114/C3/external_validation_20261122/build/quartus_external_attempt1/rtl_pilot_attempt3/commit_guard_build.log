@@ -1,0 +1,7 @@
+%Error: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-c3-paper/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/rtl/tb_rtnn_mailbox_commit_guard.sv:41:26: Too many digits for 240 bit number: 240'h123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+   41 |     response_data[239:0]=240'h123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef;
+      |                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-c3-paper/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/rtl/tb_rtnn_mailbox_commit_guard.sv:43:28: Too many digits for 240 bit number: 240'habcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789
+   43 |     response_data[479:240]=240'habcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789;
+      |                            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Error: Exiting due to 2 error(s)

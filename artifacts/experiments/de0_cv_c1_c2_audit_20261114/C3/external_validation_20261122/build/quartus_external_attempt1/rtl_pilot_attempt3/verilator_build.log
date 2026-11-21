@@ -1,0 +1,462 @@
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:14577:20: Operator VAR 'prim_ram_1p_pkg_RAM_1P_CFG_REQ_DEFAULT' expects 12 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc'
+14577 |  localparam [11:0] prim_ram_1p_pkg_RAM_1P_CFG_REQ_DEFAULT = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                      ... For warning description see https://verilator.org/warn/WIDTHEXPAND?v=5.020
+                      ... Use "/* verilator lint_off WIDTHEXPAND */" and lint_on around source to disable this message.
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:14597:20: Operator VAR 'sv2v_uu_u_ibex_ext_trvk_revbm_rdata_i_0' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc'
+14597 |  localparam [31:0] sv2v_uu_u_ibex_ext_trvk_revbm_rdata_i_0 = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:14598:19: Operator VAR 'sv2v_uu_u_ibex_ext_trvk_revbm_rdata_intg_i_0' expects 7 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc'
+14598 |  localparam [6:0] sv2v_uu_u_ibex_ext_trvk_revbm_rdata_intg_i_0 = 1'sb0;
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:14601:21: Operator VAR 'sv2v_uu_u_ibex_ext_scramble_key_i_0' expects 128 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc'
+14601 |  localparam [127:0] sv2v_uu_u_ibex_ext_scramble_key_i_0 = 1'sb0;
+      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:14603:20: Operator VAR 'sv2v_uu_u_ibex_ext_scramble_nonce_i_0' expects 64 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc'
+14603 |  localparam [63:0] sv2v_uu_u_ibex_ext_scramble_nonce_i_0 = 1'sb0;
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHTRUNC: rtnn_c3_measurement_v2_quartus_flat.v:13788:18: Operator FUNCREF 'sv2v_cast_DEBC9' expects 32 bits on the Function Argument, but Function Argument's VARREF 'prim_secded_pkg_SecdedInv3932ZeroWord' generates 39 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex'
+13788 |     .WordZeroVal(sv2v_cast_DEBC9(prim_secded_pkg_SecdedInv3932ZeroWord))
+      |                  ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:4988:46: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's VARREF 'RV32E' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 4988 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                              ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:4988:81: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's LOGNOT generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 4988 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                                                                 ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:4988:179: Operator FUNCREF 'sv2v_cast_32' expects 32 bits on the Function Argument, but Function Argument's VARREF 'ibex_pkg_CSR_MISA_MXL' generates 2 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 4988 |  localparam [31:0] MISA_VALUE = ((((((((4 | (sv2v_cast_32(RV32E) << 4)) | 0) | (sv2v_cast_32(!RV32E) << 8)) | (RV32MEnabled << 12)) | 0) | 0) | 1048576) | (RV32BExtra << 23)) | (sv2v_cast_32(ibex_pkg_CSR_MISA_MXL) << 30);
+      |                                                                                                                                                                                   ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:10523:19: Operator VAR 'sv2v_uu_lfsr_i_ext_entropy_i_0' expects 8 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+10523 |  localparam [7:0] sv2v_uu_lfsr_i_ext_entropy_i_0 = 1'sb0;
+      |                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:6114:26: Operator VAR 'ResetValue' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_cpuctrlsts_part_csr'
+ 6114 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:6114:26: Operator VAR 'ResetValue' expects 18 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mie_csr'
+ 6114 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:6114:26: Operator VAR 'ResetValue' expects 7 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mcause_csr'
+ 6114 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:6114:26: Operator VAR 'ResetValue' expects 3 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_mcounteren_csr'
+ 6114 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:6114:26: Operator VAR 'ResetValue' expects 8 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i.u_cpuctrlsts_part_csr'
+ 6114 |  parameter [Width - 1:0] ResetValue = 1'sb0;
+      |                          ^~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:2000:27: Operator VAR 'CustomCoeffs' expects 32 bits on the Initial value, but Initial value's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2000 |  parameter [LfsrDw - 1:0] CustomCoeffs = 1'sb0;
+      |                           ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:2031:7: Operator FUNCREF 'sv2v_cast_64' expects 64 bits on the Function Argument, but Function Argument's VARREF 'LfsrType' generates 56 bits.
+                                                                  : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2031 |   if (sv2v_cast_64(LfsrType) == 64'd20056519619399506) begin : gen_gal_xor
+      |       ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:2038:30: Operator FUNCREF 'sv2v_cast_C2EBB' expects 32 bits on the Function Argument, but Function Argument's VARREF 'entropy_i' generates 8 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i.lfsr_i'
+ 2038 |    assign next_lfsr_state = (sv2v_cast_C2EBB(entropy_i) ^ ({LfsrDw {lfsr_q[0]}} & coeffs)) ^ (lfsr_q >> 1);
+      |                              ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:7405:19: Operator ASSIGNDLY expects 31 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+ 7405 |      instr_addr_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:7446:12: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+ 7446 |    valid_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:7456:27: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i.fifo_i'
+ 7456 |       rdata_q[i * 32+:32] <= 1'sb0;
+      |                           ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:263:12: Operator FUNCREF 'sv2v_cast_39' expects 39 bits on the Function Argument, but Function Argument's VARREF 'data_i' generates 32 bits.
+                                                                  : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.load_store_unit_i.g_mem_wdata_ecc.u_data_gen'
+  263 |   data_o = sv2v_cast_39(data_i);
+      |            ^~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:6200:16: Operator ASSIGNDLY expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i.minstret_counter_i'
+ 6200 |      counter_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:6223:30: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i.mcycle_counter_i'
+ 6223 |     assign counter_val_upd_o = 1'sb0;
+      |                              ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:9349:18: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9349 |    div_counter_q <= 1'sb0;
+      |                  ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:9351:19: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9351 |    op_numerator_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:9352:18: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9352 |    op_quotient_q <= 1'sb0;
+      |                  ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:9465:16: Operator ASSIGN expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9465 |       summand1 = 1'sb0;
+      |                ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:9603:21: Operator ASSIGN expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh1' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9603 |      op_remainder_d = 1'sb1;
+      |                     ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:9616:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i..gen_multdiv_fast.multdiv_i'
+ 9616 |     op_quotient_d = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3549:25: Operator ASSIGNW expects 6 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3549 |    assign bitcnt_result = 1'sb0;
+      |                         ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3550:25: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3550 |    assign minmax_result = 1'sb0;
+      |                         ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3552:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3552 |    assign sv2v_tmp_A0513 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3554:23: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3554 |    assign sext_result = 1'sb0;
+      |                       ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3556:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3556 |    assign sv2v_tmp_75CE4 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3559:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3559 |    assign sv2v_tmp_FA09A = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3562:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3562 |    assign sv2v_tmp_4A308 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3564:24: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3564 |    assign xperm_result = 1'sb0;
+      |                        ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3566:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3566 |    assign sv2v_tmp_98122 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3569:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3569 |    assign sv2v_tmp_B39E0 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3572:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3572 |    assign sv2v_tmp_31DA6 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3575:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3575 |    assign sv2v_tmp_BC1B9 = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3588:12: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.ex_block_i.alu_i'
+ 3588 |   result_o = 1'sb0;
+      |            ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:4474:31: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i'
+ 4474 |      mem_resp_intg_err_addr_q <= 1'sb0;
+      |                               ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:4544:15: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i'
+ 4544 |   csr_mtval_o = 1'sb0;
+      |               ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:10519:23: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+10519 |    dummy_instr_seed_q <= 1'sb0;
+      |                       ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:10550:16: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_dummy_instr.dummy_instr_i'
+10550 |    dummy_cnt_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:3780:14: Operator ASSIGN expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 3780 |    imm[11:7] = 1'sb0;
+      |              ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:4171:17: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 4171 |      cm_rlist_q <= 1'sb0;
+      |                 ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:4172:21: Operator ASSIGNDLY expects 5 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.compressed_decoder_i'
+ 4172 |      cm_sp_offset_q <= 1'sb0;
+      |                     ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:10055:20: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i'
+10055 |      stored_addr_q <= 1'sb0;
+      |                    ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:10071:19: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i.gen_prefetch_buffer.prefetch_buffer_i'
+10071 |      fetch_addr_q <= 1'sb0;
+      |                   ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5110:17: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5110 |   csr_rdata_int = 1'sb0;
+      |                 ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5121:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5121 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5128:27: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5128 |    12'h310: csr_rdata_int = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5129:36: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5129 |    12'h30a, 12'h31a: csr_rdata_int = 1'sb0;
+      |                                    ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5132:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5132 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5145:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5145 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5153:20: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5153 |      csr_rdata_int = 1'sb0;
+      |                    ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5162:20: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5162 |      csr_rdata_int = 1'sb0;
+      |                    ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5226:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5226 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5230:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5230 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5234:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5234 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5238:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5238 |     csr_rdata_int = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5242:27: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5242 |    12'h7c1: csr_rdata_int = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5285:18: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5285 |   mhpmcounter_we = 1'sb0;
+      |                  ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5286:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5286 |   mhpmcounterh_we = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5752:27: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5752 |     assign sv2v_tmp_D50E5 = 1'sb0;
+      |                           ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5754:29: Operator ASSIGNW expects 8 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5754 |     assign pmp_cfg_rdata[i] = 1'sb0;
+      |                             ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5760:69: Operator ASSIGNW expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5760 |     assign csr_pmp_addr_o[0 + (((PMPNumRegions - 1) - i) * 34)+:34] = 1'sb0;
+      |                                                                     ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5763:23: Operator ASSIGNW expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5763 |    assign pmp_mseccfg = 1'sb0;
+      |                       ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5818:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5818 |      mhpmevent[i] = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5823:16: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5823 |   mhpmevent[1] = 1'sb0;
+      |                ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5828:19: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5828 |      mhpmevent[i] = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5856:24: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5856 |  assign mhpmcounter[1] = 1'sb0;
+      |                        ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5891:29: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5891 |     assign mhpmcounter[Cnt] = 1'sb0;
+      |                             ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:5913:20: Operator ASSIGNDLY expects 3 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.cs_registers_i'
+ 5913 |    mcountinhibit_q <= 1'sb0;
+      |                    ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:10460:19: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.wb_stage_i'
+10460 |    assign pc_wb_o = 1'sb0;
+      |                   ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:9012:12: Operator ASSIGNDLY expects 24 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.load_store_unit_i'
+ 9012 |    rdata_q <= 1'sb0;
+      |            ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:9031:16: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.load_store_unit_i'
+ 9031 |    addr_last_q <= 1'sb0;
+      |                ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:7872:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 7872 |    assign sv2v_tmp_1FCCD = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:7875:26: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 7875 |    assign sv2v_tmp_B876E = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:7901:34: Operator ASSIGNDLY expects 34 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 7901 |      imd_val_q[(1 - i) * 34+:34] <= 1'sb0;
+      |                                  ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:8710:23: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 8710 |      instr_rdata_id_o <= 1'sb0;
+      |                       ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:8711:27: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 8711 |      instr_rdata_alu_id_o <= 1'sb0;
+      |                           ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:8714:25: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 8714 |      instr_rdata_c_id_o <= 1'sb0;
+      |                         ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:8717:26: Operator ASSIGNDLY expects 16 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 8717 |      instr_expanded_id_o <= 1'sb0;
+      |                          ^~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:8719:14: Operator ASSIGNDLY expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.if_stage_i'
+ 8719 |      pc_id_o <= 1'sb0;
+      |              ^~
+%Warning-WIDTHTRUNC: rtnn_c3_measurement_v2_quartus_flat.v:12260:33: Operator FUNCREF 'sv2v_cast_5' expects 5 bits on the Function Argument, but Function Argument's VARREF 'i' generates 32 bits.
+                                                                   : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.gen_lockstep.u_ibex_lockstep.gen_shadow_regfile_ff.register_file_shadow_i'
+12260 |     we_a_dec[i] = (waddr_a_i == sv2v_cast_5(i) ? we_a_i : 1'b0);
+      |                                 ^~~~~~~~~~~
+%Warning-ASCRANGE: rtnn_c3_measurement_v2_quartus_flat.v:10883:7: Ascending bit range vector: left < right of bit range: [0:2]
+                                                                : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.gen_lockstep.u_ibex_lockstep.u_shadow_core'
+10883 |  wire [0:2] pmp_req_err;
+      |       ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:13107:25: Operator FUNCREF 'sv2v_cast_EC223' expects 177 bits on the Function Argument, but Function Argument's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.gen_lockstep.u_ibex_lockstep'
+13107 |      shadow_inputs_q <= sv2v_cast_EC223(1'sb0);
+      |                         ^~~~~~~~~~~~~~~
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:13878:26: Operator ASSIGNW expects 128 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex'
+13878 |    assign sv2v_tmp_E270A = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:13881:26: Operator ASSIGNW expects 64 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex'
+13881 |    assign sv2v_tmp_F758A = 1'sb0;
+      |                          ^
+%Warning-WIDTHEXPAND: rtnn_c3_measurement_v2_quartus_flat.v:14286:29: Operator ASSIGNW expects 32 bits on the Assign RHS, but Assign RHS's CONST '1'sh0' generates 1 bits.
+                                                                    : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex'
+14286 |    assign trvk_revbm_addr_o = 1'sb0;
+      |                             ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-c3-paper/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/rtl/tb_rtnn_external_soc.sv:82:66: Operator ASSIGN expects 32 bits on the Assign RHS, but Assign RHS's SEL generates 8 bits.
+                                                                                                                                                                                                                                                 : ... note: In instance 'tb_rtnn_external_soc'
+   82 |     label=expected[n][192+:32]; budget=expected[n][224+:16]; stop=expected[n][240+:8]; crc=expected[n][272+:32];
+      |                                                                  ^
+%Warning-WIDTHEXPAND: /mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-c3-paper/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/rtl/tb_rtnn_external_soc.sv:95:59: Operator NEQCASE expects 64 bits on the LHS, but LHS's SEL generates 32 bits.
+                                                                                                                                                                                                                                                 : ... note: In instance 'tb_rtnn_external_soc'
+   95 |     if(got[39:32]!==3 || got[47:40]!==stat || got[223:192]!==64'b0 || got[191:184]!==8'hff || got[479:448]!==crc32_56(got[447:0])) $fatal(1,"negative response %s",tag);
+      |                                                           ^~~
+%Warning-UNOPTFLAT: rtnn_c3_measurement_v2_quartus_flat.v:7711:14: Signal unoptimizable: Circular combinational logic: 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.en_wb_o'
+                                                                 : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 7711 |  output wire en_wb_o;
+      |              ^~~~~~~
+                    rtnn_c3_measurement_v2_quartus_flat.v:7711:14:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.en_wb_o
+                    rtnn_c3_measurement_v2_quartus_flat.v:8064:21:      Example path: ASSIGNW
+                    rtnn_c3_measurement_v2_quartus_flat.v:7655:14:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.csr_op_en_o
+                    rtnn_c3_measurement_v2_quartus_flat.v:4393:21:      Example path: ASSIGNW
+                    rtnn_c3_measurement_v2_quartus_flat.v:4353:7:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i.special_req
+                    rtnn_c3_measurement_v2_quartus_flat.v:4534:2:      Example path: ALWAYS
+                    rtnn_c3_measurement_v2_quartus_flat.v:4349:6:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i.halt_if
+                    rtnn_c3_measurement_v2_quartus_flat.v:4763:23:      Example path: ASSIGNW
+                    rtnn_c3_measurement_v2_quartus_flat.v:7619:14:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o
+                    rtnn_c3_measurement_v2_quartus_flat.v:4534:2:      Example path: ALWAYS
+%Warning-UNOPTFLAT: rtnn_c3_measurement_v2_quartus_flat.v:7747:7: Signal unoptimizable: Circular combinational logic: 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.instr_executing_spec'
+                                                                : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 7747 |  wire instr_executing_spec;
+      |       ^~~~~~~~~~~~~~~~~~~~
+                    rtnn_c3_measurement_v2_quartus_flat.v:7747:7:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.instr_executing_spec
+                    rtnn_c3_measurement_v2_quartus_flat.v:8124:2:      Example path: ALWAYS
+                    rtnn_c3_measurement_v2_quartus_flat.v:7745:6:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.jump_set_raw
+                    rtnn_c3_measurement_v2_quartus_flat.v:8094:18:      Example path: ASSIGNW
+                    rtnn_c3_measurement_v2_quartus_flat.v:7744:7:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.jump_set
+                    rtnn_c3_measurement_v2_quartus_flat.v:4534:2:      Example path: ALWAYS
+                    rtnn_c3_measurement_v2_quartus_flat.v:4349:6:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i.halt_if
+                    rtnn_c3_measurement_v2_quartus_flat.v:4763:23:      Example path: ASSIGNW
+                    rtnn_c3_measurement_v2_quartus_flat.v:7619:14:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o
+                    rtnn_c3_measurement_v2_quartus_flat.v:4534:2:      Example path: ALWAYS
+%Warning-UNOPTFLAT: rtnn_c3_measurement_v2_quartus_flat.v:7619:14: Signal unoptimizable: Circular combinational logic: 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o'
+                                                                 : ... note: In instance 'tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i'
+ 7619 |  output wire id_in_ready_o;
+      |              ^~~~~~~~~~~~~
+                    rtnn_c3_measurement_v2_quartus_flat.v:7619:14:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o
+                    rtnn_c3_measurement_v2_quartus_flat.v:4534:2:      Example path: ALWAYS
+                    rtnn_c3_measurement_v2_quartus_flat.v:4349:6:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.controller_i.halt_if
+                    rtnn_c3_measurement_v2_quartus_flat.v:4763:23:      Example path: ASSIGNW
+                    rtnn_c3_measurement_v2_quartus_flat.v:7619:14:      Example path: tb_rtnn_external_soc.u_soc.u_ibex.u_ibex_core.id_stage_i.id_in_ready_o
+make: Entering directory '/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-c3-paper/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/build/quartus_external_attempt1/rtl_pilot_attempt3/obj_dir'
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated.o /usr/share/verilator/include/verilated.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_timing.o /usr/share/verilator/include/verilated_timing.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -c -o verilated_threads.o /usr/share/verilator/include/verilated_threads.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -x c++-header Vtb_rtnn_external_soc__pch.h -o Vtb_rtnn_external_soc__pch.h.fast.gch
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -x c++-header Vtb_rtnn_external_soc__pch.h -o Vtb_rtnn_external_soc__pch.h.slow.gch
+echo "" > Vtb_rtnn_external_soc__ALL.verilator_deplist.tmp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc.o Vtb_rtnn_external_soc.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__0.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__1.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__1.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__2.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__2.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__3.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__3.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__4.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__4.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__5.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__5.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc___024root__DepSet_h3b023232__0.o Vtb_rtnn_external_soc___024root__DepSet_h3b023232__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_h7eb41981__0.o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_h7eb41981__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_hbd8e4db1__0.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_hbd8e4db1__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_h210e0c8c__0.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_h210e0c8c__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_h6f477e8b__0.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_h6f477e8b__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_hce46df52__0.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_hce46df52__0.cpp
+g++ -Os  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.fast -c -o Vtb_rtnn_external_soc__main.o Vtb_rtnn_external_soc__main.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc__ConstPool_0.o Vtb_rtnn_external_soc__ConstPool_0.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc___024root__Slow.o Vtb_rtnn_external_soc___024root__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__0__Slow.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc___024root__DepSet_h3b023232__0__Slow.o Vtb_rtnn_external_soc___024root__DepSet_h3b023232__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_if_stage__pi7__Slow.o Vtb_rtnn_external_soc_ibex_if_stage__pi7__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_h7eb41981__0__Slow.o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_h7eb41981__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_hde14385c__0__Slow.o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_hde14385c__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_id_stage__pi8__Slow.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_hbd8e4db1__0__Slow.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_hbd8e4db1__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_h210e0c8c__0__Slow.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_h210e0c8c__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__Slow.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_h6f477e8b__0__Slow.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_h6f477e8b__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_hce46df52__0__Slow.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_hce46df52__0__Slow.cpp
+g++   -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=0 -DVM_TRACE_FST=0 -DVM_TRACE_VCD=0 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-overloaded-virtual -Wno-shadow -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-parameter -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable     -DVL_TIME_CONTEXT   -fcoroutines -include Vtb_rtnn_external_soc__pch.h.slow -c -o Vtb_rtnn_external_soc__Syms.o Vtb_rtnn_external_soc__Syms.cpp
+Archive ar -rcs Vtb_rtnn_external_soc__ALL.a Vtb_rtnn_external_soc.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__0.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__1.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__2.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__3.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__4.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__5.o Vtb_rtnn_external_soc___024root__DepSet_h3b023232__0.o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_h7eb41981__0.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_hbd8e4db1__0.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_h210e0c8c__0.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_h6f477e8b__0.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_hce46df52__0.o Vtb_rtnn_external_soc__main.o Vtb_rtnn_external_soc__ConstPool_0.o Vtb_rtnn_external_soc___024root__Slow.o Vtb_rtnn_external_soc___024root__DepSet_hdb8213eb__0__Slow.o Vtb_rtnn_external_soc___024root__DepSet_h3b023232__0__Slow.o Vtb_rtnn_external_soc_ibex_if_stage__pi7__Slow.o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_h7eb41981__0__Slow.o Vtb_rtnn_external_soc_ibex_if_stage__pi7__DepSet_hde14385c__0__Slow.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__Slow.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_hbd8e4db1__0__Slow.o Vtb_rtnn_external_soc_ibex_id_stage__pi8__DepSet_h210e0c8c__0__Slow.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__Slow.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_h6f477e8b__0__Slow.o Vtb_rtnn_external_soc_ibex_cs_registers__pi9__DepSet_hce46df52__0__Slow.o Vtb_rtnn_external_soc__Syms.o
+g++     verilated.o verilated_timing.o verilated_threads.o Vtb_rtnn_external_soc__ALL.a    -pthread -lpthread -latomic   -o Vtb_rtnn_external_soc
+rm Vtb_rtnn_external_soc__ALL.verilator_deplist.tmp
+make: Leaving directory '/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/resource-conditioned-neural-computation-c3-paper/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/build/quartus_external_attempt1/rtl_pilot_attempt3/obj_dir'

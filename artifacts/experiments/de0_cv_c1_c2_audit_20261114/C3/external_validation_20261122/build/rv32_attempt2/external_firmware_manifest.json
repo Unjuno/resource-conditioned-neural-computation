@@ -1,0 +1,37 @@
+{
+  "schema": "rtnn-external-validation-rv32-v1",
+  "status": "RV32_IMAGE_BUILT_NOT_SIMULATED",
+  "elf_sha256": "4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e",
+  "bin_sha256": "f3b02ab923f9c19f9eebb265d08e997a57365dd9dffdea9de4bfc408eaa02cb7",
+  "image_sha256": "4ec1d357d845fc008aa3cbcb13f32d0d8261ff5184b7660bac0cc4fc58f68527",
+  "hex_sha256": "6b5ead2e78903cb6420b7b4e08453954387bfe7a71c5c64bbf0d6681b453cba8",
+  "base_addr": 1048576,
+  "entry": 1048704,
+  "stack_top": 1310704,
+  "load_bytes": 127560,
+  "memory_bytes": 132216,
+  "ram_bytes": 262144,
+  "code_limit_bytes": 229376,
+  "nonclaims": [
+    "No FPGA simulation, Quartus compilation, timing signoff, or physical test implied by ELF/image creation."
+  ],
+  "build_id": "45585631",
+  "binding_id": "45585632",
+  "model_id": "52544e4e",
+  "lane_sha256": {
+    "rtnn_ram_lane0.hex": "13cdf746b427016f0528ebda83c23beadf9fd13360565bec29e1838f9542cb59",
+    "rtnn_ram_lane1.hex": "97d720edd622b07649fa0097c6809f8f55f74ef9b8ff2da325c67e6fc67b423d",
+    "rtnn_ram_lane2.hex": "439aa03335f5ead3e949f8f53aa4951465db7aa292ac48fc77fbe785a46215c5",
+    "rtnn_ram_lane3.hex": "3730903036eaeca436866df81e9da9528b282f23485d43caf12f0638865f59dc"
+  },
+  "firmware_sources": [
+    "rtnn_external_main.c",
+    "rtnn_external_runner.c",
+    "rtnn_external_wire.c",
+    "realtime_nn_real_sequence_fixed_core.c"
+  ],
+  "model_core_sha256": "a6b2807bd4a60534c250fca3005322cf14ba0a92f6b16e28241109385efc6809",
+  "model_weights_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+  "compiler": "Ubuntu clang version 18.1.3 (1ubuntu1)",
+  "linker": "Ubuntu LLD 18.1.3 (compatible with GNU linkers)"
+}
