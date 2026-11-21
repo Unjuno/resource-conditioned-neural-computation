@@ -4,7 +4,7 @@
 
 The previously missing project-owned source bytes have been recovered from the separate, correct Unjuno audit worktree at branch `codex/stage-c3-jtag-pilot-20261114`, HEAD `c13335d38c6ce478ad4a026f607ebf5890dc799b`. The five project-owned source variants are preserved byte-for-byte in `source_recovery_20261122/`; their hashes match the frozen 146-entry manifest. The pinned Ibex checkout is commit `7b5df75a041affe56e8c235260f98a09b3319008`.
 
-**Updated source-level result: PASS, 146/146 hashes. Native Verilator simulation: PASS.** This recovers the exact graph used by the frozen native regression through an explicit archived source map. It does not demonstrate that an ordinary public clean checkout contains those five byte variants, nor does it prove Quartus/SOF bit identity or board timing signoff.
+**Updated source-level result: PASS, 146/146 hashes. Native Verilator simulation: PASS.** The explicit source map and five byte-exact project variants are now in the public research branch. A fresh clone of commit `6e07b86` used the tracked preparation script and passed the mapped native regression. This does not prove Quartus/SOF bit identity or board timing signoff. See [`CLEAN_CLONE_REGRESSION_RUN_RECORD_20261122_JA.md`](CLEAN_CLONE_REGRESSION_RUN_RECORD_20261122_JA.md).
 
 The old 2026-11-21 reports remain unchanged as historical records. Their 145/146 result accurately describes that audit. The newer result supersedes it only for the explicitly mapped graph in this addendum.
 

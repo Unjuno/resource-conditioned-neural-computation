@@ -21,7 +21,7 @@
 - [ ] 著者順、所属、資金、利益相反、謝辞、著者全員の同意を確認する。
 - [ ] 全書誌情報、DOI、各リンク、引用形式を投稿先要件に照らして最終確認する。
 - [ ] 投稿先のデータ・コード・ライセンス・補足資料ポリシーに適合する公開形態を決める。
-- [x] 146-source native graphの欠落hashを別保存のbyte-exact variantで解決し、再現回帰と限界を記録（[`SOURCE_RECOVERY_ADDENDUM_20261122_JA.md`](SOURCE_RECOVERY_ADDENDUM_20261122_JA.md)）。公開clean checkout単独での再構築やQuartus/SOF同一性は未証明。
+- [x] 146-source native graphの欠落hashをbyte-exact variantで解決し、公開branchのfresh cloneからnative Verilator回帰を再現（[`CLEAN_CLONE_REGRESSION_RUN_RECORD_20261122_JA.md`](CLEAN_CLONE_REGRESSION_RUN_RECORD_20261122_JA.md)）。Ibexは固定外部checkoutを要する。Quartus/SOF同一性と実機タイミングsignoffは未証明。
 - [ ] B-SIGNOFFの外部JTAG timing不足、CDC D102、冷起動不確かさ、WCET未確立を本文と査読回答で保持する。
 - [ ] 新しい確認的性能・精度主張が必要なら、事前登録した独立評価キャンペーンを別途実施する。
 

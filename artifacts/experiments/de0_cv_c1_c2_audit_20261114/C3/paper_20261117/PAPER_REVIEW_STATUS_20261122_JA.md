@@ -7,8 +7,8 @@
 | 項目 | 状態 | 現在の根拠・範囲 |
 |---|---|---|
 | 24,840要求／13 scheduleの保存実測データ再集計 | PASS（保存証拠の範囲） | 2026-11-21の独立解析記録 |
-| 146-source source identity | PASS（明示source map） | 2026-11-22に141 pinned Ibex + 5 byte-exact project sourcesを検証 |
-| ネイティブVerilator回帰 | PASS | 42ケース、reset recovery、負例、response write guard |
+| 146-source source identity | PASS（公開branchのfresh clone） | commit `6e07b86` を新規cloneし、141 pinned Ibex + 5 byte-exact project sourcesの146/146 hash照合 |
+| ネイティブVerilator回帰 | PASS（fresh clone） | 42要求、reset recovery、negative cases、response write guard。詳細はclean-clone run record |
 | 固定2対adaptive cycle差 | OBSERVED / EXPLORATORY | 20.934%; 1 board/build/session、比較器は先行結果を見て選択 |
 | 1 pp accuracy noninferiority | INCONCLUSIVE | 339/360ずつ正解、差の95%区間−1.389～+1.389 pp |
 | B-EMPIRICAL | PASS_LIMITED | 既存の適格性範囲のみ |
@@ -20,7 +20,7 @@
 
 ## ソース再現性の意味
 
-2026-11-21時点の145/146記録は、その時点の公開checkout監査として正しい。翌日の作業で、不足していた5つのproject source byte variantsを別の正しいUnjuno audit worktreeから回収し、凍結source mapの全146 SHAを一致させた。ネイティブ42要求/reset/負例/guard回帰もPASSした。この検証は、公開mainや通常のclean checkoutに同じbyte variantsが含まれること、Quartusで同一SOFを作れること、または基板のタイミング保証を意味しない。詳細は[`SOURCE_RECOVERY_ADDENDUM_20261122_JA.md`](SOURCE_RECOVERY_ADDENDUM_20261122_JA.md)。
+2026-11-21時点の145/146記録は、その時点の公開checkout監査として正しい。2026-11-22に五つのproject source byte variantsを正しいUnjuno audit worktreeから回収して公開branchへ保存し、commit `6e07b86` をfresh cloneした環境で、追跡済み準備スクリプトを使った146/146 hash照合とnative Verilator回帰に成功した。この結果はmapped native graphの公開branchからの再現を示す。Ibex依存は別途pinしたcheckoutを要し、Quartusで同一SOFを作れることや基板のタイミング保証は示さない。詳細は[`SOURCE_RECOVERY_ADDENDUM_20261122_JA.md`](SOURCE_RECOVERY_ADDENDUM_20261122_JA.md)と[`CLEAN_CLONE_REGRESSION_RUN_RECORD_20261122_JA.md`](CLEAN_CLONE_REGRESSION_RUN_RECORD_20261122_JA.md)。
 
 ## 論文での主張範囲
 

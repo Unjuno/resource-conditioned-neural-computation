@@ -1,5 +1,7 @@
 # RTNN C3 v2 査読前最終監査・GO/NO-GO判定（2026-11-17）
 
+> Source identity status updated by [`PAPER_REVIEW_STATUS_20261122_JA.md`](PAPER_REVIEW_STATUS_20261122_JA.md): mapped native graph clean-clone reproduction now PASSes. The audit below preserves its original 2026-11-17 state and is not the current source-identity verdict.
+
 ## 結論
 
 **保存済み実機データ解析はPASS。限定した経験的ケーススタディの草稿は作成済みだが、投稿・公開の最終GOには未達。**

@@ -4,7 +4,7 @@
 
 **アルゴリズムの新規性：NOVELTY_UNPROVEN。** 入力ごとの早期終了、複数exit、同一モデルでの予算別実行、エントロピーによる停止判断、FPGA上の動的推論は、今回確認した一次資料ですでに実現されています。特に低精度FPGAのエントロピー早期終了（Kong & Nunez-Yanez, 2022）とFPGA上の動的早期終了実装（Dimitriou et al., 2025）は、本稿の強い新規性主張に対する直接の反証です。
 
-**限定された実装・実証貢献：INCREMENTAL_CONTRIBUTION。** 1台のDE0-CV上でIbex RV32 softcoreが凍結Q15を実行し、JTAG要求と応答identityを付けたmcycle計測を24,840要求分保存・独立再集計した事例は、具体的な実装条件を持つ経験的ケーススタディとして報告できます。ただし「新方式」や「初の実機実装」とは呼べません。独立した電源セッションのばらつき、精度1 pp非劣性、146-source完全一致、正式JTAGタイミングは確立していません。
+**限定された実装・実証貢献：INCREMENTAL_CONTRIBUTION。** 1台のDE0-CV上でIbex RV32 softcoreが凍結Q15を実行し、JTAG要求と応答identityを付けたmcycle計測を24,840要求分保存・独立再集計した事例は、具体的な実装条件を持つ経験的ケーススタディとして報告できます。ただし「新方式」や「初の実機実装」とは呼べません。独立した電源セッションのばらつき、精度1 pp非劣性、Quartus/SOF再構築同一性、正式JTAGタイミングは確立していません。mapped 146-source native graphとclean-clone Verilator回帰は確認済みです。
 
 ## 貢献候補ごとの分類
 
@@ -16,7 +16,7 @@
 | 連続Q0.16予算を7段階の許可上限へ写像し、許可exitと実行exitを別々に記録する | `NOVELTY_UNCERTAIN` | RTNN内の明確な実装要件だが、今回の比較だけでは類似の量子化・cap設計を網羅的に除外できない。 |
 | Ibex/DE0-CVでのJTAG要求identity付きmcycleケーススタディと全件保存監査 | `INCREMENTAL_CONTRIBUTION` | プラットフォーム固有の測定記録として具体的。アルゴリズムやFPGA早期終了一般の新規性を意味しない。 |
 | board-level hard deadline / WCET保証 | `ALREADY_KNOWN`（研究領域として方法あり）/ RTNN結果は`NOT_ESTABLISHED` | Patmos上の静的時間解析やFPGA DPU向けWCET解析は存在。RTNNは外部JTAG/CDC signoffを満たさず、WCET解析も未実施。 |
-| 全RTL/bitstreamを第三者が同一再構築できる | `NOVELTY_UNCERTAIN` | 現在の公開証拠は145/146-source一致。1ファイルSHA不一致、別途clean rebuild不能。 |
+| mapped 146-source native graphを第三者が再構築・回帰できる | `PASS_NATIVE_ONLY` | 公開branchのclean cloneで146/146 SHA照合とnative Verilator回帰に成功。Quartus/SOF同一再構築は未確立。 |
 
 ## 論文に記載可能な貢献文
 

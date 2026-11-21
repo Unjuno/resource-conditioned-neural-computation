@@ -2,7 +2,7 @@
 
 ## 判定案
 
-限定した実装・測定ケーススタディとしてはデータ整合性が強化されている。アルゴリズム新規性を主題とする論文としては、現状の先行研究との重複から大幅な主張縮小が必要。正確なnative source graphが145/146で止まり、正式JTAGタイミングとCDC保証も未完了のため、再現性・リアルタイム保証を主張する論文は現時点でNo-Go。
+限定した実装・測定ケーススタディとしてはデータ整合性が強化されている。アルゴリズム新規性を主題とする論文としては、現状の先行研究との重複から大幅な主張縮小が必要。2026-11-22に公開branchのfresh cloneからmapped native source graph 146/146とVerilator回帰を再現した。一方、Quartus/SOF同一再構築、正式JTAGタイミングとCDC signoffは未完了のため、物理buildの完全再現性・リアルタイム保証を主張する論文はNo-Go。
 
 ## Major concerns
 
@@ -11,7 +11,7 @@
 3. **1 pp非劣性は未達。** 339/360対339/360という同じ観測正答率は、95%差区間下限−1.389 ppを覆さない。非劣性PASSと書かない。
 4. **Pareto図は探索的。** 49条件を同じ360例で走査してParetoを選んだ後の結果は、多重な設定探索を含む事後記述であり、一次検定ではない。
 5. **旧新+5 cyclesの因果関係は未確定。** source diffは新しい開始カウンター保存を測定区間に置くが、5 cyclesを命令列で確認していない。offset補正をしない。
-6. **source/build再現性とデータ再解析を区別する。** 24,840行解析がclean checkoutで再現しても、145/146 source一致からbit-identical SOF再現性は導けない。
+6. **source/build再現性とデータ再解析を区別する。** mapped native graphは公開branchのfresh cloneで146/146照合とVerilator回帰に成功したが、これはbit-identical SOF再現性を示さない。
 7. **外部タイミングとWCETを分ける。** 正の制約内slackは、未制約JTAG外部パスやCDC課題を解決しない。オシロの計測箇所も未確認。hard deadline/WCETは記載しない。
 8. **サンプルと反復単位を明確にする。** 実験要求24,840行ではなく、accuracyの独立単位は360入力ID。10 scheduleは10 independent bootsではない。
 9. **データセットと引用条件を具体化する。** `load_digits`は8×8画像でありMNISTではない。元データの利用条件・引用、scikit-learn版、入力分割生成物SHAを投稿時のデータ公開条件と照合する。

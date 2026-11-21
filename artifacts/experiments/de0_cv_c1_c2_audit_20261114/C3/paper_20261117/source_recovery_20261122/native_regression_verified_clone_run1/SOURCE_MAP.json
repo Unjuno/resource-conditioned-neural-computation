@@ -1,0 +1,743 @@
+{
+  "counts": {
+    "pinned_ibex": 141,
+    "recovered_project_source": 5
+  },
+  "entries": [
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_pkg.sv",
+      "sha256": "da6d6ef536a88236f574ba5cafa0c9c368879eec3267141eb6c3aca09c99dc2f"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_cheriot_pkg.sv",
+      "sha256": "1595cf6c1a1653aa118f3299a91dfcca7749e9358f821eab193435f014fec1cb"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1p_pkg.sv",
+      "sha256": "f51c6a588ec476b5cb2e95d9e8d19a67551732e9661a0c0933c6fccee8e92722"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_2p_pkg.sv",
+      "sha256": "118b23a1742bda9193021676d17b9ddf360f68e1ac702107fea1239a6d9ab62c"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rom_pkg.sv",
+      "sha256": "262a631ab5dc148945a0cda36ed4aa6b4f9bd9957ad984c12bd9979644378384"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1r1w_pkg.sv",
+      "sha256": "cd0d1006faf18ce7f26de47861494146d0f72872b38be7f0b2564e24d8201b10"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_assert.sv",
+      "sha256": "d717d5dbcba3b5aa8a731ef9f8af18b036b49edef282f0a43a51f5ad2dd9bb40"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_flop_macros.sv",
+      "sha256": "2e8e6c2ee484899ae5d0020eaf0c9732c31537c60c30cb2a0a0acd2e92baee03"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_cipher_pkg.sv",
+      "sha256": "9cd66bdbc64020e3fe1f14a5baee30a93609b7887a9d21df7991929087b0973f"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_and2.sv",
+      "sha256": "54d10f2ad40702c020a3074f0d11bd99073e5e6f3bd6cc6d8417b7f159d8a730"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_buf.sv",
+      "sha256": "9b00bd8ac203169268262ac9337076781fa962b19beed36f28dde54e360aaaf5"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_buf.sv",
+      "sha256": "e986f0bcd51fc81b6cb575f5f00383fde4f45b4ed0c46a822e52631a03dbd893"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_gating.sv",
+      "sha256": "b2474320674e645d423f32ba1ce60b25509042d40c2de8fe28dcb7760a8fa882"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop.sv",
+      "sha256": "6645d657b107b024f9211d3a0134890d1e20146f68ba1772bf62575f7b4e5549"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_no_rst.sv",
+      "sha256": "a9bed993f2c26d634359b5b0f8fe9f6e965a78c2a0c4f3c07ca6851ca4b17545"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pkg.sv",
+      "sha256": "e82d857795b3f82fa08cf9a7cece10629c2e39569d8f6bbeb226bcad62a26930"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_usb_diff_rx.sv",
+      "sha256": "10b5a865b7f073ac828ebff639838d1a0d3486d4dbc874a4e9aba83ba830126a"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_xnor2.sv",
+      "sha256": "ebdd3179c32a81303227775e3e6ef0afdf8959efebf7a6892d122d4bc6a776c7"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_xor2.sv",
+      "sha256": "0151c9a85fdf79122a235bd5091a3034f96ad8efbe46d0880599ed02ecf4a66f"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_pad_wrapper_pkg.sv",
+      "sha256": "af14a8b1331d9c7d46a7d4b3784768868c113407179a6e4db0db5245e2301de6"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_pkg.sv",
+      "sha256": "bcbd03333a30e7a1cb01195d1c40c7d0e736f91d9f73c2347ef5b0bd9dc3c82b"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_dec.sv",
+      "sha256": "1db557bc993dab53bcdeeb31a3051b4468f61a489c88387d0e9072c7cacd860b"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_22_16_enc.sv",
+      "sha256": "dc9be87f59567a2a6828de6e38de9f283ac7f48c088c852665e2767cea61fd35"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_28_22_dec.sv",
+      "sha256": "bc719bdaaae7a7566528b346b2771b4dd907496a4f5a9b6105c0b12edd090598"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_28_22_enc.sv",
+      "sha256": "7759abde1e32bd8c568831de1a139698897b873592714fd6a3926a35123fadb0"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_39_32_dec.sv",
+      "sha256": "13cbe5fdac6efeba3e92cbddc5c77efa68477996c616984d87f7abe438c2c61e"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_39_32_enc.sv",
+      "sha256": "31b80e9aefe5cc6df99fe7134a39c417809536b29de6892e6382a9ec3374b4c7"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_64_57_dec.sv",
+      "sha256": "473c72849e087ef8ff113034bc0bfd5557cb058a615da6c50dc26721adc1c63a"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_64_57_enc.sv",
+      "sha256": "c955ae516645355d3d095441f2025826a542360c391335e2acb500dbf5f23c31"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_72_64_dec.sv",
+      "sha256": "b706646195e58396cff43b5256f25a474a180ea18eb483499cb85c649f5ee532"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_72_64_enc.sv",
+      "sha256": "71c2c5924cf277fd978ab40ccc5eec939f609894ddf8adb3f81144baaa774755"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_22_16_dec.sv",
+      "sha256": "ed611f2143cf73b7ff540807e41ba45cdc03c4c9b94c005c930ed08a4466a3b0"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_22_16_enc.sv",
+      "sha256": "4a6a3bdd2d466a3fbf9b2d389f0203972291f2b6b9eac089f73b0302bd7fd1a9"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_39_32_dec.sv",
+      "sha256": "1d01e347a42ae0e9de40c8dda1fb557f951c8db7c990ae2ba7c67e14073646af"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_39_32_enc.sv",
+      "sha256": "d510dc23a3150a5f7b086cb465cfe679279489fc54678567d7889972efb76629"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_72_64_dec.sv",
+      "sha256": "b6af19127ac10720d328f56f790fff4eee79481321374d3b52d3b432c7fe1bb2"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_72_64_enc.sv",
+      "sha256": "2f8732b489b9c00993a189348c25766c519269b7bc58a56e4b800a93b8771f02"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_76_68_dec.sv",
+      "sha256": "98b4a274d14b0f1877308f7fc62f0191ec48350a9376c77622ff12ce2c3f4c63"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_hamming_76_68_enc.sv",
+      "sha256": "8b524f2e3ea9f481177ac729d8f38ff8bf063b2a4b467551b1a62aac9c1f0a6e"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_22_16_dec.sv",
+      "sha256": "2620fc37a5acfde0d54f0a638d13d3150b3c08acc840ce45a9ae4a24833711ef"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_22_16_enc.sv",
+      "sha256": "b6df81ecfb12826002fa979c1beae2b8b47e8fa33bd465ad7c6e4784657e8ca9"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_28_22_dec.sv",
+      "sha256": "06c0dfdf59f2dbfffa7c73e609ae6361c94927a298f13ac6815c9543633b35a4"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_28_22_enc.sv",
+      "sha256": "15b373e491fba6d6251c241229bd78d2766214771942e3fac0bdbe4cbff720fd"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_39_32_dec.sv",
+      "sha256": "f07f26fd2375952e4ec7cfc1641cebcea373a8030d82dd5977a76f81c430cb12"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_39_32_enc.sv",
+      "sha256": "4588fda3fd5ebdd711c98f6900caaaaddddf1257337c5b931ca86de7fb0ef8ff"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_64_57_dec.sv",
+      "sha256": "e598eef60254ac4a0e6899f6d1e4af5ae5bbd2ac22395ac53ee925296bc8a826"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_64_57_enc.sv",
+      "sha256": "74b3b327047b90682468614708bb4b1104b1f069c0dc3189e2b078622ac566b8"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_72_64_dec.sv",
+      "sha256": "3763fa9e291c0e33217b18cf74b7dd3830f232065a6a62ad21582d6e2bdcfd9d"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_72_64_enc.sv",
+      "sha256": "d7c176fffecdf629db3c2e3958a4ca603e99a995b4aaeab9a2f73ad55e0e2d51"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_22_16_dec.sv",
+      "sha256": "4fedd80e34009d4e54881ef2358ca3a7fd971acaa8f1621b1832aea6d0aaac3c"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_22_16_enc.sv",
+      "sha256": "74fc5522c24f1f3505a2dc7f3c34adaac07fdb54dce055268a4e2b3df3d6f416"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_39_32_dec.sv",
+      "sha256": "975eda8d8623f617f9d4e89b948c44e2d657b000596cdeeb9ed62910f6d1e8f7"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_39_32_enc.sv",
+      "sha256": "b63ddfd743b51476dea494af1665433747ce021e0933d6e1e6b7a1b2ca5f9d3a"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_72_64_dec.sv",
+      "sha256": "ee22ebd7c918a537c883ce42c27ad2ab75125e35c6184c5e2dc2b1bd9fd0fb79"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_72_64_enc.sv",
+      "sha256": "773f02fda14b0c20a41ddae143292b6b422b4b946da5476ea5a61ee97e1fd127"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_76_68_dec.sv",
+      "sha256": "925fd53e9b06cd4d770f355cd72491bac8fbd21e038b596d778de26f10bc5de5"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_secded_inv_hamming_76_68_enc.sv",
+      "sha256": "d7e15dc949ee0f935e012bb1d666cf1e329b016979e73b5a71f168971e261a82"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_icache.sv",
+      "sha256": "83f21bc20d21548c51a958e396e0ca8ceb02541c9ab6963f770a1ea38db75db3"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_cdc_rand_delay.sv",
+      "sha256": "6b0f9f46a5559a354c9770e6eb7a4721b50b09d40d34b4efb62218c7a777829c"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_subst_perm.sv",
+      "sha256": "6cae23ff8a3c6d1dc775c2a55280f532cef98a9a6c787a2d717c50b5854ee3a6"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_present.sv",
+      "sha256": "7a6ae0e88160d93b5f70460e41806ef2b7b5b5726e2aa8038cf7cfab281d890c"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_prince.sv",
+      "sha256": "e3fa14d45eebe18e6404370540648d1037887877dbde4b22fddd83c2b43d1e0d"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_count_pkg.sv",
+      "sha256": "8e465ed25b7d59f29faf0f315243a774cf0e50d178ec2068d8c71983cb2f18df"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_count.sv",
+      "sha256": "b48580aefff674a48a674489c9b21a98d5399ca5b4c7623f3a7c907a75d8f0cb"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_mux2.sv",
+      "sha256": "d0010a7d97322a118a3675fec879bdf59179ea6a1036ab6d0001feeada732f72"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pad_attr.sv",
+      "sha256": "9a38ebec3c38ec34dc9d326fdf48b06f9633b3c0616796115b17c9a1293d8de0"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_pad_wrapper.sv",
+      "sha256": "93d04f75dc741e31528c3847c767860f91cd2bb79af9a19a7285e9c1f6263594"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1p.sv",
+      "sha256": "f407382ba9136ce03d8d734c5279f73d2805f7460820f5498bb07fdb3e627aea"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_1r1w.sv",
+      "sha256": "734404e89eb8b39af204dc499c244aebc3fd00fc87aadcfc006dd6ec02f5b913"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_ram_2p.sv",
+      "sha256": "2d0990cd5ecd47db750279425b09447640ec881d20d75e10b157320ef3affc75"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rom.sv",
+      "sha256": "fe959c2fda365fd4e26b6cb02541ab8de1c7808cf1cca23ad87d3d4cd904b8c5"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_lfsr.sv",
+      "sha256": "c61632878728613ba0403f2d068c03a5103165663b58d8dd50892ef032dec916"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi_pkg.sv",
+      "sha256": "11a2f1a16ddaf750d859c95e07fc48c54743fe6ad3b5c5eabe2e14a51d9fb1af"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_sec_anchor_buf.sv",
+      "sha256": "073be7f3daa8a738add627e1055704cc94d82cfb8ff11f6952c644abde20c702"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_sec_anchor_flop.sv",
+      "sha256": "7bb3cb240164715f3956831e35e95f1a3e7e901deae02cc1297669318986d7bf"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_util_pkg.sv",
+      "sha256": "f71235ef5b92eaa3d2ed5c676f76108082df93b8aae8f9baa816584d1d285208"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/pulp_common_cells/rtl/stream_fork.sv",
+      "sha256": "94aceb08b400958fe66285351ff0909b7bdd1a8555613c6aaa443c6f696afe85"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/pulp_common_cells/rtl/stream_join_dynamic.sv",
+      "sha256": "1c3cbfb64869114c36fbadb599379c2d639d8e7d501b983a8fad84e78dd5f128"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_inv.sv",
+      "sha256": "c1988aec07ae5e38f42465be35500f84e17eb056cb2ae62808b57ec1e8f9be18"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_2sync.sv",
+      "sha256": "5780aef67607c161eb8a4b3326757af5b416eb5337aef0afc457fdebf2891c53"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_flop_en.sv",
+      "sha256": "68854581eaa23a57f00c4b49ee0ce972147ffca9f2800da2859d1fe38cc5b476"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_sender.sv",
+      "sha256": "2bd763ba3f489b406de68e6759650fe2ed7fd875298ac0adff71e70234993b39"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_sync.sv",
+      "sha256": "8d6461687bb7f022f326875e401a271f1bf6df3a7a87bf625508b334530c20df"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi4_dec.sv",
+      "sha256": "b33530adf41b05849d06424a40db5536dfb5ffd441752bf49af03ad3d7b5f48e"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_sender.sv",
+      "sha256": "cfd926dd909081b590aade41fac9a91cb72c2493defb870cbaec45153f3aa951"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_sync.sv",
+      "sha256": "2f0b9d5f5c95e0338cda232d61c390136cb0e17696c4edfd842007a6a9fbcaa7"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi8_dec.sv",
+      "sha256": "e34268f75dd36cc0bf6cce710e1ebbd900cb253fd977a394a84eaf2f19f52956"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_sender.sv",
+      "sha256": "d57946855f6d5674f557b84976189449117f4f17014a7eca0fa716f8e990d012"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_sync.sv",
+      "sha256": "44a06e1eb454387e104c51621dd99e5840d4b187ea7fda74bd8b5e0a824206e1"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi12_dec.sv",
+      "sha256": "7e30e02744c255717d0094fd0b3cb5d77caf4626c5704dce37ac5c86c59d5d50"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_sender.sv",
+      "sha256": "cafef386918aee0fcccbaa1a36bf4c11b15a0051c8f94742d926a09c834590a4"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_sync.sv",
+      "sha256": "27d63c260b986b0db77b90a4f26d0c165f7451f01b60bbf48f3b7601059bb913"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi16_dec.sv",
+      "sha256": "34ae5437446015f276f09e30c515a5538af44fbe5617f73f61b464c613dccc20"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_sender.sv",
+      "sha256": "cda878555930047822ac382e1a19e2db5a31bb2dddb8f920165bc8d515e0b7d5"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_sync.sv",
+      "sha256": "5c582e50e12a201d5060a85fa33e1de2298804ed3d273334b66c58240f2dd190"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi20_dec.sv",
+      "sha256": "99a296946f4547c4907840db35dc8d65e7d61d20cbd8120e6f8e3bc3abd49bd6"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_sender.sv",
+      "sha256": "9748a85ac3dd716d09be4047718dac6e78f7a1e23a03082fb95158abcf3367de"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_sync.sv",
+      "sha256": "5072f6c7b6ad93ca1362fc84e986e994ca9d7e80c621fd6b14308d71ad675c19"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi24_dec.sv",
+      "sha256": "677c30909b141e0f9adaf579ad4681ece28892b8911a1c85d7c11ca866bb7d8d"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_sender.sv",
+      "sha256": "0d036039d7d48b9fa614b93803167b0f1bc2dae5eb7aec2b3a6f33f39084c6ac"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_sync.sv",
+      "sha256": "d55a1857dda0a0de5a1fbfc0af3860e1731df8cdb030c9da0efe6e654dd7d70f"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi28_dec.sv",
+      "sha256": "64ae1fc075458e4cab87f8d7a665f548f78e1cbffb05b43041e48d7b941010b0"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_sender.sv",
+      "sha256": "b4dae09251ff294afea4532ed5e7205dbf52d4265aa75dc90d1b003e22f7fdd6"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_sync.sv",
+      "sha256": "66269bfff124800e2073a423bce9922ebd0f865d39608d40803b23397e3eee5b"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_mubi32_dec.sv",
+      "sha256": "75dbc715d66adb61c72ecfa4747192317b0a036be240a9bfeedd52bde30a6932"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_enc.sv",
+      "sha256": "e9a65c74e4478063ea00fc3d80eaff214fdbacfe07e91f13f28ceb725e5ad362"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_mux.sv",
+      "sha256": "adf35f6708fd04cf2a01138033de3f5b23674685c213bcfc39fc3819d04cfa7c"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_onehot_check.sv",
+      "sha256": "97aefa2e7ebd26e12ea9fc691908a62315e2135bdbb127f3c3d640eeb15096ca"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_adv.sv",
+      "sha256": "b69410fc7b7aeaa067d080cbd7fd86074456aa0c212779bfbd3b9f5d3abb7fa3"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_alu.sv",
+      "sha256": "06ce1c3ce30807f715478cf9e3bc279cac1c1cc2fb95d289516169fadcf7b7dc"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_branch_predict.sv",
+      "sha256": "78d4120eac2606e34b9338581eac55e3ba3b48c718799a46a887ac9efab2240e"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_compressed_decoder.sv",
+      "sha256": "9a75e724398065c888281726890037f75a713343cf42dfb777a5fdbd25c0d6f6"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_controller.sv",
+      "sha256": "0176847253773bf41094e8d55e35c949eafc142eae805f707660d51d0d9e10ec"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_cs_registers.sv",
+      "sha256": "adabb5a3f27140629fbc940bb08ae1f2b95f771e46f44f4a03e29a1f85a34644"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_csr.sv",
+      "sha256": "6533fffc57e233b3961ebd94722a14a1a4320771ce4a76e69481bf2deb1d8514"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_counter.sv",
+      "sha256": "0e953e2e05b5070833029d0f6fed6d3a48fbd3c02dc05785962fb0d451425d8e"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_decoder.sv",
+      "sha256": "ba04566d91209d1f58d70a63405b137cfa28d76207d2e5bebdd5dcbf2d9fd88a"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_ex_block.sv",
+      "sha256": "6451d5cd6af214b5fbb70f7499f898de981188cd7a25bf49247c0819b907c90b"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_fetch_fifo.sv",
+      "sha256": "b4e811b6dd8f6659dc3a2b56a9ddedf0700210652762f1e0dff63e91abbd6068"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_id_stage.sv",
+      "sha256": "16a39447a94cc6e0a96c4dcacb8a34064577b7bb426a93729fd82bd6ff37a8c5"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_if_stage.sv",
+      "sha256": "ead80ddf0a8fe83e42a8d62657b30d582c7548f7f1b0093994b44f457d9c8cc0"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_load_store_unit.sv",
+      "sha256": "cf32b24f749d7a1ad8e2675ed5747fcabade6595d99621cdabf6c7990611130e"
+    },
+    {
+      "kind": "recovered_project_source",
+      "resolved_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/rtnn-c3-clean-repro-20261122-6e07b86/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/source_recovery_20261122/ibex_multdiv_fast.csa.sv",
+      "sha256": "f74def2c52d42c46dffbabdb1e114dab10fe5120412d9ad7240d427d9ee0f7b0"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_multdiv_slow.sv",
+      "sha256": "88b7392d3e2cd1f67f2c39b7425075030c78646cba2409356d6cfce262a46db6"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_prefetch_buffer.sv",
+      "sha256": "2f5fa22949c9b8089d8b7918997ac544eb0e039a17a19b68818492d4199607d1"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_pmp.sv",
+      "sha256": "a564fb312d5337b0875d16f434e8b69348e12c2560548fad93f9270f9c4b9176"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_wb_stage.sv",
+      "sha256": "a07086b5200d7ee08b8ea19b6ccac55fb4bc4b0d43e76e826833419da263023a"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_dummy_instr.sv",
+      "sha256": "8899ec7fcd6df73d7ea96ad25e73f664ee2ae2a95b2186a36a7ab885e16e292e"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_core.sv",
+      "sha256": "fa081f154c7ee220484481c6545dc77df60bbf94eb0b6ed9455863d3029321a5"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async_sram_adapter.sv",
+      "sha256": "1fb4405f2aa48894d9afe63775e14904bca8d4df8384f5f430757a8f5f290e0f"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async_simple.sv",
+      "sha256": "4a7e4c2543194473227cb93f7d6de71bdaa2136d0abafbd0fe40e980fd1cf21a"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_async.sv",
+      "sha256": "0fde480a5f513a4273540e0d70c7502d0e179b759414e3020c8d4d3d349cf6c7"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync.sv",
+      "sha256": "2655befe56a70ee672c2f1259a82ef2beb2adf429ed0405bcf26bea7c4de3630"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_fifo_sync_cnt.sv",
+      "sha256": "be647efa36aa4228db8a9151ac07c83a95cdd9aef71a4488fa619a876d809fbc"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_clock_div.sv",
+      "sha256": "3d2ef35a6e0b2215cbc78b24979c27d916e6757a27d738f86b74c88bbc018f31"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim_generic/rtl/prim_rst_sync.sv",
+      "sha256": "5ea59afe93b02ba71f08f955704e46dd36c2266238f34430fc5bdd8bd5a46931"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/vendor/lowrisc_ip/ip/prim/rtl/prim_ram_1p_scr.sv",
+      "sha256": "823add68b2a538c23a1d7fb05a225ec4a45094508213a65d9ac500ec6fd7eb48"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_register_file_ff.sv",
+      "sha256": "05f5ae9879befbe1d40c72e4a6bcf16fed6f90e8f6f1c8cbe9056ba162f2d378"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_register_file_fpga.sv",
+      "sha256": "85fc2800b2c3f62f8d668bc5df9b694500fb15465caa442e8dde5cc00f6567df"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_register_file_latch.sv",
+      "sha256": "e9036eb7514f3d13405d91748263a3485ce74a6f1fec0ab4c2063b4f3cd8fe6e"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_trvk.sv",
+      "sha256": "51d58c4da42cac1329989b3efc8872f1d8f714085c6c3314636562afdbd3b445"
+    },
+    {
+      "kind": "pinned_ibex",
+      "resolved_path": "/opt/rtnn-tools/ibex/rtl/ibex_lockstep.sv",
+      "sha256": "583a22824f4841dd216e4f4251bdb5d8e91f7cd733a29a8debe4258978767e0c"
+    },
+    {
+      "kind": "recovered_project_source",
+      "resolved_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/rtnn-c3-clean-repro-20261122-6e07b86/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/source_recovery_20261122/ibex_top_gate_bypass.sv",
+      "sha256": "e1728fb66338b61a815a30062923698de7b6ff5e62d5c2bd3e996633254b3f50"
+    },
+    {
+      "kind": "recovered_project_source",
+      "resolved_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/rtnn-c3-clean-repro-20261122-6e07b86/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/source_recovery_20261122/rtnn_de0_cv_ram.sv",
+      "sha256": "bd8eb683a03cfa7db66f778106e5e1b10317c9930c50d735e4e5175ecae00b02"
+    },
+    {
+      "kind": "recovered_project_source",
+      "resolved_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/rtnn-c3-clean-repro-20261122-6e07b86/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/source_recovery_20261122/rtnn_de0_cv_soc_c2.sv",
+      "sha256": "0902a2b9db68fbc27c4aa155b5fb43025a46529b519850c78e7386694d6d19af"
+    },
+    {
+      "kind": "recovered_project_source",
+      "resolved_path": "/mnt/c/Users/junny/OneDrive/ドキュメント/ChatGPT/rtnn-c3-clean-repro-20261122-6e07b86/artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/source_recovery_20261122/rtnn_c2_vjtag_mailbox.sv",
+      "sha256": "7cc0cb69bfddf4309f3b95370ce7c0e06b99e235eb8204b40816f40ff0f719d1"
+    }
+  ],
+  "frozen_source_list_sha256": "61636721b1ccbd669b52f5ee2db57e600f6c8bbe00208ae2d92725dd050ac17f",
+  "ibex_head": "7b5df75a041affe56e8c235260f98a09b3319008",
+  "repo_head": "6e07b86b9cc0a9384ba88177e06ec5afb34b218b",
+  "schema": "rtnn-c3v2-clean-clone-regression-map-v1",
+  "source_count": 146
+}
