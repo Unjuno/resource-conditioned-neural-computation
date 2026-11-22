@@ -19,5 +19,9 @@ for path in sorted(ROOT.rglob("*")):
         continue
     digest = sha256(path.read_bytes()).hexdigest()
     lines.append(f"{digest}  {path.relative_to(ROOT).as_posix()}")
-OUT.write_text("\n".join(lines) + "\n", encoding="ascii")
+# The checked-in package manifest is intentionally stored with CRLF. Keep that
+# format even when regenerating after a previous run used a different newline.
+newline = "\r\n"
+with OUT.open("w", encoding="ascii", newline="") as stream:
+    stream.write(newline.join(lines) + newline)
 print(f"SHA256_MANIFEST_WRITTEN files={len(lines)} path={OUT}")

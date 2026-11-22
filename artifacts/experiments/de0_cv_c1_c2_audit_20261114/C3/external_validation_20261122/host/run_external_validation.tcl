@@ -1,6 +1,6 @@
 # New dynamic-pixel JTAG runner. This file is not the C3 v2 campaign runner.
 # It only uses Virtual-JTAG IR/DR operations; it has no Programmer/Flash path.
-package require ::quartus::jtag
+set ::rtnn_runner_script [file normalize [info script]]
 proc xscan {ir bits value} {
   device_virtual_ir_shift -instance_index 0 -ir_value $ir -no_captured_ir_value
   if {$value eq ""} {return [device_virtual_dr_shift -instance_index 0 -length $bits -value_in_hex]}
@@ -34,6 +34,11 @@ proc xmain {} {
   global argc argv
   if {$argc!=3} {error "usage: quartus_stp -t run_external_validation.tcl cases.csv output_dir binding.json"}
   lassign $argv cases out bindingfile
+  # Check primary's pilot evidence before loading the JTAG package or calling
+  # any hardware discovery/open API. Missing Python/gate fails closed.
+  set verifier [file normalize [file join [file dirname $::rtnn_runner_script] .. safety_gates_v1_20261122 pilot_gate.py]]
+  if {[catch {exec python $verifier --verify-binding $bindingfile --cases $cases} gateerr]} {error "pilot gate preflight failed before JTAG access: $gateerr"}
+  package require ::quartus::jtag
   if {[file exists $out]} {error "refusing existing output directory"}
   set bind [open $bindingfile r]; set bt [read $bind]; close $bind
   if {![regexp {"status"\s*:\s*"PHYSICAL_ELIGIBLE"} $bt] || ![regexp {"sof_sha256"\s*:\s*"([0-9a-f]{64})"} $bt -> sof] || ![regexp {"build_id"\s*:\s*"45585631"} $bt] || ![regexp {"model_id"\s*:\s*"52544e4e"} $bt] || ![regexp {"binding_id"\s*:\s*"45585632"} $bt]} {error "binding is not physical-eligible or identity invalid"}

@@ -1,5 +1,8 @@
 # 後日の実機評価手順（今回未実行）
 
+> **最新版ゲート追記 (2026-11-22):** primary実行は、20件のphysical pilot結果から独立監査で生成した `rtnn-extval-pilot-gate-v1` がない限り開始できない。旧版手順の「pilot適格後にprimary」もこの機械検証が必須。offline/simulation fixtureや`OFFLINE` sessionは使用不可。詳しくは `safety_gates_v1_20261122/FINAL_GATE_STATUS_JA.md` と `PILOT_GATE_SCHEMA.md` を参照。
+> **事前登録時系列の注意 (2026-11-23):** preregistrationのSHAは維持されているが、oracle/firmware予測より先に固定されたことを示す独立・改ざん耐性ある時刻証拠がない。現状、今後の評価は探索的として扱い、確認的な母集団主張はしない。
+
 この手順は、作成済みの新SOF、limited empirical audit、およびpilot bindingに対して、ユーザーが明示的に物理操作を許可した後だけ利用する。bindingは`EMPIRICAL_ONLY`で、正式signoffを意味しない。B-SIGNOFFは別ゲートであり、本手順で解除されない。現時点では基板へ何も送らない。
 
 ## 事前ファイル
@@ -43,3 +46,22 @@ pilot全20要求が新buildと固定oracleに一致しても、これは工学�
 ## 今回の扱い
 
 この手順書は準備物である。PowerShell preflightは成功した。TclはQuartus STPの`info complete`で文法完結性だけを確認した。JTAG API実行、物理JTAG runner、SOF書込み、基板リセット・電源操作は今回実行していない。
+
+## 最新版: pilotゲートを作成しprimaryへ進む
+
+physical pilot runが終了し、独立監査で20/20全件一致した場合だけ、production gateを作成する。現時点では実機pilotがないので実行しない。
+
+```powershell
+$p='artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122'
+python "$p/safety_gates_v1_20261122/PILOT_GATE_CREATOR.py" `
+  --run-dir "$p/build/physical_pilot_RUN1" `
+  --oracle "$p/build/cpu_oracle_attempt1/oracle_pilot.csv" `
+  --pilot-manifest "$p/data/pilot_manifest.csv" `
+  --primary-manifest "$p/data/primary_manifest.csv" `
+  --operator-authorization recorded `
+  --out "$p/build/pilot_gate_RUN1.json"
+```
+
+次に、既存SOF/ELF/Quartus監査を保ったprimary bindingを新規出力先へ作るとき、`--pilot-gate "$p/build/pilot_gate_RUN1.json"`を指定する。`create_physical_binding.py`、PowerShell runner、Tcl runner、primary auditの全入口でgateを再検証する。Tcl直起動もPython validatorに失敗すればJTAG packageをロードしない。
+
+電源再投入の証拠は各session別に `safety_gates_v1_20261122/POWER_SESSION_EVIDENCE_SCHEMA.md` に沿って記録する。KEY0だけ、SOF reloadだけ、または申告だけではcold bootに数えず、機能データは`EMPIRICAL_ONLY / COLD_BOOT_UNVERIFIED`として別に保全・解析する。

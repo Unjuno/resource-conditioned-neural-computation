@@ -6,7 +6,7 @@
 |---|---|---|
 | Dataset package | `DATA_EXPOSURE_UNCERTAIN` | 3,823行を監査。過去学習・画像選択履歴が完全に残っていないので未使用とは証明できない。UCI行にwriter IDなし。 |
 | Candidate size | `PASS` | pilot 10画像を永久除外した主要候補は3,813画像（閾値3,000以上）。 |
-| Preregistration | `PREREGISTRATION_READY` | 画像結果を見る前のlocked protocol; SHA `5005c80c6d2d8eefbf87dd4dfdb4c91e26adb7960a3e5b1f04a977fdaee3b33b`。 |
+| Preregistration | `DOCUMENT_LOCKED / TIMELINE_UNVERIFIED` | protocol SHA `5005c80c6d2d8eefbf87dd4dfdb4c91e26adb7960a3e5b1f04a977fdaee3b33b`は固定済み。oracle出力より前の独立した改ざん耐性ある記録がないため、確認的適格性は未確認。 |
 | Firmware | `NEW_FIRMWARE_PASS` | dynamic 64-pixel payloadを実推論APIへ渡すRV32 build、software oracle比較7,646件一致。教師ラベルを入力に含めない。 |
 | RTL regression | `HOST_AND_RTL_REGRESSION_PASS` | native SV / sv2v / Quartus-flatの20 pilot cases、reset replay、8 negative checks、mailbox partial-response commit guard各PASS。これはsimulation。 |
 | Quartus | `NEW_SOF_READY` | Prime Lite 25.1、Fitter/Assembler success、SOF生成。内STA 4 corners positive。D102 16、JTAG I/O unconstrainedの制限を維持。 |
@@ -33,4 +33,12 @@
 ## 保存場所
 
 このdirectoryの`build/`に全attemptログ・生成物を保全。`SHA256SUMS.txt`はpackage内ファイルmanifest。commit/push/PR/mergeは未実施。
+
+## 2026-11-22 safety-gate更新
+
+primary開始ゲート、電源証拠分類、データ露出レビュー、オフライン負例テストの最新状態は [`safety_gates_v1_20261122/FINAL_GATE_STATUS_JA.md`](safety_gates_v1_20261122/FINAL_GATE_STATUS_JA.md) を参照。この追記はphysical pilot / confirmatory / formal timingのNOT_RUN・BLOCKED状態を変更しない。primaryはproduction pilot gateが生成されるまで開始できない。
+
+## 2026-11-23 事前登録時系列の限定
+
+ローカルfilesystem metadataではlocked preregistrationがCPU oracle CSVより先に作られたように見えるが、独立した改ざん耐性ある先行記録を確認できない。事前登録SHAは維持する。確認的時系列適格性は未検証であり、独立記録が提示されない場合、新規評価結果は探索的として報告する。
 

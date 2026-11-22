@@ -1,0 +1,74 @@
+$ C:\Users\junny\AppData\Local\Programs\Python\Python311\python.exe C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\scripts\test_external_host.py
+EXIT_CODE=0
+--- stdout ---
+--- stderr ---
+test_bad_pixels_and_mode_fail_closed (__main__.ProtocolTests.test_bad_pixels_and_mode_fail_closed) ... ok
+test_request_crc_and_payload_bytes (__main__.ProtocolTests.test_request_crc_and_payload_bytes) ... ok
+test_response_crc_counter_and_identity (__main__.ProtocolTests.test_response_crc_counter_and_identity) ... ok
+test_response_short_and_wrong_version_reject (__main__.ProtocolTests.test_response_short_and_wrong_version_reject) ... ok
+test_verified_response_rejects_wrap_and_wrong_identity (__main__.ProtocolTests.test_verified_response_rejects_wrap_and_wrong_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK
+
+
+$ C:\Users\junny\AppData\Local\Programs\Python\Python311\python.exe C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\scripts\test_physical_audit_fail_closed.py
+EXIT_CODE=0
+--- stdout ---
+--- stderr ---
+test_mock_data_is_rejected_before_csv_import (__main__.PhysicalGateTests.test_mock_data_is_rejected_before_csv_import) ... ok
+test_old_build_is_rejected (__main__.PhysicalGateTests.test_old_build_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.026s
+
+OK
+
+
+$ C:\Users\junny\AppData\Local\Programs\Python\Python311\python.exe C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\test_safety_gates.py
+EXIT_CODE=0
+--- stdout ---
+--- stderr ---
+test_changed_predictions_and_split_mixing_rejected (__main__.GateTest.test_changed_predictions_and_split_mixing_rejected) ... ok
+test_complete_fixture_audits_only_in_test_context (__main__.GateTest.test_complete_fixture_audits_only_in_test_context) ... ok
+test_experiment_id_reuse_rejected (__main__.GateTest.test_experiment_id_reuse_rejected) ... ok
+test_failed_case_cannot_be_promoted_to_pass (__main__.GateTest.test_failed_case_cannot_be_promoted_to_pass) ... ok
+test_gate_cannot_be_reused_for_another_binding_or_tampered_evidence (__main__.GateTest.test_gate_cannot_be_reused_for_another_binding_or_tampered_evidence) ... ok
+test_gate_recomputes_raw_response_and_sof_binding (__main__.GateTest.test_gate_recomputes_raw_response_and_sof_binding) ... ok
+test_handwritten_pass_missing_evidence_rejected (__main__.GateTest.test_handwritten_pass_missing_evidence_rejected) ... ok
+test_missing_or_malformed_gate_rejected (__main__.GateTest.test_missing_or_malformed_gate_rejected) ... ok
+test_mock_failed_old_build_and_corrupt_crc_rejected (__main__.GateTest.test_mock_failed_old_build_and_corrupt_crc_rejected) ... ok
+test_primary_audit_rejects_before_reading_result_tables (__main__.GateTest.test_primary_audit_rejects_before_reading_result_tables) ... ok
+test_primary_binding_without_gate_rejected (__main__.GateTest.test_primary_binding_without_gate_rejected) ... ok
+test_primary_case_count_must_be_exact (__main__.GateTest.test_primary_case_count_must_be_exact) ... ok
+test_raw_log_change_breaks_manifest (__main__.GateTest.test_raw_log_change_breaks_manifest) ... ok
+test_response_crc_and_counter_tampering_rejected (__main__.GateTest.test_response_crc_and_counter_tampering_rejected) ... ok
+test_truncated_case_rejected (__main__.GateTest.test_truncated_case_rejected) ... ok
+test_attestation_only_full_claim_downgrades (__main__.PowerEvidenceTest.test_attestation_only_full_claim_downgrades) ... ok
+test_power_identity_usb_and_experiment_mismatch_are_not_independent (__main__.PowerEvidenceTest.test_power_identity_usb_and_experiment_mismatch_are_not_independent) ... ok
+test_reused_scope_file_across_three_session_names_is_not_independent (__main__.PowerEvidenceTest.test_reused_scope_file_across_three_session_names_is_not_independent) ... ok
+test_scope_record_requires_hashed_data_and_all_power_paths (__main__.PowerEvidenceTest.test_scope_record_requires_hashed_data_and_all_power_paths) ... ok
+test_three_names_or_operator_claim_never_prove_rail (__main__.PowerEvidenceTest.test_three_names_or_operator_claim_never_prove_rail) ... ok
+test_wave_hash_mismatch_fails (__main__.PowerEvidenceTest.test_wave_hash_mismatch_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 1.025s
+
+OK
+
+
+$ C:\Users\junny\AppData\Local\Programs\Python\Python311\python.exe C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\test_runner_preflight.py
+EXIT_CODE=0
+--- stdout ---
+--- stderr ---
+test_binding_generator_rejects_primary_without_pilot_gate (__main__.PreflightIntegration.test_binding_generator_rejects_primary_without_pilot_gate) ... ok
+test_direct_tcl_rejects_before_jtag_discovery (__main__.PreflightIntegration.test_direct_tcl_rejects_before_jtag_discovery) ... ok
+test_pilot_binding_preflight_does_not_require_a_pilot_gate (__main__.PreflightIntegration.test_pilot_binding_preflight_does_not_require_a_pilot_gate) ... ok
+test_powershell_rejects_before_quartus_launch (__main__.PreflightIntegration.test_powershell_rejects_before_quartus_launch) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.720s
+
+OK

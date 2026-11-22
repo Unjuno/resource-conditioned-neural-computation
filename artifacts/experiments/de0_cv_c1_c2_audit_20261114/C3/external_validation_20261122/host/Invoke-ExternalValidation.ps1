@@ -13,6 +13,14 @@ $bindingPath=(Resolve-Path -LiteralPath $BindingJson).Path
 $binding=Get-Content -LiteralPath $bindingPath -Raw | ConvertFrom-Json
 if($binding.status -ne 'PHYSICAL_ELIGIBLE' -or $binding.classification -ne 'EMPIRICAL_ONLY'){throw 'Binding is not eligible for empirical physical pilot.'}
 if($binding.external_jtag_timing -ne 'BLOCKED' -or $binding.build_id -ne '45585631' -or $binding.model_id -ne '52544e4e'){throw 'Binding identity/gate mismatch.'}
+$gateVerifier=Join-Path $PSScriptRoot '..\safety_gates_v1_20261122\pilot_gate.py'
+if($binding.split -eq 'primary'){
+  if(-not $binding.pilot_gate_path -or -not (Test-Path -LiteralPath $binding.pilot_gate_path)){throw 'Primary run requires a pilot gate before any Quartus/JTAG startup.'}
+  $gateHash=(Get-FileHash -LiteralPath $binding.pilot_gate_path -Algorithm SHA256).Hash.ToLowerInvariant()
+  if($gateHash -ne $binding.pilot_gate_sha256){throw 'Pilot gate SHA mismatch.'}
+  & python $gateVerifier --verify-binding $bindingPath --cases $case | Out-Null
+  if($LASTEXITCODE -ne 0){throw 'Pilot gate independent validation failed before device access.'}
+} elseif($binding.split -ne 'pilot'){throw 'Unknown binding split.'}
 $caseSha=(Get-FileHash -LiteralPath $case -Algorithm SHA256).Hash.ToLowerInvariant()
 if($caseSha -ne $binding.cases_csv_sha256){throw 'Case CSV SHA mismatch.'}
 $rows=Import-Csv -LiteralPath $case
