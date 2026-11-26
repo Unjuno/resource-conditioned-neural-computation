@@ -1,0 +1,44 @@
+{
+  "schema": "rtnn-external-validation-independent-pilot-audit-v1",
+  "validation_result": "PILOT_GATE_VALIDATED",
+  "validator": "safety_gates_v1_20261122/PILOT_GATE_VALIDATOR.py --verify-gate",
+  "validator_exit_code": 0,
+  "gate_sha256": "d0b9a3bd3fdc8ee320e1ccb97aa63b17305fed88f041df31048992b2fd91fcc2",
+  "audit": "PILOT_AUDIT_PASS",
+  "classification": "EMPIRICAL_ONLY",
+  "experiment_id": "C3_EXTVAL_PILOT_20261126_RUN4",
+  "session_id": "BOARD_POWER_EPOCH_20261126_CURRENT",
+  "case_count": 20,
+  "pilot_input_ids": [
+    57,
+    277,
+    321,
+    519,
+    525,
+    667,
+    921,
+    1673,
+    3660,
+    3689
+  ],
+  "identity": {
+    "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+    "firmware_elf_sha256": "4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e",
+    "build_id": "45585631",
+    "binding_id": "45585632",
+    "model_id": "52544e4e"
+  },
+  "source_sha256": {
+    "cases.csv": "fb37097914916ad41a18e9c13e476216f66335e91973aff6b333e62546529093",
+    "binding.json": "68a381e78cdcee2dc49e18f00914528290ec01d9b33bac5e1903681df436070e",
+    "raw_jtag.log": "6cc619cba1c1459b6035a108477922244b75efdd2cb1ca4d830cd59fb3df268f",
+    "physical_results.csv": "db138a1c34619af0f1778c05441164ef467f2f68795c223b497c972c15baa038",
+    "run_status.json": "48e7c7f0949a3b0f92465e659e8a6a637cbaad3f28b667da5fcc2ca66db3f346"
+  },
+  "operator_authorization": "recorded",
+  "operator_authorization_is_execution_proof": false,
+  "limitations": [
+    "Consistency of saved logs is not cryptographic proof of physical acquisition.",
+    "Operator authorization is recorded separately and is not inferred from execution records."
+  ]
+}

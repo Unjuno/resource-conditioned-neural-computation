@@ -1,0 +1,11 @@
+input_id,fixed2_cycles,adaptive_cycles,adaptive_minus_fixed2_cycles,fixed2_teacher_correct,adaptive_teacher_correct
+57,943907,565924,-377983,True,True
+277,943904,565921,-377983,True,True
+321,943906,565923,-377983,True,True
+519,943906,1071469,127563,True,True
+525,943906,565923,-377983,True,True
+667,943906,1071469,127563,True,True
+921,943907,565924,-377983,True,True
+1673,943905,565922,-377983,True,True
+3660,943904,565922,-377982,True,True
+3689,943905,565922,-377983,True,True

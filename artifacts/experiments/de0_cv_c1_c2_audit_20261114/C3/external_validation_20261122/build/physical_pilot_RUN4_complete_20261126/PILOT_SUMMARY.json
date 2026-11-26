@@ -1,0 +1,122 @@
+{
+  "classification": "ENGINEERING_PILOT_DESCRIPTIVE_ONLY",
+  "experiment_id": "C3_EXTVAL_PILOT_20261126_RUN4",
+  "session_id": "BOARD_POWER_EPOCH_20261126_CURRENT",
+  "case_count": 20,
+  "input_count": 10,
+  "all_status_pass": true,
+  "all_reference_predictions_match": true,
+  "teacher_accuracy_counts": {
+    "fixed2_correct": 10,
+    "adaptive_correct": 10
+  },
+  "cycles": {
+    "all": {
+      "min": 565921,
+      "median": 943904.5,
+      "max": 1071469
+    },
+    "fixed2": {
+      "min": 943904,
+      "median": 943906.0,
+      "max": 943907
+    },
+    "adaptive": {
+      "min": 565921,
+      "median": 565923.0,
+      "max": 1071469
+    }
+  },
+  "paired_inputs": [
+    {
+      "input_id": 57,
+      "fixed2_cycles": 943907,
+      "adaptive_cycles": 565924,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 277,
+      "fixed2_cycles": 943904,
+      "adaptive_cycles": 565921,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 321,
+      "fixed2_cycles": 943906,
+      "adaptive_cycles": 565923,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 519,
+      "fixed2_cycles": 943906,
+      "adaptive_cycles": 1071469,
+      "adaptive_minus_fixed2_cycles": 127563,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 525,
+      "fixed2_cycles": 943906,
+      "adaptive_cycles": 565923,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 667,
+      "fixed2_cycles": 943906,
+      "adaptive_cycles": 1071469,
+      "adaptive_minus_fixed2_cycles": 127563,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 921,
+      "fixed2_cycles": 943907,
+      "adaptive_cycles": 565924,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 1673,
+      "fixed2_cycles": 943905,
+      "adaptive_cycles": 565922,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 3660,
+      "fixed2_cycles": 943904,
+      "adaptive_cycles": 565922,
+      "adaptive_minus_fixed2_cycles": -377982,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 3689,
+      "fixed2_cycles": 943905,
+      "adaptive_cycles": 565922,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    }
+  ],
+  "adaptive_slower_input_ids": [
+    519,
+    667
+  ],
+  "limitations": [
+    "Only the preregistered 10-image engineering pilot.",
+    "No claim of population accuracy noninferiority or general speed advantage.",
+    "One live board power epoch; independent cold boots unverified.",
+    "Formal external JTAG timing signoff remains blocked."
+  ]
+}

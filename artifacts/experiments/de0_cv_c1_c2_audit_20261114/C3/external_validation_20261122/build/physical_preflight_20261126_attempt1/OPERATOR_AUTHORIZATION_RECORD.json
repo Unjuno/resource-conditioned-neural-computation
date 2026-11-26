@@ -1,0 +1,13 @@
+{
+  "schema": "rtnn-extval-operator-authorization-record-v1",
+  "status": "AWAITING_EXPLICIT_USER_APPROVAL",
+  "authorization_received": false,
+  "authorized_scope": [],
+  "requested_scope_for_next_step": [
+    "program the identity-verified SOF to DE0-CV FPGA SRAM only (no Flash/CFM/CPLD writes)",
+    "execute exactly the frozen pilot 10 inputs x fixed2/adaptive = 20 requests"
+  ],
+  "operator_at_board_confirmed": false,
+  "timestamp": null,
+  "note": "No authorization or physical action is inferred from this pending record. Primary campaign is outside the requested authorization scope."
+}

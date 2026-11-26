@@ -1,0 +1,23 @@
+{
+  "schema": "rtnn-external-validation-physical-v1",
+  "status": "ERROR",
+  "run_source": "quartus_stp_virtual_jtag",
+  "mock": false,
+  "hardware_opened": true,
+  "cycles_source": "Ibex_mcycle",
+  "experiment_id": "C3_EXTVAL_PILOT_20261126_RUN2",
+  "session_id": "PILOT_SESSION_20261126_RUN2",
+  "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+  "build_id": "45585631",
+  "model_id": "52544e4e",
+  "binding_id": "45585632",
+  "uart_used": false,
+  "flash_written": false,
+  "sof_programming_performed": false,
+  "completed_cases": 0,
+  "expected_cases": 20,
+  "error": "ERROR: The length of the value string specified does not match the length parameter specified.\n",
+  "cases_csv_sha256": "5f7bece95b30620eaf70e53d21bcdc087baa4b10116f591461c714b9a5bbcc8f",
+  "binding_sha256": "3e0c63180c36d4eaf38e162f62267bcf76ae58b8608d548bd67de2834af31f4a",
+  "host_runner_sha256": "09de973f2dce2e363f7562fe1eb1606f1e19ca7cbdc922e843bc3c895ab78c0e"
+}

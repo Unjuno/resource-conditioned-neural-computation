@@ -1,0 +1,23 @@
+{
+  "schema": "rtnn-external-validation-physical-v1",
+  "status": "ERROR",
+  "run_source": "quartus_stp_virtual_jtag",
+  "mock": false,
+  "hardware_opened": true,
+  "cycles_source": "Ibex_mcycle",
+  "experiment_id": "C3_EXTVAL_PILOT_20261126_RUN3",
+  "session_id": "PILOT_SESSION_20261126_RUN3",
+  "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+  "build_id": "45585631",
+  "model_id": "52544e4e",
+  "binding_id": "45585632",
+  "uart_used": false,
+  "flash_written": false,
+  "sof_programming_performed": false,
+  "completed_cases": 0,
+  "expected_cases": 20,
+  "error": "mailbox error seq=1",
+  "cases_csv_sha256": "2acef7670d6dcf68d8471ad94974322e4643ec7260c07389d7c993c176b44dd1",
+  "binding_sha256": "2802b8c189185354a943f164097805e628c237e66d8d04fbf4910a79ff18da05",
+  "host_runner_sha256": "587c6b5014cbd1edfd01a20048090c38350dd62ab9872c046be9459be9c51514"
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "rtnn-external-validation-operator-authorization-v1",
+  "recorded_date_local": "2026-11-26",
+  "authorization_source": "User's explicit chat reply: 基板の前にいる。SRAM設定と20要求を許可する",
+  "scope": {
+    "board": "Terasic DE0-CV / 5CEBA4F23C7",
+    "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+    "operation": "Configure the specified SOF into FPGA SRAM, then run the frozen 10-image pilot in fixed2 and adaptive modes (20 requests).",
+    "primary_campaign_authorized": false
+  },
+  "exclusions": ["Flash/CFM writes", "CPLD/EPM240 changes", "power cycling", "KEY0 reset", "wiring/voltage/clock changes", "primary campaign"],
+  "authorization_is_not_measurement_evidence": true
+}

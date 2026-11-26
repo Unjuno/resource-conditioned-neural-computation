@@ -1,0 +1,5 @@
+hardware=USB-Blaster [USB-0] device=@1: 5CE(BA4|FA4) (0x02B050DD) experiment=C3_EXTVAL_PILOT_20261126_RUN3 session=PILOT_SESSION_20261126_RUN3 sof_sha256=5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4 uart=false flash_written=false sof_programming=false
+request seq=1 input_id=3660 mode=adaptive request_lsb_hex=cc600b6e000000020f030000000000090f0000000000020f060000000007101007000000000a1010040000000005100100030000000d0f0c0f0d0000000e100e0b030000855cfb014558563152544e4e00000000ffff0e4c0000000100000302514e5452
+RUN_ERROR=mailbox error seq=1 completed=0 expected=20
+RUN_ERROR_INFO=mailbox error seq=1 |     while executing | "error "mailbox error seq=$seq""
+status=ERROR completed=0 expected=20

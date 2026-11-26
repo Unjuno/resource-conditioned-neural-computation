@@ -1,0 +1,3 @@
+hardware=USB-Blaster [USB-0] device=@1: 5CE(BA4|FA4) (0x02B050DD) experiment=C3_EXTVAL_PILOT_20261122_RUN1 session=PILOT_SESSION_01 sof_sha256=5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4 uart=false flash_written=false sof_programming=false
+RUN_ERROR=missing close-bracket completed=0 expected=20
+status=ERROR completed=0 expected=20

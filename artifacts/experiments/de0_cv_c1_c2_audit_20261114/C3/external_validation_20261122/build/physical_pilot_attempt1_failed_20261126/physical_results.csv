@@ -1,0 +1,2 @@
+experiment_id,session_id,sequence,input_id,mode,teacher_label,reference_prediction,prediction,expected_admitted_exit,admitted_exit,expected_executed_exit,executed_exit,expected_stop_reason,stop_reason,cycles_start,cycles_end,cycles,payload_crc32,request_crc_ok,response_crc_ok,model_id,build_id,binding_id,sof_sha256,status,error
+C3_EXTVAL_PILOT_20261122_RUN1,PILOT_SESSION_01,1,,,,,,,,,,,,,,,,,,,,,,5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4,FAIL,missing close-bracket
