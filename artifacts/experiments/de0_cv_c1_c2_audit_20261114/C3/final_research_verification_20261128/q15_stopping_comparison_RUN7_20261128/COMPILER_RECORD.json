@@ -1,0 +1,44 @@
+{
+  "validation_compile": {
+    "command": [
+      "C:\\Users\\junny\\AppData\\Local\\Temp\\rtnn-zig-0.17.1-20261128\\zig-x86_64-windows-0.17.1\\zig.exe",
+      "cc",
+      "-std=c11",
+      "-O2",
+      "-I",
+      "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\firmware\\model",
+      "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\firmware\\model\\realtime_nn_real_sequence_fixed_core.c",
+      "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\final_research_verification_20261128\\dump_q15_exit_metrics.c",
+      "-o",
+      "C:\\Users\\junny\\AppData\\Local\\Temp\\rtnn_q15_stopping_lbz0gs7d\\q15_all_exit_metrics.exe"
+    ],
+    "zig_version": "0.17.1",
+    "compiler_sha256": "8d6f248cdb0fc2ecd5e17c5282ef3f8a4b614beac12e6d27d12462cde59fe56b",
+    "executable_sha256": "96b25c96371acfc045f3b5922213a112c0086c81ed4b3ff5a4ecdf89f1ab4ff2",
+    "raw_input_sha256": "bfef357ac7b0c8b662aa00a4e02813e3f17c81172770fde696fe67ee7a88badb",
+    "stdout_sha256": "19e1fdd7ea4974b96e517e276c032b00dc4eee25bf628fac98d5f46e660f4036",
+    "exit_code": 0,
+    "rows": 2513
+  },
+  "heldout_compile": {
+    "command": [
+      "C:\\Users\\junny\\AppData\\Local\\Temp\\rtnn-zig-0.17.1-20261128\\zig-x86_64-windows-0.17.1\\zig.exe",
+      "cc",
+      "-std=c11",
+      "-O2",
+      "-I",
+      "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\firmware\\model",
+      "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\firmware\\model\\realtime_nn_real_sequence_fixed_core.c",
+      "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\final_research_verification_20261128\\dump_q15_exit_metrics.c",
+      "-o",
+      "C:\\Users\\junny\\AppData\\Local\\Temp\\rtnn_q15_stopping_wgggatfq\\q15_all_exit_metrics.exe"
+    ],
+    "zig_version": "0.17.1",
+    "compiler_sha256": "8d6f248cdb0fc2ecd5e17c5282ef3f8a4b614beac12e6d27d12462cde59fe56b",
+    "executable_sha256": "ad32ec33dc078d61e4677bbf5f7f1d9067a9d3546b1feb08f91df72a2df5ec45",
+    "raw_input_sha256": "661dc3b91c325e37e63790a719445f01fa66a0188a1bf528af77b9f9b0ac42f8",
+    "stdout_sha256": "cd94977fdc3315eb5000f25a8147304e9ff612de482d033d7f01f6f5f2672fbd",
+    "exit_code": 0,
+    "rows": 2520
+  }
+}

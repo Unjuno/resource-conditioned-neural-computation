@@ -1,0 +1,10 @@
+test_entropy_counterexamples_are_retained (__main__.StoppingComparisonArtifactTests.test_entropy_counterexamples_are_retained) ... ok
+test_no_cycles_or_confirmatory_claims (__main__.StoppingComparisonArtifactTests.test_no_cycles_or_confirmatory_claims) ... ok
+test_q15_metric_rows_complete_and_normalized (__main__.StoppingComparisonArtifactTests.test_q15_metric_rows_complete_and_normalized) ... ok
+test_saved_csv_is_exact_binary_stdout (__main__.StoppingComparisonArtifactTests.test_saved_csv_is_exact_binary_stdout) ... ok
+test_scope_and_frozen_q15_identity (__main__.StoppingComparisonArtifactTests.test_scope_and_frozen_q15_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.012s
+
+OK

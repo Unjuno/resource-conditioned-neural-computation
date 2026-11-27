@@ -40,3 +40,24 @@ RUN4の既存`physical_results.csv`のみから再生成: fixed2/adaptive各10�
 6. writer ID/データ来歴、外部JTAG timing仕様、正式STA/WCETは別の証拠を入手しない限り未確定。
 
 この時点ではprimary性能結果や確認的仮説の最終判定を報告できない。研究報告は、既存のソフトウェア/RTL scope内の形式・測定証拠と、10画像pilotの限定機能デモに限定する。
+
+## 2026-11-28 最新追記：Q15停止則の補助解析
+
+`Q15_STOPPING_ANALYSIS_JA.md` に、固定Q15 coreを再実行したExit別分類・停止方式比較を追加した。validation359/heldout360の全7 Exit予測が既存oracleと一致。既存entropy停止はheldout360でfixed2と同じ339/360正解、平均1.358 optional blocks対fixed2の2.000。entropy-only誤り3件とfixed2-only誤り3件を明示した。精度差bootstrap区間は0を含み、画像独立性にもwriter clusterが分からない限界があるため、非劣性は主張しない。optional blockはcycleではない。
+
+これは既存sklearn heldoutの探索的再解析であり、新規UCI画像の外部検証にも実機速度試験にも当たらない。primary外部評価は未実行。旧C3 pilot 20/20は限定的な機能整合性証拠としてのみ維持する。
+
+Exit間の正誤遷移も全360件で監査し、12画像で「浅いExitで正解した後、後段Exitで誤りに戻る」非単調性を確認した。Exit 5→6は改善0・退行3。Exit 2以降で精度が単調に上がるとの主張はこのデータに反する。全入力のExit予測・正誤は `exit_counterexamples_RUN2_20261128/` に保存した。
+
+### 現在のゲート
+
+| 仮説・ゲート | 状態 | 根拠 |
+|---|---|---|
+| 新buildの10画像pilotでCPU Q15 oracleを再現 | PASS_LIMITED | 既存RUN4の20/20実機要求・独立監査。 |
+| primaryの7,626要求の整合性・監査準備 | PASS_OFFLINE_ONLY | schedule/validatorと既存offline tests。実測結果はない。 |
+| fixed2に対するentropy停止の正答率差 | INCONCLUSIVE_EXPLORATORY | heldout正解数は同じだがpaired image区間は0をまたぎ、writer cluster不明。 |
+| 停止方式による演算block差 | DESCRIPTIVE_ONLY | Q15再実行でoptional blocks差を算出。cycle・遅延を測定していない。 |
+| 新UCI外部評価の機能・精度・cycle | NOT_RUN | primary 3,813画像の実機投入なし。 |
+| 正式タイミング/WCET/期限保証 | BLOCKED | 外部JTAG timingや基板条件の証拠不足。 |
+
+変更していない保留ラベル：`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`。

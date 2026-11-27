@@ -1,0 +1,14 @@
+{
+  "zig_version": "0.17.1",
+  "zig_executable_sha256": "8d6f248cdb0fc2ecd5e17c5282ef3f8a4b614beac12e6d27d12462cde59fe56b",
+  "compile_flags": "-std=c11 -O2",
+  "zig_archive_url": "https://ziglang.org/download/0.17.1/zig-x86_64-windows-0.17.1.zip",
+  "model_core_sha256": "a6b2807bd4a60534c250fca3005322cf14ba0a92f6b16e28241109385efc6809",
+  "location": "TEMP only; not installed system-wide",
+  "weights_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f",
+  "target": "Windows x86_64 native C compiler via zig cc / clang 22.1.8",
+  "schema": "rtnn-offline-toolchain-record-v1",
+  "signature_verification": "The official HTTPS archive hash was recorded after download; no minisign binary/key was available, so detached signature was not independently verified.",
+  "zig_archive_sha256": "b03f477a1943673e02aca0f570e8030dffd536ce1f45cbc4d3326ec31159562e",
+  "purpose": "compile analysis-only C harness for frozen Q15 exits"
+}

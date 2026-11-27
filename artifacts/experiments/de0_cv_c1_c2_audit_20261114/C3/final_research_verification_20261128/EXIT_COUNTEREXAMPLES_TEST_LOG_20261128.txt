@@ -1,0 +1,8 @@
+test_complete_exit_transition_matrix (__main__.ExitCounterexampleTests.test_complete_exit_transition_matrix) ... ok
+test_later_exit_regression_is_not_hidden (__main__.ExitCounterexampleTests.test_later_exit_regression_is_not_hidden) ... ok
+test_scope_does_not_claim_physical_performance (__main__.ExitCounterexampleTests.test_scope_does_not_claim_physical_performance) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK

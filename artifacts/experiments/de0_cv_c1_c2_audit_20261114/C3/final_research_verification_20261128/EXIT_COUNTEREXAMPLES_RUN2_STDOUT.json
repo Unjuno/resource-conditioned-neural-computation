@@ -1,0 +1,51 @@
+{
+  "status": "PASS_FROZEN_ORACLE_MATCH",
+  "images": 360,
+  "rows": 360,
+  "mismatches": 0,
+  "images_with_nonmonotonic_correctness": 12,
+  "transitions": [
+    {
+      "from_exit": 0,
+      "to_exit": 1,
+      "incorrect_to_correct": 158,
+      "correct_to_incorrect": 1,
+      "same_correctness": 201
+    },
+    {
+      "from_exit": 1,
+      "to_exit": 2,
+      "incorrect_to_correct": 14,
+      "correct_to_incorrect": 3,
+      "same_correctness": 343
+    },
+    {
+      "from_exit": 2,
+      "to_exit": 3,
+      "incorrect_to_correct": 3,
+      "correct_to_incorrect": 4,
+      "same_correctness": 353
+    },
+    {
+      "from_exit": 3,
+      "to_exit": 4,
+      "incorrect_to_correct": 0,
+      "correct_to_incorrect": 2,
+      "same_correctness": 358
+    },
+    {
+      "from_exit": 4,
+      "to_exit": 5,
+      "incorrect_to_correct": 1,
+      "correct_to_incorrect": 1,
+      "same_correctness": 358
+    },
+    {
+      "from_exit": 5,
+      "to_exit": 6,
+      "incorrect_to_correct": 0,
+      "correct_to_incorrect": 3,
+      "same_correctness": 357
+    }
+  ]
+}

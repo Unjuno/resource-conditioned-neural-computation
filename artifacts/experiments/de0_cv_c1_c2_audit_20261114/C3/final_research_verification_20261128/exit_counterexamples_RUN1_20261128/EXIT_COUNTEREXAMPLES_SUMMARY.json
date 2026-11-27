@@ -1,0 +1,113 @@
+{
+  "schema": "rtnn-q15-exit-counterexamples-v1",
+  "classification": "OFFLINE_DESCRIPTIVE_EXISTING_HELDOUT_NOT_NEW_EXTERNAL_EVALUATION",
+  "inputs": {
+    "count": 360,
+    "sha256": "eeba9000a918bcba911007e78905c5052fc743422f95cb314a0fc9f4ecdfb14c",
+    "dataset": "existing sklearn.load_digits heldout split"
+  },
+  "source_metrics_csv_sha256": "cd94977fdc3315eb5000f25a8147304e9ff612de482d033d7f01f6f5f2672fbd",
+  "frozen_oracle_all_exit_mismatches": 0,
+  "per_exit": [
+    {
+      "exit": 0,
+      "correct": 171,
+      "n": 360,
+      "accuracy": 0.475
+    },
+    {
+      "exit": 1,
+      "correct": 328,
+      "n": 360,
+      "accuracy": 0.9111111111111111
+    },
+    {
+      "exit": 2,
+      "correct": 339,
+      "n": 360,
+      "accuracy": 0.9416666666666667
+    },
+    {
+      "exit": 3,
+      "correct": 338,
+      "n": 360,
+      "accuracy": 0.9388888888888889
+    },
+    {
+      "exit": 4,
+      "correct": 336,
+      "n": 360,
+      "accuracy": 0.9333333333333333
+    },
+    {
+      "exit": 5,
+      "correct": 336,
+      "n": 360,
+      "accuracy": 0.9333333333333333
+    },
+    {
+      "exit": 6,
+      "correct": 333,
+      "n": 360,
+      "accuracy": 0.925
+    }
+  ],
+  "adjacent_exit_correctness_transitions": [
+    {
+      "from_exit": 0,
+      "to_exit": 1,
+      "incorrect_to_correct": 158,
+      "correct_to_incorrect": 1,
+      "same_correctness": 201
+    },
+    {
+      "from_exit": 1,
+      "to_exit": 2,
+      "incorrect_to_correct": 14,
+      "correct_to_incorrect": 3,
+      "same_correctness": 343
+    },
+    {
+      "from_exit": 2,
+      "to_exit": 3,
+      "incorrect_to_correct": 3,
+      "correct_to_incorrect": 4,
+      "same_correctness": 353
+    },
+    {
+      "from_exit": 3,
+      "to_exit": 4,
+      "incorrect_to_correct": 0,
+      "correct_to_incorrect": 2,
+      "same_correctness": 358
+    },
+    {
+      "from_exit": 4,
+      "to_exit": 5,
+      "incorrect_to_correct": 1,
+      "correct_to_incorrect": 1,
+      "same_correctness": 358
+    },
+    {
+      "from_exit": 5,
+      "to_exit": 6,
+      "incorrect_to_correct": 0,
+      "correct_to_incorrect": 3,
+      "same_correctness": 357
+    }
+  ],
+  "images_with_any_correct_then_later_incorrect_exit": 12,
+  "entropy_exit_histogram": {
+    "0": 0,
+    "1": 263,
+    "2": 81,
+    "3": 7,
+    "4": 2,
+    "5": 7
+  },
+  "limits": [
+    "Not physical cycles, latency, energy, or WCET.",
+    "Existing test split and unknown writer clusters; no population inference.",
+    "Exit 6 is analyzed as a model diagnostic; adaptive policy is capped at Exit 5."
+  ]
+}

@@ -1,0 +1,271 @@
+{
+  "schema": "rtnn-frozen-q15-stopping-comparison-v1",
+  "classification": "OFFLINE_Q15_HELDOUT_ANALYSIS_NOT_NEW_EXTERNAL_EVALUATION",
+  "identity": {
+    "model_id": "seed63_frozen_q15",
+    "core_sha256": "a6b2807bd4a60534c250fca3005322cf14ba0a92f6b16e28241109385efc6809",
+    "weights_header_sha256": "961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f"
+  },
+  "source": {
+    "dataset": "sklearn.load_digits",
+    "heldout360_sha256": "eeba9000a918bcba911007e78905c5052fc743422f95cb314a0fc9f4ecdfb14c",
+    "sklearn_version": "1.8.0",
+    "train_count": 1078,
+    "validation_count": 359,
+    "test_count": 360,
+    "split_seed_first": 123,
+    "split_seed_second": 456,
+    "split_status": "validation reconstructed; frozen test exact pixel/label membership verified"
+  },
+  "calibration": {
+    "validation_target_accuracy": 0.935933147632312,
+    "validation_accuracy_fixed_exits_0_to_5": {
+      "0": 0.48746518105849584,
+      "1": 0.9136490250696379,
+      "2": 0.9192200557103064,
+      "3": 0.9303621169916435,
+      "4": 0.9331476323119777,
+      "5": 0.935933147632312
+    },
+    "max_softmax_threshold_q15": 24535,
+    "max_softmax_validation": {
+      "n": 359,
+      "correct": 336,
+      "accuracy": 0.935933147632312,
+      "mean_optional_blocks": 1.256267409470752,
+      "mean_decision_checks": 2.2367688022284122
+    },
+    "top2_margin_threshold_q15": 17181,
+    "top2_margin_validation": {
+      "n": 359,
+      "correct": 336,
+      "accuracy": 0.935933147632312,
+      "mean_optional_blocks": 1.233983286908078,
+      "mean_decision_checks": 2.214484679665738
+    },
+    "threshold_selection": "minimum mean optional blocks subject to validation accuracy at least the best fixed exit 0..5 on validation; no heldout labels used for threshold selection"
+  },
+  "methods": [
+    {
+      "method": "fixed_exit_0",
+      "threshold": null,
+      "validation": {
+        "n": 359,
+        "correct": 175,
+        "accuracy": 0.48746518105849584,
+        "mean_optional_blocks": 0.0,
+        "mean_decision_checks": 1.0
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 171,
+        "accuracy": 0.475,
+        "mean_optional_blocks": 0.0,
+        "mean_decision_checks": 1.0
+      },
+      "tuned_on": "none"
+    },
+    {
+      "method": "fixed_exit_1",
+      "threshold": null,
+      "validation": {
+        "n": 359,
+        "correct": 328,
+        "accuracy": 0.9136490250696379,
+        "mean_optional_blocks": 1.0,
+        "mean_decision_checks": 2.0
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 328,
+        "accuracy": 0.9111111111111111,
+        "mean_optional_blocks": 1.0,
+        "mean_decision_checks": 2.0
+      },
+      "tuned_on": "none"
+    },
+    {
+      "method": "fixed_exit_2",
+      "threshold": null,
+      "validation": {
+        "n": 359,
+        "correct": 330,
+        "accuracy": 0.9192200557103064,
+        "mean_optional_blocks": 2.0,
+        "mean_decision_checks": 3.0
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 339,
+        "accuracy": 0.9416666666666667,
+        "mean_optional_blocks": 2.0,
+        "mean_decision_checks": 3.0
+      },
+      "tuned_on": "none"
+    },
+    {
+      "method": "fixed_exit_3",
+      "threshold": null,
+      "validation": {
+        "n": 359,
+        "correct": 334,
+        "accuracy": 0.9303621169916435,
+        "mean_optional_blocks": 3.0,
+        "mean_decision_checks": 4.0
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 338,
+        "accuracy": 0.9388888888888889,
+        "mean_optional_blocks": 3.0,
+        "mean_decision_checks": 4.0
+      },
+      "tuned_on": "none"
+    },
+    {
+      "method": "fixed_exit_4",
+      "threshold": null,
+      "validation": {
+        "n": 359,
+        "correct": 335,
+        "accuracy": 0.9331476323119777,
+        "mean_optional_blocks": 4.0,
+        "mean_decision_checks": 5.0
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 336,
+        "accuracy": 0.9333333333333333,
+        "mean_optional_blocks": 4.0,
+        "mean_decision_checks": 5.0
+      },
+      "tuned_on": "none"
+    },
+    {
+      "method": "fixed_exit_5",
+      "threshold": null,
+      "validation": {
+        "n": 359,
+        "correct": 336,
+        "accuracy": 0.935933147632312,
+        "mean_optional_blocks": 5.0,
+        "mean_decision_checks": 5.0
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 336,
+        "accuracy": 0.9333333333333333,
+        "mean_optional_blocks": 5.0,
+        "mean_decision_checks": 5.0
+      },
+      "tuned_on": "none"
+    },
+    {
+      "method": "fixed_exit_6",
+      "threshold": null,
+      "validation": {
+        "n": 359,
+        "correct": 334,
+        "accuracy": 0.9303621169916435,
+        "mean_optional_blocks": 6.0,
+        "mean_decision_checks": 5.0
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 333,
+        "accuracy": 0.925,
+        "mean_optional_blocks": 6.0,
+        "mean_decision_checks": 5.0
+      },
+      "tuned_on": "none"
+    },
+    {
+      "method": "max_softmax_q15",
+      "threshold_q15": 24535,
+      "validation": {
+        "n": 359,
+        "correct": 336,
+        "accuracy": 0.935933147632312,
+        "mean_optional_blocks": 1.256267409470752,
+        "mean_decision_checks": 2.2367688022284122
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 338,
+        "accuracy": 0.9388888888888889,
+        "mean_optional_blocks": 1.2527777777777778,
+        "mean_decision_checks": 2.2416666666666667
+      },
+      "tuned_on": "validation_only"
+    },
+    {
+      "method": "top2_probability_margin_q15",
+      "threshold_q15": 17181,
+      "validation": {
+        "n": 359,
+        "correct": 336,
+        "accuracy": 0.935933147632312,
+        "mean_optional_blocks": 1.233983286908078,
+        "mean_decision_checks": 2.214484679665738
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 337,
+        "accuracy": 0.9361111111111111,
+        "mean_optional_blocks": 1.225,
+        "mean_decision_checks": 2.2194444444444446
+      },
+      "tuned_on": "validation_only"
+    },
+    {
+      "method": "frozen_entropy_policy",
+      "threshold_q15": 18520,
+      "validation": {
+        "n": 359,
+        "correct": 336,
+        "accuracy": 0.935933147632312,
+        "mean_optional_blocks": 1.3899721448467968,
+        "mean_decision_checks": 2.3537604456824512
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 339,
+        "accuracy": 0.9416666666666667,
+        "mean_optional_blocks": 1.3583333333333334,
+        "mean_decision_checks": 2.338888888888889
+      },
+      "tuned_on": "frozen_model_policy"
+    },
+    {
+      "method": "retrospective_oracle_first_correct",
+      "threshold": null,
+      "validation": {
+        "n": 359,
+        "correct": 343,
+        "accuracy": 0.9554317548746518,
+        "mean_optional_blocks": 0.7325905292479109,
+        "mean_decision_checks": 1.6880222841225627
+      },
+      "heldout360": {
+        "n": 360,
+        "correct": 344,
+        "accuracy": 0.9555555555555556,
+        "mean_optional_blocks": 0.75,
+        "mean_decision_checks": 1.7055555555555555
+      },
+      "tuned_on": "teacher_label_hindsight_not_deployable"
+    }
+  ],
+  "crosscheck": {
+    "heldout_all_exit_prediction_mismatches_vs_frozen_q15_oracle": 0,
+    "entropy_preferred_exit_mismatches": 0,
+    "q15_probability_sum_tolerance_units": 8
+  },
+  "timing_scope": "CPU Q15 arithmetic is evaluated as optional-block count and decision-check count; no cycle, energy, WCET, or FPGA timing inference.",
+  "limits": [
+    "This is the previously held-out sklearn test split, not the new UCI optdigits primary set.",
+    "Confidence/margin analysis helper computes Q15 probabilities from the frozen exp LUT and integer divider; it is analysis-only and does not alter deployed firmware.",
+    "Oracle uses held-out teacher labels and is an unattainable retrospective lower-work reference.",
+    "Cycle costs and decision-rule instruction overhead are not measured by this analysis."
+  ]
+}

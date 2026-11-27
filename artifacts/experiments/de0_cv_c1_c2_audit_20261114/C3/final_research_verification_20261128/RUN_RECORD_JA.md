@@ -51,3 +51,34 @@ py -3.11 -B 'artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_valid
 Remove-Item Env:PYTHONPATH
 py -3.11 -B 'artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/scripts/test_physical_audit_fail_closed.py'
 ```
+
+## 2026-11-28追記：凍結Q15停止方式のオフライン比較
+
+正しい作業クローン `resource-conditioned-neural-computation-c3-paper`、origin `Unjuno/resource-conditioned-neural-computation`、branch `codex/external-validation-20261122`、開始HEAD/remote HEAD `6bcdaac39fd20c38c3f00b609cfecad7d43ffabf` を確認。実験準備用の `physical_pilot_RUN2_preparation/` は未追跡の既存データなので変更しなかった。別の `RTNN` 旧クローンはoriginが `kardaneh/RTNN` で大量の差分があり、読み取り確認後は一切変更していない。
+
+### 実行コマンド
+
+```powershell
+$repo = 'C:\Users\junny\OneDrive\ドキュメント\ChatGPT\resource-conditioned-neural-computation-c3-paper'
+$d = Join-Path $repo 'artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128'
+$zig = Join-Path $env:TEMP 'rtnn-zig-0.17.1-20261128\zig-x86_64-windows-0.17.1\zig.exe'
+$sklearn = Join-Path $env:TEMP 'rtnn_sklearn_1_8_0'
+python (Join-Path $d 'run_stopping_comparison.py') --zig $zig --sklearn-path $sklearn --out-dir (Join-Path $d 'q15_stopping_comparison_RUN8_20261128')
+python (Join-Path $d 'test_stopping_comparison.py') -v
+```
+
+Zig 0.17.1 Windows x86_64 archiveをTEMPへ展開し、システムへのインストールやrepository追加はしていない。archive SHA-256: `B03F477A1943673E02ACA0F570E8030DFFD536CE1F45CBC4D3326EC31159562E`。C core・生成重みSHAは凍結値と一致。検証359件とheldout360件、各7 ExitをC helperで実行。Windows stdinのCR-LF変換を発見しstdin/stdout双方をbinary modeに固定。RUN8で359×7/360×7行、全Exit予測・preferred Exitのoracle不一致0、Q15確率合計32768±8を確認した。RUN8に実行stdoutとcompiler/raw input/outputの各SHAを保存。
+
+初期のRUN1〜RUN5で検出・修正した入力切詰め、列スキーマ、Q15スケール、集計アクセス、固定方式check数の問題は `OFFLINE_Q15_ATTEMPTS_JA.md` に記録。RUN8のartifact検査5件、Exit遷移の独立検査3件がPASS。既存30件のオフラインテストは前回記録済みで無目的に再実行していない。
+
+RUN8でentropy停止は固定2と同じ339/360正解、平均optional blocks 1.358対2.000。誤りの入替はentropyのみ誤り3件、固定2のみ誤り3件。適応方式3種のpaired correctness bootstrap 95%区間は全て0を含む。Q15 block数は実測cycleではなく、cycle削減や非劣性を証明しない。詳細は `Q15_STOPPING_ANALYSIS_JA.md`。
+
+この追記で解消した以前の「alternate stopping rule分析未着手」は、旧sklearn heldoutの探索的オフライン比較に限る。UCI primary 3,813画像の評価、実機primary 7,626要求、一般化性能または確認的統計は未実施。`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`は変更していない。
+
+### Exit correctnessの遷移・反例
+
+`analyze_exit_counterexamples.py --run-dir <RUN8> --out-dir <new-empty-dir>` を実行。凍結heldout SHA照合、360×7予測を既存oracleと全件照合して不一致0。遷移監査は3件のテストでPASS。Exit 0→1で158回復/1退行、1→2で14/3、2→3で3/4、3→4で0/2、4→5で1/1、5→6で0/3。正解Exitの後に誤りへ戻るケースは12/360。Exit 6は診断専用で、適応許容上限はExit 5のまま。確定RUN8由来の出力は `exit_counterexamples_RUN2_20261128/`、標準出力とテストログは同階層に保存。
+
+更新した全ディレクトリ用の別manifestは `SHA256SUMS_POSTRUN_20261128.txt`（72件、manifest自身と前回の `SHA256SUMS.txt` を除く）。前回コミットのmanifestは上書きせず保持。
+
+Git diffでCRLFがwhitespaceとして検出されたため、新規生成されたテキストCSV/logの行末をLFへ正規化した（セル・数値・JSON値は変更なし）。前RUNのcompiler `stdout_sha256` は生成直後の標準出力bytesを指す。確定RUN8はC runtimeのstdin/stdoutをbinaryにして標準出力CSVを直接一致させた。
