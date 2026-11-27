@@ -100,3 +100,11 @@ Primary 7,626件は**NOT_RUN**。最初の未解決アクションは、ユー�
 ### 2026-11-28追記：claim-evidence matrixの参照監査
 
 `CLAIM_EVIDENCE_MATRIX.csv`のC6/C7/C8 `evidence`欄に説明文が入り、ファイルとして追跡できない不備を修正。11 claimすべての参照先をリポジトリ内の実ファイルに置き換え、将来の欠損・パストラバーサル・状態改変を検出する`verify_claim_evidence_matrix.py`を追加した。実行結果は11/11 claim path解決、validator負例テスト5/5 PASS、`py_compile` PASS。未実施primary・データ適格性・JTAG timing状態を格上げしていない。記録は`claim_evidence_matrix_audit_RUN1_20261128/`。
+
+### 関連研究のスコープ監査（2026-11-28）
+
+統合英語草稿の関連研究[7]を確認し、entropy-driven video frame processing-rate adaptationとして限定した。これは画像ごとの内部early exitとは異なる。文献とUCI writer-pool情報の監査記録、実行ログ、SHA manifestは`BIBLIOGRAPHY_SCOPE_AUDIT_20261128.md`および`literature_scope_audit_RUN1_20261128/`にある。この修正で研究の新規性や実験状態は格上げしていない。`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`、primary `NOT_RUN`は維持する。
+
+### 最終オフライン回帰（2026-11-28）
+
+論文Q15表11/11行照合、停止方式/Exit遷移/primary監査/解析の24/24テストを再実行してPASS。保存ログとSHA一覧は`final_offline_audit_RUN1_20261128/`。これはオフライン成果物検査であり、新規実機データではない。primaryはNOT_RUN、主要な来歴・writer cluster・cold boot・正式タイミング未解決状態は維持する。

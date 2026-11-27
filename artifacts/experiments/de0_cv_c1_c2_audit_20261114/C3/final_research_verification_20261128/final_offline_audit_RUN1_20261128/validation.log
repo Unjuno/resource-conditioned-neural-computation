@@ -1,0 +1,55 @@
+$ py -3.11 -B artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\final_research_verification_20261128\verify_q15_manuscript_table.py
+PASS: manuscript table 11/11 rows match RUN8; Pareto plot and scope labels verified
+EXIT=0
+$ py -3.11 -B artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\final_research_verification_20261128\test_stopping_comparison.py -v
+test_entropy_counterexamples_are_retained (__main__.StoppingComparisonArtifactTests.test_entropy_counterexamples_are_retained) ... ok
+test_no_cycles_or_confirmatory_claims (__main__.StoppingComparisonArtifactTests.test_no_cycles_or_confirmatory_claims) ... ok
+test_q15_metric_rows_complete_and_normalized (__main__.StoppingComparisonArtifactTests.test_q15_metric_rows_complete_and_normalized) ... ok
+test_saved_csv_is_exact_binary_stdout (__main__.StoppingComparisonArtifactTests.test_saved_csv_is_exact_binary_stdout) ... ok
+test_scope_and_frozen_q15_identity (__main__.StoppingComparisonArtifactTests.test_scope_and_frozen_q15_identity) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.010s
+
+OK
+EXIT=0
+$ py -3.11 -B artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\final_research_verification_20261128\test_exit_counterexamples.py -v
+test_complete_exit_transition_matrix (__main__.ExitCounterexampleTests.test_complete_exit_transition_matrix) ... ok
+test_later_exit_regression_is_not_hidden (__main__.ExitCounterexampleTests.test_later_exit_regression_is_not_hidden) ... ok
+test_scope_does_not_claim_physical_performance (__main__.ExitCounterexampleTests.test_scope_does_not_claim_physical_performance) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.000s
+
+OK
+EXIT=0
+$ py -3.11 -B artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\final_research_verification_20261128\test_primary_audit.py -v
+test_crc_tamper_rejected (__main__.PrimaryAuditTests.test_crc_tamper_rejected) ... ok
+test_duplicate_sequence_rejected (__main__.PrimaryAuditTests.test_duplicate_sequence_rejected) ... ok
+test_frozen_existing_schedule (__main__.PrimaryAuditTests.test_frozen_existing_schedule) ... ok
+test_manifest_duplicate_name_rejected (__main__.PrimaryAuditTests.test_manifest_duplicate_name_rejected) ... ok
+test_manifest_path_traversal_rejected (__main__.PrimaryAuditTests.test_manifest_path_traversal_rejected) ... ok
+test_missing_row_rejected (__main__.PrimaryAuditTests.test_missing_row_rejected) ... ok
+test_oracle_tamper_rejected (__main__.PrimaryAuditTests.test_oracle_tamper_rejected) ... ok
+test_pixel_tamper_rejected (__main__.PrimaryAuditTests.test_pixel_tamper_rejected) ... ok
+test_prepared_sequence_offset_schedule (__main__.PrimaryAuditTests.test_prepared_sequence_offset_schedule) ... ok
+test_raw_log_corruption_rejected (__main__.PrimaryAuditTests.test_raw_log_corruption_rejected) ... ok
+test_raw_pilot_log_parses_without_device_access (__main__.PrimaryAuditTests.test_raw_pilot_log_parses_without_device_access) ... ok
+test_teacher_label_tamper_rejected (__main__.PrimaryAuditTests.test_teacher_label_tamper_rejected) ... ok
+test_wrong_build_rejected (__main__.PrimaryAuditTests.test_wrong_build_rejected) ... ok
+test_wrong_input_order_rejected (__main__.PrimaryAuditTests.test_wrong_input_order_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.500s
+
+OK
+EXIT=0
+$ py -3.11 -B artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\final_research_verification_20261128\test_primary_analysis.py -v
+test_frozen_primary_schedule_precheck (__main__.PrimaryReadinessTests.test_frozen_primary_schedule_precheck) ... ok
+test_physical_analysis_is_not_called_on_schedule_only (__main__.PrimaryReadinessTests.test_physical_analysis_is_not_called_on_schedule_only) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.084s
+
+OK
+EXIT=0

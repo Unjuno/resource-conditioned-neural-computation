@@ -158,3 +158,13 @@ Git diffでCRLFがwhitespaceとして検出されたため、新規生成され�
 実行コマンド：`python .../verify_claim_evidence_matrix.py` は11 claims全件の解決PASS、`python .../test_verify_claim_evidence_matrix.py -v` は5/5 PASS、両Pythonファイルの`py_compile` PASS。stdout/stderrは`claim_evidence_matrix_audit_RUN1_20261128/validator.log`および`tests.log`に保存。テストは欠落証拠、説明文を証拠扱いする誤り、`../` traversal、NOT_RUN状態の改変を拒否する。
 
 併せて未追跡`physical_pilot_RUN2_preparation/cases.csv/cases.csv`を読み取り専用で確認。20行の候補schedule（experiment `C3_EXTVAL_PILOT_20261126_RUN2`, sequence 1–20, SHA-256 `5f7bece95b30620eaf70e53d21bcdc087baa4b10116f591461c714b9a5bbcc8f`）で、隣接するraw JTAG log/run status/audit JSONは存在しない。これは実機pilot結果ではないため未追跡のまま保持。今回の監査は基板操作なし。詳細:`claim_evidence_matrix_audit_RUN1_20261128/CLAIM_EVIDENCE_MATRIX_AUDIT_RUN1_20261128.md`。
+
+### 2026-11-28追記：関連研究の分類・書誌スコープ監査
+
+IEEE/CVF、Springer/機関リポジトリ、MDPI、UCIおよびscikit-learnの一次・公式記録を確認した。統合稿の[7] Kwan & Núñez-Yáñez (2020)はentropyによる動画フレーム処理レートの適応であり、1画像推論中のsample-wise early exitとしてまとめるのは不正確と判断。草稿を、[1–5] early exit/budget/routing、[6] 量子化FPGAネットワークのentropy early exit、[7] frame-processing context、[8] reconfigurable hardware上のdynamic early exitに分けて修正した。UCIの30 training writers / 別13 test writersはpool-level情報として記し、optdigits.traの行単位writer ID不在と過去利用履歴の不確実性は維持した。詳細なURLと範囲は`BIBLIOGRAPHY_SCOPE_AUDIT_20261128.md`。
+
+実行コマンド: `py -3.11 -B <C3>/verify_claim_evidence_matrix.py`（11 claims全path PASS）、`py -3.11 -B <C3>/test_verify_claim_evidence_matrix.py -v`（5/5 PASS）。通常の`git diff --check`は追加行の行末whitespace警告を報告し、`git -c core.whitespace=cr-at-eol diff --check`はPASS。文書SHA-256: 草稿 `441d57cfa679525e847779c1e677ca128e6faf5bcff6878c0e67d2afa14e9356`、文献監査 `585915f859d699a724a2763bca2da0d5b96951c4678f6d342542cc13a45ab887`。出典監査は文献範囲を限定したもので、systematic reviewや新規実験ではない。基板操作なし。実行記録・manifestは`literature_scope_audit_RUN1_20261128/`。
+
+### 2026-11-28追記：最終オフライン回帰の再実行
+
+`final_offline_audit_RUN1_20261128/validation.log`に今回の出力を保存した。`verify_q15_manuscript_table.py`はRUN8由来の本文表11行を全件一致確認。回帰は停止方式5/5、Exit遷移3/3、外部primary監査14/14、primary解析前提2/2、合計24/24 PASS。すべてオフライン検査で、新しい実機測定ではない。関連スクリプト・分析結果・ログのSHAは同フォルダの`SHA256SUMS.txt`。primaryはNOT_RUNのまま。基板・JTAG操作なし。
