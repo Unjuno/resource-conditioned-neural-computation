@@ -53,6 +53,8 @@ RUN4の既存`physical_results.csv`のみから再生成: fixed2/adaptive各10�
 
 UCI公式資料の追加確認に基づき、原稿へ筆記者pool分割の限定を追加した。公式記録はtraining sideの30人とtest sideの別の13人を記し、RTNNの追跡済み`load_digits`配列は`optdigits.tes`と一致する。よって追跡済み旧データとの間にはsplit-level writer separationの根拠がある。一方、未記録の`optdigits.tra`先行使用は否定できず、tra各行のwriter IDもないため、`DATA_EXPOSURE_UNCERTAIN`と`WRITER_CLUSTER_UNKNOWN`を維持する。出典はUCI dataset record、既存`PRIOR_DATA_USE_AUDIT_JA.md`と`DATASET_AUDIT_JA.md`。
 
+凍結事前登録の未実施primary条件も原稿に明記した。予定は3 session×7,626要求=22,878要求。H1は片側paired Clopper–Pearson/Bonferroni下限が−1 ppを超える条件、H2は点推定5%以上かつ10,000回bootstrap 95%下限>5%である。どちらも未評価。旧heldoutの20,000反復percentile bootstrapは探索解析であり、H1の規定検定と同一視しない。提案の1-session amendmentは未承認・未適用。
+
 未追跡`physical_pilot_RUN2_preparation/`は20件候補入力CSVのみと確認。raw JTAG、実行状態、実測結果、独立監査証拠は見つからず、新しいpilot実施とは判定しない。CSVは変更・削除せず未追跡のまま保全。
 
 Exit間の正誤遷移も全360件で監査し、12画像で「浅いExitで正解した後、後段Exitで誤りに戻る」非単調性を確認した。Exit 5→6は改善0・退行3。Exit 2以降で精度が単調に上がるとの主張はこのデータに反する。全入力のExit予測・正誤は `exit_counterexamples_RUN2_20261128/` に保存した。

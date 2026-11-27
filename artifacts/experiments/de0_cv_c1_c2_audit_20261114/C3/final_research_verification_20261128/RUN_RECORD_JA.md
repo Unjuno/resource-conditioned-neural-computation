@@ -81,6 +81,8 @@ RUN8でentropy停止は固定2と同じ339/360正解、平均optional blocks 1.3
 
 UCI公式記録を再確認し、optdigits.traのtraining side 30 writersとoptdigits.tesの別13 writersというpool分離情報を確認した。既存`PRIOR_DATA_USE_AUDIT_JA.md`は追跡済みRTNNコードが`sklearn.load_digits`を使い、公式test side配列と一致する点を既に記録している。これに基づくsplit-level分離を新稿へ追記。ただし不記録の過去使用と行単位クラスタ情報は解決していないため、既存のexposure/writer statusは変更しない。新たな実験は行っていない。
 
+新稿へ凍結primary統計ゲート（H1: paired Clopper–Pearson/Bonferroni下限>−1 pp、H2: cycle削減点推定≥5%かつ10,000回paired input bootstrap 95%下限>5%）と3 session計画（計22,878要求）を記述した。実測未実施、1-session amendment未承認、時系列未確認を明示。legacy heldout bootstrapを事前登録H1の結果として扱わない。
+
 未追跡`physical_pilot_RUN2_preparation/`を読み取り専用で確認。実体は`cases.csv/cases.csv`の20要求候補CSV（21行、header込み、SHA-256 `5f7bece95b30620eaf70e53d21bcdc087baa4b10116f591461c714b9a5bbcc8f`）のみで、run status、JTAG raw log、結果CSV、監査JSON、manifestはない。新実機RUN2の証拠として扱わず、そのまま保全し未追跡のままにした。
 
 ### Exit correctnessの遷移・反例
