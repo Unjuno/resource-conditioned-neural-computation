@@ -136,3 +136,17 @@ JSONの11方式heldout結果と英語稿tableを機械照合し、correct数、a
 historical pilot binding JSON（split=pilot, build `45585631`, binding `45585632`, model `52544e4e`）の記載値と実ファイルをread-only比較。SOF SHA `5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4`一致、ELF SHA `4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e`一致、事前登録SHA `5005c80c6d2d8eefbf87dd4dfdb4c91e26adb7960a3e5b1f04a977fdaee3b33b`一致。これは保存ファイルのidentity照合であり、現在の基板状態/ロード済みSOFのreadbackではない。JTAG、SOF設定、primary実行は行っていない。
 
 Git diffでCRLFがwhitespaceとして検出されたため、新規生成されたテキストCSV/logの行末をLFへ正規化した（セル・数値・JSON値は変更なし）。前RUNのcompiler `stdout_sha256` は生成直後の標準出力bytesを指す。確定RUN8はC runtimeのstdin/stdoutをbinaryにして標準出力CSVを直接一致させた。
+
+### 2026-11-28追記：primary case integrityとraw JTAGの前段監査を強化
+
+保存済みcase templateを読み、primary runnerがcase件数とinput ID集合は確認する一方、各行のpixel SHA/teacher labelをfrozen `primary_manifest.csv`・`primary_inputs.bin`へ、expected prediction/Exit/stopを`oracle_primary.csv`へ、実行順をcase order templateへ結び付けていないことを確認。case file SHAをbindingしても、任意の誤内容をbinding前に用意すればこのギャップは残る。また成功済みrunnerを手順書が旧`host/`として指していた。
+
+対処として`safety_gates_v1_20261122/pilot_gate.py`と`scripts/create_physical_binding.py`へ同じschedule/oracle照合を組み込み、bindingの` schedule_identity`へmanifest/input/oracle/order SHAとsequence範囲を保存。sequence historyは保存raw JTAG logsから走査し、記録済みrequest形式が壊れていればunknownとして拒否する。新規schedule用に現時点で保存されたraw logの最大観測sequenceは21であり、offline fixtureでは22からの7626連番のみ受け入れる。`scripts/prepare_primary_execution.py`を追加し、既存のOFFLINE templateを直接物理実行せず、新ID/session/start sequenceで新しい出力へ生成する。既存出力は拒否。
+
+`scripts/audit_and_analyze.py`ではprimaryのraw JTAG logをbyte-level protocolへ復号。request/response framing、CRC、fixed2/adaptive budget/deadline、入力payload、sequence、build/model/binding、prediction/Exit/stop、64-bit cycle境界とCSV値を比較する。欠損・重複・破損responseを拒否する。
+
+`OPERATOR_RUNBOOK_JA.md`の先頭に、成功版`host_v2_20261126/`を用い旧`host/`をprimaryに使わないこととsequence条件を追記。オフライン試験をこのv2 runnerに揃えた。詳細レポート`final_research_verification_20261128/primary_audit_hardening_RUN1_20261128/PRIMARY_AUDIT_HARDENING_RUN1_20261128.md`。
+
+検証は`python -m unittest safety_gates_v1_20261122.test_safety_gates safety_gates_v1_20261122.test_runner_preflight scripts.test_physical_audit_fail_closed host_v2_20261126.test_mock_runtime -v`を実行し35/35 PASS。production pilot gateを使ったprimary preflight正常系とoracle改変拒否も確認した。PowerShell起動とTcl直接起動でpilot-gate validatorがJTAGを開く前に呼ばれること、case payload/oracle/order tampering拒否、raw-frame CRC/欠損拒否、mock runtime protocolを確認した。`py_compile`も対象Python3ファイルでPASS。最終stdoutは`offline_tests_pass.log`、途中のテストハーネス/配置エラーも2ログへ保存し、修正後のPASSと分離した。25項目の`primary_audit_hardening_RUN1_20261128/SHA256SUMS.txt`は変更source/test/logとSOF・ELF・Q15・pilot gate・frozen input/oracle identityを含み、全項目を再hashした。
+
+物理primaryは未実施、scope/amendmentは未決定。SOF/ELF/Q15/dataset/pilot原本は変更せず、`physical_pilot_RUN2_preparation/`の既存未追跡領域も保持。変更ファイルとテストlogを含むartifact SHA manifestを作成。詳細状態の`FORMAL_TIMING_SIGNOFF_BLOCKED`等は維持。

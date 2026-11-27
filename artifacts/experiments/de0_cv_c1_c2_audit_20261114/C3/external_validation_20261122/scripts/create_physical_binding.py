@@ -4,7 +4,7 @@ import argparse,csv,hashlib,json,sys
 from pathlib import Path
 GATES=Path(__file__).resolve().parents[1]/'safety_gates_v1_20261122'
 sys.path.insert(0,str(GATES))
-from pilot_gate import verify_gate,ensure_unique_experiment_id
+from pilot_gate import verify_gate,ensure_unique_experiment_id,validate_primary_schedule
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--sof',type=Path,required=True);ap.add_argument('--firmware-manifest',type=Path,required=True);ap.add_argument('--quartus-audit',type=Path,required=True);ap.add_argument('--cases',type=Path,required=True);ap.add_argument('--split',choices=['pilot','primary'],required=True);ap.add_argument('--pilot-gate',type=Path);ap.add_argument('--out',type=Path,required=True);a=ap.parse_args()
@@ -24,6 +24,9 @@ def main():
  if a.split=='primary':
   try:ensure_unique_experiment_id(Path(__file__).resolve().parents[1],rows[0]['experiment_id'])
   except ValueError as e:raise SystemExit(str(e))
+  try:schedule_identity=validate_primary_schedule(rows)
+  except (ValueError,KeyError,TypeError) as e:raise SystemExit(f'primary frozen schedule/oracle validation failed: {e}')
+ else:schedule_identity=None
  manifest=Path(__file__).resolve().parents[1]/'data'/f'{a.split}_manifest.csv'
  manifest_ids={r['input_id'] for r in csv.DictReader(manifest.open(encoding='utf-8',newline=''))}
  case_ids={r['input_id'] for r in rows}
@@ -36,6 +39,6 @@ def main():
   k=(r['input_id'],r['mode'])
   if k in seen:raise SystemExit('duplicate input/mode')
   seen.add(k)
- b={'schema':'rtnn-external-validation-binding-v1','status':'PHYSICAL_ELIGIBLE','classification':'EMPIRICAL_ONLY','split':a.split,'experiment_id':rows[0]['experiment_id'],'session_id':rows[0]['session_id'],'case_count':len(rows),'cases_csv_sha256':sha(a.cases),'sof_sha256':sha(a.sof),'sof_path':str(a.sof.resolve()),'firmware_manifest_sha256':sha(a.firmware_manifest),'firmware_elf_sha256':fw['elf_sha256'],'firmware_bin_sha256':fw['bin_sha256'],'quartus_audit_sha256':sha(a.quartus_audit),'model_id':'52544e4e','model_core_sha256':fw['model_core_sha256'],'model_weights_header_sha256':fw['model_weights_header_sha256'],'build_id':'45585631','binding_id':'45585632','input_manifest_sha256':sha(Path(__file__).resolve().parents[1]/'data'/f'{a.split}_manifest.csv'),'preregistration_sha256':sha(Path(__file__).resolve().parents[1]/'PREREGISTRATION_LOCKED_JA.md'),'pilot_gate_path':str(a.pilot_gate.resolve()) if gate else None,'pilot_gate_sha256':sha(a.pilot_gate) if gate else None,'board':'Terasic DE0-CV / 5CEBA4F23C7','timing_classification':'EMPIRICAL_ONLY','external_jtag_timing':'BLOCKED','flash_written':False,'sof_programming_performed':False,'uart_used':False}
+ b={'schema':'rtnn-external-validation-binding-v1','status':'PHYSICAL_ELIGIBLE','classification':'EMPIRICAL_ONLY','split':a.split,'experiment_id':rows[0]['experiment_id'],'session_id':rows[0]['session_id'],'case_count':len(rows),'cases_csv_sha256':sha(a.cases),'sof_sha256':sha(a.sof),'sof_path':str(a.sof.resolve()),'firmware_manifest_sha256':sha(a.firmware_manifest),'firmware_elf_sha256':fw['elf_sha256'],'firmware_bin_sha256':fw['bin_sha256'],'quartus_audit_sha256':sha(a.quartus_audit),'model_id':'52544e4e','model_core_sha256':fw['model_core_sha256'],'model_weights_header_sha256':fw['model_weights_header_sha256'],'build_id':'45585631','binding_id':'45585632','input_manifest_sha256':sha(Path(__file__).resolve().parents[1]/'data'/f'{a.split}_manifest.csv'),'schedule_identity':schedule_identity,'preregistration_sha256':sha(Path(__file__).resolve().parents[1]/'PREREGISTRATION_LOCKED_JA.md'),'pilot_gate_path':str(a.pilot_gate.resolve()) if gate else None,'pilot_gate_sha256':sha(a.pilot_gate) if gate else None,'board':'Terasic DE0-CV / 5CEBA4F23C7','timing_classification':'EMPIRICAL_ONLY','external_jtag_timing':'BLOCKED','flash_written':False,'sof_programming_performed':False,'uart_used':False}
  a.out.parent.mkdir(parents=True,exist_ok=True);a.out.write_text(json.dumps(b,indent=2)+'\n',encoding='utf-8');print('PHYSICAL_BINDING_READY_EMPIRICAL_ONLY',sha(a.out))
 if __name__=='__main__':main()

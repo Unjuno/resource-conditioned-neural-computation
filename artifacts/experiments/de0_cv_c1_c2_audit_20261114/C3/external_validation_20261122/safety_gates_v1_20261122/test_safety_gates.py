@@ -4,7 +4,7 @@ import sys
 HERE=Path(__file__).resolve().parent
 PKG=HERE.parent
 sys.path.insert(0,str(HERE))
-from pilot_gate import audit_run,verify_binding,verify_gate,ensure_unique_experiment_id
+from pilot_gate import audit_run,verify_binding,verify_gate,ensure_unique_experiment_id,validate_primary_schedule
 from power_session import classify,SCHEMA
 sys.path.insert(0,str(PKG/'scripts'))
 from audit_and_analyze import load_run
@@ -50,6 +50,38 @@ def refresh_hashes(run):
     (run/'SHA256SUMS.txt').write_text(''.join(f"{sha((run/n).read_bytes())}  {n}\n" for n in names),encoding='ascii')
 
 class GateTest(unittest.TestCase):
+    def test_primary_schedule_binds_pixels_labels_oracle_order_and_sequences(self):
+        source=PKG/'build/host_cases_primary_attempt2/cases.csv'
+        with source.open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f))
+        for i,r in enumerate(rows,22): r['sequence']=str(i)
+        evidence=validate_primary_schedule(rows)
+        self.assertEqual(evidence['first_sequence'],22)
+        self.assertEqual(evidence['last_sequence'],7647)
+        for field,value in [('pixels_hex','00'*64),('teacher_label','9'),('expected_prediction','9')]:
+            changed=[dict(r) for r in rows];changed[0][field]=value
+            with self.assertRaises(ValueError): validate_primary_schedule(changed)
+        reordered=[dict(r) for r in rows];reordered[0],reordered[1]=reordered[1],reordered[0]
+        with self.assertRaisesRegex(ValueError,'execution order'): validate_primary_schedule(reordered)
+        noncontiguous=[dict(r) for r in rows];noncontiguous[1]['sequence']='24'
+        with self.assertRaisesRegex(ValueError,'contiguous'): validate_primary_schedule(noncontiguous)
+        reused=[dict(r) for r in rows];reused[0]['sequence']='21'
+        with self.assertRaisesRegex(ValueError,'after the recorded pilot'): validate_primary_schedule(reused)
+
+    def test_completed_run_sequence_audit_allows_later_runs_but_rejects_overlap(self):
+        with (PKG/'build/host_cases_primary_attempt2/cases.csv').open(newline='',encoding='utf-8') as f: rows=list(csv.DictReader(f))
+        for i,r in enumerate(rows,22): r['sequence']=str(i)
+        with tempfile.TemporaryDirectory(dir=PKG/'build',prefix='test_primary_seq_history_') as td:
+            base=Path(td);run=base/'current';later=base/'later';run.mkdir();later.mkdir()
+            (run/'run_status.json').write_text('{"status":"COMPLETE"}',encoding='utf-8')
+            (later/'raw_jtag.log').write_text('request seq=9000 input_id=1 mode=fixed2 request_lsb_hex=aa\n',encoding='ascii')
+            # A later session may have higher sequence numbers when an older
+            # completed run is audited; only collisions are rejected here.
+            evidence=validate_primary_schedule(rows,exclude_run=run)
+            self.assertEqual(evidence['first_sequence'],22)
+            (later/'raw_jtag.log').write_text('request seq=22 input_id=1 mode=fixed2 request_lsb_hex=aa\n',encoding='ascii')
+            with self.assertRaisesRegex(ValueError,'overlaps another recorded run'):
+                validate_primary_schedule(rows,exclude_run=run)
+
     def test_complete_fixture_audits_only_in_test_context(self):
         with tempfile.TemporaryDirectory() as td:
             run,oracle,pilot,primary=build_fixture(td)

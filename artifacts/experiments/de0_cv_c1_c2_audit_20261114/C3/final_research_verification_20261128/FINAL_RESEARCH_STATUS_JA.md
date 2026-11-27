@@ -88,3 +88,11 @@ Exit間の正誤遷移も全360件で監査し、12画像で「浅いExitで正�
 | DE0-CVの外部JTAG timing・formal WCET | **BLOCKED** | 外部JTAG timing前提と完全な基板制約/証拠が不足。経験的cycle結果で解除しない。 |
 
 Uは画像露出履歴、筆記者内相関、電源起動独立性、校正済み時間、外部JTAG timingを含む。値のない不確かさは推定不能のままとし、入力bootstrapでボード/起動間不確かさを代用しない。
+
+### 2026-11-28追記：primary測定前のcase/raw-frame guard
+
+Primary preflightの内容検証を追加した。binding作成とJTAG前段で7,626件すべてをfrozen primary manifestの画素SHA・label、primary input bytes、CPU oracleのmode別予測/Exit/stop/cap、既存offline order template、連番sequenceと照合する。後続sessionのsequenceにより先行runの再監査を誤拒否しないことも検査する。保存済みraw request/responseを復号し、frame/CRC/identity/入力/結果/mcycle区間をCSVと独立照合する。sequence履歴は保存JTAG logから最大値を読み、最大観測sequence 21より後から始める。`prepare_primary_execution.py`はこの順序から新しいcase CSVをofflineで準備するが、今回は実験CSV/bindingを作成せず、JTAGにも接続していない。
+
+`host_v2_20261126`に対応するPython/PowerShell/Tcl offline testsとraw parser試験は35/35 PASS。詳細な変更、実行ログ、25項目のSHA manifestは`final_research_verification_20261128/primary_audit_hardening_RUN1_20261128/SHA256SUMS.txt`。途中失敗の保全場所は`final_research_verification_20261128/primary_audit_hardening_RUN1_20261128/PRIMARY_AUDIT_HARDENING_RUN1_20261128.md`。
+
+Primary 7,626件は**NOT_RUN**。最初の未解決アクションは、ユーザーによるscope/amendment決定と、実機前での明示許可。現在のscope選択・amendment固定・実機identity確認を終えるまで、主測定へ進まない。

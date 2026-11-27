@@ -1,5 +1,14 @@
 # 後日の実機評価手順（今回未実行）
 
+> **2026-11-28 primary準備の追記（旧手順より優先）:** 成功済みの実行器は`host_v2_20261126/`です。本文中の旧`host/`コマンドは過去の手順記録であり、primary実行に使わないでください。primary binding作成とPowerShell/Tclのpreflightは、凍結3,813入力・7,626要求、各画素SHA・ラベル・CPU oracle・実行順、pilot gate、実行済みraw JTAGログから得たsequence履歴を照合します。primary用case CSVは既存の`build/host_cases_primary_attempt2/cases.csv`を直接実行せず、実験ID/session IDを新しくし、sequenceを記録済み最大値より後から連番にした別出力として準備してください。保存済みログの最大sequenceは21のため、次の未使用値は少なくとも22です。検証器が記録済みraw logを読めない、sequence履歴が不正、またはbindingにschedule identityがない場合は停止します。今回、primaryを開始していません。
+
+成功版のSHA-256（2026-11-28の作業開始時点）:
+
+* `host_v2_20261126/Invoke-ExternalValidation.ps1`: `477f7de64cc4da7892a82d0dd48764d5f3a88329a8f5c234241a93c080777f8b`
+* `host_v2_20261126/run_external_validation.tcl`: `587c6b5014cbd1edfd01a20048090c38350dd62ab9872c046be9459be9c51514`
+
+この追記を含む変更後はコード・runbookのcommit SHAを記録し、上記のrunner SHAは履歴値として扱います。物理実行時はコピー後に移動前後のSHA一致を再確認してください。
+
 > **最新版ゲート追記 (2026-11-22):** primary実行は、20件のphysical pilot結果から独立監査で生成した `rtnn-extval-pilot-gate-v1` がない限り開始できない。旧版手順の「pilot適格後にprimary」もこの機械検証が必須。offline/simulation fixtureや`OFFLINE` sessionは使用不可。詳しくは `safety_gates_v1_20261122/FINAL_GATE_STATUS_JA.md` と `PILOT_GATE_SCHEMA.md` を参照。
 > **事前登録時系列の注意 (2026-11-23):** preregistrationのSHAは維持されているが、oracle/firmware予測より先に固定されたことを示す独立・改ざん耐性ある時刻証拠がない。現状、今後の評価は探索的として扱い、確認的な母集団主張はしない。
 

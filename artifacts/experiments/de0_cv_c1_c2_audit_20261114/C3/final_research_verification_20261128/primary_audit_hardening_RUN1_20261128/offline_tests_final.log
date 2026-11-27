@@ -1,0 +1,149 @@
+test_changed_predictions_and_split_mixing_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_changed_predictions_and_split_mixing_rejected) ... ok
+test_complete_fixture_audits_only_in_test_context (safety_gates_v1_20261122.test_safety_gates.GateTest.test_complete_fixture_audits_only_in_test_context) ... ok
+test_experiment_id_reuse_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_experiment_id_reuse_rejected) ... ok
+test_failed_case_cannot_be_promoted_to_pass (safety_gates_v1_20261122.test_safety_gates.GateTest.test_failed_case_cannot_be_promoted_to_pass) ... ok
+test_gate_cannot_be_reused_for_another_binding_or_tampered_evidence (safety_gates_v1_20261122.test_safety_gates.GateTest.test_gate_cannot_be_reused_for_another_binding_or_tampered_evidence) ... ok
+test_gate_recomputes_raw_response_and_sof_binding (safety_gates_v1_20261122.test_safety_gates.GateTest.test_gate_recomputes_raw_response_and_sof_binding) ... ok
+test_handwritten_pass_missing_evidence_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_handwritten_pass_missing_evidence_rejected) ... ok
+test_missing_or_malformed_gate_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_missing_or_malformed_gate_rejected) ... ok
+test_mock_failed_old_build_and_corrupt_crc_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_mock_failed_old_build_and_corrupt_crc_rejected) ... ok
+test_primary_audit_rejects_before_reading_result_tables (safety_gates_v1_20261122.test_safety_gates.GateTest.test_primary_audit_rejects_before_reading_result_tables) ... ERROR
+test_primary_binding_without_gate_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_primary_binding_without_gate_rejected) ... ERROR
+test_primary_case_count_must_be_exact (safety_gates_v1_20261122.test_safety_gates.GateTest.test_primary_case_count_must_be_exact) ... ok
+test_primary_schedule_binds_pixels_labels_oracle_order_and_sequences (safety_gates_v1_20261122.test_safety_gates.GateTest.test_primary_schedule_binds_pixels_labels_oracle_order_and_sequences) ... ERROR
+test_raw_log_change_breaks_manifest (safety_gates_v1_20261122.test_safety_gates.GateTest.test_raw_log_change_breaks_manifest) ... ok
+test_response_crc_and_counter_tampering_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_response_crc_and_counter_tampering_rejected) ... ok
+test_truncated_case_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_truncated_case_rejected) ... ok
+test_attestation_only_full_claim_downgrades (safety_gates_v1_20261122.test_safety_gates.PowerEvidenceTest.test_attestation_only_full_claim_downgrades) ... ok
+test_power_identity_usb_and_experiment_mismatch_are_not_independent (safety_gates_v1_20261122.test_safety_gates.PowerEvidenceTest.test_power_identity_usb_and_experiment_mismatch_are_not_independent) ... ok
+test_reused_scope_file_across_three_session_names_is_not_independent (safety_gates_v1_20261122.test_safety_gates.PowerEvidenceTest.test_reused_scope_file_across_three_session_names_is_not_independent) ... ok
+test_scope_record_requires_hashed_data_and_all_power_paths (safety_gates_v1_20261122.test_safety_gates.PowerEvidenceTest.test_scope_record_requires_hashed_data_and_all_power_paths) ... ok
+test_three_names_or_operator_claim_never_prove_rail (safety_gates_v1_20261122.test_safety_gates.PowerEvidenceTest.test_three_names_or_operator_claim_never_prove_rail) ... ok
+test_wave_hash_mismatch_fails (safety_gates_v1_20261122.test_safety_gates.PowerEvidenceTest.test_wave_hash_mismatch_fails) ... ok
+test_binding_generator_rejects_primary_without_pilot_gate (safety_gates_v1_20261122.test_runner_preflight.PreflightIntegration.test_binding_generator_rejects_primary_without_pilot_gate) ... ok
+test_direct_tcl_rejects_before_jtag_discovery (safety_gates_v1_20261122.test_runner_preflight.PreflightIntegration.test_direct_tcl_rejects_before_jtag_discovery) ... ok
+test_pilot_binding_preflight_does_not_require_a_pilot_gate (safety_gates_v1_20261122.test_runner_preflight.PreflightIntegration.test_pilot_binding_preflight_does_not_require_a_pilot_gate) ... ok
+test_powershell_rejects_before_quartus_launch (safety_gates_v1_20261122.test_runner_preflight.PreflightIntegration.test_powershell_rejects_before_quartus_launch) ... ok
+test_primary_schedule_generator_rejects_used_sequence_and_preserves_output (safety_gates_v1_20261122.test_runner_preflight.PreflightIntegration.test_primary_schedule_generator_rejects_used_sequence_and_preserves_output) ... Exception in thread Thread-14 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 1045, in _bootstrap_inner
+    self.run()
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\threading.py", line 982, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0x83 in position 68: invalid start byte
+FAIL
+test_mock_data_is_rejected_before_csv_import (scripts.test_physical_audit_fail_closed.PhysicalGateTests.test_mock_data_is_rejected_before_csv_import) ... ok
+test_old_build_is_rejected (scripts.test_physical_audit_fail_closed.PhysicalGateTests.test_old_build_is_rejected) ... ok
+test_raw_jtag_decoder_matches_saved_pilot_protocol_frames (scripts.test_physical_audit_fail_closed.PhysicalGateTests.test_raw_jtag_decoder_matches_saved_pilot_protocol_frames) ... ok
+test_raw_jtag_decoder_rejects_missing_or_corrupt_response (scripts.test_physical_audit_fail_closed.PhysicalGateTests.test_raw_jtag_decoder_rejects_missing_or_corrupt_response) ... ok
+test_twenty_request_protocol_and_fixture_rejection (host_v2_20261126.test_mock_runtime.MockRuntime.test_twenty_request_protocol_and_fixture_rejection) ... ok
+
+======================================================================
+ERROR: test_primary_audit_rejects_before_reading_result_tables (safety_gates_v1_20261122.test_safety_gates.GateTest.test_primary_audit_rejects_before_reading_result_tables)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\test_safety_gates.py", line 124, in test_primary_audit_rejects_before_reading_result_tables
+    load_run(d,'primary')
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\scripts\audit_and_analyze.py", line 76, in load_run
+    verify_binding(binding_path)
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\pilot_gate.py", line 210, in verify_binding
+    ensure_unique_experiment_id(Path(__file__).resolve().parents[1],str(b.get("experiment_id","")),binding_path)
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\pilot_gate.py", line 28, in ensure_unique_experiment_id
+    for p in root.rglob(name):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 968, in rglob
+    for p in selector.select_from(self):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 407, in _select_from
+    for starting_point in self._iterate_directories(parent_path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  [Previous line repeated 2 more times]
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 386, in _iterate_directories
+    with scandir(parent_path) as scandir_it:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 938, in _scandir
+    return os.scandir(self)
+           ^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] �w�肳�ꂽ�p�X��������܂���B: 'C:\\Users\\junny\\OneDrive\\�h�L�������g\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\final_research_verification_20261128'
+
+======================================================================
+ERROR: test_primary_binding_without_gate_rejected (safety_gates_v1_20261122.test_safety_gates.GateTest.test_primary_binding_without_gate_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\test_safety_gates.py", line 118, in test_primary_binding_without_gate_rejected
+    with self.assertRaisesRegex(ValueError,'gate missing'):verify_binding(p)
+                                                           ^^^^^^^^^^^^^^^^^
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\pilot_gate.py", line 210, in verify_binding
+    ensure_unique_experiment_id(Path(__file__).resolve().parents[1],str(b.get("experiment_id","")),binding_path)
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\pilot_gate.py", line 28, in ensure_unique_experiment_id
+    for p in root.rglob(name):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 968, in rglob
+    for p in selector.select_from(self):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 407, in _select_from
+    for starting_point in self._iterate_directories(parent_path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  [Previous line repeated 2 more times]
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 386, in _iterate_directories
+    with scandir(parent_path) as scandir_it:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 938, in _scandir
+    return os.scandir(self)
+           ^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] �w�肳�ꂽ�p�X��������܂���B: 'C:\\Users\\junny\\OneDrive\\�h�L�������g\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\final_research_verification_20261128'
+
+======================================================================
+ERROR: test_primary_schedule_binds_pixels_labels_oracle_order_and_sequences (safety_gates_v1_20261122.test_safety_gates.GateTest.test_primary_schedule_binds_pixels_labels_oracle_order_and_sequences)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\test_safety_gates.py", line 57, in test_primary_schedule_binds_pixels_labels_oracle_order_and_sequences
+    evidence=validate_primary_schedule(rows)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\pilot_gate.py", line 93, in validate_primary_schedule
+    floor=_primary_sequence_floor(root,exclude_run)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\pilot_gate.py", line 50, in _primary_sequence_floor
+    for p in root.rglob("raw_jtag.log"):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 968, in rglob
+    for p in selector.select_from(self):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 407, in _select_from
+    for starting_point in self._iterate_directories(parent_path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 397, in _iterate_directories
+    for p in self._iterate_directories(path, is_dir, scandir):
+  [Previous line repeated 2 more times]
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 386, in _iterate_directories
+    with scandir(parent_path) as scandir_it:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\junny\AppData\Local\Programs\Python\Python311\Lib\pathlib.py", line 938, in _scandir
+    return os.scandir(self)
+           ^^^^^^^^^^^^^^^^
+FileNotFoundError: [WinError 3] �w�肳�ꂽ�p�X��������܂���B: 'C:\\Users\\junny\\OneDrive\\�h�L�������g\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\final_research_verification_20261128'
+
+======================================================================
+FAIL: test_primary_schedule_generator_rejects_used_sequence_and_preserves_output (safety_gates_v1_20261122.test_runner_preflight.PreflightIntegration.test_primary_schedule_generator_rejects_used_sequence_and_preserves_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\junny\OneDrive\�h�L�������g\ChatGPT\resource-conditioned-neural-computation-c3-paper\artifacts\experiments\de0_cv_c1_c2_audit_20261114\C3\external_validation_20261122\safety_gates_v1_20261122\test_runner_preflight.py", line 43, in test_primary_schedule_generator_rejects_used_sequence_and_preserves_output
+    self.assertNotEqual(p.returncode,0);self.assertIn('after the recorded pilot',(p.stdout or '')+(p.stderr or ''));self.assertFalse(out.exists())
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'after the recorded pilot' not found in ''
+
+----------------------------------------------------------------------
+Ran 32 tests in 4.076s
+
+FAILED (failures=1, errors=3)

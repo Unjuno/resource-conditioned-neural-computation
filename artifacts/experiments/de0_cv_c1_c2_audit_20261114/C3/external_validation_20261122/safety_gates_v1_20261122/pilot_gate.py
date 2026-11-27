@@ -44,6 +44,65 @@ def decode_raw_response(hex_text: str) -> bytes:
 def crc32(b: bytes) -> int: return __import__("zlib").crc32(b) & 0xffffffff
 def u(b, offset, n): return int.from_bytes(b[offset:offset+n], "little")
 
+def _primary_observed_sequences(root: Path, exclude_dir: Path|None=None) -> set[int]:
+    """Sequences observed in saved runner logs, not in offline templates."""
+    observed=set(); exclude=exclude_dir.resolve() if exclude_dir else None
+    for p in root.rglob("raw_jtag.log"):
+        if exclude and p.parent.resolve()==exclude: continue
+        try: lines=p.read_text(encoding="utf-8-sig").splitlines()
+        except OSError as e: raise ValueError(f"cannot read sequence history log: {p}: {e}") from e
+        for line in lines:
+            m=re.fullmatch(r"request seq=(\d+) input_id=\d+ mode=(?:fixed2|adaptive) request_lsb_hex=[0-9a-fA-F]+",line)
+            if m: observed.add(int(m.group(1)))
+            elif line.startswith("request seq="): raise ValueError(f"cannot establish sequence history from malformed log: {p}")
+    return observed
+
+def _primary_sequence_floor(root: Path, exclude_dir: Path|None=None) -> int:
+    return max(_primary_observed_sequences(root,exclude_dir),default=0)
+
+def validate_primary_schedule(rows, *, root: Path|None=None, exclude_run: Path|None=None):
+    """Bind every primary row to frozen pixels/labels/oracle and order template."""
+    root=root or Path(__file__).resolve().parents[1]
+    manifest=read_csv(root/"data"/"primary_manifest.csv")
+    oracle=read_csv(root/"build"/"cpu_oracle_attempt1"/"oracle_primary.csv")
+    inputs=(root/"data"/"primary_inputs.bin").read_bytes()
+    template=read_csv(root/"build"/"host_cases_primary_attempt2"/"cases.csv")
+    need(len(manifest)==3813 and len(inputs)==3813*64,"frozen primary manifest/input size mismatch")
+    need(len(oracle)==7626 and len(template)==7626 and len(rows)==7626,"primary schedule must contain exactly 7,626 rows")
+    by_id={r["input_id"]:(i,r) for i,r in enumerate(manifest)}
+    need(len(by_id)==3813,"primary manifest input IDs are not unique")
+    oracle_by={(r["input_id"],r["mode"]):r for r in oracle}
+    need(len(oracle_by)==7626,"CPU oracle keys are not unique/complete")
+    expected_order=[(r["input_id"],r["mode"]) for r in template]
+    actual_order=[(r.get("input_id"),r.get("mode")) for r in rows]
+    need(actual_order==expected_order,"primary execution order differs from frozen schedule template")
+    first=int(rows[0].get("sequence","0"))
+    need(first>21,"primary sequence must start after the recorded pilot sequence range 1..21")
+    for index,(row,expected_pair) in enumerate(zip(rows,expected_order)):
+        seq=int(row.get("sequence","0"))
+        need(seq==first+index,"primary sequence must be contiguous and follow frozen execution order")
+        iid=row.get("input_id"); need(iid in by_id,"primary case contains an unknown input ID")
+        manifest_index,m=by_id[iid]
+        pixels=inputs[manifest_index*64:(manifest_index+1)*64]
+        need(sha(pixels)==m["pixel_sha256"]==row.get("pixels_sha256"),f"primary pixels differ from frozen input at input {iid}")
+        need(row.get("pixels_hex")==pixels.hex(),f"primary payload differs from frozen bytes at input {iid}")
+        need(int(row.get("teacher_label","-1"))==int(m["label_host_only"]),f"primary teacher label differs from manifest at input {iid}")
+        o=oracle_by.get((str(manifest_index+1),row.get("mode")))
+        need(o is not None,f"CPU oracle is missing input/mode {iid}/{row.get('mode')}")
+        need(int(o["cap_violation"])==0,"CPU oracle reports cap violation")
+        for field,oracle_field in (("expected_prediction","prediction"),("expected_admitted_exit","admitted_exit"),("expected_executed_exit","executed_exit"),("expected_stop_reason","stop_reason")):
+            need(str(row.get(field))==str(o[oracle_field]),f"primary {field} differs from CPU oracle at input {iid}/{row.get('mode')}")
+        need(int(row.get("payload_crc32","-1"))==crc32(pixels),f"primary payload CRC differs at input {iid}")
+    current_sequences={int(r["sequence"]) for r in rows}
+    completed_run=bool(exclude_run and (exclude_run/"run_status.json").is_file())
+    if completed_run:
+        overlaps=current_sequences & _primary_observed_sequences(root,exclude_run)
+        need(not overlaps,f"primary sequence overlaps another recorded run: {min(overlaps) if overlaps else ''}")
+    else:
+        floor=_primary_sequence_floor(root,exclude_run)
+        need(first>floor,f"primary sequence reuses prior observed sequence (floor={floor})")
+    return {"first_sequence":first,"last_sequence":first+len(rows)-1,"frozen_order_rows":len(expected_order),"primary_manifest_sha256":file_sha(root/"data"/"primary_manifest.csv"),"primary_inputs_sha256":file_sha(root/"data"/"primary_inputs.bin"),"oracle_sha256":file_sha(root/"build"/"cpu_oracle_attempt1"/"oracle_primary.csv"),"order_template_sha256":file_sha(root/"build"/"host_cases_primary_attempt2"/"cases.csv")}
+
 def audit_run(run: Path, oracle: Path, pilot_manifest: Path, primary_manifest: Path,
               *, fixture_ok=False):
     status=read_json(run/"run_status.json")
@@ -165,8 +224,9 @@ def verify_binding(binding_path: Path, cases_path: Path|None=None, *, fixture_ok
         primary_manifest=root/"data"/"primary_manifest.csv"
         need(file_sha(primary_manifest)==b.get("input_manifest_sha256"),"primary input manifest SHA mismatch")
         if cases_path:
-            manifest_ids={r["input_id"] for r in read_csv(primary_manifest)}
-            need(ids==manifest_ids,"primary case input IDs differ from frozen manifest")
+            sequence_evidence=validate_primary_schedule(rows,exclude_run=cases_path.parent)
+            need(ids=={r["input_id"] for r in read_csv(primary_manifest)},"primary case input IDs differ from frozen manifest")
+            need(b.get("schedule_identity")==sequence_evidence,"primary frozen schedule/oracle identity missing or differs from binding")
         return g
     return {"audit":"PILOT_BINDING_PREFLIGHT_OK"}
 

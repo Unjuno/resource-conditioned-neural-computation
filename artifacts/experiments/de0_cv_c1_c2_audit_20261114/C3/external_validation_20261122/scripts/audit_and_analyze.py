@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Fail-closed audit and preregistered analysis of new physical primary runs."""
-import argparse,csv,hashlib,json,statistics,sys
+import argparse,csv,hashlib,json,statistics,sys,re,zlib
 from pathlib import Path
 from stats_core import paired_ni_lower,paired_cycle_bootstrap
 ROOT=Path(__file__).resolve().parents[1]
@@ -10,6 +10,62 @@ from power_session import audit_sessions
 def sha(b):return hashlib.sha256(b).hexdigest()
 def readcsv(p):
     with p.open(encoding='utf-8',newline='') as f:return list(csv.DictReader(f))
+
+def _raw_bytes(text, expected):
+    h=text.strip().lower().removeprefix('0x')
+    if len(h)!=expected*2 or not re.fullmatch(r'[0-9a-f]+',h): raise ValueError('raw JTAG frame length/hex invalid')
+    return bytes.fromhex(h)[::-1]
+
+def _u(buf,offset,size): return int.from_bytes(buf[offset:offset+size],'little')
+def _crc(buf): return zlib.crc32(buf)&0xffffffff
+
+def audit_raw_jtag(run_dir,cases,results,status):
+    requests={};responses={};current=None;headers=[]
+    for line in (Path(run_dir)/'raw_jtag.log').read_text(encoding='utf-8-sig').splitlines():
+        if line.startswith('hardware='):
+            headers.append(line)
+            continue
+        m=re.fullmatch(r'request seq=(\d+) input_id=(\d+) mode=(fixed2|adaptive) request_lsb_hex=([0-9a-fA-F]+)',line)
+        if m:
+            seq=int(m.group(1));req=_raw_bytes(m.group(4),100)
+            if seq in requests: raise ValueError('duplicate raw JTAG request sequence')
+            if req[:5]!=b'RTNQ\x02' or _crc(req[:28])!=_u(req,28,4) or _crc(req[32:96])!=_u(req,96,4): raise ValueError('raw JTAG request framing/CRC mismatch')
+            mode=1 if m.group(3)=='fixed2' else 3
+            if _u(req,8,4)!=seq or _u(req,12,2)!=int(m.group(2)) or req[5]!=mode: raise ValueError('raw JTAG request identity/mode mismatch')
+            if req[6]!=(2 if mode==1 else 0) or req[7]!=0 or _u(req,14,2)!=65535 or _u(req,16,4)!=0: raise ValueError('raw JTAG mode parameters differ from fixed study protocol')
+            if _u(req,20,4)!=0x52544e4e or _u(req,24,4)!=0x45585631: raise ValueError('raw JTAG request build/model mismatch')
+            requests[seq]=req;current=seq;continue
+        m=re.fullmatch(r'response seq=(\d+) raw_lsb_hex=([0-9a-fA-F]+)',line)
+        if m:
+            seq=int(m.group(1));rsp=_raw_bytes(m.group(2),60)
+            if seq!=current or seq not in requests or seq in responses: raise ValueError('raw JTAG response sequence missing/duplicate/mispaired')
+            if rsp[:5]!=b'RTNR\x03' or _crc(rsp[:56])!=_u(rsp,56,4): raise ValueError('raw JTAG response framing/CRC mismatch')
+            responses[seq]=rsp
+            continue
+        if line.startswith('request seq=') or line.startswith('response seq='):
+            raise ValueError('malformed raw JTAG request/response log entry')
+    if len(headers)!=1: raise ValueError('raw JTAG acquisition identity header missing/duplicated')
+    hm=re.search(r'experiment=(\S+) session=(\S+) sof_sha256=([0-9a-f]{64}) uart=false flash_written=false sof_programming=false$',headers[0])
+    if not hm or hm.group(1)!=status.get('experiment_id') or hm.group(2)!=status.get('session_id') or hm.group(3)!=status.get('sof_sha256'): raise ValueError('raw JTAG acquisition header identity mismatch')
+    if len(requests)!=len(cases) or len(responses)!=len(cases) or set(requests)!=set(responses): raise ValueError('raw JTAG log request/response count mismatch')
+    by_seq={int(c['sequence']):(c,r) for c,r in zip(cases,results)}
+    for seq,(c,r) in by_seq.items():
+        req=requests.get(seq);rsp=responses.get(seq)
+        if req is None or rsp is None: raise ValueError('raw JTAG frame missing for case')
+        pixels=bytes.fromhex(c['pixels_hex']);mode=1 if c['mode']=='fixed2' else 3
+        if req[32:96]!=pixels or _u(req,96,4)!=int(c['payload_crc32']) or _u(req,12,2)!=int(c['input_id']): raise ValueError('raw JTAG request payload differs from frozen case')
+        if int(r['payload_crc32'])!=_u(req,96,4) or int(r['request_crc_ok'])!=1 or int(r['response_crc_ok'])!=1: raise ValueError('raw JTAG request/result CRC fields mismatch')
+        stop={'none':0,'entropy':1,'budget':2}[c['expected_stop_reason']]
+        fields={'sequence':_u(rsp,8,4),'input_id':_u(rsp,12,2),'payload_crc32':_u(rsp,16,4),'admitted_exit':rsp[20],'executed_exit':rsp[21],'prediction':rsp[22],'cycles_start':_u(rsp,24,8),'cycles_end':_u(rsp,32,8),'model_id':_u(rsp,40,4),'build_id':_u(rsp,44,4),'binding_id':_u(rsp,48,4)}
+        if rsp[5]!=0 or rsp[6]!=mode or rsp[7]!=stop or rsp[23]!=255 or rsp[52]!=1: raise ValueError('raw JTAG response status/mode/stop/commit invalid')
+        if fields['sequence']!=seq or fields['input_id']!=int(c['input_id']) or fields['payload_crc32']!=int(c['payload_crc32']): raise ValueError('raw JTAG response does not echo request identity')
+        if (fields['model_id'],fields['build_id'],fields['binding_id'])!=(0x52544e4e,0x45585631,0x45585632): raise ValueError('raw JTAG response identity mismatch')
+        for k in ('prediction','admitted_exit','executed_exit'):
+            if fields[k]!=int(c['expected_'+k]) or fields[k]!=int(r[k]): raise ValueError(f'raw JTAG {k} differs from case/results')
+        if fields['cycles_start']<=0 or fields['cycles_end']<=fields['cycles_start'] or fields['cycles_end']-fields['cycles_start']!=int(r['cycles']): raise ValueError('raw JTAG cycle boundary/delta mismatch')
+        if fields['cycles_start']!=int(r['cycles_start']) or fields['cycles_end']!=int(r['cycles_end']): raise ValueError('raw JTAG counters differ from results CSV')
+    return {'request_frames':len(requests),'response_frames':len(responses),'raw_log_sha256':sha((Path(run_dir)/'raw_jtag.log').read_bytes())}
+
 def load_run(run_dir, expected_split):
     status=json.loads((run_dir/'run_status.json').read_text())
     if status.get('schema')!='rtnn-external-validation-physical-v1' or status.get('status')!='COMPLETE': raise ValueError('not a complete physical runner result')
@@ -37,6 +93,7 @@ def load_run(run_dir, expected_split):
     if sha((run_dir/'cases.csv').read_bytes())!=status.get('cases_csv_sha256'): raise ValueError('cases CSV SHA mismatch')
     if expected_split=='primary':
         verify_binding(binding_path,run_dir/'cases.csv')
+        audit_raw_jtag(run_dir,cases,results,status)
     ids=set(); seqs=set(); joined={}
     for c,r in zip(cases,results):
         if r['status']!='PASS': raise ValueError('failed physical case present')
