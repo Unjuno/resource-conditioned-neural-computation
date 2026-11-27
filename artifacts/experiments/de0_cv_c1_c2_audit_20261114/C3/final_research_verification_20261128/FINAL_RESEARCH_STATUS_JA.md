@@ -49,7 +49,7 @@ RUN4の既存`physical_results.csv`のみから再生成: fixed2/adaptive各10�
 
 ### 統合英語草稿
 
-`MANUSCRIPT_EN_DRAFT_20261128B.md` を新規作成し、CBMC、pinned Ibex RTL、旧C3 v2 campaign、新build DE0-CV pilot、Q15停止方式の探索的解析を証拠層ごとに分けて統合した。歴史的な `paper_20261117/MANUSCRIPT_DRAFT_EN.md` は変更していない。新稿では旧buildの24,840件を新buildの証拠に流用せず、UCI primary 7,626要求はoffline templateのみ、実機未実施と明記した。数値・統計・未解決ゲートは既存の監査済み記録から転記し、新しい実験結果は追加していない。レビュー前の原稿であり投稿用完成稿ではない。
+`MANUSCRIPT_EN_DRAFT_20261128B.md` を新規作成し、CBMC、pinned Ibex RTL、旧C3 v2 campaign、新build DE0-CV pilot、Q15停止方式の探索的解析を証拠層ごとに分けて統合した。歴史的な `paper_20261117/MANUSCRIPT_DRAFT_EN.md` は変更していない。新稿では旧buildの24,840件を新buildの証拠に流用せず、UCI primary 7,626要求はoffline templateのみ、実機未実施と明記した。source/evidence表、参考文献リンク、変数の意味と範囲を追加し、凍結primary計画の判定と旧heldout探索解析を区別した。数値・統計・未解決ゲートは既存の監査済み記録から転記し、新しい実験結果は追加していない。レビュー前の原稿であり投稿用完成稿ではない。
 
 Exit間の正誤遷移も全360件で監査し、12画像で「浅いExitで正解した後、後段Exitで誤りに戻る」非単調性を確認した。Exit 5→6は改善0・退行3。Exit 2以降で精度が単調に上がるとの主張はこのデータに反する。全入力のExit予測・正誤は `exit_counterexamples_RUN2_20261128/` に保存した。
 

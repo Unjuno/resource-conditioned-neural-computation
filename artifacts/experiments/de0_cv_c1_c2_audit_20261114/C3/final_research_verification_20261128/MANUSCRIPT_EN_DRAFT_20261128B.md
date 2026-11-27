@@ -12,7 +12,9 @@ Resource-conditioned inference can grant a neural classifier a maximum computati
 
 Neural early exits and conditional computation can reduce work for inputs that do not benefit from executing every layer. They do not, by themselves, establish predictable physical latency: model operations, processor cycles, I/O transfer, implementation timing, and a worst-case execution-time (WCET) guarantee are distinct quantities. We present an evidence-bounded case study of a resource-conditioned neural inference prototype and preserve those distinctions throughout.
 
-The interface accepts a normalized resource grant (b\in[0,1]). A backend maps that grant to the greatest supported finite class not exceeding it, (q_j\in\{0,1/6,2/6,3/6,4/6,5/6,1\}). The grant is a maximum permission, not a requirement to consume the full amount. An input-dependent preferred stopping decision can further reduce execution, and inactive neural blocks are skipped rather than zero-masked. Conceptually, effective work is bounded by the minimum of admitted budget, preferred work, deadline class, and policy cap.
+The interface accepts a normalized resource grant $b\in[0,1]$. A backend maps that grant to the greatest supported finite class not exceeding it, $q_j\in\{0,1/6,2/6,3/6,4/6,5/6,1\}$. The grant is a maximum permission, not a requirement to consume the full amount. An input-dependent preferred stopping decision can further reduce execution, and inactive neural blocks are skipped rather than zero-masked. Conceptually, effective work is bounded by the minimum of admitted budget, preferred work, deadline class, and policy cap.
+
+Here, $b$ is a dimensionless normalized grant over $[0,1]$, and $q_j$ is a dimensionless supported work class over $j\in\{0,1,\ldots,6\}$. They represent ceilings, not a physical unit of time. The cycle values reported below are discrete counts of processor clock cycles; no conversion to seconds is made without a calibrated clock.
 
 The contributions are intentionally limited:
 
@@ -58,13 +60,13 @@ The pilot was not designed as a representative sample. Its ten images are exclud
 
 ### 3.4 Exploratory offline comparison of stopping rules
 
-The new Q15 reanalysis used the frozen classifier and the existing scikit-learn handwritten-digit validation (359 images) and heldout (360 images) splits. It recomputed all exits with an analysis-only helper; it did not alter weights, firmware, SOF, or physical measurements. Fixed Exit 2 and frozen entropy stopping are compared directly. Max-softmax and top-two-margin thresholds were selected on validation and are exploratory analysis-only rules, not deployed firmware. A label-informed first-correct-exit oracle is included only as an unattainable retrospective reference.
+The new Q15 reanalysis used the frozen classifier and the existing scikit-learn handwritten-digit validation (359 images) and heldout (360 images) splits [4,11]. It recomputed all exits with an analysis-only helper; it did not alter weights, firmware, SOF, or physical measurements. Fixed Exit 2 and frozen entropy stopping are compared directly. Max-softmax and top-two-margin thresholds were selected on validation and are exploratory analysis-only rules, not deployed firmware. A label-informed first-correct-exit oracle is included only as an unattainable retrospective reference.
 
 For paired accuracy, the report uses a 20,000-replicate image-level bootstrap with seed `20261128`. It treats image rows as resampling units and does not account for unknown writer clusters. Therefore these intervals are descriptive conditional intervals, not a writer-population guarantee. Optional-block counts are counts of neural blocks, not CPU cycles, wall time, energy, or deadline execution time.
 
 ### 3.5 Unrun external primary campaign
 
-The UCI Optical Recognition of Handwritten Digits `optdigits.tra` primary campaign is not run. The prepared 7,626-row file is an offline schedule template for 3,813 candidate images × two modes; it contains no physical results. No output from that template is used in the results below. The former preregistration timeline cannot be independently anchored to the first model-output inspection, data exposure history is incomplete, and row-level writer IDs are unavailable. Thus the prospective and population-level eligibility conditions are not satisfied.
+The UCI Optical Recognition of Handwritten Digits `optdigits.tra` primary campaign is not run [12]. The prepared 7,626-row file is an offline schedule template for 3,813 candidate images × two modes; it contains no physical results. No output from that template is used in the results below. The former preregistration timeline cannot be independently anchored to the first model-output inspection, data exposure history is incomplete, and row-level writer IDs are unavailable. Thus the prospective and population-level eligibility conditions are not satisfied.
 
 ## 4. Results
 
@@ -124,19 +126,28 @@ Resource-conditioned inference can enforce a finite maximum-work contract while 
 
 The Japanese final status, formal evidence map, Q15 stopping analysis, pilot run record, per-input CSVs, tests, and SHA manifests are stored beside this draft under `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/`. The detailed historical C3 v2 manuscript and its evidence remain under `C3/paper_20261117/`. Key prior-work and dataset references [1–12], including UCI attribution and license information, are listed in that historical manuscript; this integrated draft retains its literature scope but awaits final bibliographic and coauthor review before submission.
 
+| Claim/evidence area | Repository evidence |
+|---|---|
+| Source-level CBMC and formal boundaries | `CLAIMS_AND_LIMITS.md`; `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/FORMAL_EVIDENCE_MAP_JA.md` |
+| Pinned Ibex RTL cycle binding and exact binary analyses | `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/FORMAL_EVIDENCE_MAP_JA.md`; referenced `notes/realtime_nn_ibex_rtl_validation.md` and `results/realtime_nn_ibex_rtl_validation_results.json` |
+| New-build DE0-CV pilot | `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/build/physical_pilot_RUN4_complete_20261126/`; `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/PILOT_DESCRIPTIVE_REANALYSIS.json` |
+| Offline stopping comparison and non-monotonic-exit cases | `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/Q15_STOPPING_ANALYSIS_JA.md`; `q15_stopping_comparison_RUN8_20261128/`; `exit_counterexamples_RUN2_20261128/` |
+| Historical C3 v2 empirical campaign (separate build) | `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/MANUSCRIPT_DRAFT_EN.md` and its linked campaign evidence |
+| UCI external primary status | `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/FINAL_RESEARCH_STATUS_JA.md`; `primary_schedule_OFFLINE_TEMPLATE.metadata.json` |
+
 ### References
 
-1. S. Teerapittayanon, B. McDanel, and H. T. Kung. “BranchyNet: Fast Inference via Early Exiting from Deep Neural Networks.” ICPR, 2016. DOI: 10.1109/ICPR.2016.7900006.
-2. G. Huang et al. “Multi-Scale Dense Networks for Resource Efficient Image Classification.” ICLR, 2018. arXiv:1703.09844.
-3. X. Wang et al. “SkipNet: Learning Dynamic Routing in Convolutional Networks.” ECCV, 2018. arXiv:1711.09485.
-4. F. Pedregosa et al. “Scikit-learn: Machine Learning in Python.” JMLR 12(85), 2011.
-5. F. Ilhan et al. “Adaptive Deep Neural Network Inference Optimization with EENet.” WACV, 2024. DOI: 10.1109/WACV57701.2024.00140.
-6. M. Kong and J. L. Nunez-Yanez. “Entropy-Based Early-Exit in a FPGA-Based Low-Precision Neural Network.” Applied Reconfigurable Computing, 2022. DOI: 10.1007/978-3-031-19983-7_6.
-7. E. Y. L. Kwan and J. Nunez-Yanez. “Entropy-Driven Adaptive Filtering for High-Accuracy and Resource-Efficient FPGA-Based Neural Network Systems.” Electronics 9(11), 1765, 2020. DOI: 10.3390/electronics9111765.
-8. A. Dimitriou et al. “Realization of Early-Exit Dynamic Neural Networks on Reconfigurable Hardware.” IEEE TCAD 44(6), 2025. DOI: 10.1109/TCAD.2024.3519055.
-9. H. Pearce et al. “Designing Neural Networks for Real-Time Systems.” IEEE Embedded Systems Letters 13(3), 2021. DOI: 10.1109/LES.2020.3009910.
-10. W. Zhang et al. “WCET Estimation for CNN Inference on FPGA SoC With Multi-DPU Engines.” IEEE TPDS 36(6), 2025. DOI: 10.1109/TPDS.2025.3555968.
-11. Scikit-learn developers. “Optical recognition of handwritten digits dataset (`load_digits`).” Dataset documentation; the loader describes a copy of the UCI test data.
-12. E. Alpaydin and C. Kaynak. “Optical Recognition of Handwritten Digits.” UCI Machine Learning Repository, 1998. DOI: 10.24432/C50P49. CC BY 4.0.
+1. S. Teerapittayanon, B. McDanel, and H. T. Kung. “BranchyNet: Fast Inference via Early Exiting from Deep Neural Networks.” ICPR, 2016. [DOI](https://doi.org/10.1109/ICPR.2016.7900006).
+2. G. Huang et al. “Multi-Scale Dense Networks for Resource Efficient Image Classification.” ICLR, 2018. [arXiv:1703.09844](https://arxiv.org/abs/1703.09844).
+3. X. Wang et al. “SkipNet: Learning Dynamic Routing in Convolutional Networks.” ECCV, 2018. [arXiv:1711.09485](https://arxiv.org/abs/1711.09485).
+4. F. Pedregosa et al. “Scikit-learn: Machine Learning in Python.” JMLR 12(85), 2011. [Paper](https://www.jmlr.org/papers/v12/pedregosa11a.html).
+5. F. Ilhan et al. “Adaptive Deep Neural Network Inference Optimization with EENet.” WACV, 2024. [DOI](https://doi.org/10.1109/WACV57701.2024.00140).
+6. M. Kong and J. L. Nunez-Yanez. “Entropy-Based Early-Exit in a FPGA-Based Low-Precision Neural Network.” Applied Reconfigurable Computing, 2022. [DOI](https://doi.org/10.1007/978-3-031-19983-7_6).
+7. E. Y. L. Kwan and J. Nunez-Yanez. “Entropy-Driven Adaptive Filtering for High-Accuracy and Resource-Efficient FPGA-Based Neural Network Systems.” Electronics 9(11), 1765, 2020. [DOI](https://doi.org/10.3390/electronics9111765).
+8. A. Dimitriou et al. “Realization of Early-Exit Dynamic Neural Networks on Reconfigurable Hardware.” IEEE TCAD 44(6), 2025. [DOI](https://doi.org/10.1109/TCAD.2024.3519055).
+9. H. Pearce et al. “Designing Neural Networks for Real-Time Systems.” IEEE Embedded Systems Letters 13(3), 2021. [DOI](https://doi.org/10.1109/LES.2020.3009910).
+10. W. Zhang et al. “WCET Estimation for CNN Inference on FPGA SoC With Multi-DPU Engines.” IEEE TPDS 36(6), 2025. [DOI](https://doi.org/10.1109/TPDS.2025.3555968).
+11. Scikit-learn developers. “Optical recognition of handwritten digits dataset (`load_digits`).” [Dataset documentation](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_digits.html); the loader describes a copy of the UCI test data.
+12. E. Alpaydin and C. Kaynak. “Optical Recognition of Handwritten Digits.” UCI Machine Learning Repository, 1998. [DOI](https://doi.org/10.24432/C50P49); [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
 **Review status:** Integrated technical draft for review. It is not submission-ready until all internal artifact links, references, authorship, and interpretation are reviewed. No result in this manuscript substitutes for the unrun external primary campaign or blocked formal timing sign-off.

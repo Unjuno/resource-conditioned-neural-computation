@@ -77,7 +77,7 @@ RUN8でentropy停止は固定2と同じ339/360正解、平均optional blocks 1.3
 
 ### 統合英語草稿の作成
 
-`MANUSCRIPT_EN_DRAFT_20261128B.md` を追加。既存の監査済み資料から、研究の方法、source/formal証拠、pinned Ibex RTL結果、DE0-CV RUN4 pilot、legacy heldout Q15停止則比較、UCI primary未実施をbuildと証拠範囲ごとに整理した。古いC3 v2原稿および測定記録は変更していない。新たな実験・物理操作はしていない。文書の数値は対応する保存済み記録に照合し、manifestへ追加する。
+`MANUSCRIPT_EN_DRAFT_20261128B.md` を追加。既存の監査済み資料から、研究の方法、source/formal証拠、pinned Ibex RTL結果、DE0-CV RUN4 pilot、legacy heldout Q15停止則比較、UCI primary未実施をbuildと証拠範囲ごとに整理した。原稿内にartifact evidence mapと関連文献DOI/公式datasetリンクを加え、変数の意味・範囲を明記した。凍結primaryの事前指定統計条件と今回のlegacy heldout探索区間を区別した。古いC3 v2原稿および測定記録は変更していない。新たな実験・物理操作はしていない。文書の数値は対応する保存済み記録に照合し、manifestへ追加する。
 
 ### Exit correctnessの遷移・反例
 
