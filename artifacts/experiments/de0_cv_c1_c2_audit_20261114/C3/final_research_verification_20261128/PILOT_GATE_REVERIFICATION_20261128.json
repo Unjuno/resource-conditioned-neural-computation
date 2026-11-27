@@ -1,0 +1,53 @@
+{
+  "schema": "rtnn-extval-pilot-gate-v1",
+  "experiment_id": "C3_EXTVAL_PILOT_20261126_RUN4",
+  "session_id": "BOARD_POWER_EPOCH_20261126_CURRENT",
+  "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+  "firmware_elf_sha256": "4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e",
+  "build_id": "45585631",
+  "binding_id": "45585632",
+  "model_id": "52544e4e",
+  "case_count": 20,
+  "pilot_attempt_recorded": true,
+  "hardware_opened_log_claim": true,
+  "pilot_input_ids": [
+    57,
+    277,
+    321,
+    519,
+    525,
+    667,
+    921,
+    1673,
+    3660,
+    3689
+  ],
+  "cases_sha256": "fb37097914916ad41a18e9c13e476216f66335e91973aff6b333e62546529093",
+  "binding_sha256": "68a381e78cdcee2dc49e18f00914528290ec01d9b33bac5e1903681df436070e",
+  "raw_log_sha256": "6cc619cba1c1459b6035a108477922244b75efdd2cb1ca4d830cd59fb3df268f",
+  "results_sha256": "db138a1c34619af0f1778c05441164ef467f2f68795c223b497c972c15baa038",
+  "run_status_sha256": "48e7c7f0949a3b0f92465e659e8a6a637cbaad3f28b667da5fcc2ca66db3f346",
+  "oracle_sha256": "e33faa329b2dd29837e069829befb2604713ababddeb3366e2201016cfbf24f6",
+  "pilot_manifest_sha256": "1bd1c4d06c0063a686d7003deadff3aa07140f402ae29e7547b4b3fdb4e1b4bc",
+  "primary_manifest_sha256": "d36914895c1c3b8db33e0497bd1559853aed6f7d1add7d544ae2992dde71cc10",
+  "evidence_paths": {
+    "cases.csv": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\build\\physical_pilot_RUN4_complete_20261126\\cases.csv",
+    "binding.json": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\build\\physical_pilot_RUN4_complete_20261126\\binding.json",
+    "run_external_validation.tcl": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\build\\physical_pilot_RUN4_complete_20261126\\run_external_validation.tcl",
+    "launcher.log": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\build\\physical_pilot_RUN4_complete_20261126\\launcher.log",
+    "physical_results.csv": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\build\\physical_pilot_RUN4_complete_20261126\\physical_results.csv",
+    "raw_jtag.log": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\build\\physical_pilot_RUN4_complete_20261126\\raw_jtag.log",
+    "run_status.json": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\build\\physical_pilot_RUN4_complete_20261126\\run_status.json",
+    "oracle.csv": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\build\\cpu_oracle_attempt1\\oracle_pilot.csv",
+    "pilot_manifest.csv": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\data\\pilot_manifest.csv",
+    "primary_manifest.csv": "C:\\Users\\junny\\OneDrive\\\u30c9\u30ad\u30e5\u30e1\u30f3\u30c8\\ChatGPT\\resource-conditioned-neural-computation-c3-paper\\artifacts\\experiments\\de0_cv_c1_c2_audit_20261114\\C3\\external_validation_20261122\\data\\primary_manifest.csv"
+  },
+  "audit": "PILOT_AUDIT_PASS",
+  "classification": "EMPIRICAL_ONLY",
+  "limitations": [
+    "Consistency of saved logs is not cryptographic proof of physical acquisition.",
+    "Operator authorization is recorded separately and is not inferred from execution records."
+  ],
+  "operator_authorization": "recorded",
+  "operator_authorization_is_not_execution_proof": true
+}

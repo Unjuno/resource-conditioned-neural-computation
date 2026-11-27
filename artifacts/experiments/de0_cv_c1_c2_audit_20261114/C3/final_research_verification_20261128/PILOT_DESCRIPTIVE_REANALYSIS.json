@@ -1,0 +1,111 @@
+{
+  "classification": "ENGINEERING_PILOT_DESCRIPTIVE_ONLY",
+  "experiment_id": "C3_EXTVAL_PILOT_20261126_RUN4",
+  "session_id": "BOARD_POWER_EPOCH_20261126_CURRENT",
+  "case_count": 20,
+  "image_count": 10,
+  "cycles": {
+    "fixed2_mean": 943905.6,
+    "fixed2_median": 943906.0,
+    "adaptive_mean": 667031.9,
+    "adaptive_median": 565923.0,
+    "paired_ratio_of_sums_saving": 0.2933277437913283
+  },
+  "paired_teacher_correct": {
+    "fixed2": 10,
+    "adaptive": 10
+  },
+  "adaptive_faster_count": 8,
+  "adaptive_slower_input_ids": [
+    519,
+    667
+  ],
+  "paired": [
+    {
+      "input_id": 57,
+      "fixed2_cycles": 943907,
+      "adaptive_cycles": 565924,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 277,
+      "fixed2_cycles": 943904,
+      "adaptive_cycles": 565921,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 321,
+      "fixed2_cycles": 943906,
+      "adaptive_cycles": 565923,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 519,
+      "fixed2_cycles": 943906,
+      "adaptive_cycles": 1071469,
+      "adaptive_minus_fixed2_cycles": 127563,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 525,
+      "fixed2_cycles": 943906,
+      "adaptive_cycles": 565923,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 667,
+      "fixed2_cycles": 943906,
+      "adaptive_cycles": 1071469,
+      "adaptive_minus_fixed2_cycles": 127563,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 921,
+      "fixed2_cycles": 943907,
+      "adaptive_cycles": 565924,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 1673,
+      "fixed2_cycles": 943905,
+      "adaptive_cycles": 565922,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 3660,
+      "fixed2_cycles": 943904,
+      "adaptive_cycles": 565922,
+      "adaptive_minus_fixed2_cycles": -377982,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    },
+    {
+      "input_id": 3689,
+      "fixed2_cycles": 943905,
+      "adaptive_cycles": 565922,
+      "adaptive_minus_fixed2_cycles": -377983,
+      "fixed2_teacher_correct": true,
+      "adaptive_teacher_correct": true
+    }
+  ],
+  "limitations": [
+    "Selected 10-image engineering pilot only; no population estimate.",
+    "One continuous board power epoch; cold boot independence unverified.",
+    "No noninferiority or general speed superiority claim.",
+    "Empirical consistency is not a proof of physical acquisition or formal timing."
+  ]
+}

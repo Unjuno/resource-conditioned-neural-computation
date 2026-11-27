@@ -1,0 +1,16 @@
+{
+  "schema": "rtnn-extval-primary-offline-preparation-v1",
+  "classification": "NOT_PHYSICAL_NOT_BOUND",
+  "experiment_id": "OFFLINE_PREPARATION_ONLY_20261128",
+  "session_id": "OFFLINE_NOT_A_POWER_SESSION",
+  "rows": 7626,
+  "sequence_first": 22,
+  "sequence_last": 7647,
+  "source_cases_sha256": "35e419a33d921ff59e0fa8df51121df30637a292079efebb4070c64b29695b50",
+  "prepared_cases_sha256": "7fb64b5b665099f890825282a8027133fb607b602fe6b918f8990601194db38c",
+  "frozen_input_mode_order_preserved": true,
+  "highest_recorded_pilot_sequence": 21,
+  "sequence_reuse_avoided": true,
+  "binding_created": false,
+  "physical_authorized": false
+}

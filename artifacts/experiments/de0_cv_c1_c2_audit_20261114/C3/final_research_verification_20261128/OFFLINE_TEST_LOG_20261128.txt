@@ -1,0 +1,81 @@
+
+>>> py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/test_primary_audit.py
+test_crc_tamper_rejected (__main__.PrimaryAuditTests.test_crc_tamper_rejected) ... ok
+test_duplicate_sequence_rejected (__main__.PrimaryAuditTests.test_duplicate_sequence_rejected) ... ok
+test_frozen_existing_schedule (__main__.PrimaryAuditTests.test_frozen_existing_schedule) ... ok
+test_manifest_duplicate_name_rejected (__main__.PrimaryAuditTests.test_manifest_duplicate_name_rejected) ... ok
+test_manifest_path_traversal_rejected (__main__.PrimaryAuditTests.test_manifest_path_traversal_rejected) ... ok
+test_missing_row_rejected (__main__.PrimaryAuditTests.test_missing_row_rejected) ... ok
+test_oracle_tamper_rejected (__main__.PrimaryAuditTests.test_oracle_tamper_rejected) ... ok
+test_pixel_tamper_rejected (__main__.PrimaryAuditTests.test_pixel_tamper_rejected) ... ok
+test_prepared_sequence_offset_schedule (__main__.PrimaryAuditTests.test_prepared_sequence_offset_schedule) ... ok
+test_raw_log_corruption_rejected (__main__.PrimaryAuditTests.test_raw_log_corruption_rejected) ... ok
+test_raw_pilot_log_parses_without_device_access (__main__.PrimaryAuditTests.test_raw_pilot_log_parses_without_device_access) ... ok
+test_teacher_label_tamper_rejected (__main__.PrimaryAuditTests.test_teacher_label_tamper_rejected) ... ok
+test_wrong_build_rejected (__main__.PrimaryAuditTests.test_wrong_build_rejected) ... ok
+test_wrong_input_order_rejected (__main__.PrimaryAuditTests.test_wrong_input_order_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.498s
+
+OK
+
+>>> py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/test_pilot_descriptive.py
+test_missing_case_rejected (__main__.PilotDescriptiveTests.test_missing_case_rejected) ... ok
+test_reference_mismatch_rejected (__main__.PilotDescriptiveTests.test_reference_mismatch_rejected) ... ok
+test_saved_run4_descriptive_only (__main__.PilotDescriptiveTests.test_saved_run4_descriptive_only) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.007s
+
+OK
+
+>>> py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/test_primary_analysis.py
+test_frozen_primary_schedule_precheck (__main__.PrimaryReadinessTests.test_frozen_primary_schedule_precheck) ... ok
+test_physical_analysis_is_not_called_on_schedule_only (__main__.PrimaryReadinessTests.test_physical_analysis_is_not_called_on_schedule_only) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.091s
+
+OK
+
+>>> py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/safety_gates_v1_20261122/test_runner_preflight.py
+test_binding_generator_rejects_primary_without_pilot_gate (__main__.PreflightIntegration.test_binding_generator_rejects_primary_without_pilot_gate) ... ok
+test_direct_tcl_rejects_before_jtag_discovery (__main__.PreflightIntegration.test_direct_tcl_rejects_before_jtag_discovery) ... ok
+test_pilot_binding_preflight_does_not_require_a_pilot_gate (__main__.PreflightIntegration.test_pilot_binding_preflight_does_not_require_a_pilot_gate) ... ok
+test_powershell_rejects_before_quartus_launch (__main__.PreflightIntegration.test_powershell_rejects_before_quartus_launch) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.488s
+
+OK
+
+>>> py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/host_v2_20261126/test_mock_runtime.py
+test_twenty_request_protocol_and_fixture_rejection (__main__.MockRuntime.test_twenty_request_protocol_and_fixture_rejection) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.488s
+
+OK
+
+>>> py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/scripts/test_stats_core.py
+test_bad_pairs_rejected (__main__.StatsTests.test_bad_pairs_rejected) ... ok
+test_cycle_bootstrap_deterministic (__main__.StatsTests.test_cycle_bootstrap_deterministic) ... ok
+test_ni_strong_adaptive_dominance (__main__.StatsTests.test_ni_strong_adaptive_dominance) ... ok
+test_ni_zero_difference_not_pass_for_tight_margin (__main__.StatsTests.test_ni_zero_difference_not_pass_for_tight_margin) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.098s
+
+OK
+
+>>> py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/external_validation_20261122/scripts/test_physical_audit_fail_closed.py
+test_mock_data_is_rejected_before_csv_import (__main__.PhysicalGateTests.test_mock_data_is_rejected_before_csv_import) ... ok
+test_old_build_is_rejected (__main__.PhysicalGateTests.test_old_build_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.008s
+
+OK
+
+ALL TEST COMMANDS EXITED 0
