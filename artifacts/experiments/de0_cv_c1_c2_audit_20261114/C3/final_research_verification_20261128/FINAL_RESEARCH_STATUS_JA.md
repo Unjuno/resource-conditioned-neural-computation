@@ -51,6 +51,10 @@ RUN4の既存`physical_results.csv`のみから再生成: fixed2/adaptive各10�
 
 `MANUSCRIPT_EN_DRAFT_20261128B.md` を新規作成し、CBMC、pinned Ibex RTL、旧C3 v2 campaign、新build DE0-CV pilot、Q15停止方式の探索的解析を証拠層ごとに分けて統合した。歴史的な `paper_20261117/MANUSCRIPT_DRAFT_EN.md` は変更していない。新稿では旧buildの24,840件を新buildの証拠に流用せず、UCI primary 7,626要求はoffline templateのみ、実機未実施と明記した。source/evidence表、参考文献リンク、変数の意味と範囲を追加し、凍結primary計画の判定と旧heldout探索解析を区別した。数値・統計・未解決ゲートは既存の監査済み記録から転記し、新しい実験結果は追加していない。レビュー前の原稿であり投稿用完成稿ではない。
 
+UCI公式資料の追加確認に基づき、原稿へ筆記者pool分割の限定を追加した。公式記録はtraining sideの30人とtest sideの別の13人を記し、RTNNの追跡済み`load_digits`配列は`optdigits.tes`と一致する。よって追跡済み旧データとの間にはsplit-level writer separationの根拠がある。一方、未記録の`optdigits.tra`先行使用は否定できず、tra各行のwriter IDもないため、`DATA_EXPOSURE_UNCERTAIN`と`WRITER_CLUSTER_UNKNOWN`を維持する。出典はUCI dataset record、既存`PRIOR_DATA_USE_AUDIT_JA.md`と`DATASET_AUDIT_JA.md`。
+
+未追跡`physical_pilot_RUN2_preparation/`は20件候補入力CSVのみと確認。raw JTAG、実行状態、実測結果、独立監査証拠は見つからず、新しいpilot実施とは判定しない。CSVは変更・削除せず未追跡のまま保全。
+
 Exit間の正誤遷移も全360件で監査し、12画像で「浅いExitで正解した後、後段Exitで誤りに戻る」非単調性を確認した。Exit 5→6は改善0・退行3。Exit 2以降で精度が単調に上がるとの主張はこのデータに反する。全入力のExit予測・正誤は `exit_counterexamples_RUN2_20261128/` に保存した。
 
 ### 現在のゲート
