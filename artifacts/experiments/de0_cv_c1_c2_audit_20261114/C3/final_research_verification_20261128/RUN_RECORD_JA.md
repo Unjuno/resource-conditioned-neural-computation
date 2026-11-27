@@ -99,4 +99,20 @@ UCI公式記録を再確認し、optdigits.traのtraining side 30 writersとoptd
 
 更新した全ディレクトリ用の別manifestは `SHA256SUMS_POSTRUN_20261128.txt`（72件、manifest自身と前回の `SHA256SUMS.txt` を除く）。前回コミットのmanifestは上書きせず保持。
 
+### 2026-11-28追記：旧C3 v2 実機campaignの独立再集計と論文統合
+
+旧C3 v2の実機データを、新buildの結果へ混ぜず論文の統合稿へ反映する目的で再集計した。正しいrepoの`codex/external-validation-20261122`、origin `Unjuno/resource-conditioned-neural-computation`、開始HEAD `4fc1940d8e6257f781b92425d403a1322a153406`を確認。既存未追跡`external_validation_20261122/build/physical_pilot_RUN2_preparation/`は変更していない。
+
+実行コマンド:
+
+```powershell
+py -3.11 -B 'artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/reanalyze_c3v2_primary.py' --out-dir 'artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/c3v2_historical_reanalysis_RUN1_20261128'
+```
+
+結果は`PASS: C3v2 13/13 24840 rows; primary 360 IDs x 10; +5 cycle shift 7200 pairs`。要約はfixed2 943,929.77 cycles、adaptive 746,327.99、差197,601.77、記述的削減20.93395%、input-ID resamplingの95%区間16.80384–24.90345%、adaptiveが速い/遅い入力263/97、両方式339/360正答、 paired accuracy差区間−1.38889〜+1.38889 pp。保存出力は上記run directoryの`analysis.json`、`input_level.csv`、`primary_sessions.csv`、図2点、SHA manifest。原campaignと旧C3 v2のbuild/SOF/ELF identityを保持し、別の今回buildへ移植しない。
+
+統合稿に独立したSection 4.4を追加し、歴史的C3 v2の定量結果をそのartifact identity・統計上の単位・test-blindでないcomparator・cold-boot未確認・タイミング/CDC sign-off未完了とともに記載した。`CLAIM_EVIDENCE_MATRIX.csv`にC11を追加。新buildのRUN4 pilot、pinned-Ibex cycle binding、旧C3 v2実機campaignを別々の主張として扱う。
+
+`test_reanalyze_c3v2_primary.py -v`を再実行し11/11 PASS。real-row fixtureと誤build、CRC、prediction、Exit、cycle interval、wrap、SHA、既存出力上書き拒否の各負例を含む。`git diff --check`もPASS。新しいintegrated manuscript内の歴史campaign 4参照とclaim matrixの証拠参照は実在ファイルを指す。更新manifestは変更文書と新しい再集計出力を含め、全項目SHAを照合した。今回、実機操作とprimary campaignは実行していない。
+
 Git diffでCRLFがwhitespaceとして検出されたため、新規生成されたテキストCSV/logの行末をLFへ正規化した（セル・数値・JSON値は変更なし）。前RUNのcompiler `stdout_sha256` は生成直後の標準出力bytesを指す。確定RUN8はC runtimeのstdin/stdoutをbinaryにして標準出力CSVを直接一致させた。
