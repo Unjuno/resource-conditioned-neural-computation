@@ -123,4 +123,6 @@ py -3.11 -B 'artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117
 
 JSONの11方式heldout結果と英語稿tableを機械照合し、correct数、accuracy、mean optional blocksの全33値が一致。Pareto SVG存在確認PASS。比較テスト5/5 PASS。初回の照合ワンショットはWindows既定文字コードでUTF-8資料を開けず停止したため、UTF-8指定で再実行してPASS。ファイル変更はない。
 
+照合を再現可能にする`verify_q15_manuscript_table.py`を追加し、RUN8 JSONのQ15/core/weights identity、validation-only tuning、11行のcorrect/accuracy/blocks/checks、Pareto図と主張範囲を検査。`py -3.11 -B .../verify_q15_manuscript_table.py`: PASS。作成時に見つかったJSON構造の参照違いと図中表記の相違は期待値側を修正し、保存値・図自体は変更していない。
+
 Git diffでCRLFがwhitespaceとして検出されたため、新規生成されたテキストCSV/logの行末をLFへ正規化した（セル・数値・JSON値は変更なし）。前RUNのcompiler `stdout_sha256` は生成直後の標準出力bytesを指す。確定RUN8はC runtimeのstdin/stdoutをbinaryにして標準出力CSVを直接一致させた。
