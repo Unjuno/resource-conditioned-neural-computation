@@ -37,7 +37,7 @@ RUN4の既存`physical_results.csv`のみから再生成: fixed2/adaptive各10�
 2. その決定前にamendmentをレビューし、primary結果を見る前に署名/時刻/SHA/適用commitを固定する。
 3. 実機の新build・mailbox状態・次sequenceをread-onlyで確認し、許可されたら新しいprimary bindingを作る。
 4. 7,626件を実機で実行してから`audit_primary.py run`、続いて`analyze_audited_primary.py`を実行。mockは不可。
-5. alternate stopping rule比較をする場合、同一Q15の全exit integer logitsとコンパイラ実行可能環境を用意し、validationで閾値を決める。
+5. legacy `load_digits`での同一Q15停止方式比較は完了済み（固定Exit 0〜6、entropy、validation選択max-softmax/margin、事後oracle）。これは探索解析であり、UCI primary結果として流用しない。UCI側で方式を追加・変更する必要があるなら、primary結果を見る前に独立amendmentへ固定する。
 6. writer ID/データ来歴、外部JTAG timing仕様、正式STA/WCETは別の証拠を入手しない限り未確定。
 
 この時点ではprimary性能結果や確認的仮説の最終判定を報告できない。研究報告は、既存のソフトウェア/RTL scope内の形式・測定証拠と、10画像pilotの限定機能デモに限定する。

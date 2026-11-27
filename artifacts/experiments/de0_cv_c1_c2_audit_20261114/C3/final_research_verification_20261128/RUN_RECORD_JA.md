@@ -127,4 +127,6 @@ JSONの11方式heldout結果と英語稿tableを機械照合し、correct数、a
 
 最終状態書にH/T/D/C/U形式の仮説別判定を追記。UCI primaryの5% cycle削減と1 pp非劣性は未評価、既存360-image bootstrapの非劣性はinconclusive、optional-block比較はoffline exploratory、Exit非単調性は観測heldout上で確認、有限work証拠は形式scopeに限定、physical timing/WCETはblockedと分離した。データ露出、writer cluster、preregistration timeline、cold boot、formal timing signoffは未解決のまま。
 
+最終状態書の人手作業一覧に古い「alternate stopping comparisonが未完了」という項目が残っていたため、RUN8で完了したlegacy `load_digits`比較と未実施UCI primaryとの差を反映して修正。停止方式比較の探索作業を重複依頼しない記載にした。
+
 Git diffでCRLFがwhitespaceとして検出されたため、新規生成されたテキストCSV/logの行末をLFへ正規化した（セル・数値・JSON値は変更なし）。前RUNのcompiler `stdout_sha256` は生成直後の標準出力bytesを指す。確定RUN8はC runtimeのstdin/stdoutをbinaryにして標準出力CSVを直接一致させた。
