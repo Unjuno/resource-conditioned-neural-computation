@@ -125,4 +125,6 @@ JSONの11方式heldout結果と英語稿tableを機械照合し、correct数、a
 
 照合を再現可能にする`verify_q15_manuscript_table.py`を追加し、RUN8 JSONのQ15/core/weights identity、validation-only tuning、11行のcorrect/accuracy/blocks/checks、Pareto図と主張範囲を検査。`py -3.11 -B .../verify_q15_manuscript_table.py`: PASS。作成時に見つかったJSON構造の参照違いと図中表記の相違は期待値側を修正し、保存値・図自体は変更していない。
 
+最終状態書にH/T/D/C/U形式の仮説別判定を追記。UCI primaryの5% cycle削減と1 pp非劣性は未評価、既存360-image bootstrapの非劣性はinconclusive、optional-block比較はoffline exploratory、Exit非単調性は観測heldout上で確認、有限work証拠は形式scopeに限定、physical timing/WCETはblockedと分離した。データ露出、writer cluster、preregistration timeline、cold boot、formal timing signoffは未解決のまま。
+
 Git diffでCRLFがwhitespaceとして検出されたため、新規生成されたテキストCSV/logの行末をLFへ正規化した（セル・数値・JSON値は変更なし）。前RUNのcompiler `stdout_sha256` は生成直後の標準出力bytesを指す。確定RUN8はC runtimeのstdin/stdoutをbinaryにして標準出力CSVを直接一致させた。

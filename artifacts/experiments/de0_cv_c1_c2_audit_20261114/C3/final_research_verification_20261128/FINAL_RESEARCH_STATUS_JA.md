@@ -74,3 +74,17 @@ Exit間の正誤遷移も全360件で監査し、12画像で「浅いExitで正�
 | 正式タイミング/WCET/期限保証 | BLOCKED | 外部JTAG timingや基板条件の証拠不足。 |
 
 変更していない保留ラベル：`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`。
+
+## 仮説別の判定（H / T / D / C / U）
+
+| 仮説・主張 | 判定 | 根拠と範囲 |
+|---|---|---|
+| 新firmwareの動的画像入力が固定Q15 oracleと整合する | **PASS_LIMITED** | DE0-CV RUN4のpilot 10画像×2方式、20/20要求。外部標本精度や全UCI評価は未検証。 |
+| 新UCI候補でadaptiveがfixed2より5%以上cyclesを削減 | **NOT_EVALUATED** | 3,813画像の実機primaryは未実施。旧C3 v2の別buildでは観測削減20.934%だが、既知結果を使ったfixed2 comparator、固定360画像、独立cold boot未確認の経験値。閾値達成を新規仮説のPASSに使わない。 |
+| 新UCI候補でaccuracy差の1 pp非劣性を満たす | **NOT_EVALUATED / PRIOR ANALYSES INCONCLUSIVE** | UCI primary未実施。旧360入力で両方式339/360という同数でも、対応差区間は−1.389〜+1.389 ppで1 pp条件を示さない。筆記者clusterも未確定。 |
+| adaptive停止が同一Q15の計算量を下げうる | **OFFLINE_EXPLORATORY SUPPORT** | legacy heldoutでentropy平均1.358 optional blocks、fixed2は2.000。confidence方式もvalidation調整後のheldoutで比較。optional blockはFPGA cyclesではない。 |
+| 深いExitは個別予測を常に改善する | **FALSIFIED ON OBSERVED HELDOUT SET** | 360画像の12件で浅いExitの正解後に深いExitで誤りへ戻った。一般母集団の割合や因果説明には拡張しない。 |
+| 有限work制御・pinned Ibexのcycle binding | **PASS_WITH_SCOPE** | CBMCと指定pinned Simple-System RTLの保存済み証明・測定。新外部入力firmwareの全設定、DE0-CV物理timing、WCETの証明ではない。 |
+| DE0-CVの外部JTAG timing・formal WCET | **BLOCKED** | 外部JTAG timing前提と完全な基板制約/証拠が不足。経験的cycle結果で解除しない。 |
+
+Uは画像露出履歴、筆記者内相関、電源起動独立性、校正済み時間、外部JTAG timingを含む。値のない不確かさは推定不能のままとし、入力bootstrapでボード/起動間不確かさを代用しない。
