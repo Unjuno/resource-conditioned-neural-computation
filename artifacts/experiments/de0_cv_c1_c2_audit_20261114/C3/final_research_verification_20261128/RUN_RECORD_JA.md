@@ -129,4 +129,10 @@ JSONの11方式heldout結果と英語稿tableを機械照合し、correct数、a
 
 最終状態書の人手作業一覧に古い「alternate stopping comparisonが未完了」という項目が残っていたため、RUN8で完了したlegacy `load_digits`比較と未実施UCI primaryとの差を反映して修正。停止方式比較の探索作業を重複依頼しない記載にした。
 
+### 2026-11-28追記：primary amendmentと保存済みbuildのread-only照合
+
+正しいrepo/branch/remoteとHEAD `06d88b3b7beb7b739da3517fb21fc951b4d85e37`を再確認。未追跡の`physical_pilot_RUN2_preparation/`は不変更。凍結`PREREGISTRATION_LOCKED_JA.md`と未承認`EXPLORATORY_PRIMARY_AMENDMENT_DRAFT_JA.md`を読んで条件を照合した。元の3 sessionsから1連続sessionへの変更、全7,626要求、pilot除外、fixed2/adaptive、budget 65535、deadline 0、統計閾値、欠損/失敗保存規則を記載している。承認者/日時・適用commit・実験/session IDは未記入で`NOT_RUN`のため、amendmentは有効化・固定済みではない。レビュー用ドラフトfingerprint SHA-256: `dd1c6e35cd73520ce655221f360379faad386d874132161ac933af01193d57c7`（承認・lock SHAではない）。
+
+historical pilot binding JSON（split=pilot, build `45585631`, binding `45585632`, model `52544e4e`）の記載値と実ファイルをread-only比較。SOF SHA `5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4`一致、ELF SHA `4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e`一致、事前登録SHA `5005c80c6d2d8eefbf87dd4dfdb4c91e26adb7960a3e5b1f04a977fdaee3b33b`一致。これは保存ファイルのidentity照合であり、現在の基板状態/ロード済みSOFのreadbackではない。JTAG、SOF設定、primary実行は行っていない。
+
 Git diffでCRLFがwhitespaceとして検出されたため、新規生成されたテキストCSV/logの行末をLFへ正規化した（セル・数値・JSON値は変更なし）。前RUNのcompiler `stdout_sha256` は生成直後の標準出力bytesを指す。確定RUN8はC runtimeのstdin/stdoutをbinaryにして標準出力CSVを直接一致させた。
