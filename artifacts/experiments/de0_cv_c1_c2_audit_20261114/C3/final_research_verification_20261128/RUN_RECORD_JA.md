@@ -115,4 +115,12 @@ py -3.11 -B 'artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117
 
 `test_reanalyze_c3v2_primary.py -v`を再実行し11/11 PASS。real-row fixtureと誤build、CRC、prediction、Exit、cycle interval、wrap、SHA、既存出力上書き拒否の各負例を含む。`git diff --check`もPASS。新しいintegrated manuscript内の歴史campaign 4参照とclaim matrixの証拠参照は実在ファイルを指す。更新manifestは変更文書と新しい再集計出力を含め、全項目SHAを照合した。今回、実機操作とprimary campaignは実行していない。
 
+### 2026-11-28追記：Q15停止方式の実行状態を整合
+
+現在の`FINAL_RESEARCH_STATUS_JA.md`に古い`BLOCKED_TOOLCHAIN/LOGIT_ARTIFACT`記載が残っていたが、これはZig経由の成功したQ15解析RUN8と矛盾していた。保存された`STOPPING_COMPARISON.json`と`Q15_STOPPING_ANALYSIS_JA.md`を照合し、validation359件・heldout360件に対する固定Exit 0〜6、entropy、validation選択max-softmax/margin、retrospective oracleの11方式評価が存在することを確認した。block数のaccuracy Pareto図も保存済み。`py -3.11 -B .../test_stopping_comparison.py -v`: 5/5 PASS（frozen Q15 identity、全指標行、CSV/stdout同一性、counterexample保持、cycle/confirmatory主張がないこと）。
+
+統合英語稿のSection 4.2へ固定Exit全段階とPareto図を追加した。Exit 6は診断専用、oracleは教師ラベルを必要とし実行可能方式ではないこと、optional blockはcycle指標ではないことを明記した。C9 evidence rowへPareto図のパスを追加し、状態表の古いblockerを「legacy heldout探索解析では解消、UCI external primaryは未実施」に修正した。`DATA_EXPOSURE_UNCERTAIN`等の制限と主要実機未実施は維持する。
+
+JSONの11方式heldout結果と英語稿tableを機械照合し、correct数、accuracy、mean optional blocksの全33値が一致。Pareto SVG存在確認PASS。比較テスト5/5 PASS。初回の照合ワンショットはWindows既定文字コードでUTF-8資料を開けず停止したため、UTF-8指定で再実行してPASS。ファイル変更はない。
+
 Git diffでCRLFがwhitespaceとして検出されたため、新規生成されたテキストCSV/logの行末をLFへ正規化した（セル・数値・JSON値は変更なし）。前RUNのcompiler `stdout_sha256` は生成直後の標準出力bytesを指す。確定RUN8はC runtimeのstdin/stdoutをbinaryにして標準出力CSVを直接一致させた。

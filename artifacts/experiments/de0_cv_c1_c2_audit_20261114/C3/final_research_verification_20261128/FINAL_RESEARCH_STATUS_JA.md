@@ -7,7 +7,7 @@
 * PowerShell/Tcl fail-closed: **PASS_OFFLINE** — primary gateなしのPowerShell起動、binding作成、Tcl直接起動は機器検出前に拒否する既存試験がPASS。Tcl runtime mockは隔離tempでのみ20件を完走し、production監査ではmock拒否。
 * 新しいprimary実機評価: **NOT_RUN** — primaryを実行する承認は今回確認できていない。過去のSRAM＋pilot許可はprimaryに及ばない。
 * 主張適格性: `DATA_EXPOSURE_UNCERTAIN`; `WRITER_CLUSTER_UNKNOWN`; `PREREGISTRATION_TIMELINE_UNVERIFIED`; `COLD_BOOT_UNVERIFIED`; `FORMAL_TIMING_SIGNOFF_BLOCKED` を維持。
-* 停止方式比較（confidence/margin/entropy/oracle）の新しい同一Q15再計算: **BLOCKED_TOOLCHAIN/LOGIT_ARTIFACT**。host Q15 oracle保存物は実行された出力だけで、全exit logitsを含まない。C compilerが見つからず、WSLはext4.vhdx mount時 `ERROR_NO_SUCH_DEVICE`。浮動小数や別モデルで代用していない。
+* 既存 `sklearn.load_digits` heldout上の同一凍結Q15停止方式比較: **PASS_OFFLINE_EXPLORATORY** — RUN8で固定Exit 0〜6、凍結entropy、validationで閾値選定したmax-softmax/top-two margin、事後oracleの11方式を比較。Pareto図と全画像出力を保全し、統計は探索的、block数はcycleではない。外部UCI primary結果は未取得。以前のtoolchain-blocked記載はZig経由の実行以前の状態であり、この比較については解消済み。
 * 旧C3 v2 24,840要求の再現可能な再集計: **PASS_SAVED_EVIDENCE_EMPIRICAL_ONLY** — 新しい出力先へ保存済みraw campaignから再実行。13/13 schedules、24,840 rows、primary 7,200 rows/360入力を確認。fixed2/adaptive平均 cycle 943,929.77/746,327.99、観測削減20.934%、入力単位95%区間16.804–24.903%。これはbuild `43334531` 固有の経験的結果で、新buildの測定と混ぜない。accuracy差の区間−1.389〜+1.389 ppは1 pp非劣性を示さない。
 
 ## pilot保存値の記述的再集計
@@ -44,7 +44,7 @@ RUN4の既存`physical_results.csv`のみから再生成: fixed2/adaptive各10�
 
 ## 2026-11-28 最新追記：Q15停止則の補助解析
 
-`Q15_STOPPING_ANALYSIS_JA.md` に、固定Q15 coreを再実行したExit別分類・停止方式比較を追加した。validation359/heldout360の全7 Exit予測が既存oracleと一致。既存entropy停止はheldout360でfixed2と同じ339/360正解、平均1.358 optional blocks対fixed2の2.000。entropy-only誤り3件とfixed2-only誤り3件を明示した。精度差bootstrap区間は0を含み、画像独立性にもwriter clusterが分からない限界があるため、非劣性は主張しない。optional blockはcycleではない。
+`Q15_STOPPING_ANALYSIS_JA.md` に、固定Q15 coreを再実行したExit別分類・停止方式比較を追加した。validation359/heldout360の全7 Exit予測が既存oracleと一致。固定Exit 0〜6、entropy、validation閾値のmax-softmax/top-two margin、事後oracleを含む全11方式の比較表とPareto図を保存した。既存entropy停止はheldout360でfixed2と同じ339/360正解、平均1.358 optional blocks対fixed2の2.000。entropy-only誤り3件とfixed2-only誤り3件を明示した。精度差bootstrap区間は0を含み、writer clusterも未確定のため非劣性は主張しない。optional blockはcycleではない。旧状態の`BLOCKED_TOOLCHAIN/LOGIT_ARTIFACT`はこのload_digits探索解析については解消済み。新規UCI画像の実機主要評価は未実施。
 
 これは既存sklearn heldoutの探索的再解析であり、新規UCI画像の外部検証にも実機速度試験にも当たらない。primary外部評価は未実行。旧C3 pilot 20/20は限定的な機能整合性証拠としてのみ維持する。
 

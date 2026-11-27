@@ -88,11 +88,21 @@ Across the 21 fixed-class input/class cases, prediction mismatches against the n
 
 | Rule | Correct on heldout 360 | Accuracy | Mean optional blocks | Mean decision checks |
 |---|---:|---:|---:|---:|
+| Fixed Exit 0 | 171 | 47.50% | 0.000 | 0 |
+| Fixed Exit 1 | 328 | 91.11% | 1.000 | 0 |
 | Fixed Exit 2 | 339 | 94.17% | 2.000 | 0 |
+| Fixed Exit 3 | 338 | 93.89% | 3.000 | 0 |
+| Fixed Exit 4 | 336 | 93.33% | 4.000 | 0 |
+| Fixed Exit 5 | 336 | 93.33% | 5.000 | 0 |
+| Fixed Exit 6 (diagnostic only) | 333 | 92.50% | 6.000 | 0 |
 | Frozen entropy | 339 | 94.17% | 1.358 | 2.339 |
 | Validation-selected max-softmax | 338 | 93.89% | 1.253 | 2.242 |
 | Validation-selected top-two margin | 337 | 93.61% | 1.225 | 2.219 |
 | Retrospective first-correct-exit oracle | 344 | 95.56% | 0.750 | Not applicable |
+
+The 11-rule accuracy-versus-optional-block plot is shown below. Optional blocks are a software work proxy; this figure is not a cycle, latency, energy, or FPGA Pareto result. Exit 6 is diagnostic and lies beyond the deployed adaptive Exit-5 ceiling; the oracle uses the true label and is not implementable.
+
+![Exploratory heldout accuracy versus mean optional blocks for fixed exits, confidence rules, entropy, and retrospective oracle](q15_stopping_comparison_RUN8_20261128/STOPPING_PARETO_HELDOUT360.svg)
 
 Against fixed Exit 2, exploratory paired image-bootstrap 95% accuracy-difference intervals were −1.39 to +1.39 percentage points for entropy, −1.67 to +1.11 points for max-softmax, and −1.94 to +0.83 points for top-two margin. All include zero, and their lower bounds do not meet the one-point margin. These are not the locked primary H1 Clopper–Pearson/Bonferroni calculations. Entropy used 0.642 fewer optional blocks per image on average than fixed Exit 2 in this heldout set. Its number of wrong predictions exclusive of fixed Exit 2 was three, and fixed Exit 2 had three exclusive errors; both were wrong on 18 images and both correct on 336.
 
