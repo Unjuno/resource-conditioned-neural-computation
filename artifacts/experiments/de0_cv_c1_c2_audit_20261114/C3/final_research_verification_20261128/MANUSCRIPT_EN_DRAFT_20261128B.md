@@ -36,7 +36,7 @@ The classifier uses a 16-dimensional embedding, six optional two-head self-atten
 | New external-input integration pilot | Build `45585631`, binding `45585632`, model `52544e4e`; SOF SHA-256 `5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4`; ELF SHA-256 `4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e` | Saved RUN4: ten frozen pilot images × two modes = 20 requests; limited dynamic-input functional check against the CPU Q15 oracle. |
 | Offline stopping-rule reanalysis | Frozen Q15 core SHA-256 `a6b2807bd4a60534c250fca3005322cf14ba0a92f6b16e28241109385efc6809`; weight-header SHA-256 `961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f` | Recomputed exit metrics on the old 359-image validation and 360-image `load_digits` heldout data; no FPGA interaction. |
 
-The historical C3 v2 campaign is retained as an earlier artifact-specific study and is not silently substituted for the new firmware. Its original detailed manuscript remains available at `C3/paper_20261117/MANUSCRIPT_DRAFT_EN.md`; that draft’s C3 v2 quantitative claims do not describe the new external-input build.
+The historical C3 v2 campaign is retained as an earlier artifact-specific study and is not silently substituted for the new firmware. Its original detailed manuscript remains available at `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/MANUSCRIPT_DRAFT_EN.md`; that draft’s C3 v2 quantitative claims do not describe the new external-input build.
 
 ## 3. Methods and evidence tiers
 
@@ -124,7 +124,7 @@ Resource-conditioned inference can enforce a finite maximum-work contract while 
 
 ## Reproducibility and evidence map
 
-The Japanese final status, formal evidence map, Q15 stopping analysis, pilot run record, per-input CSVs, tests, and SHA manifests are stored beside this draft under `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/`. The detailed historical C3 v2 manuscript and its evidence remain under `C3/paper_20261117/`. Key prior-work and dataset references [1–12], including UCI attribution and license information, are listed in that historical manuscript; this integrated draft retains its literature scope but awaits final bibliographic and coauthor review before submission.
+The Japanese final status, formal evidence map, Q15 stopping analysis, pilot run record, per-input CSVs, tests, and SHA manifests are stored beside this draft under `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/`. The detailed historical C3 v2 manuscript and its evidence remain under `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/paper_20261117/`; its prior-work bibliography is reproduced here. This integrated draft retains the literature scope but awaits final bibliographic and coauthor review before submission.
 
 | Claim/evidence area | Repository evidence |
 |---|---|
