@@ -102,7 +102,7 @@ The threshold variants were selected after observing the validation split and we
 
 ### 4.3 Dynamic-input FPGA pilot
 
-The saved DE0-CV RUN4 record contains 20/20 completed pilot requests and reports CPU-oracle agreement for all tested image/mode pairs. In the saved descriptive reaggregation, each mode classified 10/10 pilot images correctly against teacher labels; adaptive cycles were lower for eight images and higher for two. Median cycles were 943,906 for fixed Exit 2 and 565,923 for adaptive, with a ratio-of-sums descriptive reduction of 29.33%. These values describe only the selected ten-image pilot in one recorded power epoch. They are not an inferential estimate and do not support a general speed claim. They do not replace the unrun 3,813-image external primary campaign.
+The saved DE0-CV RUN4 record contains 20/20 completed pilot requests and reports CPU-oracle agreement for all tested image/mode pairs. In the saved descriptive reaggregation, each mode classified 10/10 pilot images correctly against teacher labels; adaptive cycles were lower for eight images and higher for two. Fixed-Exit-2 and adaptive median cycles were 943,906 and 565,923, respectively; their means were 943,905.6 and 667,031.9. The ratio-of-sums descriptive reduction was 29.33%. These values describe only the selected ten-image pilot in one recorded power epoch. They are not an inferential estimate and do not support a general speed claim. They do not replace the unrun 3,813-image external primary campaign.
 
 ## 5. Discussion
 

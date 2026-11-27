@@ -85,6 +85,10 @@ UCI公式記録を再確認し、optdigits.traのtraining side 30 writersとoptd
 
 未追跡`physical_pilot_RUN2_preparation/`を読み取り専用で確認。実体は`cases.csv/cases.csv`の20要求候補CSV（21行、header込み、SHA-256 `5f7bece95b30620eaf70e53d21bcdc087baa4b10116f591461c714b9a5bbcc8f`）のみで、run status、JTAG raw log、結果CSV、監査JSON、manifestはない。新実機RUN2の証拠として扱わず、そのまま保全し未追跡のままにした。
 
+### Pilot要約値の原データ再照合
+
+`analyze_pilot_descriptive.py --results <physical_pilot_RUN4_complete_20261126/physical_results.csv> --out $env:TEMP/rtnn_pilot_manuscript_recheck_20261128.json` を再実行。20/20ケース、10/10画像/方式、Q15 oracle一致、teacher正答各10/10、adaptiveが速い8件を再確認。fixed2/adaptiveの平均cycleは943,905.6/667,031.9、中央値は943,906/565,923、ratio-of-sums削減率は29.332774%で、草稿の表示値とプログラムassertで照合PASS。物理測定を追加せず、RUN4原本も変更していない。出力JSONはTEMPに作成。
+
 ### Exit correctnessの遷移・反例
 
 `analyze_exit_counterexamples.py --run-dir <RUN8> --out-dir <new-empty-dir>` を実行。凍結heldout SHA照合、360×7予測を既存oracleと全件照合して不一致0。遷移監査は3件のテストでPASS。Exit 0→1で158回復/1退行、1→2で14/3、2→3で3/4、3→4で0/2、4→5で1/1、5→6で0/3。正解Exitの後に誤りへ戻るケースは12/360。Exit 6は診断専用で、適応許容上限はExit 5のまま。確定RUN8由来の出力は `exit_counterexamples_RUN2_20261128/`、標準出力とテストログは同階層に保存。
