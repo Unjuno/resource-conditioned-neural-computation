@@ -1,0 +1,142 @@
+# Resource-Conditioned Neural Inference with Finite Work Classes: Software Proofs, Pinned-Target RTL Measurements, and a Limited FPGA Integration Pilot
+
+**Integrated evidence-bounded draft — 28 November 2026.** This draft combines separately identified evidence tiers. It is not a report of the unrun external primary campaign, and it does not claim physical WCET or formal board timing sign-off.
+
+## Abstract
+
+Resource-conditioned inference can grant a neural classifier a maximum computation budget while allowing it to stop earlier when additional work is not useful. This paper studies a fixed-parameter, multi-exit handwritten-digit classifier whose continuous normalized budget is lowered fail-closed to one of seven finite work ceilings. Optional blocks are physically skipped, and the same Q15 weights are used across execution classes. The evidence is deliberately separated by artifact and target. Source-level CBMC checks cover finite budget, deadline-class, and execution-control properties under stated abstractions. Binary analyses and cycle measurements cover one exact RV32 Q15 artifact on a pinned Ibex Simple-System configuration; the measured fixed-class cycle counts range from 29,620 to 2,959,381 cycles, with no input-dependent cycle variation in the tested class/input pairs. A separate DE0-CV integration build accepted dynamically supplied 64-pixel inputs: its saved engineering pilot contains 20 requests over ten preselected images in fixed-Exit-2 and adaptive modes, with responses reported to match the CPU Q15 oracle. This pilot is functional evidence, not a population or performance study. An exploratory offline reanalysis of an existing 360-image `sklearn.load_digits` heldout set found equal accuracy for frozen entropy stopping and fixed Exit 2 (339/360 each), while entropy used a mean 1.358 optional blocks rather than 2.000. The paired accuracy interval includes zero and does not establish the prespecified one-percentage-point noninferiority margin; optional-block counts are not cycles. Exit-wise analysis also found 12/360 images that were correct at a shallower exit and incorrect at a later one. The new UCI external primary campaign has not been run. Data exposure, writer clustering, preregistration chronology, independent cold boots, and DE0-CV external-JTAG timing remain unresolved. Accordingly, the results support a bounded research prototype and exact-configuration observations, not general speed superiority, population noninferiority, hard deadlines, or WCET.
+
+**Keywords:** resource-conditioned inference; conditional computation; early exit; Q15; Ibex; FPGA; formal verification; empirical cycle accounting.
+
+## 1. Introduction
+
+Neural early exits and conditional computation can reduce work for inputs that do not benefit from executing every layer. They do not, by themselves, establish predictable physical latency: model operations, processor cycles, I/O transfer, implementation timing, and a worst-case execution-time (WCET) guarantee are distinct quantities. We present an evidence-bounded case study of a resource-conditioned neural inference prototype and preserve those distinctions throughout.
+
+The interface accepts a normalized resource grant (b\in[0,1]). A backend maps that grant to the greatest supported finite class not exceeding it, (q_j\in\{0,1/6,2/6,3/6,4/6,5/6,1\}). The grant is a maximum permission, not a requirement to consume the full amount. An input-dependent preferred stopping decision can further reduce execution, and inactive neural blocks are skipped rather than zero-masked. Conceptually, effective work is bounded by the minimum of admitted budget, preferred work, deadline class, and policy cap.
+
+The contributions are intentionally limited:
+
+1. A same-model Q15 implementation with a finite, fail-closed resource-class interface and an explicit separation between admitted and executed work.
+2. Source-level control proofs and exact-artifact analyses whose assumptions and coverage are documented, alongside a measured cycle binding for a pinned Ibex RTL configuration.
+3. A separately versioned DE0-CV pilot demonstrating a dynamic input protocol on ten engineering images, without treating it as a generalization or speed experiment.
+4. An exploratory offline analysis that compares frozen entropy stopping with fixed Exit 2 and records counterexamples to monotonic “deeper is always better” assumptions.
+
+Early-exit classifiers, budgeted inference, entropy stopping, and FPGA early-exit implementations are prior art. We make no “first” or general algorithmic novelty claim. Our contribution is the evidence-linked implementation and scoped verification of this prototype. Relevant prior work includes BranchyNet, MSDNet, SkipNet, EENet, entropy-based low-precision FPGA inference, and dynamic early-exit FPGA implementations [1–8]. Real-time neural-network compilation and FPGA CNN timing analyses are related but address stronger timing assurance than the physical-board evidence available here [9,10].
+
+## 2. System and artifact separation
+
+The classifier uses a 16-dimensional embedding, six optional two-head self-attention/MLP blocks (MLP width 32), and seven classifier exits (0–6). The evaluated Q15 weights are frozen. Each result below is attached to its own data, firmware, and target; values from distinct builds are not pooled.
+
+| Evidence set | Identity and scope | What was measured or checked |
+|---|---|---|
+| Software/formal and pinned RTL evidence | Q15 RV32 artifact; ELF SHA-256 `234a7f46cf227a11f5d97f3c778cbb0c4ed4f7067f8994bcca86c4b08ff4e742`; BIN SHA-256 `266ecb70c723b2164f6fe9039f27d4cb49c4d7271d4aca0cf69f2692cdfdf7a1`; Ibex commit `7b5df75a041affe56e8c235260f98a09b3319008` | CBMC control properties, binary control-flow checks, and cycle measurements in the pinned Simple-System setup. |
+| Historical C3 v2 campaign | Separate frozen build and campaign, documented in the 17 November paper draft | 24,840 older-build requests on 360 `load_digits` inputs, including 7,200 primary rows. Not evidence for the newer external-input firmware. |
+| New external-input integration pilot | Build `45585631`, binding `45585632`, model `52544e4e`; SOF SHA-256 `5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4`; ELF SHA-256 `4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e` | Saved RUN4: ten frozen pilot images × two modes = 20 requests; limited dynamic-input functional check against the CPU Q15 oracle. |
+| Offline stopping-rule reanalysis | Frozen Q15 core SHA-256 `a6b2807bd4a60534c250fca3005322cf14ba0a92f6b16e28241109385efc6809`; weight-header SHA-256 `961a76b7e220bf2f665e7c04ab62063600aa2e7eccf3403d80ea730bc993ad9f` | Recomputed exit metrics on the old 359-image validation and 360-image `load_digits` heldout data; no FPGA interaction. |
+
+The historical C3 v2 campaign is retained as an earlier artifact-specific study and is not silently substituted for the new firmware. Its original detailed manuscript remains available at `C3/paper_20261117/MANUSCRIPT_DRAFT_EN.md`; that draft’s C3 v2 quantitative claims do not describe the new external-input build.
+
+## 3. Methods and evidence tiers
+
+### 3.1 Resource contract and software proofs
+
+The runtime distinguishes the budget ceiling, policy cap, model-preferred stopping point, and actual executed blocks. Invalid identities and partial certification fail closed. CBMC checks finite integer-domain properties of the represented C control contract, including monotone/greatest-fit Q0.16 lowering, deadline-class admission, effective execution below its ceilings, and selected fixed-point lookup-table arithmetic bounds. A complementary proof extracts deployed control bodies and abstracts the neural entropy result nondeterministically, so all continue/stop outcomes are considered for the control-order and cap properties.
+
+These are source-level statements about specified C functions and abstractions. They do not prove the complete neural arithmetic, compiler-to-machine equivalence, processor timing, FPGA timing, or physical WCET. The exact proof entry points, logs, and assumptions are listed in the repository’s formal evidence map.
+
+### 3.2 Binary and pinned Ibex RTL evidence
+
+The exact Q15 RV32 artifact was analyzed on pinned upstream Ibex commit `7b5df75a041affe56e8c235260f98a09b3319008` with the documented Simple-System configuration: two-stage execution, no instruction cache or branch predictor, deterministic one-cycle internal RAM, one host, and no interfering master in the validation harness. The complete setup is build-specific. Fixed-class cycle counts were measured in RTL for classes 0–6 on three heldout inputs with preferred exits 1, 3, and 5. The adaptive path was also exercised in a finite 21-case RTL set. Prediction, executed-exit, admission, and committed runtime-binding checks are reported in the source evidence.
+
+Two compiled control-flow analyses cover the exact retained ELF’s fixed-class paths. The custom taint interpreter reports no input-dependent conditional branches, indirect-control targets, or store addresses on those paths; four input-dependent LUT load sites remain. BINSEC independently reports all seven fixed classes secure for the analyzed control-flow property. Generic relational memory noninterference is not claimed. A separate pinned Simple-System memory audit checks 12,290 legal LUT word addresses and the response-valid logic for the exact RAM/bus integration.
+
+### 3.3 DE0-CV dynamic-input pilot
+
+The new external-input firmware uses request protocol v2 and response protocol v3. The pilot evidence is the saved `physical_pilot_RUN4_complete_20261126` record: ten preselected engineering images, each run once in fixed Exit 2 and once adaptively, for 20 requests. The saved raw JTAG records and independent audit report response agreement with the CPU Q15 oracle and protocol identity checks. This supports only a limited integration statement: the tested build accepted those supplied pixel arrays and returned the expected oracle outputs under the recorded run conditions.
+
+The pilot was not designed as a representative sample. Its ten images are excluded from the 3,813-image primary candidate set. It estimates neither external-dataset accuracy nor cycle superiority, cold-boot variability, or population-level noninferiority. Build identity and host SOF hash records do not constitute a bit-for-bit physical SOF readback. External USB-Blaster timing sign-off remains blocked.
+
+### 3.4 Exploratory offline comparison of stopping rules
+
+The new Q15 reanalysis used the frozen classifier and the existing scikit-learn handwritten-digit validation (359 images) and heldout (360 images) splits. It recomputed all exits with an analysis-only helper; it did not alter weights, firmware, SOF, or physical measurements. Fixed Exit 2 and frozen entropy stopping are compared directly. Max-softmax and top-two-margin thresholds were selected on validation and are exploratory analysis-only rules, not deployed firmware. A label-informed first-correct-exit oracle is included only as an unattainable retrospective reference.
+
+For paired accuracy, the report uses a 20,000-replicate image-level bootstrap with seed `20261128`. It treats image rows as resampling units and does not account for unknown writer clusters. Therefore these intervals are descriptive conditional intervals, not a writer-population guarantee. Optional-block counts are counts of neural blocks, not CPU cycles, wall time, energy, or deadline execution time.
+
+### 3.5 Unrun external primary campaign
+
+The UCI Optical Recognition of Handwritten Digits `optdigits.tra` primary campaign is not run. The prepared 7,626-row file is an offline schedule template for 3,813 candidate images × two modes; it contains no physical results. No output from that template is used in the results below. The former preregistration timeline cannot be independently anchored to the first model-output inspection, data exposure history is incomplete, and row-level writer IDs are unavailable. Thus the prospective and population-level eligibility conditions are not satisfied.
+
+## 4. Results
+
+### 4.1 Finite-class cycle binding on pinned Ibex RTL
+
+| Maximum-work class | Measured RTL cycles |
+|---:|---:|
+| 0/6 | 29,620 |
+| 1/6 | 615,569 |
+| 2/6 | 1,201,521 |
+| 3/6 | 1,787,473 |
+| 4/6 | 2,373,425 |
+| 5/6 | 2,959,377 |
+| 6/6 | 2,959,381 |
+
+Across the 21 fixed-class input/class cases, prediction mismatches against the native integer reference were zero, and within-class cycle range across the three tested inputs was zero. In 21 adaptive RTL cases, the recorded prediction and executed exit matched the reference and no unsafe admission or committed binding exceedance was reported. These are finite measurements for the specified exact binary and simulated Simple-System RTL. They are not DE0-CV FPGA cycles and do not establish a portable timing equation or WCET.
+
+### 4.2 Frozen-Q15 offline stopping comparison
+
+| Rule | Correct on heldout 360 | Accuracy | Mean optional blocks | Mean decision checks |
+|---|---:|---:|---:|---:|
+| Fixed Exit 2 | 339 | 94.17% | 2.000 | 0 |
+| Frozen entropy | 339 | 94.17% | 1.358 | 2.339 |
+| Validation-selected max-softmax | 338 | 93.89% | 1.253 | 2.242 |
+| Validation-selected top-two margin | 337 | 93.61% | 1.225 | 2.219 |
+| Retrospective first-correct-exit oracle | 344 | 95.56% | 0.750 | Not applicable |
+
+Against fixed Exit 2, paired accuracy-difference 95% bootstrap intervals were −1.39 to +1.39 percentage points for entropy, −1.67 to +1.11 points for max-softmax, and −1.94 to +0.83 points for top-two margin. All include zero; none establishes a one-point noninferiority margin. Entropy used 0.642 fewer optional blocks per image on average than fixed Exit 2 in this heldout set. Its number of wrong predictions exclusive of fixed Exit 2 was three, and fixed Exit 2 had three exclusive errors; both were wrong on 18 images and both correct on 336.
+
+The frozen entropy rule exited at class 1 on 263 images, class 2 on 81, class 3 on 7, class 4 on 2, and class 5 on 7. Exit correctness was not monotonic: 12/360 images were correct at at least one earlier exit and wrong at a deeper exit. For adjacent transitions, error-to-correct/correct-to-error counts were 158/1 (0→1), 14/3 (1→2), 3/4 (2→3), 0/2 (3→4), 1/1 (4→5), and 0/3 (5→6). Exit 6 is diagnostic and exceeds the adaptive policy’s Exit-5 ceiling. These examples falsify a blanket assumption that deeper computation always improves an individual prediction. They do not establish a general causal explanation for the errors.
+
+The threshold variants were selected after observing the validation split and were not deployed. The retrospective oracle uses the true label and is not implementable at inference. These comparisons are exploratory and use the legacy `load_digits` heldout set; they are not results on new UCI images.
+
+### 4.3 Dynamic-input FPGA pilot
+
+The saved DE0-CV RUN4 record contains 20/20 completed pilot requests and reports CPU-oracle agreement for all tested image/mode pairs. In the saved descriptive reaggregation, each mode classified 10/10 pilot images correctly against teacher labels; adaptive cycles were lower for eight images and higher for two. Median cycles were 943,906 for fixed Exit 2 and 565,923 for adaptive, with a ratio-of-sums descriptive reduction of 29.33%. These values describe only the selected ten-image pilot in one recorded power epoch. They are not an inferential estimate and do not support a general speed claim. They do not replace the unrun 3,813-image external primary campaign.
+
+## 5. Discussion
+
+The evidence establishes different things at different layers. The finite budget and execution-control properties are supported by bounded source-level proofs. The cycle table and control-flow analyses concern one exact RV32 artifact in one pinned simulated Ibex system. The DE0-CV pilot shows limited dynamic-input functional integration for one newer build. The offline Q15 comparison characterizes optional-block use and prediction behavior on a legacy heldout set. No single layer should be used to imply a result from another layer.
+
+The exit-transition counterexamples matter to policy design: confidence or entropy-based stopping can save blocks on some inputs, but a shallower correct output can later become incorrect. A stopping rule must therefore be evaluated as a complete policy on heldout data, with its validation and selection procedure disclosed. The current margin and max-softmax rules are candidates for future controlled study, not supported replacements for the frozen entropy implementation.
+
+The historical C3 v2 board campaign reported cycle reduction on its fixed 360-image set, but its exact-build results and limitations remain in the earlier manuscript and run evidence. Those data are not pooled with the external-input pilot or the pinned Ibex RTL measurements. The old C3 v2 fixed2 comparator was not test-blind, independent cold boots were not verified, and board-level JTAG timing/CDC sign-off remained incomplete. Accordingly, the historical campaign can be described as a bounded empirical observation, not confirmatory population evidence.
+
+## 6. Limitations and claim boundaries
+
+The following statuses remain unresolved: `DATA_EXPOSURE_UNCERTAIN`, `WRITER_CLUSTER_UNKNOWN`, `PREREGISTRATION_TIMELINE_UNVERIFIED`, `COLD_BOOT_UNVERIFIED`, and `FORMAL_TIMING_SIGNOFF_BLOCKED`. In addition, the external UCI primary run is `NOT_RUN`. The row-level UCI data have no writer identifier, and available repository records cannot prove absence of all prior exposure. The small engineering pilot is not representative. The 360-image bootstrap does not model writer clustering. The oscillator was not calibrated to support high-accuracy absolute time. External JTAG timing assumptions and complete board timing constraints are unavailable. The pinned Ibex measurements use a simulated processor system, not the DE0-CV implementation. None of these data establish hard deadline feasibility, silicon/FPGA WCET, energy efficiency, or a universal speed advantage.
+
+The strongest defensible statement is that this repository contains a resource-conditioned same-model Q15 prototype, selected source-level control proofs, an exact-build measured RTL binding on pinned Ibex, a 20-request dynamic-input DE0-CV integration pilot, and an exploratory legacy-heldout analysis showing both reduced optional-block use and non-monotonic exit correctness. Accuracy noninferiority and external primary performance remain unestablished.
+
+## 7. Conclusion
+
+Resource-conditioned inference can enforce a finite maximum-work contract while permitting a frozen policy to stop earlier. In the analyzed implementation, control properties are supported within the stated formal abstractions, pinned-Ibex RTL has an exact-build finite cycle binding, and a separate DE0-CV pilot exercised a new dynamic input path. Offline exit analysis shows that entropy stopping used fewer optional blocks than fixed Exit 2 on average in a legacy heldout set, while also exposing later-exit regressions and inconclusive accuracy comparison. This evidence is useful for a bounded engineering case study. It does not establish external-dataset generalization, accuracy noninferiority, population-level speed superiority, physical WCET, or formal DE0-CV timing. The next empirical step is the separately approved and audited external primary campaign; it cannot be represented by the current offline schedule template.
+
+## Reproducibility and evidence map
+
+The Japanese final status, formal evidence map, Q15 stopping analysis, pilot run record, per-input CSVs, tests, and SHA manifests are stored beside this draft under `artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/`. The detailed historical C3 v2 manuscript and its evidence remain under `C3/paper_20261117/`. Key prior-work and dataset references [1–12], including UCI attribution and license information, are listed in that historical manuscript; this integrated draft retains its literature scope but awaits final bibliographic and coauthor review before submission.
+
+### References
+
+1. S. Teerapittayanon, B. McDanel, and H. T. Kung. “BranchyNet: Fast Inference via Early Exiting from Deep Neural Networks.” ICPR, 2016. DOI: 10.1109/ICPR.2016.7900006.
+2. G. Huang et al. “Multi-Scale Dense Networks for Resource Efficient Image Classification.” ICLR, 2018. arXiv:1703.09844.
+3. X. Wang et al. “SkipNet: Learning Dynamic Routing in Convolutional Networks.” ECCV, 2018. arXiv:1711.09485.
+4. F. Pedregosa et al. “Scikit-learn: Machine Learning in Python.” JMLR 12(85), 2011.
+5. F. Ilhan et al. “Adaptive Deep Neural Network Inference Optimization with EENet.” WACV, 2024. DOI: 10.1109/WACV57701.2024.00140.
+6. M. Kong and J. L. Nunez-Yanez. “Entropy-Based Early-Exit in a FPGA-Based Low-Precision Neural Network.” Applied Reconfigurable Computing, 2022. DOI: 10.1007/978-3-031-19983-7_6.
+7. E. Y. L. Kwan and J. Nunez-Yanez. “Entropy-Driven Adaptive Filtering for High-Accuracy and Resource-Efficient FPGA-Based Neural Network Systems.” Electronics 9(11), 1765, 2020. DOI: 10.3390/electronics9111765.
+8. A. Dimitriou et al. “Realization of Early-Exit Dynamic Neural Networks on Reconfigurable Hardware.” IEEE TCAD 44(6), 2025. DOI: 10.1109/TCAD.2024.3519055.
+9. H. Pearce et al. “Designing Neural Networks for Real-Time Systems.” IEEE Embedded Systems Letters 13(3), 2021. DOI: 10.1109/LES.2020.3009910.
+10. W. Zhang et al. “WCET Estimation for CNN Inference on FPGA SoC With Multi-DPU Engines.” IEEE TPDS 36(6), 2025. DOI: 10.1109/TPDS.2025.3555968.
+11. Scikit-learn developers. “Optical recognition of handwritten digits dataset (`load_digits`).” Dataset documentation; the loader describes a copy of the UCI test data.
+12. E. Alpaydin and C. Kaynak. “Optical Recognition of Handwritten Digits.” UCI Machine Learning Repository, 1998. DOI: 10.24432/C50P49. CC BY 4.0.
+
+**Review status:** Integrated technical draft for review. It is not submission-ready until all internal artifact links, references, authorship, and interpretation are reviewed. No result in this manuscript substitutes for the unrun external primary campaign or blocked formal timing sign-off.

@@ -75,6 +75,10 @@ RUN8でentropy停止は固定2と同じ339/360正解、平均optional blocks 1.3
 
 この追記で解消した以前の「alternate stopping rule分析未着手」は、旧sklearn heldoutの探索的オフライン比較に限る。UCI primary 3,813画像の評価、実機primary 7,626要求、一般化性能または確認的統計は未実施。`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`は変更していない。
 
+### 統合英語草稿の作成
+
+`MANUSCRIPT_EN_DRAFT_20261128B.md` を追加。既存の監査済み資料から、研究の方法、source/formal証拠、pinned Ibex RTL結果、DE0-CV RUN4 pilot、legacy heldout Q15停止則比較、UCI primary未実施をbuildと証拠範囲ごとに整理した。古いC3 v2原稿および測定記録は変更していない。新たな実験・物理操作はしていない。文書の数値は対応する保存済み記録に照合し、manifestへ追加する。
+
 ### Exit correctnessの遷移・反例
 
 `analyze_exit_counterexamples.py --run-dir <RUN8> --out-dir <new-empty-dir>` を実行。凍結heldout SHA照合、360×7予測を既存oracleと全件照合して不一致0。遷移監査は3件のテストでPASS。Exit 0→1で158回復/1退行、1→2で14/3、2→3で3/4、3→4で0/2、4→5で1/1、5→6で0/3。正解Exitの後に誤りへ戻るケースは12/360。Exit 6は診断専用で、適応許容上限はExit 5のまま。確定RUN8由来の出力は `exit_counterexamples_RUN2_20261128/`、標準出力とテストログは同階層に保存。
