@@ -150,3 +150,11 @@ Git diffでCRLFがwhitespaceとして検出されたため、新規生成され�
 検証は`python -m unittest safety_gates_v1_20261122.test_safety_gates safety_gates_v1_20261122.test_runner_preflight scripts.test_physical_audit_fail_closed host_v2_20261126.test_mock_runtime -v`を実行し35/35 PASS。production pilot gateを使ったprimary preflight正常系とoracle改変拒否も確認した。PowerShell起動とTcl直接起動でpilot-gate validatorがJTAGを開く前に呼ばれること、case payload/oracle/order tampering拒否、raw-frame CRC/欠損拒否、mock runtime protocolを確認した。`py_compile`も対象Python3ファイルでPASS。最終stdoutは`offline_tests_pass.log`、途中のテストハーネス/配置エラーも2ログへ保存し、修正後のPASSと分離した。25項目の`primary_audit_hardening_RUN1_20261128/SHA256SUMS.txt`は変更source/test/logとSOF・ELF・Q15・pilot gate・frozen input/oracle identityを含み、全項目を再hashした。
 
 物理primaryは未実施、scope/amendmentは未決定。SOF/ELF/Q15/dataset/pilot原本は変更せず、`physical_pilot_RUN2_preparation/`の既存未追跡領域も保持。変更ファイルとテストlogを含むartifact SHA manifestを作成。詳細状態の`FORMAL_TIMING_SIGNOFF_BLOCKED`等は維持。
+
+### 2026-11-28追記：claim-evidence matrixを実ファイルで検証
+
+`CLAIM_EVIDENCE_MATRIX.csv`のC6/C7/C8 `evidence`欄を調べたところ、状態の説明文がファイルパスの代わりに記録されていた。C6は最終状態とoffline primary metadata、C7はdataset/prior-use audit、C8はGate B audit/design status/formal evidence mapを参照するよう修正した。`verify_claim_evidence_matrix.py`を追加し、repo/C3/matrix相対パス、repository containment、実ファイル存在、C6/C7/C8の未解決状態を検査する。
+
+実行コマンド：`python .../verify_claim_evidence_matrix.py` は11 claims全件の解決PASS、`python .../test_verify_claim_evidence_matrix.py -v` は5/5 PASS、両Pythonファイルの`py_compile` PASS。stdout/stderrは`claim_evidence_matrix_audit_RUN1_20261128/validator.log`および`tests.log`に保存。テストは欠落証拠、説明文を証拠扱いする誤り、`../` traversal、NOT_RUN状態の改変を拒否する。
+
+併せて未追跡`physical_pilot_RUN2_preparation/cases.csv/cases.csv`を読み取り専用で確認。20行の候補schedule（experiment `C3_EXTVAL_PILOT_20261126_RUN2`, sequence 1–20, SHA-256 `5f7bece95b30620eaf70e53d21bcdc087baa4b10116f591461c714b9a5bbcc8f`）で、隣接するraw JTAG log/run status/audit JSONは存在しない。これは実機pilot結果ではないため未追跡のまま保持。今回の監査は基板操作なし。詳細:`claim_evidence_matrix_audit_RUN1_20261128/CLAIM_EVIDENCE_MATRIX_AUDIT_RUN1_20261128.md`。

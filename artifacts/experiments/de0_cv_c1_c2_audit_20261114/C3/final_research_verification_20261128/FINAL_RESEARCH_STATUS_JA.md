@@ -96,3 +96,7 @@ Primary preflightの内容検証を追加した。binding作成とJTAG前段で7
 `host_v2_20261126`に対応するPython/PowerShell/Tcl offline testsとraw parser試験は35/35 PASS。詳細な変更、実行ログ、25項目のSHA manifestは`final_research_verification_20261128/primary_audit_hardening_RUN1_20261128/SHA256SUMS.txt`。途中失敗の保全場所は`final_research_verification_20261128/primary_audit_hardening_RUN1_20261128/PRIMARY_AUDIT_HARDENING_RUN1_20261128.md`。
 
 Primary 7,626件は**NOT_RUN**。最初の未解決アクションは、ユーザーによるscope/amendment決定と、実機前での明示許可。現在のscope選択・amendment固定・実機identity確認を終えるまで、主測定へ進まない。
+
+### 2026-11-28追記：claim-evidence matrixの参照監査
+
+`CLAIM_EVIDENCE_MATRIX.csv`のC6/C7/C8 `evidence`欄に説明文が入り、ファイルとして追跡できない不備を修正。11 claimすべての参照先をリポジトリ内の実ファイルに置き換え、将来の欠損・パストラバーサル・状態改変を検出する`verify_claim_evidence_matrix.py`を追加した。実行結果は11/11 claim path解決、validator負例テスト5/5 PASS、`py_compile` PASS。未実施primary・データ適格性・JTAG timing状態を格上げしていない。記録は`claim_evidence_matrix_audit_RUN1_20261128/`。
