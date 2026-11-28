@@ -1,0 +1,37 @@
+{
+  "schema": "rtnn-external-primary-independent-audit-v1",
+  "audit": "PASS_RAW_CASE_RESULT_ORACLE_IDENTITY_COUNTER_AND_HASH_CHECKS",
+  "audit_function": "scripts/audit_and_analyze.py:load_run(expected_split=primary)",
+  "audit_code_sha256": "99e5c5658d6dc9e8818880860955a61193b81ff8963d3364870ae6d118cfd12f",
+  "experiment_id": "C3_EXTVAL_PRIMARY_20261128_S01",
+  "session_id": "C3_EXTVAL_POWER_SESSION_01",
+  "classification": "EMPIRICAL_ONLY",
+  "case_count": 7626,
+  "input_count": 3813,
+  "raw_request_count": 7626,
+  "raw_response_count": 7626,
+  "result_count": 7626,
+  "sequence_min": 22,
+  "sequence_max": 7647,
+  "identity": {
+    "build_id": "45585631",
+    "binding_id": "45585632",
+    "model_id": "52544e4e",
+    "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4"
+  },
+  "run_file_sha256": {
+    "cases.csv": "222ce7515d07c3db9e59f9d09a33a4e6bd271c8ef2d9f51ce66d46a0985051ba",
+    "binding.json": "1c6db8c578f846ee110b63fed92ec005f68653fe00487fe0b23b63377b7965ba",
+    "run_external_validation.tcl": "587c6b5014cbd1edfd01a20048090c38350dd62ab9872c046be9459be9c51514",
+    "launcher.log": "6f60f4e17c94ba4e290ffec1db533c70b451ea9aee2780b5389357ee6bcb5bd4",
+    "physical_results.csv": "427481da9232deb4d6406cc7201ea1eb23b4ca9df09bbdb1e0340d6be79664ce",
+    "raw_jtag.log": "425a3cd86016fcccc9305b62d9303d401d9406359ee07864987e782ee39c264c",
+    "run_status.json": "5f3c3630a1544c5d4e64c91c4320fa176b6907f9b4c546ce3cf9e94ab35bdaa6",
+    "SHA256SUMS.txt": "dd943f63426d9f3e35444c6789562edf4ddac4defb50fda4b1a3aaffe59bbdcf"
+  },
+  "limitations": [
+    "Saved raw-log consistency is independently verified; it is not cryptographic proof of physical acquisition.",
+    "Only one primary session is complete; cold boot remains unverified.",
+    "No population-level claim is authorized by this audit."
+  ]
+}
