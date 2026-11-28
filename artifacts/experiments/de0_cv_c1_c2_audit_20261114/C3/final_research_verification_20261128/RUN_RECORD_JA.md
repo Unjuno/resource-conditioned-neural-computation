@@ -12,6 +12,10 @@
 
 ## 実行コマンドと結果
 
+### 2026-11-28追記：session 03凍結scheduleのオフライン再監査
+
+session 02の測定順は維持しながら、既存session 03用cases/bindingを`verify_session03_schedule.py`で読み取り専用監査。`audit_primary.audit_schedule`が凍結manifest・画素・教師label・oracle・mode/order・CRC・IDを7,626行で照合し、sequence 15274–22899を確認。pilot gate binding validatorもPASS。session 03にphysical `run/`、結果CSV、raw JTAG logがないことを確認し、出力に`must_wait_for_session_02_audit=true`を記録。結果は`session03_schedule_reverification_RUN1.json`、コードと入力のSHAは`session03_schedule_reverification_SHA256SUMS.txt`。これはschedule/bindingのオフライン検査で、session 03はNOT_RUNのまま。JTAG/Quartus/SOF操作なし。
+
 ### 2026-11-28追記：session 02 preflightの独立再照合
 
 `verify_session02_preflight.py`を追加し、保存済み`offline_preflight_RUN1.json`のcases/binding/runner/pilot-gate SHAを現在の各ファイルと独立比較。`verify_binding`でbindingと7,626ケースを再検査し、sequence 7648–15273とBuild/Binding/Model、SOF/ELFを記録した。結果は`session02_preflight_reverification_RUN1.json`、原本および検証器のhashは`session02_preflight_reverification_SHA256SUMS.txt`に保存。PASSはoffline preflightの再現性に限定し、JTAG/Quartusを起動せず、現在の基板identityや電源状態を示さない。

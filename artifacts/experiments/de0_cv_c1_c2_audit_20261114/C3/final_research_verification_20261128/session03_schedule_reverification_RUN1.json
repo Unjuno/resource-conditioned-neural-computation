@@ -1,0 +1,37 @@
+{
+  "schema": "rtnn-session03-schedule-reverification-v1",
+  "status": "PASS_OFFLINE_SCHEDULE_AND_BINDING_ONLY",
+  "verification_time_utc": "2026-11-28T01:59:16.706029+00:00",
+  "experiment_id": "C3_EXTVAL_PRIMARY_20261128_S03",
+  "session_id": "C3_EXTVAL_POWER_SESSION_03",
+  "classification": "OFFLINE_ONLY_NOT_PHYSICAL_RUN",
+  "schedule_audit": {
+    "classification": "SCHEDULE_ONLY",
+    "rows": 7626,
+    "unique_images": 3813,
+    "sequence_first": 15274,
+    "sequence_last": 22899,
+    "experiment_id": "C3_EXTVAL_PRIMARY_20261128_S03",
+    "session_id": "C3_EXTVAL_POWER_SESSION_03"
+  },
+  "cases_sha256": "623f0ba7769d58735d89f1279df4371b7af848c2013b086653ccdeb8e15c78db",
+  "binding_sha256": "b255d45c5b632801015baf59da32f786f85a54cc900de0564cd9623bb68c1bf0",
+  "pilot_gate_sha256": "d0b9a3bd3fdc8ee320e1ccb97aa63b17305fed88f041df31048992b2fd91fcc2",
+  "runner_sha256": "477f7de64cc4da7892a82d0dd48764d5f3a88329a8f5c234241a93c080777f8b",
+  "identity": {
+    "build_id": "45585631",
+    "binding_id": "45585632",
+    "model_id": "52544e4e",
+    "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+    "firmware_elf_sha256": "4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e"
+  },
+  "sequence_range": [
+    15274,
+    22899
+  ],
+  "must_wait_for_session_02_audit": true,
+  "physical_jtag_started": false,
+  "quartus_started": false,
+  "sof_programming_performed": false,
+  "flash_written": false
+}
