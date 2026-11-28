@@ -14,6 +14,7 @@
 * session 01生CSVを独立監査器に通したうえで、3,813件の対画像データ、固定2対adaptive cycles散布図、adaptive実行Exit別のcycle差分図を再生成可能なPythonスクリプトから保存。図・データ・build/SOF identity・mcycle境界・単一session範囲は`primary_session01_figures_RUN1_20261128/`のSHA manifestに記録。図は経験的記述に限定し、cold bootや母集団の不確かさは示さない。
 * 現在の最初の人手待ち：session 02前のboard power transitionについて、操作者が何を行ったかの確認。読み取り専用identityだけから電源断を推定しない。いずれのセッションも、完全なrail遮断を裏付ける証拠がなければ独立cold bootとは認定しない。
 * session 02のオフラインpreflightはPASS。7,626要求・sequence 7648–15273、pilot gateとSOF/ELF/build/model/binding identity、case SHAを照合し、`PREFLIGHT_ONLY`, `physical_jtag_started=false`を記録。Quartus/JTAGは起動せず、物理run出力も作っていない。操作者は今回SRAM設定と3-session測定を明示許可したが、session 02の実行前に実際の電源遷移と現在のboard identity/READYを確認する必要がある。
+* 保存済みpreflight JSONに対する独立SHA再照合もPASS。cases、binding、runner、pilot gateの4 SHAが一致し、`verify_binding`が再度PASS。結果は`session02_preflight_reverification_RUN1.json`と`session02_preflight_reverification_SHA256SUMS.txt`。これはoffline検証のみで、実機の現在状態は確認していない。
 * 以下の未解決状態は維持：`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`。
 
 詳細なsession 01進捗は`../external_validation_20261122/build/physical_primary_3session_20261128/PRIMARY_CAMPAIGN_PROGRESS_JA.md`、再集計は`../external_validation_20261122/build/physical_primary_3session_20261128/session_01/analysis_single/analysis.json`にある。

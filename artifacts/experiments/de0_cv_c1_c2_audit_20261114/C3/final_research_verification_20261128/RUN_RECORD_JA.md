@@ -12,6 +12,12 @@
 
 ## 実行コマンドと結果
 
+### 2026-11-28追記：session 02 preflightの独立再照合
+
+`verify_session02_preflight.py`を追加し、保存済み`offline_preflight_RUN1.json`のcases/binding/runner/pilot-gate SHAを現在の各ファイルと独立比較。`verify_binding`でbindingと7,626ケースを再検査し、sequence 7648–15273とBuild/Binding/Model、SOF/ELFを記録した。結果は`session02_preflight_reverification_RUN1.json`、原本および検証器のhashは`session02_preflight_reverification_SHA256SUMS.txt`に保存。PASSはoffline preflightの再現性に限定し、JTAG/Quartusを起動せず、現在の基板identityや電源状態を示さない。
+
+一度、Windowsの長いnested pathへ結果JSONを書こうとして`FileNotFoundError`になった。対象ファイルは作られていない。短い`final_research_verification_20261128/`へ出力先を変更して成功した。このpath問題を記録し、campaign内ファイルは変更していない。
+
 ### 2026-11-28追記：session 02のオフラインpreflightと実機許可範囲
 
 session 02向けPowerShell preflightを`-ExecutePhysical`なしで再実行した保存記録`session_02/offline_preflight_RUN1.json`を確認。凍結primary 7,626件、sequence 7648–15273、pilot gate参照、SOF/ELF/model/build/binding identityとcase SHAの照合がPASSし、`PREFLIGHT_ONLY` / `physical_jtag_started=false`。Quartus/JTAGは起動せず、physical output directoryも作成していない。今回のユーザー発言でSRAM設定と3-session測定が明示許可された。session 02の実行前に、実際のpower transitionと現在のread-only JTAG/Build/READYを照合する必要があり、独立電源起動は未認定。session 03はsession 02の完全監査後に行う。詳細はcampaign progress `../external_validation_20261122/build/physical_primary_3session_20261128/PRIMARY_CAMPAIGN_PROGRESS_JA.md`。
