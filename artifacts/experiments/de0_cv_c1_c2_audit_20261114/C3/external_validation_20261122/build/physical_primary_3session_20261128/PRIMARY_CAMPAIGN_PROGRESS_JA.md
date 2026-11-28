@@ -21,6 +21,7 @@
 ## 残り
 
 - Session 02: 7,626件。今回のoffline preflightを再実行して`PREFLIGHT_ONLY`、pilot gate独立照合PASS、identity/case SHA/sequence range一致を確認。記録は`session_02/offline_preflight_RUN1.json`。JTAG/Quartus未起動、出力先未作成。開始前に操作者の電源状態回答とread-only ID/build/READY照合が必要。
+- Session 02 read-only pre-run check (2026-11-28 11:03 JST): USB-Blaster `[USB-0]`, IDCODE `02B050DD`, Build ID `45585631`, mailbox `READY=1/BUSY=0/ERROR=0`; host SOF SHA matched. Full record: `../../../final_research_verification_20261128/SESSION02_READ_ONLY_IDENTITY.json`. No request was sent and no RAM/SOF/Flash write occurred. This snapshot does not resolve the pending operator power-transition confirmation.
 - Session 03: 7,626件。凍結cases/bindingをオフライン再検査し、7,626行・sequence 15274–22899・pilot gateを照合。結果は`../../../final_research_verification_20261128/session03_schedule_reverification_RUN1.json`。これは事前schedule監査のみで、session 03のJTAG測定はSession 02完了監査後に実施する。
 - 予定総数22,878件中、現在7,626件取得（1/3 session）。cold boot証拠は未取得。Session 01の電源履歴は`POWER_SESSION_UNKNOWN`/`COLD_BOOT_UNVERIFIED`。
 - session間は一件ずつ監査し、異常時は停止してログを保持する。セッションIDだけで独立cold bootとは認定しない。

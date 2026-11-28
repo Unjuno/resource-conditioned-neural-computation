@@ -12,6 +12,12 @@
 
 ## 実行コマンドと結果
 
+### 2026-11-28追記：session 02開始前のread-only JTAG identity
+
+Quartus Prime Lite 25.1std.0 Build 1129の`jtagconfig`でUSB-Blaster `[USB-0]`とDE0-CV/Cyclone V IDCODE `02B050DD`を読取。Quartus STPの既存read-only TclをASCII-only Tempへコピーして実行し、Build ID `45585631`、mailbox status `0x08`（READY=1/BUSY=0/ERROR=0）を取得。ホスト上の予定SOFを再hashしSHA `5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4`と一致。ログ・時刻・host SOF SHA・Tcl sourceとpreflight identityを`SESSION02_READ_ONLY_IDENTITY.json`および`SESSION02_READ_ONLY_IDENTITY_SHA256SUMS.txt`に保存した。
+
+実行した操作はCable/device列挙とVirtual-JTAGのidentity/statusレジスタ読取りだけ。推論request送信、RAM書込み、SRAM再設定、Flash/CFM/CPLD変更なし。Build ID一致はSOF全bit readbackではなく、status/IDCODEは全rail電源断やsession独立性を示さない。session 02は依然未開始で、電源遷移の操作者確認待ち。コマンド起動前のPowerShell存在確認で一度parameter-binding syntax errorが発生したが、その時点では外部プログラムを起動していない。修正後のread-only identity queryは成功。
+
 ### 2026-11-28追記：session 03凍結scheduleのオフライン再監査
 
 session 02の測定順は維持しながら、既存session 03用cases/bindingを`verify_session03_schedule.py`で読み取り専用監査。`audit_primary.audit_schedule`が凍結manifest・画素・教師label・oracle・mode/order・CRC・IDを7,626行で照合し、sequence 15274–22899を確認。pilot gate binding validatorもPASS。session 03にphysical `run/`、結果CSV、raw JTAG logがないことを確認し、出力に`must_wait_for_session_02_audit=true`を記録。結果は`session03_schedule_reverification_RUN1.json`、コードと入力のSHAは`session03_schedule_reverification_SHA256SUMS.txt`。これはschedule/bindingのオフライン検査で、session 03はNOT_RUNのまま。JTAG/Quartus/SOF操作なし。

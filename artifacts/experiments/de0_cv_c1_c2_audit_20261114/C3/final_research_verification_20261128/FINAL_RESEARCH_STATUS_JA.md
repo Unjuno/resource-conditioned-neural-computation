@@ -15,6 +15,7 @@
 * 現在の最初の人手待ち：session 02前のboard power transitionについて、操作者が何を行ったかの確認。読み取り専用identityだけから電源断を推定しない。いずれのセッションも、完全なrail遮断を裏付ける証拠がなければ独立cold bootとは認定しない。
 * session 02のオフラインpreflightはPASS。7,626要求・sequence 7648–15273、pilot gateとSOF/ELF/build/model/binding identity、case SHAを照合し、`PREFLIGHT_ONLY`, `physical_jtag_started=false`を記録。Quartus/JTAGは起動せず、物理run出力も作っていない。操作者は今回SRAM設定と3-session測定を明示許可したが、session 02の実行前に実際の電源遷移と現在のboard identity/READYを確認する必要がある。
 * 保存済みpreflight JSONに対する独立SHA再照合もPASS。cases、binding、runner、pilot gateの4 SHAが一致し、`verify_binding`が再度PASS。結果は`session02_preflight_reverification_RUN1.json`と`session02_preflight_reverification_SHA256SUMS.txt`。これはoffline検証のみで、実機の現在状態は確認していない。
+* 2026-11-28 11:03 JSTに読み取り専用のJTAG照合を実施。`jtagconfig`はUSB-BlasterとIDCODE `02B050DD`を検出。Quartus STPのread-only identityではBuild ID `45585631`、mailbox `READY=1/BUSY=0/ERROR=0`。ホストSOFファイルSHAも予定値と一致。証拠は`SESSION02_READ_ONLY_IDENTITY.json`とSHA manifest。推論要求・RAM書込み・SOF設定・Flash書込みはしていない。これは観測時点の内部Build IDであり、電源遷移やSOF全bit readbackを示さない。
 * session 03は実行順を先取りせず、凍結schedule 7,626件・sequence 15274–22899・pilot gate bindingのみをオフライン再検査してPASS。`session03_schedule_reverification_RUN1.json`に保存し、「session 02の全件取得・監査まで実行不可」を明記。実機run出力がないことも確認。
 * 以下の未解決状態は維持：`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`。
 

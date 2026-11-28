@@ -1,0 +1,43 @@
+{
+  "schema": "rtnn-session02-read-only-identity-observation-v1",
+  "classification": "READ_ONLY_CURRENT_IDENTITY_NOT_POWER_ATTESTATION",
+  "quartus_version": "25.1std.0 Build 1129",
+  "device": "Terasic DE0-CV Cyclone V 5CE(BA4|FA4)",
+  "jtagconfig_device_idcode": "02B050DD",
+  "read_only_identity": {
+    "hardware": "USB-Blaster [USB-0]",
+    "build_id": "45585631",
+    "mailbox_status": "0x08",
+    "ready": true,
+    "busy": false,
+    "error": false
+  },
+  "read_only_identity_local_time": "2026-11-28T11:03:23+09:00",
+  "jtagconfig_log_mtime_local": "2026-11-28T11:04:09.441074+09:00",
+  "expected": {
+    "build_id": "45585631",
+    "model_id": "52544e4e",
+    "binding_id": "45585632",
+    "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4"
+  },
+  "host_sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+  "host_sof_matches_expected": true,
+  "evidence": {
+    "jtagconfig_sha256": "011fa201841604db123ed7436ff23d664f3d56685abfce0a5c659e2daea83405",
+    "quartus_read_only_identity_log_sha256": "6dcb59830fee1360b31553fdcb549d5b3d121f45414ad98b82c019977e2812d9",
+    "read_only_tcl_sha256": "dad04c636347ccf5a1f2c19d5e69f2103c7cc611bb2e2c2039d10f65cba12d8e"
+  },
+  "actions": {
+    "only_jtag_idcode_enumeration_and_virtual_jtag_identity_register_reads": true,
+    "request_or_result_ram_written": false,
+    "sof_programming_performed": false,
+    "flash_written": false,
+    "cpld_changed": false,
+    "physical_primary_measurement_started": false
+  },
+  "unresolved": {
+    "session02_power_transition": "NOT_CONFIRMED",
+    "independent_cold_boot": "COLD_BOOT_UNVERIFIED",
+    "full_sof_bit_readback": "NOT_PERFORMED"
+  }
+}
