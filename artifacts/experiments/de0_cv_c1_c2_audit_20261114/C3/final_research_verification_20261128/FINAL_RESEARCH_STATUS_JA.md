@@ -9,6 +9,7 @@
 * session 01単独の経験値：fixed2正解3,482/3,813、平均943,905.78 cycles。adaptive正解3,485/3,813、平均759,704.67 cycles。対応平均cycle削減19.515%（入力bootstrap 95%区間18.106–20.871%）。adaptiveが遅い入力929/3,813。非劣性の数値下限−0.639 ppで事前margin−1 ppを数値上クリアしたが、1 sessionのみの数値結果。
 * session 01だけでは、3-session cycle gate、起動間再現性、母集団への速度優位・精度非劣性は判定しない。`COLD_BOOT_UNVERIFIED`を維持する。session 02/03は未実行。
 * 独立監査JSON：`primary_session01_independent_audit.json`。SHA-256：`18e2fffdf124a40d8011b5ff71ed3271cfe2a8555b4eec6ed03b17b33b15a43e`。監査コードSHA、各runファイルSHA、件数、sequence範囲、build identityを記録。これは保存ログ間の整合性監査であり、ログが物理的に取得されたことの暗号学的証明ではない。
+* 英語草稿C `MANUSCRIPT_EN_DRAFT_20261128C.md` にsession 01の限定的な実測と残り2 sessionの状態を反映。旧草稿Bは変更せず、測定前スナップショットとして保全。数値は保存済みanalysisと独立したCSV算術再集計で照合した。
 * 現在の最初の人手待ち：session 02前のboard power transitionについて、操作者が何を行ったかの確認。読み取り専用identityだけから電源断を推定しない。いずれのセッションも、完全なrail遮断を裏付ける証拠がなければ独立cold bootとは認定しない。
 * 以下の未解決状態は維持：`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`。
 

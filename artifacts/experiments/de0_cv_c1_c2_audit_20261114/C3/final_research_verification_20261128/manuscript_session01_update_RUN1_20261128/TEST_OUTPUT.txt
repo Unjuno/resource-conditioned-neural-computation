@@ -1,0 +1,7 @@
+CSV cross-check:
+fixed2: n=3813 correct=3482 mean=943905.780487805 median=943906
+adaptive: n=3813 correct=3485 mean=759704.673485445 median=565923
+paired_inputs=3813 adaptive_slower=929
+
+Internal manuscript file references: 12 checked, 0 missing.
+Stale pre-session-01 primary NOT_RUN/unrun wording check: none found.
