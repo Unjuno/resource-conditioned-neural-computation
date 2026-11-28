@@ -1,0 +1,27 @@
+{
+  "pre_run_identity": {
+    "ready": true,
+    "busy": false,
+    "idcode": "02B050DD",
+    "error": false,
+    "build_id": "45585631"
+  },
+  "experiment_id": "C3_EXTVAL_PRIMARY_20261128_S02",
+  "output_directory_created": false,
+  "failure": "Quartus STP Tcl returned 3; original launch log reported package \"fil_test\" not loaded statically. Offline diagnosis found Unicode path marshaling corruption when Tcl passed repository paths to Python; ASCII-staged gate/package preflight passed.",
+  "raw_jtag_log_created": false,
+  "cold_boot": "COLD_BOOT_UNVERIFIED",
+  "physical_results_csv_created": false,
+  "session_id": "C3_EXTVAL_POWER_SESSION_02",
+  "schema": "rtnn-primary-run-attempt-failure-v1",
+  "attempt_id": "ATTEMPT01",
+  "runner_exit_code": 3,
+  "power_session_classification": "POWER_SESSION_UNKNOWN",
+  "retry_performed": false,
+  "flash_written": false,
+  "sof_programming_performed": false,
+  "completed_cases": 0,
+  "status": "FAILED_BEFORE_DEVICE_DISCOVERY",
+  "expected_cases": 7626,
+  "cpld_changed": false
+}

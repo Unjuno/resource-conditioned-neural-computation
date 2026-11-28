@@ -25,3 +25,9 @@
 - Session 03: 7,626件。凍結cases/bindingをオフライン再検査し、7,626行・sequence 15274–22899・pilot gateを照合。結果は`../../../final_research_verification_20261128/session03_schedule_reverification_RUN1.json`。これは事前schedule監査のみで、session 03のJTAG測定はSession 02完了監査後に実施する。
 - 予定総数22,878件中、現在7,626件取得（1/3 session）。cold boot証拠は未取得。Session 01の電源履歴は`POWER_SESSION_UNKNOWN`/`COLD_BOOT_UNVERIFIED`。
 - session間は一件ずつ監査し、異常時は停止してログを保持する。セッションIDだけで独立cold bootとは認定しない。
+
+## 2026-11-28追記：Session 02 attempt 01 startup failure
+
+Frozen session02 cases/binding (7,626 rows; sequence 7648–15273) passed offline verification. A fresh read-only check observed IDCODE `02B050DD`, Build ID `45585631`, mailbox READY=1/BUSY=0/ERROR=0. The authorized physical runner attempt then failed before device discovery/open: Quartus STP Tcl exit 3, PowerShell exit 1, completed requests 0/7,626, and no output directory or result/raw JTAG files were created. The original launcher printed `package "fil_test" isn't loaded statically`.
+
+Offline diagnosis showed Quartus Tcl corrupts non-ASCII repository path arguments passed to Python. An ASCII-staged PowerShell preflight (7,626 rows) and Tcl gate/package-load probe passed; the copied production Tcl was explicitly stopped before device discovery. This confirms a path-marshalling defect in the current invocation route, but does not establish a complete physical runner pass. No physical retry was made. Failure logs, read-only identity and no-device diagnosis are preserved in `session_02/attempt_01_quartus_tcl_start_failure_20261128/`. Power history remains `POWER_SESSION_UNKNOWN / COLD_BOOT_UNVERIFIED`.

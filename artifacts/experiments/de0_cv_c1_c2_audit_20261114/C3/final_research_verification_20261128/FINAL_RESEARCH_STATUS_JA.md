@@ -129,3 +129,7 @@ Primary preflightの内容検証を追加した。binding作成とJTAG前段で7
 ### 最終オフライン回帰（2026-11-28）
 
 論文Q15表11/11行照合、停止方式/Exit遷移/primary監査/解析の24/24テストを再実行してPASS。保存ログとSHA一覧は`final_offline_audit_RUN1_20261128/`。これはオフライン成果物検査であり、新規実機データではない。primaryはNOT_RUN、主要な来歴・writer cluster・cold boot・正式タイミング未解決状態は維持する。
+
+## 2026-11-28追記：Session 02 physical attempt 01
+
+Session 02 did not yield measurement data. Quartus STP Tcl exited 3 before device discovery/open, after displaying a `fil_test` package-load error; PowerShell returned 1. Completed 0/7,626; output directory/raw/results/status files were not created. An isolated no-device probe demonstrated Unicode path corruption when Quartus Tcl passes repository paths to Python; the equivalent ASCII-staged preflight and gate/package-load probe passed. This diagnoses a path-marshalling defect but is not a physical runner pass. The failed attempt and probes are recorded with SHA-256 under `external_validation_20261122/build/physical_primary_3session_20261128/session_02/attempt_01_quartus_tcl_start_failure_20261128/`. No retry has been made. Power transition is unconfirmed, so `POWER_SESSION_UNKNOWN / COLD_BOOT_UNVERIFIED` remains.

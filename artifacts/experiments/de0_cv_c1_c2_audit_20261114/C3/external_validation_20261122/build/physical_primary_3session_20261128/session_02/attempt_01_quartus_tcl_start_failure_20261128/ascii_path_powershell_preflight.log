@@ -1,0 +1,10 @@
+{
+  "status": "PREFLIGHT_ONLY",
+  "case_count": 7626,
+  "cases_csv_sha256": "61d568f3239e740a743900976dc82301ef5def836210726a67815fbcf7108149",
+  "experiment_id": "C3_EXTVAL_PRIMARY_20261128_S02",
+  "session_id": "C3_EXTVAL_POWER_SESSION_02",
+  "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+  "board": "Terasic DE0-CV / 5CEBA4F23C7",
+  "physical_jtag_started": false
+}
