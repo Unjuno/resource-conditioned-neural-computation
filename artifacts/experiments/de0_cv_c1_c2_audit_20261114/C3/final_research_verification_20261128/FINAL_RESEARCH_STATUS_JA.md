@@ -13,6 +13,7 @@
 * Exit・教師label別のsession 01探索的診断を`primary_session01_diagnostics_RUN2.json`へ保存。adaptiveのExit1は2,884件すべてfixed2より速く、Exit2–5の計929件はすべて遅い。両方式の正誤が異なる画像は91件（adaptiveのみ正解47、fixed2のみ正解44）。事後の記述分析であり、因果・母集団主張ではない。
 * session 01生CSVを独立監査器に通したうえで、3,813件の対画像データ、固定2対adaptive cycles散布図、adaptive実行Exit別のcycle差分図を再生成可能なPythonスクリプトから保存。図・データ・build/SOF identity・mcycle境界・単一session範囲は`primary_session01_figures_RUN1_20261128/`のSHA manifestに記録。図は経験的記述に限定し、cold bootや母集団の不確かさは示さない。
 * 現在の最初の人手待ち：session 02前のboard power transitionについて、操作者が何を行ったかの確認。読み取り専用identityだけから電源断を推定しない。いずれのセッションも、完全なrail遮断を裏付ける証拠がなければ独立cold bootとは認定しない。
+* session 02のオフラインpreflightはPASS。7,626要求・sequence 7648–15273、pilot gateとSOF/ELF/build/model/binding identity、case SHAを照合し、`PREFLIGHT_ONLY`, `physical_jtag_started=false`を記録。Quartus/JTAGは起動せず、物理run出力も作っていない。操作者は今回SRAM設定と3-session測定を明示許可したが、session 02の実行前に実際の電源遷移と現在のboard identity/READYを確認する必要がある。
 * 以下の未解決状態は維持：`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`。
 
 詳細なsession 01進捗は`../external_validation_20261122/build/physical_primary_3session_20261128/PRIMARY_CAMPAIGN_PROGRESS_JA.md`、再集計は`../external_validation_20261122/build/physical_primary_3session_20261128/session_01/analysis_single/analysis.json`にある。
@@ -22,7 +23,7 @@
 * primary予定表: **PASS_OFFLINE_ONLY** — 凍結manifest・pixel bytes/SHA・host-only label・Q15 oracle・mode順・CRC・identityを7,626行すべて照合。これは実機データではない。
 * 保存済みRUN4 pilot: **PASS_LIMITED_FUNCTIONAL_EVIDENCE** — 今回 `PILOT_GATE_VALIDATOR.py --verify-gate` を保存gateに対して再実行し、20要求、10画像、oracle一致を再検証。raw応答も新しい監査器で再デコードし、pair/counter/CRC/ID/framingを独立点検した。
 * PowerShell/Tcl fail-closed: **PASS_OFFLINE** — primary gateなしのPowerShell起動、binding作成、Tcl直接起動は機器検出前に拒否する既存試験がPASS。Tcl runtime mockは隔離tempでのみ20件を完走し、production監査ではmock拒否。
-* 新しいprimary実機評価: **NOT_RUN** — primaryを実行する承認は今回確認できていない。過去のSRAM＋pilot許可はprimaryに及ばない。
+* 新しいprimary実機評価: **IN_PROGRESS (1/3 sessions)** — session 01の7,626要求を取得・監査済み。session 02のオフラインpreflightはPASS、物理runは未開始。今回SRAM設定と3-session測定の明示許可を得た。session 02開始前の電源遷移記録とread-only identity/READY確認が残り、session 03も未実施。
 * 主張適格性: `DATA_EXPOSURE_UNCERTAIN`; `WRITER_CLUSTER_UNKNOWN`; `PREREGISTRATION_TIMELINE_UNVERIFIED`; `COLD_BOOT_UNVERIFIED`; `FORMAL_TIMING_SIGNOFF_BLOCKED` を維持。
 * 既存 `sklearn.load_digits` heldout上の同一凍結Q15停止方式比較: **PASS_OFFLINE_EXPLORATORY** — RUN8で固定Exit 0〜6、凍結entropy、validationで閾値選定したmax-softmax/top-two margin、事後oracleの11方式を比較。Pareto図と全画像出力を保全し、統計は探索的、block数はcycleではない。外部UCI primary結果は未取得。以前のtoolchain-blocked記載はZig経由の実行以前の状態であり、この比較については解消済み。
 * 旧C3 v2 24,840要求の再現可能な再集計: **PASS_SAVED_EVIDENCE_EMPIRICAL_ONLY** — 新しい出力先へ保存済みraw campaignから再実行。13/13 schedules、24,840 rows、primary 7,200 rows/360入力を確認。fixed2/adaptive平均 cycle 943,929.77/746,327.99、観測削減20.934%、入力単位95%区間16.804–24.903%。これはbuild `43334531` 固有の経験的結果で、新buildの測定と混ぜない。accuracy差の区間−1.389〜+1.389 ppは1 pp非劣性を示さない。
@@ -112,7 +113,7 @@ Primary preflightの内容検証を追加した。binding作成とJTAG前段で7
 
 `host_v2_20261126`に対応するPython/PowerShell/Tcl offline testsとraw parser試験は35/35 PASS。詳細な変更、実行ログ、25項目のSHA manifestは`final_research_verification_20261128/primary_audit_hardening_RUN1_20261128/SHA256SUMS.txt`。途中失敗の保全場所は`final_research_verification_20261128/primary_audit_hardening_RUN1_20261128/PRIMARY_AUDIT_HARDENING_RUN1_20261128.md`。
 
-Primary 7,626件は**NOT_RUN**。最初の未解決アクションは、ユーザーによるscope/amendment決定と、実機前での明示許可。現在のscope選択・amendment固定・実機identity確認を終えるまで、主測定へ進まない。
+当初のPrimary 7,626件はsession 01で完了済み。残るsession 02/03は各7,626件。元の3-session計画を維持するためscope amendmentは不要。操作者は3-session実機測定とSRAM設定を明示許可済み。session 02のoffline preflightは`session_02/offline_preflight_RUN1.json`に保存済みだが、次の物理実行前にsession 02直前の電源遷移とread-only JTAG/Build/READYを確認する。
 
 ### 2026-11-28追記：claim-evidence matrixの参照監査
 

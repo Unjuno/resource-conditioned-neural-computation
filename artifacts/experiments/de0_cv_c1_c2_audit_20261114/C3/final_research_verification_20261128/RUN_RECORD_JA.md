@@ -12,6 +12,10 @@
 
 ## 実行コマンドと結果
 
+### 2026-11-28追記：session 02のオフラインpreflightと実機許可範囲
+
+session 02向けPowerShell preflightを`-ExecutePhysical`なしで再実行した保存記録`session_02/offline_preflight_RUN1.json`を確認。凍結primary 7,626件、sequence 7648–15273、pilot gate参照、SOF/ELF/model/build/binding identityとcase SHAの照合がPASSし、`PREFLIGHT_ONLY` / `physical_jtag_started=false`。Quartus/JTAGは起動せず、physical output directoryも作成していない。今回のユーザー発言でSRAM設定と3-session測定が明示許可された。session 02の実行前に、実際のpower transitionと現在のread-only JTAG/Build/READYを照合する必要があり、独立電源起動は未認定。session 03はsession 02の完全監査後に行う。詳細はcampaign progress `../external_validation_20261122/build/physical_primary_3session_20261128/PRIMARY_CAMPAIGN_PROGRESS_JA.md`。
+
 ### 2026-11-28追記：primary session 01の再生成可能な図表
 
 保存済みsession 01の`physical_results.csv`から図表用のpaired tableとSVGを作る`plot_primary_session01.py`を追加。実行時に独立監査器`audit_primary.audit_run`を先に呼び、7,626件のraw JTAG/result/oracle/case整合監査が通らなければ出力を作成しない。fixed2/adaptiveの3,813対応行、cycle散布図、adaptive実行Exit別cycle差分図、identityと測定境界を含むmetadata、出力SHA256SUMSを保存した。session 01の生データや既存の監査JSONは変更していない。
