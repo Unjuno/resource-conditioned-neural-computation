@@ -48,9 +48,12 @@ class ClaimEvidenceMatrixTests(unittest.TestCase):
         self.write_matrix("../outside.md")
         self.assertTrue(any("escapes repository" in e for e in validate(self.matrix, self.root)))
 
-    def test_preserves_unrun_and_ineligible_gate_statuses(self):
-        self.write_matrix("evidence.md", claim_id="C6", status="PASS")
-        self.assertTrue(any("status must remain NOT_RUN" in e for e in validate(self.matrix, self.root)))
+    def test_preserves_evidence_bounded_claim_statuses(self):
+        for claim_id, expected in (("C6", "OBSERVED_EMPIRICAL_ONLY"), ("C7", "INELIGIBLE"), ("C8", "BLOCKED")):
+            with self.subTest(claim_id=claim_id):
+                self.write_matrix("evidence.md", claim_id=claim_id, status="PASS")
+                errors = validate(self.matrix, self.root)
+                self.assertTrue(any(f"status must remain {expected}" in e for e in errors))
 
 
 if __name__ == "__main__":

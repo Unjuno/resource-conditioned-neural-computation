@@ -8,7 +8,11 @@ import csv
 from pathlib import Path
 
 
-EXPECTED_STATUS = {"C6": "NOT_RUN", "C7": "INELIGIBLE", "C8": "BLOCKED"}
+EXPECTED_STATUS = {
+    "C6": "OBSERVED_EMPIRICAL_ONLY",
+    "C7": "INELIGIBLE",
+    "C8": "BLOCKED",
+}
 REQUIRED_COLUMNS = {
     "claim_id", "claim", "evidence", "status", "allowed_wording", "not_supported"
 }

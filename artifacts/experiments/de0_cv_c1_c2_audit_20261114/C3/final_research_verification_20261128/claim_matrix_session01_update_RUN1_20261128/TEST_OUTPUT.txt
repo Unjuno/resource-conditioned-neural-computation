@@ -1,0 +1,9 @@
+PASS: 11 claims; all evidence entries resolve within repository
+test_preserves_evidence_bounded_claim_statuses ... ok
+test_rejects_missing_evidence_file ... ok
+test_rejects_prose_as_evidence_path ... ok
+test_rejects_repository_escape ... ok
+test_resolves_repo_relative_evidence ... ok
+
+Ran 5 tests
+OK
