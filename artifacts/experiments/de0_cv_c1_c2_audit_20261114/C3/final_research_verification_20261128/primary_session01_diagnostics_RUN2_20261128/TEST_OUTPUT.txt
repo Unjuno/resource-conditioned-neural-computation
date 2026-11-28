@@ -1,0 +1,8 @@
+test_rejects_duplicate_input_mode ... ok
+test_rejects_missing_mode_pair ... ok
+test_reports_paired_transitions_and_slow_cases ... ok
+
+Ran 3 tests
+OK
+
+Actual session-01 raw-run audit: PASS, 7,626/7,626 request-response pairs, 3,813 paired images.
