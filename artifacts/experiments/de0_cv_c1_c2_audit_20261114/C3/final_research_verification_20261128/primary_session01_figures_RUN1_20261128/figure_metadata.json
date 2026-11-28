@@ -1,0 +1,34 @@
+{
+  "schema": "rtnn-primary-session-figure-source-v1",
+  "classification": "EMPIRICAL_ONLY_SINGLE_SESSION",
+  "audit": {
+    "classification": "EMPIRICAL_ONLY",
+    "data_integrity": "PASS",
+    "raw_pairs": 7626,
+    "primary_images": 3813,
+    "paired_requests": 7626,
+    "sequence_first": 22,
+    "sequence_last": 7647,
+    "cases_sha256": "222ce7515d07c3db9e59f9d09a33a4e6bd271c8ef2d9f51ce66d46a0985051ba",
+    "raw_log_sha256": "425a3cd86016fcccc9305b62d9303d401d9406359ee07864987e782ee39c264c",
+    "pilot_gate_verified": true,
+    "cold_boot": "COLD_BOOT_UNVERIFIED",
+    "formal_timing_signoff": "BLOCKED_EXTERNAL_BOARD_TIMING"
+  },
+  "input_result_sha256": "427481da9232deb4d6406cc7201ea1eb23b4ca9df09bbdb1e0340d6be79664ce",
+  "analysis_sha256": "702ea80a56e6835a3ce7a1517af83f7cd3a3f11395ccdc9c23161f92dbb1b337",
+  "paired_rows": 3813,
+  "session_ids": [
+    "C3_EXTVAL_POWER_SESSION_01"
+  ],
+  "build_id": "45585631",
+  "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+  "measurement_boundary": "64-bit Ibex mcycle start/end around inference; host/JTAG scan/wait excluded",
+  "cold_boot": "COLD_BOOT_UNVERIFIED",
+  "formal_timing_signoff": "BLOCKED_EXTERNAL_BOARD_TIMING",
+  "figures": {
+    "paired_cycles_scatter.svg": "9024e6b52d5ce8b620652eed447f0b35da5258855d70b60a868070793cc4ad6b",
+    "cycle_delta_by_exit.svg": "5ef4566d9f95f0de2ad59a2cefee947e183902a3ec9025195bc49ec45bef7e36",
+    "paired_values.csv": "b7c8075e30cb045ec6923ac7af126831496be83a337eedfe65e72920a99035e5"
+  }
+}

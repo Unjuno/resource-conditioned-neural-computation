@@ -11,6 +11,7 @@
 * 独立監査JSON：`primary_session01_independent_audit.json`。SHA-256：`18e2fffdf124a40d8011b5ff71ed3271cfe2a8555b4eec6ed03b17b33b15a43e`。監査コードSHA、各runファイルSHA、件数、sequence範囲、build identityを記録。これは保存ログ間の整合性監査であり、ログが物理的に取得されたことの暗号学的証明ではない。
 * 英語草稿C `MANUSCRIPT_EN_DRAFT_20261128C.md` にsession 01の限定的な実測と残り2 sessionの状態を反映。旧草稿Bは変更せず、測定前スナップショットとして保全。数値は保存済みanalysisと独立したCSV算術再集計で照合した。
 * Exit・教師label別のsession 01探索的診断を`primary_session01_diagnostics_RUN2.json`へ保存。adaptiveのExit1は2,884件すべてfixed2より速く、Exit2–5の計929件はすべて遅い。両方式の正誤が異なる画像は91件（adaptiveのみ正解47、fixed2のみ正解44）。事後の記述分析であり、因果・母集団主張ではない。
+* session 01生CSVを独立監査器に通したうえで、3,813件の対画像データ、固定2対adaptive cycles散布図、adaptive実行Exit別のcycle差分図を再生成可能なPythonスクリプトから保存。図・データ・build/SOF identity・mcycle境界・単一session範囲は`primary_session01_figures_RUN1_20261128/`のSHA manifestに記録。図は経験的記述に限定し、cold bootや母集団の不確かさは示さない。
 * 現在の最初の人手待ち：session 02前のboard power transitionについて、操作者が何を行ったかの確認。読み取り専用identityだけから電源断を推定しない。いずれのセッションも、完全なrail遮断を裏付ける証拠がなければ独立cold bootとは認定しない。
 * 以下の未解決状態は維持：`DATA_EXPOSURE_UNCERTAIN`、`WRITER_CLUSTER_UNKNOWN`、`PREREGISTRATION_TIMELINE_UNVERIFIED`、`COLD_BOOT_UNVERIFIED`、`FORMAL_TIMING_SIGNOFF_BLOCKED`。
 

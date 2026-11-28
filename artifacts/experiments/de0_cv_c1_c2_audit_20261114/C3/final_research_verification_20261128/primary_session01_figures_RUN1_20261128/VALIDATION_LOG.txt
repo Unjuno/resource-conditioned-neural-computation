@@ -1,0 +1,23 @@
+Figure regeneration verification (2026-11-28)
+
+Command: py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/plot_primary_session01.py
+Result: PASS; audit_primary.audit_run completed; 7,626 raw request/response pairs audited; 3,813 paired rows emitted; classification EMPIRICAL_ONLY_SINGLE_SESSION; cold_boot COLD_BOOT_UNVERIFIED.
+
+Command: py -3.11 -B -c "parse both SVG files as XML; check 3,813 paired_values.csv rows; verify single-session metadata and SHA256SUMS"
+Result: PASS; both SVGs well-formed; each input has a fixed2/adaptive pair; output hashes match.
+
+Command: py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/verify_claim_evidence_matrix.py
+Result: PASS; 11 claims and every evidence path resolved.
+
+Command: py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/test_verify_claim_evidence_matrix.py -v
+Result: PASS; 5/5 tests.
+
+Command: py -3.11 -B -m py_compile artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/plot_primary_session01.py
+Result: PASS.
+
+Command: git -c core.whitespace=cr-at-eol diff --check
+Result: PASS.
+
+No physical board operation, JTAG access, or primary session rerun occurred.
+
+Line ending normalization: paired_values.csv was rewritten from CRLF to LF after git diff --check flagged CR bytes as trailing whitespace. Parsed cell contents and row count remain unchanged; derived manifests were recomputed.

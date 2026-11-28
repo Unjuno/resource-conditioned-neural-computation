@@ -12,6 +12,12 @@
 
 ## 実行コマンドと結果
 
+### 2026-11-28追記：primary session 01の再生成可能な図表
+
+保存済みsession 01の`physical_results.csv`から図表用のpaired tableとSVGを作る`plot_primary_session01.py`を追加。実行時に独立監査器`audit_primary.audit_run`を先に呼び、7,626件のraw JTAG/result/oracle/case整合監査が通らなければ出力を作成しない。fixed2/adaptiveの3,813対応行、cycle散布図、adaptive実行Exit別cycle差分図、identityと測定境界を含むmetadata、出力SHA256SUMSを保存した。session 01の生データや既存の監査JSONは変更していない。
+
+実行コマンド：`py -3.11 -B artifacts/experiments/de0_cv_c1_c2_audit_20261114/C3/final_research_verification_20261128/plot_primary_session01.py`。監査後に3,813対応行で図を生成してPASS。別コマンドで両SVGをXML parse、CSV行数とpair列、metadataの`EMPIRICAL_ONLY_SINGLE_SESSION`/`COLD_BOOT_UNVERIFIED`、生成ファイルのSHAを照合しPASS。C6 evidence path validatorは11/11 claim、負例テスト5/5 PASS、図生成スクリプトのcompileとdiff whitespace確認もPASS。ログは出力先`VALIDATION_LOG.txt`。出力は`primary_session01_figures_RUN1_20261128/`。実機・JTAG操作なし。図は単一sessionの経験的観測であり、primaryの残り2 session待ち、cold boot未検証、population inference不可の状態を変えない。`MANUSCRIPT_EN_DRAFT_20261128C.md`、C6 claim evidence、最終状態書に成果物パスを追記。
+
 1. `py -3.11 -B artifacts/.../C3/final_research_verification_20261128/audit_primary.py schedule --cases artifacts/.../external_validation_20261122/build/host_cases_primary_attempt2/cases.csv --sequence-start 1` — 7,626件/3,813画像を凍結schedule監査。PASS。
 2. `prepare_primary_schedule.py`で同じscheduleをoffline templateとしてsequence 22から再採番。metadataに `NOT_PHYSICAL_NOT_BOUND`, `binding_created=false`, `physical_authorized=false` を記録。
 3. `test_primary_audit.py` — 14/14 PASS（不足・重複・順序・pixel・label・oracle・CRC・build・raw log・manifest traversal拒否を含む）。
