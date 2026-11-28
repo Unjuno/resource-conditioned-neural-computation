@@ -1,0 +1,20 @@
+{
+  "schema": "rtnn-primary-campaign-operator-authorization-v1",
+  "recorded_at_local": "2026-11-28T09:52:43+09:00",
+  "authorization_source": "Explicit user response in this conversation",
+  "scope": "SRAM-only SOF setting if required, and the preregistered three-session primary campaign; no Flash/CFM/CPLD changes",
+  "repository": "https://github.com/Unjuno/resource-conditioned-neural-computation",
+  "branch": "codex/external-validation-20261122",
+  "board": "Terasic DE0-CV / Cyclone V 5CEBA4F23C7",
+  "build_id": "45585631",
+  "binding_id": "45585632",
+  "model_id": "52544e4e",
+  "sof_sha256": "5e333e9377b7188a394d04b93b98833d91afb2cd53eca8d976e6aa715dfa00c4",
+  "elf_sha256": "4673f6a8b90493c15c327ed3be1167e0fcf3ff2be60292dcb12a1391124a0c2e",
+  "planned_requests_per_session": 7626,
+  "planned_sessions": 3,
+  "primary_measurement_permission": true,
+  "flash_or_cfm_permission": false,
+  "formal_timing_signoff": false,
+  "authorization_is_not_measurement_evidence": true
+}

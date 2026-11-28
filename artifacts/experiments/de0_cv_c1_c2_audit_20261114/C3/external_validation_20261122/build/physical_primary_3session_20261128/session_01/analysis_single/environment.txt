@@ -1,0 +1,5 @@
+Python 3.11.9
+numpy==2.4.6
+scipy==1.17.1
+audit_and_analyze.py_sha256=99e5c5658d6dc9e8818880860955a61193b81ff8963d3364870ae6d118cfd12f
+stats_core.py_sha256=c2ea9a56ea572d4b6c1ce252b26f8dfe20ed98d9299e12aa7ea0f3a55f205e30
